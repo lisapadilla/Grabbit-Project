@@ -1,0 +1,59 @@
+<?php
+// $Id: flag_friend_access.module,v 1.1.2.2 2009/06/09 19:24:29 sirkitree Exp $
+
+/**
+ * @file: provides access control for nodes. Allow only the users friends to
+ * have access to it
+ */
+
+/**
+ * Implementation of hook_node_grants().
+ */
+function flag_friend_access_node_grants($account, $op) {
+  // module only controls view operations
+  if ($op == 'view') {
+    $friends = flag_friend_get_friends($account->uid);
+    $grants['flag_friend'][] = $account->uid;
+    if (!empty($friends)) {
+      $grants['flag_friend'] = array_keys($friends);
+    }
+    return $grants;
+  }
+}
+
+/**
+ * Implementation of hook_node_access_records().
+ */
+function flag_friend_access_node_access_records($node) {
+  if ($node->flag_friend_access) {
+    return array(
+      array(
+        'realm' => 'flag_friend',
+        'gid' => $node->uid,
+        'grant_view' => 1,
+        'grant_update' => 0,
+        'grant_delete' => 0,
+        'priority' => 5,
+      ),
+    );
+  }
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function flag_friend_access_form_alter(&$form, &$form_state, $form_id) {
+  // add in a checkbox only if the 
+  if ($form['#node']->type . '_node_form' == $form_id && empty($form['#node']->nid)) {
+    // we have a node form alter in our stuff
+    $form['flag_friend_control'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Friend Access Control'),
+      '#collapsable' => FALSE,
+    );
+    $form['flag_friend_control']['flag_friend_access'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Only My Friends'),
+    );
+  }
+}
