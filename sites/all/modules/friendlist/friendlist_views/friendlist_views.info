@@ -1,0 +1,17 @@
+; $Id: friendlist_views.info,v 1.1.2.2 2008/09/18 17:23:27 mercmobily Exp $
+name = Friendlist Views
+description = Friendlist Views integration
+core = 6.x
+package = Friendlist
+dependencies[] = friendlist_api
+dependencies[] = views
+project = "friendlist"
+version = "6.x-1.x-dev"
+core = "6.x"
+
+; Information added by drupal.org packaging script on 2009-06-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "friendlist"
+datestamp = "1244938229"
+

@@ -1,0 +1,13 @@
+; $Id: cck_field_privacy.info,v 1.1.6.4 2008/11/15 00:49:36 obsidiandesign Exp $
+name = "Content Field Privacy"
+description = "Allow users to control per-field privacy settings."
+dependencies[] = content 
+dependencies[] = jquery_impromptu
+package = CCK
+core = 6.x
+; Information added by drupal.org packaging script on 2009-03-21
+version = "6.x-1.1"
+core = "6.x"
+project = "cck_field_privacy"
+datestamp = "1237673715"
+

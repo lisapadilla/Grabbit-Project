@@ -1,0 +1,299 @@
+<?php 
+// $Id: shouts.module,v 1.1.2.6 2009/02/10 21:49:35 zuuperman Exp $ 
+// by Zuuperman - ONE-agency - www.one-agency.be
+
+/**
+ * @file
+ * Gives the possibility to the user to shout a message.
+ */
+
+/**
+ * Implementation of hook_perm().
+ */
+function shouts_perm() {
+  return array('make shout', 'administer shouts');
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function shouts_theme($existing, $type, $theme, $path) {
+  return array(
+    'shoutform_message' => array(
+      'arguments' => array('latest_shout' => NULL)
+    )
+  );  
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function shouts_menu() {  
+  $items['shout/post'] = array(
+    'title' => 'Do shout',
+    'description' => 'Make a shout',
+    'access arguments' => array('make shout'),
+    'page callback' => 'shouts_shout_form_submit',
+    'type' => MENU_CALLBACK
+  );    
+  $items['shout/clear'] = array(
+    'title' => 'Clear shout',
+    'description' => 'Clear shout',
+    'access arguments' => array('make shout'),
+    'page callback' => 'clear_shout',
+    'type' => MENU_CALLBACK
+  );      
+  return $items;    
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function shouts_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op) {    
+    case 'list':
+      $blocks[0]['info'] = t('Shout form');
+      return $blocks;      
+    case 'view':      
+      switch($delta) {
+        case 0:
+          $block['subject'] = t('Make shout');
+          $block['content'] = drupal_get_form('shouts_shout_form');
+          return $block;
+        break;
+      } 
+  }  
+}
+
+/**
+ * Implementation of hook_heartbeat_message_info()
+ */
+function shouts_heartbeat_message_info() {
+  return array (
+	  0 => 
+		  array (
+        'message_id' => 'heartbeat_shout',
+        'message_type' => 'shout',
+		    'message' => '!user !message',
+		    'message_concat' => '',
+		    'concat_args' => 
+		    array (
+		      'type' => 'single',
+		      'merge_target' => '',
+		      'merge_separator' => '',
+		      'merge_end_separator' => '',
+		    ),
+		    'module' => 'shouts',
+		    'karma_index' => '4',
+		    'description' => 'shout message',
+		    'variables' => 
+		    array (
+		      '@user' => '[user:user-name-url]',
+		      '@message' => '[shout:comment-body-raw]',
+		    ),
+    ),
+	);  
+}
+
+/**
+ * Show the shoutform
+ */
+function shouts_shout_form() {
+  global $user;
+
+  $form = array();
+  $latest_shout = $user->latest_shout;
+  $own_shout = true;
+
+  drupal_add_js(drupal_get_path('module', 'shouts').'/shouts.js', 'module');
+  
+  if(empty($latest_shout) || $latest_shout->cleared) {
+    $latest_shout->message = t('Post new shout');
+    $own_shout = false;
+    $latest_shout->time = '';    
+  }
+
+  $form['#prefix'] = theme('shoutform_message', $latest_shout->message, $own_shout, false, $latest_shout->time);
+  $form['shout'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Shout'),
+    '#required' => TRUE,
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Shout'),
+		'#ahah' => array(
+      'path' => 'shout/post',
+      'wrapper' => 'shout-wrapper',
+      'progress' => array('type' => 'bar', 'message' => t('Please wait...')),
+    ),    
+  );
+  
+  return $form;
+  
+}
+
+/**
+ * User submitted the shoutform, save the shout.
+ */
+function shouts_shout_form_submit($form = array(), &$form_state = array()) {
+  
+  $ahah = empty($form);
+  
+  global $user;
+  $uid = $user->uid;
+  $message = '';
+  
+  if(user_access('make shout')) {
+    $message = ($ahah ? $_POST['shout'] : $form_state['values']['shout']);
+  }
+
+  $result = false;
+  if(!empty($message)) {
+    $sql = "INSERT INTO {shouts} (uid, message, time) VALUES (%d,'%s', '%s')";
+    $result = db_query($sql, $uid, $message, date('Y-m-d H:i:s'));
+  }
+  
+  if($ahah) {
+    
+    if($result) {
+      $comment = new stdClass();
+      $comment->comment = $message;      
+      rules_invoke_event('shout_post', $user, $comment); 
+      $output = theme('shoutform_message', $message, true, true);
+      drupal_json(array('status' => TRUE, 'data' => $output));      
+    } else {
+      $output = 'error';
+      drupal_json(array('status' => TRUE, 'data' => $output));      
+    }
+    
+  } else {
+    
+    if($result) {
+      $comment = new stdClass();
+      $comment->comment = $message;        
+      rules_invoke_event('shout_post', $user, $comment); 
+      drupal_set_message(t('Shout has been posted.'));
+    } else {
+      drupal_set_message(t('Error while posting shout.'));
+    }       
+  }
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function shouts_user($op, &$edit, &$account, $category = NULL) {
+  
+  global $user;
+  switch($op) {
+    case 'load':
+      $user->latest_shout = get_latest_shout($user->uid);
+      break;
+    case 'view':
+      $latest_shout = get_latest_shout($account->uid);
+      if(!$latest_shout->cleared) {
+        if(!empty($latest_shout->message)) {
+          $account->content['latest_shout'] = array(
+            '#value' => theme('shoutform_message', $latest_shout->message, false, false, $latest_shout->time)          
+          );
+        }     
+      }
+    break;
+  }
+  
+}
+
+/**
+ * Get the latest shout of a user.
+ *
+ * @param $uid user_id of shout to load
+ */
+function get_latest_shout($uid) {
+  $shout = db_fetch_object(db_query_range('SELECT message, cleared, time FROM {shouts} WHERE uid = %d ORDER BY time DESC', $uid, 0, 1));      
+  return $shout;
+}
+
+/**
+ * Theme the latest shout of a user.
+ *
+ * @param $latest_shout the shout message
+ * @param $ownshout is it the users own shout?
+ * @param $update is it an ajax update of the shout?
+ */
+function theme_shoutform_message($latest_shout, $ownshout, $update, $time='') {
+  
+  if($ownshout) {
+    
+    $options = array(
+    	'attributes' => array(
+      	'onclick' => 'javascript: clearShout(); return false;'
+      ),
+      'query' => 'destination='.$_GET['q']
+    );    
+    $clear = '<span class="shout_clear">'.l(t('Clear'), 'shout/clear', $options).'</span>';
+    
+  }
+  
+  if ($time) {
+    $ago = t('ago');
+    $time_diff = $_SERVER['REQUEST_TIME'] - strtotime($time);
+
+    // don't show minutes if less then 1 minute ago.
+    if ($time_diff < 60) {
+      $date = t('a moment');
+    } else {
+      $date = format_interval(($time_diff), 1,'nl');
+    }
+    
+    $shout_time = '<span class="shout_ago">'.$date.' '.$ago.'</span>';
+  }
+  
+  $latest_shout = '<div class="latest_shout">'.$latest_shout.'</div>';
+  
+  $output = '<div class="inner">'.$latest_shout.$shout_time.$clear.'</div>';
+  if(!$update) {
+    $output = '<div id="shout-wrapper">'.$output.'</div>';
+  }
+  return $output;
+}
+
+/**
+ * Clear the latest shout from a user.
+ */
+function clear_shout() {
+  
+  global $user;
+  $result = db_query("UPDATE {shouts} SET cleared = 1 WHERE uid = %d ORDER BY shout_id DESC LIMIT 1", $user->uid);
+  
+  // if destination is set, there was a javascript error. Redirect to destination
+  if(isset($_GET['destination'])) {
+    drupal_goto();
+  }
+  
+  if($result) {  
+    drupal_json(array('status' => TRUE, 'data' => theme_shoutform_message(t('Post shout'), false, true)));
+  } else {
+    drupal_json(array('status' => FALSE, 'data' => theme_shoutform_message(t('Error while clearing shout.'), false, true)));
+  }
+  
+}
+
+/**
+* Implementation of hook_rules_event_info().
+* @ingroup rules
+*/
+function shouts_rules_event_info() {
+  return array(
+    'shout_post' => array(
+      'label' => t('User posts a new shout'),
+      'module' => 'Shouts',
+      'arguments' => array(
+        'user' => array('type' => 'user', 'label' => t('User who posts a new shout.')),
+        'shout' => array('type' => 'comment', 'label' => t('Shout that has been posted.')),
+      ),
+      'redirect' => TRUE,
+    ),
+  );
+}

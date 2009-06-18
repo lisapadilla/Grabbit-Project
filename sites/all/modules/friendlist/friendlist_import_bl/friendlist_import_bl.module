@@ -1,0 +1,122 @@
+<?php
+// $Id: friendlist_import_bl.module,v 1.1.2.3 2008/11/20 00:05:04 mercmobily Exp $
+
+/**
+ * @file
+ * An importer for Buddylist module.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function friendlist_import_bl_menu() {
+  $items['admin/settings/friendlist_import_bl'] = array(
+    'title' => 'Friendlist Buddylist importer',
+    'description' => 'Import data from Buddylist.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('friendlist_import_bl_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+/**
+ * Import confirmation form.
+ */
+function friendlist_import_bl_form() {
+  // This seems a little over the top, but it's consistent with the others.
+  $form['info'] = array(
+    '#value' => '<h1>'. t('This is DESTRUCTIVE. YOU WILL LOSE ALL YOUR Friendlist DATA. WATCH OUT. PLUS, disable "rules" during the import, or your users might get a lot of emails.') .'</h1>',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Import'),
+  );
+
+  return $form;
+}
+
+/**
+ * Submit handler for import confirmation form.
+ */
+function friendlist_import_bl_form_submit($form, &$form_state) {
+
+  // Delete the existing relations and relation types.
+  db_query("DELETE FROM {friendlist_relation_types}");
+  db_query("DELETE FROM {friendlist_relations}");
+  db_query("DELETE FROM {friendlist_statuses}");
+
+  // Create a new relationship type for 'buddy'.
+  $buddy_terms = buddylist_translation();
+  $name = $buddy_terms['@buddy'];
+  $plural = $buddy_terms['@buddies'];
+
+  // This is a two-way, active relationship.
+  $relationship = friendlist_api_relation_type_add($name, $plural, FALSE, TRUE);
+
+  // {buddylist} table schema:
+  // - uid: The User ID of the user who requested the "buddying."
+  // - buddy: The target of the buddy request.
+  // - timestamp: Time of the buddy request.
+  // - received: a boolean flag to indicate whether the target saw
+  //   that they were "buddied." This value is discarded.
+  $result = db_query('SELECT * FROM {buddylist}');
+
+  while ($row = db_fetch_object($result)) {
+    // Add buddy relationship to friendlist.
+    // '' means that no message is associated with this request
+    // FALSE indicates that this is not a user-generated request.
+    friendlist_api_relation_add($row->uid, $row->buddy, $relationship->rtid, '', FALSE);
+
+    friendlist_api_set_relation_field($row->uid, $row->buddy, $relationship->rtid, 'create_time', $row->timestamp);
+    friendlist_api_set_status_field($row->uid, $row->buddy, $relationship->rtid, 'last_update_time', $row->timestamp);
+    friendlist_api_set_status_field($row->buddy, $row->uid, $relationship->rtid, 'last_update_time', $row->timestamp);
+  }
+
+
+  // Now add the pending requests.  Note that these will get the current time,
+  // because the Buddylist module does not record the time in this table.
+
+  $r = db_query("SELECT * FROM {buddylist_pending_requests}");
+
+  while ($row = db_fetch_object($r)) {
+    friendlist_api_relation_add($row->requester_uid, $row->requestee_uid, $relationship->rtid, '', FALSE);
+
+    friendlist_api_set_relation_field($row->requester_uid, $row->requestee_uid, $relationship->rtid, 'create_time', time() );
+    friendlist_api_set_status_field($row->requester_uid, $row->requestee_uid, $relationship->rtid, 'last_update_time', time() );
+    friendlist_api_set_status_field($row->requestee_uid, $row->requester_uid, $relationship->rtid, 'last_update_time', time() );
+
+  }
+
+  // TODO: Imports of the data in {buddylist_groups}, {buddylist_buddy_group},
+
+  drupal_set_message(t('Done!'));
+}
+
+/**
+ * Returns an array of common translation placeholders.
+ *
+ * This function is duplicated from buddylist.module, because buddylist.module
+ * cannot currently be enabled due to its incompatibility with 6.x.
+ */
+if (!function_exists('buddylist_translation')) {
+  function buddylist_translation() {
+    $translations = array(
+      '@buddy' => t('buddy'),
+      '@Buddy' => t('Buddy'),
+
+      '@buddylist' => t('buddylist'),
+      '@Buddylist' => t('Buddylist'),
+
+      '@buddies' => t('buddies'),
+      '@Buddies' => t('Buddies'),
+
+      '@buddyof' => t('buddy of'),
+      '@Buddyof' => t('Buddy of'),
+    );
+    return variable_get('buddylist_translation', $translations);
+  }
+}
+

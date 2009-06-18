@@ -1,0 +1,433 @@
+<?php
+// $Id: friendlist_ui.module,v 1.1.2.35 2009/06/10 12:37:07 mercmobily Exp $
+
+
+/**
+ * @file
+ * Friendlist's UI
+ *
+ * This is a working UI for the friendlist_api module. It does
+ * all of the basic things: from an admin perspective, it allows
+ * administrators to add and remove relationship types, it adds
+ * some basic links to the user profiles, provides working URLs to
+ * add and remove friends, and it gives all of the tools to
+ * create snipsets to see pending requests, etc. -- with the links
+ * coming out automagically.
+ */
+
+/**
+ * Implementation of hook_init.
+ */
+function friendlist_ui_init() {
+  drupal_add_css(drupal_get_path('module', 'friendlist_ui') .'/friendlist_ui.css');
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function friendlist_ui_perm() {
+
+  $perms = array(
+    'have relationships with friendlist',
+  );
+
+  return $perms;
+}
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function friendlist_ui_menu() {
+  global $user;
+
+  $items['admin/settings/friendlist_ui'] = array(
+    'title' => 'Friendlist UI module',
+    'description' => 'Settings for the friendlist_ui module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('friendlist_ui_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'friendlist_ui.admin.inc',
+  );
+
+
+  $items['admin/settings/friendlist_ui/rebuild'] = array(
+    'title' => 'Rebuild friendlist status table',
+    'page arguments' => array('friendlist_ui_rebuild_confirm'),
+    'file' => 'friendlist_ui.admin.inc',
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_CALLBACK,
+  );
+
+  // Relation types settings.
+
+  $items['admin/settings/friendlist_relation_types'] = array(
+    'title' => 'Friendlist relation types',
+    'description' => 'Manage friendlist relation types',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('friendlist_ui_relation_types_overview'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'friendlist_ui.admin.inc',
+  );
+
+  $items['admin/settings/friendlist_relation_types/list'] = array(
+    'title' => 'List',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'file' => 'friendlist_ui.admin.inc',
+    'weight' => -10,
+  );
+
+  $items['admin/settings/friendlist_relation_types/add'] = array(
+    'title' => 'Add relation type',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('friendlist_ui_form_relation_type'),
+    'type' => MENU_LOCAL_TASK,
+    'access arguments' => array('administer site configuration'),
+    'parent' => 'admin/content/taxonomy',
+    'file' => 'friendlist_ui.admin.inc',
+  );
+
+  $items['admin/settings/friendlist_relation_types/edit/%'] = array(
+    'title' => 'Edit relation',
+    'page callback' => 'friendlist_ui_relation_edit',
+    'page arguments' => array(4),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('administer site configuration'),
+    'file' => 'friendlist_ui.admin.inc',
+  );
+
+  // Relation management URL.
+
+  $items['friendlist/%/%user/%'] = array(
+    'title' => 'Connections',
+    'description' => 'Add/Delete/Confirm functions',
+    'page callback' => 'friendlist_ui_web_functions',
+    'page arguments' => array(1, 2, 3),
+    'access arguments' => array('have relationships with friendlist'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function friendlist_ui_theme() {
+  return array(
+    'friendlist_ui_relation_types_overview' => array(
+      'arguments' => array('form' => array()),
+    ),
+  );
+}
+
+
+/**
+ * Implementation of hook_user().
+ *
+ * It displays the possible operations (add/delete) the viewer can do
+ * to the viewed user.
+ */
+function friendlist_ui_user($op, &$edit, &$account, $category = NULL) {
+
+  global $user;
+
+  if ($op == 'view' && user_access('have relationships with friendlist')) {
+
+
+    if ($account->uid != $user->uid) {
+
+      $contents = friendlist_ui_user_links($account);
+
+      if ($contents != '') {
+
+        $account->content['friendlist_ui'] = array(
+          '#type' => 'user_profile_item',
+          '#title' => t('Connections'),
+          '#value' => $contents,
+          '#attributes' => array('class' => 'friendlist_ui_profile'),
+        );
+        return $account;
+      }
+    }
+  }
+}
+
+##################################################################
+# FRIEND ADD/REMOVE FUNCTIONALITIES
+##################################################################
+function friendlist_ui_web_functions($op, $account, $rtid) {
+
+  global $user;
+
+  #drupal_set_message("HERE: '$op' -- '$account->uid' -- '$rtid'");
+
+  // For now, only "add" and "delete" are allowed.
+  if ($op != 'add' && $op != 'delete') {
+    return drupal_not_found();
+  }
+
+  if ($user->uid == $account->uid) {
+    return drupal_access_denied();
+  }
+
+
+  // Load the relation type.
+  $rt = friendlist_api_relation_type_load($rtid);
+  $oneway = $rt->oneway;
+
+
+  // Check that the user is allowed the requested operation.
+  $allowed = friendlist_api_relation_allowed_op($op, $user, $account, $rtid);
+  if (!$allowed) {
+    return drupal_access_denied();
+  }
+
+  // Get status and status data.
+  $status = friendlist_api_relation_status_get($user, $account, $rtid);
+  $status_data = friendlist_api_status_data($status);
+
+  $text_to_display = $status_data["on_$op"]['screen'];
+  $page .= t($text_to_display, array('!rt_name' => $rt->name, '!rt_name_p' => $rt->name_p));
+
+
+  // Set the form parameters.
+  $form_params['requestee_id'] = $account->uid;
+  $form_params['rtid'] = $rtid;
+  $form_params['rt'] = $rt;
+  $form_params['status'] = $status;
+  $form_params['op'] = $op;
+
+  $page .= drupal_get_form('friendlist_ui_relation_form', $form_params);
+
+
+  return $page;
+}
+
+function friendlist_ui_relation_form(&$form_state, &$form_params) {
+
+  $form_state['parameters'] = $form_params;
+
+  // Only show the message if it's an "add" operation.
+  if ($form_params['op'] == 'add') {
+
+    $form['message'] = array(
+      '#title' => t('Message'),
+      '#type' => 'textarea',
+      '#rows' => 5,
+      '#required' => FALSE,
+    );
+  }
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+
+  return $form;
+}
+
+function friendlist_ui_relation_form_validate($form, &$form_state) {
+  global $user;
+  #drupal_set_message("Validation!");
+}
+
+function friendlist_ui_relation_form_submit($form, &$form_state) {
+  global $user;
+
+  // Make the variable names bearable.
+  $status       = $form_state['parameters']['status'];
+  $op           = $form_state['parameters']['op'];
+  $requestee_id = $form_state['parameters']['requestee_id'];
+  $rtid         = $form_state['parameters']['rtid'];
+  $rt           = $form_state['parameters']['rt'];
+  $message      = $form_state['values']['message'];
+
+  // Get the status.
+  $status_data = friendlist_api_status_data($status);
+
+  // OK, do it!
+  if ($op == 'add') {
+    friendlist_api_relation_add($user, $requestee_id, $rtid, $message);
+  }
+  else {
+    friendlist_api_relation_delete($user, $requestee_id, $rtid);
+  }
+
+
+  // Set the result message.
+  $result_message = $status_data["on_$op"]['message'];
+
+  // Send out the right message, and that's it.
+  drupal_set_message(t($result_message, array('!rt_name' => $rt->name, '!rt_name_p' => $rt->name_p)));
+}
+
+##################################################################
+# UTILITY FUNCTIONS USEFUL TO SNIPSETS AND CODERS
+##################################################################
+
+/**
+ * Return the right link (with the right text!) to add or delete a user.
+ *
+ * @param $op
+ *   It could be 'add' or 'delete', depending on what type of link you
+ *   want.
+ * @param $account
+ *   The user object (or id) you want the links for.
+ * @param $rtid
+ *   The relation type id you want the links for.
+ * @return
+ *    The link ready to be used.
+ */
+function friendlist_ui_get_link($op, $account, $rtid) {
+  global $user;
+
+  $account = friendlist_api_user_into_uid($account);
+
+
+  // The user is "self": return nothing.
+  if ($user->uid == $account) {
+    return '';
+  }
+
+  // Return something empty if the user doesn't have the right
+  // permissions.
+  if (!user_access('have relationships with friendlist')) {
+    return '';
+  }
+
+
+  // Get the status data.
+  $status = friendlist_api_relation_status_get($user, $account, $rtid);
+  $status_data = friendlist_api_status_data($status);
+
+  // Prepare the link text.
+  $link_text = $status_data["on_$op"]['link'];
+
+  // Check that the user is allowed. If not, just return
+  // the text without the link!
+  $allowed = friendlist_api_relation_allowed_op($op, $user, $account, $rtid);
+  if (!$allowed) {
+    return '';
+  }
+
+  // Set $rd, needed for the translation in a minute.
+  $rt = friendlist_api_relation_type_load($rtid);
+
+  // Prepare the link's href, now that we have all the ingredients.
+  $link_href = "friendlist/$op/$account/$rtid";
+
+  // Interface with the FANTASTIC popups module.
+  if (module_exists('popups')) {
+    $popups_style = "popups-form-reload";
+    $popups_body = popups_add_popups();
+  }
+
+
+  // Et voila - return the link, ready to be used by themes etc.
+  return $popups_body . l(t($link_text, array('!rt_name' => $rt->name, '!rt_name_p' => $rt->name_p)),
+    $link_href,
+    array(
+      #'query' => 'destination='. friendlist_ui_destination(),
+      'query' => drupal_get_destination(),
+      'attributes' => array(
+        'class' => "$popups_style friendlist_ui_${status}_$op ",
+        'title' => t($link_text, array('!rt_name' => $rt->name, '!rt_name_p' => $rt->name_p)),
+      )
+    )
+  );
+}
+
+function friendlist_ui_get_status_string($requester, $requestee, $rtid){
+
+  $status     = friendlist_api_relation_status_get($requester,$requestee,$rtid);
+  $status_data= friendlist_api_status_data($status);
+  $rt = friendlist_api_relation_type_load($rtid);
+
+  return t($status_data['description'], array('!rt_name' => $rt->name, '!rt_name_p' => $rt->name_p));
+
+
+}
+
+/**
+ * Return an HTML-formatted list of links for EVERY relation type for the user.
+ *
+ * This function is used by the hook_user() hook to show links about the user.
+ *
+ * @param $account
+ *   The user object (or id) you want the links for.
+ * @return
+ *   HTML items, formatted with theme_item_list.
+ */
+function friendlist_ui_user_links($account) {
+
+  global $user;
+
+  $account = friendlist_api_user_into_uid($account);
+
+  // The user is "self": return nothing.
+  if ($user->uid == $account) {
+    return '';
+  }
+
+  // No permissions: nothing to do.
+  if (!user_access('have relationships with friendlist')) {
+    return '';
+  }
+
+  // This will contain the output. What an obvious comment.
+  $output = '';
+
+  // Load the relation types in $relation_types.
+  $relation_types = friendlist_api_relation_types_load_all();
+
+  // Initial span
+  $output .= '<div class="friendlist-relation-links">';
+
+  // Cycle the active relation types, and
+  // add links as appropriate.
+  foreach ($relation_types as $rt) {
+
+  if ($rt->active) {
+
+      $status      = friendlist_api_relation_status_get($user, $account, $rt->rtid);
+      $status_data = friendlist_api_status_data($status);
+
+      $l1 = friendlist_ui_get_link('add', $account, $rt->rtid);
+      $l2 = friendlist_ui_get_link('delete', $account, $rt->rtid);
+
+      $output .= '<span class="friendlist-relation-name">'.
+                  t($rt->name) .
+                  ' – </span>'.
+                  '<span class="friendlist-relation-info">' .
+                  t($status_data['description'], array('!rt_name' => $rt->name, '!rt_name_p' => $rt->name_p)) .
+                 '</span>';
+
+      // Add the appropriate links
+      $sublist = array();
+      if ($l1) {
+        $sublist[] = array(
+          'data' => $l1, 
+          'class' => 'friendlist-action-list-item',
+        );
+      }
+      if ($l2) {
+        $sublist[] = array(
+          'data' => $l2, 
+          'class' => 'friendlist-action-list-item'
+        );
+      }
+      if(count($sublist) != 0){
+        $output .= theme('item_list', $sublist, NULL, 'ul', array('class' => 'friendlist-user-links'));
+      }
+
+
+    }
+  }
+
+  $output .= '</div>';
+
+  // No links to be returned!
+  return $output;
+}
+

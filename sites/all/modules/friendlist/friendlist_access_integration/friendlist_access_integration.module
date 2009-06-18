@@ -1,0 +1,54 @@
+<?php
+// $Id: friendlist_access_integration.module,v 1.1.2.5 2008/10/11 18:47:28 mercmobily Exp $
+
+/**
+ * @file
+ * Friendlist module to integrate with access mechanism of other modules.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function friendlist_access_integration_menu() {
+
+  // Basic settings.
+  $items['admin/settings/friend_access_integration'] = array(
+    'title' => 'Friendlist Access Integration module',
+    'description' => 'Settings for the Friendlist Access Integration module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('friendlist_access_integration_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'friendlist_access_integration.admin.inc',
+  );
+
+  return $items;
+}
+
+
+#################################################################
+#   INTEGRATION HOOKS
+#################################################################
+
+/**
+ * Implementation of hook_cck_field_privacy_access().
+ *
+ * This hook is used by cck_field_privacy to see if a locked field should
+ * be accessible.
+ */
+function friendlist_access_integration_cck_field_privacy_access($requester, $requestee) {
+
+  // Get the relation id set for this integration.
+  $rtid = variable_get('friendlist_access_integration_cck_field_privacy_rtid', 0);
+
+  // Get the status.
+  $status = friendlist_api_relation_status_get($requester, $requestee, $rtid);
+
+  // Return true if the status is one of the "good" ones.
+  if (in_array($status, variable_get('friendlist_access_integration_cck_field_privacy_statuses', array()))) {
+    return TRUE;
+  }
+  return FALSE;
+
+}
+
+

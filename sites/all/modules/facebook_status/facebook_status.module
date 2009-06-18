@@ -1,0 +1,1218 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ *   Allows users to have a "status."
+ */
+
+//=============
+//DRUPAL HOOKS.
+//=============
+
+/**
+ * Implementation of hook_help().
+ */
+function facebook_status_help($path, $arg) {
+  if ($path == 'admin/help#facebook_status') {
+    return t('Allows users the ability to have a Facebook-style "status" or to post messages on the profiles of other users. Please see the <a href="http://drupal.org/project/facebook_status" rel="nofollow">Project page</a> for more information.');
+  }
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function facebook_status_menu() {
+  $items = array();
+  $items['admin/settings/facebook_status'] = array(
+    'title' => 'Facebook-style Statuses',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('facebook_status_admin'),
+    'access arguments' => array('access administration pages'),
+    'description' => 'Allows administrators to adjust certain display settings for Facebook-style Statuses.',
+    'file' => 'facebook_status.admin.inc',
+  );
+  $items['admin/settings/facebook_status/general'] = array(
+    'title' => 'General',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'access arguments' => array('access administration pages'),
+    'weight' => -1,
+  );
+  $items['admin/settings/facebook_status/advanced'] = array(
+    'title' => 'Advanced',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('facebook_status_admin_advanced'),
+    'access arguments' => array('access administration pages'),
+    'description' => 'Allows administrators to adjust certain display settings for Facebook-style Statuses.',
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'facebook_status.admin.inc',
+  );
+  $items['share-status'] = array(
+    'title' => 'Post to Status',
+    'page callback' => 'theme',
+    'page arguments' => array('facebook_status_form_display'),
+    'access arguments' => array('edit own status'),
+    'description' => 'Allows users to post items to their status from other sites.',
+    'type' => 'MENU_SUGGESTED_ITEM',
+  );
+  $items['statuses/%facebook_status/edit'] = array(
+    'title' => 'Edit status',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_facebook_status_edit', 1),
+    'access callback' => '_facebook_status_can_edit',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'file' => 'facebook_status.edit.inc',
+  );
+  $items['statuses/%facebook_status/delete'] = array(
+    'title' => 'Delete status',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_facebook_status_delete', 1),
+    'access callback' => '_facebook_status_can_edit',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'file' => 'facebook_status.edit.inc',
+  );
+  $items['facebook_status/autocomplete'] = array(
+    'title' => 'Facebook-style Statuses user autocomplete',
+    'page callback' => '_facebook_status_user_autocomplete',
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_CALLBACK,
+    'file' => 'facebook_status.admin.inc',
+  );
+  $items['statuses/openapi'] = array(
+    'title' => 'Status Open API',
+    'page callback' => '_facebook_status_openapi',
+    'access arguments' => array('use open API'),
+    'type' => MENU_CALLBACK,
+    'file' => 'facebook_status.openapi.inc',
+  );
+  $items['facebook_status/js'] = array(
+    'title' => 'Save status update form',
+    'page callback' => 'facebook_status_save_js',
+    'access callback' => '_facebook_status_can_edit',
+    'access arguments' => FALSE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_block().
+ */
+function facebook_status_block($op = 'list', $delta = 0, $edit = NULL) {
+  if ($op == 'list') {
+    $block['facebook_status']['info'] = t('Facebook-style Statuses');
+    return $block;
+  }
+  else if ($op == 'view' && $delta == 'facebook_status') {
+    if (variable_get('facebook_status_special_user', '')) {
+      $account = user_load(array('name' => variable_get('facebook_status_special_user', '')));
+    }
+    else {
+      $account = facebook_status_choose_owner(FALSE);
+    }
+    $block['subject'] = t('Status');
+    $block['content'] = theme('facebook_status_form_display', $account);
+    return $block;
+  }
+  else if ($op == 'configure' && $delta == 'facebook_status') {
+    $form['facebook_status'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Facebook-style Statuses Settings'),
+      '#collapsible' => TRUE,
+      '#weight' => -4,
+      '#tree' => TRUE,
+    );
+    $form['facebook_status']['facebook_status_special_user'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Special User'),
+      '#default_value' => variable_get('facebook_status_special_user', ''),
+      '#description' => t("If you enter a user's name in this field, the block will show only that user's status. Use this on single-user blog sites or for site announcements, for example."),
+      '#element_validate' => array('facebook_status_alter_validate'),
+      '#autocomplete_path' => 'user/autocomplete',
+    );
+    if (module_exists('twitter') && user_access('use global twitter account')) {
+      $form['facebook_status']['facebook_status_twitter_special'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Post Special User statuses to the Global Twitter account'),
+        '#description' => t('This option only applies if a user is entered in the Special User field above.'),
+        '#default_value' => variable_get('facebook_status_twitter_special', 0),
+      );
+    }
+    return $form;
+  }
+  else if ($op == 'save' && $delta == 'facebook_status') {
+    variable_set('facebook_status_special_user', $edit['facebook_status']['facebook_status_special_user']);
+    if ($edit['facebook_status']['facebook_status_twitter_special'] && module_exists('twitter')) {
+      variable_set('facebook_status_twitter_special', $edit['facebook_status']['facebook_status_twitter_special']);
+    }
+  }
+}
+
+/**
+ * Validate function for the Special User element in the form alter configuration.
+ */
+function facebook_status_alter_validate($element, &$form_state) {
+  $name = $form_state['values']['facebook_status']['facebook_status_special_user'];
+  if ($name) {
+    $uid = db_result(db_query("SELECT uid FROM {users} WHERE name = '%s'", $name));
+    if (!$uid) {
+      form_set_error('facebook_status', t('You must use a valid username in the Special User field.'));
+    }
+  }
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function facebook_status_perm() {
+  return array('edit all statuses', 'edit own status', 'post on all profiles', 'use open API', 'view all statuses');
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function facebook_status_user($op, &$edit, &$account, $category = NULL) {
+  if ($op == 'delete') {
+    //Remove abandoned statuses from the database on user account deletion.
+    db_query('DELETE FROM {facebook_status} WHERE uid = %d OR pid = %d', $account->uid, $account->uid);
+  }
+  if ($op == 'view' && !_facebook_status_exclude($account)) {
+    if (!isset($account->content['facebook_status'])) {
+      $account->content['facebook_status'] = array();
+    }
+    $account->content['facebook_status'] += array(
+      '#type' => 'user_profile_category',
+      '#attributes' => array('class' => 'facebook_status-profile-category'),
+      '#weight' => -5,
+      '#title' => t('Status'),
+    );
+    $size = variable_get('facebook_status_size_long', 40);
+    $account->content['facebook_status']['status'] = array(
+      '#type' => 'user_profile_item',
+      '#title' => '',
+      '#value' => theme('facebook_status_form_display', $account, $size),
+      '#attributes' => array('class' => 'facebook_status profile'),
+    );
+  }
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ * No need to check permissions since the form is already restricted.
+ */
+function facebook_status_form_twitter_account_list_form_alter(&$form, &$form_state) {
+  $result = db_query("SELECT screen_name FROM {twitter_user} WHERE uid = %d", arg(1));
+  $options = array(0 => t('None'));
+  while ($option = db_fetch_array($result)) {
+    $options[$option['screen_name']] = $option['screen_name'];
+  }
+  $account = user_load(array('uid' => arg(1)));
+  $data = unserialize($account->data);
+
+  if (!empty($options) && variable_get('facebook_status_twitter', 1)) {
+    $form_state['#account'] = $account;
+    $form['facebook_status_twitter'] = array(
+      '#type' => 'select',
+      '#title' => t('Choose an account to which status updates can be posted'),
+      '#description' => t('If you choose a Twitter account here, you will be given the option to post your status updates to Twitter on the status update form.'),
+      '#default_value' => $data['facebook_status_twitter'],
+      '#options' => $options,
+      '#weight' => -1,
+    );
+    $form['#submit'][] = 'facebook_status_twitter_submit';
+  }
+}
+
+/**
+ * Submit function for the Twitter account form alter.
+ */
+function facebook_status_twitter_submit($form, &$form_state) {
+  $account = $form_state['#account'];
+  if ($account) {
+    user_save($account, array('facebook_status_twitter' => $form_state['values']['facebook_status_twitter']), 'twitter');
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function facebook_status_theme($existing, $type, $theme, $path) {
+  return array(
+    'facebook_status_item' => array(
+      'arguments' => array(
+        'status' => NULL,
+      ),
+    ),
+    'facebook_status_form_display' => array(
+      'arguments' => array(
+        'account' => FALSE,
+        'size' => FALSE,
+      ),
+    ),
+    'facebook_status_time' => array(
+      'arguments' => array(
+        'status_time' => time(),
+      ),
+    ),
+    'facebook_status_flag_create' => array(
+      'arguments' => array(
+        'sid' => FALSE,
+      ),
+    ),
+  );
+}
+
+//================
+//THEME FUNCTIONS.
+//================
+
+/**
+ * Formats a status. Does not check to make sure the status belongs to the
+ * relevant user if a status is passed in.
+ *
+ * @param $status
+ *   A full status object. If not passed, gets the last status for the relevant
+ *   user automatically. If there is none, uses a default message.
+ * @return
+ *   HTML to display the themed status or FALSE if the current user does not
+ *   have permission to view the status.
+ */
+function theme_facebook_status_item($status = FALSE) {
+  global $user;
+  if (!$status) {
+    $status = _facebook_status_get_status_fast($user->uid);
+  }
+  $owner = user_load(array('uid' => $status->uid));
+  $poster = user_load(array('uid' => $status->pid));
+  if (!user_access('view all statuses') && $user->uid != $owner->uid && $user->uid != $poster->uid) {
+    return FALSE;
+  }
+  $owner_name = theme('username', $owner);
+  $poster_name = theme('username', $poster);
+  $status_exists = TRUE;
+  if (!$status->status) {
+    $status_exists = FALSE;
+    if (variable_get('facebook_status_concat', 1) == 0) {
+      $status->status = t('!user does not have a status.', array('!user' => $owner_name));
+    }
+    else {
+      $status->status = t('does not have a status.');
+    }
+  }
+  $status_text = _facebook_status_run_filter($status->status);
+  //Invokes hook_facebook_status_render($owner, $poster, $status).
+  $functions = module_invoke_all('facebook_status_render', $owner, $poster, $status_text);
+  foreach ($functions as $function => $args) {
+    $status_text = call_user_func_array($function, array_merge(array($status_text), $args));
+  }
+  $edit = '';
+  if ($status_exists && (($user->uid != $owner->uid && user_access('edit all statuses')) || ($user->uid == $poster->uid && user_access('edit own status')))) {
+    $edit = ' <span id="facebook_status_edit_delete">'. l(t('Edit'), 'statuses/'. $status->sid .'/edit') .' '. l(t('Delete'), 'statuses/'. $status->sid .'/delete') .'</span>';
+  }
+  $time = theme('facebook_status_time', $status->status_time);
+  $args = array('!status' => $status_text, '%time' => $time, '!edit' => $edit);
+  if ($owner->uid == $poster->uid) {
+    $args['!user'] = $owner_name;
+    if (variable_get('facebook_status_concat', 1)) {
+      if (_facebook_status_possessive($status->status)) {
+        $output = t('!user!status %time!edit', $args);
+      }
+      else {
+        $output = t('!user !status %time!edit', $args);
+      }
+    }
+    else {
+      $output = t('@fbsstatus %time!edit', $args);
+    }
+  }
+  else {
+    $args['!owner'] = $owner_name;
+    $args['!poster'] = $poster_name;
+    $args['!conversation'] = '';
+    if (module_exists('views') && $owner->uid != $poster->uid) {
+      $args['!conversation'] = ' '. l(t('Conversation'), 'statuses/conversation/'. check_plain($owner->name) .','. check_plain($poster->name));
+    }
+    $output = t('!poster &raquo; !owner: !status %time!edit!conversation', $args);
+  }
+  return $output;
+}
+
+/**
+ * Returns the status update form.
+ *
+ * @param $account
+ *   The user whose profile will be posted to, or FALSE to have the module
+ *   detect the relevant user automatically according to the settings.
+ * @param $size
+ *   The size of the status update textfield, or FALSE to use the setting.
+ * @return
+ *   HTML to display the status update form or FALSE if the user cannot have a
+ *   status.
+ */
+function theme_facebook_status_form_display($account = FALSE, $size = FALSE) {
+  global $user;
+  if ($account === FALSE) {
+    $account = facebook_status_choose_owner(FALSE);
+  }
+  if (($user->uid == $account->uid && user_access('edit own status')) || ($user->uid != $account->uid && user_access('post on all profiles'))) {
+    if (!_facebook_status_exclude($account)) {
+      return '<div id="facebook_status_update" class="clear-block">'. drupal_get_form('_facebook_status_status', $account, $size) .'</div>';
+    }
+  }
+  $status = _facebook_status_get_status_fast($account->uid);
+  return theme('facebook_status_item', $status);
+}
+
+/**
+ * Returns a formatted string showing the time the status was submitted.
+ *
+ * @param $status_time
+ *   The Unix timestamp for when the relevant status was updated.
+ * @return
+ *   If the status was submitted within the last 3 days, returns a "time ago"
+ *   date. If not, returns a normal (small) date. If zero, returns FALSE.
+ */
+function theme_facebook_status_time($status_time) {
+  if (!$status_time) {
+    return FALSE;
+  }
+  if (time() - $status_time < 60) {
+    return t('a moment ago');
+  }
+  else if (time() - $status_time < 60 * 60 * 24 * 3) {
+    return t('!time ago', array('!time' => format_interval(time() - $status_time, 1)));
+  }
+  else {
+    return format_date($status_time, 'small');
+  }
+}
+
+//====
+//API.
+//====
+
+/**
+ * Returns a status or statuses for a single user.
+ *
+ * @param $uid
+ *   The User ID of the user whose profile was posted on. If $uid is literally
+ *   zero, the current user is assumed. If $uid otherwise evaluates to FALSE,
+ *   all users are assumed.
+ * @param $pid
+ *   The User ID of the user who posted the status. If $pid is literally zero,
+ *   the current user is assumed. If $pid otherwise evaluates to FALSE, all
+ *   users are assumed.
+ * @param $count
+ *   The maximum number of statuses to return. If zero, all relevant statuses
+ *   are returned.
+ * @param $instance
+ *   Allows getting statuses that are older than the most recent status.
+ *   If positive, gets statuses after the timestamp $instance.
+ *   If negative, gets the $instance-th most recent status (and newer ones).
+ *   If negative and there are fewer than abs($instance) statuses available,
+ *   the counting starts with the first one.
+ *   If zero, gets $count statuses starting with the first one.
+ * @param $exclude_blank
+ *   If TRUE, blank statuses will not be included.  If FALSE, they will be.
+ * @return
+ *   An array of status objects.
+ *   If the user has no statuses, or may not have statuses, returns FALSE.
+ */
+function facebook_status_get_status($uid = 0, $pid = 0, $count = 1, $instance = -1, $exclude_blank = TRUE) {
+  $excluded = _facebook_status_exclude(user_load(array('uid' => $uid)));
+  if ($excluded) {
+    return FALSE;
+  }
+  global $user;
+  $sql = '';
+  $args = array();
+  if ($uid === 0) {
+    $uid = $user->uid;
+  }
+  if ($uid) {
+    $sql .= 'AND uid = %d ';
+    $args[] = $uid;
+  }
+  if ($pid === 0) {
+    $pid = $user->uid;
+  }
+  if ($pid) {
+    $sql .= 'AND pid = %d ';
+    $args[] = $pid;
+  }
+  if ($exclude_blank) {
+    $sql .= ' AND status_time <> 0 ';
+  }
+  $sql .= 'ORDER BY sid DESC';
+  //Greater than or equal to zero.  This means $instance = 0 can retrieve all statuses starting with the first one.
+  //Note that the above is true even though we exclude statuses where status_time == 0 because only blank statuses have status_time == 0.
+  if ($instance >= 0) {
+    $sql = 'SELECT sid FROM {facebook_status} WHERE status_time > %d '. $sql;
+    array_unshift($args, $instance);
+    if ($count == 0) {
+      db_query($sql, $args);
+    }
+    else {
+      db_query_range($sql, $args, 0, $count);
+    }
+  }
+  else {
+    $sql = 'SELECT sid FROM {facebook_status} WHERE 1 '. $sql;
+    $total = facebook_status_has_status($uid);
+    //If $count == 0 we want to get all relevant statuses, so set $count to the total number of statuses for this user so they all get included.
+    if ($count == 0) {
+      $count = $total;
+    }
+    //Offset actually starts at zero in SQL, but $instance starts at (negative) 1.
+    $offset = abs($instance) - 1;
+    //If there are fewer than abs($instance) statuses available, just start with the first one.
+    if ($total + $instance < 0) {
+      $offset = 0;
+    }
+    $result = db_query_range($sql, $args, $offset, $count);
+  }
+  $statuses = array();
+  while ($sid = db_fetch_object($result)) {
+    $status = facebook_status_load($sid->sid);
+    if (trim($status->status)) {
+      $statuses[] = $status;
+    }
+  }
+  if (!empty($statuses)) {
+    return $statuses;
+  }
+  return FALSE;
+}
+
+/**
+ * Returns statuses for multiple users.
+ * Assumes blank statuses shouldn't be returned.
+ *
+ * @param $uids
+ *   An array of User IDs for users whose profile was posted on. If empty,
+ *   all users are considered.
+ * @param $pids
+ *   An array of User IDs for users who posted statuses. If empty,
+ *   all users are considered.
+ * @param $total
+ *   The maximum number of statuses to return. If zero, all relevant statuses
+ *   are returned.
+ * @param $latest_only
+ *   If TRUE, only include the latest status from each user; if FALSE, include
+ *   all relevant statuses. May cause issues in MySQL 4 and PostgreSQL if TRUE.
+ * @return
+ *   An array of status objects.
+ */
+function facebook_status_get_statuses($uids = array(), $pids = array(), $total = 0, $latest_only = FALSE) {
+  $statuses = array();
+  $args = array();
+  $sql = 'SELECT sid, uid FROM {facebook_status} WHERE status_time <> 0 ';
+  if (!empty($uids)) {
+    $args = array_merge($args, $uids);
+    $uids = db_placeholders($uids);
+    $sql .= 'AND uid IN ('. $uids .') ';
+  }
+  if (!empty($pids)) {
+    $args = array_merge($args, $pids);
+    $pids = db_placeholders($pids);
+    $sql .= 'AND pid IN ('. $pids .') ';
+  }
+  $sql .= 'ORDER BY sid DESC';
+  if ($latest_only) {
+    $sql = 'SELECT sid, uid FROM ('. $subquery .') x GROUP BY uid ORDER BY sid DESC';
+  }
+  if ($total == 0) {
+    $result = db_query($sql);
+  }
+  else {
+    $result = db_query_range($sql, 0, $total);
+  }
+  while ($sid = db_fetch_array($result)) {
+    if ($sid['sid']) {
+      $status = facebook_status_load($sid['sid']);
+      $statuses[$status->sid] = $status;
+    }
+  }
+  krsort($statuses);
+  return array_values($statuses);
+}
+
+/**
+ * Determines whether a user has statuses.
+ *
+ * @param $uid
+ *   The User ID of the user whose number of statuses will be looked up.
+ *   If $uid evaluates to FALSE, the current user will be assumed.
+ * @param $pid
+ *   The poster ID. Restricts results to statuses posted on the profile of the
+ *   user whose UID is $uid by the user whose UID is $pid.
+ * @return
+ *   The number of statuses of the relevant user or the number of statuses on
+ *   the profile of the relevant user by the specified poster.
+ */
+function facebook_status_has_status($uid = FALSE, $pid = FALSE) {
+  if (!$uid) {
+    global $user;
+    $uid = $user->uid;
+  }
+  if (is_numeric($pid)) {
+    return db_result(db_query("SELECT COUNT(sid) FROM {facebook_status} WHERE uid = %d AND pid = %d", $uid, $pid));
+  }
+  return db_result(db_query("SELECT COUNT(sid) FROM {facebook_status} WHERE uid = %d", $uid));
+}
+
+/**
+ * Load a status object.
+ *
+ * @param $sid
+ *   The Status ID.
+ * @return
+ *   A full status object containing sid, status, status_time, uid, and pid.
+ */
+function facebook_status_load($sid) {
+  return db_fetch_object(db_query("SELECT * FROM {facebook_status} WHERE sid = %d", $sid));
+}
+
+/**
+ * Delete a status from the database.
+ *
+ * @param $sid
+ *   The Status ID or a status object.
+ */
+function facebook_status_delete_status($sid) {
+  if (is_object($sid)) {
+    $sid = $sid->sid;
+  }
+  //Rules integration.
+  if (module_exists('rules')) {
+    rules_invoke_event('facebook_status_delete', $sid);
+  }
+  //Invokes hook_facebook_status_delete($sid).
+  module_invoke_all('facebook_status_delete', $sid);
+  db_query("DELETE FROM {facebook_status} WHERE sid = %d", $sid);
+}
+
+/**
+ * Saves a status into the database.
+ *
+ * @param $account
+ *   The $user object for the user whose status will be saved.
+ * @param $new_status
+ *   The status text to be saved.
+ */
+function facebook_status_save_status($account = FALSE, $new_status = '') {
+  if (!$account) {
+    $account = facebook_status_choose_owner();
+  }
+  global $user;
+  //If the user clears the status, set the time to zero so the new, blank status will not show up as new in lists.
+  $time = time();
+  if ($new_status === '') {
+    $time = 0;
+  }
+  //Choose "your" or "user's" depending on whether the editing user is the owner of the status.
+  $your = t('Your');
+  if ($user->uid != $account->uid) {
+    $your = t("!user's", array('!user' => theme('username', $account)));
+  }
+  //Pretend to have set a new status if the submitted status is exactly the same as the old one.
+  $status = _facebook_status_get_status_fast($account->uid);
+  if ($new_status != $status->status && $account->uid) {
+    //If a new status is submitted on one's own profile within 10 seconds of the old one, we assume the user didn't mean to post the first one.
+    if (time() - $status->status_time < 10 && $account->uid != $user->uid) {
+      $sql = "UPDATE {facebook_status} SET status = '%s', status_time = %d WHERE sid = %d ORDER BY sid DESC";
+      db_query($sql, $new_status, $time, $status->sid);
+    }
+    else {
+      $object = array('status' => $new_status, 'status_time' => $time, 'uid' => $account->uid, 'pid' => $user->uid);
+      drupal_write_record('facebook_status', $object);
+    }
+    $new_id = db_result(db_query("SELECT MAX(sid) FROM {facebook_status}"));
+    //Invokes hook_facebook_status_save($status_owner_object, &$status, $sid).
+    module_invoke_all('facebook_status_save', $account, $new_status, $new_id);
+  }
+  //Trigger integration.
+  if (module_exists('trigger')) {
+    module_invoke_all('facebook_status', 'submitted', $account, $user);
+  }
+  //Activity integration.
+  facebook_status_activity($account, $user, $new_status);
+  //Rules integration.
+  if (module_exists('rules')) {
+    rules_invoke_event('facebook_status_update', $account, $new_status);
+  }
+  //Twitter integration.
+  if (module_exists('twitter') && user_access('use global twitter account') && variable_get('facebook_status_twitter_special', 0) && $account->name == variable_get('facebook_status_special_user', '')) {
+    twitter_set_status(variable_get('twitter_global_name', NULL), variable_get('twitter_global_password', NULL), $new_status);
+  }
+
+  //A message to show to the user if necessary.
+  return t('!possessive status has been updated.', array('!possessive' => $your));
+}
+
+/**
+ * Determines the user whose status should be shown.
+ *
+ * @param $legacy
+ *   An array specifying which realms to treat with legacy behavior.  If
+ *   $legacy['user'] == TRUE, then on profile pages the owner of the profile
+ *   will be returned.  If $legacy['node'] == TRUE, then on nodes the author of
+ *   the node will be returned.  Everywhere else, or if $legacy has no value in
+ *   the 'user' or 'node' keys, the current user will be returned. If $legacy is
+ *   FALSE, the module's settings will be applied.
+ * @return
+ *   The $user object for the user whose status should be shown.
+ */
+function facebook_status_choose_owner($legacy = array()) {
+  if (variable_get('facebook_status_special_user', '') && arg(0) != 'share-status') {
+    return user_load(array('name' => variable_get('facebook_status_special_user', '')));
+  }
+  if ($legacy === FALSE) {
+    $legacy = variable_get('facebook_status_legacy', array('user' => 'user'));
+  }
+  if ($legacy['user'] && arg(0) == 'user' && is_numeric(arg(1))) {
+    return user_load(array('uid' => arg(1)));
+  }
+  else if ($legacy['node'] && arg(0) == 'node' && is_numeric(arg(1))) {
+    $node = menu_get_object();
+    return user_load(array('uid' => $node->uid));
+  }
+  else {
+    global $user;
+    return $user;
+  }
+}
+
+//=================
+//HELPER FUNCTIONS.
+//=================
+
+/**
+ * Determines if the current user can edit the relevant status.
+ *
+ * @param $author
+ *   The $user object for the author of the status. If FALSE, determine the
+ *   author automatically. Can also be a status object; if it is, checks whether
+ *   the current user can edit the status.
+ * @return
+ *   TRUE if the current user can edit the status; FALSE otherwise.
+ */
+function _facebook_status_can_edit($author = FALSE) {
+  global $user;
+  if (!$author) {
+    $author = facebook_status_choose_owner(FALSE);
+  }
+  if (($user->uid == $author->uid && user_access('edit own status')) || user_access('edit all statuses')) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Determines whether the relevant user can have a status.
+ *
+ * @param $account
+ *   The $user object of the user to examine. If FALSE, the current user is
+ *   assumed.
+ * @return
+ *   FALSE if the user is allowed to have a status; TRUE otherwise.
+ */
+function _facebook_status_exclude($account) {
+  if (!$account) {
+    global $user;
+    $account = $user;
+  }
+  //This variable should get saved so that this splits it exactly into the names without needing to trim().
+  $names = explode(', ', variable_get('facebook_status_exclude', ''));
+  if (in_array($account->name, $names)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Determines if a status starts with the English possessive apostrophe-S.
+ *
+ * @param $status
+ *   The relevant status text.
+ * @return
+ *   TRUE if the status is possessive; FALSE otherwise.
+ */
+function _facebook_status_possessive($status) {
+  //Don't use this function with Facebook Mode because there's nothing to concatenate with.
+  if (!variable_get('facebook_status_concat', 1)) {
+    return FALSE;
+  }
+  $language = user_preferred_language($account);
+  $language = $language->language;
+  $string = drupal_substr($status, 0, 3);
+  if ($language == 'en' && $string == "'s ") {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Helper function that runs filters on statuses.
+ */
+function _facebook_status_run_filter($status) {
+  if (variable_get('facebook_status_filter', 1) != 'none') {
+    return check_markup($status, variable_get('facebook_status_filter', 1));
+  }
+  return check_plain($status);
+}
+
+/**
+ * Gets the most recent status posted by a user on her own profile.
+ * Operates almost 6 times faster than facebook_status_get_status().
+ * Equivalent to facebook_status_get_status($uid, $uid, 1, -1, FALSE).
+ *
+ * @param $uid
+ *   The User ID of the user whose latest status should be retrieved.
+ * @return
+ *   A status object.
+ */
+function _facebook_status_get_status_fast($uid) {
+  return db_fetch_object(db_query("SELECT * FROM {facebook_status} WHERE uid = %d AND pid = %d ORDER BY sid DESC", $uid, $uid));
+}
+
+//======
+//FORMS.
+//======
+
+/**
+ * The status form.
+ *
+ * @param $account
+ *   The $user object for the user whose profile will be posted to.
+ * @param $size
+ *   The size of the status update textfield, or FALSE to use the setting.
+ * @return
+ *   A $form array.
+ */
+function _facebook_status_status($form_state, $account = NULL, $size = FALSE) {
+  global $user;
+  if (isset($form_state['facebook_status'])) {
+    $aid = $form_state['facebook_status']['account'];
+    $account = user_load(array('uid' => $aid));
+    $size = $form_state['facebook_status']['size'];
+  }
+
+  if (!$size) {
+    $size = variable_get('facebook_status_size', 32);
+    if (arg(0) == 'share-status') {
+      $size = variable_get('facebook_status_size_long', 40);
+    }
+  }
+  $maxlength = variable_get('facebook_status_length', 192);
+  $default = '';
+  $prefix = '';
+  if ($user->uid == $account->uid) {
+    //Because this text will appear exactly as-is in the textfield, we can't use a full check_plain() or filter_xss().
+    //We also translate a blank string so that the default text can be in different languages without having the restriction of being preset.
+    $default = str_replace('"', '', t('@fbssdefault', array('@fbssdefault' => '')));
+    if (variable_get('facebook_status_concat', 1)) {
+      $prefix = '<span class="facebook_status_prefix">'. t('!fbss_prefix_name ', array('!fbss_prefix_name' => theme('username', $account))) .'&nbsp;</span>';
+    }
+    $status = _facebook_status_get_status_fast($account->uid);
+    if ($status->status_time) {
+      $default = $status->status;
+    }
+    $slider = '';
+    if (!variable_get('facebook_status_hide_status', 0)) {
+      $slider = theme('facebook_status_item', $status);
+    }
+  }
+  else {
+    $slider = theme('username', $account);
+  }
+
+  if (arg(0) == 'share-status') {
+    $default = str_replace('"', '', $_GET['s']);
+  }
+
+  $path = drupal_get_path('module', 'facebook_status');
+  drupal_add_js($path .'/facebook_status.js');
+  drupal_add_css($path .'/facebook_status.css');
+  drupal_add_js(array('facebook_status' => array(
+    'maxlength' => $maxlength,
+    'ttype' => variable_get('facebook_status_type', 'textfield'))
+  ), 'setting');
+  $form = array('#cache' => TRUE);
+  $form['slider'] = array(
+    '#prefix' => '<span id="facebook_status_replace">',
+    '#value' => '<span id="facebook_status_slider">'. $slider .'</span>',
+  );
+  $form['status'] = array(
+    '#type' => variable_get('facebook_status_type', 'textfield'),
+    '#field_prefix' => $prefix,
+    '#size' => $size,
+    '#cols' => $size,
+    '#rows' => 2,
+    '#maxlength' => $maxlength,
+    '#default_value' => $default,
+    '#attributes' => array('class' => 'facebook_status_text'),
+    '#suffix' => '</span>',
+    '#resizable' => FALSE,
+  );
+  $form['account'] = array(
+    '#type' => 'value',
+    '#value' => $account->uid,
+  );
+  $form['size'] = array(
+    '#type' => 'value',
+    '#value' => $size,
+  );
+  $form['fbss-submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#submit' => array('_facebook_status_status_submit'),
+    '#attributes' => array('class' => 'facebook_status_submit'),
+  );
+  $form['fbss-submit']['#ahah'] = array(
+    'path' => 'facebook_status/js',
+    'wrapper' => 'facebook_status_replace',
+    'effect' => 'fade',
+    'method' => 'replace',
+  );
+  $form['chars'] = array(
+    '#value' => '<span id="facebook_status_chars">'. t('%chars characters allowed', array('%chars' => $maxlength)) .'</span>',
+  );
+  $data = unserialize($account->data);
+  if (module_exists('twitter') && $data['facebook_status_twitter'] && $account->uid == $GLOBALS['user']->uid && variable_get('facebook_status_twitter', 1)) {
+    $form['twitter'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Post to Twitter'),
+    );
+  }
+  //@todo: This is bad. It should be in the CSS but that doesn't seem to be working.
+  $form['#attributes'] = array('style' => 'margin-bottom: 0;');
+  return $form;
+}
+
+/**
+ * Validate function for the status update form.
+ */
+function _facebook_status_status_validate($form, &$form_state) {
+  $maxlen = variable_get('facebook_status_length', 192);
+  if (drupal_strlen($form_state['values']['status']) > $maxlen) {
+    form_set_error('status', t('The status must be no longer than %chars characters.', array('%chars' => $maxlen)));
+  }
+}
+
+/**
+ * Submit function for the status update form.
+ */
+function _facebook_status_status_submit($form, &$form_state) {
+  $size = $form_state['values']['size'];
+  $aid = $form_state['values']['account'];
+  $account = user_load(array('uid' => $aid));
+  $new_status = trim($form_state['values']['status']);
+  if ($form_state['values']['twitter']) {
+    facebook_status_twitter($account, $new_status);
+  }
+
+  $message = facebook_status_save_status($account, $new_status);
+
+  $form_state['facebook_status'] = array(
+    'account' => $aid,
+    'size' => $size,
+  );
+  $form_state['rebuild'] = TRUE;
+}
+
+/**
+ * Saves statuses via AHAH.
+ */
+function facebook_status_save_js() {
+  $form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_build_id = $_POST['form_build_id'];
+  $form = form_get_cache($form_build_id, $form_state);
+  $form_state['post'] = $form['#post'] = $_POST;
+  $form['#programmed'] = $form['#redirect'] = FALSE;
+  $args = $form['#parameters'];
+  $form_id = array_shift($args);
+  drupal_process_form($form_id, $form, $form_state);
+  $form = drupal_rebuild_form($form_id, $form_state, $args, $form_build_id);
+  //Get HTML for the replacement form.
+  $new_form['slider'] = $form['slider'];
+  $new_form['status'] = $form['status'];
+  //Prevent duplicate wrappers.
+  unset($new_form['slider']['#prefix']);
+  unset($new_form['status']['#suffix']);
+  $output = theme('status_messages') . drupal_render($new_form);
+  //Return the results.
+  drupal_json(array('status' => TRUE, 'data' => $output));
+}
+
+//====================
+//TRIGGER INTEGRATION.
+//====================
+
+/**
+ * Note that Actions integration is not present, even though Triggers
+ * integration is. That's because there's really no easily conceivable action
+ * that Facebook-style Statuses should define except to display a message to the
+ * user. Use the triggerunlock module, which lets you use any action with any
+ * hook, to access the display message action with facebook_status triggers.
+ * Of course, you can also write your own.
+ */
+
+/**
+ * Implementation of hook_hook_info().
+ */
+function facebook_status_hook_info() {
+  return array(
+    'facebook_status' => array(
+      'facebook_status' => array(
+        'fbss_submitted' => array(
+          'runs when' => t('The status update form has been submitted.'),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_facebook_status().
+ */
+function facebook_status_facebook_status($op, $owner, $poster) {
+  if (!in_array($op, array('submitted'))) {
+    return;
+  }
+  $aids = _trigger_get_hook_aids('facebook_status', $op);
+  $context = array(
+    'hook' => 'facebook_status',
+    'op' => $op,
+    'owner' => $owner,
+    'poster' => $poster,
+  );
+  actions_do(array_keys($aids), $poster, $context);
+}
+
+//===============================
+//ACTIVITY AND TOKEN INTEGRATION.
+//===============================
+
+/**
+ * Implementation of hook_activity_info().
+ */
+function facebook_status_activity_info() {
+  $token_types['facebook_status'] = t('Facebook-style Statuses');
+  return array(
+    'ops' => array('update' => t('Submit Status Update')),
+    'types' => $token_types,
+    'roles' => array(
+      'owner' => array(
+        '#name' => t('Owner'),
+        '#description' => t('The user whose profile the status was posted on.'),
+        '#default' => 'You have a new post on your profile.',
+      ),
+      'poster' => array(
+        '#name' => t('Poster'),
+        '#description' => t('The user who posted the status.'),
+        '#default' => "You posted a status on [owner]'s profile.",
+      ),
+      'all' => array(
+        '#name' => t('All'),
+        '#description' => t('Everyone who can see status updates.'),
+        '#default' => "[poster] posted on [owner]'s profile.",
+      ),
+    ),
+  );
+}
+
+/** 
+ * Implementation of hook_activityapi().
+ * I have no idea why this is actually necessary.
+ */
+function facebook_status_activityapi(&$activity, $op) {
+  if ($op == 'load') {
+    if ($activity['data']['module'] == 'facebook_status' && user_access('view all statuses')) {
+      $activity = array();
+    }
+  }
+}
+
+/**
+ * Implementation of hook_token_list().
+ */
+function facebook_status_token_list($type = 'all') {
+  if ($type == 'facebook_status') {
+    $tokens['facebook_status'] = array(
+      'operation' => t('The operation that took place. Always "update."'),
+      'owner' => t('The user whose profile the status was posted on.'),
+      'poster' => t('The user who posted the status.'),
+      'status' => t('The new status.'),
+      'status-time' => t('The time the status was submittted.'),
+    );
+    return $tokens;
+  }
+}
+
+/**
+ * Implementation of hook_token_values().
+ */
+function facebook_status_token_values($type, $data = NULL, $options = array()) {
+  if ($type == 'facebook_status' && !empty($data)) {
+    $status_time = $data['status_time'];
+    $data['status-time'] = theme('facebook_status_time', $status_time);
+    return $data;
+  }
+}
+
+/**
+ * Handles recording activity messages.
+ *
+ * @param $account
+ *   The $user object of the owner of the status.
+ * @param $status
+ *   The status object containing the status to record. Requires at least the
+ *   status and status_time.
+ */
+function facebook_status_activity($owner, $poster, $status) {
+  if (!module_exists('activity')) {
+    return FALSE;
+  }
+  //Privacy setting check.
+  if (activity_user_privacy_optout($account)) {
+    return FALSE;
+  }
+  $data = array(
+    'operation' => 'update',
+    'owner' => theme('username', $owner),
+    'poster' => theme('username', $poster),
+    'status' => check_plain($status->status),
+    'status_time' => $status->status_time,
+  );
+  $target_users_roles = array(
+    ACTIVITY_ALL => 'all',
+    $owner->uid => 'owner',
+  );
+  if ($owner->uid != $poster->uid) {
+    $target_users_roles[$poster->uid] = 'poster';
+  }
+  activity_insert($account->uid, 'facebook_status', 'status', 'update', $data, $target_users_roles);
+}
+
+//==================
+//VIEWS INTEGRATION.
+//==================
+
+/**
+ * Implementation of hook_views_api().
+ */
+function facebook_status_views_api() {
+  return array('api' => 2);
+}
+
+//====================
+//Twitter Integration.
+//====================
+
+/**
+ * Posts a status to Twitter.
+ */
+function facebook_status_twitter($account, $status) {
+  if (!module_exists('twitter')) {
+    return;
+  }
+  global $user;
+  if ($user->uid != $account->uid) {
+    return;
+  }
+  module_load_include('inc', 'twitter');
+  $twitter_accounts = twitter_get_user_accounts($account->uid);
+  $data = unserialize($account->data);
+  $twitter_account = $twitter_accounts[$data['facebook_status_twitter']];
+  module_load_include('inc', 'twitter');
+  twitter_set_status($twitter_account['screen_name'], $twitter_account['password'], $status);
+}
+
+//=================
+//FLAG INTEGRATION.
+//=================
+
+/**
+ * Implementation of hook_flag_definitions().
+ */
+function facebook_status_flag_definitions() {
+  return array(
+    'facebook_status' => array(
+      'title' => 'Facebook-style Statuses',
+      'description' => t('Statuses are short textual messages users use to express themselves.'),
+      'handler' => 'facebook_status_flag',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_flag().
+ */
+function facebook_status_flag($flag_status, $flag_object, $flagged_item_id, $flagger) {
+  if ($flag_object->name == 'facebook_status_delete' && $flag_object->content_type == 'facebook_status') {
+    facebook_status_delete_status($flagged_item_id);
+  }
+}
+
+/**
+ * Implementation of hook_flag_default_flags().
+ */
+function facebook_status_flag_default_flags() {
+  $flags = array();
+  $flags[] = array(
+    'content_type' => 'facebook_status',
+    'name' => 'like',
+    'title' => t('Like'),
+    'roles' => array('2'),
+    'global' => FALSE,
+    'types' => array('page'),
+    'flag_short' => t('Like'),
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => t('Un-like'),
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'show_on_page' => FALSE,
+    'show_on_teaser' => FALSE,
+    'show_on_form' => FALSE,
+    'status' => TRUE,
+    'locked' => array('name', 'global', 'types', 'show_on_page', 'show_on_teaser', 'show_on_form', 'status'),
+  );
+  $flags[] = array(
+    'content_type' => 'facebook_status',
+    'name' => 'facebook_status_delete',
+    'title' => t('Delete'),
+    'roles' => array(),
+    'global' => TRUE,
+    'types' => array('page'),
+    'flag_short' => t('Delete'),
+    'flag_long' => '',
+    'flag_confirmation' => t('Are you sure you want to permanently delete this status?'),
+    'flag_message' => '',
+    'unflag_short' => t('Un-delete'),
+    'unflag_long' => '',
+    'unflag_confirmation' => t('Are you sure you want to un-delete this status?'),
+    'unflag_message' => '',
+    'show_on_page' => FALSE,
+    'show_on_teaser' => FALSE,
+    'show_on_form' => FALSE,
+    'status' => FALSE,
+    'link_type' => 'confirm',
+    'locked' => array('name', 'global', 'types', 'show_on_page', 'show_on_teaser', 'show_on_form', 'status', 'link_type'),
+  );
+  return $flags;
+}
+
+/**
+ * We have to check to make sure class flag_flag exists or we will get a WSOD.
+ * The flag_flag class exists if the Flag module is loaded before this file is.
+ * The Flag module is loaded first if the weight is higher in the {system} table,
+ * and the 'facebook_status_flag_update' variable tells us if this is true.
+ */
+if (module_exists('flag') && variable_get('facebook_status_flag_update', FALSE)) {
+  //This is here because the Flag module does not support magic include files.
+  module_load_include('inc', 'facebook_status', 'facebook_status.flag');
+}

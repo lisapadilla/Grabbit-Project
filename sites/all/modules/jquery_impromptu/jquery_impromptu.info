@@ -1,0 +1,11 @@
+; $Id: jquery_impromptu.info,v 1.1.2.1 2008/11/24 22:02:48 obsidiandesign Exp $
+name = jQuery Impromptu
+description = A more pleasant way to spontaneously prompt a user for input.
+package = User Interface
+core = 6.x
+; Information added by drupal.org packaging script on 2008-12-09
+version = "6.x-1.1"
+core = "6.x"
+project = "jquery_impromptu"
+datestamp = "1228824934"
+

@@ -1,0 +1,36 @@
+/**
+* Friendlist styling for displaying user pictures
+* Author: Marius Ooms
+*/
+
+.view-fl-public .item-list ul li {
+    float: left;
+    margin:  0 5px 5px 0;
+    padding: 0;
+    text-align: center;
+    line-height: normal;
+    list-style-type: none;
+    list-style: none;
+    }
+
+.view-fl-public .picture,
+.view-fl-manage .picture {
+    padding: 0;
+}
+
+.view-fl-manage img {
+    width: 60px; /* Change to desired picture size */
+    height: auto;
+}
+
+.view-fl-public img {
+    width: 120px; /* Change to desired picture size */
+    height: auto;
+}
+
+#block-views-fl_public-block_1 img,
+#block-views-fl_public-block_2 img,
+#block-views-fl_public-block_3 img {
+    width: 60px; /* Change to desired picture size */
+    height: auto;
+}

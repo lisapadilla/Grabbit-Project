@@ -1,0 +1,22 @@
+<?php 
+// $Id: og_activity.install,v 1.1.2.1 2008/12/28 13:14:49 stalski Exp $ 
+// by Jochen Stals - ONE-agency - www.one-agency.be
+
+/**
+ * Implementation of hook_disable().
+ */
+function og_activity_disable() {
+  heartbeat_messages_uninstall('og_activity');
+  variable_del('heartbeat_add_og_admins_to_personal'); 
+  variable_del('heartbeat_add_og_members_to_personal'); 
+  variable_del('heartbeat_add_og_related_to_personal'); 
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function og_activity_enable() {
+  variable_set('heartbeat_add_og_admins_to_personal', TRUE); 
+  variable_set('heartbeat_add_og_members_to_personal', TRUE);  
+  variable_set('heartbeat_add_og_related_to_personal', TRUE);   
+}

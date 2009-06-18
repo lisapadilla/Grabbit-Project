@@ -1,0 +1,22 @@
+<?php
+// $Id: friendlist_views.module,v 1.1.2.5 2008/10/11 18:47:30 mercmobily Exp $
+
+/**
+ * @file
+ * Friendlist's Rules integration.
+ */
+
+/**
+ * Implementation of hook_views_api().
+ *
+ * This hook will tell "views" that this module interfaces with it.
+ */
+function friendlist_views_views_api() {
+
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'friendlist_views'),
+  );
+}
+
+

@@ -1,0 +1,751 @@
+# German translation of FriendList
+# Copyright Drupal Voice Channel <dvc@DrupalCenter.de>
+# Generated from files:
+#  friendlist_access.module,v 1.1.2.14 2008/10/29 00:53:17 mercmobily
+#  friendlist_access.install,v 1.1.2.6 2008/10/11 18:47:28 mercmobily
+#  friendlist_access.info,v 1.1.2.1 2008/09/12 17:31:07 mercmobily
+#  friendlist_access_integration.info,v 1.1.2.1 2008/09/29 04:49:01 mercmobily
+#  friendlist_api.info,v 1.1 2008/09/05 09:18:56 sicjoy
+#  friendlist_blocks.info,v 1.1.2.1 2008/09/08 00:20:24 mercmobily
+#  friendlist_import_bl.info,v 1.1.2.1 2008/10/11 20:11:31 mercmobily
+#  friendlist_import_bl2.info,v 1.1.2.1 2008/09/27 19:13:13 mercmobily
+#  friendlist_import_ur.info,v 1.1.2.1 2008/09/19 18:28:57 mercmobily
+#  friendlist_rules.info,v 1.1.2.3 2008/10/07 19:11:06 mercmobily
+#  friendlist_ui.info,v 1.1 2008/09/05 09:18:57 sicjoy
+#  friendlist_views.info,v 1.1.2.2 2008/09/18 17:23:27 mercmobily
+#  friendlist_access_integration.admin.inc,v 1.1.2.7 2008/10/11 18:47:28 mercmobily
+#  friendlist_access_integration.module,v 1.1.2.5 2008/10/11 18:47:28 mercmobily
+#  friendlist_api.module,v 1.1.2.35 2008/10/29 00:53:17 mercmobily
+#  friendlist_api.install,v 1.1.2.10 2008/10/11 18:47:28 mercmobily
+#  friendlist_blocks.module,v 1.1.2.19 2008/11/02 12:41:33 mercmobily
+#  friendlist_import_bl.module,v 1.1.2.2 2008/11/07 15:15:35 mercmobily
+#  friendlist_import_bl2.module,v 1.1.2.9 2008/10/11 18:47:29 mercmobily
+#  friendlist_import_ur.module,v 1.1.2.9 2008/10/11 18:47:29 mercmobily
+#  friendlist_rules.rules.inc,v 1.1.2.12 2008/10/11 18:47:29 mercmobily
+#  friendlist_views.views.inc,v 1.1.2.10 2008/10/11 18:47:30 mercmobily
+#  views_handler_filter_status.inc,v 1.1.2.4 2008/10/11 18:47:30 mercmobily
+#  friendlist_rules.module,v 1.1.2.6 2008/10/11 18:47:29 mercmobily
+#  friendlist_ui.admin.inc,v 1.1.2.17 2008/10/11 18:47:29 mercmobily
+#  friendlist_ui.module,v 1.1.2.29 2008/11/02 12:41:27 mercmobily
+#  views_handler_field_friendlist_link.inc,v 1.1.2.4 2008/10/02 08:27:42 mercmobily
+#  views_handler_field_friendlist_link_requestee.inc,v 1.1.2.6 2008/10/11 18:47:30 mercmobily
+#  views_handler_field_friendlist_link_requester.inc,v 1.1.2.6 2008/10/11 18:47:30 mercmobily
+#  views_handler_filter_relationship_type.inc,v 1.1.2.6 2008/10/11 18:47:30 mercmobily
+#  friendlist_views.module,v 1.1.2.5 2008/10/11 18:47:30 mercmobily
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: friendlist (6.x-1.x-dev)\n"
+"POT-Creation-Date: 2008-11-13 19:06+0100\n"
+"PO-Revision-Date: 2008-11-13 21:00+0100\n"
+"Last-Translator: Drupal Voice Channel <dvc@DrupalCenter.de>\n"
+"Language-Team: Deutsch <dvc@DrupalCenter.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: friendlist_access/friendlist_access.module:143
+msgid "Friendlist Node Access"
+msgstr "Friendlist Zugriff auf Nodes"
+
+#: friendlist_access/friendlist_access.module:144
+msgid "Node access based on your relationships to other users"
+msgstr "Node Zugriff, basierend auf den Beziehungen zu anderen Benutzern"
+
+#: friendlist_access/friendlist_access.module:156
+msgid "Give view access - GLOBAL SETTING"
+msgstr "Rechte zum Lesen erteilen - Globale Einstellung"
+
+#: friendlist_access/friendlist_access.module:162
+msgid "Give update access - GLOBAL SETTING"
+msgstr "Rechte zum Aktualisieren erteilen - Globale Einstellung"
+
+#: friendlist_access/friendlist_access.module:168
+msgid "Give delete access - GLOBAL SETTING"
+msgstr "Rechte zum Löschen erteilen - Globale Einstellung"
+
+#: friendlist_access/friendlist_access.module:187
+msgid "Access for relation type !t"
+msgstr "Zugriffsrechte auf den Beziehungstyp !t"
+
+#: friendlist_access/friendlist_access.module:223
+msgid "Give view access"
+msgstr "Rechte zum Lesen erteilen"
+
+#: friendlist_access/friendlist_access.module:229
+msgid "Give update access"
+msgstr "Rechte zum Aktualisieren erteilen"
+
+#: friendlist_access/friendlist_access.module:235
+msgid "Give delete access"
+msgstr "Rechte zum Löschen erteilen"
+
+#: friendlist_access/friendlist_access.install:12
+msgid "Table for node access for friendlist"
+msgstr "Node-Zugrifftabelle für die \"Freundesliste\""
+
+#: friendlist_access_integration/friendlist_access_integration.admin.inc:24
+msgid "CCK Field privacy integration"
+msgstr "Integration privater CCK Felder"
+
+#: friendlist_access_integration/friendlist_access_integration.module:16
+msgid "Friendlist Access Integration module"
+msgstr "Freundesliste Zugriffsmodul"
+
+#: friendlist_access_integration/friendlist_access_integration.module:17
+msgid "Settings for the Friendlist Access Integration module"
+msgstr "Einstellungen für das Freundesliste Zugriffsmodul"
+
+#: friendlist_api/friendlist_api.install:17
+msgid "Table for friend relations."
+msgstr "Tabelle für Freundschaften"
+
+#: friendlist_api/friendlist_api.install:22
+msgid "Relation ID"
+msgstr "Beziehungs-ID"
+
+#: friendlist_api/friendlist_api.install:29;101
+msgid "User ID of requester."
+msgstr "Benutzer-ID des Anfragenden"
+
+#: friendlist_api/friendlist_api.install:36;108
+msgid "User ID of requestee."
+msgstr "Benutzer-ID des Angefragten"
+
+#: friendlist_api/friendlist_api.install:43;115
+msgid "Foreign key to relationships table."
+msgstr "Fremdschlüssel zur Beziehungstabelle"
+
+#: friendlist_api/friendlist_api.install:50;122
+msgid "Message which was send by the requester."
+msgstr "Nachricht die vom Anfragenden gesendet wurde."
+
+#: friendlist_api/friendlist_api.install:58
+msgid "Generation time of relationship."
+msgstr "Erstellungszeit der Beziehung"
+
+#: friendlist_api/friendlist_api.install:65
+msgid "Time when the two-way relationship was refused. Applies to two-ways relationships"
+msgstr "Zeit zu der die gegenseitige Beziehung abgelehnt wurde. Bezieht sich auf gegenseitige Beziehungen."
+
+#: friendlist_api/friendlist_api.install:89
+msgid "Table for status caching"
+msgstr "Tabelle des Status-Cache"
+
+#: friendlist_api/friendlist_api.install:94
+msgid "Status ID"
+msgstr "Status-ID"
+
+#: friendlist_api/friendlist_api.install:130
+msgid "Link back to the relation ID that generated the status."
+msgstr "Link zur Beziehungs-ID die den Status erzeugt hat."
+
+#: friendlist_api/friendlist_api.install:136
+msgid "Link back to the relation ID that OWNS the status. It might be empty"
+msgstr "Link zur Beziehungs-ID die den Status BESITZT - kann leer bleiben."
+
+#: friendlist_api/friendlist_api.install:143
+msgid "When the status was last updated"
+msgstr "Letzte Status-Aktualisierung"
+
+#: friendlist_api/friendlist_api.install:166
+msgid "Table for pending friend relationships."
+msgstr "Tabelle von Freundschaftsanfragen"
+
+#: friendlist_api/friendlist_api.install:170
+msgid "Primary key for relation_types."
+msgstr "Primär-Schlüssel des Beziehungs-Typ"
+
+#: friendlist_api/friendlist_api.install:177
+msgid "Name of the relationship."
+msgstr "Beziehungsname"
+
+#: friendlist_api/friendlist_api.install:185
+msgid "Name in plural form of the relationship."
+msgstr "Pluralform des Beziehungsnamens"
+
+#: friendlist_api/friendlist_api.install:193
+msgid "0 or 1, 1 stands for oneway."
+msgstr "0 oder 1, 1 steht für einseitig"
+
+#: friendlist_api/friendlist_api.install:202
+msgid "0 or 1, 1 means active"
+msgstr "0 oder 1, 1 steht für aktiv"
+
+#: friendlist_blocks/friendlist_blocks.module:23;94
+msgid "People you might know"
+msgstr "Leute die Sie kennen könnten"
+
+#: friendlist_blocks/friendlist_blocks.module:24
+msgid "Friendlist actions to the content's author"
+msgstr "Freundeslisten-Aktion mit dem Autor durchführen"
+
+#: friendlist_blocks/friendlist_blocks.module:25
+msgid "Mutual friends"
+msgstr "Gemeinsame Bekannte"
+
+#: friendlist_blocks/friendlist_blocks.module:41;64
+msgid "Relation type to consider"
+msgstr "Zu überprüfender Beziehungstyp"
+
+#: friendlist_blocks/friendlist_blocks.module:103
+msgid "You and !user"
+msgstr "Sie und !user"
+
+#: friendlist_blocks/friendlist_blocks.module:115
+msgid "Common relations"
+msgstr "Allgemeine Beziehungen"
+
+#: friendlist_import_bl/friendlist_import_bl.module:30
+msgid "This is DESTRUCTIVE. YOU WILL LOSE ALL YOUR Friendlist DATA. WATCH OUT."
+msgstr "Achtung! ES WERDEN ALLE DATEN DER FREUNDESLISTE GELÖSCHT. Vorsicht!"
+
+#: friendlist_import_bl/friendlist_import_bl.module:35 friendlist_import_bl2/friendlist_import_bl2.module:42 friendlist_import_ur/friendlist_import_ur.module:36
+msgid "Import"
+msgstr "Import"
+
+#: friendlist_import_bl/friendlist_import_bl.module:95 friendlist_import_bl2/friendlist_import_bl2.module:110 friendlist_import_ur/friendlist_import_ur.module:99
+msgid "Done!"
+msgstr "Fertig!"
+
+#: friendlist_import_bl/friendlist_import_bl.module:107
+msgid "buddy"
+msgstr "buddy"
+
+#: friendlist_import_bl/friendlist_import_bl.module:108
+msgid "Buddy"
+msgstr "Buddy"
+
+#: friendlist_import_bl/friendlist_import_bl.module:110
+msgid "buddylist"
+msgstr "buddylist"
+
+#: friendlist_import_bl/friendlist_import_bl.module:111
+msgid "Buddylist"
+msgstr "Buddylist"
+
+#: friendlist_import_bl/friendlist_import_bl.module:113
+msgid "buddies"
+msgstr "Buddies"
+
+#: friendlist_import_bl/friendlist_import_bl.module:114
+msgid "Buddies"
+msgstr "Buddies"
+
+#: friendlist_import_bl/friendlist_import_bl.module:116
+msgid "buddy of"
+msgstr "buddy von"
+
+#: friendlist_import_bl/friendlist_import_bl.module:117
+msgid "Buddy of"
+msgstr "Buddy von"
+
+#: friendlist_import_bl/friendlist_import_bl.module:14
+msgid "Friendlist Buddylist importer"
+msgstr "Friendlist Buddylist Importer"
+
+#: friendlist_import_bl/friendlist_import_bl.module:15
+msgid "Import data from Buddylist."
+msgstr "Importiere Daten aus Buddylist"
+
+#: friendlist_import_bl2/friendlist_import_bl2.module:34
+msgid "Buddylist2 data importer"
+msgstr "Importiere Daten aus Buddylist2"
+
+#: friendlist_import_bl2/friendlist_import_bl2.module:37
+msgid "<h1>This is DESTRUCTIVE. YOU WILL LOSE ALL YOUR Friendlist DATA. WATCH OUT.</h1>"
+msgstr "<h1>Achtung! Hiermit verlieren Sie alle Daten der Freundesliste! Vorsicht!</h1>"
+
+#: friendlist_import_bl2/friendlist_import_bl2.module:17
+msgid "Friendlist Buddylist2 importer"
+msgstr "Friendlist Buddylist2 Importer"
+
+#: friendlist_import_ur/friendlist_import_ur.module:31
+msgid "<h1>This is DESTRUCTIVE. YOU WILL LOSE ALL YOUR Friendlist DATA. WATCH OUT.</h1><p>Also, note that: 1) Pending 1-way requests will be lost -- only approved ones will be added 2) The value of the variable \"expires_val\" in the relation type will be lost</p>"
+msgstr "<h1>Achtung! Hiermit verlieren Sie alle Daten der Freundesliste. Vorsicht!.</h1><p>Beachten Sie auch: 1) Nicht bestätigte Anfragen gehen verloren -- nur bestätigte Anfragen werden hinzugefügt. 2) Der Wert der Variable \"expires_val\" in der Beziehungstabelle geht verloren.</p>"
+
+#: friendlist_import_ur/friendlist_import_ur.module:15
+msgid "Friendlist User Relationships importer"
+msgstr "Friendlist \"User Relationships\" Importer"
+
+#: friendlist_import_ur/friendlist_import_ur.module:16
+msgid "Import data from User Relationships."
+msgstr "Datenimport vom \"User Relationships\"-Modul."
+
+#: friendlist_rules/friendlist_rules.rules.inc:20;260 friendlist_views/friendlist_views.views.inc:278
+msgid "Relation status"
+msgstr "Beziehungsstatus"
+
+#: friendlist_rules/friendlist_rules.rules.inc:26;276;340
+msgid "Relation type"
+msgstr "Beziehungstyp"
+
+#: friendlist_rules/friendlist_rules.rules.inc:32
+msgid "Relation message"
+msgstr "Beziehungsnachricht"
+
+#: friendlist_rules/friendlist_rules.rules.inc:105
+msgid "Create a relationship between users"
+msgstr "Erstellt eine Beziehung zwischen Benutzern"
+
+#: friendlist_rules/friendlist_rules.rules.inc:118
+msgid "Delete a relationship between users"
+msgstr "Löscht eine Beziehung zwischen Benutzern"
+
+#: friendlist_rules/friendlist_rules.rules.inc:145;204
+msgid "User 1"
+msgstr "Benutzer 1"
+
+#: friendlist_rules/friendlist_rules.rules.inc:147;206
+msgid "The user from which the relation will start"
+msgstr "Der Benutzer, von dem aus die Beziehung beginnt"
+
+#: friendlist_rules/friendlist_rules.rules.inc:154;213
+msgid "User 2"
+msgstr "Benutzer 2"
+
+#: friendlist_rules/friendlist_rules.rules.inc:156;215
+msgid "The user to which the relation will get"
+msgstr "Der Benutzer, auf den die Beziehung verweist"
+
+#: friendlist_rules/friendlist_rules.rules.inc:164;223 friendlist_views/friendlist_views.views.inc:215
+msgid "Relation type ID"
+msgstr "Beziehungstyp ID"
+
+#: friendlist_rules/friendlist_rules.rules.inc:166;225 friendlist_views/friendlist_views.views.inc:171
+msgid "The relation ID"
+msgstr "Die Beziehungs-ID"
+
+#: friendlist_rules/friendlist_rules.rules.inc:173;175
+msgid "The message"
+msgstr "Die Nachricht"
+
+#: friendlist_rules/friendlist_rules.rules.inc:256
+msgid "Compare with a status."
+msgstr "Vergleichen mit einem Status"
+
+#: friendlist_rules/friendlist_rules.rules.inc:272
+msgid "Compare with a relation type"
+msgstr "Vergleichen mit einem Beziehungstyp"
+
+#: friendlist_rules/friendlist_rules.rules.inc:306 friendlist_views/friendlist_views.views.inc:302;310;326;342 friendlist_views/views_handler_filter_status.inc:16
+msgid "Status"
+msgstr "Status"
+
+#: friendlist_rules/friendlist_rules.rules.inc:308
+msgid "The status to compare it with"
+msgstr "Der Status mit dem verglichen werden soll."
+
+#: friendlist_rules/friendlist_rules.rules.inc:342
+msgid "The relation_type to compare it with"
+msgstr "Der Beziehungstyp mit dem verglichen werden soll."
+
+#: friendlist_rules/friendlist_rules.rules.inc:369
+msgid "User1 adds a relation to User2"
+msgstr "Benutzer 1 hat eine Beziehung zu Benutzer 2 hinzugefügt."
+
+#: friendlist_rules/friendlist_rules.rules.inc:372
+msgid "User1, which adds User2."
+msgstr "Benutzer 1, der Benutzer 2 hinzugefügt hat."
+
+#: friendlist_rules/friendlist_rules.rules.inc:373
+msgid "User2, which is added to User1's list."
+msgstr "Benutzer 2, der zur Liste von Benuter 1 hinzugefügt wurde."
+
+#: friendlist_rules/friendlist_rules.rules.inc:374;390
+msgid "The relation type id"
+msgstr "Die Beziehungstyp ID"
+
+#: friendlist_rules/friendlist_rules.rules.inc:375;391
+msgid "The message sent to the user"
+msgstr "Nachricht, die der Benutzer erhält"
+
+#: friendlist_rules/friendlist_rules.rules.inc:376
+msgid "The status before the user gets added"
+msgstr "Status bevor ein Benutzer hinzugefügt wird"
+
+#: friendlist_rules/friendlist_rules.rules.inc:377
+msgid "The status once the user has been added"
+msgstr "Status nach dem ein Benutzer hinzugefügt wird"
+
+#: friendlist_rules/friendlist_rules.rules.inc:378
+msgid "The action was generated by a live user"
+msgstr "Die Aktion wurde durch einen angemeldeten Benutzer erzeugt."
+
+#: friendlist_rules/friendlist_rules.rules.inc:385
+msgid "User1 deletes a relation to user2"
+msgstr "Benutzer 1 löscht die Beziehung zu Benutzer 2"
+
+#: friendlist_rules/friendlist_rules.rules.inc:388
+msgid "User1, which deletes User2."
+msgstr "Benutzer 1 löscht Beziehung zu Benutzer 2"
+
+#: friendlist_rules/friendlist_rules.rules.inc:389
+msgid "User2, which is deleted to User1's list."
+msgstr "Benutzer 2 wurde von der Liste des Benutzer 1 gelöscht."
+
+#: friendlist_rules/friendlist_rules.rules.inc:392
+msgid "The status before the user was deleted"
+msgstr "Status bevor der Benutzer gelöscht wurde"
+
+#: friendlist_rules/friendlist_rules.rules.inc:393
+msgid "The status once the user has been deleted"
+msgstr "Status nachdem ein Benutzer gelöscht wurde"
+
+#: friendlist_rules/friendlist_rules.rules.inc:394
+msgid "True if the action was generated by a live user"
+msgstr "Wahr wenn die Aktion ein angemeldeter Benutzer durchgeführt hat"
+
+#: friendlist_rules/friendlist_rules.rules.inc:413
+msgid "The status in string form"
+msgstr "Status als Zeichenkette"
+
+#: friendlist_rules/friendlist_rules.rules.inc:417
+msgid "The relation type in numeric form"
+msgstr "Beziehungstyp in numerischer Darstellung"
+
+#: friendlist_rules/friendlist_rules.rules.inc:418
+msgid "The relation type in string"
+msgstr "Beziehungstyp als Zeichenkette"
+
+#: friendlist_rules/friendlist_rules.rules.inc:419
+msgid "The relation type in string, plural"
+msgstr "Beziehungstyp als Zeichenkette im Plural"
+
+#: friendlist_rules/friendlist_rules.rules.inc:423
+msgid "The raw string"
+msgstr "Zeichenkette im Rohformat"
+
+#: friendlist_rules/friendlist_rules.rules.inc:427
+msgid "1 for true, 0 for FALSE"
+msgstr "1 für wahr, 0 für falsch"
+
+#: friendlist_ui/friendlist_ui.admin.inc:20 friendlist_views/friendlist_views.views.inc:249;265
+msgid "One way"
+msgstr "Einseitig"
+
+#: friendlist_ui/friendlist_ui.admin.inc:20
+msgid "Reciprocal"
+msgstr "Gegenseitig"
+
+#: friendlist_ui/friendlist_ui.admin.inc:21
+msgid "Yes"
+msgstr "Ja"
+
+#: friendlist_ui/friendlist_ui.admin.inc:21
+msgid "No"
+msgstr "Nein"
+
+#: friendlist_ui/friendlist_ui.admin.inc:22
+msgid "edit"
+msgstr "bearbeiten"
+
+#: friendlist_ui/friendlist_ui.admin.inc:46
+msgid "No relations available."
+msgstr "Keine Beziehungen verfügbar."
+
+#: friendlist_ui/friendlist_ui.admin.inc:50
+msgid "ID"
+msgstr "ID"
+
+#: friendlist_ui/friendlist_ui.admin.inc:51
+msgid "Name"
+msgstr "Name"
+
+#: friendlist_ui/friendlist_ui.admin.inc:52
+msgid "Name plur"
+msgstr "Namen"
+
+#: friendlist_ui/friendlist_ui.admin.inc:53
+msgid "Type"
+msgstr "Typ"
+
+#: friendlist_ui/friendlist_ui.admin.inc:54;100 friendlist_views/friendlist_views.views.inc:257
+msgid "Active"
+msgstr "Aktiv"
+
+#: friendlist_ui/friendlist_ui.admin.inc:56
+msgid "Operations"
+msgstr "Vorgänge"
+
+#: friendlist_ui/friendlist_ui.admin.inc:80
+msgid "Relation name"
+msgstr "Beziehungsname"
+
+#: friendlist_ui/friendlist_ui.admin.inc:87
+msgid "Relation name - plural form"
+msgstr "Beziehungsname im Plural"
+
+#: friendlist_ui/friendlist_ui.admin.inc:94
+msgid "One way relation"
+msgstr "Einseitige Beziehung"
+
+#: friendlist_ui/friendlist_ui.admin.inc:108
+msgid "Save"
+msgstr "Speichern"
+
+#: friendlist_ui/friendlist_ui.admin.inc:126
+msgid "Relation type created"
+msgstr "Beziehungstyp wurde erstellt."
+
+#: friendlist_ui/friendlist_ui.admin.inc:137
+msgid "Relation type saved"
+msgstr "Beziehungstyp wurde gespeichert."
+
+#: friendlist_ui/friendlist_ui.admin.inc:169
+msgid "Status messages"
+msgstr "Statusmeldung"
+
+#: friendlist_ui/friendlist_ui.admin.inc:207
+msgid "<br/><hr /><br/><h1>Settings for status !status</h1>"
+msgstr "<br/><hr /><br/><h1>Einstellungen für den Status !status</h1>"
+
+#: friendlist_ui/friendlist_ui.admin.inc:217
+msgid "Currently: !default"
+msgstr "Aktuell: !default"
+
+#: friendlist_ui/friendlist_ui.admin.inc:223
+msgid "This button will rebuild the cache:"
+msgstr "Dieser Button baut den Cache neu auf:"
+
+#: friendlist_ui/friendlist_ui.admin.inc:227;243;253
+msgid "Rebuild status cache"
+msgstr "Status-Cache neu aufbauen"
+
+#: friendlist_ui/friendlist_ui.admin.inc:252
+msgid "Are you sure you want to rebuild the permissions on site content?"
+msgstr "Sind Sie sich sicher, dass Sie die Berechtigungen für die Seiteninhalte neu aufbauen wollen?"
+
+#: friendlist_ui/friendlist_ui.admin.inc:253
+msgid "This action rebuilds the status cache for the friendlist module. This may be a lengthy process. This action cannot be undone."
+msgstr "Diese Aktion erneuert den Status-Cache des Friendlist Modules. Dies kann einige Zeit dauern. Diese Aktion kann nicht rückgängig gemacht werden."
+
+#: friendlist_ui/friendlist_ui.admin.inc:253
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: friendlist_ui/friendlist_ui.admin.inc:272
+msgid "DONE!"
+msgstr "FERTIG!"
+
+#: friendlist_ui/friendlist_ui.module:139;95
+msgid "Connections"
+msgstr "Verbindungen"
+
+#: friendlist_ui/friendlist_ui.module:208
+msgid "Message"
+msgstr "Nachricht"
+
+#: friendlist_ui/friendlist_ui.module:217
+msgid "Submit"
+msgstr "Absenden"
+
+#: friendlist_ui/friendlist_ui.module:24
+msgid "have relationships with friendlist"
+msgstr "hat Beziehungen mit Freundesliste"
+
+#: friendlist_ui/friendlist_ui.module:38
+msgid "Friendlist UI module"
+msgstr "Friendlist UI Modul"
+
+#: friendlist_ui/friendlist_ui.module:39
+msgid "Settings for the friendlist_ui module"
+msgstr "Einstellungen für das Friendlist UI Modul"
+
+#: friendlist_ui/friendlist_ui.module:48
+msgid "Rebuild friendlist status table"
+msgstr "Erneuere die Statustabelle der Freundesliste"
+
+#: friendlist_ui/friendlist_ui.module:58
+msgid "Friendlist relation types"
+msgstr "Beziehungstypen der Freundesliste"
+
+#: friendlist_ui/friendlist_ui.module:59
+msgid "Manage friendlist relation types"
+msgstr "Verwalte Beziehungstypen der Freundesliste"
+
+#: friendlist_ui/friendlist_ui.module:67
+msgid "List"
+msgstr "Liste"
+
+#: friendlist_ui/friendlist_ui.module:74
+msgid "Add relation type"
+msgstr "Beziehungstyp hinzufügen"
+
+#: friendlist_ui/friendlist_ui.module:84
+msgid "Edit relation"
+msgstr "Beziehung bearbeiten"
+
+#: friendlist_ui/friendlist_ui.module:96
+msgid "Add/Delete/Confirm functions"
+msgstr "Funktionen zum Hinzufügen/Löschen/Übernehmen"
+
+#: friendlist_views/friendlist_views.views.inc:65
+msgid "Relations"
+msgstr "Beziehungen"
+
+#: friendlist_views/friendlist_views.views.inc:76
+msgid "Relations between users"
+msgstr "Beziehungen zwischen Benutzern"
+
+#: friendlist_views/friendlist_views.views.inc:77
+msgid "Relations between users in the system. They can be one-way or two ways"
+msgstr "Beziehungen zwischen den Benutzern im System. Sie können einseitig oder gegenseitig sein."
+
+#: friendlist_views/friendlist_views.views.inc:83;315
+msgid "Requesting user"
+msgstr "Anfragender Benutzer"
+
+#: friendlist_views/friendlist_views.views.inc:84;316
+msgid "The user who made the request"
+msgstr "Benutzer der die Anfrage gestartet hat"
+
+#: friendlist_views/friendlist_views.views.inc:89;321
+msgid "Requester"
+msgstr "Anfragender"
+
+#: friendlist_views/friendlist_views.views.inc:94;331
+msgid "Requestee user"
+msgstr "Angefragter Benutzer"
+
+#: friendlist_views/friendlist_views.views.inc:95;332
+msgid "The user who received the request"
+msgstr "Benutzer, der die Anfrage erhalten hat"
+
+#: friendlist_views/friendlist_views.views.inc:100;337
+msgid "Requestee"
+msgstr "Angefragter"
+
+#: friendlist_views/friendlist_views.views.inc:106
+msgid "The relation type ID"
+msgstr "Beziehungstyp-ID"
+
+#: friendlist_views/friendlist_views.views.inc:107
+msgid "The relation type ID you want to filter by. You can view the ID in the administration interface"
+msgstr "Beziehungstyp-ID nach der gefiltert werden soll. Die ID kann im Administratoinsbereich abgelesen werden."
+
+#: friendlist_views/friendlist_views.views.inc:114
+msgid "Message sent"
+msgstr "Nachricht gesendet"
+
+#: friendlist_views/friendlist_views.views.inc:115
+msgid "Message sent by the requesting user"
+msgstr "Nachricht des anfragenden Benutzer"
+
+#: friendlist_views/friendlist_views.views.inc:123
+msgid "Date of the request"
+msgstr "Datum der Anfrage"
+
+#: friendlist_views/friendlist_views.views.inc:124
+msgid "When the friendship request was sent"
+msgstr "Zeitpunkt der Freundschaftsanfrage"
+
+#: friendlist_views/friendlist_views.views.inc:138
+msgid "When the two-way relationship was disregarded"
+msgstr "Wenn eine gegenseitige Freundschaftsanfrage nicht beachtet wird"
+
+#: friendlist_views/friendlist_views.views.inc:139
+msgid "When the relaton request (a two-way one) was denied"
+msgstr "Wenn eine gegenseitige Freundschaftsanfrage abgelehnt wurde"
+
+#: friendlist_views/friendlist_views.views.inc:154
+msgid "Requestee user is the currently logged in user"
+msgstr "Angefragter Benutzer ist der aktuell angemeldete Benutzer"
+
+#: friendlist_views/friendlist_views.views.inc:155
+msgid "Filter results so that only the current user is the requestee"
+msgstr "Filtert die Ergebnisse derart, dass nur der aktuelle Benutzer der Angefragte ist."
+
+#: friendlist_views/friendlist_views.views.inc:163
+msgid "Requester user is the currently logged in user"
+msgstr "Anfragender Benutzer ist der aktuell angemeldete Benutzer."
+
+#: friendlist_views/friendlist_views.views.inc:164
+msgid "Filter results so that only the current user is the requester"
+msgstr "Filtert die Ergebnisse derart, dass nur der aktuelle Benutzer der Anfragende ist."
+
+#: friendlist_views/friendlist_views.views.inc:172
+msgid "This is only here to make sure that Views works"
+msgstr "Test, um sicher zu stellen das Views funktioniert."
+
+#: friendlist_views/friendlist_views.views.inc:177
+msgid "Action from logged in user to requester"
+msgstr "Aktion vom angemeldeten Benutzer zum Anfragenden"
+
+#: friendlist_views/friendlist_views.views.inc:178;186
+msgid "Links to act on the relationship with the user"
+msgstr "Links, um auf die die Beziehung zwischen Benutzern zu reagieren."
+
+#: friendlist_views/friendlist_views.views.inc:185
+msgid "Action from logged in user to requestee"
+msgstr "Aktion vom angemeldeten Benutzer zum Angefragten"
+
+#: friendlist_views/friendlist_views.views.inc:195
+msgid "Relationship types"
+msgstr "Beziehungstypen"
+
+#: friendlist_views/friendlist_views.views.inc:216
+msgid "The Relation type ID"
+msgstr "Beziehungstyp-ID"
+
+#: friendlist_views/friendlist_views.views.inc:224;225
+msgid "Name of the relation type"
+msgstr "Beziehungstyp-Name"
+
+#: friendlist_views/friendlist_views.views.inc:232;233
+msgid "Plural form of the relation type"
+msgstr "Beziehungstyp-Name als Plural"
+
+#: friendlist_views/friendlist_views.views.inc:241
+msgid "One way relation type"
+msgstr "Einseitiger Beziehungstyp"
+
+#: friendlist_views/friendlist_views.views.inc:242
+msgid "Relation types that do not require confirmation"
+msgstr "Beziehungstypen die keine Zustimmung benötigen"
+
+#: friendlist_views/friendlist_views.views.inc:258
+msgid "Active relation types"
+msgstr "Aktive Beziehungstypen"
+
+#: friendlist_views/friendlist_views.views.inc:279
+msgid "Relation status between two users"
+msgstr "Beziehungsstatus zwischen zwei Benutzern"
+
+#: friendlist_views/friendlist_views.views.inc:283
+msgid "Statuses"
+msgstr "Status"
+
+#: friendlist_views/friendlist_views.views.inc:303
+msgid "The relation status"
+msgstr "Beziehungstatus"
+
+#: friendlist_views/friendlist_views.views.inc:346
+msgid "Date the status was set"
+msgstr "Datum an dem der Status gesetzt wurde"
+
+#: friendlist_views/friendlist_views.views.inc:347
+msgid "When the status was set"
+msgstr "Wenn der Status gesetzt wurde"
+
+#: friendlist_views/views_handler_field_friendlist_link.inc:37
+msgid "Text to display"
+msgstr "Anzeigetext"
+
+#: friendlist_views/views_handler_field_friendlist_link_requestee.inc:19 friendlist_views/views_handler_field_friendlist_link_requester.inc:19
+msgid "view"
+msgstr "ansehen"
+
+#: friendlist_views/views_handler_field_friendlist_link_requestee.inc:28 friendlist_views/views_handler_field_friendlist_link_requester.inc:28
+msgid "<div class=\"friendlist-user-links\">!add_link</div>"
+msgstr "<div class=\"friendlist-user-links\">!add_link</div>"
+
+#: friendlist_views/views_handler_field_friendlist_link_requestee.inc:31 friendlist_views/views_handler_field_friendlist_link_requester.inc:31
+msgid "<div class=\"friendlist-user-links\">!delete_link</div>"
+msgstr "<div class=\"friendlist-user-links\">!delete_link</div>"
+
+#: friendlist_views/views_handler_filter_relationship_type.inc:16
+msgid "Relationship type"
+msgstr "Beziehungstyp"

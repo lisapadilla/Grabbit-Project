@@ -1,0 +1,12 @@
+; $Id: friendlist_import_bl.info,v 1.1.2.1 2008/10/11 20:11:31 mercmobily Exp $
+name = Friendlist Importer for Buddylist
+description = Import data from Buddylist
+core = 6.x
+package = Friendlist
+dependencies[] = friendlist_api
+; Information added by drupal.org packaging script on 2009-06-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "friendlist"
+datestamp = "1244938229"
+

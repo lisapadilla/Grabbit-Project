@@ -1,0 +1,103 @@
+<?php
+// $Id: friendlist_import_ur.module,v 1.1.2.10 2008/11/20 00:05:05 mercmobily Exp $
+
+/**
+ * @file
+ * Friendlist's importer for User Relationships
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function friendlist_import_ur_menu() {
+
+  $items['admin/settings/friendlist_import_ur'] = array(
+    'title' => 'Friendlist User Relationships importer',
+    'description' => 'Import data from User Relationships.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('friendlist_import_ur_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_form().
+ */
+function friendlist_import_ur_form( &$form_state ) {
+
+  $form['info'] = array(
+    '#value' => t('<h1>This is DESTRUCTIVE. YOU WILL LOSE ALL YOUR Friendlist DATA. WATCH OUT. PLUS, disable "rules" during the import, or your users might get a lot of emails.</h1><p>Also, note that: 1) Pending 1-way requests will be lost -- only approved ones will be added 2) The value of the variable "expires_val" in the relation type will be lost</p>'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Import'),
+  );
+
+  return $form;
+}
+
+/**
+ * This function actually does all of the importing.
+ */
+function friendlist_import_ur_form_submit($form, &$form_state) {
+
+  // Delete the existing relations and relation types.
+  db_query("DELETE FROM {friendlist_relation_types}");
+  db_query("DELETE FROM {friendlist_relations}");
+  db_query("DELETE FROM {friendlist_statuses}");
+
+  // Get the relation types from User Relationships. Note: requires_approval
+  // and expires_val will be lost.
+  $result = db_query('SELECT * FROM {user_relationship_types}');
+  while ($row = db_fetch_object($result)) {
+    db_query("INSERT INTO {friendlist_relation_types} SET rtid = %d, name = '%s', name_p = '%s', oneway = '%s', active = %d", $row->rtid, $row->name, $row->plural_name, $row->is_oneway, 1);
+    if ($row->is_oneway) {
+      $oneway_list[$row->rtid] = TRUE;
+    }
+  }
+
+  $result = db_query('SELECT * FROM {user_relationships}');
+  while ($row = db_fetch_object($result)) {
+
+    // Case #1: it's a 1-way relationship, "just add it" (if it's approved).
+    if ($oneway_list[$row->rtid]) {
+      if ($row->approved) {
+
+        friendlist_api_relation_add( $row->requester_id, $row->requestee_id, $row->rtid, '', FALSE);
+
+        friendlist_api_set_relations_field($row->requester_id, $row->requestee_id, $row->rtid, 'create_time', $row->created_at);
+        friendlist_api_set_status_field($row->requester_id, $row->requestee_id, $row->rtid, 'last_update_time', $row->created_at);
+        friendlist_api_set_status_field($row->requestee_id, $row->requester_id, $row->rtid, 'last_update_time', $row->created_at);
+
+      }
+
+    // Case #2: it's a 2-way relationship. Watch out: only add the "other side"
+    // if it's been approved.
+    }
+    else {
+
+      friendlist_api_relation_add( $row->requester_id, $row->requestee_id, $row->rtid, '', FALSE);
+
+      friendlist_api_set_relations_field($row->requester_id, $row->requestee_id, $row->rtid, 'create_time', $row->created_at);
+      friendlist_api_set_status_field($row->requester_id, $row->requestee_id, $row->rtid, 'last_update_time', $row->created_at);
+      friendlist_api_set_status_field($row->requestee_id, $row->requester_id, $row->rtid, 'last_update_time', $row->created_at);
+
+      if ($row->approved) {
+
+        friendlist_api_relation_add( $row->requestee_id, $row->requester_id, $row->rtid, '', FALSE);
+
+        friendlist_api_set_relations_field($row->requestee_id, $row->requester_id, $row->rtid, 'create_time', $row->created_at);
+        friendlist_api_set_status_field($row->requestee_id, $row->requester_id, $row->rtid, 'last_update_time', $row->created_at);
+        friendlist_api_set_status_field($row->requester_id, $row->requestee_id, $row->rtid, 'last_update_time', $row->created_at);
+      }
+    }
+  }
+
+  drupal_set_message(t("Done!"));
+}
+
+
+

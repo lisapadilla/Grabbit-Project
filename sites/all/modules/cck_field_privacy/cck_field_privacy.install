@@ -1,0 +1,126 @@
+<?php
+// $Id: cck_field_privacy.install,v 1.3.2.1.2.7 2008/12/29 23:46:01 obsidiandesign Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function cck_field_privacy_schema() {
+  $schema = array();
+  $schema['cckfp'] = array(
+    'description' => t('TODO'),
+    'fields' => array(
+      'uid' => array(
+        'description' => t('TODO'),
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'field_name' => array(
+        'description' => t('TODO'),
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'type_name' => array(
+        'description' => t('TODO'),
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'permission' => array(
+        'description' => t('TODO'),
+        'type' => 'char',
+        'not null' => TRUE,
+      ),
+    ),
+    'indexes' => array(
+      'uid' => array('uid', 'type_name'),
+    ),
+    'unique keys' => array(
+      'uid_2' => array('uid', 'field_name', 'type_name'),
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function cck_field_privacy_install() {
+  // Create tables.
+  drupal_install_schema('cck_field_privacy');
+  variable_set('cckfp_values', '');
+  variable_set('cckfp_types', '');
+  _cck_field_privacy_update_weight();
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function cck_field_privacy_uninstall() {
+  // Remove tables.
+  drupal_uninstall_schema('cck_field_privacy');
+
+  variable_del('cckfp_types');
+  variable_del('cckfp_values');
+}
+
+/**
+ * Implementation of hook_requirements().
+ */
+function cck_field_privacy_requirements($phase) {
+  $requirements = array();
+  
+  switch ($phase) {
+    case "install":
+      return;
+    break;
+    case "runtime":
+      if (!db_table_exists('cckfp')) {
+        $requirements['cckfp'] = array(
+          'title' => t('CCK Field Privacy Database Table'),
+          'description' => t('The CCK Field Privacy Database has not been created.  Please either reinstall the module or manually create the database table.'),
+          'severity' => REQUIREMENT_ERROR,
+          'value' => t('Database table missing'),
+        );
+        variable_set('cckfp_trouble', TRUE);
+      }
+      else {
+        variable_set('cckfp_trouble', FALSE);
+      }
+    break;
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_update_N().
+ * Patch to correct a 5.x-1.0 formatted DB
+ */
+
+function cck_field_privacy_update_6100() {
+  $ret = array();
+  _cck_field_privacy_update_weight();
+  return $ret;
+}
+
+/**
+ * Patch to update the module weight again, this time based on CCK Fieldgroup
+ * which appears to have a dynamic (but unknown) weight.
+ */
+function cck_field_privacy_update_6101() {
+  $ret = array();
+  $ret = _cck_field_privacy_update_weight();
+  return $ret;
+}
+
+/**
+ * Update the module's weight in the system table
+ */
+function _cck_field_privacy_update_weight() {
+  $ret = array();
+  $weight = (int) db_result(db_query("SELECT weight FROM {system} WHERE name = 'fieldgroup'"));
+  db_query("UPDATE {system} SET weight = %d WHERE name = 'cck_field_privacy'", $weight + 10);
+  return $ret;
+}

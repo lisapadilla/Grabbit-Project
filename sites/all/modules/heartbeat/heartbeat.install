@@ -1,0 +1,54 @@
+<?php
+
+// $Id: heartbeat.install,v 1.1.2.6.2.8 2008/12/28 13:18:22 stalski Exp $ 
+// by Jochen Stals - ONE-agency - www.one-agency.be
+
+// To clear cache while developing, you can quickly use this
+// rules_clear_cache();
+
+/**
+ * install basic variables
+ */
+function heartbeat_enable() {
+  variable_set('heartbeat_enabled',1);
+  variable_set('heartbeat_show_time_grouped_items', 1);
+  variable_set('heartbeat_show_message_times', 1);
+  variable_set('karma_indexes', array('-5','-4','-3','-2','-1','0','1','2','3','4','5','6','7','8','9','10'));
+  variable_set('message_types', array('normal','shout','flag'));
+  variable_set('message_access_types', array(0=>'private',1=>'public to all',2=>'actor and addressee only if exists',3=>'public to connections if exists'));
+  variable_set('heartbeat_types', array('summary','single','count'));
+  variable_set('heartbeat_perms', array('Private', 'Friends', 'Full Site'));
+}
+
+/**
+ * Uninstall basic variables
+ */
+function heartbeat_disable() {  
+  variable_del('heartbeat_enabled');
+  variable_del('heartbeat_show_message_times');
+  variable_del('heartbeat_show_time_grouped_items');
+  variable_del('karma_indexes');
+  variable_del('message_types');
+  variable_del('message_access_types');
+  variable_del('heartbeat_types');
+  variable_del('heartbeat_perms');
+}
+
+/**
+ * Implementation of hook_update_n
+ * The raison is tha tuser_activity cnflicts with another modules
+ *
+ * @return returnvalue
+ */
+function heartbeat_update_6300() {
+  $ret = array();
+  $sql = "DELETE FROM {system} WHERE name = 'user_activity'";
+  $result = db_query($sql);  
+  $ret[] = array('success' => $result !== FALSE, 'query' => check_plain($sql));
+  $sql = "UPDATE {system} SET status = 1 WHERE name = 'hb_activity'";
+  $result = db_query($sql);
+  $ret[] = array('success' => $result !== FALSE, 'query' => check_plain($sql));    
+  db_rename_table($ret, 'user_activity', 'hb_activity');  
+  drupal_set_message('Heartbeat hb_activity module renamed and enabled');  
+  return $ret;  
+}

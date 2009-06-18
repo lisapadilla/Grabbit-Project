@@ -1,0 +1,15 @@
+; $Id: friendlist_api.info,v 1.1 2008/09/05 09:18:56 sicjoy Exp $
+name = Friendlist API
+description = "The underlying API for Friendlist"
+core = 6.x
+package = Friendlist
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "friendlist"
+
+; Information added by drupal.org packaging script on 2009-06-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "friendlist"
+datestamp = "1244938229"
+

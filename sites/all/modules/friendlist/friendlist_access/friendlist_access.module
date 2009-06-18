@@ -1,0 +1,316 @@
+<?php
+
+// $Id: friendlist_access.module,v 1.1.2.15 2009/02/01 21:23:43 inadarei Exp $
+
+/**
+ * @file
+ * Friendlist Access Module.
+ *
+ * This module will restrict access to nodes according to the
+ * relationship between the node's owner and the viewer
+ * If you want to know what hard work is, try interfacing your
+ * module with Drupal's access system. Dries: Hooks. Say it with me: hooks :-D
+ */
+
+###########################################################
+# DRUPAL SIDE OF THE STORY
+###########################################################
+
+/**
+ * Implementation of hook_accesss_records().
+ *
+ * This function will create every possible realm for a node based
+ * on its $node->friendlist_access variable. Each real will have
+ * the right permissions according to what the user decided. This will
+ * basically ensure that there is one real for each possible
+ * status/rtid (relation type id) pair.
+ *
+ */
+function friendlist_access_node_access_records($node) {
+
+  #drupal_set_message("DEBUG: ".serialize( $node->friendlist_access) );
+  if (!$node->friendlist_access || count($node->friendlist_access) == 0 ) {
+    #drupal_set_message("DEBUG: Empty PERMISSIONS, IGNORING -- ". $node->nid);
+    return;
+  }
+
+  #drupal_set_message("Node: ". $node->nid);
+  #drupal_set_message("Access' data: ". serialize($node->friendlist_access));
+
+  $friendlist_access = $node->friendlist_access;
+  foreach (array_keys($friendlist_access) as $rtid) {
+    foreach (array_keys($friendlist_access[$rtid]) as $status) {
+
+      #drupal_set_message("friendlist_access[$rtid][$status]: ". $friendlist_access[$rtid][$status]);
+
+      $grants[] = array(
+        'realm'         => "friendlist_node_access_{$rtid}_{$status}",
+        'gid'           => 1,
+        'grant_view'    => $friendlist_access[$rtid][$status]['view'],
+        'grant_update'  => $friendlist_access[$rtid][$status]['update'],
+        'grant_delete'  => $friendlist_access[$rtid][$status]['delete'],
+      );
+
+    }
+  }
+
+  // Global permissions as set in the config form.
+  $grants[] = array(
+    'realm'         => "friendlist_node_access_ALL",
+    'gid'           => 1,
+    'grant_view'    => $friendlist_access['all']['view'],
+    'grant_update'  => $friendlist_access['all']['update'],
+    'grant_delete'  => $friendlist_access['all']['delete'],
+  );
+
+  // For the friendlist_access_node_access_author array, the GID is
+  // equivalent to a UID, which means there are many many groups of just
+  // 1 user.
+  $grants[] = array(
+    'realm' => 'friendlist_access_node_access_author',
+    'gid' => $node->uid,
+    'grant_view' => TRUE,
+    'grant_update' => TRUE,
+    'grant_delete' => TRUE,
+    'priority' => 0,
+  );
+
+  return $grants;
+}
+
+/**
+ * Implementation of hook_node_grants().
+ *
+ * Given a $user, this function will go through every status between
+ * two users and create a grant ID according to their status.
+ */
+function friendlist_access_node_grants($user, $op) {
+
+  #drupal_set_message("Called for: $user->uid, $op");
+
+  // Loop amongst all of the possible statuses that the user has from
+  // other users.
+  $r = friendlist_api_db_statuses('select', NULL, $user->uid, NULL, NULL);
+
+  while ($row = db_fetch_object($r)) {
+
+    // Get the status for the relationship.
+    $status = $row->status;
+
+    // For each possible status, create a grant realm with the status ID and
+    // the relation type ID embedded in it.
+    $grants["friendlist_node_access_{$row->rtid}_{$status}"] = array(1);
+
+    #drupal_set_message("adding grants friendlist_node_access_{$row->rtid}_{$status}");
+  }
+
+  // These are granted in any case.
+  $grants["friendlist_node_access_ALL"] = array(1);
+  $grants["friendlist_node_access_ALL"] = array(1);
+
+
+  // This is always there for the node owner.
+  $grants['friendlist_access_node_access_author'] = array($user->uid);
+  return $grants;
+
+}
+
+###########################################################
+# USER INTERFACE SIDE OF THE MODULE
+###########################################################
+
+/**
+ * Implementation of hook_form_alter().
+ *
+ * This function will add some configuration options while creating a node.
+ * The config options will allow the node's owner to decide who can do what
+ * with the node.
+ */
+function friendlist_access_form_alter(&$form, $form_state, $form_id) {
+
+  // This is always handy. It will be used later to get the default
+  // values.
+  $form_values = $form_state['values'];
+  $node = $form['#node'];
+
+  // Check that the form ID is correct.
+  if ($form_id != $form['type']['#value'] .'_node_form') {
+    return;
+  }
+
+  $form['friendlist_access'] = array(
+    '#type'         => 'fieldset',
+    '#title'        => t('Friendlist Node Access'),
+    '#description'  => t('Node access based on your relationships to other users'),
+    '#collapsible'  => TRUE,
+    '#collapsed'    => TRUE,
+    '#tree'         => TRUE,
+  );
+
+
+
+  // GENERAL settings, which will apply to every node regardless of
+  // the relationship with the author.
+  $form['friendlist_access']['all']['view'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Give view access - GLOBAL SETTING'),
+    '#default_value' => $node->friendlist_access['all']['view'],
+  );
+
+  $form['friendlist_access']['all']['update'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Give update access - GLOBAL SETTING'),
+    '#default_value' => $node->friendlist_access['all']['update'],
+  );
+
+  $form['friendlist_access']['all']['delete'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Give delete access - GLOBAL SETTING'),
+    '#default_value' => $node->friendlist_access['all']['delete'],
+  );
+
+  $status_data = friendlist_api_status_data();
+
+  // Cycle through all of the relation types.
+  $types = friendlist_api_relation_types_load_all();
+  foreach ($types as $rt) {
+
+    $rtid = $rt->rtid;
+
+    // Skip this type if it's not active.
+    if (!$rt->active) {
+      continue;
+    }
+
+    $form['friendlist_access'][$rtid] = array(
+      '#type'         => 'fieldset',
+      '#title'        => t('Access for relation type !t', array('!t' => $rt->name)),
+      '#collapsible'  => TRUE,
+      '#collapsed'    => FALSE,
+      '#tree'         => TRUE,
+    );
+
+    foreach ($status_data as $status_name => $status_info) {
+
+      // This is a bit of help taking out the "impossible" statuses
+      // Naming convention for status names is good, and it makes this
+      // possible.
+      if (!$rt->oneway && drupal_substr($status_name, 0, 1) == 'O') continue;
+      if ($rt->oneway && drupal_substr($status_name, 0, 1) == 'T') continue;
+
+      // Create a nice translated string out of the status' description
+      $status_desc = t($status_info['description'], array(
+        '!rt_name'   => $rt->name,
+        '!rt_name_p' => $rt->name_p,
+      ));
+
+      // Since it's actually impossible to check for these, we might
+      // as well let them go.
+      if ($status_name == 'OW_NONE' || $status_name == 'TW_NONE') {
+        continue;
+      }
+
+      $form['friendlist_access'][$rtid][$status_name] = array(
+        '#type'         => 'fieldset',
+        '#title'        => $status_desc,
+        '#collapsible'  => FALSE,
+        '#collapsed'    => TRUE,
+        '#tree'         => TRUE,
+      );
+
+      $form['friendlist_access'][$rtid][$status_name]['view'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('Give view access'),
+        '#default_value' => $node->friendlist_access[$rtid][$status_name]['view'],
+      );
+
+      $form['friendlist_access'][$rtid][$status_name]['update'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('Give update access'),
+        '#default_value' => $node->friendlist_access[$rtid][$status_name]['update'],
+      );
+
+      $form['friendlist_access'][$rtid][$status_name]['delete'] = array(
+        '#type'          => 'checkbox',
+        '#title'         => t('Give delete access'),
+        '#default_value' => $node->friendlist_access[$rtid][$status_name]['delete'],
+      );
+
+    }
+  }
+}
+
+/**
+ * Implementation of hook_nodeapi().
+ *
+ * This function will make sure that the extra settings added in
+ * hook_form_alter are actually stored and loaded etc.
+ */
+function friendlist_access_nodeapi(&$node, $op, $arg = 0) {
+  switch ($op) {
+
+    case 'update':
+    case 'insert':
+
+      friendlist_access_optimise_access_array($node);
+      $friendlist_access = serialize($node->friendlist_access);
+      db_query("DELETE FROM {friendlist_access} where nid = %d", $node->nid);
+      db_query("INSERT INTO {friendlist_access} (nid, permissions) VALUES (%d, '%s')", $node->nid, $friendlist_access);
+      break;
+
+    case 'delete':
+      db_query('DELETE FROM {friendlist_access} WHERE nid = %d', $node->nid);
+      break;
+
+    case 'load':
+      $result = db_fetch_object(db_query('SELECT * FROM {friendlist_access} WHERE nid = %d', $node->nid));
+      $node->friendlist_access = unserialize($result->permissions);
+      break;
+
+  }
+}
+
+/*
+ * This function is used specifically to optimise the
+ * $node->friendlist_access variable.
+ *
+ * @param $node
+ *   The node which contains the friendlist_access element. The element itself
+ *   WILL be changed.
+ * @return
+ *   Nothing
+ */
+function friendlist_access_optimise_access_array(&$node) {
+
+  // This is a particular key I will need in one minute.
+  // This is because the 'all' part of the array has a slightly
+  // different structure (there is no status sub-index) and it
+  // would get zapped here otherwise.
+  $all_backup = $node->friendlist_access['all'];
+
+  $friendlist_access = $node->friendlist_access;
+  if (is_array($friendlist_access) && sizeof($friendlist_access)>0) {
+    $new_array = array();
+    foreach (array_keys($friendlist_access) as $rtid) {
+      if (is_array($friendlist_access[$rtid]) && sizeof($friendlist_access[$rtid]) > 0) {
+        foreach (array_keys($friendlist_access[$rtid]) as $status) {
+          foreach (array('view', 'update', 'delete') as $op) {
+            if ($friendlist_access[$rtid][$status][$op] != 0) {
+              $new_array[$rtid][$status][$op] = 1;
+            }
+          }        
+        }
+      }
+    }
+    $node->friendlist_access =  $new_array;
+  }
+
+  // Adding the 'all' key, which is much needed.
+  if( $all_backup['view'] ||
+      $all_backup['update'] ||
+      $all_backup['delete'] ){
+    $node->friendlist_access['all'] = $all_backup;
+  }
+
+}
+

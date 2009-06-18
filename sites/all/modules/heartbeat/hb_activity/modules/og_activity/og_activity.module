@@ -1,0 +1,127 @@
+<?php
+// $Id: og_activity.module,v 1.1.2.1 2008/12/28 13:14:49 stalski Exp $ 
+// by Jochen Stals - ONE-agency - www.one-agency.be
+
+/**
+ *  Implementation of hook_form_alter().
+ */
+function og_activity_form_alter(&$form, $form_state, $form_id) {
+  if($form_id == 'hb_activity_admin_settings') {
+    $form['og_fields'] = array(
+      '#type' => 'fieldset',  
+      '#weight' => 0,   
+      '#title' => t('Organic group settings'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE, 
+    );
+	  $form['og_fields']['heartbeat_add_og_admins_to_personal'] = array(
+	    '#title' => t('Do you want to log activity by group administrators to the personal heartbeat?'),
+	    '#type' => 'checkbox',
+	    '#default_value' => variable_get('heartbeat_add_og_admins_to_personal',1)
+	  );
+    
+    $form['og_fields']['heartbeat_add_og_members_to_personal'] = array(
+      '#title' => t('Do you want to log activity by members of your group to the personal heartbeat?'),
+	    '#type' => 'checkbox',
+	    '#default_value' => variable_get('heartbeat_add_og_members_to_personal',1),
+      '#description' => t('the members performing the activity are members of the group where acting user is administer')
+    );
+    
+    $form['og_fields']['heartbeat_add_og_related_to_personal'] = array(
+      '#title' => t('Do you want to log activity by related group members to the personal heartbeat?'),
+      '#type' => 'checkbox',
+      '#default_value' => variable_get('heartbeat_add_og_related_to_personal',1),
+      '#description' => t('the members performing the activity are members of the groups where acting user has membership')
+    );
+  }
+}
+
+# function to fetch the related heartbeat users 
+
+/**
+ * Function to retrieve all users related to the currently logged in
+ * user checking the default variable settings that go with this
+ */
+function og_activity_get_related_uids() {
+  global $user;  
+  $uids = array();
+  // Organic groups of the logged in user
+  if(is_array($user->og_groups)) {
+    foreach($user->og_groups as $group) {      
+      $result = db_query(og_list_users_sql(0, 0), $group['nid']);
+      while($row = db_fetch_object($result)) {
+        $uids[] = $row->uid;
+      }
+      /*
+      // add users that are administrators of the group
+      if(variable_get('heartbeat_add_og_admins_to_personal', TRUE) && $group->is_admin) {
+        //$uids += array($group['uid']);
+      }
+      // if user is the administrator and wants to see messages of members
+      if(variable_get('heartbeat_add_og_members_to_personal', TRUE) && !$group->is_admin) {
+        //$uids += array($group['uid']);
+      }
+      // if user is a member and wants to see messages of members
+      if(variable_get('heartbeat_add_og_related_to_personal', TRUE)) {
+         //$uids += array($group['uid']);
+      }      
+      */
+    }
+  }
+  return $uids;
+}
+
+
+/**
+ * Implementation of hook_heartbeat_related_uid_info()
+ */
+function og_activity_heartbeat_related_uid_info($uid){
+  // all the messages where the current uid is member of a group 
+  // where uid is a member of
+  $uids = array();
+  if(function_exists('og_activity_get_related_uids')) {
+    $og_uids = og_activity_get_related_uids($uid);
+    $uids = $og_uids;
+  }
+  return $uids;
+}
+
+  
+# TOKENS : token hook functions
+
+
+/**
+ * Implementation of hook_token_list().
+ */
+//Taken from friendlist as example
+function og_activity_token_list($type = 'all') {
+  //dsm($type);
+  if ($type == 'node' || $type == 'all') {
+    $tokens['node']['ogname-title-link'] = t('title of top group with a link to it.');
+    return $tokens;
+  }
+}
+
+
+/**
+ * Implementation of hook_token_values().
+ */
+function og_activity_token_values($type, $object = NULL, $options = array()) {  
+  switch ($type) {
+    case 'node':
+      if (is_array($object->og_groups)) {
+        $gids = array_filter($object->og_groups);
+        $gid = $gids[0];
+        $title = db_result(db_query("SELECT title FROM {node} WHERE nid = %d", $gid));
+        $values['ogname-title-link'] = l(check_plain($title),'node/'.$gid);
+      }
+      else {
+        // No group info found. Return defaults.
+        // $values['ogname-title-link'] = '';         
+      }
+      break;    
+  }  
+  return $values;
+}
+
+

@@ -1,0 +1,12 @@
+This file documents the changes in FriendList module versions.
+A simple list of issue numbers, with full description of the
+fixes/features implemented at: http://drupal.org/project/issues/friendlist?states=all
+
+==== FriendList 6.x-1.x-dev to 6.x.1.0
+
+Fixed: node/343906  Error when creating a new user account in Drupal 6.6
+Fixed: node/358204  Warning when using node gallery & friendlist
+Implemented: node/370950 Refactor Friendslist_Views Module
+Implemented: node/370993 Optimize the Performance of friendlist_api_db_statuses_array()
+Fixed: node/340304 Blocks aren't working?
+Fixed: node/372352 Warning messages friendlist.api line 1351 and line 1354

@@ -1,0 +1,16 @@
+; $Id: friendlist_access_integration.info,v 1.1.2.1 2008/09/29 04:49:01 mercmobily Exp $
+name = Friendlist Access Integration
+description = Module to integrate FriendList with cck_field_privacy, ...
+core = 6.x
+package = Friendlist
+dependencies[] = friendlist_api
+project = "friendlist"
+version = "6.x-1.x-dev"
+core = "6.x"
+
+; Information added by drupal.org packaging script on 2009-06-14
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "friendlist"
+datestamp = "1244938229"
+

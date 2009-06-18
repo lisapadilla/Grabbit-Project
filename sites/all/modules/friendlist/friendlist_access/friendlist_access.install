@@ -1,0 +1,48 @@
+<?php
+// $Id: friendlist_access.install,v 1.1.2.6 2008/10/11 18:47:28 mercmobily Exp $
+
+/**
+ * @file
+ * friendlist_access module installation file.
+ */
+
+function friendlist_access_schema() {
+
+  $schema['friendlist_access'] = array(
+    'description' => t('Table for node access for friendlist'),
+    'fields' => array(
+
+      'nid' => array(
+        'description' => 'The node ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
+
+      'permissions' => array(
+        'description' => 'The permissions',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big'
+      ),
+    ),
+
+    'primary key' => array('nid'),
+  );
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function friendlist_access_install() {
+  drupal_install_schema('friendlist_access');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function friendlist_access_uninstall() {
+  drupal_uninstall_schema('friendlist_access');
+}

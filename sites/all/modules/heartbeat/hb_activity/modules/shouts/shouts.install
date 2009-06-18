@@ -1,0 +1,59 @@
+<?php
+// $Id: shouts.install,v 1.1.2.1 2008/12/28 13:14:49 stalski Exp $ 
+// by Zuuperman - ONE-agency - www.one-agency.be
+
+/**
+ * Implementation of hook_install().
+ */
+function shouts_install() {
+  drupal_install_schema('shouts');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function shouts_uninstall() {
+  drupal_uninstall_schema('shouts');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function shouts_schema() {
+  $schema['shouts'] = array(
+    'description' => t('Stores shouts of users.'),
+    'fields' => array(
+      'shout_id' => array(
+        'description' => t('The primary identifier for the shout.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'uid' => array(
+        'description' => t('The user_id from the user that shouted the message.'),
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'message' => array(      
+        'description' => t('Message of the shout'),
+        'type' => 'text',
+        'not null' => FALSE,
+        'size' => 'big',
+      ),
+      'cleared' => array(
+        'description' => t('Did the user clear this message?'),
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'time' => array(
+        'description' => t('Timestamp when the shout has been posted'),
+        'type' => 'datetime',
+        'not null' => TRUE,
+      ),       
+    ),
+	'primary key' => array('shout_id'),    
+  );
+  return $schema;
+}

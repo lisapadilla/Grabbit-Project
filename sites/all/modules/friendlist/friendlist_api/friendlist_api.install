@@ -1,0 +1,256 @@
+<?php
+
+// $Id: friendlist_api.install,v 1.1.2.11 2009/01/12 18:45:11 mercmobily Exp $
+
+/**
+ * @file
+ * Contains install/uninstall and update functions for friendlist_api.
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function friendlist_api_schema() {
+
+  // Contains relations between two users.
+  $schema['friendlist_relations'] = array(
+    'description' => t('Table for friend relations.'),
+
+    'fields' => array(
+
+      'rid' => array(
+        'description' => t('Relation ID'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'requester_id' => array(
+        'description' => t('User ID of requester.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'requestee_id' => array(
+        'description' => t('User ID of requestee.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'rtid' => array(
+        'description' => t('Foreign key to relationships table.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'message' => array(
+        'description' => t('Message which was send by the requester.'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+
+      'create_time' => array(
+        'description' => t('Generation time of relationship.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'tw_disregarded_time' => array(
+        'description' => t('Time when the two-way relationship was refused. Applies to two-ways relationships'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+
+    ),
+
+    'unique keys' => array(
+      'relationship' => array(
+        'requester_id',
+        'requestee_id',
+        'rtid'
+      ),
+    ),
+    'primary key' => array(
+      'rid' => 'rid',
+    ),
+
+  );
+
+  // Contains relations between two users.
+  $schema['friendlist_statuses'] = array(
+    'description' => t('Table for status caching'),
+
+    'fields' => array(
+
+      'sid' => array(
+        'description' => t('Status ID'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'requester_id' => array(
+        'description' => t('User ID of requester.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'requestee_id' => array(
+        'description' => t('User ID of requestee.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'rtid' => array(
+        'description' => t('Foreign key to relationships table.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'status' => array(
+        'description' => t('Message which was send by the requester.'),
+        'type' => 'varchar',
+        'length' => 15,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+
+      'rid_origin' => array(
+        'description' => t('Link back to the relation ID that generated the status.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'rid' => array(
+        'description' => t('Link back to the relation ID that OWNS the status. It might be empty'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+      ),
+
+      'last_update_time' => array(
+        'description' => t('When the status was last updated'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'unique keys' => array(
+      'relationship' => array('requester_id', 'requestee_id', 'rtid'),
+    ),
+    'primary key' => array(
+      'sid' => 'sid',
+    ),
+
+    'indexes' => array(
+      'rid' => array('rid'),
+      'last_update_time' => array('last_update_time'),
+      'rid_origin' => array('rid_origin'),
+    ),
+
+  );
+
+  // Contains basic relation types (+ types from other modules).
+  $schema['friendlist_relation_types'] = array(
+    'description' => t('Table for pending friend relationships.'),
+    'fields' => array(
+
+      'rtid' => array(
+        'description' => t('Primary key for relation_types.'),
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'name' => array(
+        'description' => t('Name of the relationship.'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+
+      'name_p' => array(
+        'description' => t('Name in plural form of the relationship.'),
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+
+      'oneway' => array(
+        'description' => t('0 or 1, 1 stands for oneway.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'size' => 'tiny',
+      ),
+
+      'active' => array(
+        'description' => t('0 or 1, 1 means active'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+
+    ),
+    'unique keys' => array(
+      'name'  => array('name'),
+    ),
+    'primary key' => array('rtid')
+  );
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function friendlist_api_install() {
+  // Create tables.
+  drupal_install_schema('friendlist_api');
+  #drupal_get_schema('friendlist_relation_types', TRUE);
+
+  // Add the first default relation type: friends.
+  $record1 = new stdClass();
+  $record1->name = 'friend';
+  $record1->name_p = 'friends';
+  $record1->oneway = 0;
+  $record1->active = 1;
+  #$r1 = drupal_write_record('friendlist_relation_types', $record1);
+  db_query("INSERT INTO {friendlist_relation_types} (name, name_p, oneway, active) VALUES ('%s', '%s', %d, %d)", $record1->name, $record1->name_p, $record1->oneway, $record1->active);
+
+
+  // Add the second default relation type: fans.
+  $record2 = new stdClass();
+  $record2->name = 'fan';
+  $record2->name_p = 'fans';
+  $record2->oneway = 1;
+  $record2->active = 1;
+  #$r2 = drupal_write_record('friendlist_relation_types', $record2);
+  db_query("INSERT INTO {friendlist_relation_types} (name, name_p, oneway, active) VALUES ('%s', '%s', %d, %d)", $record2->name, $record2->name_p, $record2->oneway, $record2->active);
+
+  #drupal_set_message("Results: $r1 , $r2");
+
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function friendlist_api_uninstall() {
+  // Remove tables.
+  drupal_uninstall_schema('friendlist_api');
+}

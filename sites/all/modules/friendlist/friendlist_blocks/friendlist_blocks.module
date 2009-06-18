@@ -1,0 +1,213 @@
+<?php
+// $Id: friendlist_blocks.module,v 1.1.2.24 2009/06/13 13:11:04 mercmobily Exp $
+
+
+/**
+ * @file
+ * Friendlist's blocks.
+ *
+ * Some handy blocks for FriendList. These blocks are the ones that
+ * cannot be done with views.
+ */
+
+
+/**
+ * Implementation of hook_block().
+ */
+function friendlist_blocks_block($op = 'list', $delta = 0, $edit = array()) {
+
+  global $user;
+
+  switch ($op) {
+    case 'list':
+      $blocks[0]['info'] = t('People you might know');
+      $blocks[1]['info'] = t('Friendlist actions to the content\'s author');
+      $blocks[2]['info'] = t('Mutual friends');
+
+      return $blocks;
+
+    case 'configure':
+
+      if ($delta == 0) {
+      }
+
+      elseif ($delta == 1) {
+      }
+
+
+      elseif ($delta == 2) {
+
+        $relation_types = friendlist_api_relation_types_load_all();
+        $options = array();
+        foreach ($relation_types as $rt) {
+          if (!$rt->oneway) {
+            $options[ $rt->rtid ] = $rt->name;
+          }
+        }
+        $form['friendlist_blocks_2_rtid'] = array(
+          '#type' => 'select',
+          '#title' => t('Relation type to consider'),
+          '#required' => TRUE,
+          '#options' => $options,
+          '#default_value' => variable_get('friendlist_blocks_2_rtid', 0)
+        );
+      }
+
+      return $form;
+      break;
+
+    case 'save':
+
+      if ($delta == 2) {
+        variable_set('friendlist_blocks_2_rtid', $edit['friendlist_blocks_2_rtid']);
+      }
+
+
+      break;
+
+    case 'view':
+
+
+      if (user_access('access content')) {
+
+        $block = array();
+
+        // Case #0.
+        if ($delta == 0) {
+          $block['subject'] = t('People you might know');
+          $block['content'] = friendlist_blocks_contents_0();
+        }
+
+
+        // Block to display possible actions with the content's author.
+        elseif ($delta == 1) {
+
+          if ( ($n = menu_get_object('node')) &&  ($u = user_load(array('uid' => $n->uid))) && $user->uid != $u->uid) {
+            $block['subject'] = t('You and !user', array('!user' => theme('username', $u)));
+            $block['content'] = friendlist_ui_user_links($u);
+          }
+        }
+
+
+        // Block to display possible actions with the content's author or
+        // user being viewed.
+        elseif ($delta == 2) {
+
+          if (
+               ( ($n = menu_get_object('node') ) &&  ($u = user_load(array('uid' => $n->uid)))  && $user->uid != $u->uid )
+             || 
+               ( ($u = menu_get_object('user_uid_optional') ) && $user->uid != $u->uid)
+          ) {
+              $block['subject'] = t('Mutual friends');
+              $block['content'] = friendlist_blocks_contents_2($u);
+          }
+        }
+
+        return $block;
+      }
+  } // End of switch.
+
+}
+
+/**
+ * Return the contents for the block with ID 0.
+ *
+ * @return
+ *   A string with the contents.
+ */
+function friendlist_blocks_contents_0() {
+  global $user;
+ 
+  $user_uids = friendlist_api_people_you_may_know($user->uid, TRUE);
+  return friendlist_blocks_display_user_list($user_uids, 'relation-might-know');
+}
+
+
+/**
+ * Return the contents for the block with ID 2.
+ *
+ * @param $user_owner
+ *   An user object representing The owner of the node or the owner of
+ *   the profile page.
+ * @return
+ *   A string with the contents.
+ */
+function friendlist_blocks_contents_2($user_owner) {
+
+  global $user;
+
+
+  $rtid = variable_get('friendlist_blocks_2_rtid', 0);
+
+  // Limits the number of results that will show.
+  $limit = 10;
+
+  $results = db_query_range("
+
+SELECT u.uid FROM
+  (SELECT u.uid FROM {users} AS u
+  LEFT JOIN {friendlist_relations} AS fr ON (u.uid = fr.requester_id OR u.uid = fr.requestee_id)
+  LEFT JOIN {friendlist_statuses} AS fs ON (fr.requester_id = fs.requester_id AND fr.requestee_id = fs.requestee_id)
+  WHERE (fr.requester_id = %d OR fr.requestee_id = %d)
+    AND (fs.status = 'TW_BOTH')
+    AND (fr.rtid = %d)
+  GROUP BY (u.uid))
+AS u
+LEFT JOIN {friendlist_relations} AS fr ON (u.uid = fr.requester_id OR u.uid = fr.requestee_id)
+LEFT JOIN {friendlist_statuses} AS fs ON (fr.requester_id = fs.requester_id AND fr.requestee_id = fs.requestee_id)
+WHERE (fr.requester_id = %d OR fr.requestee_id = %d)
+  AND (fs.status = 'TW_BOTH')
+  AND (fr.rtid = %d)
+GROUP BY (u.uid)
+ORDER BY RAND()
+  ",
+  $user_owner->uid,
+  $user_owner->uid,
+  $rtid,
+
+  $user->uid,
+  $user->uid,
+  $rtid,
+
+  0,
+  $limit
+
+  );
+
+  while ($row = db_fetch_array($results)) {
+    $user_uids[]= $row['uid'];
+  }
+
+  return friendlist_blocks_display_user_list($user_uids, 'relation-common');
+
+}
+
+
+
+/**
+ * Displays a list of users taking them from the previous query.
+ *
+ * @param $results
+ *   A query $result.
+ * @param $list_class
+ *   The class used for the list.
+ * @return
+ *   A themed list.
+ */
+function friendlist_blocks_display_user_list($user_uids, $list_class) {
+  $list = array();
+
+  if( count($user_uids) == 0 ){
+    return;
+  }
+
+  foreach($user_uids as $uid){
+    $account = user_load(array('uid' => $uid));
+    $picture = theme_get_setting('toggle_node_user_picture') ? theme('user_picture', $account) : '';
+    $list[] = $picture .' '. theme('username', $account);
+  }
+  
+  return theme('item_list', $list, NULL, 'ul', array('class' => $list_class));
+  
+}
+

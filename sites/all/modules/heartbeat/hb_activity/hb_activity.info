@@ -1,0 +1,16 @@
+; $Id: hb_activity.info,v 1.1.2.1 2008/12/28 13:14:48 stalski Exp $
+package = Heartbeat
+project = Heartbeat
+name = User activity
+description = Logs user activity when certain events occur, triggering actions.
+dependencies[] = rules
+dependencies[] = token
+dependencies[] = trigger
+core = 6.x
+version = 6.x-1.0
+; Information added by drupal.org packaging script on 2009-03-15
+version = "6.x-3.3"
+core = "6.x"
+project = "heartbeat"
+datestamp = "1237122629"
+

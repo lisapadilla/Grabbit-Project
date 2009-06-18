@@ -1,0 +1,97 @@
+<?php
+// $Id: simple.my_activity.view,v 1.1.2.2 2009/01/22 21:39:26 stalski Exp $
+
+
+$view = new view;
+$view->name = 'heartbeat_simple';
+$view->description = 'simple heartbeat views';
+$view->tag = 'heartbeat';
+$view->view_php = '';
+$view->base_table = 'hb_activity';
+$view->is_cacheable = FALSE;
+$view->api_version = 2;
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+$handler = $view->new_display('default', 'Defaults', 'default');
+$handler->override_option('relationships', array(
+  'message_id' => array(
+    'label' => 'Heartbeat message',
+    'required' => 1,
+    'id' => 'message_id',
+    'table' => 'hb_activity',
+    'field' => 'message_id',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('fields', array(
+  'message' => array(
+    'label' => '',
+    'exclude' => 0,
+    'id' => 'message',
+    'table' => 'hb_activity',
+    'field' => 'message',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('sorts', array(
+  'timestamp' => array(
+    'order' => 'DESC',
+    'granularity' => 'second',
+    'id' => 'timestamp',
+    'table' => 'hb_activity',
+    'field' => 'timestamp',
+    'override' => array(
+      'button' => 'Override',
+    ),
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('filters', array(
+  'language' => array(
+    'operator' => '=',
+    'value' => 1,
+    'group' => '0',
+    'exposed' => FALSE,
+    'expose' => array(
+      'operator' => FALSE,
+      'label' => '',
+    ),
+    'id' => 'language',
+    'table' => 'hb_activity',
+    'field' => 'language',
+    'relationship' => 'none',
+  ),
+  'access_type' => array(
+    'operator' => '=',
+    'value' => array(
+      'access' => '3',
+      'value' => '',
+      'min' => '',
+      'max' => '',
+    ),
+    'group' => '0',
+    'exposed' => FALSE,
+    'expose' => array(
+      'operator' => FALSE,
+      'label' => '',
+    ),
+    'id' => 'access_type',
+    'table' => 'hb_activity',
+    'field' => 'access_type',
+    'relationship' => 'none',
+  ),
+));
+$handler->override_option('access', array(
+  'type' => 'none',
+));
+$handler->override_option('title', 'All heartbeat messages');
+$handler->override_option('items_per_page', 300);
+$handler->override_option('row_plugin', 'heartbeat');
+$handler->override_option('row_options', array(
+  'messages' => 1,
+));
+$handler = $view->new_display('block', 'All heartbeat messages', 'block_1');
+$handler->override_option('block_description', 'All heartbeat messages');
+$handler->override_option('block_caching', -1);
+
+
+

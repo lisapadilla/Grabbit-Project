@@ -1,0 +1,33 @@
+<?php
+// $Id: friendlist_rules.module,v 1.1.2.6 2008/10/11 18:47:29 mercmobily Exp $
+
+/**
+ * @file
+ * Friendlist's Rules integration.
+ */
+
+/**
+ * Implementation of hook_friendlist_relations().
+ *
+ * This function hooks to the friendlist_relations hooks, to generate the event
+ * for Rules. That way, the friendlist_api itself stays Rules-agnostic.
+ */
+function friendlist_rules_friendlist_relations($op, $when, $requester, $requestee, $rtid, $message, $old_status, $new_status, $user_generated) {
+
+  // Only work in "post" mode -- once the request is made.
+  if ($when != 'post') {
+    return;
+  }
+
+  // Get the objects. The whole FriendList API uses uids...
+  $requester_obj = user_load(array('uid' => $requester));
+  $requestee_obj = user_load(array('uid' => $requestee));
+
+  #drupal_set_message("Before invoking event, right here: $requester  $requestee");
+
+  // Invoke the Rules event so that all sorts of fancy things can happen.
+  rules_invoke_event("friendlist_$op", $requester_obj, $requestee_obj, $rtid, $message, $old_status, $new_status, $user_generated);
+}
+
+
+

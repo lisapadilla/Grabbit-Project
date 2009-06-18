@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file custom_views.install
+ */
+ 
+/**
+ * Implementation of hook_install().
+ */
+function friendlist_views_install() {
+  // We want to be after views which is 10.
+  db_query("UPDATE {system} SET weight = 20 WHERE name = 'friendlist_views'");
+}

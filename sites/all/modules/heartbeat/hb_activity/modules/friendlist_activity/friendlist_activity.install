@@ -1,0 +1,19 @@
+<?php 
+// $Id: friendlist_activity.install,v 1.1.2.1 2008/12/28 13:14:48 stalski Exp $ 
+// by Jochen Stals - ONE-agency - www.one-agency.be
+
+/**
+ * Implementation of hook_disable().
+ */
+function friendlist_activity_disable() {
+  heartbeat_messages_uninstall('friendlist_activity');
+  variable_del('heartbeat_add_friends_to_personal'); 
+}
+
+/**
+ * Implementation of hook_enable().
+ */
+function friendlist_activity_enable() {
+  variable_set('heartbeat_add_friends_to_personal', TRUE); 
+  heartbeat_messages_uninstall('friendlist_activity');
+}

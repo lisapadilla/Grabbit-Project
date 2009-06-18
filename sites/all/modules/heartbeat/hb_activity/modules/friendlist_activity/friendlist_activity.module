@@ -1,0 +1,107 @@
+<?php
+// $Id: friendlist_activity.module,v 1.1.2.5 2009/02/22 20:59:53 stalski Exp $ 
+// by Jochen Stals - ONE-agency - www.one-agency.be
+
+
+/**
+ * Implementation of hook_views_api()
+ *
+ * This hook will tell views2 that friendlist_activiy is available
+ */
+function friendlist_activiy_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'friendlist_activiy'),
+  );
+}
+
+/**
+ * Implementation of hook_heartbeat_message_info()
+ */
+function friendlist_activity_heartbeat_message_info() {
+    $info = array (
+	  1 => 
+	  array (
+	    'message_id' => 'heartbeat_become_friends',
+      'message_type' => 'normal',
+	    'message' => '!user1 is now !relation_type with !user2.',
+	    'message_concat' => '!user1 is now !relation_type with %others%',
+	    'concat_args' => 
+	    array (
+	      'type' => 'summary',
+	      'merge_target' => 'others',
+	      'merge_separator' => ',',
+	      'merge_end_separator' => 'and',
+	    ),
+	    'module' => 'friendlist_api',
+	    'karma_index' => '1',
+	    'description' => 'one user becomes friends with another.',
+	    'variables' => 
+	    array (
+	      '@user1' => '[user2:user-name-url]',
+	      '#relation_type' => '[rtid:name]',
+	      '@user2' => '[user1:user-name-url]',
+	    ),
+	  ),
+  );
+  return $info; 
+}
+
+/**
+ * Implementation of hook_heartbeat_related_uid_info()
+ */
+function friendlist_activity_heartbeat_related_uid_info($uid){  
+  if(variable_get('heartbeat_add_friends_to_personal',1)) {
+    $friends_uids = friendlist_activity_get_friends($uid);
+    return $friends_uids;
+  }
+  else {
+    return array($uid);
+  }  
+}
+
+/**
+ * Implementation of hook_heartbeat_messages_alter()
+ */
+function friendlist_activity_heartbeat_messages_alter(& $raw_messages){
+  $duplicates = array();
+	return $duplicates;
+}
+
+
+/**
+ *  Implementation of hook_form_alter().
+ */
+function friendlist_activity_form_alter(&$form, $form_state, $form_id) {
+  if($form_id == 'hb_activity_admin_settings') {
+    $form['fl_fields'] = array(
+      '#type' => 'fieldset',  
+      '#weight' => 0,   
+      '#title' => t('Friendlist settings'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE, 
+    );
+    $form['fl_fields']['heartbeat_add_friends_to_personal'] = array(
+      '#title' => t('Do you want to show activity by friendlist friends to the personal heartbeat?'),
+      '#type' => 'checkbox',
+      '#default_value' => variable_get('heartbeat_add_friends_to_personal',1)
+    );
+  }
+}
+
+/**
+ * Generate the view of people that a user is following
+ */
+function friendlist_activity_get_friends($uid) {  
+	$uids = array();
+	if(variable_get('heartbeat_add_friends_to_personal', TRUE)) {
+	  $sql = "SELECT fr.requestee_id as 'uid' FROM {friendlist_relations} as fr
+	  INNER JOIN {friendlist_statuses} fs ON fs.rid = fr.rid 
+	  WHERE fr.requester_id = %d AND fs.status = '%s' ORDER BY fs.last_update_time DESC, fr.rid DESC";  
+	  $result = db_query($sql, $uid, 'TW_BOTH');
+	  while($row = db_fetch_object($result)) {
+	  	$uids[] = $row->uid;  
+	  }
+	}
+  return $uids; 
+}

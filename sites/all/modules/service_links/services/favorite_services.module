@@ -1,0 +1,19 @@
+<?php
+// $Id: favorite_services.module,v 1.1.2.1 2009/04/03 11:22:13 thecrow Exp $
+
+/**
+ * @file
+ * Provide the bookmarking support for various browser
+ */
+function favorite_services_service_links() {
+  $links['favorite'] = array(
+    'name' => 'Favorite',
+    'description' => t('Add this page in your favorites'),
+    'link' => url('', array('absolute' => TRUE, 'query' => '<encoded-url>#<encoded-title>')),
+    'attributes' => array('class' => 'service_links_favorite', 'style' => 'display:none;'),
+    'javascript' => 'favorite_services.js'
+  );
+  return $links;
+}
+
+?>

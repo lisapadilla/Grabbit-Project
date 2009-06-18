@@ -1,0 +1,1441 @@
+<?php
+// $Id: friendlist_api.module,v 1.1.2.41 2009/06/08 14:04:05 mercmobily Exp $
+
+/**
+ * @file
+ * Friendlist's API.
+ *
+ * A powerful, and yet uncomplicated, API to manage relationships.
+ * Developers, read "README.DEVS.txt".
+ * Users, read "README.txt".
+ *
+ * Enjoy!
+ */
+
+######################################################################
+# RELATION STATUS DEFINITION - THIS IS VITAL - VERY VERY VITAL
+######################################################################
+
+/**
+ * This function is the heart of this API. It:
+ *  - States a list of relation types, each one with a code.
+ *  - It sets a description if the status, from the point of view
+ *    of the requester seeing requester. This is also how you read the "status".
+ *    If requester checks his status with requester, and receives a OW_1_TO_2,
+ *    it means that requester has a ONE WAY relationship with requestee, and
+ *    the description will talk about the status from requester's perspective.
+ *  - It sets if requester can add or delete a connection with requestee.
+ *    So, if the status is TW_BOTH (two way relationship, both agreed, so
+ *    the users are mutual friends), it's obviously possible for requester to
+ *    delete his relation with requester and it's NOT possible for him to
+ *    add a connection with requestee (it's already there).
+ *  - For the "add" action, it gives three important pieces  of
+ *    information:
+ *      - What the link should say. If requestee is already a friend of requester,
+ *        then the link will state "approve requester's request!". So, the
+ *        link will change according to the context.
+ *      - What the form will say. Once the user clicks o n the link, there
+ *        will be a form informing the user about what will happen if it's
+ *        submitted.
+ *      - What the system will tell the user once he goes ahead and submits
+ *        the forms. For example "The request was approved!"
+ *  - The "delete" action is obviously equivalent to the "add" one.
+ *
+ * This information is vital to the whole module and any submodule using
+ * it. The _ui module, for example, uses it to add links to the user's
+ * page. It's also amazingly trivial to create snipsets of code WITH
+ * the right links with no effort at all.
+ *
+ * @param $p
+ *   The key that you want to retrieve.
+ * @return
+ *    The right chunk of the data structure.
+ */
+function friendlist_api_status_data($status_name = '') {
+
+  // Note to self: DO NOT add t() around these strings. These are meant to
+  // be called in a t() afterwards, since they contain tokens.
+
+  static $status_data;
+
+  if (!$status_data) {
+
+    $status_data = array(
+      'OW_NONE' => array(
+        'description' => "You're not a !rt_name",
+        'on_add' => array(
+          'link' => 'Become a !rt_name',
+          'screen' => 'You will become a !rt_name of this user.',
+          'message' => 'You are now a !rt_name of this user.',
+        ),
+      ),
+      'OW_1_TO_2' => array(
+        'description' => "You're a !rt_name",
+        'on_delete' => array(
+          'link' => 'Stop being a !rt_name',
+          'screen' => 'You will no longer be a !rt_name.',
+          'message' => "You are no longer this user's !rt_name.",
+        ),
+      ),
+      'OW_2_TO_1' => array(
+        'description' => 'Viewing a !rt_name',
+        'on_add' => array(
+          'link' => 'Become !rt_name_p',
+          'screen' => 'You will become !rt_name_p of each other.',
+          'message' => "You are now each other's !rt_name_p.",
+        ),
+      ),
+      'OW_BOTH' => array(
+        'description' => 'You are !rt_name_p',
+        'on_delete' => array(
+          'link' => 'Stop being a !rt_name',
+          'screen' => 'You will no longer be a !rt_name.',
+          'message' => "You are no longer this user's !rt_name.",
+        ),
+      ),
+      'TW_NONE' => array(
+        'description' => 'You are not !rt_name_p',
+        'on_add' => array(
+          'link' => 'Add to !rt_name_p',
+          'screen' => 'Send a request, which will have to be approved by the recipient.',
+          'message' => 'Request has been sent successfully.',
+        ),
+      ),
+      'TW_1_TO_2_P' => array(
+        'description' => 'Your !rt_name request is pending',
+        'on_delete' => array(
+          'link' => 'Cancel !rt_name request',
+          'screen' => 'Cancel your request to become !rt_name_p with this user.',
+          'message' => 'Request has been cancelled successfully.',
+        ),
+      ),
+      'TW_1_TO_2_D' => array(
+        'description' => 'You can not become !rt_name_p',
+      ),
+      'TW_2_TO_1_P' => array(
+        'description' => 'You have been send a !rt_name request',
+        'on_add' => array(
+          'link' => 'Accept !rt_name request',
+          'screen' => 'Accept the request and become !rt_name_p with this user.',
+          'message' => 'Request has been successfully confirmed. You are now !rt_name_p.',
+        ),
+        'on_delete' => array(
+          'link' => 'Decline !rt_name request',
+          'screen' => 'You are about to deny the request. NOTE: No further !rt_name requests can be send to you.',
+          'message' => 'Request to become !rt_name_p has been declined and no further requests can be send to you.',
+        ),
+      ),
+      'TW_2_TO_1_D' => array(
+        'description' => "You don't want to be !rt_name_p",
+        'on_add' => array(
+          'link' => 'Add !rt_name anyway',
+          'screen' => 'No request needs to be approved. You will become !rt_name_p immediately.',
+          'message' => 'You are now !rt_name_p with this user.',
+        ),
+      ),
+      'TW_BOTH' => array(
+        'description' => 'You are !rt_name_p',
+          'on_delete' => array(
+          'link' => 'Remove from !rt_name_p',
+          'screen' => 'You are about to remove this !rt_name. NOTE: No further !rt_name requests can be send to you.',
+          'message' => 'You are no longer !rt_name_p and no further requests can be send to you.',
+        ),
+      ),
+    );
+
+    // Change the $status_data array according to whatever the admin decided to
+    // change, and how.
+    $sm = variable_get('friendlist_status_messages', NULL);
+    #drupal_set_message("See: ". serialize($sm));
+    foreach (array_keys($status_data) as $s) {
+      foreach (array_keys($status_data[$s]) as $d) {
+        if (drupal_substr($d, 0, 3) == 'on_') {
+          foreach (array_keys($status_data[$s][$d]) as $o) {
+            $status_data[$s][$d][$o] =  $sm["${s}_${d}_${o}"] != '' ? $sm["${s}_${d}_${o}"] : $status_data[$s][$d][$o];
+            #drupal_set_message("TEST: ${s}_${d}_${o}");
+          }
+        }
+        else {
+            $status_data[$s][$d] =  $sm["${s}_${d}"] != '' ? $sm["${s}_${d}"] : $status_data[$s][$d];
+          #drupal_set_message("TEST: ${s}_${d}");
+        }
+      }
+    }
+
+  }
+
+  // No status specified: return the lot. Handy when you need a complete
+  // list of all possible states.
+  if ($status_name == '') {
+    return $status_data;
+  }
+
+  // Return the right status
+  return ($status_data[$status_name]);
+}
+
+
+######################################################################
+# RELATION TYPE FUNCTION
+######################################################################
+
+/**
+ * Delete a relation type.
+ *
+ * @param $rtid
+ *   The relation type id.
+ * @return
+ *    TRUE  - all OK.
+ *    FALSE - deletion failed.
+ */
+function friendlist_api_relation_type_delete($rtid) {
+
+  // Delete the relation type.
+  $query = 'DELETE FROM  {friendlist_relation_types} WHERE rtid = %d';
+  $return = db_query($query, $rtid);
+
+  // No results: there was a problem.
+  if (!$return) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+/**
+ * Edit a relation type.
+ *
+ * @param $rtid
+ *   The relation type ID that will be edited.
+ * @param $name
+ *   The relation name. For example "fan", "friend".
+ * @param $name_p
+ *   The relation name. In plural form.
+ * @param $oneway
+ *   If TRUE, the relation will be marked as "oneway". This
+ *   has implications in some functions.
+ * @param $active
+ *   TRUE if active.
+ * @return
+ *    TRUE  - all OK.
+ *    FALSE - edit failed.
+ */
+function friendlist_api_relation_type_edit($rtid, $name, $name_p, $oneway, $active) {
+
+  // All clear: create it.
+  $query = "UPDATE {friendlist_relation_types} SET name = '%s',name_p = '%s', oneway = %d, active = %d WHERE rtid = %d";
+
+  $res = db_query($query, $name, $name_p, $oneway, $active, $rtid);
+  if (!$res) {
+    return FALSE;
+  }
+
+  // All went well.
+  return TRUE;
+}
+
+/**
+ * Create a relation type.
+ *
+ * @param $name
+ *   The relation name. For example "fan", "friend".
+ * @param $name_p
+ *   The relation name. In plural form.
+ * @param $oneway
+ *   If TRUE, the relation will be marked as "oneway". This
+ *   has implications in some functions.
+ * @param $active
+ *   TRUE if active.
+ * @return
+ *    The inserted object.
+ *    FALSE if the insert failed.
+ */
+function friendlist_api_relation_type_add($name, $name_p, $oneway, $active) {
+
+  // Check that the relation type doesn't exist already.
+  $res = db_result(db_query("SELECT * FROM {friendlist_relation_types} WHERE name = '%s'", $name));
+  if ($res) {
+    return FALSE;
+  }
+
+  // All clear: create it.
+  $res = db_query("INSERT INTO {friendlist_relation_types} (name, name_p, oneway, active) VALUES ('%s', '%s', %d, %d)", $name, $name_p, $oneway, $active);
+  if (!$res) {
+    return FALSE;
+  }
+
+  // Return the object that just got inserted.
+  $last_insert_id = db_last_insert_id('friendlist_relation_types', 'rtid');
+  return friendlist_api_relation_type_load($last_insert_id);
+}
+
+/**
+ * List all relation data from the database.
+ *
+ * @return
+ *   An array of associative arrays.
+ */
+function friendlist_api_relation_types_load_all() {
+
+  $return = array();
+
+  // Run the actual query.
+  $query = 'SELECT * FROM  {friendlist_relation_types}';
+  $res = db_query($query);
+  while ($row = db_fetch_object($res)) {
+    $return[] = $row;
+  }
+
+  // All went well, return the array.
+  return $return;
+}
+
+/**
+ * Load a relation data from the database.
+ *
+ * @param $rt
+ *   If it's a number, it will lookup the relation type
+ *   by its relation type ID. If it's a name, it will
+ *   lookup the relation by its name.
+ *
+ * @return
+ *   The loaded entry, or FALSE if the entry was not found.
+ */
+function friendlist_api_relation_type_load($rt) {
+
+  static $rt_cache = array();
+
+  if (isset($rt_cache[$rt])) {
+    $return =  $rt_cache[$rt];
+  }
+  else {
+
+    if (is_numeric($rt)) {
+      $cond = 'rt.rtid = %d';
+    }
+    elseif (is_string($rt)) {
+      $cond = "rt.name = '%s'";
+    }
+    else {
+      return FALSE;
+    }
+
+    // Run the actual query.
+    $query = "SELECT * FROM  {friendlist_relation_types} rt WHERE $cond";
+    $return = db_fetch_object(db_query($query, $rt));
+
+    // No results: there was a problem.
+    if (!$return) {
+      return FALSE;
+    }
+
+    $rt_cache[$rt] = $return;
+
+  }
+  // All went well, return the record.
+  return $return;
+}
+
+##############################################################
+# RELATIONS FUNCTION
+##############################################################
+
+/**
+ * Get a relation record.
+ *
+ * In other words, starting from user A and user B, will return detailed
+ * information about their relation.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @param $nocache
+ *   If TRUE, cache will be ignored. Default: false.
+ * @return
+ *   The relation data as an associative array. NULL if failed.
+ */
+function friendlist_api_relation_load($requester, $requestee, $rtid, $nocache = FALSE) {
+
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  static $relation_record_cache = array();
+
+  if (!$nocache && isset($relation_record_cache[$requester][$requestee][$rtid])) {
+    // $relation = $relation_record_cache[$requester][$requestee][$rtid];
+  }
+  else {
+
+    // Check that the relation wasn't already there.
+    $row = db_fetch_object(db_query('SELECT * FROM {friendlist_relations} WHERE requester_id = %d AND requestee_id = %d AND rtid = %d', $requester, $requestee, $rtid));
+    if (!$row) {
+      return FALSE;
+    }
+    $relation_record_cache[$requester][$requestee][$rtid] = $row;
+  }
+
+  // Return the value, which at this point is always in the cache.
+  return $relation_record_cache[$requester][$requestee][$rtid];
+}
+
+/**
+ * Add a friend.
+ *
+ * This function needs a couple of users (obviously), the relation type id, and
+ * the message the requester wants to send out. Note that if the relation type
+ * is simply "oneway", then that's it.  However, if it's a two way
+ * relation type, the function also needs to kill the "disregarded"
+ * flag that the _other_ user might have for a friend request to the
+ * adding user. Suppose user B wants to be friends to user A. She will
+ * send a request. A won't like her, and will mark B's request as
+ * "disregarded". B cannot send further requests to A, because there is
+ * already one -- and that's disregarded. B can't touch it. It can't even
+ * delete it (obviously!). Later, A wants to be friends with B. When A
+ * adds B as a friends, that "disregard" flag in B's request to A needs
+ * to disappear!
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @return
+ *   The added object. FALSE if adding failed.
+ */
+function friendlist_api_relation_add($requester, $requestee, $rtid, $message, $user_generated = TRUE) {
+
+  // Turn these into ids.
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  #drupal_set_message("ADD called with: $requester, $requestee, $rtid, $message, $user_generated");
+
+  // A person must NEVER start a relationship with him/herself.
+  if ($requester == $requestee) {
+    return FALSE;
+  }
+
+
+  // Calculate the old status, and call the appropriate hook.
+  $old_status = friendlist_api_relation_status_get($requester, $requestee, $rtid);
+  module_invoke_all('friendlist_relations', 'add', 'pre', $requester, $requestee, $rtid, $message, $old_status, NULL, $user_generated);
+
+  // Check that the relation wasn't already there.
+  $result = db_fetch_object(db_query('SELECT * FROM {friendlist_relations} WHERE requester_id = %d AND requestee_id = %d AND rtid = %d', $requester, $requestee, $rtid));
+  if (!$result) {
+
+    $result2 = db_query("INSERT INTO {friendlist_relations} (requester_id, requestee_id, rtid, message, create_time) VALUES (%d, %d, %d, '%s', %d)", $requester, $requestee, $rtid, $message, time());
+
+    // Critical: could not add to the DB.
+    if (!$result2) {
+      return FALSE;
+    }
+  }
+
+  // In 2 way relations, turn (if present) the $requestee<->requester
+  // as NOT disregarded! Note that there is no need to actually
+  // check that it's a 2-way relation...
+  friendlist_api_set_relation_field($requestee, $requester, $rtid, 'tw_disregarded_time', NULL);
+
+  // Rebuild the status cache for BOTH users, and then get the new
+  // status.
+  friendlist_api_relation_status_update_cache_both($requester, $requestee, $rtid);
+  $new_status = friendlist_api_relation_status_get($requester, $requestee, $rtid);
+
+  // That's it: other modules might want to know about it.
+  module_invoke_all('friendlist_relations', 'add', 'post', $requester, $requestee, $rtid, $message, $old_status, $new_status, $user_generated);
+
+  return friendlist_api_relation_load($requester, $requestee, $rtid);
+}
+
+/**
+ * Delete a relation.
+ *
+ * A couple of things are interesting here. The first one is that deletion will
+ * fail if what the user is actually trying to delete is a request that has a
+ * disregarded timestamp (see below).
+ * The other one is that if the relation type is "twoways", then
+ * a 'nasty' disregard timestamp is added (well, at least there's an
+ * attempt to the friend request of your "ex" friend. this means that
+ * the other user is stuck with a "refusal", and cannot nag the deleter
+ * with more requests
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @param $force
+ *   Force the record's deletion even if it has a refusal pending. This IS
+ *   an API after all :-D.
+ * @return
+ *   0 - All good.
+ *   1 - Error: same UID for requester and requestee.
+ *   2 - Refusal to delete the entry, because it's an entry with a REFUSAL
+ *       timestamp attached to it. Forcing the entry here will make sure
+ *       that users can't send request after request if the first one
+ *       was refused.
+ *   3 - Deleting the record failed.
+ */
+function friendlist_api_relation_delete($requester, $requestee, $rtid, $user_generated = TRUE) {
+
+  // Turn these into ids.
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  if ($requester == $requestee) {
+    return FALSE;
+  }
+
+  // Calculate the old status, and call the appropriate hook.
+  $old_status = friendlist_api_relation_status_get($requester, $requestee, $rtid);
+
+  module_invoke_all('friendlist_relations', 'delete', 'pre', $requester, $requestee, $rtid, $message, $old_status, NULL, $user_generated);
+
+  // IMPORTANT: If you have a pending request, and it got refused, then
+  // you mustn't be able to delete it, since it has the disregarded
+  // flag. This will prevent you from sending multiple requests. The only
+  // way out of this is if the OTHER person adds you as a friend (which
+  // makes sense).
+  //
+  // Commented out by merc. The API should be able to do _anything_. The
+  // UI should deal with this sort of stuff.
+  #if ($old_status == 'TW_1_TO_2_D') {
+  #  return 2;
+  #}
+
+  // In 2 way relations, turn (if present) the $requestee->requester
+  // as disregarded! Note that this is only meaningful for twoway
+  // relations, hence the check with $rt.
+  $rt = friendlist_api_relation_type_load($rtid);
+  if (!$rt->oneway) {
+    friendlist_api_set_relation_field($requestee, $requester, $rtid, 'tw_disregarded_time', time());
+  }
+
+  // Actually run the query.
+  $result = db_query('DELETE FROM {friendlist_relations} WHERE requester_id = %d AND requestee_id = %d AND rtid = %d', $requester, $requestee, $rtid);
+
+  // Rebuild the status cache for BOTH users, and then get the new status.
+  friendlist_api_relation_status_update_cache_both($requester, $requestee, $rtid);
+  $new_status = friendlist_api_relation_status_get($requester, $requestee, $rtid);
+
+  // That's it: other modules might want to know about it.
+  module_invoke_all('friendlist_relations', 'delete', 'post', $requester, $requestee, $rtid, $message, $old_status, $new_status, $user_generated);
+
+  return TRUE;
+}
+
+/*
+ * Check that a user is allowed to add or delete another specific user as a friend.
+ *
+ * This information is readily available in the $status_data variable. For
+ * example if $status_data['OW_NONE']['on_add'] is defined, then the "add"
+ * operation is allowed. This works with other (future) operations.
+ *
+ * @param $op
+ *   The operation to check. It can be "add" or "delete".
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @return
+ *   TRUE  - Allowed!
+ *   FALSE - Not Allowed!
+ */
+function friendlist_api_relation_allowed_op($op, $requester, $requestee, $rtid) {
+
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  // If the user is silly, we can just save some time and return.
+  if ($requester == $requestee) {
+    return FALSE;
+  }
+
+  // Get the relation type info.
+  $rt = friendlist_api_relation_type_load($rtid);
+
+  // If the relation type is not active, he's not allowed.
+  if ($rt == FALSE || !$rt->active) {
+    return FALSE;
+  }
+
+  if ($op != 'add' && $op != 'delete') {
+    return FALSE;
+  }
+
+  // Gets the relation's status.
+  $status = friendlist_api_relation_status_get($requester, $requestee, $rtid);
+  $status_data = friendlist_api_status_data($status);
+
+  // If the right array in the main STATUS database structure
+  // is defined, then it's allowed.
+  if (is_array($status_data["on_$op"])) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Set a single field in the relationship table.
+ *
+ * This is useful when a simple update query is all the developer needs.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @param $field_name
+ *   The field to change.
+ * @param $field_value
+ *   The new value.
+ * @return
+ *   TRUE  - All good.
+ *   FALSE - The record couldn't be set.
+ */
+function friendlist_api_set_relation_field($requester, $requestee, $rtid, $field_name, $field_value) {
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+
+  // This can't and shouldn't happen.
+  if ($requester == $requestee) {
+    return FALSE;
+  }
+
+  $field_name == 'message' ? $type = 'varchar' : $type = 'int' ;
+  db_query("UPDATE {friendlist_relations} SET $field_name = ". db_placeholders(array($field_name), $type) ." WHERE requester_id = %d AND requestee_id = %d AND rtid = %d", $field_value, $requester, $requestee, $rtid);
+
+  return TRUE;
+}
+
+##############################################################
+# STATUS FUNCTIONS
+##############################################################
+
+/**
+ * Get the current status between two users.
+ *
+ * It won't calculate it: it will get it from the database cache instead. IF
+ * not present, it will recalculate it and write it to the cache.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @return
+ *   The status
+ */
+function friendlist_api_relation_status_get($requester, $requestee, $rtid) {
+
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  // This can't and shouldn't happen.
+  if ($requester == $requestee) {
+    return 'ERROR_1';
+  }
+
+  // Try and fetch the status from the DB.
+  $query = 'SELECT status FROM {friendlist_statuses} WHERE requester_id = %d AND requestee_id = %d AND rtid = %d';
+  $status = db_result(db_query($query, $requester, $requestee, $rtid));
+
+  // If the status was there, simply return it.
+  if ($status !== FALSE) {
+    return $status;
+  }
+
+  // It's not there. It can mean two things: it didn't get cached before,
+  // OR that it's a ?W_NONE status.
+
+  // Work out the status. If it's ?W_NONE, return it and that's all this
+  // function needs to do.
+  $status = friendlist_api_relation_status_calculate($requester, $requestee, $rtid);
+
+  // IF it's not ?W_NONE, then write it to the cache for next time.
+  if ($status != 'OW_NONE' && $status != 'TW_NONE') {
+    friendlist_api_relation_status_update_cache_both($requester, $requestee, $rtid);
+  }
+
+  // Finally, return it.
+  return $status;
+}
+
+
+
+/**
+ * Ensure the cache is updated for both requester and requestee.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @return
+ *   Noting.
+ */
+function friendlist_api_relation_status_update_cache_both($requester, $requestee, $rtid) {
+  friendlist_api_relation_status_update_cache($requester, $requestee, $rtid);
+  friendlist_api_relation_status_update_cache($requestee, $requester, $rtid);
+}
+
+
+/**
+ * Ensure the cache is updated to the current status.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @return
+ *   0 - all good.
+ *   1 - requester and requestee were the same user.
+ *   2 - No need to write to cache -- old and new statuses are the same.
+ */
+function friendlist_api_relation_status_update_cache($requester, $requestee, $rtid) {
+
+  // Make sure we are talking IDs.
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+
+  // This can't and shouldn't happen.
+  if ($requester == $requestee) {
+    return 1;
+  }
+
+  // Get the two statuses -- the old one and the new one.
+  $old_status = db_result(db_query('SELECT status FROM {friendlist_statuses} WHERE requester_id = %d AND requestee_id = %d AND rtid = %d', $requester, $requestee, $rtid));
+  $new_status = friendlist_api_relation_status_calculate($requester, $requestee, $rtid, TRUE);
+
+  // Get the rid of the relation, and assign it to both $rid_unique and
+  // to $rid.
+  $relation = friendlist_api_relation_load($requester, $requestee, $rtid);
+
+  // There was a relation: both rid and rid_origin are set, no worries.
+  if ($relation) {
+    $rid = $relation->rid;
+    $rid_origin = $relation->rid;
+  }
+
+  // If there was NO relation, then rid needs to stay NULL. However,
+  // $rid_origin will have the value of the "other" relation -- the one that
+  // "generated" the status. This will be immensely helpful for
+  // things like views.
+  if (!$relation) {
+    $relation = friendlist_api_relation_load($requestee, $requester, $rtid);
+    $rid = 0;
+    $rid_origin = $relation->rid;
+  }
+
+  // If the status hasn't changed, there is no point in doing anything.
+  if ($old_status == $new_status) {
+    return 2;
+  }
+
+  // TW_NONE AND OW_NONE are never cached. Otherwise, the cache might
+  // become really, really, really big. If the new status is one of those,
+  // delete the current cache and exit.
+  if ($new_status == 'OW_NONE' || $new_status == 'TW_NONE') {
+    db_query('DELETE FROM {friendlist_statuses} WHERE requester_id = %d AND requestee_id = %d AND rtid = %d' , $requester, $requestee, $rtid);
+
+    return 3;
+  }
+
+  if ($old_status) {
+    $query = "UPDATE {friendlist_statuses} SET status = '%s',rid_origin = %d, rid = %d, last_update_time = %d WHERE requester_id = %d AND requestee_id = %d AND rtid = %d";
+  }
+  else {
+    $query = "INSERT INTO {friendlist_statuses} (status, rid_origin, rid, last_update_time, requester_id, requestee_id, rtid) VALUES ('%s', %d, %d, %d, %d, %d, %d)";
+  }
+
+  $res = db_query($query, $new_status, $rid_origin, $rid, time(), $requester, $requestee, $rtid);
+  if (!$res) {
+    return 1;
+  }
+  // All good: return 0.
+  return 0;
+
+}
+
+/**
+ * Get the type of relation between two users.
+ *
+ * THIS IS ONE OF THE MOST IMPORTANT FUNCTIONS OF THIS API.
+ * It's _immensely_ handy to other modules which want to grant
+ * access to nodes etc. according to the relation status.
+ * It basically gets the type of relation between two users.
+ * Given a couple of users and a relation type, it will tell you if
+ * the users are friends, or if one of them WANTS to be friends, or
+ * if one of them is barred... Learn it, and you will fall in love with
+ * it :-D
+ *
+ * @param $requester
+ *   The first user. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The second user. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @return
+ *   Ah, get ready.
+ *
+ * --- IF THE RELATIONSHIP TYPE IS ONE WAY:
+ * 'OW_NONE'  : Inactive. On both sides
+ * 'OW_1_TO_2': Active.  Relation $requester -> requestee
+ * 'OW_2_TO_1': Active.  Relation $requestee -> requester
+ * 'OW_BOTH'  : Active.  Relation $requester -> requestee AND viceversa
+ *
+ * --- IF THE RELATIONSHIP TYPE IS TWO WAYS:
+ * 'TW_NONE'    : Inactive. On both sides.
+ * 'TW_1_TO_2_P': Inactive. $requester requested, $requestee didn't disregard
+ * 'TW_1_TO_2_D': Inactive. $requester requested, $requestee disregarded
+ * 'TW_2_TO_1_P': Inactive. $requestee requested, $requester didn't disregard
+ * 'TW_2_TO_1_D': Inactive. $requestee requested, $requester disregarded
+ * 'TW_BOTH'    : Active. TWO WAYS. They are each others friends (or whatever)
+ *
+ * --- IF SOMETHING WENT WRONG:
+ * 'ERROR_1':  $requester and $requestee are identical
+ * 'ERROR_2':  Coudld not load the relation type
+ * 'ERROR_3':  Could not find ANY matching combination  (?)
+ */
+function friendlist_api_relation_status_calculate($requester, $requestee, $rtid, $nocache = FALSE) {
+
+  // Turn these into ids.
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  if ($requester == $requestee) {
+    return 'ERROR_1';
+  }
+
+
+  // Load the relations if present.
+  $relation_1_to_2 = friendlist_api_relation_load($requester, $requestee, $rtid, $nocache);
+  $relation_2_to_1 = friendlist_api_relation_load($requestee, $requester, $rtid, $nocache);
+
+  // If the relation type ID can't be loaded, return an ERROR.
+  $rt = friendlist_api_relation_type_load($rtid);
+  if ($rt == FALSE) {
+    return 'ERROR_2';
+  }
+
+  // If both of them are empty, it's automatically  NONE_OW OR NONE_TW
+  // It's important to distinguish because every single other
+  // status allows you to find out if it's TW or OW.
+  if (!$relation_1_to_2 && !$relation_2_to_1) {
+    if ($rt->oneway) {
+      return 'OW_NONE';
+    }
+    else {
+      return 'TW_NONE';
+    }
+  }
+
+  // OK, it's all loaded in the $rt variable. Let's get started.
+  // It's a one way relation: see which one applies.
+  if ($rt->oneway) {
+    if ($relation_1_to_2 && $relation_2_to_1) {
+      return 'OW_BOTH';
+    }
+    if ($relation_1_to_2) {
+      return 'OW_1_TO_2';
+    }
+    if ($relation_2_to_1) {
+      return 'OW_2_TO_1';
+    }
+  }
+
+  // It's a two way relation: see which one applies.
+  if (!$rt->oneway) {
+
+    if ($relation_1_to_2 && !$relation_1_to_2->tw_disregarded_time && $relation_2_to_1 && !$relation_2_to_1->tw_disregarded_time) {
+      return 'TW_BOTH';
+    }
+
+    /* I killed this status, since it's meant to be impossible */
+    /*
+    if ($relation_1_to_2 && $relation_1_to_2['tw_disregarded_time'] && $relation_2_to_1 && $relation_2_to_1['tw_disregarded_time']) {
+      return 'TW_BOTH_D';
+    }
+    */
+
+    if ($relation_1_to_2 && !$relation_1_to_2->tw_disregarded_time) {
+      return 'TW_1_TO_2_P';
+    }
+
+    if ($relation_1_to_2 && $relation_1_to_2->tw_disregarded_time) {
+      return 'TW_1_TO_2_D';
+    }
+
+    if ($relation_2_to_1 && !$relation_2_to_1->tw_disregarded_time) {
+      return 'TW_2_TO_1_P';
+    }
+
+    if ($relation_2_to_1 && $relation_2_to_1->tw_disregarded_time) {
+      return 'TW_2_TO_1_D';
+    }
+
+    // This should never ever happen.
+    return 'ERROR_3';
+  }
+}
+
+/**
+ * Fetch relations from the friendlist_statuses table or alternatively, count them.
+ *
+ * Note: EVERY parameter can optionally be NULL. The more parameters, the
+ * narrower the search.
+ * ALSO, note that $status can be an array -- in which case, the query will
+ * include all of them with OR.
+ * This means that you could use this function to count/select the ALL of the
+ * established relationships (just pass all NULLs in apart from the $status
+ * parameter, set as TW_BOTH), how many fans there are as a whole (all NULLs,
+ * apart from $status set as array('OW_1_TO_2','OW_BOTH'), OR, check how many
+ * fans a user has (set $requester as the user id, and $status as
+ * array('OW_2_TO_1','OW_BOTH') ).
+ * And so on...
+ *
+ * @param $op
+ *   Is can be 'select' or 'count'.
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @param $status
+ *   The status, or an array of possible statuses.
+ * @return
+ *   If $op == 'select': a $query_result object, to which you can do
+ *                       db_fetch_object (for example).
+ *   If $op == 'count' : The number of returned records.
+ */
+function friendlist_api_db_statuses($op, $requester, $requestee, $rtid, $status) {
+
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  if ($requester !== NULL) {
+    $cond  .= ' AND fs.requester_id = %d ';
+    $parm[] = $requester;
+  }
+
+  if ($requestee !== NULL) {
+    $cond  .= ' AND fs.requestee_id = %d ';
+    $parm[] = $requestee;
+  }
+
+  if ($rtid !== NULL) {
+    $cond  .= ' AND fs.rtid = %d ';
+    $parm[] = $rtid;
+  }
+
+  if ($status != NULL) {
+
+    if (is_array($status)) {
+
+      // Turn the conditions into a query.
+      foreach ($status as $status_value) {
+        $cond_status[] = "fs.status LIKE '%s'";
+        $parm[] = $status_value;
+      }
+      $cond .= 'AND ('. implode(' OR ', $cond_status) .')' ;
+
+    }
+    else {
+      $cond  .= " AND fs.status LIKE '%s' ";
+      $parm[] = $status;
+    }
+  }
+
+  if ($op == 'count') {
+    $query = "SELECT COUNT(*) FROM {friendlist_statuses} fs WHERE 1 = 1 $cond";
+    return db_result(db_query($query, $parm));
+  }
+  else {
+    $query = "SELECT * FROM {friendlist_statuses} fs WHERE 1 = 1 $cond";
+    return db_query($query, $parm);
+  }
+}
+
+/**
+ * Return the list of users as an array
+ *
+ * This function works as a layer around friendlist_api_db_statuses().
+ * NOTE: it returns an array of requestees.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @param $status
+ *   The status, or an array of possible statuses.
+ * @param $field
+ *   It can be "requester" or "requestee". It defaults to "requestee". It
+ *   determines if the returned array of objects will be based on the
+ *   requester or the requestee.
+ * @param $only_uids
+ *   If true, the function will not load the user objects, but will return
+ *   an array of uids instead. This is immensely handy if you don't want
+ *   to load user objects
+ * @return
+ *   An array of user objects. HOWEVER! Each user object has attached an
+ *   extra field, "friendlist_status", which is the status of
+ */
+function friendlist_api_db_statuses_array($requester, $requestee, $rtid, $status, $field = 'requestee_id', $only_uids=FALSE) {
+
+
+  // Just in case it was passed as NULL to allow $only_uids to get passed
+  if($field == NULL){
+    $field = 'requestee_id';
+  }
+
+  // Creates the query.
+  $r = friendlist_api_db_statuses('select', $requester, $requestee, $rtid, $status);
+
+  // Cycle through the results.
+  while ($row = db_fetch_object($r)) {
+    if(!$only_uids){
+      $user_object = user_load(array('uid' => $row->$field));
+      #drupal_set_message("Added: $user_object->name");
+      $user_object->friendlist_status = $row;
+      $list[] = $user_object;
+    } else {
+      $list[] = $row->$field;
+    }
+  }
+
+  return $list;
+}
+
+
+/**
+ * Return the list of users that a user MIGHT know
+ *
+ * This function works as a layer around friendlist_api_db_statuses().
+ * NOTE: it returns an array of requestees.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $only_uids
+ *   Only get the uids, without loading usr objects
+ *   An array of user objects, unless $only_uids was specified
+ */
+function friendlist_api_people_you_may_know($uid, $only_uids=FALSE) {
+
+  $uid = friendlist_api_user_into_uid($uid);
+  $who_you_know = friendlist_api_db_statuses_array($uid, NULL, NULL, array('OW_1_TO_2', 'OW_BOTH', 'TW_BOTH'), 'requestee_id', TRUE);
+ 
+  //You can't know anybody if nobody knows you.
+  if (sizeof($who_you_know)<1){
+    return array(); 
+  }
+
+  $who_you_know_str = implode(',', $who_you_know);
+  
+  $query = "
+SELECT count(*) num, fs1.requestee_id as uid
+FROM {friendlist_statuses} fs1
+WHERE fs1.requester_id
+  IN ($who_you_know_str)
+  AND (fs1.status='TW_BOTH' OR fs1.status='OW_BOTH' OR fs1.status='OW_1_TO_2')
+  AND fs1.requestee_id != %d
+
+  GROUP BY fs1.requestee_id
+
+  HAVING num>1";
+ 
+  $result = db_query($query, $uid);
+  
+  // We need to manually filter-out users that may already be our friends!!!
+  $users = array();
+  $user_ids = array();
+  while ($obj=db_fetch_object($result)) {
+    if (!in_array($obj->uid, $who_you_know)) {
+      $user_ids[] = $obj->uid;
+    }    
+  }
+ 
+  // Return the right thing
+  if(!$only_uids){
+    foreach($user_ids as $uid){
+      $user_objects = user_load( array('uid' => $uid ) );
+    }
+    return $user_objects;
+  } else {
+    return $user_ids;
+  }
+
+  // Randomise -- Deleted by Merc
+  #if (sizeof($user_ids)>0) {
+  #  shuffle ($user_ids); //Randomize!
+  #}  
+
+}
+
+
+/**
+ * Set a single field in the statuses table.
+ *
+ * This is useful when a simple update query is all the developer needs.
+ *
+ * @param $requester
+ *   The relation requester. It can be a $user object, or an user id.
+ * @param $requestee
+ *   The relation requestee. It can be a $user object, or an user id.
+ * @param $rtid
+ *   The relation type ID.
+ * @param $field_name
+ *   The field to change.
+ * @param $field_value
+ *   The new value.
+ * @return
+ *   TRUE  - All good.
+ *   FALSE - The record couldn't be set
+ */
+function friendlist_api_set_status_field($requester, $requestee, $rtid, $field_name, $field_value) {
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+
+  // This can't and shouldn't happen.
+  if ($requester == $requestee) {
+    return FALSE;
+  }
+
+  $field_name == 'status' ? $type = 'varchar' : $type = 'int';
+  db_query("UPDATE {friendlist_statuses} SET $field_name = ". db_placeholders(array($field_name), $type) ." WHERE requester_id = %d AND requestee_id = %d AND rtid = %d", $field_value, $requester, $requestee, $rtid);
+
+  return TRUE;
+}
+
+
+
+###################################################################
+# HELPER FUNCTIONS
+###################################################################
+
+/**
+ * Helper function to turn a $user object into an id.
+ *
+ * Used throughout this module.
+ *
+ * @param $u
+ *   It can be a $user object or an user ID.
+ * @return
+ *   A user ID.
+ */
+function friendlist_api_user_into_uid($u) {
+  if (is_object($u)) {
+    return $u->uid;
+  }
+  return $u;
+}
+
+
+/**
+ * Helper function to turn a $uid object into an user object.
+ *
+ * @param $u
+ *   It can be a $user object or an user ID.
+ * @return
+ *   A user ID.
+ */
+function friendlist_api_uid_into_user($u) {
+
+  // It's already an object, don't worry about it.
+  if (is_object($u)) {
+    return $u;
+  }
+
+  return user_load(array('uid' => $u));
+}
+
+
+################################################################
+# OTHER DRUPAL HOOKS
+################################################################
+
+/**
+ * Implementation of hook_user().
+ *
+ * This is important so that when a user gets deleted from the system,
+ * its relationships aree also zapped.
+ */
+function friendlist_api_user($type, &$edit, &$account, $category = NULL) {
+  // If a user has been deleted, delete all of her relations.
+  if ($type == 'delete') {
+    db_query('DELETE FROM {friendlist_relations} WHERE requester_id = %d OR requestee_id = %d', $account->uid, $account->uid);
+  }
+}
+
+################################################################
+# RELATION GENERIC API LAYER IMPLEMENTATION
+################################################################
+
+function friendlist_api_socnet_is_related($uid1, $uid2, $relation_name = NULL, $relation_style='all'){
+
+  // If a relation name is specified, try and load it. IF loading it fails,
+  // then return NULL since nothing would be returned anyway
+  $rtid = NULL;
+  if ($relation_name != NULL){
+    $rt = friendlist_api_relation_type_load($relation_name);
+    if ($rt){
+      $rtid = $rt->rtid;
+    } else {
+      return NULL;
+    }
+  }
+
+  // Add the right statuses
+  $statuses = array();
+  if ($relation_style == 'one-way' || $relation_style == 'all' || $relation_style == NULL){
+    $statuses[] = 'OW_1_TO_2';
+    $statuses[] = 'OW_BOTH';
+  }
+  if ($relation_style == 'two-way' || $relation_style == 'all' || $relation_style == NULL){
+    $statuses[] = 'TW_BOTH';
+  }
+
+  // Note that if there are no results the module returns NULL, so that
+  // the caller can do count() on the results and test that the result
+  // is 0
+  $result = count(friendlist_api_db_statuses_array($uid1, $uid2, $rt, $statuses, NULL, TRUE));
+  if ($result == 0) {
+    return NULL;
+  } else {
+    return $result;
+  }
+}
+
+function friendlist_api_socnet_is_pending($uid1, $uid2, $relation_name = NULL, $relation_style='all'){
+  
+  // If a relation name is specified, try and load it. IF loading it fails,
+  // then return NULL since nothing would be returned anyway
+  $rtid = NULL;
+  if ($relation_name != NULL){
+    $rt = friendlist_api_relation_type_load($relation_name);
+    if (! $rt){
+      return FALSE;
+    }
+  }
+
+  // Note that if there are no results the module returns NULL, so that
+  // the caller can do count() on the results and test that the result
+  // is 0
+  $result = count(friendlist_api_db_statuses_array($uid1, $uid2, $rt, $statuses, NULL, TRUE));
+  if ($result == 0) {
+    return NULL;
+  } else {
+    return $result;
+  }
+
+}
+
+function friendlist_api_socnet_is_blocked($blocked_by_uid, $blocked_uid, $relation_name = NULL, $relation_style='all') {
+
+  // If a relation name is specified, try and load it. IF loading it fails,
+  // then return NULL since nothing would be returned anyway
+  $rtid = NULL;
+  if ($relation_name != NULL){
+    $rt = friendlist_api_relation_type_load($relation_name);
+    if (! $rt){
+      return FALSE;
+    }
+  }
+
+  $statuses = array('TW_2_TO_1_D');
+
+  // Note that if there are no results the module returns NULL, so that
+  // the caller can do count() on the results and test that the result
+  // is 0
+  $result = count(friendlist_api_db_statuses_array($blocked_by_uid, $blocked_uid, $rt, $statuses, NULL, TRUE));
+  if ($result == 0) {
+    return NULL;
+  } else {
+    return $result;
+  }
+}
+
+function friendlist_api_socnet_get_related_users($uid, $relation_name = NULL, $relation_style='all') {
+
+  // If a relation name is specified, try and load it. IF loading it fails,
+  // then return NULL since nothing would be returned anyway
+  $rtid = NULL;
+  if ($relation_name != NULL){
+    $rt = friendlist_api_relation_type_load($relation_name);
+    if ($rt){
+      $rtid = $rt->rtid;
+    } else {
+      return NULL;
+    }
+  }
+
+  // Add the right statuses
+  $statuses = array();
+  if ($relation_style == 'one-way' || $relation_style == 'all' || $relation_style == NULL){
+    $statuses[] = 'OW_1_TO_2';
+    $statuses[] = 'OW_BOTH';
+  }
+  if ($relation_style == 'two-way' || $relation_style == 'all' || $relation_style == NULL){
+    $statuses[] = 'TW_BOTH';
+  }
+
+  // Make the call!
+  return friendlist_api_db_statuses_array($uid, NULL, $rt, $statuses, NULL, TRUE);
+}
+
+function friendlist_api_socnet_all_pending_from($uid, $relation_name = NULL, $relation_style='all'){
+
+  // If a relation name is specified, try and load it. IF loading it fails,
+  // then return NULL since nothing would be returned anyway
+  $rtid = NULL;
+  if ($relation_name != NULL){
+    $rt = friendlist_api_relation_type_load($relation_name);
+    if ($rt){
+      $rtid = $rt->rtid;
+    } else {
+      return NULL;
+    }
+  }
+
+  // Add the right statuses
+  $statuses = array('TW_1_TO_2_P');
+  return friendlist_api_db_statuses_array($uid, NULL, $rt, $statuses, NULL, TRUE);
+
+}
+
+function friendlist_api_socnet_all_pending_to($uid, $relation_name = NULL, $relation_style='all'){
+
+  // If a relation name is specified, try and load it. IF loading it fails,
+  // then return NULL since nothing would be returned anyway
+  $rtid = NULL;
+  if ($relation_name != NULL){
+    $rt = friendlist_api_relation_type_load($relation_name);
+    if ($rt){
+      $rtid = $rt->rtid;
+    } else {
+      return NULL;
+    }
+  }
+
+  // Add the right statuses
+  $statuses = array('TW_2_TO_1_P');
+  return friendlist_api_db_statuses_array($uid, NULL, $rt, $statuses, NULL, TRUE);
+
+}
+
+function friendlist_api_socnet_get_relation_names($relation_style='all'){
+
+  $relation_types = friendlist_api_relation_types_load_all();
+
+  // Cycle through the relation types, only adding to the $return
+  // variables the one that satisfy the constraing of $relation_style
+  // (if present)
+  $return=array();
+  foreach($relation_types as $rt){
+    if (
+      ($relation_style == 'all') || 
+      ($relation_style == 'one-way' && $rt->oneway) || 
+      ($relation_style == 'two-way' && !$rt->oneway) 
+    ){
+      $return[] = $rt->name;
+    }
+  }
+
+  return $return;
+}
+
+function friendlist_api_socnet_relation_type($relation_name){
+
+  // Return the relation name according to this module
+  $rt = friendlist_api_relation_type_load($relation_name);
+  if($rt){
+    if ($rt->oneway){
+      return 'one-way';
+    }
+    else {
+      return 'two-way';
+    }
+  } else {
+    return NULL;
+  }
+
+}
+
+function friendlist_api_socnet_get_implementations(){
+  return 'friendlist';
+}
+
+#######################################################################
+# DEPRECATED STUFF
+#######################################################################
+
+/**
+ * DEPRECATED
+ * I am not here to write generic DB functions... which is why this
+ * function is deprecated.
+ * This is a multi purpose function that is used to fetch data from
+ * any table. it should suite most needs. And
+ * if you really need to, you can always ask the database!
+ * It returns a database $result. The interesting part is that if the
+ * $use_pager flag is on, then it will create a paged query. This means
+ * that developers can create pages with the pager with very little
+ * effort.
+ *
+ * @param $param
+ *   An associative array of parameters. For example:
+ *     $param = array(
+ * 'requester_id' => $user
+ * );
+ *
+ * @return
+ *
+ */
+/*
+function friendlist_api_db_query($table, $param, $use_pager = FALSE, $limit = 10, $element = 0) {
+
+  $arguents = array();
+
+  if (is_array($param) && count($param) != 0) {
+
+    // Turn the conditions into a query.
+    foreach ($param as $key => $value) {
+      $cond[] = 'tbl.'. db_escape_table($key) ." = '%s'";
+      $arguments[] = $value;
+    }
+    $cond = implode(' AND ', $cond);
+  }
+  else {
+    $cond = "1 = 1";
+  }
+
+  $query = "SELECT * FROM {$table} tbl WHERE $cond";
+  if ($use_pager) {
+    $r = pager_query($query, $limit, $element, NULL, $arguments);
+  }
+  else {
+    $r = db_query($query, $arguments);
+  }
+
+  return $r;
+}
+ */
+

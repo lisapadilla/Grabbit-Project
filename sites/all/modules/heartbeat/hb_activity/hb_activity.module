@@ -1,0 +1,281 @@
+<?php
+// $Id: hb_activity.module,v 1.1.2.2 2008/12/28 20:33:49 stalski Exp $ 
+// by Jochen Stals - ONE-agency - www.one-agency.be
+
+/**
+ * Implementation of hook_views_api()
+ *
+ * This hook will tell views2 that user activity is available
+ */
+function hb_activity_views_api() {
+  return array(
+    'api' => 2,
+    /*'path' => drupal_get_path('module', 'hb_activity'),*/
+  );
+}
+
+/**
+ *  Implementation of hook_menu().
+ */
+function hb_activity_menu() {
+  $items = array();
+  
+  $items['admin/settings/heartbeat/hb_activity'] = array(
+    'title' => 'user activity settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('hb_activity_admin_settings'),
+    'access arguments' => array('configure user activity'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 6,
+    'file' => 'hb_activity.admin.inc',
+  );
+  
+  $items['heartbeat/ahah/%'] = array(
+    'page callback' => 'hb_activity_ahah',
+    'page arguments' => array(2),
+    'access callback' => 'user_access',
+    'access arguments' => array('configure user activity'),
+    'type' => MENU_CALLBACK,
+    'file' => 'hb_activity.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * User activity logger function
+ * @param   The data to add one row
+ */
+function hb_activity_log($data, $args=array()) {
+  heartbeat_include('hb_activity');
+  $hb_activity = new hb_activity($data);  
+	$hb_activity->save($args);
+}
+
+/**
+ * Implementation of hook_heartbeat_message_info
+ */
+function hb_activity_heartbeat_message_info() {
+	$info = array (
+	
+    /**
+     * Default node messages
+     */	
+	  2 => 
+	  array (
+      'message_id' => 'heartbeat_edit_node',
+      'message_type' => 'normal',
+	    'message' => '!username has updated !node_type "!node_title"',
+	    'message_concat' => '!username has updated %node_titles%',
+	    'concat_args' => 
+	    array (
+	      'type' => 'summary',
+	      'merge_target' => 'node_titles',
+	      'merge_separator' => ',',
+	      'merge_end_separator' => 'or',
+	    ),
+	    'module' => 'node',
+	    'karma_index' => '1',
+	    'description' => 'When editing a node, log the users activity',
+	    'variables' => 
+	    array (
+	      '@username' => '[node:author-name-url]',
+	      '@node_type' => '[node:type]',
+	      '@node_title' => '[node:title-link]',
+	    ),
+	  ),
+	  3 => 
+	  array (
+      'message_id' => 'heartbeat_add_node',
+      'message_type' => 'normal',
+	    'message' => '!username has added !node_type !node_title.',
+	    'message_concat' => '!username has added the following !node_types: %node_titles%.',
+	    'concat_args' => 
+	    array (
+	      'type' => 'summary',
+	      'merge_target' => 'node_titles',
+	      'merge_separator' => ',',
+	      'merge_end_separator' => 'and',
+	    ),
+	    'module' => 'node',
+	    'karma_index' => '1',
+	    'description' => 'User adds a node, save user activity',
+	    'variables' => 
+	    array (
+	      '@username' => '[user:user-name-url]',
+	      '@node_type' => '[node:type]',
+	      '@node_title' => '[node:title-link]',
+	      '@node_types' => '[node:type]',
+	    ),
+	  ),
+	  
+    /**
+     * Default comment messages
+     */ 
+	  4 => 
+	  array (
+      'message_id' => 'heartbeat_add_comment',
+      'message_type' => 'normal',
+	    'message' => '!username replied on !title.',
+	    'message_concat' => '!username replied %times% times on !title.',
+	    'concat_args' => 
+	    array (
+	      'type' => 'count',
+	      'merge_target' => 'times',
+	      'merge_separator' => '',
+	      'merge_end_separator' => '',
+	    ),
+	    'module' => 'comment',
+	    'karma_index' => '0',
+	    'description' => 'user replied on some content',
+	    'variables' => 
+	    array (
+	      '@username' => '[user:user-name-url]  ',
+	      '@title' => '[node:title-link]',
+	    ),
+	  ),
+	  5 => 
+	  array (
+      'message_id' => 'heartbeat_edit_comment',
+      'message_type' => 'normal',
+	    'message' => '!username changed his comment on !title.',
+	    'message_concat' => '!username changed his comment on !title several times (%times%).',
+	    'concat_args' => 
+	    array (
+	      'type' => 'count',
+	      'merge_target' => 'times',
+	      'merge_separator' => '',
+	      'merge_end_separator' => '',
+	    ),
+	    'module' => 'comment',
+	    'karma_index' => '1',
+	    'description' => 'user changed his comment',
+	    'variables' => 
+	    array (
+	      '@username' => '[user:user-name-url]',
+	      '@title' => '[node:title-link]',
+	    ),
+	  ),
+	  
+    6 => 
+    array (
+      'message_id' => 'heartbeat_edit_account',
+      'message_type' => 'normal',
+      'message' => '!username\'s personal account page has been changed.',
+      'message_concat' => '',
+      'concat_args' => 
+      array (
+        'type' => 'single',
+        'merge_target' => '',
+        'merge_separator' => '',
+        'merge_end_separator' => '',
+      ),
+      'module' => 'user',
+      'karma_index' => '1',
+      'description' => 'user changed his/her account',
+      'variables' => 
+      array (
+        '@username' => '[user:user-name-url]',
+      ),
+    ),
+	  
+	  
+	  
+	  
+    /**
+     * Default heartbeat flag messages
+     */ 
+	  
+		9 => 
+		  array (
+        'message_id' => 'heartbeat_flag_slapping',
+        'message_type' => 'flag',
+		    'message' => '!username slaps !username_target round the head with a rotten fish',
+		    'message_concat' => '',
+		    'concat_args' => 
+		    array (
+		      'type' => 'single',
+		      'merge_target' => '',
+		      'merge_separator' => '',
+		      'merge_end_separator' => '',
+		    ),
+		    'module' => 'heartbeat',
+		    'karma_index' => '2',
+		    'description' => 'heartbeat flag: slaps fish to other user',
+		    'variables' => 
+		    array (
+		      '@username' => '[user:user-name-url]',
+		      '@username_target' => '[flagged_user:user-name-url]',
+		    ),
+		  ),
+		  10 => 
+		  array (
+        'message_id' => 'heartbeat_flag_congrats',
+        'message_type' => 'flag',
+		    'message' => '!username congratulates !username_target with his new born child',
+		    'message_concat' => '',
+		    'concat_args' => 
+		    array (
+		      'type' => 'single',
+		      'merge_target' => '',
+		      'merge_separator' => '',
+		      'merge_end_separator' => '',
+		    ),
+		    'module' => 'content_profile',
+		    'karma_index' => '1',
+		    'description' => 'Heartbeat congratulations',
+		    'variables' => 
+		    array (
+		      '@username' => '[user:user-name-url]',
+		      '@username_target' => '[flagged_user:user-name-url]',
+		    ),
+		  ),
+		  15 => 
+		  array (
+        'message_id' => 'heartbeat_flag_poking',
+        'message_type' => 'flag',
+		    'message' => '!username pokes !username_target in the eye :-)',
+		    'message_concat' => '',
+		    'concat_args' => 
+		    array (
+		      'type' => 'single',
+		      'merge_target' => '',
+		      'merge_separator' => '',
+		      'merge_end_separator' => '',
+		    ),
+		    'module' => 'heartbeat',
+		    'karma_index' => '3',
+		    'description' => 'heartbeat flag : poke in the eye',
+		    'variables' => 
+		    array (
+		      '@username' => '[user:user-name-url]',
+		      '@username_target' => '[flagged_user:user-name-url]',
+		    ),
+		  ),
+		  16 => 
+		  array (
+        'message_id' => 'heartbeat_flag_kisses',
+        'message_type' => 'flag',
+		    'message' => '!username sends a bunch of sweet kisses to !username_target. 
+		xxx',
+		    'message_concat' => '',
+		    'concat_args' => 
+		    array (
+		      'type' => 'single',
+		      'merge_target' => '',
+		      'merge_separator' => '',
+		      'merge_end_separator' => '',
+		    ),
+		    'module' => 'heartbeat',
+		    'karma_index' => '1',
+		    'description' => 'heartbeat flag: sweet kisses',
+		    'variables' => 
+		    array (
+		      '@username' => '[user:user-name-url]',
+		      '@username_target' => '[flagged_user:user-name-url]',
+		    ),
+		  ),
+	  
+	);
+  return $info;
+}
+
