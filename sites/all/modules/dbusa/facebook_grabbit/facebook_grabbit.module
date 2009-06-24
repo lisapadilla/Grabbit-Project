@@ -1,0 +1,64 @@
+<?
+//$Id$
+ 
+/**
+ * Implementation of hook_menu()
+ */
+function facebook_grabbit_menu () {
+  $items['app/facebook'] = array( 
+  'title' => 'Grabbit.net Facebook', 
+  'page callback' => 'facebook_grabbit_facebook', 
+  'access arguments' => array('access content')
+  ); 
+  
+  return $items;
+}
+
+function facebook_grabbit_facebook(){
+  global $user;
+print_r($user);
+  // the facebook client library
+  include_once 'facebook/facebook.php';
+
+  include_once("facebook/config.php");  
+
+  $facebook = new Facebook($api_key, $secret);
+  $facebook->require_frame();
+  $user = $facebook->require_login();
+
+  $duid=$_GET["duid"];
+
+  if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access")){  
+    $output .= '<fb:prompt-permission perms="status_update, offline_access" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')">Let us update your status from this application</fb:prompt-permission>';  
+    $visibility = "none";  
+  }  
+  else  
+    $visibility = "block";     
+	if(isset($_POST['status'])){  
+	    $facebook->api_client->users_setStatus($_POST['status']);  
+	    $output .= "<p>Your status has been updated</p>";  
+	  }  
+  $sessionkey = $_REQUEST['fb_sig_session_key'];
+
+  if(!$_GET["duid"]){
+    $visibility = "none";	
+  }
+  else{
+    $output .= "mysessionkey = ".$sessionkey;
+  }
+
+  $output .='<div id="statusdiv" style="display:'.$visibility.';">  
+	   <form method="POST">  
+	       Please update your status:<br/>  
+	       <input type="text" name="status" /> <br/>  
+	       <input type="submit" value="change status" />  
+	   </form>  
+	</div>  
+	<script>
+	function after(url){
+	  document.setLocation(url);
+	}
+	</script>';
+
+  print $output;
+}

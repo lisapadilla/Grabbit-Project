@@ -1,0 +1,7 @@
+;$Id$
+name = "Facebook Grabbit"
+description = "Allows users to set up a facebook account for update status"
+package = "Danilo Black USA"
+version = 6.x-1.0-dev
+core = 6.x
+php = 5.2
