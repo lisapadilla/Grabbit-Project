@@ -15,7 +15,8 @@ function facebook_grabbit_menu () {
 }
 
 function facebook_grabbit_facebook(){
-	
+  global $user;
+print_r($user);
   // the facebook client library
   include_once 'facebook/facebook.php';
 
