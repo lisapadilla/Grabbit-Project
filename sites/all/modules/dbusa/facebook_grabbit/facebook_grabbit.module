@@ -46,7 +46,7 @@ function facebook_grabbit_facebook(){
     $output .= "mysessionkey = ".$sessionkey;
   }
 
-  $output .='<div id="statusdiv" style="display:<?=$visibility;?>;">  
+  $output .='<div id="statusdiv" style="display:'.$visibility.';">  
 	   <form method="POST">  
 	       Please update your status:<br/>  
 	       <input type="text" name="status" /> <br/>  
