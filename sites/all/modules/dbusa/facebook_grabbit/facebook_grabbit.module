@@ -116,7 +116,7 @@ function facebook_grabbit_facebook(){
   $duid=$_GET["duid"];
 
   if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access")){  
-    $output .= '<fb:prompt-permission perms="status_update, offline_access" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')">Let us update your status from this application</fb:prompt-permission>';  
+    $output .= '<fb:prompt-permission perms="status_update, offline_access" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status!</strong></fb:prompt-permission>';  
     $visibility = "none";  
   }else{
     $visibility = "block";
