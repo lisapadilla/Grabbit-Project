@@ -149,7 +149,7 @@ function facebook_grabbit_save_fid($user,$fid,$kid){
   else{
     $result = FALSE;
   }
-  
+  print $user."<br>".$fid."<br>".$kid;
   return $result;
 
 }
