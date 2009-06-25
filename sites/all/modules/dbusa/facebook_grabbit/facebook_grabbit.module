@@ -8,7 +8,8 @@ function facebook_grabbit_menu () {
   $items['app/facebook'] = array( 
     'title' => 'Grabbit.net Facebook', 
     'page callback' => 'facebook_grabbit_facebook', 
-    'access arguments' => array('access content')
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
   ); 
 
   $items['facebook/status'] = array( 
@@ -33,32 +34,42 @@ function facebook_grabbit_update_form($form_state){
 	
 	global $user;
 	$fuser = facebook_grabbit_get_fid($user->uid);
+	
+	if ($fuser){
+		
+		$suser=$fuser->fid;
+		$session_key=$fuser->kid;
 
-	$suser=$fuser->fid;
-	$session_key=$fuser->kid;
-	
-	$facebook = new FacebookDesktop($api_key, $secret);
-	$facebook->set_user($suser, $session_key);
-	
-	$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
+		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
 
-	$form['cstatus'] = array(
-	  '#type' => 'item',
-	  '#title' => t('Current Facebook Status'),
-	  '#value' => $status[0]['message'],
-	);
-	
-	$form['status'] = array(
-	    '#type' => 'textfield',
-	    '#title' => t('New Status'),
-	    '#size' => 60,
-	    '#maxlength' => 255,
-	    '#required' => true );
-	
-	$form['submit'] = array(
-	    '#type' => 'submit',
-	    '#value' => t('Update Status'),
-	);	
+		$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
+
+		$form['cstatus'] = array(
+		  '#type' => 'item',
+		  '#title' => t('Current Facebook Status'),
+		  '#value' => $status[0]['message'],
+		);
+
+		$form['status'] = array(
+		    '#type' => 'textfield',
+		    '#title' => t('New Status'),
+		    '#size' => 60,
+		    '#maxlength' => 255,
+		    '#required' => true );
+
+		$form['submit'] = array(
+		    '#type' => 'submit',
+		    '#value' => t('Update Status'),
+		);	
+	}
+	else{
+		$form['facebook'] = array(
+		  '#type' => 'item',
+		  '#title' => t('Allow Grabbit to update your Facebook Status'),
+		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))),
+		);
+	}
 	
 	return $form;
 	
@@ -181,7 +192,7 @@ function facebook_grabbit_form_alter(&$form, $form_state, $form_id) {
 		$form['facebook'] = array(
 		  '#type' => 'item',
 		  '#title' => t('Allow Grabbit to update your Facebook Status'),
-		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE)),
+		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))),
 		);	
 	}
 	
