@@ -145,7 +145,8 @@ function facebook_grabbit_save_fid($user,$fid,$kid){
     $result = TRUE;
   }
   else{
-    $result = FALSE;
+    db_query("UPDATE {facebook_grabbit} SET kid='%s', fid=%d WHERE uid=%d",$kid,$fid,$user);	
+    $result = TRUE;
   }
 
   return $result;
