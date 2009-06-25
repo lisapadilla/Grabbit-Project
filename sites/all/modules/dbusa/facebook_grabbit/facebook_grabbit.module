@@ -15,7 +15,7 @@ function facebook_grabbit_menu () {
     'title' => 'Update Facebook Status', 
     'page callback' => 'drupal_get_form', 
     'page arguments' => array('facebook_grabbit_update_form'),
-    'access arguments' => array('Update own facebook status')
+    'access arguments' => array('access content')
   );
   
   return $items;
