@@ -26,7 +26,7 @@ function facebook_grabbit_menu () {
  */
 
 function facebook_grabbit_update_form($form_state){
-	
+/*	
 	include("facebook/facebook.php");
 	include("facebook/facebook_desktop.php");
 	include("facebook/config.php");
@@ -41,7 +41,7 @@ function facebook_grabbit_update_form($form_state){
 	$facebook->set_user($user, $session_key);
 	
 	$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$user, 'limit'=>'5'));
-
+*/
 	$form['cstatus'] = array(
 	  '#type' => 'item',
 	  '#title' => t('Current Status'),
