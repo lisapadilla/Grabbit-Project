@@ -122,11 +122,7 @@ function facebook_grabbit_facebook(){
   }  
 
   $output .='<div id="statusdiv" style="display:'.$visibility.';">  
-	   <form method="POST">  
-	       Please update your status:<br/>  
-	       <input type="text" name="status" /> <br/>  
-	       <input type="submit" value="change status" />  
-	   </form>  
+	   <strong>Thank you for installing this app, go to Grabbit to change your facebook status</strong>
 	</div>  
 	<script>
 	function after(url){
