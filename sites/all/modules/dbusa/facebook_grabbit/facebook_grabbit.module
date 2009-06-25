@@ -26,7 +26,7 @@ function facebook_grabbit_menu () {
  */
 
 function facebook_grabbit_update_form($form_state){
-/*	
+
 	include("facebook/facebook.php");
 	include("facebook/facebook_desktop.php");
 	include("facebook/config.php");
@@ -41,7 +41,7 @@ function facebook_grabbit_update_form($form_state){
 	$facebook->set_user($user, $session_key);
 	
 	$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$user, 'limit'=>'5'));
-*/
+
 	$form['cstatus'] = array(
 	  '#type' => 'item',
 	  '#title' => t('Current Status'),
@@ -114,12 +114,14 @@ function facebook_grabbit_facebook(){
 	    $output = "There was a problem accessing your Grabbit account, please go back to grabbit.net and try again";	
 	}else{
 	  	$sessionkey = $_REQUEST['fb_sig_session_key'];
+	print_r($sessionkey);
 	    $fid=$facebook->api_client->user;
 	    facebook_grabbit_save_fid($_GET["duid"],$fid,$sessionkey);	
 	}
     
   }  
-  
+  	$sessionkey = $_REQUEST['fb_sig_session_key'];
+    $output .=$sessionkey;
   $output .='<div id="statusdiv" style="display:'.$visibility.';">  
 	   <form method="POST">  
 	       Please update your status:<br/>  
