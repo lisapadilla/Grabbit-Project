@@ -1,0 +1,74 @@
+<?php
+// $Id: facebook_grabbit.install,v 1.1.2.2 2009/06/24 05:53:49 Exp $
+
+/**
+ * @file
+ * Facebook for Grabbit install file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function facebook_grabbit_install() {
+  drupal_install_schema('facebook_grabbit');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function facebook_grabbit_uninstall() {
+  drupal_uninstall_schema('facebook_grabbit');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function facebook_grabbit_schema() {
+  $schema = array();
+/*
+  $schema['facebook_grabbit'] = array(
+    'fields' => array(
+      'uid' => array(
+        'type' => 'init',
+        'size' => 'normal',
+        'not null' => TRUE
+      ),
+      'fid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => FALSE
+      ),
+	  'kid' => array(
+      'type' => 'varchar',
+      	'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+      ),
+    ),
+    'primary key' => array('uid'),
+  );
+*/
+$schema['facebook_grabbit'] = array(
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'disp-width' => '10',
+      ),
+      'kid' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'fid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => FALSE,
+        'disp-width' => '10',
+      ),
+    ),
+    'primary key' => array('uid'),
+  );
+  return $schema;
+}
