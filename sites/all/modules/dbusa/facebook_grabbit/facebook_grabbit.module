@@ -182,7 +182,7 @@ function facebook_grabbit_form_alter(&$form, $form_state, $form_id) {
 		$form['facebook'] = array(
 		  '#type' => 'item',
 		  '#title' => t('Allow Grabbit to update your Facebook Status'),
-		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?uid='.$user->uid,array('html'=>TRUE)),
+		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE)),
 		);	
 	}
 	
