@@ -27,24 +27,24 @@ function facebook_grabbit_menu () {
 
 function facebook_grabbit_update_form($form_state){
 
-	include("facebook/facebook.php");
-	include("facebook/facebook_desktop.php");
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
 	include("facebook/config.php");
 	
 	global $user;
 	$fuser = facebook_grabbit_get_fid($user->uid);
-	
-	$user=$fuser->fid;
+
+	$suser=$fuser->fid;
 	$session_key=$fuser->kid;
 	
 	$facebook = new FacebookDesktop($api_key, $secret);
-	$facebook->set_user($user, $session_key);
+	$facebook->set_user($suser, $session_key);
 	
-	$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$user, 'limit'=>'5'));
+	$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
 
 	$form['cstatus'] = array(
 	  '#type' => 'item',
-	  '#title' => t('Current Status'),
+	  '#title' => t('Current Facebook Status'),
 	  '#value' => $status[0]['message'],
 	);
 	
@@ -66,21 +66,21 @@ function facebook_grabbit_update_form($form_state){
 
 function facebook_grabbit_update_form_submit ($form, &$form_state) {
 	
-	include("facebook/facebook.php");
-	include("facebook/facebook_desktop.php");
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
 	include("facebook/config.php");
 	
 	global $user;
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	
-	$user=$fuser->fid;
+	$suser=$fuser->fid;
 	$session_key=$fuser->kid;
 	
 	$facebook = new FacebookDesktop($api_key, $secret);
-	$facebook->set_user($user, $session_key);
+	$facebook->set_user($suser, $session_key);
 	
 	$facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
-	                                                                     'uid'=>"$user",
+	                                                                     'uid'=>"$suser",
 	                                                                     'status'=>$form_state['values']['status']));
 	
 	drupal_set_message('You have changed your facebook status');
@@ -120,8 +120,7 @@ function facebook_grabbit_facebook(){
 	}
     
   }  
-  	$sessionkey = $_REQUEST['fb_sig_session_key'];
-    $output .=$sessionkey;
+
   $output .='<div id="statusdiv" style="display:'.$visibility.';">  
 	   <form method="POST">  
 	       Please update your status:<br/>  
