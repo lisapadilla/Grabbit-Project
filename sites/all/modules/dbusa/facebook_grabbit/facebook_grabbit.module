@@ -118,8 +118,10 @@ function facebook_grabbit_stream(){
 
 		$facebook = new FacebookDesktop($api_key, $secret);
 		$facebook->set_user($suser, $session_key);
+		$ttoken = $facebook->api_client->auth_createToken();
+        $secreto = $facebook->api_client->auth_getSession($token);
 
-		$ini = 'app_id=90953553995session_key='.$session_key.'source_id='.$suser.'application_secret='.$secret;
+		$ini = 'app_id=90953553995session_key='.$session_key.'source_id='.$suser.'session_secret='.$secreto;
 		$sig = md5($ini);
 		$var = drupal_http_request('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id='.$api_key.'&session_key='.$session_key.'&sig='.$sig.'&v=0.7&read');
 		print_r('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id=90953553995&session_key='.$session_key.'&sig='.$sig.'&v=0.7&read');
