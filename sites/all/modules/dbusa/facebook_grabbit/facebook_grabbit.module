@@ -122,7 +122,9 @@ function facebook_grabbit_stream(){
 		$ini = 'app_id=90953553995session_secret='.$session_key.'source_id='.$suser;
 		$sig = md5($ini);
 		$var = drupal_http_request('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id='.$api_key.'&session_key='.$session_key.'&sig='.$sig.'&v=0.7&read');
-		print_r('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id=90953553995&session_key='.$session_key.'&sig='.$sig.'&v=0.7&read');
+		$var .='<br><br>http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id=90953553995&session_key='.$session_key.'&sig='.$sig.'&v=0.7&read';
+		return $var;
+		
 	}
 	else{
 		return "You have no facebook account yet";
