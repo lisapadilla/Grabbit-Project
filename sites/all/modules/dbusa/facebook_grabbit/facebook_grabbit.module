@@ -18,6 +18,11 @@ function facebook_grabbit_menu () {
     'page arguments' => array('facebook_grabbit_update_form'),
     'access arguments' => array('access content')
   );
+  $items['facebook/stream'] = array( 
+    'title' => 'View my Facebook Stream', 
+    'page callback' => 'facebook_grabbit_stream', 
+    'access arguments' => array('access content')
+  );
   
   return $items;
 }
@@ -96,6 +101,34 @@ function facebook_grabbit_update_form_submit ($form, &$form_state) {
 	
 	drupal_set_message('You have changed your facebook status');
 }
+
+function facebook_grabbit_stream(){
+
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	
+	global $user;
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	
+	if ($fuser){
+		
+		$suser=$fuser->fid;
+		$session_key=$fuser->kid;
+
+		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
+
+		$stream = $facebook->api_client->stream_get($session_key);
+		print_r($stream);
+	}
+	else{
+		return "You have no facebook account yet";
+	}
+
+	
+}
+
 
 /**
  * Facebook aplication using facebook API()
