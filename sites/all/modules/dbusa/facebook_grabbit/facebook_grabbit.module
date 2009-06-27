@@ -18,6 +18,11 @@ function facebook_grabbit_menu () {
     'page arguments' => array('facebook_grabbit_update_form'),
     'access arguments' => array('access content')
   );
+  $items['facebook/stream'] = array( 
+    'title' => 'View my Facebook Stream', 
+    'page callback' => 'facebook_grabbit_stream', 
+    'access arguments' => array('access content')
+  );
   
   return $items;
 }
@@ -97,6 +102,34 @@ function facebook_grabbit_update_form_submit ($form, &$form_state) {
 	drupal_set_message('You have changed your facebook status');
 }
 
+function facebook_grabbit_stream(){
+
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	
+	global $user;
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	
+	if ($fuser){
+		
+		$suser=$fuser->fid;
+		$session_key=$fuser->kid;
+
+		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
+
+		$stream = $facebook->api_client->stream_get($session_key);
+		print_r($stream);
+	}
+	else{
+		return "You have no facebook account yet";
+	}
+
+	
+}
+
+
 /**
  * Facebook aplication using facebook API()
  */
@@ -127,7 +160,7 @@ function facebook_grabbit_facebook(){
 	  	$sessionkey = $_REQUEST['fb_sig_session_key'];
 	print_r($sessionkey);
 	    $fid=$facebook->api_client->user;
-	    facebook_grabbit_save_fid($_GET["duid"],$fid,$sessionkey);	
+	    facebook_grabbit_save_fid($_GET["duid"],$fid,$sessionkey);
 	}
     
   }  
@@ -180,22 +213,83 @@ function facebook_grabbit_get_fid($user){
 
   return $user;
 }
-
+/*
 /**
  * Implementation of hook_form_alter
- */
+ 
 function facebook_grabbit_form_alter(&$form, $form_state, $form_id) {
+
   if ('profile_node_form' == $form_id) {
+	
+	$form['services'] = array(
+	  '#type' => 'fieldset',
+	  '#title' => t('Social Networks'),
+	  '#weight' => 10,
+	  '#collapsible' => FALSE,
+	  '#collapsed' => FALSE,
+	);
 	
 	global $user;
 	if(!facebook_grabbit_get_fid($user->uid)){
-		$form['facebook'] = array(
+		$form['services']['facebook'] = array(
 		  '#type' => 'item',
 		  '#weight' => 10,
 		  '#title' => t('Allow Grabbit to update your Facebook Status'),
 		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))),
 		);	
 	}
+	module_load_include('inc', 'twitter');
+	$twitter = array_shift(twitter_get_user_accounts($form['uid']['#value']));
+	
+	  $form['services']['screen_name'] = array(
+	    '#type' => 'textfield',
+	    '#required' => FALSE,
+	    '#title' => t('Twitter user name'),
+	    '#value'=>$twitter['screen_name']
+	  );
+	  $form['services']['password'] = array(
+	    '#type' => 'password',
+	    '#title' => t('Password'),
+	    '#value'=>$twitter['password'],
+	    '#description' => t("If your Twitter account is protected, or you wish to post to Twitter from Grabbit, you must enter the Twitter account's password.")
+	  );
 	
   }
+
+  
 }
+
+/**
+ * Implementation of hook_nodeapi
+ 
+function facebook_grabbit_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+	//update
+	if($node->type == 'profile' && $op == 'update'){
+		module_load_include('inc', 'twitter');
+
+		$verify = FALSE;
+
+		$pass = $node->password;
+		$name = $node->screen_name;
+
+		if (!empty($pass)) {
+		    $verify = TRUE;
+		}
+
+		if ($verify) {
+		  $valid = twitter_authenticate($name, $pass);
+		  if (!$valid) {
+		    drupal_set_message(t('Twitter authentication failed. Please check your account name and try again.'));
+		  }
+		  else{
+			$account=array('screen_name'=>$name,
+			               'password' => $pass,
+			               'uid' => $node->uid);
+		    twitter_user_save($account, TRUE);	
+		    drupal_set_message(t('The twitter account was setted up on Grabbit '));
+		  }
+		}
+		
+	}
+}
+*/
