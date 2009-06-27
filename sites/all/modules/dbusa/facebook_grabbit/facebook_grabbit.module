@@ -120,7 +120,8 @@ function facebook_grabbit_stream(){
 		$facebook->set_user($suser, $session_key);
 
 		$stream = $facebook->api_client->stream_get($session_key);
-		print_r($stream);
+        $output ='<fb:wall>  <fb:wallpost uid="'.$stream['posts'][0]['source_id'].'">This is a wall post from uid 12345</fb:wallpost>  </fb:wall>';
+        return $output;
 	}
 	else{
 		return "You have no facebook account yet";
