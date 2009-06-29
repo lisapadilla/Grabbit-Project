@@ -23,6 +23,11 @@ function facebook_grabbit_menu () {
     'page callback' => 'facebook_grabbit_stream', 
     'access arguments' => array('access content')
   );
+  $items['facebook/feed'] = array( 
+    'title' => 'View my Facebook Feed', 
+    'page callback' => 'facebook_grabbit_feed', 
+    'access arguments' => array('access content')
+  );
   
   return $items;
 }
@@ -102,7 +107,7 @@ function facebook_grabbit_update_form_submit ($form, &$form_state) {
 	drupal_set_message('You have changed your facebook status');
 }
 
-function facebook_grabbit_stream(){
+function facebook_grabbit_feed(){
 
 	require_once("facebook/facebook.php");
 	require_once("facebook/facebook_desktop.php");
@@ -141,6 +146,37 @@ function facebook_grabbit_stream(){
 		$output = drupal_http_request('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id='.$app_id.'&session_key='.$facebook->api_client->session_key.'&sig='.$sig.'&v=0.7&read', $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
 		
         print $output->data;
+		
+	}
+	else{
+		return "You have no facebook account yet";
+	}
+
+	
+}
+
+function facebook_grabbit_stream(){
+
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	$app_id='90953553995';
+	
+	global $user;
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	
+	if ($fuser){
+		
+		$suser=$fuser->fid;
+		$session_key=$fuser->kid;
+
+		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
+		
+		$facebook->api_client->stream_get($suser);
+		
+		print_r($facebook);
+
 		
 	}
 	else{
