@@ -192,10 +192,10 @@ function facebook_grabbit_stream(){
 				$output .= prepeare_standar_update($post, $profiles[$post['actor_id']]);
 			}
 		
-		return $output;
-
-		
-	}
+			
+	  }
+	return $output;
+    }
 	else{
 		return "You have no facebook account yet";
 	}
