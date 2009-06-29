@@ -122,7 +122,7 @@ function facebook_grabbit_stream(){
 		
 	//	$stream = $facebook->api_client->stream_get($session_key);
 		
-		print_r($session_key."<br>".$user);
+		print_r($session_key);
 		
 
 		
