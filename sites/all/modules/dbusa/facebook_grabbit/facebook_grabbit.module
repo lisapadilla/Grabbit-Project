@@ -140,7 +140,7 @@ function facebook_grabbit_stream(){
 		
 		$output = drupal_http_request('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id='.$app_id.'&session_key='.$facebook->api_client->session_key.'&sig='.$sig.'&v=0.7&read', $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
 		
-        print $output;
+print_r($output);
 		
 	}
 	else{
