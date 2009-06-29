@@ -119,11 +119,12 @@ function facebook_grabbit_stream(){
 
 		$facebook = new FacebookDesktop($api_key, $secret);
 		$facebook->set_user($suser, $session_key);
+		$s_key=$facebook->api_client->session_key;
 		
 		//Generate the md5 sig for facebook application
 		$args = array(
 		  'app_id' => $app_id,
-		  'session_key' => $facebook->api_client->session_key,
+		  'session_key' => $s_key,
 		  'source_id'=>$suser
 		);
 
