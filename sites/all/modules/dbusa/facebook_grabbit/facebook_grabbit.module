@@ -107,6 +107,7 @@ function facebook_grabbit_stream(){
 	require_once("facebook/facebook.php");
 	require_once("facebook/facebook_desktop.php");
 	include("facebook/config.php");
+	$app_id='90953553995';
 	
 	global $user;
 	$fuser = facebook_grabbit_get_fid($user->uid);
@@ -119,12 +120,26 @@ function facebook_grabbit_stream(){
 		$facebook = new FacebookDesktop($api_key, $secret);
 		$facebook->set_user($suser, $session_key);
 		
-		
-	//	$stream = $facebook->api_client->stream_get($session_key);
-		
-		print_r($session_key);
-		
+		//Generate the md5 sig for facebook application
+		$args = array(
+		  'app_id' => $app_id,
+		  'session_key' => $facebook->api_client->session_key,
+		  'source_id'=>$suser
+		);
 
+		$request_str = '';
+
+		foreach ($args as $key => $value)
+		{
+		  $request_str .= $key . '=' . $value;
+		}
+
+		$sig = $request_str . $secret;
+		$sig = md5($sig);
+		
+		$output = drupal_http_request('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id='.$app_id.'&session_key='.$facebook->api_client->session_key.'&sig='.$sig.'&v=0.7&read', $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
+		
+        print $output;
 		
 	}
 	else{
