@@ -175,10 +175,27 @@ function facebook_grabbit_stream(){
 		
 		$stream = $facebook->api_client->stream_get($suser);
 		
-		print_r($stream);
+		$friends = $stream['profiles'];
+		$posts = $stream['posts'];
 
+		foreach($friends as $friend){
+			$profiles[$friend['id']] = $friend; 
+		}
+
+		foreach ($posts as $post){
+			if(!$post['attachment']){ //STATUS UPDATE
+				$target='';
+				if($post['target_id'])
+				  $target='> <a href="'.$profiles[$post['actor_id']]['url'].'">'.$profiles[$post['target_id']]['name'].'</a>';
+				$output .= prepeare_status_update($post, $profiles[$post['actor_id']],$target);
+			}else{		             // OTHER UPDATES SUPPORTED
+				$output .= prepeare_standar_update($post, $profiles[$post['actor_id']]);
+			}
 		
-	}
+			
+	  }
+	return $output;
+    }
 	else{
 		return "You have no facebook account yet";
 	}
@@ -205,8 +222,8 @@ function facebook_grabbit_facebook(){
 
   $duid=$_GET["duid"];
 
-  if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access")){  
-    $output .= '<fb:prompt-permission perms="status_update, offline_access" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status!</strong></fb:prompt-permission>';  
+  if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access") || !$facebook->api_client->users_hasAppPermission("read_stream")){  
+    $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status!</strong></fb:prompt-permission>';  
     $visibility = "none";  
   }else{
     $visibility = "block";
@@ -270,83 +287,57 @@ function facebook_grabbit_get_fid($user){
 
   return $user;
 }
-/*
-/**
- * Implementation of hook_form_alter
- 
-function facebook_grabbit_form_alter(&$form, $form_state, $form_id) {
 
-  if ('profile_node_form' == $form_id) {
-	
-	$form['services'] = array(
-	  '#type' => 'fieldset',
-	  '#title' => t('Social Networks'),
-	  '#weight' => 10,
-	  '#collapsible' => FALSE,
-	  '#collapsed' => FALSE,
-	);
-	
-	global $user;
-	if(!facebook_grabbit_get_fid($user->uid)){
-		$form['services']['facebook'] = array(
-		  '#type' => 'item',
-		  '#weight' => 10,
-		  '#title' => t('Allow Grabbit to update your Facebook Status'),
-		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))),
-		);	
-	}
-	module_load_include('inc', 'twitter');
-	$twitter = array_shift(twitter_get_user_accounts($form['uid']['#value']));
-	
-	  $form['services']['screen_name'] = array(
-	    '#type' => 'textfield',
-	    '#required' => FALSE,
-	    '#title' => t('Twitter user name'),
-	    '#value'=>$twitter['screen_name']
-	  );
-	  $form['services']['password'] = array(
-	    '#type' => 'password',
-	    '#title' => t('Password'),
-	    '#value'=>$twitter['password'],
-	    '#description' => t("If your Twitter account is protected, or you wish to post to Twitter from Grabbit, you must enter the Twitter account's password.")
-	  );
-	
-  }
 
-  
+
+function prepeare_status_update($post,$user,$target){
+	
+	
+	$output = '<div class="facebook-post" id="fb_story_'.$post['post_id'].'">
+	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
+	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
+	</div>
+	<div class="facebook-post-body">
+	  '.$post['message'].'
+	</div>
+	</div>';
+	
+	return $output;
 }
 
-/**
- * Implementation of hook_nodeapi
- 
-function facebook_grabbit_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
-	//update
-	if($node->type == 'profile' && $op == 'update'){
-		module_load_include('inc', 'twitter');
+function prepeare_standar_update($post,$user){
+	
+	$attachment = '';
+	
+	if($post['attachment']['name'])
+	  $attachment .='<p><span class="facebook-attach-title">'.$post['attachment']['name'].'</span></p>';
+	
+	if($post['attachment']['description'])
+	  $attachment .='<p><span class="facebook-attach-text">'.$post['attachment']['description'].'</span></p>';
 
-		$verify = FALSE;
-
-		$pass = $node->password;
-		$name = $node->screen_name;
-
-		if (!empty($pass)) {
-		    $verify = TRUE;
+    if($post['attachment']['media']!=''){
+	  	foreach($post['attachment']['media'] as $media){
+	      if($media['type'] =="photo"){
+		    $attachment .='<span class="facebook-attach-photo"><a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+	      }
+		  if($media['type'] =="link"){
+		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+	      }
+	      if($media['type'] =="video"){
+		    $attachment .='<span class="facebook-attach-video">Video: <a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+	      }
 		}
-
-		if ($verify) {
-		  $valid = twitter_authenticate($name, $pass);
-		  if (!$valid) {
-		    drupal_set_message(t('Twitter authentication failed. Please check your account name and try again.'));
-		  }
-		  else{
-			$account=array('screen_name'=>$name,
-			               'password' => $pass,
-			               'uid' => $node->uid);
-		    twitter_user_save($account, TRUE);	
-		    drupal_set_message(t('The twitter account was setted up on Grabbit '));
-		  }
-		}
-		
-	}
+    }
+	
+	
+	$output = '<div class="facebook-post" id="fb_story_'.$post['post_id'].'">
+	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
+	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>
+	</div>
+	<div class="facebook-post-body">
+	  '.$post['message'].'
+	</div>'.$attachment.'
+	</div>';
+	
+	return $output;
 }
-*/
