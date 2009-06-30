@@ -26,9 +26,7 @@
         <?php if ($logo): ?>
         <a href="<?php print $base_path; ?>" title="<?php print $site_name; ?>" id="logo"><img src="<?php print $logo; ?>" alt="<?php if ($site_name): print $site_name;  endif; ?>" /></a>
         <?php endif; ?>
-        <?php if ($site_name): ?>
-        <span id="site-name"> <a href="<?php print $base_path; ?>" title="<?php print $site_name; ?>"><?php print $site_name; ?></a> </span>
-        <?php endif; ?>
+        
         <?php if ($site_slogan): ?>
           <span id="site-slogan"><?php print $site_slogan; ?></span>
         <?php endif; ?>
