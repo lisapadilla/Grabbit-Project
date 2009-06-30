@@ -121,7 +121,7 @@ function facebook_grabbit_feed(){
 	
 	global $user;
 	$fuser = facebook_grabbit_get_fid($user->uid);
-	print_r($fuser);
+
 	if ($fuser){
 		
 		$suser=$fuser->fid;
