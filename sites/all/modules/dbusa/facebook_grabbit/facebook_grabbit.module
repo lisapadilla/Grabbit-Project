@@ -28,6 +28,11 @@ function facebook_grabbit_menu () {
     'page callback' => 'facebook_grabbit_feed', 
     'access arguments' => array('access content')
   );
+  $items['twitter/stream'] = array( 
+    'title' => 'View my Twitter stream', 
+    'page callback' => 'facebook_grabbit_twitter_stream', 
+    'access arguments' => array('access content')
+  );
   
   return $items;
 }
@@ -116,7 +121,7 @@ function facebook_grabbit_feed(){
 	
 	global $user;
 	$fuser = facebook_grabbit_get_fid($user->uid);
-	
+	print_r($fuser);
 	if ($fuser){
 		
 		$suser=$fuser->fid;
@@ -340,4 +345,54 @@ function prepeare_standar_update($post,$user){
 	</div>';
 	
 	return $output;
+}
+
+
+function facebook_grabbit_twitter_stream(){
+	global $user;
+	
+	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
+	if(count($accounts)){
+		$account = array_shift($accounts); 
+
+		$output = facebook_grabbit_get_friends_timeline($account);	
+	}
+	else{
+		$output = "You dont have a twitter account yet";
+	}
+	
+	
+	return $output;
+}
+
+/**
+* Grab the latest posts from you and your twitter friends.
+*/
+function facebook_grabbit_get_friends_timeline($account) {
+
+  $twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+
+  $headers = array('Authorization' => 'Basic '. $twitter_encrypted,
+                   'Content-type' => 'application/x-www-form-urlencoded');
+
+  $result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
+
+  $xml = new SimpleXMLElement($result->data);
+
+  foreach ($xml->status as $message){
+		
+	$output .= theme_twitter_message($message);
+
+  }
+  return $output;
+}
+
+/**
+* Theme each meesage.
+*/
+function theme_twitter_message($message){
+
+	$output = '<div class="twitter-message-stream"><img src="'.$message->user->profile_image_url.'" /><strong>'.$message->user->name.'</strong>
+	          <p>'.$message->text . "  </p><p> on " . format_date(strtotime($message->created_at)) . "</p></div><br /><br />";
+	return $output; 
 }
