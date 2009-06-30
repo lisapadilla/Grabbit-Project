@@ -38,6 +38,11 @@ function facebook_grabbit_menu () {
     'page callback' => 'facebook_grabbit_twitter_facebook', 
     'access arguments' => array('access content')
   );
+  $items['stream/user'] = array( 
+    'title' => 'View my personal stream', 
+    'page callback' => 'facebook_grabbit_private_view', 
+    'access arguments' => array('access content')
+  );
   
   return $items;
 }
@@ -392,6 +397,110 @@ function facebook_grabbit_get_friends_timeline($account) {
   return $output;
 }
 
+function facebook_grabbit_private_view(){
+	
+	global $user;
+	
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	$app_id='90953553995';
+	
+	$view = views_get_view('grabbit_public_stream');
+	$view->execute();
+
+    foreach($view->result as $node){
+	  $twitface[$node->node_created]=$node;
+    }
+	
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	
+	if ($fuser){
+		$fb = TRUE;
+		$suser=$fuser->fid;
+		$session_key=$fuser->kid;
+
+		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
+		
+		$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+		                                                                     'viewer_id'=>$suser,    
+		                                                                     'limit'=>"15"));
+		$friends = $stream['profiles'];
+		$posts = $stream['posts'];
+		
+		foreach($friends as $friend){
+			$profiles[$friend['id']] = $friend; 
+		}
+		
+		foreach ($posts as $post){
+			$twitface[$post['created_time']]=$post;
+		}
+				
+	}else{
+	    $fb = FALSE;
+	}
+	
+	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
+	if(count($accounts)){
+		$tw = TRUE;
+		$account = array_shift($accounts); 
+		
+		$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+		$headers = array('Authorization' => 'Basic '. $twitter_encrypted,
+		                   'Content-type' => 'application/x-www-form-urlencoded');
+
+		$result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
+		$xml = new SimpleXMLElement($result->data);
+
+		foreach ($xml->status as $message){
+
+		  $time = strtotime($message->created_at);
+		  $twitface[$time]=$message;
+
+		}
+	}
+	else{
+		$tw = FALSE;
+	}
+	
+	if(!$tw && !$fb){
+	  return "You have no Twitter or Facebook accounts yet";	
+	}
+	else{
+		ksort($twitface);
+		$result = array_reverse($twitface);
+		foreach($result as $entry){
+			if(is_array($entry)){
+				if(!$entry['attachment']){ //STATUS UPDATE
+					$target='';
+					if($entry['target_id'])
+					  $target='> <a href="'.$profiles[$entry['actor_id']]['url'].'">'.$profiles[$entry['target_id']]['name'].'</a>';
+					$output .= prepeare_status_update($entry, $profiles[$entry['actor_id']],$target);
+				}else{		             // OTHER UPDATES SUPPORTED
+					$output .= prepeare_standar_update($entry, $profiles[$entry['actor_id']]);
+				}
+			}
+			else{
+				if($entry->nid){
+					$node=node_load($entry->nid);
+					$output .= theme('node',$node);
+				}
+				else{
+                  $output .= theme_twitter_message($entry);
+                }
+				
+			}
+		}	
+	}
+	
+	return $output;
+
+}
+
+/*
+** Merge of facebook and twitter feeds
+*/
 function facebook_grabbit_twitter_facebook(){
 	global $user;
 	
