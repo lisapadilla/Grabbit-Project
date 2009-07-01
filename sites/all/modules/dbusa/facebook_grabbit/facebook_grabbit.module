@@ -421,8 +421,12 @@ function facebook_grabbit_private_view(){
 	$app_id='90953553995';
 	
 	$view = views_get_view('grabbit_public_stream');
-	$args = explode('+', arg(2));
-	$view->set_arguments($args);
+	
+	if (arg(2)){
+		$args = explode(' ', arg(2));
+		$view->set_arguments($args);	
+	}
+	
 	$view->execute();
 
     foreach($view->result as $node){
