@@ -12,33 +12,7 @@ function facebook_grabbit_menu () {
     'type' => MENU_CALLBACK
   ); 
 
-  $items['facebook/status'] = array( 
-    'title' => 'Update Facebook Status', 
-    'page callback' => 'drupal_get_form', 
-    'page arguments' => array('facebook_grabbit_update_form'),
-    'access arguments' => array('access content')
-  );
-  $items['facebook/stream'] = array( 
-    'title' => 'View my Facebook Stream', 
-    'page callback' => 'facebook_grabbit_stream', 
-    'access arguments' => array('access content')
-  );
-  $items['facebook/feed'] = array( 
-    'title' => 'View my Facebook Feed', 
-    'page callback' => 'facebook_grabbit_feed', 
-    'access arguments' => array('access content')
-  );
-  $items['twitter/stream'] = array( 
-    'title' => 'View my Twitter stream', 
-    'page callback' => 'facebook_grabbit_twitter_stream', 
-    'access arguments' => array('access content')
-  );
-  $items['twitface/stream'] = array( 
-    'title' => 'View my Twitter/Facebook stream', 
-    'page callback' => 'facebook_grabbit_twitter_facebook', 
-    'access arguments' => array('access content')
-  );
-  $items['stream/user'] = array( 
+    $items['stream/user'] = array( 
     'title' => 'View my personal stream', 
     'page callback' => 'facebook_grabbit_private_view', 
     'access arguments' => array('access content')
