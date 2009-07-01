@@ -423,8 +423,7 @@ function facebook_grabbit_private_view(){
 	$view = views_get_view('grabbit_public_stream');
 	
 	if (arg(2)){
-		$args = explode(' ', arg(2));
-		$view->set_arguments($args);	
+		$view->set_arguments(arg(2));	
 	}
 	
 	$view->execute();
