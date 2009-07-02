@@ -641,11 +641,14 @@ function facebook_grabbit_tags_form(){
 	foreach($taxonomy as $term){
 		$terms[$term->tid]=$term->name;
 	}
+	$tags=0;
+	if($_GET['tags'])
+	  $tags=$_GET['tags'];
 	
 	$form['tags'] = array(
 	    '#type'=> 'checkboxes',
 	    '#options'=> $terms,
-	    '#default_value'=> $_GET['tags'],
+	    '#default_value'=> $tags,
 	    );
 	$form['submit'] = array('#type' => 'submit', '#value' => t('Filter'));
 	$form['#method'] = 'get';
