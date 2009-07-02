@@ -428,6 +428,7 @@ function facebook_grabbit_private_view(){
 		foreach($_GET['tags'] as $tag){
 			$tags .=$tag." ";
 		}
+		print_r($tags);
 		$view->set_arguments(array($tags));	
 	}
 	
