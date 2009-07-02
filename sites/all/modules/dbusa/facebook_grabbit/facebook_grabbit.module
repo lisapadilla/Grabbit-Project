@@ -424,7 +424,7 @@ function facebook_grabbit_private_view(){
 	
 	if ($_GET['tags']){
 		foreach($_GET['tags'] as $tag){
-			$tags .=$tag."+";
+			$tags .=$tag." ";
 		}
 		$view->set_arguments(array($tags));	
 	}
