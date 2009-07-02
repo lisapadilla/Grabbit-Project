@@ -641,7 +641,7 @@ function facebook_grabbit_tags_form(){
 	foreach($taxonomy as $term){
 		$terms[$term->tid]=$term->name;
 	}
-	$tags=0;
+	$tags=array();
 	if($_GET['tags'])
 	  $tags=$_GET['tags'];
 	
