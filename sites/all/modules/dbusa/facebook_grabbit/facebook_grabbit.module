@@ -322,7 +322,7 @@ function facebook_grabbit_get_fid($user){
 function prepeare_status_update($post,$user,$target){
 	
 	
-	$output = '<div class="facebook-post" id="fb_story_'.$post['post_id'].'">
+	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
 	<div class="facebook-post-body">
@@ -339,10 +339,10 @@ function prepeare_standar_update($post,$user){
 	$attachment = '';
 	
 	if($post['attachment']['name'])
-	  $attachment .='<p><span class="facebook-attach-title">'.$post['attachment']['name'].'</span></p>';
+	  $attachment .='<span class="facebook-attach-title">'.$post['attachment']['name'].'</span>';
 	
 	if($post['attachment']['description'])
-	  $attachment .='<p><span class="facebook-attach-text">'.$post['attachment']['description'].'</span></p>';
+	  $attachment .='<span class="facebook-attach-text">'.$post['attachment']['description'].'</span>';
 
     if($post['attachment']['media']!=''){
 	  	foreach($post['attachment']['media'] as $media){
@@ -359,7 +359,7 @@ function prepeare_standar_update($post,$user){
     }
 	
 	
-	$output = '<div class="facebook-post" id="fb_story_'.$post['post_id'].'">
+	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
@@ -661,7 +661,9 @@ function facebook_grabbit_tags_form(){
 */
 function theme_twitter_message($message){
 
-	$output = '<div class="twitter-message-stream"><img src="'.$message->user->profile_image_url.'" /><strong>'.$message->user->name.'</strong>
-	          <p>'.$message->text . "  </p><p> on " . format_date(strtotime($message->created_at)) . "</p></div><br /><br />";
+	$output = '<div class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
+	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
+	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$message->text . ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
+	          </div>';
 	return $output; 
 }

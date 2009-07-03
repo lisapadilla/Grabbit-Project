@@ -1820,3 +1820,49 @@ ul.menu a.ext {
 	padding:5px;
 	margin-bottom:30px;
 }
+
+.facebook-story-pic{
+  float:left;
+}
+.twitter-image{
+	display:block;
+	height:50px;
+	left:0;
+	margin:0 10px 0 0px;
+	overflow:hidden;
+	width:50px;
+	float:left;
+}
+.facebook-story-name{
+	font-weight:bold;
+	padding-bottom:10px;
+	padding-left:10px;
+	padding-right:10px;
+}
+.twitter-body{
+	display:block;
+	margin-left:65px;
+	min-height:50px;
+	overflow:hidden;
+	width:420px;
+}
+.twitter-date{
+	color:#314C74;
+	font-size:10px;
+}
+.facebook-post-body, .facebook-attachment{
+	float:left;
+	padding-bottom:10px;
+	padding-left:10px;
+	width:400px;
+}
+.facebook-header{
+   background:transparent url(images/facebook.gif) no-repeat scroll left center;
+   padding-left:20px;
+   margin-bottom:5px;
+}
+.twitter-header{
+   background:transparent url(images/twitter.gif) no-repeat scroll left center;
+   padding-left:20px;
+   margin-bottom:5px;
+}
