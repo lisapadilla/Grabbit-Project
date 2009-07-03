@@ -2,7 +2,7 @@
 name = "Facebook Grabbit"
 description = "Allows users to set up a facebook account and Twitter account to see the stream of both and update status."
 package = "Danilo Black USA"
-version = 6.x-1.0-dev
+version = 6.x-1.5-dev
 core = 6.x
 php = 5.2
 dependencies[] = views
