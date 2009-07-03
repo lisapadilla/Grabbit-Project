@@ -442,7 +442,7 @@ function facebook_grabbit_private_view(){
 	}else{
 		$filters[1] = 'all';
 	}
-	print_r($filters);
+
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	
 	$view->execute();
