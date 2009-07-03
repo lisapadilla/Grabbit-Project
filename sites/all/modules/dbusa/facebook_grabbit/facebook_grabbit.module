@@ -673,15 +673,32 @@ function facebook_grabbit_feeds_form(){
 	foreach($taxonomy as $term){
 		$terms[$term->tid]=$term->name;
 	}
+	$taxonomy_tags = taxonomy_get_tree(1);
+	foreach($taxonomy_tags as $term){
+		$terms_tags[$term->tid]=$term->name;
+	}
 	$feeds=array();
 	if($_GET['feeds'])
 	  $feeds=$_GET['feeds'];
 	
 	$form['feeds'] = array(
 	    '#type'=> 'checkboxes',
+	    '#title'=>'By Source',
 	    '#options'=> $terms,
 	    '#default_value'=> $feeds,
 	    );
+	
+	$tags=array();
+	if($_GET['tags'])
+	  $tags=$_GET['tags'];
+
+	$form['tags'] = array(
+	    '#type'=> 'checkboxes',
+	    '#title'=>'By tags',
+	    '#options'=> $terms,
+	    '#default_value'=> $tags,
+	    );
+	
 	$form['submit'] = array('#type' => 'submit', 
 	                        '#value' => t('Filter'));
 	$form['#method'] = 'get';
