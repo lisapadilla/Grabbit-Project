@@ -673,7 +673,7 @@ function facebook_grabbit_feeds_form(){
 	foreach($taxonomy as $term){
 		$terms[$term->tid]=$term->name;
 	}
-	$taxonomy_tags = taxonomy_get_tree(1);
+	$taxonomy_tags = taxonomy_get_tree(3);
 	foreach($taxonomy_tags as $term){
 		$terms_tags[$term->tid]=$term->name;
 	}
