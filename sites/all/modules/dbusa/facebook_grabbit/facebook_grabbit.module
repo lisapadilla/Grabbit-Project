@@ -695,7 +695,7 @@ function facebook_grabbit_feeds_form(){
 	$form['tags'] = array(
 	    '#type'=> 'checkboxes',
 	    '#title'=>'By tags',
-	    '#options'=> $terms,
+	    '#options'=> $terms_tags,
 	    '#default_value'=> $tags,
 	    );
 	
