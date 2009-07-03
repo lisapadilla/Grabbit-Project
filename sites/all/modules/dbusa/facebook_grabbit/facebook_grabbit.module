@@ -261,7 +261,7 @@ function facebook_grabbit_facebook(){
 	    $output = "There was a problem accessing your Grabbit account, please go back to grabbit.net and try again";	
 	}else{
 	  	$sessionkey = $_REQUEST['fb_sig_session_key'];
-	print_r($sessionkey);
+
 	    $fid=$facebook->api_client->user;
 	    facebook_grabbit_save_fid($_GET["duid"],$fid,$sessionkey);
 	}
@@ -362,10 +362,10 @@ function prepeare_standar_update($post,$user){
 	$output = '<div class="facebook-post" id="fb_story_'.$post['post_id'].'">
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>
-	</div>
 	<div class="facebook-post-body">
 	  '.$post['message'].'
-	</div>'.$attachment.'
+	</div><div class="facebook-attachment">'.$attachment.'</div>
+	</div>
 	</div>';
 	
 	return $output;
@@ -424,7 +424,7 @@ function facebook_grabbit_private_view(){
 	
 	if ($_GET['tags']){
 		$tags = implode(" ", $_GET['tags']);
-		print_r($tags);
+
 		$view->set_arguments(array($tags));	
 	}
 	
@@ -649,7 +649,8 @@ function facebook_grabbit_tags_form(){
 	    '#options'=> $terms,
 	    '#default_value'=> $tags,
 	    );
-	$form['submit'] = array('#type' => 'submit', '#value' => t('Filter'));
+	$form['submit'] = array('#type' => 'submit', 
+	                        '#value' => t('Filter'));
 	$form['#method'] = 'get';
 		
 	return $form;
