@@ -426,6 +426,11 @@ function facebook_grabbit_private_view(){
 
 		$view->set_arguments(array($tags));	
 	}
+	if ($_GET['feeds']){
+		$tags = implode(" ", $_GET['feeds']);
+
+		$view->set_arguments(array($tags));	
+	}
 	
 	$view->execute();
 
