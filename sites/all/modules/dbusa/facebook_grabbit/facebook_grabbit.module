@@ -321,12 +321,11 @@ function facebook_grabbit_get_fid($user){
 
 function prepeare_status_update($post,$user,$target){
 	
-	
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
 	<div class="facebook-post-body">
-	  '.$post['message'].'
+	  '.$post['message'].'<br><br>'.format_date($post['created_time']).'
 	</div>
 	</div>
 	</div>';
@@ -364,7 +363,7 @@ function prepeare_standar_update($post,$user){
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
 	  '.$post['message'].'
-	</div><div class="facebook-attachment">'.$attachment.'</div>
+	</div><div class="facebook-attachment">'.$attachment.'</div><br><br>'.format_date($post['created_time']).'
 	</div>
 	</div>';
 	
