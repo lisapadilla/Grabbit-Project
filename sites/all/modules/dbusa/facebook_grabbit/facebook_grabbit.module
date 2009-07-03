@@ -325,9 +325,9 @@ function prepeare_status_update($post,$user,$target){
 	$output = '<div class="facebook-post" id="fb_story_'.$post['post_id'].'">
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
-	</div>
 	<div class="facebook-post-body">
 	  '.$post['message'].'
+	</div>
 	</div>
 	</div>';
 	
