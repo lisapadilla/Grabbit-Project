@@ -446,6 +446,12 @@ function facebook_grabbit_private_view(){
    		$(".facebook-makecomment-link").click(function () {
 		  $(this).next("div").slideToggle("slow"); 
 		});
+		
+		$(".twit-reply").click(function () {
+		  var to = $(this).attr("id"); 
+		  $("#edit-status").val(to);
+		  $("#edit-status").focus();
+		});
       });', $type = 'inline');
 	
 	global $user;
@@ -642,6 +648,7 @@ function theme_twitter_message($message){
 	$output = '<div class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
 	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
 	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$message->text . ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
+	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a></div>
 	          </div>';
 	return $output; 
 }
@@ -676,4 +683,28 @@ function facebook_grabbit_comment_form($form_state, $post_id){
 	);
 	
   return $form;
+}
+
+function facebook_grabbit_comment_form_submit ($form, &$form_state) {
+	
+		require_once("facebook/facebook.php");
+		require_once("facebook/facebook_desktop.php");
+		include("facebook/config.php");
+
+		global $user;
+		$fuser = facebook_grabbit_get_fid($user->uid);
+
+		$suser=$fuser->fid;
+		$session_key=$fuser->kid;
+
+		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
+
+		$test = $facebook->api_client->call_method('facebook.Stream.addComment', array('session_key' => $session_key,
+		                                                                     'post_id'=>$form_state['clicked_button']['#post']['post_id'],
+		                                                                     'comment'=>$form_state['clicked_button']['#post']['comment']));
+
+
+		drupal_set_message('You have commented on facebook');
+	
 }
