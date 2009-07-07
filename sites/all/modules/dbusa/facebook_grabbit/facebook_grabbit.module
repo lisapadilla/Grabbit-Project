@@ -489,25 +489,27 @@ function facebook_grabbit_private_view(){
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	
 	if ($fuser){
-		$fb = TRUE;
-		$suser=$fuser->fid;
-		$session_key=$fuser->kid;
+		if(!$_GET['hide_facebook']){
+			$fb = TRUE;
+			$suser=$fuser->fid;
+			$session_key=$fuser->kid;
 
-		$facebook = new FacebookDesktop($api_key, $secret);
-		$facebook->set_user($suser, $session_key);
-		
-		$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
-		                                                                     'viewer_id'=>$suser,    
-		                                                                     'limit'=>"15"));
-		$friends = $stream['profiles'];
-		$posts = $stream['posts'];
-		
-		foreach($friends as $friend){
-			$profiles[$friend['id']] = $friend; 
-		}
-		
-		foreach ($posts as $post){
-			$twitface[$post['created_time']]=$post;
+			$facebook = new FacebookDesktop($api_key, $secret);
+			$facebook->set_user($suser, $session_key);
+
+			$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+			                                                                     'viewer_id'=>$suser,    
+			                                                                     'limit'=>"15"));
+			$friends = $stream['profiles'];
+			$posts = $stream['posts'];
+
+			foreach($friends as $friend){
+				$profiles[$friend['id']] = $friend; 
+			}
+
+			foreach ($posts as $post){
+				$twitface[$post['created_time']]=$post;
+			}	
 		}
 				
 	}else{
@@ -516,21 +518,23 @@ function facebook_grabbit_private_view(){
 	
 	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
 	if(count($accounts)){
-		$tw = TRUE;
-		$account = array_shift($accounts); 
-		
-		$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
-		$headers = array('Authorization' => 'Basic '. $twitter_encrypted,
-		                   'Content-type' => 'application/x-www-form-urlencoded');
+		if(!$_GET['hide_twitter']){
+			$tw = TRUE;
+			$account = array_shift($accounts); 
 
-		$result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
-		$xml = new SimpleXMLElement($result->data);
+			$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+			$headers = array('Authorization' => 'Basic '. $twitter_encrypted,
+			                   'Content-type' => 'application/x-www-form-urlencoded');
 
-		foreach ($xml->status as $message){
+			$result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
+			$xml = new SimpleXMLElement($result->data);
 
-		  $time = strtotime($message->created_at);
-		  $twitface[$time]=$message;
+			foreach ($xml->status as $message){
 
+			  $time = strtotime($message->created_at);
+			  $twitface[$time]=$message;
+
+			}	
 		}
 	}
 	else{
@@ -541,32 +545,35 @@ function facebook_grabbit_private_view(){
 	  return "You have no Twitter or Facebook accounts yet";	
 	}
 	else{
-		ksort($twitface);
-		$result = array_reverse($twitface);
-		foreach($result as $entry){
-			if(is_array($entry)){
-				if(!$entry['attachment']){ //STATUS UPDATE
-					$target='';
-					if($entry['target_id'])
-					  $target='> <a href="'.$profiles[$entry['actor_id']]['url'].'">'.$profiles[$entry['target_id']]['name'].'</a>';
-					
-					$output .= prepeare_status_update($entry, $profiles[$entry['actor_id']],$target,$profiles);
-					$comments=array();
-				}else{		             // OTHER UPDATES SUPPORTED
-					$output .= prepeare_standar_update($entry, $profiles[$entry['actor_id']],$profiles);
-				}
-			}
-			else{
-				if($entry->nid){
-					$node=node_load($entry->nid);
-					$output .= theme('node',$node);
+		if(is_array($twitface)){
+			ksort($twitface);
+			$result = array_reverse($twitface);
+			foreach($result as $entry){
+				if(is_array($entry)){
+					if(!$entry['attachment']){ //STATUS UPDATE
+						$target='';
+						if($entry['target_id'])
+						  $target='> <a href="'.$profiles[$entry['actor_id']]['url'].'">'.$profiles[$entry['target_id']]['name'].'</a>';
+
+						$output .= prepeare_status_update($entry, $profiles[$entry['actor_id']],$target,$profiles);
+						$comments=array();
+					}else{		             // OTHER UPDATES SUPPORTED
+						$output .= prepeare_standar_update($entry, $profiles[$entry['actor_id']],$profiles);
+					}
 				}
 				else{
-                  $output .= theme_twitter_message($entry);
-                }
-				
-			}
-		}	
+					if($entry->nid){
+						$node=node_load($entry->nid);
+						$output .= theme('node',$node);
+					}
+					else{
+	                  $output .= theme_twitter_message($entry);
+	                }
+
+				}
+			}	
+		}
+			
 	}
 	
 	return $output;
@@ -615,18 +622,24 @@ function facebook_grabbit_feeds_form(){
 	if($_GET['feeds'])
 	  $feeds=$_GET['feeds'];
 	
+	$form['hide_facebook'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('Hide Facebook'),
+		'#default_value' => $_GET['hide_facebook']
+	    );
+	
+	$form['hide_twitter'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('Hide Twitter'),
+		'#default_value' => $_GET['hide_twitter']
+	    );
+	
 	$form['feeds'] = array(
 	    '#type'=> 'checkboxes',
 	    '#title'=>'By Source',
 	    '#options'=> $terms,
 	    '#default_value'=> $feeds,
 	    );
-	
-		$form['hide_facebook'] = array(
-		    '#type'=> 'checkbox',
-			'#title' => t('Hide Facebook'),
-			'#default_value' => $_GET['hide_facebook']
-		    );
 	
 	$form['submit1'] = array('#type' => 'submit', 
 	                       '#value' => t('Filter'));
