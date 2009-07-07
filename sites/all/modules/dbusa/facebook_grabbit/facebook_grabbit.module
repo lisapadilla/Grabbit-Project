@@ -463,6 +463,10 @@ function facebook_grabbit_private_view(){
 	
 	$view = views_get_view('grabbit_public_stream');
 	
+	if(!$_GET['favorites']){
+	  $view->display['default']->display_options['relationships']=array();	
+	}
+	
 	if ($_GET['tags']){
 		$tags = implode(" ", $_GET['tags']);
 		$filters[0] = $tags;
@@ -634,6 +638,12 @@ function facebook_grabbit_feeds_form(){
 	    '#type'=> 'checkbox',
 		'#title' => t('Hide Twitter'),
 		'#default_value' => $_GET['hide_twitter']
+	    );
+	
+	$form['favorites'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('Only Favorites'),
+		'#default_value' => $_GET['favorites']
 	    );
 	
 	$form['feeds'] = array(
