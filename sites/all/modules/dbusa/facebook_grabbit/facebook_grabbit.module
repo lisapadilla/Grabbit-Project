@@ -566,7 +566,7 @@ function facebook_grabbit_private_view(){
 				else{
 					if($entry->nid){
 						$node=node_load($entry->nid);
-						$output .= theme('node',$node);
+						$output .= node_view($node, TRUE, FALSE, TRUE);
 					}
 					else{
 	                  $output .= theme_twitter_message($entry);
