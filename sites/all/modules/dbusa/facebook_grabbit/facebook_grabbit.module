@@ -610,6 +610,8 @@ function facebook_grabbit_feeds_form(){
 		$terms_tags[$term->tid]=$term->name;
 	}
 	$feeds=array();
+	
+	
 	if($_GET['feeds'])
 	  $feeds=$_GET['feeds'];
 	
@@ -619,6 +621,13 @@ function facebook_grabbit_feeds_form(){
 	    '#options'=> $terms,
 	    '#default_value'=> $feeds,
 	    );
+	
+		$form['hide_facebook'] = array(
+		    '#type'=> 'checkbox',
+			'#title' => t('Hide Facebook'),
+			'#default_value' => $_GET['hide_facebook']
+		    );
+	
 	$form['submit1'] = array('#type' => 'submit', 
 	                       '#value' => t('Filter'));
 	
