@@ -489,8 +489,9 @@ function facebook_grabbit_private_view(){
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	
 	if ($fuser){
+		$fb = TRUE;
 		if(!$_GET['hide_facebook']){
-			$fb = TRUE;
+			
 			$suser=$fuser->fid;
 			$session_key=$fuser->kid;
 
@@ -518,8 +519,9 @@ function facebook_grabbit_private_view(){
 	
 	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
 	if(count($accounts)){
+		$tw = TRUE;
 		if(!$_GET['hide_twitter']){
-			$tw = TRUE;
+			
 			$account = array_shift($accounts); 
 
 			$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
