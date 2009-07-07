@@ -440,7 +440,7 @@ function facebook_grabbit_get_friends_timeline($account) {
  */
 
 function facebook_grabbit_private_view(){
-	
+	node_access_rebuild();
 	drupal_add_js('1.
       $(document).ready(function() {
    		$(".facebook-makecomment-link").click(function () {
