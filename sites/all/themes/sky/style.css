@@ -1866,3 +1866,27 @@ ul.menu a.ext {
    padding-left:20px;
    margin-bottom:5px;
 }
+.facebook-comments{
+	float:left;
+	padding-bottom:10px;
+	padding-left:45px;
+	width:400px;
+}
+.facebook-comment-text{
+	margin-left:40px;
+	display:block;
+}
+.facebook-comment-timeline{
+	margin-left:40px;
+	display:block;
+	font-size:9px;
+}
+.facebook-comment-form{
+	float:left;
+	padding-bottom:10px;
+	padding-left:45px;
+	width:400px;
+}
+.facebook-comment-form .form-text{
+	width:50%;
+}

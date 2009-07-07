@@ -251,8 +251,8 @@ function facebook_grabbit_facebook(){
 
   $duid=$_GET["duid"];
 
-  if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access") || !$facebook->api_client->users_hasAppPermission("read_stream")){  
-    $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status!</strong></fb:prompt-permission>';  
+  if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access") || !$facebook->api_client->users_hasAppPermission("read_stream"), || !$facebook->api_client->users_hasAppPermission("publish_stream")){  
+    $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream, publish_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status!</strong></fb:prompt-permission>';  
     $visibility = "none";  
   }else{
     $visibility = "block";
@@ -319,21 +319,31 @@ function facebook_grabbit_get_fid($user){
 
 
 
-function prepeare_status_update($post,$user,$target){
+function prepeare_status_update($post,$user,$target,$profiles){
 	
+	if(is_array($post['comments']['comment_list'])){
+		foreach($post['comments']['comment_list'] as $comment){
+			$show_comments .='<div class="facebook-comments"><a title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-story-pic" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
+			<span class="facebook-comment-timeline"><a title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a> commented on '.format_date($comment['time']).'</span>
+			<span class="facebook-comment-text">'.$comment['text'].'</span>
+			</div>';
+		}	
+	}
+    
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
 	<div class="facebook-post-body">
 	  '.$post['message'].'<br><br>'.format_date($post['created_time']).'
-	</div>
+	</div>'.$show_comments.'
+	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">'.drupal_get_form('facebook_grabbit_comment_form',$post['post_id']).'</div></div>
 	</div>
 	</div>';
 	
 	return $output;
 }
 
-function prepeare_standar_update($post,$user){
+function prepeare_standar_update($post,$user,$profiles){
 	
 	$attachment = '';
 	
@@ -357,6 +367,14 @@ function prepeare_standar_update($post,$user){
 		}
     }
 	
+	if(is_array($post['comments']['comment_list'])){
+		foreach($post['comments']['comment_list'] as $comment){
+			$show_comments .='<div class="facebook-comments"><a title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-story-pic" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
+			<span class="facebook-comment-timeline"><a title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a> commented on '.format_date($comment['time']).'</span>
+			<span class="facebook-comment-text">'.$comment['text'].'</span>
+			</div>';
+		}	
+	}
 	
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
@@ -364,6 +382,8 @@ function prepeare_standar_update($post,$user){
 	<div class="facebook-post-body">
 	  '.$post['message'].'
 	</div><div class="facebook-attachment">'.$attachment.'</div><br><br>'.format_date($post['created_time']).'
+	'.$show_comments.'
+	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">'.drupal_get_form('facebook_grabbit_comment_form',$post['post_id']).'</div></div>
 	</div>
 	</div>';
 	
@@ -420,6 +440,13 @@ function facebook_grabbit_get_friends_timeline($account) {
  */
 
 function facebook_grabbit_private_view(){
+	
+	drupal_add_js('1.
+      $(document).ready(function() {
+   		$(".facebook-makecomment-link").click(function () {
+		  $(this).next("div").slideToggle("slow"); 
+		});
+      });', $type = 'inline');
 	
 	global $user;
 	
@@ -516,9 +543,11 @@ function facebook_grabbit_private_view(){
 					$target='';
 					if($entry['target_id'])
 					  $target='> <a href="'.$profiles[$entry['actor_id']]['url'].'">'.$profiles[$entry['target_id']]['name'].'</a>';
-					$output .= prepeare_status_update($entry, $profiles[$entry['actor_id']],$target);
+					
+					$output .= prepeare_status_update($entry, $profiles[$entry['actor_id']],$target,$profiles);
+					$comments=array();
 				}else{		             // OTHER UPDATES SUPPORTED
-					$output .= prepeare_standar_update($entry, $profiles[$entry['actor_id']]);
+					$output .= prepeare_standar_update($entry, $profiles[$entry['actor_id']],$profiles);
 				}
 			}
 			else{
@@ -615,4 +644,36 @@ function theme_twitter_message($message){
 	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$message->text . ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
 	          </div>';
 	return $output; 
+}
+
+/**
+* hook form alter
+*/
+function facebook_grabbit_form_alter(&$form, $form_state, $form_id){
+
+}
+
+/**
+ * Implementation of hook_form() for post comments on facebook
+ */
+
+function facebook_grabbit_comment_form($form_state, $post_id){
+	
+  	$form['comment'] = array(
+	    '#type' => 'textfield',
+	    '#size' => 60,
+	    '#maxlength' => 255,
+	    '#required' => true );
+
+	$form['submit'] = array(
+	    '#type' => 'submit',
+	    '#value' => t('Comment'),
+	    '#weight'=>10
+	);	
+	$form['post_id'] = array(
+	    '#type' => 'hidden',
+	    '#value' => $post_id
+	);
+	
+  return $form;
 }
