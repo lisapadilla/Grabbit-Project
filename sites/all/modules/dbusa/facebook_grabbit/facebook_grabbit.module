@@ -733,9 +733,10 @@ function facebook_grabbit_feeds_form(){
 	    '#options'=> $terms_tags,
 	    '#default_value'=> $tags,
 	    );
-*/	
+	
 	$form['submit'] = array('#type' => 'submit', 
 	                        '#value' => t('Filter'));
+*/
 	$form['#method'] = 'get';
 		
 	return $form;
