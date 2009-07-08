@@ -472,6 +472,7 @@ function facebook_grabbit_private_view(){
 	  if($_GET['news'])
 	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
 	}
+	print_r($view);
 	
 	if(!$_GET['favorites']){
 	  $view->display['default']->display_options['relationships']=array();	
@@ -654,13 +655,13 @@ function facebook_grabbit_feeds_form(){
 	
 	$form['blogs'] = array(
 	    '#type'=> 'checkbox',
-		'#title' => t('Only Blogs'),
+		'#title' => t('Blogs'),
 		'#default_value' => $_GET['blogs']
 	    );
 
 	$form['news'] = array(
 	    '#type'=> 'checkbox',
-		'#title' => t('Only News'),
+		'#title' => t('News'),
 		'#default_value' => $_GET['news']
 	    );
 	
