@@ -488,11 +488,19 @@ function facebook_grabbit_private_view(){
         $filters[1] = $tags;
 	}else{
 		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
-		foreach($flag['myfeeds'] as $my_feeds){
-		  $user_feeds[]=$my_feeds->content_id;	
+		if(is_array($flag['myfeeds'])){
+			
+		  	foreach($flag['myfeeds'] as $my_feeds){
+			  $user_feeds[]=$my_feeds->content_id;	
+			}
+			
+			$tags = implode(",", $user_feeds);
+			$filters[1] = $tags;	
 		}
-		$tags = implode(",", $user_feeds);
-		$filters[1] = $tags;
+		else{
+			$filters[1] = "all";	
+		}
+
 	}
 	
 	//End filters of all kind
@@ -647,10 +655,16 @@ function facebook_grabbit_block($op = 'list', $delta = 0, $edit = array()) {
 */
 function facebook_grabbit_feeds_form(){
 	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
-	foreach($flag['myfeeds'] as $term){
-		$nodo = node_load($term->content_id);
-		$terms[$nodo->nid]=$nodo->title;
+	if(is_array($flag['myfeeds'])){
+		foreach($flag['myfeeds'] as $term){
+			$nodo = node_load($term->content_id);
+			$terms[$nodo->nid]=$nodo->title;
+		}	
 	}
+	else{
+		$terms=array();
+	}
+	
 	$taxonomy_tags = taxonomy_get_tree(3);
 	foreach($taxonomy_tags as $term){
 		$terms_tags[$term->tid]=$term->name;
