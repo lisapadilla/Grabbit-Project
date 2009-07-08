@@ -497,9 +497,10 @@ function facebook_grabbit_private_view(){
 	$view->execute();
 
     foreach($view->result as $node){
-	  $twitface[$node->node_created]=$node;
+	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	                              'value'=>$node);
     }
-	
+
 	$output .=drupal_get_form('facebook_grabbit_update_form');
 	
 	$fuser = facebook_grabbit_get_fid($user->uid);
@@ -525,7 +526,8 @@ function facebook_grabbit_private_view(){
 			}
 
 			foreach ($posts as $post){
-				$twitface[$post['created_time']]=$post;
+				$twitface[$post['post_id']]=array('time'=>$post['created_time'],
+				                              'value'=>$post);
 			}	
 		}
 				
@@ -550,7 +552,9 @@ function facebook_grabbit_private_view(){
 			foreach ($xml->status as $message){
 
 			  $time = strtotime($message->created_at);
-			  $twitface[$time]=$message;
+			  $key = (string)$message->id;
+			  $twitface[$key]=array('time'=>$time,
+				                              'value'=>$message);
 
 			}	
 		}
@@ -564,28 +568,28 @@ function facebook_grabbit_private_view(){
 	}
 	else{
 		if(is_array($twitface)){
-			ksort($twitface);
+			usort($twitface, 'compare');
 			$result = array_reverse($twitface);
 			foreach($result as $entry){
-				if(is_array($entry)){
-					if(!$entry['attachment']){ //STATUS UPDATE
+				if(is_array($entry['value'])){
+					if(!$entry['value']['attachment']){ //STATUS UPDATE
 						$target='';
-						if($entry['target_id'])
-						  $target='> <a href="'.$profiles[$entry['actor_id']]['url'].'">'.$profiles[$entry['target_id']]['name'].'</a>';
+						if($entry['value']['target_id'])
+						  $target='> <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
 
-						$output .= prepeare_status_update($entry, $profiles[$entry['actor_id']],$target,$profiles);
+						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles);
 						$comments=array();
 					}else{		             // OTHER UPDATES SUPPORTED
-						$output .= prepeare_standar_update($entry, $profiles[$entry['actor_id']],$profiles);
+						$output .= prepeare_standar_update($entry['value'], $profiles[$entry['value']['actor_id']],$profiles);
 					}
 				}
 				else{
-					if($entry->nid){
-						$node=node_load($entry->nid);
+					if($entry['value']->nid){
+						$node=node_load($entry['value']->nid);
 						$output .= node_view($node, TRUE, FALSE, TRUE);
 					}
 					else{
-	                  $output .= theme_twitter_message($entry);
+	                  $output .= theme_twitter_message($entry['value']);
 	                }
 
 				}
@@ -598,7 +602,18 @@ function facebook_grabbit_private_view(){
 
 }
 
-
+/**
+ * Helper function to sort the entries
+ */
+function compare($x, $y)
+{
+ if ( $x['time'] == $y['time'])
+  return 0;
+ else if ( $x['time'] < $y['time'] )
+  return -1;
+ else
+  return 1;
+}
 
 /**
  * Implementation of hook_block()
