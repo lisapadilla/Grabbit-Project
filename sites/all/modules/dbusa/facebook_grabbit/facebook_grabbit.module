@@ -656,7 +656,7 @@ function facebook_grabbit_block($op = 'list', $delta = 0, $edit = array()) {
 function facebook_grabbit_feeds_form(){
 	global $user;
 	
-	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
+	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = $user->uid, $reset = FALSE);
 	if(is_array($flag['myfeeds'])){
 		foreach($flag['myfeeds'] as $term){
 			$nodo = node_load($term->content_id);
