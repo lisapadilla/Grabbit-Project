@@ -654,6 +654,8 @@ function facebook_grabbit_block($op = 'list', $delta = 0, $edit = array()) {
 * Generate the tags block/form
 */
 function facebook_grabbit_feeds_form(){
+	global $user;
+	
 	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
 	if(is_array($flag['myfeeds'])){
 		foreach($flag['myfeeds'] as $term){
