@@ -488,7 +488,7 @@ function facebook_grabbit_private_view(){
         $filters[1] = $tags;
 	}else{
 		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
-		print_r($flag);
+
 		if(is_array($flag['myfeeds'])){
 			
 		  	foreach($flag['myfeeds'] as $my_feeds){
@@ -658,7 +658,7 @@ function facebook_grabbit_feeds_form(){
 	global $user;
 	
 	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = $user->uid, $reset = FALSE);
-	print_r($flag);
+
 	if(is_array($flag['myfeeds'])){
 		foreach($flag['myfeeds'] as $term){
 			$nodo = node_load($term->content_id);
@@ -668,11 +668,12 @@ function facebook_grabbit_feeds_form(){
 	else{
 		$terms=array();
 	}
-	
+/*	
 	$taxonomy_tags = taxonomy_get_tree(3);
 	foreach($taxonomy_tags as $term){
 		$terms_tags[$term->tid]=$term->name;
 	}
+	*/
 	$feeds=array();
 	
 	
@@ -723,14 +724,14 @@ function facebook_grabbit_feeds_form(){
 	$tags=array();
 	if($_GET['tags'])
 	  $tags=$_GET['tags'];
-
+/*
 	$form['tags'] = array(
 	    '#type'=> 'checkboxes',
 	    '#title'=>'By tags',
 	    '#options'=> $terms_tags,
 	    '#default_value'=> $tags,
 	    );
-	
+*/	
 	$form['submit'] = array('#type' => 'submit', 
 	                        '#value' => t('Filter'));
 	$form['#method'] = 'get';
