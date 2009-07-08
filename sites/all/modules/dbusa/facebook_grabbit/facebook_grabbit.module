@@ -472,7 +472,6 @@ function facebook_grabbit_private_view(){
 	  if($_GET['news'])
 	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
 	}
-	print_r($view);
 	
 	if(!$_GET['favorites']){
 	  $view->display['default']->display_options['relationships']=array();	
