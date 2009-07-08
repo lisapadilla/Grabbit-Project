@@ -488,6 +488,7 @@ function facebook_grabbit_private_view(){
         $filters[1] = $tags;
 	}else{
 		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = $user->uid, $reset = FALSE);
+		print_r($flag);
 		if(is_array($flag['myfeeds'])){
 			
 		  	foreach($flag['myfeeds'] as $my_feeds){
