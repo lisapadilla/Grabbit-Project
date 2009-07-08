@@ -484,10 +484,15 @@ function facebook_grabbit_private_view(){
 		$filters[0] = 'all';	
 	}
 	if ($_GET['feeds']){
-		$tags = implode(" ", $_GET['feeds']);
+		$tags = implode(",", $_GET['feeds']);
         $filters[1] = $tags;
 	}else{
-		$filters[1] = 'all';
+		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
+		foreach($flag['myfeeds'] as $my_feeds){
+		  $user_feeds[]=$my_feeds->content_id;	
+		}
+		$tags = implode(",", $user_feeds);
+		$filters[1] = $tags;
 	}
 	
 	//End filters of all kind
@@ -641,9 +646,10 @@ function facebook_grabbit_block($op = 'list', $delta = 0, $edit = array()) {
 * Generate the tags block/form
 */
 function facebook_grabbit_feeds_form(){
-	$taxonomy = taxonomy_get_tree(2);
-	foreach($taxonomy as $term){
-		$terms[$term->tid]=$term->name;
+	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
+	foreach($flag['myfeeds'] as $term){
+		$nodo = node_load($term->content_id);
+		$terms[$nodo->nid]=$nodo->title;
 	}
 	$taxonomy_tags = taxonomy_get_tree(3);
 	foreach($taxonomy_tags as $term){
@@ -687,9 +693,10 @@ function facebook_grabbit_feeds_form(){
 	
 	$form['feeds'] = array(
 	    '#type'=> 'checkboxes',
-	    '#title'=>'By Source',
+	    '#title'=>'My Feeds',
 	    '#options'=> $terms,
 	    '#default_value'=> $feeds,
+	    '#description'=> l('Modify my Feeds','user/'.$user->uid.'/myfeeds'),
 	    );
 	
 	$form['submit1'] = array('#type' => 'submit', 
