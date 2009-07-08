@@ -462,6 +462,7 @@ function facebook_grabbit_private_view(){
 	$app_id='90953553995';
 	
 	$view = views_get_view('grabbit_public_stream');
+    $view->pager['items_per_page']=30;
 
 	// Filters of all kind
 	
@@ -668,12 +669,13 @@ function facebook_grabbit_feeds_form(){
 	else{
 		$terms=array();
 	}
-/*	
-	$taxonomy_tags = taxonomy_get_tree(3);
+
+/*	$taxonomy_tags = taxonomy_get_tree(3);
 	foreach($taxonomy_tags as $term){
 		$terms_tags[$term->tid]=$term->name;
 	}
 	*/
+	
 	$feeds=array();
 	
 	
