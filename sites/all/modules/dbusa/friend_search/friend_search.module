@@ -46,6 +46,7 @@ function friend_search_page()
   $view->set_display($display_id);
   $view->is_cacheable = FALSE;
   
+  print_r($_GET);
   if ($_GET['username'])
   {
     $item = $view->get_item($display_id, 'filter', 'title');
