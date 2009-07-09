@@ -42,7 +42,7 @@ function friend_search_menu()
 function friend_search_page()
 {
   $view = views_get_view('friend_search');
-  $display_id = 'page';
+  $display_id = 'default';
   $view->set_display($display_id);
   $view->is_cacheable = FALSE;
   
