@@ -27,7 +27,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
  */
 function friend_search_people_form($form_state){
 	
-  	$form['name'] = array(
+  	$form['username'] = array(
 	    '#type' => 'textfield',
 	    '#size' => 60,
 	    '#maxlength' => 255,
