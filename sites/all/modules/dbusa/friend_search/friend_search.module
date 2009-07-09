@@ -43,6 +43,7 @@ function friend_search_page()
 {
   $view = views_get_view('friend_search');
   print_r($view);
+  $view->use_ajax = TRUE;
   $display_id = 'default';
   $view->set_display($display_id);
   $view->is_cacheable = FALSE;
