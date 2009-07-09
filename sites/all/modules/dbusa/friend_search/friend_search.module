@@ -23,6 +23,42 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 }
 
 /**
+ * Implementation of hook_menu()
+ */
+function friend_search_menu()
+{
+  $items['user/search'] = array( 
+    'title' => 'Find People', 
+    'page callback' => 'friend_search_page', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  ); 
+  return $items;
+}
+
+/**
+ * Retrieves and displays page view
+ */
+function friend_search_page()
+{
+  $view = views_get_view('friend_search');
+  $display_id = 'page';
+  $view->set_display($display_id);
+  $view->is_cacheable = FALSE;
+  
+  if (isset($_GET['username']))
+  {
+    $item = $view->get_item($display_id, 'filter', 'title');
+    $item['value'] = $_GET['username'];
+    unset($_GET['username']);
+    
+    $view->set_item($display_id, 'filter', 'title', $item);
+  }
+  
+  return $view->render();
+}
+
+/**
  * Implementation of hook_form() for find people
  */
 function friend_search_people_form($form_state){
