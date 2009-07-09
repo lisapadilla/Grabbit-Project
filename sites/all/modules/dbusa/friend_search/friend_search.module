@@ -35,7 +35,7 @@ function friend_search_people_form($form_state){
 
 	$form['submit'] = array(
 	    '#type' => 'submit',
-	    '#value' => t('Comment'),
+	    '#value' => t('Search'),
 	    '#weight'=>10
 	);	
 	
