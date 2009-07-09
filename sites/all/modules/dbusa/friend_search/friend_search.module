@@ -25,7 +25,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 /**
  * Implementation of hook_form() for find people
  */
-function friend_search_people_form($form_state, $post_id){
+function friend_search_people_form($form_state){
 	
   	$form['name'] = array(
 	    '#type' => 'textfield',
@@ -39,7 +39,7 @@ function friend_search_people_form($form_state, $post_id){
 	    '#weight'=>10
 	);	
 	
-	$form['#action'] = url('search/friend');
+	$form['#action'] = url('user/search');
 	
 	$form['#method'] = 'get';
 	
