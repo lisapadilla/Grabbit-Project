@@ -669,15 +669,17 @@ function facebook_grabbit_feeds_form(){
 	else{
 		$terms=array();
 	}
-
-/*	$taxonomy_tags = taxonomy_get_tree(3);
-	foreach($taxonomy_tags as $term){
-		$terms_tags[$term->tid]=$term->name;
-	}
-	*/
 	
 	$feeds=array();
 	
+	// Get most popular tags using term view
+	$view = views_get_view('popular_terms');
+	$view->execute();
+	
+	foreach($view->result as $pop_tag){
+		$popular_tags[$pop_tag->tid] = $pop_tag->term_data_name;
+	}
+	// End of most popular tags
 	
 	if($_GET['feeds'])
 	  $feeds=$_GET['feeds'];
@@ -722,21 +724,24 @@ function facebook_grabbit_feeds_form(){
 	
 	$form['submit1'] = array('#type' => 'submit', 
 	                       '#value' => t('Filter'));
-	
-	$tags=array();
-	if($_GET['tags'])
-	  $tags=$_GET['tags'];
-/*
+
+    $tags=array();
+	if($_GET['tags']){
+	  $tags=$_GET['tags'];	
+	  $popular_tags = array_merge($tags,$popular_tags);
+	}
+	  
+
 	$form['tags'] = array(
 	    '#type'=> 'checkboxes',
-	    '#title'=>'By tags',
-	    '#options'=> $terms_tags,
-	    '#default_value'=> $tags,
+	    '#title'=>'Popular Tags',
+	    '#options'=> $popular_tags,
+	    '#default_value'=> $tags
 	    );
 	
 	$form['submit'] = array('#type' => 'submit', 
 	                        '#value' => t('Filter'));
-*/
+
 	$form['#method'] = 'get';
 		
 	return $form;
