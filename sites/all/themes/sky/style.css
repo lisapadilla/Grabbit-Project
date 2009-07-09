@@ -1890,3 +1890,14 @@ ul.menu a.ext {
 .facebook-comment-form .form-text{
 	width:50%;
 }
+.multiple-tags-stream .option{
+	float:left;
+	width:200px;
+	margin-bottom:5px;
+}
+.multiple-tags-stream .form-checkbox{
+	float:left;
+}
+.multiple-tags-stream .form-item-checkbox{
+	font-size:10px;
+}

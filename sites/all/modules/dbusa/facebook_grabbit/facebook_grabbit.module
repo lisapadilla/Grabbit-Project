@@ -17,7 +17,13 @@ function facebook_grabbit_menu () {
     'page callback' => 'facebook_grabbit_private_view', 
     'access arguments' => array('access content')
   );
-  
+
+  	$items['stream/moretags'] = array( 
+   'title' => 'Select filters for your stream', 
+   'page callback' => 'facebook_grabbit_moretags', 
+   'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
   return $items;
 }
 
@@ -136,108 +142,9 @@ function facebook_grabbit_update_form_submit ($form, &$form_state) {
 	
 }
 
-function facebook_grabbit_feed(){
-
-	require_once("facebook/facebook.php");
-	require_once("facebook/facebook_desktop.php");
-	include("facebook/config.php");
-	$app_id='90953553995';
-	
-	global $user;
-	$fuser = facebook_grabbit_get_fid($user->uid);
-
-	if ($fuser){
-		
-		$suser=$fuser->fid;
-		$session_key=$fuser->kid;
-
-		$facebook = new FacebookDesktop($api_key, $secret);
-		$facebook->set_user($suser, $session_key);
-		$s_key=$facebook->api_client->session_key;
-		
-		//Generate the md5 sig for facebook application
-		$args = array(
-		  'app_id' => $app_id,
-		  'session_key' => $s_key,
-		  'source_id'=>$suser
-		);
-
-		$request_str = '';
-
-		foreach ($args as $key => $value)
-		{
-		  $request_str .= $key . '=' . $value;
-		}
-
-		$sig = $request_str . $secret;
-		$sig = md5($sig);
-		
-		$output = drupal_http_request('http://www.facebook.com/activitystreams/feed.php?source_id='.$suser.'&app_id='.$app_id.'&session_key='.$facebook->api_client->session_key.'&sig='.$sig.'&v=0.7&read', $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
-		
-        print $output->data;
-		
-	}
-	else{
-		return "You have no facebook account yet";
-	}
-
-	
-}
-
-function facebook_grabbit_stream(){
-
-	require_once("facebook/facebook.php");
-	require_once("facebook/facebook_desktop.php");
-	include("facebook/config.php");
-	$app_id='90953553995';
-	
-	global $user;
-	$fuser = facebook_grabbit_get_fid($user->uid);
-	
-	if ($fuser){
-		
-		$suser=$fuser->fid;
-		$session_key=$fuser->kid;
-
-		$facebook = new FacebookDesktop($api_key, $secret);
-		$facebook->set_user($suser, $session_key);
-		
-		$stream = $facebook->api_client->stream_get($suser);
-		
-		$friends = $stream['profiles'];
-		$posts = $stream['posts'];
-
-		foreach($friends as $friend){
-			$profiles[$friend['id']] = $friend; 
-		}
-
-		foreach ($posts as $post){
-			if(!$post['attachment']){ //STATUS UPDATE
-				$target='';
-				if($post['target_id'])
-				  $target='> <a href="'.$profiles[$post['actor_id']]['url'].'">'.$profiles[$post['target_id']]['name'].'</a>';
-				$output .= prepeare_status_update($post, $profiles[$post['actor_id']],$target);
-			}else{		             // OTHER UPDATES SUPPORTED
-				$output .= prepeare_standar_update($post, $profiles[$post['actor_id']]);
-			}
-		
-			
-	  }
-	return $output;
-    }
-	else{
-		return "You have no facebook account yet";
-	}
-
-	
-}
-
-
 /**
  * Facebook aplication using facebook API()
- */
-
-	
+ */	
 function facebook_grabbit_facebook(){
 
   // the facebook client library
@@ -727,16 +634,21 @@ function facebook_grabbit_feeds_form(){
 
     $tags=array();
 	if($_GET['tags']){
-	  $tags=$_GET['tags'];	
-	  $popular_tags = array_merge($tags,$popular_tags);
+	  $tags= $_GET['tags'];
+	  foreach($_GET['tags'] as $tid){
+	    $tax_term = taxonomy_get_term($tid);
+	    $popular_tags[$tid]=$tax_term->name;
+	  }
 	}
-	  
-
+	
+	unset($_GET['q']);
+	
 	$form['tags'] = array(
 	    '#type'=> 'checkboxes',
 	    '#title'=>'Popular Tags',
 	    '#options'=> $popular_tags,
-	    '#default_value'=> $tags
+	    '#default_value'=> $tags,
+	    '#description'=>l('Select more tags','stream/moretags',array('query'=>$_GET))
 	    );
 	
 	$form['submit'] = array('#type' => 'submit', 
@@ -761,16 +673,8 @@ function theme_twitter_message($message){
 }
 
 /**
-* hook form alter
-*/
-function facebook_grabbit_form_alter(&$form, $form_state, $form_id){
-
-}
-
-/**
  * Implementation of hook_form() for post comments on facebook
  */
-
 function facebook_grabbit_comment_form($form_state, $post_id){
 	
   	$form['comment'] = array(
@@ -814,4 +718,65 @@ function facebook_grabbit_comment_form_submit ($form, &$form_state) {
 
 		drupal_set_message('You have commented on facebook');
 	
+}
+
+function facebook_grabbit_moretags(){
+	
+   $output = drupal_get_form('facebook_grabbit_tags_form');
+	
+	return $output;
+}
+
+/**
+* Generate the MORE TAGS form
+*/
+function facebook_grabbit_tags_form(){
+	
+	$taxonomy = taxonomy_get_tree(3);
+	foreach($taxonomy as $tax){
+	  $popular_tags[$tax->tid]=$tax->name;
+	}
+
+	$tags=array();
+	if($_GET['tags']){
+	  $tags= $_GET['tags'];
+	  unset($_GET['tags']);
+	}
+
+	unset($_GET['op']);
+	unset($_GET['form_build_id']);
+	unset($_GET['form_token']);
+	unset($_GET['form_id']);
+	
+	foreach($_GET as $key => $value){
+	  if(!is_array($value)){
+	    $form[$key] = array('#type' => 'hidden', '#value' => $value);	
+	  }else{
+	    $form[$key] = array('#type' => 'checkboxes', 
+	                        '#options' => $value,
+	                        '#default_value'=>$value,
+	                        '#prefix'=>'<div class="hidden" style="display:none">',
+	                        '#suffix' => '</div>');	
+	  }
+	  
+	}
+	
+    unset($form['q']);
+ 	
+	$form['tags'] = array(
+	    '#type'=> 'checkboxes',
+	    '#title'=>'Popular Tags',
+	    '#options'=> $popular_tags,
+	    '#default_value'=> $tags,
+	    '#attributes'=>array('class'=>'multiple-tags-stream clearfix')
+	    );
+	
+	$form['submit'] = array('#type' => 'submit', 
+	                        '#value' => t('Filter'));
+	
+	$form['#action'] = url('stream/user');
+
+	$form['#method'] = 'get';
+		
+	return $form;
 }
