@@ -46,7 +46,7 @@ function friend_search_page()
   $view->set_display($display_id);
   $view->is_cacheable = FALSE;
   
-  echo 'broder';
+  print_r($_GET);
   if ($_GET['username'])
   {
     $item = $view->get_item($display_id, 'filter', 'title');
@@ -56,7 +56,7 @@ function friend_search_page()
     $view->set_item($display_id, 'filter', 'title', $item);
   }
   
-  return $view->render();
+  //return $view->render();
 }
 
 /**
