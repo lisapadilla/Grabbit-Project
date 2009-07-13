@@ -7,6 +7,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
   switch($op) {
     case 'list':
       $blocks[0]['info'] = t('Friend Search');
+      $blocks[1]['info'] = t('Search Content');
       return $blocks;
       break;
     case 'view':
@@ -15,6 +16,10 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 		case 0:
           $blocks['title'] = 'Find People';
           $blocks['content'] = drupal_get_form('friend_search_people_form');
+          break;
+		case 1:
+          $blocks['title'] = 'Search Content';
+          $blocks['content'] = drupal_get_form('search_form');
           break;
       }
       return $blocks;
@@ -88,5 +93,5 @@ function friend_search_people_form($form_state){
  * Implementation of hook_menu_alter() to customize search
  */
 function friend_search_menu_alter(&$items) {
-    unset($items['search/user/%menu_tail']);
+    unset($items['search/user/%menu_tail']); // So the Tab "Users" doesnt appear in the search page
 }
