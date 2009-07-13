@@ -83,3 +83,10 @@ function friend_search_people_form($form_state){
 	
   return $form;
 }
+
+/**
+ * Implementation of hook_menu_alter() to customize search
+ */
+function friend_search_menu_alter(&$items) {
+    unset($items['search/user/%menu_tail']);
+}
