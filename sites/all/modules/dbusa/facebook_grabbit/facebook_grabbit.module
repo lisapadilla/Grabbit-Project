@@ -228,6 +228,9 @@ function facebook_grabbit_get_fid($user){
 
 function prepeare_status_update($post,$user,$target,$profiles){
 	
+	$msg=$post['message'];
+	$msg_formatted=get_msg_formatted($msg);
+	
 	if(is_array($post['comments']['comment_list'])){
 		foreach($post['comments']['comment_list'] as $comment){
 			$show_comments .='<div class="facebook-comments"><a title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-story-pic" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
@@ -241,7 +244,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
 	<div class="facebook-post-body">
-	  '.$post['message'].'<br><br>'.format_date($post['created_time']).'
+	  '.$msg_formatted.'<br><br>'.format_date($post['created_time']).'
 	</div>'.$show_comments.'
 	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">'.drupal_get_form('facebook_grabbit_comment_form',$post['post_id']).'</div></div>
 	</div>
@@ -251,6 +254,9 @@ function prepeare_status_update($post,$user,$target,$profiles){
 }
 
 function prepeare_standar_update($post,$user,$profiles){
+	
+	$msg=$post['message'];
+	$msg_formatted=get_msg_formatted($msg);
 	
 	$attachment = '';
 	
@@ -287,7 +293,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	<div class="facebook-post-header"><a title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
-	  '.$post['message'].'
+	  '.$msg_formatted.'
 	</div><div class="facebook-attachment">'.$attachment.'</div><br><br>'.format_date($post['created_time']).'
 	'.$show_comments.'
 	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">'.drupal_get_form('facebook_grabbit_comment_form',$post['post_id']).'</div></div>
@@ -664,12 +670,48 @@ function facebook_grabbit_feeds_form(){
 */
 function theme_twitter_message($message){
 
+	$msg = $message->text;
+	$msg_formatted=get_msg_formatted($msg);
+
 	$output = '<div class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
 	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
-	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$message->text . ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
+	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$msg_formatted. ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
 	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a></div>
 	          </div>';
 	return $output; 
+}
+
+function get_msg_formatted($msg){
+	/*
+	// Saving everything correctly formatted in one single $mag var. It includes URL's anchors.
+	// NOTE: Check if it works when it starts or ends with an URL
+	*/
+	
+	// $pattern can be changed for further optimization
+	$pattern = "http://";
+	$msg_formatted = '';
+      
+	$split = split($pattern,$msg);
+	$msg_formatted .= $split[0];
+	
+	for ($i = 0; $i < count($split) - 1; $i++){
+	  $urll=split(' ',$split[$i+1]);
+	  
+	  //$url1 stores the real URL in format: http://www.google.com
+	  $url1 = 'http://'.$urll[0];
+	  
+	  //$text stores the text between URL's
+	  $shift = array_shift($urll);
+	  $text = implode(' ',$urll);
+	  
+	  //$msg_formatted is getting formatted the original message with anchors.
+	  $msg_formatted .= '<a href="'.$url1.'" target="_blank">';
+	  $msg_formatted .= $url1;
+	  $msg_formatted .= '</a> ';
+	  $msg_formatted .= $text;
+	}
+	
+	return $msg_formatted;
 }
 
 /**
