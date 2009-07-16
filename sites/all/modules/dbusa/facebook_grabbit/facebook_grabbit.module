@@ -647,14 +647,17 @@ function facebook_grabbit_feeds_form(){
 	  }
 	}
 	
+	//FOR THICKBOX DIMENSIONS
 	unset($_GET['q']);
+	$_GET['height']='300';
+	$_GET['width']='250';
 	
 	$form['tags'] = array(
 	    '#type'=> 'checkboxes',
 	    '#title'=>'Popular Tags',
 	    '#options'=> $popular_tags,
 	    '#default_value'=> $tags,
-	    '#description'=>l('Select more tags','stream/moretags',array('query'=>$_GET))
+	    '#description'=>l('Select more tags','stream/moretags',array('attributes'=>array('class'=>'thickbox'), 'query'=>$_GET))
 	    );
 	
 	$form['submit'] = array('#type' => 'submit', 
@@ -766,7 +769,7 @@ function facebook_grabbit_moretags(){
 	
    $output = drupal_get_form('facebook_grabbit_tags_form');
 	
-	return $output;
+   print $output;
 }
 
 /**
