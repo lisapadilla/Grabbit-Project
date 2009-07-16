@@ -21,6 +21,17 @@ Drupal.behaviors.initThickbox = function (context) {
   });
 };
 
+function tb_setBrowserExtra() {
+  // Add iPhone, IE 6 and Mac Firefox browser detection.
+  // msie6 fixes the fact that IE 7 now reports itself as MSIE 6.0 compatible
+  var userAgent = navigator.userAgent.toLowerCase();
+  $.browserextra = {
+    iphone: /iphone/.test( userAgent ),
+    msie6: /msie/.test( userAgent ) && !/opera/.test( userAgent ) && /msie 6\.0/.test( userAgent ) && !/msie 7\.0/.test( userAgent ),
+    macfirefox: /mac/.test( userAgent ) && /firefox/.test( userAgent )
+  };
+}
+
 function tb_show(caption, url, imageGroup) { //function called when the user clicks on a thickbox link
 
   var settings = Drupal.settings.thickbox;
@@ -346,17 +357,6 @@ function tb_getPageSize() {
   var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight;
   arrayPageSize = [w,h];
   return arrayPageSize;
-}
-
-function tb_setBrowserExtra() {
-  // Add iPhone, IE 6 and Mac Firefox browser detection.
-  // msie6 fixes the fact that IE 7 now reports itself as MSIE 6.0 compatible
-  var userAgent = navigator.userAgent.toLowerCase();
-  $.browserextra = {
-    iphone: /iphone/.test( userAgent ),
-    msie6: /msie/.test( userAgent ) && !/opera/.test( userAgent ) && /msie 6\.0/.test( userAgent ) && !/msie 7\.0/.test( userAgent ),
-    macfirefox: /mac/.test( userAgent ) && /firefox/.test( userAgent )
-  };
 }
 
 function tb_focusFirstFormElement() {
