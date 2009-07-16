@@ -651,7 +651,6 @@ function facebook_grabbit_feeds_form(){
 	
 	$_GET['height']='300';
 	$_GET['width']='250';
-	$_GET['modal']='true';
 	
 	$form['tags'] = array(
 	    '#type'=> 'checkboxes',
