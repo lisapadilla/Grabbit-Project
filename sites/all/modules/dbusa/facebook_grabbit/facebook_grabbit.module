@@ -686,7 +686,12 @@ function theme_twitter_message($message){
 }
 
 function get_msg_formatted($msg){
-
+	/*
+	// Saving everything correctly formatted in one single $mag var. It includes URL's anchors.
+	// NOTE: Check if it works when it starts or ends with an URL
+	*/
+	
+	// $pattern can be changed for further optimization
 	$pattern = "http://";
 	$msg_formatted = '';
       
