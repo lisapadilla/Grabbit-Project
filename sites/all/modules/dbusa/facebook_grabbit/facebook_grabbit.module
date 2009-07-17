@@ -681,16 +681,12 @@ function theme_twitter_message($message){
 	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$msg_formatted. ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
 	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a></div>
 	          </div>';
+	
 	return $output;
 }
 
 function get_msg_formatted($msg){
-	/*
-	// Saving everything correctly formatted in one single $mag var. It includes URL's anchors.
-	// NOTE: Check if it works when it starts or ends with an URL
-	*/
-	
-	// $pattern can be changed for further optimization
+
 	$pattern = "http://";
 	$msg_formatted = '';
       
