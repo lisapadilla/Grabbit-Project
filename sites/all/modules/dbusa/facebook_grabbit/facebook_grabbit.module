@@ -66,14 +66,14 @@ function facebook_grabbit_update_form($form_state){
 		
 		}
 		else{
-		  drupal_set_message("Facebook connection failed","error");  	
+		  drupal_set_message("Facebook connection failed, please try again","error");  	
 		}
 	
 	}
 	else{
 		$form['facebook'] = array(
 		  '#type' => 'item',
-		  '#title' => t('Allow Grabbit to update your Facebook Status'),
+		  '#title' => t('Allow Grabbit to update my Facebook Status'),
 		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))),
 		);
 	}
@@ -337,7 +337,7 @@ function facebook_grabbit_twitter_stream(){
 /**
 * Grab the latest posts from you and your twitter friends.
 */
-function facebook_grabbit_get_friends_timeline($account) {
+function facebook_grabbit_get_friends_timeline($account){
 
   $twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
 
@@ -349,7 +349,7 @@ function facebook_grabbit_get_friends_timeline($account) {
   $xml = new SimpleXMLElement($result->data);
 
   foreach ($xml->status as $message){
-		
+
 	$output .= theme_twitter_message($message);
 
   }
@@ -360,7 +360,6 @@ function facebook_grabbit_get_friends_timeline($account) {
 /**
  * Creates users private view()
  */
-
 function facebook_grabbit_private_view(){
 
 	drupal_add_js('1.
@@ -385,6 +384,16 @@ function facebook_grabbit_private_view(){
 	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=30;
+
+    if(count($_GET)<=2){  //Get saved configuration
+	  if($result = grabbit_config_get_uid($user->uid)){
+        $config = $result->config;
+		$_GET = unserialize($config);			
+	  }
+    }else{  // Save configuration
+	  $config = $_GET;
+      grabbit_config_save_config($user->uid,$config);
+    }
 
 	// Filters of all kind
 	
@@ -487,15 +496,21 @@ function facebook_grabbit_private_view(){
 			                   'Content-type' => 'application/x-www-form-urlencoded');
 
 			$result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
-			$xml = new SimpleXMLElement($result->data);
-
-			foreach ($xml->status as $message){
+			if($result->data){
+				
+			  $xml = new SimpleXMLElement($result->data);	
+			
+			  foreach ($xml->status as $message){
 
 			  $time = strtotime($message->created_at);
 			  $key = (string)$message->id;
 			  $twitface[$key]=array('time'=>$time,
 				                              'value'=>$message);
 
+			  }
+			
+			}else{
+			  drupal_set_message("There was a problem connecting to Twitter, please try again","error");
 			}	
 		}
 	}
