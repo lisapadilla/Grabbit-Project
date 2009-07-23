@@ -1,0 +1,34 @@
+<?
+//$Id$
+ 
+function grabbit_config_save_config($user,$config){
+  $check = grabbit_config_get_uid($user);
+
+  $savetodb = serialize($config);
+
+  if(!$check){
+    db_query("INSERT INTO {grabbit_config} (uid,config) VALUES (%d, '%s')",$user,$savetodb);	
+    $result = TRUE;
+  }
+  else{
+    db_query("UPDATE {grabbit_config} SET config='%s' WHERE uid=%d",$savetodb,$user);	
+    $result = TRUE;
+  }
+
+  return $result;
+	
+}
+
+function grabbit_config_get_uid($user){
+	
+  $result = db_query("SELECT * FROM {grabbit_config} WHERE uid = %d",$user);
+
+  if ($user = db_fetch_object($result)) {
+	$user = $user;
+  }
+  else{
+    $user = FALSE;	
+  }
+
+  return $user;
+}
