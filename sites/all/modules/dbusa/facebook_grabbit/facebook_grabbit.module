@@ -24,6 +24,13 @@ function facebook_grabbit_menu () {
    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
   );
+	
+    $items['twitter/addfavorite'] = array( 
+    'title' => 'Adding a favorite', 
+    'page callback' => 'facebook_grabbit_add_favorite_twitter', 
+    'access arguments' => array('access content')
+  );
+    
   return $items;
 }
 
@@ -356,6 +363,33 @@ function facebook_grabbit_get_friends_timeline($account){
   return $output;
 }
 
+/**
+ * Add a new post to favorites in Twitter
+ */
+
+function facebook_grabbit_add_favorite_twitter(){
+	global $user;
+	$id = $_GET['id'];
+	$mode =  $_GET['mode'];
+  
+	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
+	if(count($accounts)){
+		$account = array_shift($accounts); 		
+	}
+  
+	$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+        $headers = array('Authorization' => 'Basic '. $twitter_encrypted,
+                           'Content-type' => 'application/x-www-form-urlencoded');
+
+	if ($mode == "create"){
+	  $result = drupal_http_request("http://twitter.com/favorites/create/".$id.".xml", $headers, 'POST');
+	}else{ //destroy
+	  $result = drupal_http_request("http://twitter.com/favorites/destroy/".$id.".xml", $headers, 'POST');
+	}
+        print_r ($result);
+	
+}
+
 
 /**
  * Creates users private view()
@@ -372,10 +406,35 @@ function facebook_grabbit_private_view(){
 		  var to = $(this).attr("id"); 
 		  $("#edit-status").val(to);
 		  $("#edit-status").focus();
-		});
-      });', $type = 'inline');
+		});		
+		
+		$(".twitter_favorite").click(function () {
+		  var id = $(this).attr("id");
+		  var tag = $(this);
+		  
+		  if (tag.text() == "Add to favorites"){
+		    tag.text("Adding to favorites...");
+		    $.get("'.base_path().'/twitter/addfavorite",{id:id,mode:"create"},function(data){
+		      //Successfully added to favorites
+		      //Testing if it works
+		      tag.text("Remove from favorites");		      
+		    });
+		  }
+		  else{ //Remove from favorites
+		  tag.text("Removing from favorites...");
+		    $.get("'.base_path().'/twitter/addfavorite",{id:id,mode:"destroy"},function(data){
+		      //Successfully removed from favorites
+		      //Testing if it works
+		      tag.text("Add to favorites");		      
+		    });		    
+		  }
+		  		  
+		});		
+		
+		});', $type = 'inline');
 	
 	global $user;
+	
 	
 	require_once("facebook/facebook.php");
 	require_once("facebook/facebook_desktop.php");
@@ -696,18 +755,45 @@ function facebook_grabbit_feeds_form(){
 }
 
 /**
+ * Add favorites to twitter
+ * 
+ * It adds a favorite entry to Twitter when user clicks on the star icon
+ *
+ * @param $link
+ * Parameter description
+ */
+ 
+function _add_twitter_favorite($link){
+  $twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+
+  $headers = array('Authorization' => 'Basic '. $twitter_encrypted,
+                   'Content-type' => 'application/x-www-form-urlencoded');
+
+  $result = drupal_http_request('http://twitter.com/favorites/create/2759490482.xml', $headers, 'PORT');   
+}
+
+/**
 * Theme each meesage.
 */
-function theme_twitter_message($message){
+function theme_twitter_message($message){  
 
 	$msg = $message->text;
 	$msg_formatted=get_url_msg_formatted($msg);
-
+		
 	$output = '<div class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
 	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
 	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$msg_formatted. ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
 	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a></div>
-	          </div>';
+	          <div><a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
+		  
+		  if ($message->favorited == "false"){
+		    $output .= 'Add to favorites</a></div>
+		  </div>';
+		  }
+		  else{ //true
+		    $output .= 'Remove from favorites</a></div>
+		  </div>';
+		  }
 	return $output;
 }
 
@@ -753,7 +839,6 @@ function get_target_blank_msg_formatted($msg){
 	
 	return $msg_formatted;
 }
-
 
 /**
  * Implementation of hook_form() for post comments on facebook
