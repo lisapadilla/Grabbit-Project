@@ -1389,7 +1389,6 @@ fieldset:not(.collapsible) {
   border: solid 1px #cdcdcd;
   -webkit-border-radius: 0.5em;
   -moz-border-radius: 0.5em;
-  -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
 }
 html.js fieldset:not(.collapsible) legend {
   padding: 0;
