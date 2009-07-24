@@ -30,7 +30,19 @@ function facebook_grabbit_menu () {
     'page callback' => 'facebook_grabbit_add_favorite_twitter', 
     'access arguments' => array('access content')
   );
-    
+		
+  $items['facebook/comment'] = array( 
+    'title' => 'Adding comments', 
+    'page callback' => 'facebook_grabbit_facebook_comment_submit_action', 
+    'access arguments' => array('access content')
+  );
+	
+	$items['facebook/getuserinfo'] = array( 
+    'title' => 'Getting users info', 
+    'page callback' => '_get_current_user_info', 
+    'access arguments' => array('access content')
+  );
+	
   return $items;
 }
 
@@ -240,7 +252,57 @@ function facebook_grabbit_get_fid($user){
   return $user;
 }
 
+/*
+ * Return users information
+ * SYNTAX: it recieves a "params" var by GET method, each param must be separated by a comma and no spaces.
+ * 				 EXAMPLE:
+ * 				 				grabbit/facebook/getuserinfo?params=first_name,last_name,sex
+ *
+ * NOTE: It does not support array params like "hometown_location" or "hs_info" yet.
+ * 
+ * To see available params, take a look to: http://wiki.developers.facebook.com/index.php/Users.getInfo
+ */
 
+function _get_current_user_info(){
+	
+	global $user;
+	
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	$app_id='90953553995';
+	
+	$params = $_GET["params"];
+	$params = split(",",$params);
+	$params = implode(", ",$params);	
+	
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	$suser=$fuser->fid;
+	$session_key=$fuser->kid;
+			
+	$facebook = new FacebookDesktop($api_key, $secret);
+	$facebook->set_user($suser, $session_key);
+	
+	$user_details = $facebook->api_client->users_getInfo($suser, $params);      
+	
+	if ($user_details){
+		// Index 0 contains uid and we do not need it
+		$i=0;
+		foreach ($user_details[0] as $detail){
+			if ($i != 0){
+				print ($detail);
+				// It avoids writing a comma at the end
+				if ($i != count($user_details[0])-1){
+					print (",");
+				}
+			}
+			$i++;
+		}
+	}else{
+		//An error has occurred
+		
+	}
+}
 
 function prepeare_status_update($post,$user,$target,$profiles){
 	
@@ -255,14 +317,32 @@ function prepeare_status_update($post,$user,$target,$profiles){
 			</div>';
 		}	
 	}
-    
-	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
+   
+	//ORIGINAL  
+	/*$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
 	<div class="facebook-post-body">
 	  '.$msg_formatted.'<br><br>'.format_date($post['created_time']).'
 	</div>'.$show_comments.'
 	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">'.drupal_get_form('facebook_grabbit_comment_form',$post['post_id']).'</div></div>
+	</div>
+	</div>';*/
+	
+	//TEST FOR COMMENTING USING AJAX
+	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
+	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
+	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
+	<div class="facebook-post-body">
+	  '.$msg_formatted.'<br><br>'.format_date($post['created_time']).'
+	</div>'.$show_comments.'
+	<div class="facebook-new-comments"></div>
+	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
+		<form id="myForm">
+			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
+			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
+		</form>
+	</div></div>
 	</div>
 	</div>';
 	
@@ -305,7 +385,8 @@ function prepeare_standar_update($post,$user,$profiles){
 		}	
 	}
 	
-	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
+	//ORIGINAL
+	/*$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
@@ -314,9 +395,26 @@ function prepeare_standar_update($post,$user,$profiles){
 	'.$show_comments.'
 	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">'.drupal_get_form('facebook_grabbit_comment_form',$post['post_id']).'</div></div>
 	</div>
-	</div>';
+	</div>';*/
 	
+	//TEST FOR GETTING AJAX WHEN COMMENTING
+	//REASON: Drupal forms are forced to count with submit button and it forces a refresh.
+	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
+	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
+	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a>
+	<div class="facebook-post-body">
+	  '.$msg_formatted.'
+	</div><div class="facebook-attachment">'.$attachment.'</div><br><br>'.format_date($post['created_time']).'
+	'.$show_comments.'
+	<div class="facebook-new-comments"></div>
+	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
+		<form id="myForm">
+			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
+			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
+		</form>
+	</div></div></div></div>';
 	return $output;
+	
 }
 
 
@@ -808,7 +906,11 @@ function get_target_blank_msg_formatted($msg){
 /**
  * Implementation of hook_form() for post comments on facebook
  */
-function facebook_grabbit_comment_form($form_state, $post_id){
+
+/*function facebook_grabbit_comment_form($form_state, $post_id){
+	
+		$form['#action'] = '';
+		$form['#method'] = 'GET';
 	
   	$form['comment'] = array(
 	    '#type' => 'textfield',
@@ -827,11 +929,12 @@ function facebook_grabbit_comment_form($form_state, $post_id){
 	);
 	
   return $form;
-}
+}*/
 
-function facebook_grabbit_comment_form_submit ($form, &$form_state) {
+function facebook_grabbit_facebook_comment_submit_action() {
 	
-		require_once("facebook/facebook.php");
+		//ORIGINAL
+		/*require_once("facebook/facebook.php");
 		require_once("facebook/facebook_desktop.php");
 		include("facebook/config.php");
 
@@ -847,7 +950,28 @@ function facebook_grabbit_comment_form_submit ($form, &$form_state) {
 		$test = $facebook->api_client->call_method('facebook.Stream.addComment', array('session_key' => $session_key,
 										       'post_id'=>$form_state['clicked_button']['#post']['post_id'],
 										       'comment'=>$form_state['clicked_button']['#post']['comment']));				
-		drupal_set_message('You have commented on facebook',"status");						  		  	    	
+		drupal_set_message('You have commented on facebook',"status");*/
+		
+		//TEST
+		require_once("facebook/facebook.php");
+		require_once("facebook/facebook_desktop.php");
+		include("facebook/config.php");
+
+		global $user;
+		$fuser = facebook_grabbit_get_fid($user->uid);
+
+		$suser=$fuser->fid;
+		$session_key=$fuser->kid;
+
+		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
+		
+		$test = $facebook->api_client->call_method('facebook.Stream.addComment', array('session_key' => $session_key,
+										       'post_id'=>$_GET['post_id'],
+										       'comment'=>$_GET['comment']));				
+		//drupal_set_message('You have commented on facebook',"status");
+		print_r ($test);
+		
 }
 
 function facebook_grabbit_moretags(){
