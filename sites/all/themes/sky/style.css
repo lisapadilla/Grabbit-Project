@@ -19,7 +19,6 @@ body {
 #wrapper {
   background: #fff;
   font-size: 12px;
-  -webkit-box-shadow: 1em 1em 5em rgba(0, 0, 0, 0.5);
 }
 /* @group Header */
 #header {
