@@ -407,7 +407,10 @@ function facebook_grabbit_private_view(){
 	$app_id='90953553995';
 	
 	$view = views_get_view('grabbit_public_stream');
-    $view->pager['items_per_page']=30;
+    $view->pager['items_per_page']=15;
+
+    $view_deals = views_get_view('grabbit_private_deals');
+    $view_deals->pager['items_per_page']=15;
 
     if(count($_GET)<=2){  //Get saved configuration
 	  if($result = grabbit_config_get_uid($user->uid)){
@@ -461,7 +464,7 @@ function facebook_grabbit_private_view(){
 	}
 	
 	//End filters of all kind
-
+ 
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	
 	$view->execute();
@@ -470,6 +473,26 @@ function facebook_grabbit_private_view(){
 	  $twitface[$node->nid]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
+
+    // prepeare the deals view according to the user's tags
+	$deals_profile = content_profile_load('profile', $user->uid);
+	if (count($deals_profile->taxonomy)){
+	  foreach ($deals_profile->taxonomy as $term){
+	    $d_tags[] = $term->tid;
+	  }
+	  $deals_tags = implode("+", $d_tags);
+	}else{
+		$deals_tags = 'all';	
+	}
+	
+    $view_deals->set_arguments(array($deals_tags));	
+	$view_deals->execute();
+
+    foreach($view_deals->result as $node){
+	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+    // end of deals view
 
 	$output .=drupal_get_form('facebook_grabbit_update_form');
 	
