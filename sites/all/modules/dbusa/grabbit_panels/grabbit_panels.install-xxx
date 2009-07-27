@@ -1,0 +1,44 @@
+<?php
+// $Id: grabbit_config.install,v 1.1.2.2 2009/06/24 05:53:49 Exp $
+
+/**
+ * @file
+ * Grabbit user condiguration install file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function grabbit_config_install() {
+  drupal_install_schema('grabbit_config');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function grabbit_config_uninstall() {
+  drupal_uninstall_schema('grabbit_config');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function grabbit_config_schema() {
+  $schema = array();
+$schema['grabbit_config'] = array(
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'disp-width' => '10',
+      ),
+      'config' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      )
+    ),
+    'primary key' => array('uid'),
+  );
+  return $schema;
+}

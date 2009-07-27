@@ -1051,7 +1051,7 @@ ul.menu .collapsed .leaf a {
 .with-photo .meta {
   float: left;
   background: #fff url('images/bg-shade-white-lrg.png') repeat-x left bottom;
-  border: solid 1px #ddd;
+  border-bottom: solid 1px #ddd;
   clear: both;
   padding: 1em;
   -webkit-border-radius: 0.333em;
@@ -1806,15 +1806,26 @@ ul.menu a.ext {
 /* @end */
 
 /* Facebook and Twitter css */
+.panel-grabbit{
+	float: left;
+	border: solid 1px #ddd;
+}
 .facebook-post{
-	background-color:#E7E7E7;
-	padding:5px;
-	margin-bottom:30px;
+	float: left;
+	  background: #fff url('images/bg-shade-white-lrg.png') repeat-x left bottom;
+	  border-bottom: solid 1px #ddd;
+	  clear: both;
+	  padding: 1em;
+	  -webkit-border-radius: 0.333em;
+	  -moz-border-radius: 0.333em;
+	width:89%;
+	margin-bottom:0.5em;
+
 }
 .twitter-message-stream{
 	float: left;
 	  background: #fff url('images/bg-shade-white-lrg.png') repeat-x left bottom;
-	  border: solid 1px #ddd;
+	  border-bottom: solid 1px #ddd;
 	  clear: both;
 	  padding: 1em;
 	  -webkit-border-radius: 0.333em;
@@ -1830,28 +1841,29 @@ ul.menu a.ext {
 }
 .facebook-story-pic{
   float:left;
+  margin-right:5px;
 }
 .twitter-image{
 	display:block;
 	height:50px;
 	left:0;
-	margin:0 10px 0 0px;
+	margin:0 5px 0 0px;
 	overflow:hidden;
 	width:50px;
 	float:left;
 }
 .facebook-story-name{
 	font-weight:bold;
-	padding-bottom:10px;
-	padding-left:10px;
-	padding-right:10px;
+	font-size:9px;
+}
+.facebook-post-header .facebook-post-header a{
+	font-size:9px;
 }
 .twitter-body{
 	display:block;
-	margin-left:65px;
 	min-height:50px;
 	overflow:hidden;
-	width:86%;
+	width:72%;
 	font-size:9px;
 }
 .twitter-date{
@@ -1859,10 +1871,10 @@ ul.menu a.ext {
 	font-size:10px;
 }
 .facebook-post-body, .facebook-attachment{
-	float:left;
-	padding-bottom:10px;
-	padding-left:10px;
-	width:400px;
+	display:block;
+	overflow:hidden;
+	width:72%;
+	font-size:9px;
 }
 .facebook-header{
    background:transparent url(images/facebook.gif) no-repeat scroll left center;
@@ -1878,7 +1890,8 @@ ul.menu a.ext {
 	float:left;
 	padding-bottom:10px;
 	padding-left:45px;
-	width:400px;
+	width:70%;
+	font-size:9px;
 }
 .facebook-comment-text{
 	margin-left:40px;
@@ -1893,7 +1906,8 @@ ul.menu a.ext {
 	float:left;
 	padding-bottom:10px;
 	padding-left:45px;
-	width:400px;
+	font-size:9px;
+	width:70%;
 }
 .facebook-comment-form .form-text{
 	width:50%;
@@ -1925,9 +1939,33 @@ ul.menu a.ext {
 }
 .content-floated-left{
 	float:left;
-	width:13%;
+	width:30%;
 }
 .content-floated-right{
 	float:right;
-	width:86%;
+	width:65%;
+}
+.panel-grabbit{
+	width:32%;
+	float:left;
+	margin-left:5px;
+}
+.panel-grabbit h3.title {
+  background: #fff url('images/bg-shade-light.png') repeat-x bottom left;
+  color: #777;
+  display: block;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: 1.1em;
+  padding: 5px 10px;
+  margin: 0;
+  text-shadow: #fff 1px 1px 1px;
+  color: #555;
+  -moz-border-radius-topleft: 0.333em;
+  -webkit-border-top-left-radius: 0.333em;
+  -moz-border-radius-topright: 0.333em;
+  -webkit-border-top-right-radius: 0.333em;
+  border: solid 1px #ddd;
+  border-bottom: 0;
 }

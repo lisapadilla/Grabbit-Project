@@ -331,7 +331,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	
 	//TEST FOR COMMENTING USING AJAX
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
-	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
+	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].' </span></a>'.$target.'
 	<div class="facebook-post-body">
 	  '.$msg_formatted.'<br><br>'.format_date($post['created_time']).'
@@ -365,13 +365,13 @@ function prepeare_standar_update($post,$user,$profiles){
     if($post['attachment']['media']!=''){
 	  	foreach($post['attachment']['media'] as $media){
 	      if($media['type'] =="photo"){
-		    $attachment .='<span class="facebook-attach-photo"><a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+		    $attachment .='<span class="facebook-attach-photo"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
 		  if($media['type'] =="link"){
-		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
 	      if($media['type'] =="video"){
-		    $attachment .='<span class="facebook-attach-video">Video: <a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+		    $attachment .='<span class="facebook-attach-video">Video: <a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
 		}
     }
@@ -400,7 +400,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	//TEST FOR GETTING AJAX WHEN COMMENTING
 	//REASON: Drupal forms are forced to count with submit button and it forces a refresh.
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
-	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'"/></span></a>
+	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
 	  '.$msg_formatted.'
@@ -702,6 +702,219 @@ function facebook_grabbit_private_view(){
 
 }
 
+
+/**
+ * Creates users pannel()
+ */
+function facebook_grabbit_private_view_panel(){
+
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
+	global $user;
+	
+	
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	$app_id='90953553995';
+	
+	$view = views_get_view('grabbit_public_stream');
+    $view->pager['items_per_page']=15;
+
+    $view_deals = views_get_view('grabbit_private_deals');
+    $view_deals->pager['items_per_page']=15;
+
+    if(count($_GET)<=2){  //Get saved configuration
+	  if($result = grabbit_config_get_uid($user->uid)){
+        $config = $result->config;
+		$_GET = unserialize($config);			
+	  }
+    }else{  // Save configuration
+	  $config = $_GET;
+      grabbit_config_save_config($user->uid,$config);
+    }
+
+	// Filters of all kind
+	
+	if($_GET['blogs'] || $_GET['news']){
+	  $view->display['default']->display_options['filters']['type']['value']=array();
+	  if($_GET['blogs'])
+	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
+	  if($_GET['news'])
+	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
+	}
+	
+	if(!$_GET['favorites']){
+	  $view->display['default']->display_options['relationships']=array();	
+	}
+	
+	if ($_GET['tags']){
+		$tags = implode(" ", $_GET['tags']);
+		$filters[0] = $tags;
+	}else{
+		$filters[0] = 'all';	
+	}
+	if ($_GET['feeds']){
+		$tags = implode(",", $_GET['feeds']);
+        $filters[1] = $tags;
+	}else{
+		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
+
+		if(is_array($flag['myfeeds'])){
+			
+		  	foreach($flag['myfeeds'] as $my_feeds){
+			  $user_feeds[]=$my_feeds->content_id;	
+			}
+			
+			$tags = implode(",", $user_feeds);
+			$filters[1] = $tags;	
+		}
+		else{
+			$filters[1] = "all";	
+		}
+
+	}
+	
+	//End filters of all kind
+ 
+	$view->set_arguments(array($filters[0],$filters[1]));	
+	
+	$view->execute();
+
+    foreach($view->result as $node){
+	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+
+    // prepeare the deals view according to the user's tags
+	$deals_profile = content_profile_load('profile', $user->uid);
+	if (count($deals_profile->taxonomy)){
+	  foreach ($deals_profile->taxonomy as $term){
+	    $d_tags[] = $term->tid;
+	  }
+	  $deals_tags = implode("+", $d_tags);
+	}else{
+		$deals_tags = 'all';	
+	}
+	
+    $view_deals->set_arguments(array($deals_tags));	
+	$view_deals->execute();
+
+    foreach($view_deals->result as $node){
+	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+    // end of deals view
+	
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	
+	if ($fuser){
+		$fb = TRUE;
+		if(!$_GET['hide_facebook']){
+			
+			$suser=$fuser->fid;
+			$session_key=$fuser->kid;
+			
+			$facebook = new FacebookDesktop($api_key, $secret);
+			$facebook->set_user($suser, $session_key);
+			$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+											       'viewer_id'=>$suser,    
+											       'limit'=>"15"));		      
+			if ($stream){
+			  
+			  $friends = $stream['profiles'];
+			  $posts = $stream['posts'];
+  
+			  foreach($friends as $friend){
+				  $profiles[$friend['id']] = $friend; 
+			  }
+  
+			  foreach ($posts as $post){
+				  $twitface[$post['post_id']]=array('time'=>$post['created_time'],
+								'value'=>$post);
+			  }
+			}
+		
+		}
+				
+	}else{
+	    $fb = FALSE;
+	}
+	
+	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
+	if(count($accounts)){
+		$tw = TRUE;
+		if(!$_GET['hide_twitter']){
+			
+			$account = array_shift($accounts); 
+
+			$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+			$headers = array('Authorization' => 'Basic '. $twitter_encrypted,
+			                   'Content-type' => 'application/x-www-form-urlencoded');
+
+			$result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
+			if($result->data){
+				
+			  $xml = new SimpleXMLElement($result->data);	
+			
+			  foreach ($xml->status as $message){
+
+			  $time = strtotime($message->created_at);
+			  $key = (string)$message->id;
+			  $twitface[$key]=array('time'=>$time,
+				                              'value'=>$message);
+
+			  }
+			
+			}else{
+			  drupal_set_message("There was a problem connecting to Twitter, please try again","error");
+			}	
+		}
+	}
+	else{
+		$tw = FALSE;
+	}
+	
+	if(!$tw && !$fb){
+	  return "You have no Twitter or Facebook accounts yet";	
+	}
+	else{
+		if(is_array($twitface)){
+			usort($twitface, 'compare');
+			$result = array_reverse($twitface);
+			foreach($result as $entry){
+				if(is_array($entry['value'])){
+					if(!$entry['value']['attachment']){ //STATUS UPDATE
+						$target='';
+						if($entry['value']['target_id'])
+						  $target='> <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
+
+						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles);
+						$comments=array();
+					}else{		             // OTHER UPDATES SUPPORTED
+						$output .= prepeare_standar_update($entry['value'], $profiles[$entry['value']['actor_id']],$profiles);
+					}
+				}
+				else{
+					if($entry['value']->nid){
+						$node=node_load($entry['value']->nid);
+						$output .= node_view($node, TRUE, FALSE, TRUE);
+					}
+					else{
+	                  $output .= theme_twitter_message($entry['value']);
+	                }
+
+				}
+			}	
+		}
+			
+	}
+	
+	return $output;
+
+}
+
+
 /**
  * Helper function to sort the entries
  */
@@ -868,16 +1081,16 @@ function theme_twitter_message($message){
 		
 	$output = '<div class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
 	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
-	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$msg_formatted. ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span>
+	          <div class="twitter-body">'.$msg_formatted. ' <span class="twitter-date"><strong>'.$message->user->name.'</strong> on '. format_date(strtotime($message->created_at)) . '</span>
 	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a> - 
 	          <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
 		  
 		  if ($message->favorited == "false"){
-		    $output .= 'Add to favorites</a></div></span>
+		    $output .= 'Add to favorites</a></div></div>
 		  </div>';
 		  }
 		  else{ //true
-		    $output .= 'Remove from favorites</a></div></span>
+		    $output .= 'Remove from favorites</a></div></div>
 		  </div>';
 		  }
 		

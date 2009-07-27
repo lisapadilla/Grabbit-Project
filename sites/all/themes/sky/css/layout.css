@@ -67,7 +67,7 @@ table {
   height: 4em;
 }
 .main-inner {
-  padding: 1em 2em;
+  padding: 1em 0.5em;
 }
 .sidebar .inner {
   padding: 1em 1.25em;
