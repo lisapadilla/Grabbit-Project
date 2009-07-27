@@ -1025,14 +1025,12 @@ ul.menu .collapsed .leaf a {
 .node {
   clear: both;
   display: block;
-  margin: 0 0 1em 0;
+  margin: 0 0 0 0;
   padding: 0 1em 0 0;
 }
 /* @group Teasers */
 .node-teaser {
-  margin-bottom: 3em;
-  padding-bottom: 1.5em;
-  border-bottom: solid 1px #eee;
+  padding-bottom: 0.5em;
 }
 /* @end */
 /* @group Sticky */
@@ -1182,7 +1180,7 @@ dl.node-type-list dt a:before {
   float: left;
   font-weight: normal;
   text-decoration: none;
-  padding: 0.5em 1.1em;
+  padding: 0.1em 0.4em;
   text-shadow: #fff 1px 1px 1px;
   -webkit-border-radius: 0.333em;
   -moz-border-radius: 0.333em;
@@ -1814,11 +1812,22 @@ ul.menu a.ext {
 	margin-bottom:30px;
 }
 .twitter-message-stream{
-	background-color:#B5BACA;
-	padding:5px;
-	margin-bottom:30px;
+	float: left;
+	  background: #fff url('images/bg-shade-white-lrg.png') repeat-x left bottom;
+	  border: solid 1px #ddd;
+	  clear: both;
+	  padding: 1em;
+	  -webkit-border-radius: 0.333em;
+	  -moz-border-radius: 0.333em;
+	width:89%;
+	margin-bottom:0.5em;
 }
-
+.twitter-containter{
+	padding-bottom:0.5em;
+	clear:both;
+	display:block;
+	
+}
 .facebook-story-pic{
   float:left;
 }
@@ -1842,7 +1851,8 @@ ul.menu a.ext {
 	margin-left:65px;
 	min-height:50px;
 	overflow:hidden;
-	width:420px;
+	width:86%;
+	font-size:9px;
 }
 .twitter-date{
 	color:#314C74;
@@ -1898,4 +1908,26 @@ ul.menu a.ext {
 }
 .multiple-tags-stream .form-item-checkbox{
 	font-size:10px;
+}
+
+.without-photo .meta{
+	padding:0.5em;
+}
+.meta h2{
+	font-size:10px;
+}
+.meta p{
+	font-size:9px;
+	line-height:12px;
+}
+.meta a{
+	font-size:9px;
+}
+.content-floated-left{
+	float:left;
+	width:13%;
+}
+.content-floated-right{
+	float:right;
+	width:86%;
 }

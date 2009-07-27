@@ -770,18 +770,19 @@ function theme_twitter_message($message){
 		
 	$output = '<div class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
 	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
-	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$msg_formatted. ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span></span>
-	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a></div>
-	          <div><a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
+	          <span class="twitter-body"><strong>'.$message->user->name.'</strong> '.$msg_formatted. ' <span class="twitter-date"> on '. format_date(strtotime($message->created_at)) . '</span>
+	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a> - 
+	          <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
 		  
 		  if ($message->favorited == "false"){
-		    $output .= 'Add to favorites</a></div>
+		    $output .= 'Add to favorites</a></div></span>
 		  </div>';
 		  }
 		  else{ //true
-		    $output .= 'Remove from favorites</a></div>
+		    $output .= 'Remove from favorites</a></div></span>
 		  </div>';
 		  }
+		
 	return $output;
 }
 
