@@ -17,7 +17,7 @@
       <?php if (!$page && $title){ ?>
       <div class="content-floated-left">
 	    <h2><a href="<?php print $node_url; ?>" title="<?php print $title; ?>"><?php print $title; ?></a></h2>
-	    <?php print_r($node); ?>
+	    <?= $node->field_deal_creative[0]['view'] ?>
 	  </div>
       <div class="content-floated-right">
         <?php print $content; ?>
