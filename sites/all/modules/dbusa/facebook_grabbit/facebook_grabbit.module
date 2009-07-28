@@ -140,14 +140,15 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		$session_key=$fuser->kid;
 
 		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
 		
-		if (!$facebook->set_user($suser, $session_key)){
+		$result = $facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
+										       'uid'=>"$suser",
+										       'status'=>$form_state['values']['status']));
+		if (!$result){
 		  drupal_set_message("Internet connection failed","error");
 		}
 		else{
-		  $facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
-										       'uid'=>"$suser",
-										       'status'=>$form_state['values']['status'])); 
 		  drupal_set_message('You have changed your facebook status');
 		}
 	}
