@@ -116,7 +116,7 @@ function grabbit_panels_source_form($form,$panel_id){
 
 	if($_GET['form_id']){
 	  grabbit_panels_save_panel($user->uid,$_GET,arg(2));
-	  drupal_goto("panels_show");
+	  drupal_goto("stream/user");
       return;	
 	}
 	
