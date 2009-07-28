@@ -22,19 +22,22 @@ function facebook_grabbit_menu () {
     $items['twitter/addfavorite'] = array( 
     'title' => 'Adding a favorite', 
     'page callback' => 'facebook_grabbit_add_favorite_twitter', 
-    'access arguments' => array('access content')
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
   );
 		
   $items['facebook/comment'] = array( 
     'title' => 'Adding comments', 
     'page callback' => 'facebook_grabbit_facebook_comment_submit_action', 
-    'access arguments' => array('access content')
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
   );
 	
 	$items['facebook/getuserinfo'] = array( 
     'title' => 'Getting users info', 
     'page callback' => '_get_current_user_info', 
-    'access arguments' => array('access content')
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
   );
 	
   return $items;
