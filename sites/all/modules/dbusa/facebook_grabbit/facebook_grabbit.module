@@ -721,10 +721,10 @@ function facebook_grabbit_private_view_panel($param){
 
     
 	  if($result = grabbit_panels_get_uid($user->uid,$param)){
-		$_GET = unserialize($result->config);
+		$GET = unserialize($result->config);
 		$tags= unserialize($result->filters);
 		if($tags['tags']){
-		  $_GET['tags']=$tags['tags'];	
+		  $GET['tags']=$tags['tags'];	
 		}
 	  }
       
@@ -732,25 +732,25 @@ function facebook_grabbit_private_view_panel($param){
 	$view->display['default']->display_options['filters']['type']['value']=array();
 	$view->display['default']->display_options['filters']['type']['value']['blogs']='FALSE';
 	$view->display['default']->display_options['filters']['type']['value']['news']='FALSE';
-	if($_GET['blogs'] || $_GET['news']){
-	  if($_GET['blogs'])
+	if($GET['blogs'] || $GET['news']){
+	  if($GET['blogs'])
 	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
-	  if($_GET['news'])
+	  if($GET['news'])
 	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
 	}
 
-	if(!$_GET['favorites']){
+	if(!$GET['favorites']){
 	  $view->display['default']->display_options['relationships']=array();	
 	}
 	
-	if ($_GET['tags']){
-		$tags = implode(" ", $_GET['tags']);
+	if ($GET['tags']){
+		$tags = implode(" ", $GET['tags']);
 		$filters[0] = $tags;
 	}else{
 		$filters[0] = 'all';	
 	}
-	if ($_GET['feeds']){
-		$tags = implode(",", $_GET['feeds']);
+	if ($GET['feeds']){
+		$tags = implode(",", $GET['feeds']);
         $filters[1] = $tags;
 	}else{
 		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
@@ -805,7 +805,7 @@ function facebook_grabbit_private_view_panel($param){
 	
 	if ($fuser){
 		$fb = TRUE;
-		if($_GET['show_facebook']){
+		if($GET['show_facebook']){
 			
 			$suser=$fuser->fid;
 			$session_key=$fuser->kid;
@@ -840,7 +840,7 @@ function facebook_grabbit_private_view_panel($param){
 	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
 	if(count($accounts)){
 		$tw = TRUE;
-		if($_GET['show_twitter']){
+		if($GET['show_twitter']){
 			
 			$account = array_shift($accounts); 
 
@@ -905,7 +905,7 @@ function facebook_grabbit_private_view_panel($param){
 		}
 			
 	}
-
+    $GET=array();
 	return $output;
 
 }
