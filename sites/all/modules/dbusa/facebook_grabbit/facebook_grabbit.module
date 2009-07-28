@@ -607,7 +607,8 @@ function facebook_grabbit_private_view(){
 			$facebook->set_user($suser, $session_key);
 			$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
 											       'viewer_id'=>$suser,    
-											       'limit'=>"15"));		      
+											       'limit'=>"15"));	
+
 			if ($stream){
 			  
 			  $friends = $stream['profiles'];
@@ -706,7 +707,7 @@ function facebook_grabbit_private_view(){
 /**
  * Creates users pannel()
  */
-function facebook_grabbit_private_view_panel(){
+function facebook_grabbit_private_view_panel($param){
 
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
@@ -724,26 +725,26 @@ function facebook_grabbit_private_view_panel(){
     $view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=15;
 
-    if(count($_GET)<=2){  //Get saved configuration
-	  if($result = grabbit_config_get_uid($user->uid)){
-        $config = $result->config;
-		$_GET = unserialize($config);			
+    
+	  if($result = grabbit_panels_get_uid($user->uid,$param)){
+		$_GET = unserialize($result->config);
+		$tags= unserialize($result->filters);
+		if($tags['tags']){
+		  $_GET['tags']=$tags['tags'];	
+		}
 	  }
-    }else{  // Save configuration
-	  $config = $_GET;
-      grabbit_config_save_config($user->uid,$config);
-    }
-
+      
 	// Filters of all kind
-	
+	$view->display['default']->display_options['filters']['type']['value']=array();
+	$view->display['default']->display_options['filters']['type']['value']['blogs']='FALSE';
+	$view->display['default']->display_options['filters']['type']['value']['news']='FALSE';
 	if($_GET['blogs'] || $_GET['news']){
-	  $view->display['default']->display_options['filters']['type']['value']=array();
 	  if($_GET['blogs'])
 	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
 	  if($_GET['news'])
 	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
 	}
-	
+
 	if(!$_GET['favorites']){
 	  $view->display['default']->display_options['relationships']=array();	
 	}
@@ -810,7 +811,7 @@ function facebook_grabbit_private_view_panel(){
 	
 	if ($fuser){
 		$fb = TRUE;
-		if(!$_GET['hide_facebook']){
+		if($_GET['show_facebook']){
 			
 			$suser=$fuser->fid;
 			$session_key=$fuser->kid;
@@ -820,6 +821,7 @@ function facebook_grabbit_private_view_panel(){
 			$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
 											       'viewer_id'=>$suser,    
 											       'limit'=>"15"));		      
+
 			if ($stream){
 			  
 			  $friends = $stream['profiles'];
@@ -844,7 +846,7 @@ function facebook_grabbit_private_view_panel(){
 	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
 	if(count($accounts)){
 		$tw = TRUE;
-		if(!$_GET['hide_twitter']){
+		if($_GET['show_twitter']){
 			
 			$account = array_shift($accounts); 
 
@@ -909,7 +911,7 @@ function facebook_grabbit_private_view_panel(){
 		}
 			
 	}
-	
+	$_GET=array();
 	return $output;
 
 }

@@ -78,7 +78,7 @@ table {
   float: left;
 }
 .both #main {
-  width: 60%;
+  width: 80%;
   float: left;
 }
 .both #sidebar-right {
@@ -100,11 +100,11 @@ table {
 
 /* @group Right Sidebar */
 .right #main {
-  width: 75%;
+  width: 80%;
   float: left;
 }
 .right #sidebar-right {
-  width: 25%;
+  width: 20%;
   float: right;
 }
 /* @end */
