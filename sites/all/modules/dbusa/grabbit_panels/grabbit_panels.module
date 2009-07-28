@@ -5,10 +5,7 @@
  * Implementation of hook_menu()
  */
 function grabbit_panels_menu () {
-	$items['panels_show'] = array( 
-    'page callback' => 'grabbit_panels_get_panels', 
-    'access arguments' => array('access content')
-  );
+
   $items['panels/edit'] = array( 
     'page callback' => 'grabbit_panels_edit_panels', 
     'access arguments' => array('access content')
@@ -16,6 +13,11 @@ function grabbit_panels_menu () {
   $items['panels/filters'] = array( 
     'page callback' => 'grabbit_panels_filters', 
     'access arguments' => array('access content')
+  );
+  $items['stream/user'] = array( 
+  'title' => 'View my personal stream', 
+  'page callback' => 'grabbit_panels_get_panels', 
+  'access arguments' => array('access content')
   );
 
   return $items;

@@ -12,12 +12,6 @@ function facebook_grabbit_menu () {
     'type' => MENU_CALLBACK
   ); 
 
-    $items['stream/user'] = array( 
-    'title' => 'View my personal stream', 
-    'page callback' => 'facebook_grabbit_private_view', 
-    'access arguments' => array('access content')
-  );
-
   	$items['stream/moretags'] = array( 
    'title' => 'Select filters for your stream', 
    'page callback' => 'facebook_grabbit_moretags', 
