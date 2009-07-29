@@ -12,12 +12,6 @@ function facebook_grabbit_menu () {
     'type' => MENU_CALLBACK
   ); 
 
-    $items['stream/user'] = array( 
-    'title' => 'View my personal stream', 
-    'page callback' => 'facebook_grabbit_private_view', 
-    'access arguments' => array('access content')
-  );
-
   	$items['stream/moretags'] = array( 
    'title' => 'Select filters for your stream', 
    'page callback' => 'facebook_grabbit_moretags', 
@@ -26,19 +20,16 @@ function facebook_grabbit_menu () {
   );
 	
     $items['twitter/addfavorite'] = array( 
-    'title' => 'Adding a favorite', 
     'page callback' => 'facebook_grabbit_add_favorite_twitter', 
     'access arguments' => array('access content')
   );
 		
   $items['facebook/comment'] = array( 
-    'title' => 'Adding comments', 
     'page callback' => 'facebook_grabbit_facebook_comment_submit_action', 
     'access arguments' => array('access content')
   );
 	
 	$items['facebook/getuserinfo'] = array( 
-    'title' => 'Getting users info', 
     'page callback' => '_get_current_user_info', 
     'access arguments' => array('access content')
   );
@@ -716,11 +707,12 @@ function facebook_grabbit_private_view(){
 /**
  * Creates users pannel()
  */
-function facebook_grabbit_private_view_panel(){
+function facebook_grabbit_private_view_panel($param){
 
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	global $user;
+	
 	
 	require_once("facebook/facebook.php");
 	require_once("facebook/facebook_desktop.php");
@@ -733,38 +725,38 @@ function facebook_grabbit_private_view_panel(){
     $view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=15;
 
-    if(count($_GET)<=2){  //Get saved configuration
-	  if($result = grabbit_config_get_uid($user->uid)){
-        $config = $result->config;
-		$_GET = unserialize($config);			
+    
+	  if($result = grabbit_panels_get_uid($user->uid,$param)){
+		$GET = unserialize($result->config);
+		$tags= unserialize($result->filters);
+		if($tags['tags']){
+		  $GET['tags']=$tags['tags'];	
+		}
 	  }
-    }else{  // Save configuration
-	  $config = $_GET;
-      grabbit_config_save_config($user->uid,$config);
-    }
-
+      
 	// Filters of all kind
-	
-	if($_GET['blogs'] || $_GET['news']){
-	  $view->display['default']->display_options['filters']['type']['value']=array();
-	  if($_GET['blogs'])
+	$view->display['default']->display_options['filters']['type']['value']=array();
+	$view->display['default']->display_options['filters']['type']['value']['blogs']='FALSE';
+	$view->display['default']->display_options['filters']['type']['value']['news']='FALSE';
+	if($GET['blogs'] || $GET['news']){
+	  if($GET['blogs'])
 	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
-	  if($_GET['news'])
+	  if($GET['news'])
 	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
 	}
-	
-	if(!$_GET['favorites']){
+
+	if(!$GET['favorites']){
 	  $view->display['default']->display_options['relationships']=array();	
 	}
 	
-	if ($_GET['tags']){
-		$tags = implode(" ", $_GET['tags']);
+	if ($GET['tags']){
+		$tags = implode(" ", $GET['tags']);
 		$filters[0] = $tags;
 	}else{
 		$filters[0] = 'all';	
 	}
-	if ($_GET['feeds']){
-		$tags = implode(",", $_GET['feeds']);
+	if ($GET['feeds']){
+		$tags = implode(",", $GET['feeds']);
         $filters[1] = $tags;
 	}else{
 		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
@@ -819,7 +811,7 @@ function facebook_grabbit_private_view_panel(){
 	
 	if ($fuser){
 		$fb = TRUE;
-		if(!$_GET['hide_facebook']){
+		if($GET['show_facebook']){
 			
 			$suser=$fuser->fid;
 			$session_key=$fuser->kid;
@@ -829,6 +821,7 @@ function facebook_grabbit_private_view_panel(){
 			$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
 											       'viewer_id'=>$suser,    
 											       'limit'=>"15"));		      
+
 			if ($stream){
 			  
 			  $friends = $stream['profiles'];
@@ -845,7 +838,7 @@ function facebook_grabbit_private_view_panel(){
 			}
 		
 		}
-				
+			
 	}else{
 	    $fb = FALSE;
 	}
@@ -853,7 +846,7 @@ function facebook_grabbit_private_view_panel(){
 	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
 	if(count($accounts)){
 		$tw = TRUE;
-		if(!$_GET['hide_twitter']){
+		if($GET['show_twitter']){
 			
 			$account = array_shift($accounts); 
 
@@ -898,8 +891,7 @@ function facebook_grabbit_private_view_panel(){
 						if($entry['value']['target_id'])
 						  $target='> <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
 
-				
-						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles,'sss');
+						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles);
 						$comments=array();
 					}else{		             // OTHER UPDATES SUPPORTED
 						$output .= prepeare_standar_update($entry['value'], $profiles[$entry['value']['actor_id']],$profiles);
@@ -919,7 +911,7 @@ function facebook_grabbit_private_view_panel(){
 		}
 			
 	}
-	
+    $GET=array();
 	return $output;
 
 }
