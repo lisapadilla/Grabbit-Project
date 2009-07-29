@@ -1817,7 +1817,7 @@ ul.menu a.ext {
 	  padding: 1em;
 	  -webkit-border-radius: 0.333em;
 	  -moz-border-radius: 0.333em;
-	width:89%;
+	width:100%;
 	margin-bottom:0.5em;
 
 }
@@ -1829,7 +1829,7 @@ ul.menu a.ext {
 	  padding: 1em;
 	  -webkit-border-radius: 0.333em;
 	  -moz-border-radius: 0.333em;
-	width:89%;
+	width:100%;
 	margin-bottom:0.5em;
 }
 .twitter-containter{
@@ -1945,7 +1945,7 @@ ul.menu a.ext {
 	width:65%;
 }
 .panel-grabbit{
-	width:32%;
+	width:48%;
 	float:left;
 	margin-left:5px;
 }
@@ -1977,8 +1977,7 @@ ul.menu a.ext {
 .panel-wraper{
 	border: solid 1px #ddd;
 	height:420px;
-	overflow:scroll;
-	overflow-x:hidden;
+	overflow:hidden;
 }
 .panel-gear{
   background:transparent url("images/gear.gif");

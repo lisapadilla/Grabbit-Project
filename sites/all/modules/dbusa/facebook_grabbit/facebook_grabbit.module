@@ -725,14 +725,22 @@ function facebook_grabbit_private_view_panel($param){
     $view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=15;
 
-    
-	  if($result = grabbit_panels_get_uid($user->uid,$param)){
-		$GET = unserialize($result->config);
-		$tags= unserialize($result->filters);
-		if($tags['tags']){
-		  $GET['tags']=$tags['tags'];	
-		}
-	  }
+    if($param>0){
+		if($result = grabbit_panels_get_uid($user->uid,$param)){
+			$GET = unserialize($result->config);
+			$tags= unserialize($result->filters);
+			if($tags['tags']){
+			  $GET['tags']=$tags['tags'];	
+			}
+		  }
+     }
+     else{
+	   $GET['blogs']="blogs";
+	   $GET['news']="news";
+	   $GET['show_facebook']=1;
+	   $GET['show_twitter']=1;
+     }
+	  
       
 	// Filters of all kind
 	$view->display['default']->display_options['filters']['type']['value']=array();

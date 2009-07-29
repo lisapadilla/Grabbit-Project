@@ -33,14 +33,13 @@ function grabbit_panels_get_panels(){
 	             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>
 	           </div><div id="placeholderSortable">';
 	
-	$numbers=1;
-	while ($numbers<=3){
-	  $settings=grabbit_panels_get_uid($user->uid,$numbers);
-	  $panel_settings=unserialize($settings->config);
-	  $panel = facebook_grabbit_private_view_panel($numbers);
-	  $output .= theme_panels($panel,$numbers,$panel_settings['panel_name']);	
-	  $numbers++;
-	}
+	$panel_1 = facebook_grabbit_private_view_panel(0);
+	
+	$settings=grabbit_panels_get_uid($user->uid,1);
+	$panel_settings=unserialize($settings->config);
+    $panel_2 = facebook_grabbit_private_view_panel(1);
+	$output .= theme_panels($panel_1,0,"Main Stream");	
+	$output .= theme_panels($panel_2,1,$panel_settings['panel_name']);	
 	
 	$output .="</div>";
 	return $output;
@@ -243,12 +242,16 @@ function theme_panels($private_view,$id,$name){
 
     if(!$name)
       $name="Panel ".$id;
+
 	$output = '<div class="panel-grabbit" id="'.$id.'">
 	             <div class="panel-title clearfix">
-	               <h3 class="title">'.$name.'</h3>
-	               '.l('<span style="display:none">Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-	               '.l('<span style="display:none">Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-	             </div>
+	               <h3 class="title">'.$name.'</h3>';
+	if($id>0){
+		$output .=l('<span style="display:none">Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+                '.l('<span style="display:none">Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE));	
+	}
+	             
+	$output .='</div>
 	             <div class="panel-wraper">'.$private_view."</div>
 	           </div>";
 	
