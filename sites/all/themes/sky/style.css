@@ -2037,3 +2037,6 @@ ul.menu a.ext {
 .panels-update-form .panels-update-wraper .form-item label, .panels-update-form .panels-update-wraper .form-item-checkbox{
 	display:inline;
 }
+.panel-title{
+	cursor:move;
+}

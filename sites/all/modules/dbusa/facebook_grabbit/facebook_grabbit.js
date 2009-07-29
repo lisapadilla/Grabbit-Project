@@ -1,4 +1,10 @@
 $(document).ready(function() {
+	
+	$("#placeholderSortable").sortable({ 
+	    handle: ".panel-title", 
+	    forcePlaceholderSize: true 
+	});
+	
 	$(".facebook-makecomment-link").click(function () {
 	  $(this).next("div").slideToggle("slow");
 		$(this).next("div").children("form").children("input").prev().attr("value","");

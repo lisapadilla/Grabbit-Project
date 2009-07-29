@@ -26,10 +26,12 @@ function grabbit_panels_menu () {
 function grabbit_panels_get_panels(){
 	global $user;
 	
+	jquery_ui_add('ui.sortable');
+	
 	$output .='<div class="panels-update-form">
 	             <div class="panels-update-title">Update your status</div>
-	             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form')."</div>
-	           </div>";
+	             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>
+	           </div><div id="placeholderSortable">';
 	
 	$numbers=1;
 	while ($numbers<=3){
@@ -40,6 +42,7 @@ function grabbit_panels_get_panels(){
 	  $numbers++;
 	}
 	
+	$output .="</div>";
 	return $output;
 }
 
