@@ -1808,7 +1808,6 @@ ul.menu a.ext {
 /* Facebook and Twitter css */
 .panel-grabbit{
 	float: left;
-	border: solid 1px #ddd;
 }
 .facebook-post{
 	float: left;
@@ -1950,14 +1949,13 @@ ul.menu a.ext {
 	float:left;
 	margin-left:5px;
 }
-.panel-grabbit h3.title {
+.panel-grabbit .panel-title {
   background: #fff url('images/bg-shade-light.png') repeat-x bottom left;
   color: #777;
   display: block;
   font-weight: 700;
   letter-spacing: normal;
   text-align: left;
-  font-size: 1.1em;
   padding: 5px 10px;
   margin: 0;
   text-shadow: #fff 1px 1px 1px;
@@ -1968,4 +1966,77 @@ ul.menu a.ext {
   -webkit-border-top-right-radius: 0.333em;
   border: solid 1px #ddd;
   border-bottom: 0;
+}
+.panel-grabbit .panel-title h3.title{
+  font-size: 1.1em;
+  margin:0px;
+  color: #777;
+  font-weight: 700;
+  float:left;
+}
+.panel-wraper{
+	border: solid 1px #ddd;
+	height:420px;
+	overflow:scroll;
+	overflow-x:hidden;
+}
+.panel-gear{
+  background:transparent url("images/gear.gif");
+  display: inline-block;
+  float: right;
+  height: 12px;
+  width: 16px;
+  margin: 2px 0px 1px 0px;
+  border-bottom: #C2C9CE 1px solid;
+  border-right: #C2C9CE 1px solid;
+  padding: 0px;
+  
+}
+.panel-filters{
+  background:transparent url("images/sprites.gif");
+  display: inline-block;
+  float: right;
+  height: 12px;
+  width: 16px;
+  margin: 2px 0px 1px 0px;
+  border-bottom: #C2C9CE 1px solid;
+  border-right: #C2C9CE 1px solid;
+  padding: 0px;
+  
+}
+.panels-update-form .panels-update-title{
+	background: #fff url('images/bg-shade-light.png') repeat-x bottom left;
+	  color: #777;
+	  display: block;
+	  font-weight: 700;
+	  letter-spacing: normal;
+	  text-align: left;
+	  padding: 5px 10px;
+	  margin: 0;
+	  text-shadow: #fff 1px 1px 1px;
+	  color: #555;
+	  -moz-border-radius-topleft: 0.333em;
+	  -webkit-border-top-left-radius: 0.333em;
+	  -moz-border-radius-topright: 0.333em;
+	  -webkit-border-top-right-radius: 0.333em;
+	  border: solid 1px #ddd;
+	  border-bottom: 0;
+}
+.panels-update-form .panels-update-wraper{
+	border: solid 1px #ddd;
+	padding:5px;
+	font-size:10px;
+}
+.panels-update-form{
+	width:98%;
+	margin-bottom:10px;
+}
+.panels-update-form .panels-update-wraper .form-item{
+	margin:0px;
+}
+.panels-update-form .panels-update-wraper .form-item label, .panels-update-form .panels-update-wraper .form-item-checkbox{
+	display:inline;
+}
+.panel-title{
+	cursor:move;
 }

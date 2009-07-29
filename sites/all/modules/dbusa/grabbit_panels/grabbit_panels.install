@@ -1,0 +1,58 @@
+<?php
+// $Id: grabbit_panels.install,v 1.1.2.2 2009/06/24 05:53:49 Exp $
+
+/**
+ * @file
+ * Grabbit user condiguration install file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function grabbit_panels_install() {
+  drupal_install_schema('grabbit_panels');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function grabbit_panels_uninstall() {
+  drupal_uninstall_schema('grabbit_panels');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function grabbit_panels_schema() {
+  $schema = array();
+$schema['grabbit_panels'] = array(
+    'fields' => array(
+      'pan' => array(
+        'type' => 'serial',
+        'not null' => TRUE
+      ),
+      'pid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'disp-width' => '10',
+      ),
+	  'uid' => array(
+       'type' => 'int',
+       'size' => 'normal',
+       'not null' => TRUE,
+       'disp-width' => '10',
+      ),
+      'config' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+	 'filters' => array(
+      'type' => 'text',
+      'not null' => FALSE,
+     ) 
+    ),
+    'primary key' => array('pan'),
+  );
+  return $schema;
+}
