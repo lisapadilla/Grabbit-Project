@@ -495,12 +495,6 @@ function facebook_grabbit_add_favorite_twitter(){
  * Creates users private view()
  */
 function facebook_grabbit_private_view(){
-
-	//set_time_limit(60);
-	//
-	print ('entro');
-	exit;
-	
 	
 	global $user;
 	global $user_info;
@@ -719,7 +713,6 @@ function facebook_grabbit_private_view(){
  */
 function facebook_grabbit_private_view_panel($param){
 	
-	set_time_limit(60);
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	

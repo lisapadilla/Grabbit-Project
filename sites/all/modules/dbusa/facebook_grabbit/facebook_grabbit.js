@@ -106,7 +106,6 @@ $(document).ready(function() {
 	
 	$(".facebook-makecomment-link").click(function () {
 	  adjust($(this).next("div"),"comment_form_slide");
-		//$(this).next("div").slideToggle("slow",adjust);
 		$(this).next("div").children("form").children("input").prev().attr("value","");
 		$(this).next("div").children("form").children("input").prev().focus();
 	});
