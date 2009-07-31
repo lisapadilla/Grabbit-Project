@@ -1,33 +1,62 @@
-
-
 $(document).ready(function() {
 	// Everything that executes once the page is totally loaded
-	$('.panel-grabbit').append('<div class="panel-controller"><a class="main-stream-back" href="javascript:void(0)">up &nbsp&nbsp</a><a class="main-stream-next" href="javascript:void(0)">down</a></div>');
+	$('#0').append('<div class="panel-controller"><a class="main-stream-back" href="javascript:void(0)">up &nbsp&nbsp</a><a class="main-stream-next" href="javascript:void(0)">down</a></div>');
 	
-	// IMPORTANT: Validate and save these for each panel 
+	// IMPORTANT: Validate and save these for each panel (further), when using both at the same time, it doesn't work properly
 	var document_height;
 	var acum_height;
 	var stories_per_slide = 3;
 	var current_story = '';
 	var first_story = '';
 	var slide_height_array = new Array();
-	// If design is definitive, read the kind of class and then plus the correct padding amount.
 	var padding = 28; //Padding in pixels by each one, Problems with these because it seems each element (facebook, twitter, news, etc) has different paddings
 	
-	function adjust(comment_form){
-		/*for (var i = 0; i < stories_per_slide; i++){
-				current_story = current_story.next();
-				acum_height += current_story.height();
-				acum_height += padding;
-		}*/
+	// BETA : If design accepted, rebuild this function asking for needed nodes instead of using .parent(), child(), etc. And considering previous note about conerting vars to array so
+	// it can be useful for any number of panels or elements which need resizing.
+	function adjust(comment_form,type){
 		
-		acum_height -= current_story.height();
-		comment_form.slideToggle("slow",function(){
-			acum_height += current_story.height();
+		if (type == "comment_form_slide"){
+			var its_story = comment_form.parent().parent().parent();
 			
-			//comment_form.slideToggle("slow");
-		});
-		
+			acum_height -= its_story.height();
+			comment_form.slideToggle("slow",function(){
+				acum_height += its_story.height();
+				slide_height_array[slide_height_array.length-1] = acum_height;
+				its_story.parent().animate({height:acum_height},200);	
+			});
+		}else if (type == "comment_posted"){
+			// div class='new-comments'
+			var its_story = comment_form.parent().parent().parent();
+			
+			acum_height -= its_story.height();
+			comment_form.slideToggle("slow",function(){
+				acum_height += its_story.height();
+				slide_height_array[slide_height_array.length-1] = acum_height;
+				its_story.parent().animate({height:acum_height},200);
+			});
+		}else if (type == "comment_removed"){
+			if (comment_form.parent().parent().parent().attr('class') == 'panel-wraper'){
+				// It is a comment that was added in onReady
+				var its_story = comment_form.parent().parent();
+				
+				acum_height -= its_story.height();
+				comment_form.slideToggle("slow",function(){
+					acum_height += its_story.height();
+					slide_height_array[slide_height_array.length-1] = acum_height;
+					its_story.parent().animate({height:acum_height},200);
+				});				
+			}else{
+				// It is a comment that was added on the fly
+				var its_story = comment_form.parent().parent().parent();
+			
+				acum_height -= its_story.height();
+				comment_form.slideToggle("slow",function(){
+					acum_height += its_story.height();
+					slide_height_array[slide_height_array.length-1] = acum_height;
+					its_story.parent().animate({height:acum_height},200);
+				});				
+			}		
+		}				
 	}
 	
 	$('.main-stream-next').click(function(){
@@ -64,7 +93,7 @@ $(document).ready(function() {
 		if (slide_height_array.length >1 ){ // The stream can be compress
 			slide_height_array.pop();
 			acum_height = slide_height_array[slide_height_array.length-1];
-			$.scrollTo(slide_height_array[slide_height_array.length-1]-200,1000,{axis:'y',onAfter:function(){				
+			$.scrollTo(slide_height_array[slide_height_array.length-1]-250,1000,{axis:'y',onAfter:function(){				
 				tag.animate({height:slide_height_array[slide_height_array.length-1]},100);				
 			}});
 			
@@ -76,7 +105,7 @@ $(document).ready(function() {
 	});
 	
 	$(".facebook-makecomment-link").click(function () {
-	  adjust($(this).next("div"));
+	  adjust($(this).next("div"),"comment_form_slide");
 		//$(this).next("div").slideToggle("slow",adjust);
 		$(this).next("div").children("form").children("input").prev().attr("value","");
 		$(this).next("div").children("form").children("input").prev().focus();
@@ -120,6 +149,7 @@ $(document).ready(function() {
 									tag.closest("div").parent().prev().append(new_content);
 									var id = data;
 									
+									// Add the new handler to jQuery using live() function
 									$('#facebook-comment-delete-'+data).live('click',function(){
 										var tag = $(this).parent().parent();
 										var post_id = id;
@@ -127,7 +157,7 @@ $(document).ready(function() {
 										$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,mode:"delete"},function(data){
 												// Comment has been deleted
 												if (data){
-													tag.slideToggle("slow");																						
+													adjust(tag,"comment_removed");																							
 												}else{
 														// An error has occurred, catch it depending on the incoming design
 												}
@@ -137,9 +167,8 @@ $(document).ready(function() {
 									// Reset comment textbox
 									tag.prev("input").attr("value","");
 									tag.prev("input").focus();
-									
-									// Slide the new comment to make it invisible, it is missing to remove it (Performance issue)
-									tag.closest("div").parent().prev().children("#"+data).slideToggle("slow");										
+									// Call a funcion to extend the stream and enable the new comment
+									adjust(tag.closest("div").parent().prev().children("#"+data),"comment_posted");						
 								});								
 				}else{
 								tag.prev("input").attr("value","There was a connection problem. Try later");
@@ -154,7 +183,7 @@ $(document).ready(function() {
 		$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,mode:"delete"},function(data){
 	      // Comment has been deleted
 				if (data){
-					tag.slideToggle("slow");																						
+					adjust(tag,"comment_removed");																						
 				}else{
 						// An error has occurred, catch it depending on the incoming design
 				}
@@ -197,5 +226,4 @@ $(document).ready(function() {
 	    });		    
 	  }  		  
 	});
-	
-	});
+});

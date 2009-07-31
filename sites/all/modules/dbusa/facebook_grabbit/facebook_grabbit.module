@@ -273,6 +273,7 @@ function _get_current_user_info($params=array()){
 		$params = implode(", ",$params);
 	}
 	
+	
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	$suser=$fuser->fid;
 	$session_key=$fuser->kid;
@@ -490,8 +491,10 @@ function facebook_grabbit_add_favorite_twitter(){
  */
 function facebook_grabbit_private_view(){
 
-	set_time_limit(60);
+	//set_time_limit(60);
 	//
+	print ('entro');
+	exit;
 	
 	
 	global $user;
@@ -710,11 +713,18 @@ function facebook_grabbit_private_view(){
  * Creates users pannel()
  */
 function facebook_grabbit_private_view_panel($param){
-
+	
+	set_time_limit(60);
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	global $user;
+	global $user_info;
+	
+	//It starts getting parameters from index 1, 0 is the response id
+	//prepeare_status_update & prepeare_standar_update request 'name' at index 1, if it's needed to get more params, leave 'name' as first
+	$params = array('name','pic_square','profile_url');
+  $user_info = _get_current_user_info($params);
 	
 	
 	require_once("facebook/facebook.php");
