@@ -140,7 +140,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 
 		$facebook = new FacebookDesktop($api_key, $secret);
 		
-		if (!$facebook->set_user($suser, $session_key)){
+		if ($facebook->set_user($suser, $session_key) != null){
 			drupal_set_message("Internet connection failed","error");
 		}
 		else{
@@ -495,7 +495,9 @@ function facebook_grabbit_add_favorite_twitter(){
  */
 function facebook_grabbit_private_view(){
 
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	set_time_limit(60);
+	//
+	
 	
 	global $user;
 	global $user_info;
@@ -714,6 +716,7 @@ function facebook_grabbit_private_view(){
  */
 function facebook_grabbit_private_view_panel($param){
 
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	global $user;

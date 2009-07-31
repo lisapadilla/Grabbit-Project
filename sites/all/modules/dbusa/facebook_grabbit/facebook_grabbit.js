@@ -1,6 +1,83 @@
+
+
 $(document).ready(function() {
+	// Everything that executes once the page is totally loaded
+	$('.panel-grabbit').append('<div class="panel-controller"><a class="main-stream-back" href="javascript:void(0)">up &nbsp&nbsp</a><a class="main-stream-next" href="javascript:void(0)">down</a></div>');
+	
+	// IMPORTANT: Validate and save these for each panel 
+	var document_height;
+	var acum_height;
+	var stories_per_slide = 3;
+	var current_story = '';
+	var first_story = '';
+	var slide_height_array = new Array();
+	// If design is definitive, read the kind of class and then plus the correct padding amount.
+	var padding = 28; //Padding in pixels by each one, Problems with these because it seems each element (facebook, twitter, news, etc) has different paddings
+	
+	function adjust(comment_form){
+		/*for (var i = 0; i < stories_per_slide; i++){
+				current_story = current_story.next();
+				acum_height += current_story.height();
+				acum_height += padding;
+		}*/
+		
+		acum_height -= current_story.height();
+		comment_form.slideToggle("slow",function(){
+			acum_height += current_story.height();
+			
+			//comment_form.slideToggle("slow");
+		});
+		
+	}
+	
+	$('.main-stream-next').click(function(){
+		if (current_story == ''){ // First time the user extends the stream
+			first_story = $(this).parent().prev().children(); //First story
+			current_story = first_story;
+			acum_height = current_story.height();
+			acum_height += padding;
+			for (i = 1; i < stories_per_slide; i++){
+				current_story = current_story.next();
+				acum_height += current_story.height();
+				acum_height += padding;
+			}
+		}else{
+			// acum_height trae el valor correcto
+			for (var i = 0; i < stories_per_slide; i++){
+				current_story = current_story.next();
+				acum_height += current_story.height();
+				acum_height += padding;
+			}
+			acum_height += 9;
+		}
+		slide_height_array.push(acum_height);
+		$(this).parent().prev().animate({height:acum_height},100,null,function(){
+			// callback: focus at the end of the stream
+			document_height = parseInt($(document).height());
+			$.scrollTo(document_height,1000,{axis:'y'});			
+		});		
+	});
+	
+	$('.main-stream-back').click(function(){
+		var tag = $(this).parent().prev();
+		
+		if (slide_height_array.length >1 ){ // The stream can be compress
+			slide_height_array.pop();
+			acum_height = slide_height_array[slide_height_array.length-1];
+			$.scrollTo(slide_height_array[slide_height_array.length-1]-200,1000,{axis:'y',onAfter:function(){				
+				tag.animate({height:slide_height_array[slide_height_array.length-1]},100);				
+			}});
+			
+			for (var i=0 ; i < stories_per_slide; i++){
+				current_story = current_story.prev();
+			}
+			
+		}
+	});
+	
 	$(".facebook-makecomment-link").click(function () {
-	  $(this).next("div").slideToggle("slow");
+	  adjust($(this).next("div"));
+		//$(this).next("div").slideToggle("slow",adjust);
 		$(this).next("div").children("form").children("input").prev().attr("value","");
 		$(this).next("div").children("form").children("input").prev().focus();
 	});
@@ -118,8 +195,7 @@ $(document).ready(function() {
 								alert ("There was a connection problem. Try later");
 				}
 	    });		    
-	  }
-	  		  
-	});		
+	  }  		  
+	});
 	
 	});
