@@ -157,7 +157,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
 		$account = array_shift($accounts); 
 
-		twitter_set_status($account['screen_name'], $account['password'], $form_state['values']['status'], $source = 'Onix');
+		twitter_set_status($account['screen_name'], $account['password'], $form_state['values']['status'], $source = 'Grabbit.net');
 	}
 	
 	
@@ -180,7 +180,8 @@ function facebook_grabbit_facebook(){
   $duid=$_GET["duid"];
 
   if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access") || !$facebook->api_client->users_hasAppPermission("read_stream") || !$facebook->api_client->users_hasAppPermission("publish_stream")){  
-    $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream, publish_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status!</strong></fb:prompt-permission>';  
+	$output .= "To start using Grabbit for reading and updating your Facebook Stream you have to grant permissions for the grabbit application:<br>";
+    $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream, publish_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status and read your stream!</strong></fb:prompt-permission>';  
     $visibility = "none";  
   }else{
     $visibility = "block";
@@ -197,7 +198,11 @@ function facebook_grabbit_facebook(){
   }  
 
   $output .='<div id="statusdiv" style="display:'.$visibility.';">  
-	   <strong>Thank you for installing this app, go to Grabbit to change your facebook status</strong>
+	   <strong>Thank you for installing this application, <br></strong>
+	    You will be able to access your facebook account from grabbit.net<br>
+	    Now <a href="#">got to Grabbit.net</a> to start using your new fatures.
+	<br><br>
+	    Grabbit.net Staff
 	</div>  
 	<script>
 	function after(url){
