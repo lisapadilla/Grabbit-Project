@@ -1024,7 +1024,7 @@ ul.menu .collapsed .leaf a {
 }
 .node {
   clear: both;
-  display: block;
+  display: none;
   margin: 0 0 0 0;
   padding: 0 1em 0 0;
 }
@@ -1819,7 +1819,7 @@ ul.menu a.ext {
 	  -moz-border-radius: 0.333em;
 	width:100%;
 	margin-bottom:0.5em;
-
+  display: none;
 }
 .twitter-message-stream{
 	float: left;
@@ -1831,6 +1831,7 @@ ul.menu a.ext {
 	  -moz-border-radius: 0.333em;
 	width:100%;
 	margin-bottom:0.5em;
+  display: none;
 }
 .twitter-containter{
 	padding-bottom:0.5em;
@@ -1976,7 +1977,7 @@ ul.menu a.ext {
 }
 .panel-wraper{
 	border: solid 1px #ddd;
-	height:420px;
+	height:auto;
 	overflow:hidden;
 }
 .panel-gear{

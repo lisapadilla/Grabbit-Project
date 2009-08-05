@@ -1,6 +1,21 @@
 $(document).ready(function() {
+
+	$(document).scrollTo($(document).children(),0);
+	
+	var stories_at_first = 4;
+	var stories_per_slide = 4;
+	// save in 'current' the first one
+	var current = $('#0').children().next().children().attr('id');
+	current = $('#'+current);
+	current.slideToggle('medium');
+	
+	for (var i = 1; i< stories_at_first; i++){
+		current = current.next();
+		current.show();
+	}
+	
 	// Everything that executes once the page is totally loaded
-	$('#0').append('<div class="panel-controller"><a class="main-stream-back" href="javascript:void(0)">up &nbsp&nbsp</a><a class="main-stream-next" href="javascript:void(0)">down</a></div>');
+	$('#0').append('<div class="panel-controller"></a><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
 	
 	// IMPORTANT: Validate and save these for each panel (further), when using both at the same time, it doesn't work properly
 	var document_height;
@@ -11,103 +26,24 @@ $(document).ready(function() {
 	var slide_height_array = new Array();
 	var padding = 28; //Padding in pixels by each one, Problems with these because it seems each element (facebook, twitter, news, etc) has different paddings
 	
-	// BETA : If design accepted, rebuild this function asking for needed nodes instead of using .parent(), child(), etc. And considering previous note about conerting vars to array so
-	// it can be useful for any number of panels or elements which need resizing.
-	function adjust(comment_form,type){
-		
-		if (type == "comment_form_slide"){
-			var its_story = comment_form.parent().parent().parent();
-			
-			acum_height -= its_story.height();
-			comment_form.slideToggle("slow",function(){
-				acum_height += its_story.height();
-				slide_height_array[slide_height_array.length-1] = acum_height;
-				its_story.parent().animate({height:acum_height},200);	
-			});
-		}else if (type == "comment_posted"){
-			// div class='new-comments'
-			var its_story = comment_form.parent().parent().parent();
-			
-			acum_height -= its_story.height();
-			comment_form.slideToggle("slow",function(){
-				acum_height += its_story.height();
-				slide_height_array[slide_height_array.length-1] = acum_height;
-				its_story.parent().animate({height:acum_height},200);
-			});
-		}else if (type == "comment_removed"){
-			if (comment_form.parent().parent().parent().attr('class') == 'panel-wraper'){
-				// It is a comment that was added in onReady
-				var its_story = comment_form.parent().parent();
-				
-				acum_height -= its_story.height();
-				comment_form.slideToggle("slow",function(){
-					acum_height += its_story.height();
-					slide_height_array[slide_height_array.length-1] = acum_height;
-					its_story.parent().animate({height:acum_height},200);
-				});				
-			}else{
-				// It is a comment that was added on the fly
-				var its_story = comment_form.parent().parent().parent();
-			
-				acum_height -= its_story.height();
-				comment_form.slideToggle("slow",function(){
-					acum_height += its_story.height();
-					slide_height_array[slide_height_array.length-1] = acum_height;
-					its_story.parent().animate({height:acum_height},200);
-				});				
-			}		
-		}				
-	}
-	
 	$('.main-stream-next').click(function(){
-		if (current_story == ''){ // First time the user extends the stream
-			first_story = $(this).parent().prev().children(); //First story
-			current_story = first_story;
-			acum_height = current_story.height();
-			acum_height += padding;
-			for (i = 1; i < stories_per_slide; i++){
-				current_story = current_story.next();
-				acum_height += current_story.height();
-				acum_height += padding;
-			}
-		}else{
-			// acum_height trae el valor correcto
-			for (var i = 0; i < stories_per_slide; i++){
-				current_story = current_story.next();
-				acum_height += current_story.height();
-				acum_height += padding;
-			}
-			acum_height += 9;
+		// The story I am focusing the user to read
+		//var scroll_to = current.child().next().child().next('.facebook-comment-form');
+		var scroll_to = current.next();
+		for (var i = 0; i< stories_per_slide; i++){
+			current = current.next();
+			current.show();
 		}
-		slide_height_array.push(acum_height);
-		$(this).parent().prev().animate({height:acum_height},100,null,function(){
-			// callback: focus at the end of the stream
-			document_height = parseInt($(document).height());
-			$.scrollTo(document_height,1000,{axis:'y'});			
-		});		
-	});
-	
-	$('.main-stream-back').click(function(){
-		var tag = $(this).parent().prev();
-		
-		if (slide_height_array.length >1 ){ // The stream can be compress
-			slide_height_array.pop();
-			acum_height = slide_height_array[slide_height_array.length-1];
-			$.scrollTo(slide_height_array[slide_height_array.length-1]-250,1000,{axis:'y',onAfter:function(){				
-				tag.animate({height:slide_height_array[slide_height_array.length-1]},100);				
-			}});
-			
-			for (var i=0 ; i < stories_per_slide; i++){
-				current_story = current_story.prev();
-			}
-			
-		}
+		$(document).scrollTo(scroll_to,2500,{axis:'y'});
 	});
 	
 	$(".facebook-makecomment-link").click(function () {
-	  adjust($(this).next("div"),"comment_form_slide");
+	  var input = $(this).next("div").children("form").children("input").prev();
+		$(this).next("div").slideToggle("medium",function(){
+			input.focus();
+		});
 		$(this).next("div").children("form").children("input").prev().attr("value","");
-		$(this).next("div").children("form").children("input").prev().focus();
+		
 	});
 
 // When user submits a comment in facebook
@@ -156,7 +92,9 @@ $(document).ready(function() {
 										$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,mode:"delete"},function(data){
 												// Comment has been deleted
 												if (data){
-													adjust(tag,"comment_removed");																							
+													tag.slideUp('medium',function(){
+														tag.remove();
+													});		
 												}else{
 														// An error has occurred, catch it depending on the incoming design
 												}
@@ -167,10 +105,10 @@ $(document).ready(function() {
 									tag.prev("input").attr("value","");
 									tag.prev("input").focus();
 									// Call a funcion to extend the stream and enable the new comment
-									adjust(tag.closest("div").parent().prev().children("#"+data),"comment_posted");						
+									tag.closest("div").parent().prev().children("#"+data).slideToggle('medium');						
 								});								
 				}else{
-								tag.prev("input").attr("value","There was a connection problem. Try later");
+								alert ("There was a connection problem. Try later");
 				}
     });
 	});
@@ -182,7 +120,7 @@ $(document).ready(function() {
 		$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,mode:"delete"},function(data){
 	      // Comment has been deleted
 				if (data){
-					adjust(tag,"comment_removed");																						
+					tag.slideToggle('medium');																				
 				}else{
 						// An error has occurred, catch it depending on the incoming design
 				}
