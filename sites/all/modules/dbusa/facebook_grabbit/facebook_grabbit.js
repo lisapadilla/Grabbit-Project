@@ -17,15 +17,6 @@ $(document).ready(function() {
 	// Everything that executes once the page is totally loaded
 	$('#0').append('<div class="panel-controller"></a><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
 	
-	// IMPORTANT: Validate and save these for each panel (further), when using both at the same time, it doesn't work properly
-	var document_height;
-	var acum_height;
-	var stories_per_slide = 3;
-	var current_story = '';
-	var first_story = '';
-	var slide_height_array = new Array();
-	var padding = 28; //Padding in pixels by each one, Problems with these because it seems each element (facebook, twitter, news, etc) has different paddings
-	
 	$('.main-stream-next').click(function(){
 		// The story I am focusing the user to read
 		//var scroll_to = current.child().next().child().next('.facebook-comment-form');

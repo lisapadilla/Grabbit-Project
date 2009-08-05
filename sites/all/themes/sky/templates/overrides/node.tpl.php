@@ -9,7 +9,7 @@
  * http://api.drupal.org/api/function/template_preprocess_node/6
  */
 ?>
-<div<?php print $attributes; ?>>
+<div<?php print $attributes; if ($_SERVER["REQUEST_URI"] == '/grabbit/stream/user'){ ?>style="display:none"<?php } ?> >
     <div class="meta">
       <?php if ($submitted): ?>
       <?php print $picture; ?>

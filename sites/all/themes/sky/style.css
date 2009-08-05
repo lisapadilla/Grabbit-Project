@@ -1024,7 +1024,6 @@ ul.menu .collapsed .leaf a {
 }
 .node {
   clear: both;
-  display: none;
   margin: 0 0 0 0;
   padding: 0 1em 0 0;
 }
