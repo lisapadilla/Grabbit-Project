@@ -2,31 +2,60 @@ $(document).ready(function() {
 
 	$(document).scrollTo($(document).children(),0);
 	
-	var stories_at_first = 4;
-	var stories_per_slide = 4;
-	// save in 'current' the first one
-	var current = $('#0').children().next().children().attr('id');
-	current = $('#'+current);
-	current.slideToggle('medium');
+	// PANEL 1
+	var stories_at_first_p1 = 4;
+	var stories_per_slide_p1 = 4;
 	
-	for (var i = 1; i< stories_at_first; i++){
-		current = current.next();
-		current.show();
+	var current_panel_1 = $('#0').children().next().children().attr('id');
+	current_panel_1 = $('#'+current_panel_1);
+	current_panel_1.show();
+	
+	for (var i = 1; i< stories_at_first_p1; i++){
+		current_panel_1 = current_panel_1.next();
+		current_panel_1.show();
 	}
 	
-	// Everything that executes once the page is totally loaded
-	$('#0').append('<div class="panel-controller"></a><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
+	$('#0').append('<div class="panel-controller"></a><a class="main-stream-next-p1" href="javascript:void(0)">more</a></div>');
 	
-	$('.main-stream-next').click(function(){
+	$('.main-stream-next-p1').click(function(){
 		// The story I am focusing the user to read
-		//var scroll_to = current.child().next().child().next('.facebook-comment-form');
-		var scroll_to = current.next();
-		for (var i = 0; i< stories_per_slide; i++){
-			current = current.next();
-			current.show();
+		//var scroll_to = current_panel_1.child().next().child().next('.facebook-comment-form');
+		var scroll_to = current_panel_1.next();
+		for (var i = 0; i< stories_per_slide_p1; i++){
+			current_panel_1 = current_panel_1.next();
+			current_panel_1.show();
 		}
 		$(document).scrollTo(scroll_to,2500,{axis:'y'});
 	});
+	
+	// PANEL 2
+	var stories_at_first_p2 = 4;
+	var stories_per_slide_p2 = 4;
+	
+	var current_panel_2 = $('#1').children().next().children().attr('id');
+	current_panel_2 = $('#'+current_panel_2);
+	current_panel_2.show();
+	
+	for (var i = 1; i< stories_at_first_p2; i++){
+		current_panel_2 = current_panel_2.next();
+		current_panel_2.show();
+	}
+	
+	$('#1').append('<div class="panel-controller"></a><a class="main-stream-next-p2" href="javascript:void(0)">more</a></div>');
+	
+	$('.main-stream-next-p2').click(function(){
+		// The story I am focusing the user to read
+		//var scroll_to = current_panel_1.child().next().child().next('.facebook-comment-form');
+		var scroll_to = current_panel_2.next();
+		for (var i = 0; i< stories_per_slide_p2; i++){
+			current_panel_2 = current_panel_2.next();
+			current_panel_2.show();
+		}
+		$(document).scrollTo(scroll_to,2500,{axis:'y'});
+	});
+	
+
+
 	
 	$(".facebook-makecomment-link").click(function () {
 	  var input = $(this).next("div").children("form").children("input").prev();
