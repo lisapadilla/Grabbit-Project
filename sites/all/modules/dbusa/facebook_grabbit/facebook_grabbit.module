@@ -119,7 +119,6 @@ function facebook_grabbit_update_form($form_state){
 		);
 	}
 	
-	
 	return $form;
 	
 }
@@ -713,8 +712,6 @@ function facebook_grabbit_private_view(){
  */
 function facebook_grabbit_private_view_panel($param){
 	
-	set_time_limit(60);
-	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
@@ -924,9 +921,8 @@ function facebook_grabbit_private_view_panel($param){
 						$output .= node_view($node, TRUE, FALSE, TRUE);
 					}
 					else{
-	                  $output .= theme_twitter_message($entry['value']);
-	                }
-
+	          $output .= theme_twitter_message($entry['value']);
+	        }
 				}
 			}	
 		}
@@ -936,7 +932,6 @@ function facebook_grabbit_private_view_panel($param){
 	return $output;
 
 }
-
 
 /**
  * Helper function to sort the entries
@@ -1100,9 +1095,10 @@ function _add_twitter_favorite($link){
 function theme_twitter_message($message){  
 
 	$msg = $message->text;
+	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
 	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
 	          <div class="twitter-body">'.$msg_formatted. ' <span class="twitter-date"><strong>'.$message->user->name.'</strong> on '. format_date(strtotime($message->created_at)) . '</span>
 	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a> - 
