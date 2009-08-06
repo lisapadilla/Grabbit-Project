@@ -869,7 +869,8 @@ function facebook_grabbit_private_view_panel($param){
 			
 			$account = array_shift($accounts); 
 
-		//	$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+			$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
+			print_r($twitter_encrypted);
 			$headers = array('Authorization' => 'Basic '. $twitter_encrypted,
 			                   'Content-type' => 'application/x-www-form-urlencoded');
 
