@@ -888,8 +888,7 @@ function facebook_grabbit_private_view_panel($param){
 			  }
 			
 			}else{
-				print_r($result);
-			  drupal_set_message("There was a problem connecting to Twitter, please try again","error");
+			  drupal_set_message("There was a problem connecting to Twitter, please try again: ".$result->error,"error");
 			}	
 		}
 	}
