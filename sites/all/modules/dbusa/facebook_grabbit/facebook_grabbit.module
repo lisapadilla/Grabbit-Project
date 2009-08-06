@@ -169,7 +169,6 @@ function facebook_grabbit_facebook(){
 
   // the facebook client library
   include_once 'facebook/facebook.php';
-
   include_once("facebook/config.php");  
 
   $facebook = new Facebook($api_key, $secret);
@@ -711,6 +710,8 @@ function facebook_grabbit_private_view(){
  * Creates users pannel()
  */
 function facebook_grabbit_private_view_panel($param){
+	
+	set_time_limit(60);
 	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');

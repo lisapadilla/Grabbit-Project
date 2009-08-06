@@ -5,18 +5,11 @@ $(document).ready(function() {
 	// PANEL 1
 	var stories_at_first_p1 = 4;
 	var stories_per_slide_p1 = 4;
-	
 	var current_panel_1 = $('#0').children().next().children();
 	
-	if (current_panel_1.attr('id').length>0){
-		// The first one is facebook or twitter
-		current_panel_1 = current_panel_1.attr('id');
-		current_panel_1 = $('#'+current_panel_1);
-		current_panel_1.show();
-	}else{
-		// The first one is a node or new which don't have id
-		current_panel_1.show();
-	}
+	$('#'+current_panel_1.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
+	current_panel_1 = $('#'+current_panel_1.attr('id'));
+	current_panel_1.show();
 	
 	for (var i = 1; i< stories_at_first_p1; i++){
 		current_panel_1 = current_panel_1.next();
@@ -26,48 +19,51 @@ $(document).ready(function() {
 	$('#0').append('<div class="panel-controller"></a><a class="main-stream-next-p1" href="javascript:void(0)">more</a></div>');
 	
 	$('.main-stream-next-p1').click(function(){
-		// The story I am focusing the user to read
-		var scroll_to = current_panel_1.next();
-		for (var i = 0; i< stories_per_slide_p1; i++){
-			current_panel_1 = current_panel_1.next();
-			current_panel_1.show();
-		}
-		$(document).scrollTo(scroll_to,2500,{axis:'y'});
+		// Verify if it is the last one
+		if (current_panel_1.next().attr('class') != undefined){
+			var scroll_to = current_panel_1.next();
+			for (var i = 0; i< stories_per_slide_p2; i++){	
+				if (current_panel_1.next().attr('class') != undefined){
+					current_panel_1 = current_panel_1.next();
+					current_panel_1.show();
+				}			
+			}
+			$(document).scrollTo(scroll_to,1000,{axis:'y'});
+		}else{
+			current_panel_1.parent().next().html('There\'s no more posts');
+		}		
 	});
 	
 	// PANEL 2
 	var stories_at_first_p2 = 4;
 	var stories_per_slide_p2 = 4;
-	
 	var current_panel_2 = $('#1').children().next().children();
 	
-	$('#'+current_panel_2.attr('id')).attr('id','nuevo-'+Math.random()*1000);
+	$('#'+current_panel_2.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
 	current_panel_2 = $('#'+current_panel_2.attr('id'));
-	
 	current_panel_2.show();
 	
 	for (var i = 1; i< stories_at_first_p2; i++){
-		current_panel_2 = current_panel_2.next();
-		
+		current_panel_2 = current_panel_2.next();		
 		current_panel_2.show();
 	}
 	
 	$('#1').append('<div class="panel-controller"></a><a class="main-stream-next-p2" href="javascript:void(0)">more</a></div>');
 	
-	$('.main-stream-next-p2').click(function(){
-		// The story I am focusing the user to read
-		var scroll_to = current_panel_2.next();
-		for (var i = 0; i< stories_per_slide_p2; i++){
-			current_panel_2 = current_panel_2.next();
-			
-			if (current_panel_2.attr('id').substr(0,7) == 'twitter'){
-				current_panel_2.attr('id','twitter-post-'+Math.round(Math.random()*1000));				
+	$('.main-stream-next-p2').click(function(){		
+		//Verify if it is the last one
+		if (current_panel_2.next().attr('class') != undefined){
+			var scroll_to = current_panel_2.next();
+			for (var i = 0; i< stories_per_slide_p2; i++){	
+				if (current_panel_2.next().attr('class') != undefined){
+					current_panel_2 = current_panel_2.next();
+					current_panel_2.show();
+				}			
 			}
-			current_panel_2.show();			
-			
-			current_panel_2.show();
+			$(document).scrollTo(scroll_to,1000,{axis:'y'});
+		}else{
+			current_panel_2.parent().next().html('There\'s no more posts');
 		}
-		$(document).scrollTo(scroll_to,2500,{axis:'y'});
 	});
 	
 	$(".facebook-makecomment-link").click(function () {
@@ -79,7 +75,7 @@ $(document).ready(function() {
 		
 	});
 
-// When user submits a comment in facebook
+	// When user submits a comment in facebook
 	$(".facebook_comment_submit").click(function () {
 		var tag = $(this);
 		var post_id = $(this).attr("id");
