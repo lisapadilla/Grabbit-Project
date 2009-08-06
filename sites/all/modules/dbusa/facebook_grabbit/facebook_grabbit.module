@@ -1236,17 +1236,3 @@ function facebook_grabbit_tags_form(){
 		
 	return $form;
 }
-
-function facebook_grabbit_get_page_html(){
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-	
-	/*print ('<iframe src ="http://www.altavista.com" width="800" scrolling="no" height="650" style="zoom:.3" align="center">
-        <p>Your browser does not support iframes.</p>
-    </iframe>
-    <a class="cla" href="javascript:void(0)">
-        agrandar
-    </a>');*/
-
-	
-}
