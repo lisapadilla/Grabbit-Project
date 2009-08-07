@@ -1,5 +1,5 @@
 <?php
-// $Id: subscriptions_blog_ui.module,v 1.4 2008/10/26 23:25:44 salvis Exp $
+// $Id: subscriptions_blog_ui.module,v 1.7 2009/07/20 21:55:53 salvis Exp $
 
 /**
  * @file
@@ -60,7 +60,7 @@ function subscriptions_blog_ui_page_blog($account, $form) {
     FROM {node} n
     INNER JOIN {users} u ON n.uid = u.uid
     WHERE n.type = 'blog' AND n.status = 1
-    GROUP BY u.uid
+    GROUP BY u.uid, u.name
     ORDER BY u.name");
   $result = db_query($sql);
   while ($usr = db_fetch_array($result)) {
@@ -72,15 +72,17 @@ function subscriptions_blog_ui_page_blog($account, $form) {
   }
 
   // possibly additional blog subscription entries (no blog nodes)
-  $result = db_query("
-    SELECT s.author_uid, u.name
-    FROM {subscriptions} s
-    INNER JOIN {users} u ON s.author_uid = u.uid
-    WHERE s.module = 'node' AND s.field = 'type' AND s.value = 'blog' AND s.recipient_uid = %d
-    ORDER BY u.name", $account->uid);
-  while ($usr = db_fetch_array($result)) {
-    $blogs[$usr['author_uid']]['uid'] = $usr['author_uid'];
-    $blogs[$usr['author_uid']]['name'] = $usr['name'];
+  if (isset($account)) {
+    $result = db_query("
+      SELECT s.author_uid, u.name
+      FROM {subscriptions} s
+      INNER JOIN {users} u ON s.author_uid = u.uid
+      WHERE s.module = 'node' AND s.field = 'type' AND s.value = 'blog' AND s.recipient_uid = %d
+      ORDER BY u.name", $account->uid);
+    while ($usr = db_fetch_array($result)) {
+      $blogs[$usr['author_uid']]['uid'] = $usr['author_uid'];
+      $blogs[$usr['author_uid']]['name'] = $usr['name'];
+    }
   }
 
   if (!empty($blogs)) {

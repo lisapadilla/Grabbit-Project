@@ -1,5 +1,5 @@
 <?php
-// $Id: parser_simplepie.module,v 1.6.2.20.2.15 2009/06/17 15:04:23 aronnovak Exp $
+// $Id: parser_simplepie.module,v 1.6.2.20.2.16 2009/07/02 16:38:16 aronnovak Exp $
 
 /**
  * @file
@@ -140,7 +140,7 @@ function _parser_simplepie_feedapi_parse($feed, $settings = array()) {
     $curr_item->options->timestamp = $simplepie_item->get_date("U");
     $curr_item->options->guid = $simplepie_item->get_id();
     $curr_item->options->original_author = $simplepie_item->get_author();
-    // Enclosures 
+    // Enclosures
     $enclosures = $simplepie_item->get_enclosures();
     if (is_array($enclosures)) {
       foreach ($enclosures as $enclosure) {
@@ -151,7 +151,7 @@ function _parser_simplepie_feedapi_parse($feed, $settings = array()) {
         }
       }
     }
-    // Location 
+    // Location
     $latitude = $simplepie_item->get_latitude();
     $longitude = $simplepie_item->get_longitude();
     if (!is_null($latitude) && !is_null($longitude)) {
@@ -182,7 +182,7 @@ function _parser_simplepie_feedapi_parse($feed, $settings = array()) {
   }
   return $parsed_source;
 }
-        
+
 /**
  * Set the default caching directory if the current setting is not useable
  */
@@ -207,7 +207,7 @@ function _parser_simplepie_sanitize_cache() {
  * @param $enable_cache
  *   If FALSE, the caching is disabled
  * @param $settings
- *   
+ *
  * @return
  *   SimplePie object
  */

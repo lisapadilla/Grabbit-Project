@@ -1,5 +1,5 @@
 <?php
-// $Id: feedapi_node.module,v 1.1.2.18.2.34 2009/06/19 15:59:48 aronnovak Exp $
+// $Id: feedapi_node.module,v 1.1.2.18.2.35 2009/07/02 16:38:16 aronnovak Exp $
 
 /**
  * @file
@@ -109,7 +109,7 @@ function feedapi_node_link($type, $node = NULL) {
           'href' => $node->feedapi_node->url,
         );
       }
-      
+
     }
   }
   return $links;
@@ -210,11 +210,11 @@ function feedapi_node_feedapi_item($op) {
 
 /**
  * Check for expired items, pass them to the item_expire function
- * 
+ *
  * @TO DO Add cron timeout checking here, there may be too many items (nodes) to delete
- * 
+ *
  * We implement the same logic as a db query. The old code is
- * 
+ *
  *     if (isset($item->arrived) || isset($item->timestamp)) {
  *       $diff = abs(time() - (isset($item->timestamp) ? $item->timestamp : $item->timestamp));
  *       if ($diff > $settings['items_delete']) {
@@ -244,7 +244,7 @@ function _feedapi_node_expire($feed, $settings) {
 function _feedapi_node_save($feed_item, $feed_nid, $settings = array()) {
   // Avoid error message flood when creating tons of items.
   static $error_msg = FALSE;
-  
+
   module_load_include('inc', 'node', 'node.pages');
   // Don't save anything if neither url nor guid given.
   if (!$feed_item->options->original_url) {
@@ -277,7 +277,7 @@ function _feedapi_node_save($feed_item, $feed_nid, $settings = array()) {
   else {
     $node->type = $settings['content_type'];
   }
-  
+
   if (feedapi_enabled_type($node->type)) {
     if ($error_msg !== TRUE) {
       drupal_set_message(t('Please disable FeedAPI for !item content-type.', array('!item' => $node->type)), 'error');
@@ -285,7 +285,7 @@ function _feedapi_node_save($feed_item, $feed_nid, $settings = array()) {
     }
     return FALSE;
   }
-  
+
   // Get the default options from the cont
   $options = variable_get('node_options_'. $node->type, FALSE);
   if (is_array($options)) {
@@ -297,7 +297,7 @@ function _feedapi_node_save($feed_item, $feed_nid, $settings = array()) {
     $node->status = 1;
   }
   $feed_node = node_load($feed_nid);
-  
+
   $type = node_get_types('type', $node->type);
   if ($type->has_title) {
     $node->title = $feed_item->title;
@@ -323,10 +323,10 @@ function _feedapi_node_save($feed_item, $feed_nid, $settings = array()) {
     $node->created = db_result(db_query("SELECT created FROM {node} WHERE nid = %d", $feed_item->nid));
   }
   $node->uid = $feed_node->uid;
-  
+
   // If there are dupes on other feeds, don't create new feed item, but link this feed
   // to existing feed item.
-  // Heads up: if there is a duplicate on the SAME feed, 
+  // Heads up: if there is a duplicate on the SAME feed,
   // _feedapi_node_save() won't even be called.
   if (isset($feed_item->feedapi_node->duplicates)) {
     foreach ($feed_item->feedapi_node->duplicates as $fi_nid => $f_nids) {
@@ -369,13 +369,13 @@ function _feedapi_node_delete($feed_item) {
  */
 function _feedapi_node_purge($feed) {
   $total = db_result(db_query('SELECT COUNT(*) FROM {feedapi_node_item_feed} WHERE feed_nid = %d', $feed->nid));
-  
+
   $deleted = 0;
   $max_execution_time = ini_get('max_execution_time');
   while ($deleted < $total) {
     // Take hundred items at a time.
     $result = db_query_range('SELECT feed_item_nid as nid FROM {feedapi_node_item_feed} WHERE feed_nid = %d', $feed->nid, 0, 100);
-    
+
     while ($node = db_fetch_object($result)) {
       node_delete($node->nid);
       $deleted++;
@@ -433,7 +433,7 @@ function _feedapi_node_unique($feed_item, $feed_nid, $settings) {
   // There is *usually* only one. However, there might be more than one.
   // Todo: don't link to feed items whose feed is not x_dedupe enabled.
   if ($settings['x_dedupe']) {
-    
+
     if (isset($feed_item->options->original_url)) {
       $result = db_query("SELECT fni.nid, ff.feed_nid FROM {feedapi_node_item} fni JOIN {feedapi_node_item_feed} ff ON ff.feed_item_nid = fni.nid WHERE ff.feed_nid <> %d AND fni.url = '%s'", $feed_nid, $feed_item->options->original_url);
       while ($existing_feed_item = db_fetch_object($result)) {
@@ -447,7 +447,7 @@ function _feedapi_node_unique($feed_item, $feed_nid, $settings) {
       }
     }
   }
-  
+
   if (isset($feed_item->options->original_url) || isset($feed_item->options->guid)) {
     return TRUE;
   }
@@ -457,7 +457,7 @@ function _feedapi_node_unique($feed_item, $feed_nid, $settings) {
 
 /**
  * Copy of http://api.drupal.org/api/function/node_delete/6 to avoid permission checking
- * 
+ *
  * @todo: this is just a workaround to be able to delete nodes at cron time
  * @param unknown_type $nid
  */

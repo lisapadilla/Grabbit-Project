@@ -1,6 +1,40 @@
 CHANGELOG for Subscriptions 1.x for Drupal 6
 
 Subscriptions 6.x-1.x-dev:
+
+
+Subscriptions 6.x-1.x-BETA6 (2009-07-22):
+   - #367093: Don't suppress "On comments" checkboxes.
+   - #259377: French translation.
+   - #500148: Mention 'comment' in the node-nid template description; also change 'Pages' to 'Pages/Threads'; update .pot and de.po.
+   - #524362: Fix empty subscriptions_content_node_form().
+   - Fix the fix: MySQL doesn't like CAST(... AS VARCHAR).
+   - #524332: PostgreSQL fixes.
+   - #524332-5: Undo the taxa optimization; it destroys potentially useful data and is non-conformant SQL.
+   - #507898: Avoid creating duplicate entries in {subscriptions_queue} for new comments.
+   - #507898: Avoid creating duplicate taxa entries in {subscriptions_queue}.
+   - Add img_assist module support (provide URLs of embedded pictures).
+   - Add the !files variable to list attached files.
+   - Define new hook_subscriptions_ui() to allow arbitration of multiple node UIs.
+   - #301229: Remove subscriptions_moderate_content_notifications module.
+   - Update strings, .pot file and German translation.
+   - #430870: Check the syntax of the blocked node input field.
+   - #324716: Allow modifying the "From" e-mail name.
+   - #427642: Add Hungarian translation.
+   - Minor clean-up (mostly strings).
+   - #356964: Add "Latest activity, authored, commented" information on the page/thread subscriptions page.
+   - #356964: Add select/unselect all checkbox on the subscriptions pages.
+   - #373130: Avoid mentioning 'red' formatting because this is theme-dependent.
+   - #372490: Add tag symbol to links that are visible only due to the 'subscribe to all content types' permission.
+   - #373128: Fix notice (Trying to get property of non-object).
+   - #371701: Add another pgsql CAST().
+   - #365682: Commit Brazilian Portuguese translation.
+   - #362533: Analyze and report faulty returns from hook_subscriptions().
+   - Move Danish translation to the correct directory (it's based on the D5 version even though it was uploaded to HEAD/D6, but it's better than nothing).
+   - #351753: Add any missing {subscriptions_user} records without complaint to support multi-site installations.
+   - Remove pre-D6 {subscriptions_mail_edit} table from database schema.
+   - Clean up database schema to keep schema module happy.
+   - #305235: Revert previous patch because it didn't work.
  
 Subscriptions 6.x-1.x-BETA5 (2008-12-27):
    - #351606: Fix deprecated call-time pass-by-reference.

@@ -1,5 +1,5 @@
 <?php
-// $Id: twitter.pages.inc,v 1.2.2.7 2009/04/08 22:13:35 eaton Exp $
+// $Id: twitter.pages.inc,v 1.2.2.8 2009/07/02 13:23:44 eaton Exp $
 
 /**
  *
@@ -74,6 +74,12 @@ function twitter_admin_form() {
     '#default_value' => variable_get('twitter_api_url', 'twitter.com'),
     '#description' => t("A Twitter-compatible microblogging services like !identica can be used insted of Twitter.com by entering the service's API URL here.",
       array('!identica' => l('Identi.ca', 'http://laconi.ca/trac/wiki/TwitterCompatibleAPI'))),
+  );
+
+  $form['twitter_set_source'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Set source to Drupal when updating Twitter status'),
+    '#default_value' => variable_get('twitter_set_source', TRUE),
   );
 
   return system_settings_form($form);

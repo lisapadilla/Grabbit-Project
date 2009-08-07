@@ -1,5 +1,5 @@
 <?php
-// $Id: subscriptions.install,v 1.13 2008/09/13 11:03:20 salvis Exp $
+// $Id: subscriptions.install,v 1.16 2009/04/18 20:26:35 salvis Exp $
 
 /**
  * @file
@@ -13,15 +13,15 @@ function subscriptions_schema() {
 
   $schema['subscriptions'] = array(
     'fields'          => array(
-      'sid'           => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE, 'disp-width' => '10'),
+      'sid'           => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE),
       'module'        => array('type' => 'varchar', 'length' => '64', 'not null' => FALSE),
       'field'         => array('type' => 'varchar', 'length' => '32', 'not null' => FALSE),
       'value'         => array('type' => 'varchar', 'length' => '237', 'not null' => FALSE),
-      'recipient_uid' => array('type' => 'int', 'not null' => TRUE, 'disp-width' => '11'),
-      'send_interval' => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
-      'author_uid'    => array('type' => 'int', 'not null' => TRUE, 'disp-width' => '11'),
-      'send_updates'  => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0, 'disp-width' => '4'),
-      'send_comments' => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0, 'disp-width' => '4')),
+      'recipient_uid' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'send_interval' => array('type' => 'int', 'not null' => FALSE),
+      'author_uid'    => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'send_updates'  => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0),
+      'send_comments' => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0)),
     'primary key'     => array('sid'),
     'indexes'         => array(
       'module'        => array('module', 'field', 'value'),
@@ -31,50 +31,42 @@ function subscriptions_schema() {
 
   $schema['subscriptions_queue'] = array(
     'fields'          => array(
-      'sqid'          => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE, 'disp-width' => '10'),
-      'uid'           => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
+      'sqid'          => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE),
+      'uid'           => array('type' => 'int', 'not null' => FALSE),
       'name'          => array('type' => 'varchar', 'length' => '60', 'not null' => FALSE),
       'mail'          => array('type' => 'varchar', 'length' => '64', 'not null' => FALSE),
       'language'      => array('type' => 'varchar', 'length' => '12', 'not null' => FALSE),
       'module'        => array('type' => 'varchar', 'length' => '64', 'not null' => FALSE),
       'field'         => array('type' => 'varchar', 'length' => '32', 'not null' => FALSE),
       'value'         => array('type' => 'varchar', 'length' => '237', 'not null' => FALSE),
-      'author_uid'    => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
-      'send_interval' => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
-      'digest'        => array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE, 'disp-width' => '4'),
+      'author_uid'    => array('type' => 'int', 'not null' => FALSE),
+      'send_interval' => array('type' => 'int', 'not null' => FALSE),
+      'digest'        => array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE),
       'load_args'     => array('type' => 'varchar', 'length' => '255', 'not null' => TRUE, 'default' => ''),
       'load_function' => array('type' => 'varchar', 'length' => '60', 'not null' => TRUE, 'default' => ''),
-      'is_new'        => array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE, 'disp-width' => '4'),
-      'last_sent'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0, 'disp-width' => '10')),
+      'is_new'        => array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE),
+      'last_sent'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0)),
     'primary key'     => array('sqid'),
     'indexes'         => array(
       'load_args'     => array('load_args', 'load_function', 'uid')),
   );
 
 
-  $schema['subscriptions_mail_edit'] = array(
-    'fields'          => array(
-      'mailkey'       => array('type' => 'varchar', 'length' => '255', 'not null' => TRUE),
-      'item_body'     => array('type' => 'text', 'not null' => FALSE)),
-    'primary key'     => array('mailkey'),
-  );
-
-
   $schema['subscriptions_user'] = array(
     'fields'                  => array(
-      'uid'                   => array('type' => 'int', 'not null' => TRUE, 'disp-width' => '11'),
-      'digest'                => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'send_interval'         => array('type' => 'int', 'not null' => TRUE, 'default' => -1, 'disp-width' => '11'),
-      'send_updates'          => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'send_comments'         => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'send_interval_visible' => array('type' => 'int', 'not null' => TRUE, 'default' => -1, 'disp-width' => '11'),
-      'send_updates_visible'  => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'send_comments_visible' => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'autosub_on_post'       => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'autosub_on_update'     => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'autosub_on_comment'    => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'send_self'             => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'last_sent'             => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0, 'disp-width' => '10')),
+      'uid'                   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'digest'                => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'send_interval'         => array('type' => 'int', 'not null' => TRUE, 'default' => -1),
+      'send_updates'          => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'send_comments'         => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'send_interval_visible' => array('type' => 'int', 'not null' => TRUE, 'default' => -1),
+      'send_updates_visible'  => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'send_comments_visible' => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'autosub_on_post'       => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'autosub_on_update'     => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'autosub_on_comment'    => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'send_self'             => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'last_sent'             => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0)),
     'primary key'             => array('uid'),
   );
 
@@ -103,6 +95,9 @@ function subscriptions_install() {
 function subscriptions_uninstall() {
   $ret = drupal_uninstall_schema('subscriptions');
 
+  if (db_table_exists('subscriptions_mail_edit')) {
+    db_drop_table($ret, 'subscriptions_mail_edit');      // old table from 5.x-2.x
+  }
   if (db_table_exists('subscriptions_old')) {
     db_drop_table($ret, 'subscriptions_old');            // old backup from 5.x-1.x
   }
@@ -117,9 +112,12 @@ function subscriptions_uninstall() {
   }
 
   if (db_table_exists('mail_edit')) {
-    db_query("DELETE FROM {mail_edit} WHERE mailkey LIKE 'subscriptions-%'");
+    db_query("DELETE FROM {mail_edit} WHERE id LIKE 'subscriptions_%'");
   }
-
+   if (db_table_exists('mail_edit_registry')) {
+    db_query("DELETE FROM {mail_edit_registry} WHERE id LIKE 'subscriptions_%'");
+  }
+  
   variable_del('subscriptions_avoid_empty_subscribe_links');
   variable_del('subscriptions_blocked_content_types');
   variable_del('subscriptions_blocked_nodes');
@@ -128,17 +126,14 @@ function subscriptions_uninstall() {
   variable_del('subscriptions_form_in_block');
   variable_del('subscriptions_form_link_only');
   variable_del('subscriptions_generate_full_node');
+  variable_del('subscriptions_hide_overview_page');
   variable_del('subscriptions_link_teaser');
-  variable_del('subscriptions_number_of_mails');
   variable_del('subscriptions_omitted_taxa');
   variable_del('subscriptions_restricted_taxa');
   variable_del('subscriptions_send_intervals');
   variable_del('subscriptions_show_by_author_options');
-  variable_del('subscriptions_site_mail');
   variable_del('subscriptions_static_content_types');
   variable_del('subscriptions_unlisted_content_types');
-  variable_del('subscriptions_watchgood');
-  variable_del('subscriptions_watchstats');
 
   // also remove legacy 5.x-1.9(-dev) variables:
   variable_del('subscriptions_allow_vid');
@@ -166,7 +161,7 @@ function subscriptions_update_1() {
 
   db_create_table($ret, 'subscriptions_mail_edit', $schema['subscriptions_mail_edit']);
 
-  db_add_field($ret, 'subscriptions', 'send_interval', array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'));
+  db_add_field($ret, 'subscriptions', 'send_interval', array('type' => 'int', 'not null' => FALSE));
 
   if (variable_get('subscriptions_usecron', 0)) {
     $ret[] = update_sql("UPDATE {subscriptions} SET send_interval = 1");
@@ -207,15 +202,15 @@ function subscriptions_update_3() {
 
   $schema['subscriptions'] = array(
     'fields'          => array(
-      'sid'           => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE, 'disp-width' => '10'),
+      'sid'           => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE),
       'module'        => array('type' => 'varchar', 'length' => '64', 'not null' => FALSE),
       'field'         => array('type' => 'varchar', 'length' => '32', 'not null' => FALSE),
       'value'         => array('type' => 'varchar', 'length' => '237', 'not null' => FALSE),
-      'recipient_uid' => array('type' => 'int', 'not null' => TRUE, 'disp-width' => '11'),
-      'send_interval' => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
-      'author_uid'    => array('type' => 'int', 'not null' => TRUE, 'disp-width' => '11'),
-      'send_updates'  => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0, 'disp-width' => '4'),
-      'send_comments' => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0, 'disp-width' => '4')),
+      'recipient_uid' => array('type' => 'int', 'not null' => TRUE),
+      'send_interval' => array('type' => 'int', 'not null' => FALSE),
+      'author_uid'    => array('type' => 'int', 'not null' => TRUE),
+      'send_updates'  => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0),
+      'send_comments' => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0)),
     'primary key'     => array('sid'),
     'indexes'         => array(
       'module'        => array('module', 'field', 'value'),
@@ -246,20 +241,20 @@ function subscriptions_update_3() {
 
   $schema['subscriptions_queue'] = array(
     'fields'          => array(
-      'sqid'          => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE, 'disp-width' => '10'),
-      'uid'           => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
+      'sqid'          => array('type' => 'serial', 'unsigned' => TRUE, 'not null' => TRUE),
+      'uid'           => array('type' => 'int', 'not null' => FALSE),
       'name'          => array('type' => 'varchar', 'length' => '60', 'not null' => FALSE),
       'mail'          => array('type' => 'varchar', 'length' => '64', 'not null' => FALSE),
       'language'      => array('type' => 'varchar', 'length' => '12', 'not null' => FALSE),
       'module'        => array('type' => 'varchar', 'length' => '64', 'not null' => FALSE),
       'field'         => array('type' => 'varchar', 'length' => '32', 'not null' => FALSE),
       'value'         => array('type' => 'varchar', 'length' => '237', 'not null' => FALSE),
-      'author_uid'    => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
-      'send_interval' => array('type' => 'int', 'not null' => FALSE, 'disp-width' => '11'),
-      'digest'        => array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE, 'disp-width' => '4'),
+      'author_uid'    => array('type' => 'int', 'not null' => FALSE),
+      'send_interval' => array('type' => 'int', 'not null' => FALSE),
+      'digest'        => array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE),
       'load_args'     => array('type' => 'varchar', 'length' => '255', 'not null' => TRUE, 'default' => ''),
       'load_function' => array('type' => 'varchar', 'length' => '60', 'not null' => TRUE, 'default' => ''),
-      'last_sent'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0, 'disp-width' => '10')),
+      'last_sent'     => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0)),
     'primary key'     => array('sqid'),
     'indexes'         => array(
       'load_args'     => array('load_args', 'load_function', 'uid')),
@@ -272,9 +267,9 @@ function subscriptions_update_3() {
 
   $schema['subscriptions_user'] = array(
     'fields'                  => array(
-      'uid'                   => array('type' => 'int', 'not null' => TRUE, 'disp-width' => '11'),
-      'digest'                => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'),
-      'last_sent'             => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0, 'disp-width' => '10')),
+      'uid'                   => array('type' => 'int', 'not null' => TRUE),
+      'digest'                => array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1),
+      'last_sent'             => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0)),
     'primary key'             => array('uid'),
   );
   db_create_table($ret, 'subscriptions_user', $schema['subscriptions_user']);
@@ -292,9 +287,9 @@ function subscriptions_update_3() {
 function subscriptions_update_4() {
   $ret = array();
 
-  db_add_field($ret, 'subscriptions_user', 'send_interval', array('type' => 'int', 'not null' => TRUE, 'default' => -1, 'disp-width' => '11'));
-  db_add_field($ret, 'subscriptions_user', 'send_updates',  array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
-  db_add_field($ret, 'subscriptions_user', 'send_comments', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
+  db_add_field($ret, 'subscriptions_user', 'send_interval', array('type' => 'int', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_user', 'send_updates',  array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_user', 'send_comments', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
 
   $ret[] = update_sql("DELETE FROM {subscriptions_user} WHERE uid = 0");
   $ret[] = update_sql("UPDATE {subscriptions_user} SET digest = -1");
@@ -308,10 +303,10 @@ function subscriptions_update_4() {
 function subscriptions_update_5() {
   $ret = array();
 
-  db_add_field($ret, 'subscriptions_user', 'send_interval_visible', array('type' => 'int', 'not null' => TRUE, 'default' => -1, 'disp-width' => '11'));
-  db_add_field($ret, 'subscriptions_user', 'send_updates_visible',  array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
-  db_add_field($ret, 'subscriptions_user', 'send_comments_visible', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
-  db_add_field($ret, 'subscriptions_queue', 'is_new', array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE, 'disp-width' => '4'));
+  db_add_field($ret, 'subscriptions_user', 'send_interval_visible', array('type' => 'int', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_user', 'send_updates_visible',  array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_user', 'send_comments_visible', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_queue', 'is_new', array('type' => 'int', 'size' => 'tiny', 'not null' => FALSE));
 
   $ret[] = update_sql("UPDATE {subscriptions_user} SET send_interval_visible = 0, send_updates_visible = 0, send_comments_visible = 0 WHERE uid = ". -DRUPAL_AUTHENTICATED_RID);
   return $ret;
@@ -323,10 +318,10 @@ function subscriptions_update_5() {
 function subscriptions_update_6() {
   $ret = array();
 
-  db_add_field($ret, 'subscriptions_user', 'autosub_on_post',    array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
-  db_add_field($ret, 'subscriptions_user', 'autosub_on_update',  array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
-  db_add_field($ret, 'subscriptions_user', 'autosub_on_comment', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
-  db_add_field($ret, 'subscriptions_user', 'send_self',          array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1, 'disp-width' => '4'));
+  db_add_field($ret, 'subscriptions_user', 'autosub_on_post',    array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_user', 'autosub_on_update',  array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_user', 'autosub_on_comment', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
+  db_add_field($ret, 'subscriptions_user', 'send_self',          array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => -1));
 
   return $ret;
 }

@@ -1,6 +1,6 @@
 <?php
 
-// $Id: friendlist_api.install,v 1.1.2.11 2009/01/12 18:45:11 mercmobily Exp $
+// $Id: friendlist_api.install,v 1.1.2.12 2009/06/24 07:50:27 mercmobily Exp $
 
 /**
  * @file
@@ -79,7 +79,7 @@ function friendlist_api_schema() {
       ),
     ),
     'primary key' => array(
-      'rid' => 'rid',
+      'rid'
     ),
 
   );
@@ -150,7 +150,7 @@ function friendlist_api_schema() {
       'relationship' => array('requester_id', 'requestee_id', 'rtid'),
     ),
     'primary key' => array(
-      'sid' => 'sid',
+      'sid'
     ),
 
     'indexes' => array(

@@ -1,5 +1,5 @@
 <?php
-// $Id: feedapi.module,v 1.23.2.119.2.61 2009/06/19 15:46:28 aronnovak Exp $
+// $Id: feedapi.module,v 1.23.2.119.2.67 2009/07/06 14:50:12 aronnovak Exp $
 
 /**
  * @file
@@ -86,7 +86,7 @@ function feedapi_menu() {
     'access arguments' => array('administer feedapi'),
     'file' => 'feedapi.admin.inc',
   );
-  
+
   $items['node/%node/refresh'] = array(
     'title' => 'Refresh',
     'page callback' => 'feedapi_refresh',
@@ -260,7 +260,7 @@ function feedapi_views_api() {
  *  "load"    Load the feed items basic data into the $feed->items[]
  *  "refresh"  Re-download the feed and process newly arrived item
  *  "purge"    Delete all the feed items
- * 
+ *
  * @param $feed
  *  A feed object. If only the ID is known, you should pass something like this: $feed->nid = X
  * @param $param
@@ -319,7 +319,7 @@ function feedapi_purge_confirm_submit($form, &$form_state) {
 
 /**
  * Delete expired items and return informations about the feed refreshing
- * 
+ *
  * @param $feed
  *  The feed object
  * @param $settings
@@ -329,7 +329,7 @@ function feedapi_purge_confirm_submit($form, &$form_state) {
  */
 function feedapi_expire($feed, $settings = NULL) {
   // Backwards compatibility, get settings if not passed
-  $settings = is_null($settings) ? feedapi_get_settings(NULL, $feed->nid) : $settings;
+  $settings = is_null($settings) ? feedapi_get_settings(NULL, $feed->vid) : $settings;
   // Each processor can have its own expiration criteria ?
   $expired = _feedapi_invoke('expire', $feed, $settings);
   // Return the number of expired items
@@ -352,7 +352,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
   // Content type form.
   if ($form_id == 'node_type_form' && isset($form['identity']['type'])) {
     $node_type_settings = feedapi_get_settings($form['#node_type']->type);
-    
+
     $form['#validate'][] = 'feedapi_content_type_validate';
 
     // Don't blow away existing form elements.
@@ -478,7 +478,8 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
     // FeedAPI-enabled node form.
     $form['title']['#required'] = FALSE;
     $form['title']['#description'] = t('This field will be populated with the feed title. You can override by filling in this field.');
-    $form['body_filter']['body']['#description'] = t('This field will be populated with the feed description. You can override by filling in this field.');
+    $form['body_field']['body']['#description'] = t('This field will be populated with the feed description. You can override by filling in this field.');
+    $form['body_field']['body']['#rows'] = 2;
 
     // Don't blow away existing form elements.
     if (!isset($form['feedapi'])) {
@@ -498,7 +499,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
     elseif (isset($form_state['values']['feedapi']['feedapi_url'])) {
       $feedapi_url_default = $form_state['values']['feedapi']['feedapi_url'];
     }
-    if ($node_type_settings['upload_method'] == 'upload') {
+    if (isset($node_type_settings['upload_method']) && $node_type_settings['upload_method'] == 'upload') {
       // Makes possible to upload file via this form.
       $form['#attributes']['enctype'] = 'multipart/form-data';
       $form['feedapi']['feedapi_file'] = array(
@@ -600,6 +601,9 @@ function feedapi_node_validate($form, &$form_state) {
     }
     // Stick feed object into feedapi form snippet - store it in submit.
     $form_state['values']['feedapi_object'] = $feed;
+    if ($has_upload) {
+      $form_state['values']['feedapi_object']->url = str_replace($GLOBALS['base_url'], '', $form_state['values']['feedapi_object']->url);
+    }
     if (empty($form_state['values']['title']) && isset($feed->title)) {
       form_set_value($form['title'], $feed->title, $form_state);
     }
@@ -673,13 +677,13 @@ function feedapi_feedapi_settings_form($type) {
  */
 function feedapi_cron() {
   global $user;
-  
+
   // Saves the currently logged in user and start safe impersonating
   $original_user = $user;
   session_save_session(FALSE);
-  
+
   db_query('DELETE FROM {feedapi_stat} WHERE timestamp < %d', variable_get('cron_semaphore', FALSE) - FEEDAPI_CRON_STAT_LIFETIME);
-  
+
   // Initialize counters
   $count = array(
     '%feeds' => 0,
@@ -687,7 +691,7 @@ function feedapi_cron() {
     '%new' => 0,
     '%updated' => 0,
   );
-  
+
   // We get feeds in small lots, this will save memory and have the process adjusting to the
   // time limit even when we have many thousands of them.
   $now = time();
@@ -710,7 +714,7 @@ function feedapi_cron() {
       $process--;
     }
   }
-  
+
   // Loads back the logged in user
   $user = $original_user;
   session_save_session(TRUE);
@@ -718,7 +722,7 @@ function feedapi_cron() {
 
 /**
  * Check for time limits in cron processing.
- * 
+ *
  * @return
  *   Number of seconds left, zero if none.
  */
@@ -728,7 +732,10 @@ function feedapi_cron_time() {
   if (!$time_limit) {
     $time_limit = time() + (variable_get('feedapi_cron_percentage', 15) / 100) * ini_get('max_execution_time');
     // However, check for left time, maybe some other cron processing already occured
-    $time_limit = min($time_limit, variable_get('cron_semaphore', 0) + ini_get('max_execution_time'));
+    $cron_semaphore = variable_get('cron_semaphore', 0);
+    if ($cron_semaphore) {
+      $time_limit = min($time_limit, $cron_semaphore + ini_get('max_execution_time'));
+    }
     timer_start('feedapi_cron');
   }
   return max($time_limit - time(), 0);
@@ -782,7 +789,7 @@ function feedapi_simplified_form_submit($form, &$form_state) {
 /**
  * Get the module-defined natural name of FeedAPI parser or processor
  * Define this name in hook_help():
- * 
+ *
  *  function hook_help($section) {
  *    switch ($section) {
  *      case 'feedapi/full_name':
@@ -799,7 +806,7 @@ function feedapi_get_natural_name($module) {
 
 /**
  * Create a feedapi node programatically.
- * 
+ *
  * @param $param
  *  Either a feedapi - enabled node type or a $node object with at least valid $node->type.
  * @param $url
@@ -932,7 +939,7 @@ function _feedapi_update(&$node, $teaser, $page) {
       _feedapi_insert($node, 'insert', $teaser, $page);
       return;
     }
-    // Only change next_refresh_time if refresh_time changed 
+    // Only change next_refresh_time if refresh_time changed
     // or if $next_refresh_time is FEEDAPI_CRON_NEVER_REFRESH.
     $next_refresh_time = $old_config->feed->next_refresh_time;
     if (isset($node->feedapi['refresh_time'])) {
@@ -943,12 +950,12 @@ function _feedapi_update(&$node, $teaser, $page) {
         $next_refresh_time = time() + $node->feedapi['refresh_time'];
       }
     }
-    
+
     db_query("UPDATE {feedapi} SET
-            url = '%s', 
-            feed_type = '%s', 
+            url = '%s',
+            feed_type = '%s',
             processors = '%s',
-            parsers = '%s', 
+            parsers = '%s',
             link = '%s',
             next_refresh_time = %d
             WHERE vid = %d",
@@ -984,6 +991,10 @@ function _feedapi_call_parsers($feed, $parsers, $settings) {
   $nid = isset($feed->nid) ? $feed->nid : '';
   $parser_primary = array_shift($parsers);
   $parsers_secondary = $parsers;
+  // Normalize relative URLs according to the base URL (mostly for uploaded feeds)
+  if (!valid_url($feed->url, TRUE) && valid_url($feed->url)) {
+    $feed->url = $GLOBALS['base_url'] . $feed->url;
+  }
   if (module_exists($parser_primary)) {
     $settings_primary = isset($settings[$parser_primary]) ? $settings[$parser_primary] : array();
     $feed->feed_type =  module_invoke($parser_primary, 'feedapi_feed', 'compatible', $feed, $settings_primary);
@@ -1033,7 +1044,7 @@ function _feedapi_call_parsers($feed, $parsers, $settings) {
       }
     }
   }
-  
+
   if (isset($feed->items)) {
     for ($i = 0; $i < count($feed->items); $i++) {
       $feed->items[$i]->title = _feedapi_process_text($feed->items[$i]->title, array());
@@ -1121,7 +1132,7 @@ function feedapi_enabled_type($node_type, $parser_or_processor = '') {
 
 /**
  * Helper function for feedapi_invoke().
- * 
+ *
  * Generic operations, collects results and returns array
  */
 function _feedapi_invoke($op, &$feed, $param) {
@@ -1145,16 +1156,17 @@ function _feedapi_invoke($op, &$feed, $param) {
  * Helper function for feedapi_invoke().
  * Refresh the feed, call the proper parsers and processors' hooks.
  * Don't call this function directly, use feedapi_refresh() instead.
- * 
+ *
  * @ TODO Fix: This may loop forever when a feed has no processors
  */
 function _feedapi_invoke_refresh(&$feed, $param) {
   $timestamp = variable_get('cron_semaphore', FALSE) !== FALSE ? variable_get('cron_semaphore', FALSE) : time();
-  
+
   $counter = array();
   timer_start('feedapi_'. $feed->nid);
+  $memory_usage = memory_get_usage();
   $cron = $param;
-  
+
   // Step 0: Check processors and grab settings
   if (!is_array($feed->processors) || count($feed->processors) == 0) {
     if (!$cron) {
@@ -1164,9 +1176,9 @@ function _feedapi_invoke_refresh(&$feed, $param) {
     return 0;
   }
   $settings = feedapi_get_settings(NULL, $feed->vid);
-  
+
   // Step 1: Force processors to delete old items and determine the max. create elements.
-  $counter['expired'] = feedapi_expire($feed);
+  $counter['expired'] = feedapi_expire($feed, $settings);
 
   // Step 2: Get feed.
   $nid = $feed->nid;
@@ -1175,7 +1187,7 @@ function _feedapi_invoke_refresh(&$feed, $param) {
   if (is_object($feed)) {
     $feed->hash = md5(serialize($feed->items));
   }
-  
+
   // Step 3: See, whether feed has been modified.
   if ($feed === FALSE || $hash_old == $feed->hash) {
     // Updated the next_refresh_time field in any case.
@@ -1226,7 +1238,7 @@ function _feedapi_invoke_refresh(&$feed, $param) {
     }
     $new = $item->is_new ? $new + 1 : $new;
     $updated = ($item->is_updated && !$item->is_new) ? $updated + 1 : $updated;
-    
+
     // Decision on time. If the exec time is greather than the user-set percentage of php max execution time
     if ($cron && !feedapi_cron_time()) {
       $half_done = ($new + $updated) == count($items) ? FALSE : TRUE;
@@ -1235,22 +1247,24 @@ function _feedapi_invoke_refresh(&$feed, $param) {
     // Save the item status for further processing
     $feed->items[$index] = $item;
   }
-  
+
   // Closing step: Call after refresh and update feed statistics
-  foreach (module_implements('feedapi_after_refresh') as $module) {	 
-    $func = $module .'_feedapi_after_refresh';	 
-    $func($feed);	 
-  }
-  if ($new > 0) {
-    _feedapi_store_stat($nid, 'update_times', time(), $timestamp);
-    _feedapi_store_stat($nid, 'new', $new, $timestamp);
-    _feedapi_store_stat($nid, 'download_num', count($items), $timestamp);
-    _feedapi_store_stat($nid, 'process_time', timer_read('feedapi_'. $feed->nid), $timestamp);
+  foreach (module_implements('feedapi_after_refresh') as $module) {
+    $func = $module .'_feedapi_after_refresh';
+    $func($feed);
   }
 
   // Set next_refresh_time to FEEDAPI_CRON_NEVER_REFRESH if refresh_time is FEEDAPI_CRON_NEVER_REFRESH.
   $next_refresh_time = $settings['refresh_time'] == FEEDAPI_CRON_NEVER_REFRESH ? $settings['refresh_time'] : (time() + $settings['refresh_time']);
   db_query("UPDATE {feedapi} SET next_refresh_time = %d, half_done = %d, hash = '%s' WHERE nid = %d", $next_refresh_time, $half_done, $feed->hash, $feed->nid);
+
+  // Log statistics.
+  _feedapi_store_stat($nid, 'update_times', time(), $timestamp);
+  _feedapi_store_stat($nid, 'new', $new, $timestamp);
+  _feedapi_store_stat($nid, 'download_num', count($items), $timestamp);
+  _feedapi_store_stat($nid, 'process_time', timer_read('feedapi_'. $feed->nid), $timestamp);
+  _feedapi_store_stat($nid, 'memory_increase', memory_get_usage() - $memory_usage, $timestamp);
+  _feedapi_store_stat($nid, 'next_refresh_time', $next_refresh_time, $timestamp);
 
   if (!$cron) {
     if ($new == 0 && $updated == 0) {
@@ -1275,7 +1289,7 @@ function _feedapi_invoke_refresh(&$feed, $param) {
  */
 function _feedapi_invoke_purge(&$feed, $param) {
   $node = node_load($feed->nid);
-  
+
   if ($param == 'items') {
     return drupal_get_form('feedapi_purge_confirm', $node);
   }
@@ -1332,7 +1346,7 @@ function _feedapi_format_settings($node_type_settings, $stage_type) {
 
 /**
  * Retrieve settings per content type or per node.
- * 
+ *
  * @param $node_type
  *  Content type name or NULL if per node
  * @param $vid
@@ -1341,7 +1355,7 @@ function _feedapi_format_settings($node_type_settings, $stage_type) {
  *  If TRUE, the data is returned from the database.
  * @return
  *  The associative array of feedapi settings
- * 
+ *
  * @todo: Use node type settings for pulling on/off and weight of
  *       parsers/processors, use per node settings to override their
  *       configuration, this allows us a more predictable
@@ -1351,7 +1365,7 @@ function _feedapi_format_settings($node_type_settings, $stage_type) {
  */
 function feedapi_get_settings($node_type, $vid = FALSE, $reset = FALSE) {
   static $node_settings;
-  
+
   if (is_numeric($vid)) {
     if (!isset($node_settings[$vid]) || $reset) {
       if ($settings = db_fetch_object(db_query('SELECT settings FROM {feedapi} WHERE vid = %d', $vid))) {
@@ -1380,16 +1394,27 @@ function feedapi_get_settings($node_type, $vid = FALSE, $reset = FALSE) {
       return $node_settings[$vid];
     }
   }
-  
+
   // Fallback: node_type.
   if (isset($node_type) && is_string($node_type)) {
     if ($settings = variable_get('feedapi_settings_'. $node_type, FALSE)) {
       // Sanitize data right now, tricky users may turned off the module
       foreach (array('parsers', 'processors') as $type) {
-        $modules = array_keys($settings[$type]);
-        foreach ($modules as $module) {
-          if (!module_exists($module)) {
-            unset($settings['parsers'][$module]);
+        if (isset($settings[$type]) && is_array($settings[$type])) {
+          $modules = array_keys($settings[$type]);
+          foreach ($modules as $module) {
+            if (!module_exists($module)) {
+              unset($settings['parsers'][$module]);
+            }
+          }
+        }
+        else {
+          // Missing parser or processor, set error message.
+          if (user_access('administer content types')) {
+            drupal_set_message(t('There are no !type defined for this content type. Go to !edit_page and enable at least one.', array('!type' => $type, '!edit_page' => l('admin/content/node-type/'. $node_type, 'admin/content/node-type/'. $node_type))), 'error', FALSE);
+          }
+          else {
+            drupal_set_message(t('There are no !type defined for this content type. Contact your site administrator.', array('!type' => $type)), 'error', FALSE);
           }
         }
       }

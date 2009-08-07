@@ -1,14 +1,14 @@
 <?php
-// $Id: feedapi_inherit.module,v 1.1.2.14.2.6 2009/06/04 16:30:52 aronnovak Exp $
+// $Id: feedapi_inherit.module,v 1.1.2.14.2.7 2009/07/02 16:38:16 aronnovak Exp $
 
 /**
  * @file
  * Inherit group language and taxonomy settings from feeds to news items
  * This is an add on processor for FeedAPI
- * 
+ *
  * @author
  *  Aron Novak <aron at novaak dot net>
- * 
+ *
  * Sponsored by Development Seed
  */
 
@@ -31,7 +31,7 @@ function feedapi_inherit_nodeapi(&$node, $op) {
   if (!isset($node->feedapi_node)) {
     return;
   }
-  
+
   switch ($op) {
     case 'prepare':
       if ($node->feedapi_node->feed_nids) {
@@ -49,7 +49,7 @@ function feedapi_inherit_nodeapi(&$node, $op) {
 /**
  * Implementation of hook_feedapi_item().
  * Do nothing here, this function only makes us a feedapi processor,
- * which means that we can be enabled/disabled on a per node type 
+ * which means that we can be enabled/disabled on a per node type
  * basis.
  */
 function feedapi_inherit_feedapi_item($op) {
@@ -63,7 +63,7 @@ function feedapi_inherit_feedapi_item($op) {
  */
 function feedapi_inherit_feedapi_settings_form($type) {
   $form = array();
-  
+
   switch ($type) {
     case 'processors':
       if (module_exists('og')) {
@@ -108,7 +108,7 @@ function _feedapi_inherit_do_inherit(&$item_node, $feed_node) {
     $inherit_author = $feed_node->feed->settings['processors']['feedapi_inherit']['inherit_author'];
     $inherit_translation = $feed_node->feed->settings['processors']['feedapi_inherit']['inherit_language'];
   }
-  
+
   // Pass on author data
   if ($inherit_author) {
     $item_node->uid = $feed_node->uid;

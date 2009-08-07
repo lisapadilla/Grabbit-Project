@@ -1,5 +1,5 @@
 <?php
-// $Id: subscriptions_mail.module,v 1.21 2008/12/27 19:23:10 salvis Exp $
+// $Id: subscriptions_mail.module,v 1.23 2009/07/22 15:51:10 salvis Exp $
 
 /**
  * @file
@@ -89,6 +89,7 @@ function subscriptions_mail_cron() {
           if ($module == 'node' && $field == 'nid' && (!empty($object->_subscriptions_is_updated) || !empty($object->_subscriptions_is_new)) && user_access('subscribe to content types', $user)) {
             $unlisteds = variable_get('subscriptions_unlisted_content_types', array());
             if (isset($object->type) && !in_array($object->type, $unlisteds)) {
+              // Convert node-nid to node-type because that can give more specific information.
               $field = 'type';
               $value = $object->type;
             }
@@ -243,9 +244,18 @@ function _subscriptions_mail_send($mailkey, $name, $to, $subject, $body, $from, 
   }
 }
 
-function _subscriptions_mail_site_mail() {
+/**
+ * Return the 'From:' address to use for sending e-mail.
+ */
+function _subscriptions_mail_site_mail($address_only = FALSE) {
   $email = variable_get('subscriptions_site_mail', '');
-  return ($email != '' ? $email : variable_get('site_mail', ini_get('sendmail_from')));
+  if (empty($email)) {
+    $email = variable_get('site_mail', ini_get('sendmail_from'));
+  }
+  if (!$address_only && ($name = variable_get('subscriptions_site_mail_name', FALSE))) {
+    $email = '"'. $name .'" <'. $email .'>';
+  }
+  return $email;
 }
 
 /**
@@ -284,8 +294,14 @@ function subscriptions_mail_form_subscriptions_settings_form_alter(&$form, &$for
   $form['mail_settings']['subscriptions_site_mail'] = array(
     '#type'          => 'textfield',
     '#title'         => t('E-mail address'),
-    '#default_value' => _subscriptions_mail_site_mail(),
-    '#description'   => t('A valid e-mail address to be used as the "From" address by the auto-mailer for !module notifications.  To lessen the likelihood of e-mail being marked as spam, this e-mail address should use the same domain as the website.', array('!module' => 'Subscriptions')) .'<br />'. t('Clear this field to use the default site e-mail address.'),
+    '#default_value' => _subscriptions_mail_site_mail(TRUE),
+    '#description'   => t('A valid e-mail address to be used as the %From and %Reply_To address by the auto-mailer for !module notifications.  To lessen the likelihood of e-mail being marked as spam, this e-mail address should use the same domain as the website.', array('%From' => 'From', '%Reply_To' => 'Reply-To', '!module' => 'Subscriptions')) .'<br />'. t('Clear this field to use the default site e-mail address.'),
+  );
+  $form['mail_settings']['subscriptions_site_mail_name'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('E-mail name'),
+    '#default_value' => variable_get('subscriptions_site_mail_name', ''),
+    '#description'   => t('An optional name to go with the e-mail address above, no "double-quotes".') .'<br />'. t('Clear this field to use the e-mail address only &mdash; some e-mail clients will display only the portion of the address to the left of the @ sign.'),
   );
   $form['mail_settings']['subscriptions_number_of_mails'] = array(
     '#type'          => 'textfield',

@@ -1,5 +1,5 @@
 <?php
-// $Id: subscriptions.admin.inc,v 1.17 2008/10/26 23:25:43 salvis Exp $
+// $Id: subscriptions.admin.inc,v 1.21 2009/04/18 20:26:35 salvis Exp $
 
 /**
  * @file
@@ -102,8 +102,8 @@ function theme_subscriptions_form_table($element) {
   $output = '';
   $rows = array();
   drupal_add_js(drupal_get_path('module', 'subscriptions') .'/subscriptions_tableselect.js', 'module', 'header', FALSE, TRUE, FALSE);
-  $columns['checkboxes']    = array('data' => '&nbsp;', 'width' => '1%', 'class' => 'subscriptions-table');
-  $columns['labels']        = array('data' => '&nbsp;', 'width' => '18%');
+  $columns['checkboxes']      = array('data' => '', 'width' => '1%', 'class' => 'subscriptions-table select-all');
+  $columns['labels']          = array('data' => t('Subscription'), 'width' => '18%');
   if (isset($element['send_interval']) && $element['send_interval']['#access']) {
     $columns['send_interval'] = array('data' => t('Send interval'), 'width' => '20%');
   }
@@ -125,16 +125,24 @@ function theme_subscriptions_form_table($element) {
       }
     }
   }
+  if (isset($element['extra_info'])) {
+    $columns['extra_info']['data'] = $element['extra_info']['#title'];
+  }
   $column_keys = array_keys($columns);
   unset($columns[end($column_keys)]['width']);  // let the last column grow
 
-  foreach (element_children($element['checkboxes']) as $key) {
-    foreach (element_children($element['checkboxes'][$key]) as $key1) {
-      $row = array();
-      foreach (array_keys($columns) as $colkey) {
-        $row[] = drupal_render($element[$colkey][$key][$key1]);
+  if (isset($element['checkboxes'])) {
+    foreach (element_children($element['checkboxes']) as $key) {
+      foreach (element_children($element['checkboxes'][$key]) as $key1) {
+        if (empty($element['checkboxes'][$key][$key1]['#disabled'])) {
+          $element['checkboxes'][$key][$key1]['#attributes']['class'] = 'select-row';
+        }
+        $row = array();
+        foreach (array_keys($columns) as $colkey) {
+          $row[] = drupal_render($element[$colkey][$key][$key1]);
+        }
+        $rows[] = $row;
       }
-      $rows[] = $row;
     }
   }
   if ($rows) {
@@ -266,7 +274,7 @@ function subscriptions_page($account, $stype) {
 
   $form['footer'] = array(
     '#type' => 'item',
-    '#description' => t('The master checkboxes on the left turn the given subscription on or off. Depending on the setup of the site, you may have additional options for active subscriptions.'),
+    '#description' => t('The master checkboxes on the left turn the given subscription on or off. Click and Shift-click to turn a range of subscriptions on or off.') .'<br />'. t('Depending on the setup of the site, you may have additional options for active subscriptions.'),
     '#weight' => 10,
     );
 
@@ -377,6 +385,12 @@ function subscriptions_user_settings_form(&$form_state, $account) {
           '%Settings' => $tr('Settings'),
         )
       ) .'</div>',
+    );
+    $form['settings']['info']['hide_overview_page'] = array(
+      '#type'          => 'checkbox',
+      '#title'         => t('Hide the %Overview page from your users', array('%Overview' => t('Overview'))),
+      '#default_value' => variable_get('subscriptions_hide_overview_page', 0),
+      '#description'   => t("If you hide this page, your users won't be able to change any of these settings. The default is OFF."),
     );
   }
   $form['settings']['autosub'] = array(
@@ -534,6 +548,10 @@ function subscriptions_user_settings_form_submit($form, &$form_state) {
     }
     else {
       $uid = -DRUPAL_AUTHENTICATED_RID;
+      if (variable_get('subscriptions_hide_overview_page', 0) != $form_state['values']['hide_overview_page']) { 
+        variable_set('subscriptions_hide_overview_page', $form_state['values']['hide_overview_page']);
+        menu_rebuild();
+      }
     }
     $send_interval_visible = 1-$form_state['values']['send_interval_visible'];
     $send_updates_visible = 1-$form_state['values']['send_updates_visible'];
@@ -754,10 +772,16 @@ function subscriptions_form_helper(&$form, &$defaults, $author_uid, $key, $title
     '#options' => $intervals,
     '#default_value' => $defaults['send_interval'][$key][$author_uid],
   );
-  foreach (array('checkboxes', 'send_comments', 'send_updates') as $index => $name) {
-    $form[$name][$key][$author_uid] = array(
+  foreach (array('checkboxes', 'send_comments', 'send_updates') as $col_name) {
+    $form[$col_name][$key][$author_uid] = array(
       '#type' => 'checkbox',
-      '#default_value' => !empty($defaults[$name][$key][$author_uid]),
+      '#default_value' => !empty($defaults[$col_name][$key][$author_uid]),
+    );
+  }
+  if (isset($subscription['extra_info'])) {
+    $form['extra_info'][$key][$author_uid] = array(
+      '#type' => 'item',
+      '#value' => $subscription['extra_info'],
     );
   }
 }

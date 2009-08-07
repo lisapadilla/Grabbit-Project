@@ -1,5 +1,5 @@
 <?php
-// $Id: parser_common_syndication.module,v 1.6.2.23.2.42 2009/06/05 13:49:43 aronnovak Exp $
+// $Id: parser_common_syndication.module,v 1.6.2.23.2.44 2009/07/02 16:38:16 aronnovak Exp $
 
 /**
  * @file
@@ -169,8 +169,8 @@ function _parser_common_syndication_feedapi_get($url, $username = NULL, $passwor
   }
   $has_etag = FALSE;
   $curl = _parser_common_syndication_use_curl();
-  
-  // Only download and parse data if really needs refresh. 
+
+  // Only download and parse data if really needs refresh.
   // Based on "Last-Modified" and "If-Modified-Since".
   $headers = array();
   $db_result = db_query("SELECT etag, last_modified FROM {parser_common_syndication} WHERE url = '%s'", md5($url));
@@ -216,7 +216,7 @@ function _parser_common_syndication_feedapi_get($url, $username = NULL, $passwor
     $header = substr($data, 0, $header_size - 1);
     $result->data = substr($data, $header_size);
     $header_lines = preg_split("/\r\n|\n|\r/", $header);
-    
+
     $result->headers = array();
     array_shift($header_lines); // skip HTTP response status
     while ($line = trim(array_shift($header_lines))) {
@@ -224,20 +224,20 @@ function _parser_common_syndication_feedapi_get($url, $username = NULL, $passwor
       if (isset($result->headers[$header]) && $header == 'Set-Cookie') {
         // RFC 2109: the Set-Cookie response header comprises the token Set-
         // Cookie:, followed by a comma-separated list of one or more cookies.
-        $result->headers[$header] .= ',' . trim($value);
+        $result->headers[$header] .= ','. trim($value);
       }
       else {
         $result->headers[$header] = trim($value);
       }
     }
     $result->code = curl_getinfo($download, CURLINFO_HTTP_CODE);
-    
+
     curl_close($download);
   }
   else {
     $result = drupal_http_request($url, $headers);
   }
-  
+
   $result->code = isset($result->code) ? $result->code : 200;
   // In this case return the cached data.
   if ($result->code == 304) {
@@ -247,7 +247,7 @@ function _parser_common_syndication_feedapi_get($url, $username = NULL, $passwor
       return $cached_data;
     }
     else {
-      // It's a tragedy, this file has to be exist and contain good data. 
+      // It's a tragedy, this file has to be exist and contain good data.
       // In this case, repeat the stuff without cache.
       db_query("DELETE FROM {parser_common_syndication} WHERE url = '%s'", md5($url));
       return _parser_common_syndication_feedapi_get($url, $username, $password);
@@ -335,7 +335,7 @@ function _parser_common_syndication_download($url, $settings = NULL) {
       $username = $url_parts['user'];
     }
   }
-  
+
   $accept_invalid_cert = isset($settings['accept_invalid_cert']) ? $settings['accept_invalid_cert'] : FALSE;
   $downloaded_string = _parser_common_syndication_feedapi_get($url, $username, $password, $accept_invalid_cert);
 
@@ -347,7 +347,7 @@ function _parser_common_syndication_download($url, $settings = NULL) {
   else if (is_object($downloaded_string)) {
     return $downloaded_string;
   }
-  
+
   // Do the autodiscovery at this level, pass back the real data.
   // Maybe it's HTML. If it's not HTML, not worth to take a look into the downloaded string.
   if (strpos(strtolower($downloaded_string), "<html") !== FALSE) {
@@ -360,11 +360,11 @@ function _parser_common_syndication_download($url, $settings = NULL) {
     foreach ($links as $link) {
       $mime = array();
       // Get the type attribute and check if the mime type is allowed.
-      preg_match_all('/type\s*=\s*("|'. "'" .')([A-Za-z\/+]*)("|'. "'" .')/si', $link, $mime);
+      preg_match_all('/type\s*=\s*("|\')([A-Za-z\/+]*)("|\')/si', $link, $mime);
       if (in_array(array_pop($mime[2]), $allowed_mime)) {
         $href = array();
         // Get the href attribute.
-        preg_match_all('/href\s*=\s*("|'. "'" .')([=#\?_:.0-9A-Za-z\/+]*)("|'. "'" .')/si', $link, $href);
+        preg_match_all('/href\s*=\s*("|\')([=#\?_:.0-9A-Za-z\/+]*)("|\')/si', $link, $href);
         $rss_link = array_pop($href[2]);
         if (is_string($rss_link) && strlen($rss_link) > 0 && $rss_link != $url) {
           // Handle base url related stuff.
@@ -372,7 +372,7 @@ function _parser_common_syndication_download($url, $settings = NULL) {
           if (!isset($parsed_url['host'])) {
             // It's relative so make it absolute.
             $base_tag = array();
-            preg_match_all('/<base href\s*=\s*("|'. "'" .')([_:.0-9A-Za-z\/+]*)("|'. "'" .')/si', $link, $base_tag);
+            preg_match_all('/<base href\s*=\s*("|\')([_:.0-9A-Za-z\/+]*)("|\')/si', $link, $base_tag);
             $base_url = array_pop($base_tag[2]);
             if (is_string($base_url) && strlen($base_url) > 0) {
               // Get from the HTML base tag.
@@ -392,7 +392,7 @@ function _parser_common_syndication_download($url, $settings = NULL) {
   }
   // Ugly hack to be able to retrieve the xml:base property, no way to access xml:lang inside <feed>
   $downloaded_string = preg_replace('/xml:base *=/', 'base=', $downloaded_string);
-  
+
   // Filter out strange tags. Without this, the text would contain strange stuff.
   // @todo: make sure that these are not important for feed element mapper
   $downloaded_string_filtered = preg_replace(array('@<script[^>]*?.*?</script>@si', '@<object[^>]*?.*?</object>@si', '@<embed[^>]*?.*?</embed>@si', '@<applet[^>]*?.*?</applet>@si', '@<noframes[^>]*?.*?</noframes>@si', '@<noscript[^>]*?.*?</noscript>@si', '@<noembed[^>]*?.*?</noembed>@si'), '', $downloaded_string);
@@ -404,23 +404,23 @@ function _parser_common_syndication_download($url, $settings = NULL) {
  */
 function _parser_common_syndication_atom10_parse($feed_XML) {
   $parsed_source = new stdClass();
-  
+
   $base = (string) array_shift($feed_XML->xpath("@base"));
   if (!valid_url($base, TRUE)) {
     $base = FALSE;
   }
-  
+
   // Detect the title
   $parsed_source->title = isset($feed_XML->title) ? _parser_common_syndication_title("{$feed_XML->title}") : "";
   // Detect the description
   $parsed_source->description = isset($feed_XML->subtitle) ? "{$feed_XML->subtitle}" : "";
   $parsed_source->options = new stdClass();
-  
+
   $parsed_source->options->link = _parser_common_syndication_link($feed_XML->link);
   if (valid_url($parsed_source->options->link) && !valid_url($parsed_source->options->link, TRUE) && !empty($base)) {
     $parsed_source->options->link = $base . $parsed_source->options->link;
   }
-  
+
   $parsed_source->items = array();
 
   foreach ($feed_XML->entry as $news) {
@@ -490,7 +490,7 @@ function _parser_common_syndication_atom10_parse($feed_XML) {
     }
 
     $original_url = _parser_common_syndication_link($news->link);
-    
+
     $item = new stdClass();
     $item->title = _parser_common_syndication_title($title, $body);
     $item->description = $body;
@@ -692,7 +692,7 @@ function _parser_common_syndication_RSS20_parse($feed_XML) {
     else {
       $original_url = NULL;
     }
-    
+
     $additional_taxonomies = array();
     $additional_taxonomies['RSS Categories'] = array();
     $additional_taxonomies['RSS Domains'] = array();
@@ -840,7 +840,7 @@ function _parser_common_syndication_title($title, $body = FALSE) {
 
 /**
  * Decides if it's possible to use cURL or not
- * 
+ *
  * @return
  *   TRUE or FALSE
  */

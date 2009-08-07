@@ -1,5 +1,5 @@
 <?php
-// $Id: subscriptions_taxonomy.module,v 1.8 2008/11/05 18:07:54 salvis Exp $
+// $Id: subscriptions_taxonomy.module,v 1.13 2009/07/20 21:55:53 salvis Exp $
 
 /**
  * @file
@@ -29,9 +29,9 @@ function subscriptions_taxonomy_subscriptions($op, $arg0 = NULL, $arg1 = NULL, $
       if ($arg0['module'] == 'node') {
         $node = $arg0['node'];
         $params['node']['tid'] = array(
-          'join' => 'INNER JOIN {term_node} t ON s.value = '. ($GLOBALS['db_type'] == 'pgsql' ? 'CAST(' : '')
-                                                         .'t.tid'. ($GLOBALS['db_type'] == 'pgsql' ? ' AS CHAR)' : ''),
-          'where' => 't.nid = %d',
+          'join' => 'INNER JOIN {term_node} tn ON s.value = '. ($GLOBALS['db_type'] == 'pgsql' ? 'CAST(' : '')
+                                                          .'tn.tid'. ($GLOBALS['db_type'] == 'pgsql' ? ' AS VARCHAR)' : ''),
+          'where' => 'tn.nid = %d',
           'args' => array($node->nid),
         );
         if ($arg0['type'] == 'comment') {
@@ -214,7 +214,7 @@ function subscriptions_taxonomy_taxa_form(&$form_state, $vocabularies, $account,
     SELECT s.value, s.send_interval, s.author_uid, s.send_comments, s.send_updates, t.tid, t.vid, t.name
     FROM {term_data} t
     INNER JOIN {subscriptions} s ON ". ($GLOBALS['db_type'] == 'pgsql' ? 'CAST(' : '')
-                                  ."t.tid". ($GLOBALS['db_type'] == 'pgsql' ? ' AS CHAR)' : '')
+                                  ."t.tid". ($GLOBALS['db_type'] == 'pgsql' ? ' AS VARCHAR)' : '')
                                        ." = s.value
     WHERE s.module = 'node' AND s.field = 'tid' AND s.recipient_uid = %d
     ORDER BY s.author_uid", 't', 'tid');
@@ -248,7 +248,7 @@ function subscriptions_taxonomy_taxa_form(&$form_state, $vocabularies, $account,
         $tree = $subscriptions_terms_by_vid[$vocab->vid];
         $form[$vocab->vid][1] = array(
           '#type' => 'item',
-          '#description' => '<div>'. t('This is a restricted category group; to subscribe to an unlisted category, go to a post in that category and subscribe from there.') .'</div>',
+          '#description' => '<div>'. t('This is a restricted category group; deactivated subscriptions will be removed from the list. To subscribe to an unlisted category, go to a post in that category and subscribe from there.') .'</div>',
         );
       }
     }
@@ -262,7 +262,7 @@ function subscriptions_taxonomy_taxa_form(&$form_state, $vocabularies, $account,
         if (is_array($term)) {
           $term = (object)$term;
         }
-        $title = str_repeat('--&nbsp;', $term->depth) . l($term->name, 'taxonomy/term/'. $term->tid);
+        $title = str_repeat('--&nbsp;', (empty($term->depth) ? 0 : $term->depth)) . l($term->name, 'taxonomy/term/'. $term->tid);
         if (!isset($subscriptions_vid[$term->tid][-1])) {
           // author-less item is missing -- add it here:
           $subscriptions_vid[$term->tid][-1] = array(

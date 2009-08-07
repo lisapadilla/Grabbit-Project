@@ -1,5 +1,10 @@
 <?php
-// $Id: parser_common_syndication.install,v 1.1.2.4.2.7 2009/04/21 13:30:03 aronnovak Exp $
+// $Id: parser_common_syndication.install,v 1.1.2.4.2.9 2009/07/02 16:38:16 aronnovak Exp $
+
+/**
+ * @file
+ * Adds it to the content-type configuration
+ */
 
 /**
  * Implementation of hook_schema().
@@ -29,7 +34,7 @@ function parser_common_syndication_schema() {
  */
 function parser_common_syndication_install() {
   drupal_install_schema('parser_common_syndication');
-  
+
   // Set the parser of defaultly shipped processors if it's not done previously.
   $default_processors = array('feed');
   $set_common = array("parsers" => array("parser_common_syndication" => array("enabled" => TRUE, "weight" => 0)));
@@ -47,7 +52,7 @@ function parser_common_syndication_install() {
  */
 function parser_common_syndication_uninstall() {
   drupal_uninstall_schema('parser_common_syndication');
-  
+
   // Empty cache directory.
   $cache_dir = variable_get('parser_common_syndication_cache', FALSE);
   if (is_dir($cache_dir)) {
@@ -60,7 +65,7 @@ function parser_common_syndication_uninstall() {
     closedir($dp);
     rmdir($cache_dir);
   }
-  
+
   variable_del('parser_common_syndication_cache');
 }
 
@@ -68,11 +73,11 @@ function parser_common_syndication_uninstall() {
  * Instead of textual URL, store MD5 in the parser_common_syndication table
  */
 function parser_common_syndication_update_6101() {
+  $ret = array();
   $result = db_query("SELECT url FROM {parser_common_syndication}");
   while ($url = db_fetch_array($result)) {
-    db_query("UPDATE {parser_common_syndication} SET url = '%s' WHERE url = '%s'", md5($url['url']), $url['url']);
+    $ret[] = update_sql("UPDATE {parser_common_syndication} SET url = '%s' WHERE url = '%s'", md5($url['url']), $url['url']);
   }
-  $ret = array();
   db_change_field($ret, 'parser_common_syndication', 'url', 'url', array(
         'description' => t('The MD5 hash of feed URL'),
         'type' => 'varchar',

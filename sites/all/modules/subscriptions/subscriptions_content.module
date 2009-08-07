@@ -1,5 +1,5 @@
 <?php
-// $Id: subscriptions_content.module,v 1.26 2008/11/16 11:54:05 salvis Exp $
+// $Id: subscriptions_content.module,v 1.38 2009/07/22 15:51:10 salvis Exp $
 
 /**
  * @file
@@ -156,7 +156,7 @@ function _subscriptions_content_access($load_function, $load_args, $node) {
 function _subscriptions_content_types() {
   $tr = 't';
   $types['node'] = array(
-    'title' => 'Pages',
+    'title' => 'Pages/Threads',
     'access' => 'subscribe to content',
     'page' => 'subscriptions_content_page_node',
     'fields' => array('node', 'nid'),
@@ -174,7 +174,6 @@ function _subscriptions_content_types() {
   // help potx to pick up these strings:
   t('subscribe to content');
   t('subscribe to content types');
-  t('Pages');
 }
 
 /**
@@ -231,7 +230,7 @@ function subscriptions_content_nodeapi(&$node, $op, $arg = 0) {
       break;
 
     case 'delete':
-      db_query("DELETE FROM {subscriptions} WHERE module = 'node' AND field = 'nid' AND value = %d", $node->nid);
+      db_query("DELETE FROM {subscriptions} WHERE module = 'node' AND field = 'nid' AND value = '%s'", $node->nid);
       break;
   }
 }
@@ -244,6 +243,7 @@ function subscriptions_content_nodeapi(&$node, $op, $arg = 0) {
 function subscriptions_content_comment($comment, $op) {
   global $user;
   static $is_unpublished;
+  static $inserted_cid = 0;
   $comment = (array)$comment;  // $comment can be an object or an array.
 
   if ($op == 'form') {
@@ -273,7 +273,7 @@ function subscriptions_content_comment($comment, $op) {
     return (isset($form) ? $form : NULL);
   }
 
-  if (!isset($comment['nomail']) && ($op == 'insert' || $op == 'update' || $op == 'publish')) {
+  if (!isset($comment['nomail']) && ($op == 'insert' || $op == 'update' || ($op == 'publish' && $comment['cid'] != $inserted_cid))) {
     if (!isset($comment['subscriptions_notify']) || $comment['subscriptions_notify']) {
       $node = node_load($comment['nid']);
       $event = array(
@@ -288,6 +288,7 @@ function subscriptions_content_comment($comment, $op) {
         'comment' => (object)$comment,
       );
       subscriptions_queue($event);
+      $inserted_cid = $comment['cid'];
     }
     _subscriptions_content_autosubscribe($node->type, 'node', 'nid', $comment['nid'], 'on_comment');
   }
@@ -336,7 +337,7 @@ function subscriptions_content_form_subscriptions_settings_form_alter(&$form, &$
   $form['content']['subscriptions_blocked_content_types_note'] = array(
     '#type'          => 'item',
     '#title'         => t('Note'),
-    '#value'         => t('The %permission permission grants normal access to unlisted and blocked content types; this is intended as an administrative function, and the content types will be marked with a !symbol symbol (and appear in !red_ON red !red_OFF in the case of blocked types).', array('%permission' => t('subscribe to all content types'), '!symbol' => SUBSCRIPTIONS_UNAVAILABLE, '!red_ON' => '<span class="error">', '!red_OFF' => '</span>')),
+    '#value'         => t("The %permission permission grants normal access to unlisted and blocked content types; this is intended as an administrative function, and the content types and links will be marked with a '!symbol' symbol (and appear !red_ON like this !red_OFF in the case of blocked types).", array('%permission' => t('subscribe to all content types'), '!symbol' => SUBSCRIPTIONS_UNAVAILABLE, '!red_ON' => '<span class="error">', '!red_OFF' => '</span>')),
   );
   $form['content']['subscriptions_blocked_nodes'] = array(
     '#type'          => 'textfield',
@@ -346,6 +347,7 @@ function subscriptions_content_form_subscriptions_settings_form_alter(&$form, &$
     '#default_value' => variable_get('subscriptions_blocked_nodes', ''),
     '#description'   => t('Enter the IDs of nodes that should be <strong>completely unavailable for subscribing</strong>, separated by spaces.'),
   );
+  $form['#validate'][] = '_subscriptions_content_validate_blocked_nodes';
 
   $statics = variable_get('subscriptions_static_content_types', array());
   $avoid_empty_subscribe_links = variable_get('subscriptions_avoid_empty_subscribe_links', 0);
@@ -376,6 +378,23 @@ function subscriptions_content_form_subscriptions_settings_form_alter(&$form, &$
     '#default_value' => variable_get('subscriptions_generate_full_node', 0),
     '#description'   => t("Generating this variable causes considerable overhead even if it's not used, and <strong>it may even cause errors</strong>, depending on the !content_type! Default is OFF.", array('!content_type' => $tr('content type'))),
   );
+}
+
+/**
+ * Validate the 'subscriptions_blocked_nodes' input.
+ */
+function _subscriptions_content_validate_blocked_nodes($form, $form_state) {
+  $form_values = $form_state['values'];
+  $values = $form_values['subscriptions_blocked_nodes'];
+  if (!empty($values)) {
+    $values = explode(' ', $values);
+    foreach ($values as $v) {
+      if (!empty($v) && !is_numeric($v)) {
+        form_set_error('subscriptions_blocked_nodes', t('Enter a series of numbers, separated by spaces.'));
+        break;
+      }
+    }
+  }
 }
 
 /**
@@ -535,19 +554,36 @@ function _subscriptions_content_node_mailvars(&$mailvars, $node, $field, $s) {
   else {
     $mailvars['!comments'] = '';
   }
+  $files = '';
+  if (isset($node->files) && user_access('view uploaded files')) {
+    foreach($node->files as $file) {
+      $files .= file_create_url($file->filepath) ."\n";
+    }
+  }
+  $mailvars['!files'] = $files;
 }
 
 /**
  * Convert text with formatting into plain text.
  */
 function _subscriptions_content_format_text($text, $format = NULL) {
+  static $have_img_assist;
+  if (!isset($have_img_assist)) {
+    $have_img_assist = module_exists('img_assist');
+  }
+  if (!empty($have_img_assist)) {
+    foreach (img_assist_get_macros($text) as $unexpanded_macro => $macro) {
+      $expanded_macro = img_assist_render_image($macro);
+      if (preg_match('/<img src="([^"]*)".*title="([^"]*)"/', $expanded_macro, $matches)) {
+        $text = str_replace($unexpanded_macro, " [<a href=\"$matches[1]\">$matches[2]</a>] ", $text);
+      }
+    }
+  }
+
   if (isset($format)) {
     $text = check_markup($text, $format, FALSE);
   }
   $text = drupal_html_to_text($text);
-  if (module_exists('img_assist')) {
-    $text = preg_replace('/\[img_assist\|.*\]/', '['. t('image on website') .']', $text);
-  }
   return trim($text);
 }
 
@@ -654,24 +690,29 @@ function _subscriptions_content_load($nid, $comment_load_sqid) {
     }
     if (!empty($comment_load_sqid)) {
       // check for a later queued update notification (don't send comments past that one because it will go out as node/type with its own comments later!)
-      if ($cutoff_sqid = db_result(db_query_range("SELECT sqid FROM {subscriptions_queue} WHERE module = 'node' AND field = 'nid' AND value = %d AND uid = %d AND load_function = 'subscriptions_content_node_load' AND sqid > %d", array($nid, $user->uid, $comment_load_sqid), 0, 1))) {
+      if ($cutoff_sqid = db_result(db_query_range("SELECT sqid FROM {subscriptions_queue} WHERE module = 'node' AND field = 'nid' AND value = '%s' AND uid = %d AND load_function = 'subscriptions_content_node_load' AND sqid > %d", array($nid, $user->uid, $comment_load_sqid), 0, 1))) {
         $limit_sqids = 'AND q.sqid < '. (integer) $cutoff_sqid;
       }
     }
-    $sql = "SELECT q.sqid AS _subscriptions_sqid, q.is_new AS _subscriptions_is_new, c.* FROM {comments} c INNER JOIN {subscriptions_queue} q ON c.cid = q.load_args AND q.uid = %d AND q.load_function = '%s' WHERE c.nid = %d ". $published_comments_only .' '. $limit_sqids;
+    $sql = "
+      SELECT q.sqid AS _subscriptions_sqid, q.is_new AS _subscriptions_is_new, c.* 
+      FROM {comments} c 
+        INNER JOIN {subscriptions_queue} q ON ". ($GLOBALS['db_type'] == 'pgsql' ? 'CAST(' : '')
+                                            ."c.cid". ($GLOBALS['db_type'] == 'pgsql' ? ' AS VARCHAR)' : '')
+                                                 ." = q.load_args AND q.uid = %d AND q.load_function = '%s' 
+      WHERE c.nid = %d ". $published_comments_only .' '. $limit_sqids;
     $sql = db_rewrite_sql($sql, 'c', 'cid');
     $result = db_query($sql, $user->uid, 'subscriptions_content_comment_load', $nid);
-    $sqids = $placeholders = array();
+    $sqids = array();
     while ($comment = db_fetch_object($result)) {
       comment_invoke_comment($comment, 'view');
       if ($comment && user_access('access comments') && !isset($node->_subscriptions_comments[$comment->cid])) {
         $node->_subscriptions_comments[$comment->cid] = $comment;
       }
       $sqids[] = $comment->_subscriptions_sqid;
-      $placeholders[] = '%d';
     }
     if ($sqids) {
-      db_query('DELETE FROM {subscriptions_queue} WHERE sqid IN ('. implode(',', $placeholders) .')', $sqids);
+      db_query('DELETE FROM {subscriptions_queue} WHERE sqid IN ('. db_placeholders($sqids) .')', $sqids);
     }
   }
   return (empty($node) ? NULL : $node);
@@ -691,19 +732,42 @@ function subscriptions_content_page_node($account, $form) {
  */
 function subscriptions_content_node_form(&$form_state, $account, $form) {
   $uid = $account->uid;
+  $tr = 't';
   $subscriptions = array();
   $sql = db_rewrite_sql("
-    SELECT s.value, s.send_interval, s.author_uid, s.send_comments, s.send_updates, n.title, n.status
+    SELECT n.nid, n.uid, s.send_interval, s.author_uid, s.send_comments, s.send_updates, n.title, n.status, n.changed, n.comment AS comment_count, ncs.last_comment_timestamp,
+      IF(s.send_comments + s.send_updates = 0, n.created, IF(s.send_comments + s.send_updates = 2, IF(n.changed > ncs.last_comment_timestamp, n.changed, ncs.last_comment_timestamp), IF(s.send_comments = 1, ncs.last_comment_timestamp, n.changed))) AS latest_activity
     FROM {node} n
     INNER JOIN {subscriptions} s ON ". ($GLOBALS['db_type'] == 'pgsql' ? 'CAST(' : '')
-                                  ."n.nid". ($GLOBALS['db_type'] == 'pgsql' ? ' AS CHAR)' : '')
+                                  ."n.nid". ($GLOBALS['db_type'] == 'pgsql' ? ' AS VARCHAR)' : '')
                                        ." = s.value
+    LEFT JOIN {node_comment_statistics} ncs ON n.nid = ncs.nid
     WHERE s.module = 'node' AND s.field = 'nid' AND s.recipient_uid = %d
-    ORDER BY s.author_uid");
+    ORDER BY latest_activity DESC");
   $result = db_query($sql, $uid);
   while ($s = db_fetch_array($result)) {
-    $subscriptions[$s['value']][$s['author_uid']] = $s;
+    $subscriptions[$s['nid']][$s['author_uid']] = $s;
   }
+
+  // check whether we've commented:
+  $nids = array_keys($subscriptions);
+  $result = db_query("
+    SELECT nid FROM {comments}
+      WHERE
+        nid IN (
+          SELECT ". ($GLOBALS['db_type'] == 'pgsql' ? 'CAST(' : '')
+               ."value". ($GLOBALS['db_type'] == 'pgsql' ? ' AS INTEGER)' : '')
+                    ." FROM {subscriptions} WHERE module = 'node' AND field = 'nid' AND recipient_uid = %d
+        )
+        AND uid = %d GROUP BY nid", $uid, $uid);
+  while ($c = db_fetch_array($result)) {
+    if (isset($subscriptions[$c['nid']])) {
+      foreach ($subscriptions[$c['nid']] as $author_uid => $subscription) {
+        $subscriptions[$c['nid']][$author_uid]['commented'] = TRUE;
+      }
+    }
+  }
+
   $form[0] = array(
     '#type' => 'item',
     '#title' => '',
@@ -717,7 +781,7 @@ function subscriptions_content_node_form(&$form_state, $account, $form) {
       if ($title != $subscription['title']) {
         $title .= '...';
       }
-      $title = l($title, 'node/'. $subscription['value']);
+      $title = l($title, 'node/'. $subscription['nid']);
       if (!$subscription['status']) {
         if (user_access('administer nodes')) {
           $title = SUBSCRIPTIONS_UNAVAILABLE .'&nbsp;'. $title;
@@ -726,12 +790,18 @@ function subscriptions_content_node_form(&$form_state, $account, $form) {
           continue;
         }
       }
-      subscriptions_form_helper($form[0], $defaults, $author_uid, $subscription['value'], $title, $subscription);
+      $subscription['extra_info'] = t('@latest_activity, @authored, @commented', array(
+        '@latest_activity' => format_interval(time() - $subscription['latest_activity']),
+        '@authored' => ($subscription['uid'] == $uid ? $tr('Yes') : $tr('No')),
+        '@commented' => (!empty($subscription['commented']) ? $tr('Yes') : $tr('No')),
+      ));
+      subscriptions_form_helper($form[0], $defaults, $author_uid, $subscription['nid'], $title, $subscription);
     }
   }
   unset($form[0]['author']);
 
   if (count(element_children($form[0]))) {
+    $form[0]['extra_info']['#title'] = t('Latest activity, authored, commented');
     $form[0]['defaults'] = array(
       '#type' => 'value',
       '#value' => $defaults,
@@ -744,6 +814,7 @@ function subscriptions_content_node_form(&$form_state, $account, $form) {
     $form['field'] = array('#type' => 'value', '#value' => 'nid');
     $form['submit'] = array('#type' => 'submit', '#value' => t('Save'), '#weight' => 10);
     $form['#submit'][] = 'subscriptions_page_form_submit';
+    $form['note'] = array('#type' => 'item', '#description' => '<div>'. t('Note: Deactivated subscriptions will be removed from the list.') .'</div>' );
   }
   else {
     $form = array(
@@ -848,7 +919,7 @@ function subscriptions_content_type_form(&$form_state, $account, $form) {
  * @ingroup hooks
  */
 function subscriptions_content_mailkeys() {
-  $mailkeys['node-nid'] = t('Notifications for %Pages subscriptions', array('%Pages' => t('Pages')));
+  $mailkeys['node-nid'] = t('Notifications for %Pages (update/comment) subscriptions', array('%Pages' => t('Pages/Threads')));
   foreach (array_keys(node_get_types()) as $type) {
     $mailkeys['node-type-'. $type] = t('Notifications for %type !content_type subscriptions', array('%type' => $type, '!content_type' => t('content type')));
   }
@@ -905,6 +976,7 @@ function subscriptions_content_mail_edit_tokens_list($mailkey, $options = array(
         '!is_updated'          => t('The type of notification: 1 = updated (possibly new and already updated) item, 0 = otherwise.'),
         '!is_old'              => t('The type of notification: 1 = neither new nor updated item, 0 = otherwise.'),
         '!is_published'        => t('The publication state: 1 = published, 0 = unpublished.<br />(Unpublished nodes are sent to users with the %administer_nodes permission only.)', array('%administer_nodes' => $tr('administer nodes'))),
+        '!files'               => t('The list of attached files, one per line, if any, otherwise empty.'),
         '!has_new_comments'    => t('The comments state: 1 = comments are available in !comments, 0 = no comments.'),
         '!comments'            => t('One or more comments if available, otherwise empty.') .'<br />',
       );
@@ -946,6 +1018,12 @@ function subscriptions_content_form_mail_edit_trans_alter(&$form, &$form_state) 
   if ($form['id']['#value'] == $mailkey) {
     $tr = 't';
     $langcode = $form['language']['#value'];
+
+    $form['mail']['note'] = array(
+      '#value' => '<div>'. t("Note: 'new' and 'update' notifications for %Pages subscriptions use the matching !content_type subscriptions template rather than this one, if allowed; this does not apply to 'comment'-only notifications.", array('%Pages' => t('Pages/Threads'), '!content_type' => t('content type'))) .'</div>',
+      '#weight' => -1,
+    );
+
     $comment_body = subscriptions_mail_template_load(SUBSCRIPTIONS_COMMENT_MAILKEY, $langcode, 'body', 'CITEM');
     $separator = subscriptions_mail_template_load(SUBSCRIPTIONS_COMMENT_MAILKEY, $langcode, 'subject', 'SEP');
 

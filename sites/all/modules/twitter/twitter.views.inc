@@ -1,5 +1,5 @@
 <?php
-// $Id: twitter.views.inc,v 1.1.2.3 2009/06/15 21:56:30 eaton Exp $
+// $Id: twitter.views.inc,v 1.1.2.4 2009/06/20 16:29:14 eaton Exp $
 /**
  * @file
  * Provide views data and handlers for twitter.module
@@ -72,7 +72,14 @@ function twitter_views_data() {
     'help' => t('The ID of the Twitter status message.'),
     'field' => array(
       'handler' => 'views_handler_field',
-      'click sortable' => FALSE,
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+      'allow empty' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
     ),
   );
 
@@ -121,10 +128,44 @@ function twitter_views_data() {
     ),
   );
 
+  // Twitter reply-to-status id
+  $data['twitter']['in_reply_to_status_id'] = array(
+    'title' => t('Reply ID'),
+    'help' => t('The ID of the Twitter status this message is replying to.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+      'allow empty' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
 
+  // Twitter reply-to-status screen name
+  $data['twitter']['in_reply_to_screen_name'] = array(
+    'title' => t('Reply name'),
+    'help' => t('The login account of the Twitter user this message is replying to.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE,
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+      'allow empty' => TRUE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
 
-
-  $data['twitter_account']['table']['group']  = t('Twitter');
+  $data['twitter_account']['table']['group']  = t('Twitter account');
 
   $data['twitter_account']['table']['join'] = array(
     'twitter' => array(

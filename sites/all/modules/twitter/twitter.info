@@ -4,9 +4,9 @@ description = Adds integration with the Twitter microblogging service.
 php = 5.1
 core = 6.x
 
-; Information added by drupal.org packaging script on 2009-06-15
-version = "6.x-2.5"
+; Information added by drupal.org packaging script on 2009-07-02
+version = "6.x-2.6"
 core = "6.x"
 project = "twitter"
-datestamp = "1245105686"
+datestamp = "1246548743"
 

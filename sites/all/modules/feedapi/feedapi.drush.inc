@@ -1,5 +1,10 @@
 <?php
-// $Id: feedapi.drush.inc,v 1.1.2.1 2009/06/18 13:58:11 aronnovak Exp $
+// $Id: feedapi.drush.inc,v 1.1.2.3 2009/07/02 16:38:15 aronnovak Exp $
+
+/**
+ * @file
+ * Drush commands for FeedAPI.
+ */
 
 /**
  * Implementation of hook_drush_help().
@@ -16,7 +21,7 @@ function feedapi_drush_help($section) {
       return dt('Parses a feed and shows you the output.');
     case 'drush:feedapi config':
       return dt('Shows the config of a parser of a processor.');
-  
+
   }
 }
 

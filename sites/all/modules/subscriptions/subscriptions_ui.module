@@ -1,5 +1,5 @@
 <?php
-// $Id: subscriptions_ui.module,v 1.12 2008/12/25 13:44:42 salvis Exp $
+// $Id: subscriptions_ui.module,v 1.16 2009/07/22 16:58:07 salvis Exp $
 
 /**
  * @file
@@ -58,12 +58,13 @@ function subscriptions_ui_block($op = 'list', $delta = 0) {
 
 
 /**
- * Returns TRUE on node/NID pages if the NID is not blocked.
+ * Returns TRUE on node/NID pages if the NID is not blocked
+ * and no other module wants to provide the UI.
  */
 function subscriptions_ui_can_subscribe() {
   global $user;
   
-  return ($user->uid && arg(0) == 'node' && is_numeric(arg(1)) && !subscriptions_node_is_blocked(arg(1)) && user_access('subscribe to content'));
+  return ($user->uid && arg(0) == 'node' && is_numeric(arg(1)) && module_invoke('subscriptions_ui', 'get_permission_to_handle', arg(1), 'subscriptions_ui') !== FALSE);
 }
 
 /**
@@ -79,8 +80,9 @@ function subscriptions_ui_link($type, $node = NULL, $teaser = NULL) {
       $blocked_types = variable_get('subscriptions_blocked_content_types', array());
       if (!in_array($node->type, $blocked_types) || user_access('subscribe to all content types')) {
         return array('subscriptions-subscribe' => array(
-          'href' => check_url(preg_replace('!^/!', '', url($_GET['q'] .'/subscribe'))),
-          'title' => t('Subscribe'),
+          'href' => $_GET['q'] .'/subscribe',
+          'title' => t('Subscribe') . (in_array($node->type, $blocked_types) ? SUBSCRIPTIONS_UNAVAILABLE : ''),
+          'html' => TRUE,
           'fragment' => 'subscribe',
           'attributes' => array('title' => t('Receive notifications about changes and/or comments to this page (and possibly similar pages).')),
         ));
@@ -210,7 +212,7 @@ function subscriptions_ui_node_form(&$form_state, $node, $account = NULL) {
     '#options' => $nonlabeled_options,
     '#access' => _subscriptions_get_setting('send_updates_visible', $user) > 0,
   );
-  if (module_exists('comment') && $node->comment == COMMENT_NODE_READ_WRITE && user_access('access comments')) {
+  if (module_exists('comment') && user_access('access comments')) {
     $form['wrapper']['comments'] = array(
       '#type' => 'checkboxes',
       '#default_value' => $default_comments,
@@ -353,4 +355,44 @@ function subscriptions_ui_form_subscriptions_settings_form_alter(&$form, &$form_
     '#default_value' => variable_get('subscriptions_show_by_author_options', 1),
     '#description'   => t("If you don't want your users to subscribe 'by author', then turn this off.  Default is ON."),
   );
+}
+
+/**
+ * Ask for permission to display the subscriptions interface
+ * for the given node.
+ *
+ * This should be used as follows:
+ *   if (module_invoke('subscriptions_ui', 'get_permission_to_handle', $nid, 'mymodule') !== FALSE) {
+ *     my_module_display_interface($nid);
+ *   }
+ * and mymodule needs to implement hook_subscriptions_ui(), see below.
+ */
+function subscriptions_ui_get_permission_to_handle($nid, $module)
+{
+  if (subscriptions_node_is_blocked($nid) || !user_access('subscribe to content')) {
+    return FALSE;
+  }
+
+  static $permissions = array();
+  if (empty($permissions[$nid])) {
+    foreach (module_implements('subscriptions_ui') as $m) {
+      $perm = module_invoke($m, 'subscriptions_ui', $nid);
+      if (empty($permissions[$nid]) || $permissions[$nid]['priority'] < $perm['priority'] ) {
+        $permissions[$nid] = $perm;
+      }
+    }
+  }
+  return $permissions[$nid]['module'] == $module;
+}
+
+/**
+ * Implementation of hook_subscriptions_ui().
+ *
+ * subscriptions_ui is willing to handle all $nids.
+ * Other modules can return a higher priority with their name
+ * (or a different name!) depending on the $nid, $user, etc.
+ */
+function subscriptions_ui_subscriptions_ui($nid)
+{
+  return array('priority' => 0, 'module' => 'subscriptions_ui');
 }
