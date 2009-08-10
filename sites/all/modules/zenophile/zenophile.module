@@ -1,0 +1,661 @@
+<?php
+// $Id: zenophile.module,v 1.6 2009/06/29 18:21:45 garrettalbright Exp $
+
+/**
+ * Implementation of hook_menu().
+ */
+
+function zenophile_menu() {
+  return array(
+    'admin/build/themes/zenophile' => array(
+      'title' => 'Create Zen subtheme',
+      'description' => 'Quickly create a Zen subtheme for theming.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('zenophile_create'),
+      'access arguments' => array('create zen theme with zenophile'),
+      'type' => MENU_LOCAL_TASK,
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+
+function zenophile_perm() {
+  return array('create zen theme with zenophile');
+}
+
+/**
+ * Form to create the subtheme. drupal_get_form() callback.
+ */
+
+function zenophile_create() {
+  // Check for Zen
+  if (drupal_get_path('theme', 'STARTERKIT') === '') {
+    drupal_set_message(t('The STARTERKIT theme could not be found. Please check that the <a href="!zen">Zen theme</a> is properly installed.', array('!zen' => 'http://drupal.org/project/zen')), 'error');
+  }
+  else {
+    // Create a list of Zen-based themes. This is… good enough.
+    $zen_based = array();
+    foreach (list_themes(TRUE) as $theme) {
+      // Check for zen.css in the theme's stylesheet list
+      if (in_array('zen.css', array_keys($theme->info['stylesheets']['all']))) {
+        $zen_based[$theme->name] = t('@tname (@tsname)', array('@tname' => $theme->info['name'], '@tsname' => $theme->name));
+      }
+    }
+    return array(
+      'parent' => array(
+        '#title' => t('Starter theme'),
+        '#description' => t('The parent theme for the theme you are creating. If in doubt, select STARTERKIT.'),
+        '#type' => 'select',
+        '#options' => $zen_based,
+        '#default_value' => 'STARTERKIT',
+        '#required' => TRUE,
+        '#weight' => 0,
+      ),
+      'sysname' => array(
+        '#title' => t('System name'),
+        '#description' => t('The machine-compatible name of your subtheme. This name should consist of only lowercase letters plus the underscore character.'),
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#weight' => 10,
+      ),
+      'friendly' => array(
+        '#title' => t('Human name'),
+        '#description' => t('A human-friendly name for your subtheme. This name may contain uppercase letters, spaces, punctuation, etc. If left blank, the system name will also be used here.'),
+        '#type' => 'textfield',
+        '#weight' => 20,
+      ),
+      'description' => array(
+        '#title' => t('Description'),
+        '#description' => t('A short description of this theme.'),
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#weight' => 30,
+      ),
+      'layout' => array(
+        '#title' => t('Layout type'),
+        '#description' => t('A fixed layout will stay the same width, regardless of the user&rsquo;s browser window width. Any space beyond the width of the layout will be filled with blank space on either side of the layout, so that the layout is always centered in the browser window. A liquid layout will adjust its width depending on the width of the user&rsquo;s browser window width, so that the edges of the layout are always the same distance from the edges of the browser window (though this breaks when the browser window is made to be extremely narrow). If in doubt, you probably want to use a fixed layout.'),
+        '#type' => 'radios',
+        '#options' => array(
+          'fixed' => t('Fixed'),
+          'liquid' => t('Liquid'),
+        ),
+        '#default_value' => 'fixed',
+        '#required' => TRUE,
+        '#weight' => 40,
+      ),
+      'site' => array(
+        '#title' => t('Site directory'),
+        '#description' => t('Which site directory would you like your new subtheme to be placed in? If in doubt, select <em>all</em>.'),
+        '#type' => 'select',
+        '#options' => _zenophile_find_sites(),
+        '#default_value' => array('all'),
+        '#required' => TRUE,
+        '#weight' => 50,
+      ),
+      'fresh' => array(
+        '#title' => t('Create fresh CSS file'),
+        '#description' => t('If checked, Zenophile will create a new empty CSS file and add it to the theme via its .info file. Some themers may prefer to start with a fresh empty CSS file rather than adapting the pre-created CSS file which will be copied over from the STARTERKIT directory.'),
+        '#type' => 'checkbox',
+        '#default_value' => TRUE,
+        '#weight' => 60,
+      ),
+      'widths_fset' => array(
+        '#title' => t('Customize widths and positions'),
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#weight' => 70,
+        'desc' => array(
+          '#type' => 'item',
+          '#value' => t('If you wish to change the widths and positions of the page wrapper div (#page) and standard sidebars from their defaults, you may do so using the fields below. Zenophile will do the math for you and add the measurements to a new CSS file named sidebars.css, which will be placed in your new theme&rsquo;s directory and .info file. Note that some parent themes may remove one or both of the standard sidebars and/or add their own additional sidebars.'),
+          '#weight' => 0,
+        ),
+        'page' => array(
+          '#title' => t('Page wrapper width (#page)'),
+          '#type' => 'textfield',
+          '#size' => 4,
+          '#field_suffix' => 'px',
+          '#default_value' => '960',
+          '#description' => t('This value is ignored for themes with a liquid layout.'),
+          '#weight' => 10,
+        ),
+        'sidebar-left' => array(
+          '#title' => t('Left sidebar width (#sidebar-left)'),
+          '#type' => 'textfield',
+          '#size' => 4,
+          '#field_suffix' => 'px',
+          '#default_value' => '200',
+          '#weight' => 20,
+        ),
+        'sidebar-right' => array(
+          '#title' => t('Right sidebar width (#sidebar-right)'),
+          '#type' => 'textfield',
+          '#size' => 4,
+          '#field_suffix' => 'px',
+          '#default_value' => '200',
+          '#weight' => 30,
+        ),
+        'sidebar-pos' => array(
+          '#title' => t('Sidebar positioning'),
+          '#type' => 'radios',
+          '#options' => array(
+            'normal' => t('Sidebars on their respective sides (left, main, right)'),
+            'left' => t('Both sidebars on left (left, right, main)'),
+            'right' => t('Both sidebars on right (main, left, right)'),
+          ),
+          '#default_value' => 'normal',
+          '#weight' => 40,
+        ),
+      ),
+      // TODO: Regions, mixins?
+      'submit' => array(
+        '#type' => 'submit',
+        '#value' => t('Submit'),
+        '#weight' => 1000,
+      ),
+    );
+  }
+}
+
+/**
+ * Validator for zenophile_create().
+ */
+
+function zenophile_create_validate($form, &$form_state) {
+  // Check that the system name of the theme is valid
+  if (preg_match('/[^a-z_]/', $form_state['values']['sysname'])) {
+    form_set_error('sysname', t('The <em>System name</em> may only consist of lowercase letters and the underscore character.'));
+  }
+  if (drupal_get_path('theme', $form_state['values']['sysname'])) {
+    form_set_error('sysname', t('A theme with this <em>System name</em> already exists. Cowardly refusing to create another one.'));
+  }
+  if (in_array($form_state['values']['sysname'], array('layout', 'print', 'sidebars'/*, drupal6-reference.css, html-elements.css (these will already be disallowed by the first if clause above) */))) {
+    form_set_error('sysname', t('That <em>System name</em> value cannot be used. Zenophile will need to create @sysname.css to continue, but that filename is reserved for another important Zen CSS file. Please choose a different <em>System name</em> value.', array('@sysname' => $form_state['values']['sysname'])));
+  }
+}
+
+/**
+ * Submitor (?) for zenophile_create().
+ */
+
+function zenophile_create_submit($form, &$form_state) {
+  // Does the theme directory exist already for this site?
+  $t_dir = "sites/{$form_state['values']['site']}/themes";
+  if (!file_exists($t_dir) && !mkdir($t_dir, 0755)) {
+    form_set_error('site', t('The <em>themes</em> directory for the %site site directory does not exist, and it could not be created automatically. Please create the directory %dir manually and try again.', array('%site' => $site, '%dir' => $t_dir)), 'error');
+  }
+  else {
+    $dir = "{$t_dir}/{$form_state['values']['sysname']}";
+    // Make the theme directory
+    if (file_exists($dir)) {
+      // This theoretically should have been caught by the validate function
+      // above, but it's possible that there's a directory in this site's
+      // themes directory which is not a proper theme… or it's a regular file.
+      form_set_error(NULL, t('The subtheme directory %dir could not be created because a file or directory with that name already exists.', array('%dir' => $dir)));
+    }
+    else {
+      if (mkdir($dir)) {
+        // Copy over everyting in the STARTERKIT directory except
+        // STARTERKIT.info (which we'll get to in just a bit), and template.php
+        // and theme-settings.php (which we'll get to in step 6). This is
+        // essentially Step 1 of the "by-hand" Zen subtheme creation directions.
+        $parent_dir = drupal_get_path('theme', $form_state['values']['parent']);
+        $zen_dir = drupal_get_path('theme', 'zen');
+        $h = opendir($parent_dir);
+        
+        $parent_info = $form_state['values']['parent'] . '.info';
+        while (($file = readdir($h)) !== FALSE) {
+          // We're not just using _zenophile_rcopy() here because we want to
+          // exclude some files.
+          $fpath = "{$parent_dir}/{$file}";
+          $parent_css = $form_state['values']['parent'] . '.css';
+          if ($file[0] !== '.' && $file !== $parent_info && $file !== 'template.php' && $file !== 'theme-settings.php') {
+            // Copy and rename the parent CSS file
+            if ($file === $parent_css) {
+              copy($fpath, "{$dir}/{$form_state['values']['sysname']}.css");
+            }
+            else {
+              _zenophile_rcopy($fpath, "{$dir}/{$file}");
+//            if (is_file($fpath)) {
+//              copy($fpath, "{$dir}/{$file}");
+//            }
+            }
+          }
+        }
+        $path_part = "{$dir}/{$form_state['values']['sysname']}";
+        // Now take care of STARTERKIT.info. Step 2.
+        // Load the info file into a string.
+        $info = file_get_contents("{$parent_dir}/{$parent_info}");
+        // Reset the \$Id\$ string
+        $info = preg_replace('/^; \$Id.*\$$/m', '; \$Id\$', $info, 1);
+        // Build replacement arrays. We definitely want to replace the name and
+        // description.
+        $from = array(
+          "/{$form_state['values']['parent']}/",
+          '/^name\s*=.*/m',
+          '/^description\s*=.*/m',
+        );
+        $to = array(
+          $form_state['values']['sysname'],
+          'name        = ' . ($form_state['values']['friendly'] === '' ? $form_state['values']['sysname'] : $form_state['values']['friendly']),
+          'description = ' . $form_state['values']['description'],
+        );
+        
+        // Do we also want to add the fresh stylesheet?
+        if ($form_state['values']['fresh']) {
+          $from[] = '/^stylesheets\[all\]\[\]\s*=\s*zen\.css$/m';
+          $to[] = "stylesheets[all][]   = zen.css\n\n  ; Specifying a nice clean stylesheet\nstylesheets[all][] = {$form_state['values']['sysname']}-fresh.css";
+          // Make the blank stylesheet file
+          touch($path_part . '-fresh.css');
+        }
+        
+        // Do we want to do sidebars.css?
+        if (($form_state['values']['sidebar-left'] !== '200' || $form_state['values']['sidebar-right'] !== '200' || $form_state['values']['page'] !== '960' || $form_state['values']['sidebar-pos'] !== 'normal')) {
+          $page = intval($form_state['values']['page']);
+          $ls = intval($form_state['values']['sidebar-left']);
+          $rs = intval($form_state['values']['sidebar-right']);
+          $ls_content_width = $page - $ls;
+          $rs_content_width = $page - $rs;
+          $both_sidebars_width = $ls + $rs;
+          $both_content_width = $page - $both_sidebars_width;
+          if ($form_state['values']['sidebar-pos'] === 'left') {
+            if ($form_state['values']['layout'] === 'fixed') {
+              $sidebars = <<<END
+/* \$Id\$ */
+
+/* Fixed layout; both sidebars on left */
+
+#page, .no-sidebars #content {
+  width: {$page}px;
+}
+
+#sidebar-left {
+  width: {$ls}px;
+  margin-right: -{$ls}px;
+}
+
+#sidebar-right {
+  width: {$rs}px;
+}
+
+.two-sidebars #sidebar-right {
+  margin-left: {$ls}px;
+  margin-right: -{$both_sidebars_width}px;
+}
+
+.sidebar-right #sidebar-right {
+  margin-left: 0px;
+  margin-right: -{$rs}px;
+}
+
+#sidebar-right-inner {
+  margin-left: 0px;
+  margin-right: 20px;
+}
+
+.no-sidebars #content, .one-sidebar #content, .two-sidebars #content {
+  margin-right: -{$page}px;
+}
+
+.sidebar-left #content {
+  margin-left: {$ls}px;
+  width: {$ls_content_width}px;
+}
+
+.sidebar-right #content {
+  margin-left: {$rs}px;
+  width: {$rs_content_width}px;
+}
+
+.two-sidebars #content {
+  margin-left: {$both_sidebars_width}px;
+  width: {$both_content_width}px;
+}
+END;
+            }
+            else {
+              $sidebars = <<<END
+/* \$Id\$ */
+
+/* Liquid layout; both sidebars on left */
+
+#sidebar-left {
+  width: {$ls}px;
+  margin-right: -{$ls}px;
+}
+
+#sidebar-right {
+  float: left;
+  width: {$rs}px;
+}
+
+.two-sidebars #sidebar-right {
+  margin-left: {$ls}px;
+  margin-right: -{$both_sidebars_width}px;
+}
+
+.sidebar-right #sidebar-right {
+  margin-left: 0px;
+  margin-right: -{$rs}px;
+}
+
+#sidebar-right-inner {
+  margin-left: 0px;
+  margin-right: 20px;
+}
+
+.sidebar-left #content-inner {
+  padding-left: {$ls}px;
+}
+
+.sidebar-right #content-inner {
+  padding-left: {$rs}px;
+  padding-right: 0px;
+}
+
+.two-sidebars #content-inner {
+  padding-left: {$both_sidebars_width}px;
+  padding-right: 0px;
+}
+END;
+            }
+          }
+          elseif ($form_state['values']['sidebar-pos'] === 'right') {
+            if ($form_state['values']['layout'] === 'fixed') {
+              $sidebars = <<< END
+/* \$Id\$ */
+
+/* Fixed layout; both sidebars on right */
+
+#page, .no-sidebars #content {
+  width: {$page}px;
+}
+
+#sidebar-left {
+  width: {$ls}px;
+}
+
+#sidebar-right {
+  width: {$rs}px;
+  margin-left: {$rs_content_width}px;
+  margin-right: -{$page}px;
+}
+
+.two-sidebars #sidebar-left {
+  margin-left: {$both_content_width}px;
+  margin-right: -{$rs_content_width}px;
+}
+
+.two-sidebars #sidebar-right {
+  margin-right: -{$page}px;
+}
+
+.sidebar-left #sidebar-left {
+  margin-left: {$ls_content_width}px;
+  margin-right: -{$page}px;
+}
+
+#sidebar-left-inner {
+  margin-left: 20px;
+  margin-right: 0px;
+}
+
+.sidebar-right #sidebar-right {
+  margin-left: {$rs_content_width}px;
+}
+
+.no-siebars #content, .one-sidebar #content, .two-sidebars #content {
+  margin-left: 0px;
+}
+
+.sidebar-left #content {
+  width: {$ls_content_width}px;
+  margin-right: -{$ls_content_width}px;
+}
+
+.sidebar-right #content {
+  width: {$rs_content_width}px;
+  margin-right: -{$rs_content_width}px;
+}
+
+.two-sidebars #content {
+  width: {$both_content_width}px;
+  margin-right: -{$both_content_width}px;
+}
+END;
+            }
+            else {
+              $sidebars = <<< END
+/* \$Id\$ */
+
+/* Liquid layout; both sidebars on right */
+
+#sidebar-left {
+  width: {$ls}px;
+  float: right;
+  margin-right: 0px;
+}
+
+#sidebar-right {
+  width: {$rs}px;
+}
+
+#sidebar-left-inner {
+  margin-left: 20px;
+  margin-right: 0px;
+}
+
+.sidebar-left #content-inner {
+  padding-left: 0px;
+  padding-right: {$ls}px;
+}
+
+.sidebar-right #content-inner {
+  padding-right: {$rs}px;
+}
+
+.two-sidebars #sidebar-left {
+  margin-right: {$rs}px;
+}
+
+.two-sidebars #sidebar-right {
+  margin-right: -{$both_sidebars_width}px;
+}
+
+.two-sidebars #content-inner {
+  padding-left: 0px;
+  padding-right: {$both_sidebars_width}px;
+}
+END;
+            }
+          }
+          else {
+            if ($form_state['values']['layout'] === 'fixed') {
+              $sidebars = <<<END
+/* \$Id\$ */
+
+/* Fixed layout; standard sidebar placement */
+
+#page, .no-sidebars #content {
+  width: {$page}px;
+}
+
+#sidebar-left {
+  width: {$ls}px;
+  margin-right: -{$ls}px;
+}
+
+#sidebar-right {
+  width: {$rs}px;
+  margin-left: {$rs_content_width}px;
+  margin-right: -{$page}px;
+}
+
+#content {
+  margin-right: -{$page}px;
+}
+
+.sidebar-left #content {
+  width: {$ls_content_width}px;
+  margin-left: {$ls}px;
+  margin-right: -{$page}px;
+}
+
+.sidebar-right #content {
+  width: {$rs_content_width}px;
+  margin-right: -{$rs_content_width}px;
+}
+
+.two-sidebars #content {
+  width: {$both_content_width}px;
+  margin-left: {$ls}px;
+  margin-right: -{$rs_content_width}px;
+}
+END;
+            }
+            else {
+              $sidebars = <<<END
+/* \$Id\$ */
+
+/* Liquid layout; standard sidebar placement */
+
+#sidebar-left {
+  width: {$ls}px;
+}
+
+#sidebar-right {
+  width: {$rs}px;
+}
+
+.sidebar-left #content-inner, .two-sidebars #content-inner {
+  padding-left: {$ls}px;
+}
+
+.sidebar-right #content-inner, .two-sidebars #content-inner {
+  padding-right: {$rs}px;
+}
+END;
+            }
+          }
+          // Write the CSS file
+          file_put_contents($dir . '/sidebars.css', $sidebars);
+          // Add replacement for .info file
+          $from[] = '/^stylesheets\[all\]\[\]\s*=\s*zen\.css$/m';
+          $to[] = "stylesheets[all][]  = zen.css\n  ; Customized sidebar/content widths and positions\nstylesheets[all][]    = sidebars.css";
+        }
+        // Do replacement and write the info file
+        $info = preg_replace($from, $to, $info);
+        file_put_contents($path_part . '.info', $info);
+        
+        // Copy the liquid or fixed stylesheet, zen.css, print.css and
+        // html-elements.css. Steps 3 through 6. Only do this if the parent is
+        // STARTERKIT - otherwise these should have already been copied.
+        if ($form_state['values']['parent'] === 'STARTERKIT') {
+          copy("{$zen_dir}/layout-{$form_state['values']['layout']}.css", $dir . '/layout.css');
+          copy($zen_dir . '/print.css', $dir . '/print.css');
+          copy($zen_dir . '/html-elements.css', $dir . '/html-elements.css');
+          // If there is a starter_theme.css file in the directory already,
+          // rename it to this_theme.css. Otherwise, copy over zen.css and
+          // rename it.
+          $parent_css = "{$dir}/{$form_state['values']['parent']}.css";
+          if (file_exists($parent_css)) {
+            rename($parent_css, "{$dir}/{$form_state['values']['sysname']}.css");
+          }
+          else {
+            copy($zen_dir . '/zen.css', "{$dir}/{$form_state['values']['sysname']}.css");
+          }
+        }
+        
+        // Copy template.php and theme-settings.php and replace STARTERKIT.
+        // Kind of Step 1 plus Step 7 mixed together.
+        $info = file_get_contents($parent_dir . '/template.php');
+        $info = str_replace($form_state['values']['parent'], $form_state['values']['sysname'], $info);
+        file_put_contents($dir . '/template.php', $info);
+        $info = file_get_contents($parent_dir . '/theme-settings.php');
+        $info = str_replace($form_state['values']['parent'], $form_state['values']['sysname'], $info);
+        file_put_contents($dir . '/theme-settings.php', $info);
+
+        drupal_set_message(t('A new subtheme was created in %dir.', array('%dir' => $dir)));
+        
+        // Flush the cached theme data so the new subtheme appears in the parent
+        // theme list
+        system_theme_data();
+      }
+      else {
+        drupal_set_message(t('An error occurred while trying to create the subtheme directory %dir.', array('%dir' => $dir)));
+      }
+    }
+  }
+}
+
+/**
+ * List this site's sites as located in the sites directory.
+ *
+ * @return An array of directories in the sites directory.
+ */
+
+function _zenophile_find_sites() {
+  $sites = array();
+  if ($h = opendir('sites')) {
+    while (($site = readdir($h)) !== FALSE) {
+      // Don't allow dot files or links for security reasons
+      if (is_dir('sites/' . $site) && !is_link('sites/' . $site) && $site[0] !== '.' && $site !== 'default') {
+        $sites[] = $site;
+      }
+    }
+    closedir($h);
+    return drupal_map_assoc($sites);
+  }
+  else {
+    drupal_set_message(t('The <em>sites</em> directory could not be read.'), 'error');
+    return array();
+  }
+}
+
+/**
+ * Copy a file, or recursively copy a directory.
+ *
+ * Adapted from code created by Aidan Lister:
+ * http://aidanlister.com/2004/04/recursively-copying-directories-in-php/
+ *
+ * @param $source
+ *   The source path
+ * @param $dest
+ *   The destination path
+ * @return TRUE or FALSE depending on success.
+ */
+
+function _zenophile_rcopy($source, $dest) {
+
+  // Check for symlinks
+  if (is_link($source)) {
+    return symlink(readlink($source), $dest);
+  }
+
+  // Simple copy for a file
+  if (is_file($source)) {
+    return copy($source, $dest);
+  }
+
+  // Make destination directory
+  if (!is_dir($dest)) {
+    mkdir($dest);
+  }
+
+  // Loop through the folder
+  $dir = opendir($source);
+  while (($entry = readdir($dir)) !== FALSE) {
+    // Skip pointers
+    if ($entry[0] !== '.') {
+    // Deep copy directories
+    _zenophile_rcopy("{$source}/{$entry}", "{$dest}/{$entry}");
+    }
+  }
+
+  // Clean up
+  closedir($dir);
+  return TRUE;
+}

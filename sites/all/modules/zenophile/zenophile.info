@@ -1,0 +1,11 @@
+; $Id: zenophile.info,v 1.1 2009/04/12 01:52:12 garrettalbright Exp $
+name = Zenophile
+description = Quickly create Zen subthemes.
+package = Development
+core = 6.x
+; Information added by drupal.org packaging script on 2009-07-21
+version = "6.x-1.1-beta6"
+core = "6.x"
+project = "zenophile"
+datestamp = "1248143766"
+
