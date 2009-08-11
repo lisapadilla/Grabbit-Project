@@ -104,8 +104,6 @@
 /** header **/
   #header
   {
-    height: 220px;
-    background: url(images/various/bg_header.gif) repeat-x;
   }
 
   #header-inner
@@ -115,11 +113,16 @@
 
   #logo-title /* Wrapper for logo, website name, and slogan */
   {
+    margin: 0;
+    padding: 0;
+    width: 192px;
+    height: 79px;
+    float: left;
   }
 
   #logo /* Wrapper for logo */
   {
-    margin: 0 10px 0 0;
+    margin: 0;
     padding: 0;
   }
 
@@ -153,6 +156,10 @@
 
   #header-blocks /* Wrapper for any blocks placed in the header region */
   {
+    width: 105px;
+    height: 33px;
+    float: right;
+    margin-bottom: 24px;
   }
 
 /** main (container for everything else) **/
@@ -274,6 +281,12 @@
 
   #primary /* Primary links */
   {
+    margin: 0;
+    padding: 0;
+    float: right;
+    width: 385px;
+    height: 19px;
+    clear: right;
   }
 
   #secondary /* Secondary links */
@@ -828,4 +841,37 @@
     text-align: left;
     padding-right: 1em;
     border-bottom: 3px solid #ccc;
+  }
+  #skip-to-nav{
+    display: none;
+  }
+  #block-facebook_grabbit-1{
+    margin: 0;
+    padding: 0;
+    width: 105px;
+    height: 33px;
+    float: right;
+  }
+  #block-facebook_grabbit-1 a{
+    display: block;
+    width: 105px;
+    height: 33px;
+    background: url(images/btns/tell_friend.gif) 0 0 no-repeat;
+    text-indent: -3000em;
+  }
+  #block-facebook_grabbit-1 a:hover{
+    border: none;
+    text-decoration: none;
+  }
+  #primary ul.links{
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+  }
+  #primary ul.links li{
+    list-style: none;
+  }
+  #primary ul.links li a {
+    display: inline-block;
+    height: 19px;
   }

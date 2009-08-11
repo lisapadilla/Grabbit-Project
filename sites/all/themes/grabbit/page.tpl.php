@@ -132,6 +132,12 @@
           <?php print $header; ?>
         </div> <!-- /#header-blocks -->
       <?php endif; ?>
+      
+      <?php if ($primary_links): ?>
+        <div id="primary">
+          <?php print theme('links', $primary_links); ?>
+        </div> <!-- /#primary -->
+      <?php endif; ?>
 
     </div></div> <!-- /#header-inner, /#header -->
 
@@ -188,12 +194,6 @@
             <div id="search-box">
               <?php print $search_box; ?>
             </div> <!-- /#search-box -->
-          <?php endif; ?>
-
-          <?php if ($primary_links): ?>
-            <div id="primary">
-              <?php print theme('links', $primary_links); ?>
-            </div> <!-- /#primary -->
           <?php endif; ?>
 
           <?php if ($secondary_links): ?>
