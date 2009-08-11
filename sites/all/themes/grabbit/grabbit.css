@@ -842,7 +842,6 @@
     padding-right: 1em;
     border-bottom: 3px solid #ccc;
   }
-<<<<<<< HEAD:sites/all/themes/grabbit/grabbit.css
   #skip-to-nav{
     display: none;
   }
@@ -876,8 +875,6 @@
     display: inline-block;
     height: 19px;
   }
-=======
 .twitter-message-stream, .facebook-post{
 	display:none;
 }
->>>>>>> 6da47ce61620b163f5203d6fc4352552c12daf3b:sites/all/themes/grabbit/grabbit.css
