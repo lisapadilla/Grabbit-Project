@@ -48,7 +48,19 @@ function facebook_grabbit_update_form($form_state){
 	include("facebook/config.php");
 	
 	global $user;
+	
 	$fuser = facebook_grabbit_get_fid($user->uid);
+	$profile = content_profile_load('profile', $user->uid);
+	
+	$data = '<div class="user-data">
+	           <div class="picture"><img src="'.base_path().$profile->field_profile_picture[0]['filepath'].'" /></div>
+	           <div class="user-name">'.$user->name.'</div>
+	         </div>';
+	
+	$form['user_data'] = array(
+	    '#type' => 'item',
+	    '#value' => $data,
+	 );
 	
 	if ($fuser){
 		
@@ -61,12 +73,8 @@ function facebook_grabbit_update_form($form_state){
 		
 		$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
 		
+		
 		if ($status){
-		  $form['cstatus'] = array(
-		    '#type' => 'item',
-		    '#title' => t('Current Facebook Status'),
-		    '#value' => $status[0]['message'],
-		  );
 		  
 		  $form['facebook']= array(
 		  '#type' => 'checkbox',
@@ -106,8 +114,7 @@ function facebook_grabbit_update_form($form_state){
 	
 	if($tw || $fb){
 		$form['status'] = array(
-		    '#type' => 'textfield',
-		    '#title' => t('New Status'),
+		    '#type' => 'textarea',
 		    '#size' => 60,
 		    '#maxlength' => 255,
 		    '#required' => true );
