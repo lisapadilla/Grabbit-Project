@@ -986,7 +986,8 @@
     float: left;
   }
   .facebook-post{
-    padding: ;
+    padding: 0px 0px 10px 0px;
+    margin-bottom: 10px;
   }
   .facebook-post .facebook-post-header a.facebook-story-pic,
   .twitter-message-stream .twitter-image{
