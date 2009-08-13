@@ -140,8 +140,8 @@ function facebook_grabbit_update_form($form_state){
 
 		$form['submit'] = array(
 		    '#type' => 'submit',
-		    '#value' => t('Update Status'),
-		    '#weight'=>10
+		    '#value' => t('Send'),
+		    '#weight'=>4
 		);
 	}
 	
