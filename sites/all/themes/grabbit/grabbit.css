@@ -562,7 +562,6 @@
 /** Drupal blocks **/
   .block /* Block wrapper */
   {
-    margin-bottom: 1em;
   }
 
   .block.region-odd /* Zebra striping for each block in the region */
@@ -977,4 +976,13 @@
   float: left;
   clear: left;
   overflow: hidden;
+}
+#0{
+  width: 368px;
+  float: left;
+  margin-right: 19px;
+}
+#1{
+  width: 302px;
+  float: left;
 }
