@@ -205,11 +205,13 @@ Drupal.behaviors.charCountDown = function(context)
       //handle the over the limit part here
       $(this).addClass('overlimit');
       $('#edit-submit').attr('disabled', 'true');
+      $('#edit-submit').addClass('disabled-grabbit');
     } 
     else 
     {
       $(this).removeClass('overlimit');
       $('#edit-submit').attr('disabled', 'false');
+      $('#edit-submit').removeClass('disabled-grabbit');
     }
     $('#counter div').text(limit-this.value.length);
   });
