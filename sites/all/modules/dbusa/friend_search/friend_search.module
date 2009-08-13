@@ -8,6 +8,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
     case 'list':
       $blocks[0]['info'] = t('Friend Search');
       $blocks[1]['info'] = t('Search Content');
+      $blocks[2]['info'] = t('Status Form');
       return $blocks;
       break;
     case 'view':
@@ -20,6 +21,11 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 		case 1:
           $blocks['title'] = 'Search Content';
           $blocks['content'] = drupal_get_form('search_form');
+          break;
+		case 2:
+          $blocks['content'] = '<div class="panels-update-form">
+		             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>
+		           </div><div id="placeholderSortable">';
           break;
       }
       return $blocks;
