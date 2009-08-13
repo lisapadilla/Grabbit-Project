@@ -954,9 +954,26 @@
   width: 85px;
   float: left;
 }
+
+/* Estilos cuerpo de la pagina */
+
 #placeholderSortable{
   display: none;
 }
 #content-header{
   display: none;
+}
+#content-area{
+  width: 718px;
+  float: right;
+}
+#block-friend_search-2{
+  width: 100%;
+}
+#content-top{
+  width: 192px;
+  padding: 20px 30px;
+  float: left;
+  clear: left;
+  overflow: hidden;
 }
