@@ -38,7 +38,9 @@
  img {
  	border: none;
  }
-
+ a{
+   text-decoration: none;
+ }
  a img{
  	border: none;
  }
@@ -982,4 +984,17 @@
   #panel-1{
     width: 302px;
     float: left;
+  }
+  .facebook-post .facebook-post-header a.facebook-story-pic,
+  .twitter-message-stream .twitter-image{
+    width: 48px;
+    float: left;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  .facebook-post .facebook-post-header a.facebook-story-name{
+    color: #0073CF;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 13px;
   }
