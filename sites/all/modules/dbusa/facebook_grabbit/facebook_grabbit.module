@@ -370,7 +370,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
 	<div class="facebook-post-body">
-	  '.$msg_formatted.''.format_date($post['created_time']).'
+	  '.$msg_formatted.'<span class="facebook-date">'.format_date($post['created_time']).'</div>
 	</div>'.$show_comments;
 	
 	if ($target == ''){
@@ -437,7 +437,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
 	  '.$msg_formatted.'
-	</div><div class="facebook-attachment">'.$attachment.'</div>'.format_date($post['created_time']).'
+	</div><div class="facebook-attachment">'.$attachment.'</div><span class="facebook-date">'.format_date($post['created_time']).'</div>
 	'.$show_comments.'
 	<div class="facebook-new-comments"></div>
 	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
