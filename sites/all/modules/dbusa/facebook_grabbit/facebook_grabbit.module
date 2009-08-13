@@ -366,7 +366,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	}
 	
 	// Output for wall and status update.
-	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
+	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
 	<div class="facebook-post-body">
@@ -432,7 +432,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	}
 	
 	// Output for aplication updates
-	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'"><div class="facebook-header">Facebook</div>
+	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
@@ -1137,7 +1137,7 @@ function theme_twitter_message($message){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-header">Twitter</div>
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix">
 	          <div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
 	          <div class="twitter-body">'.$msg_formatted. ' <span class="twitter-date"><strong>'.$message->user->name.'</strong> on '. format_date(strtotime($message->created_at)) . '</span>
 	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a> - 

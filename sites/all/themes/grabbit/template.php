@@ -127,9 +127,13 @@ function grabbit_preprocess_page(&$vars, $hook) {
  * @param $hook
  *   The name of the template being rendered ("node" in this case.)
  */
-/* -- Delete this line if you want to use this function
+
 function grabbit_preprocess_node(&$vars, $hook) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+  if(arg(0)=='stream'){
+    $vars['links_stream'] = flag_create_link('bookmarks', $vars['nid']);	
+    $vars['comment_link'] = l("Comment","node/".$vars['nid'],array('query'=>'#comments'));
+  }
+  
 }
 // */
 

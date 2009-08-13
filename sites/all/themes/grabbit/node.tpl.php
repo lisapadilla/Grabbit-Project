@@ -48,7 +48,7 @@
  * @see template_preprocess_node()
  */
 ?>
-<div<?php print $attributes; if ($_SERVER["REQUEST_URI"] == '/grabbit/stream/user'){ ?>style="display:none"<?php } ?> >
+<div<?php print $attributes; ?> >
     <div class="meta">
       <?php if ($submitted): ?>
       <?php print $picture; ?>
@@ -63,9 +63,10 @@
         <?php if ($submitted): ?>
           <p><?php print $submitted; ?></p>
         <?php endif; ?>
-        <?php if ($links): ?>
-	      <div class="links">
-	        <?php print $links; ?>
+        <?php if ($links_stream): ?>
+	      <div class="links_stream">
+	        <?php print $links_stream; ?>
+	        <?php print $comment_link; ?>
 	      </div>
 	    <?php endif; ?>
       </div>
