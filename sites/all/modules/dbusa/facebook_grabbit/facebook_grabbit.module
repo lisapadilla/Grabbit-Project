@@ -79,7 +79,7 @@ function facebook_grabbit_update_form($form_state){
 	$profile = content_profile_load('profile', $user->uid);
 	
 	$data = '<div class="user-data">
-	           <div class="picture"><img src="'.base_path().$profile->field_profile_picture[0]['filepath'].'" /></div>
+	           <div class="picture">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 	           <div class="user-name">'.$user->name.'</div>
 	         </div>';
 	
