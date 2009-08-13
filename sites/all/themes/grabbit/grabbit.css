@@ -955,5 +955,8 @@
   float: left;
 }
 #placeholderSortable{
-  padding: 15px 30px;
+  display: none;
+}
+#content-header{
+  display: none;
 }
