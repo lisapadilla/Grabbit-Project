@@ -970,10 +970,7 @@
 #block-friend_search-2{
   width: 100%;
 }
-#block-views-friends-block_1,
-#block-views-suggested_friends-block_1,
-#block-friend_search-1,
-#block-friend_search-0{
+#content-top{
   width: 192px;
   padding: 20px 30px;
   float: left;
