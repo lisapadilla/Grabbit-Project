@@ -17,7 +17,7 @@ function twitter_menu() {
   );
 
   $items['user/%user_category/edit/twitter'] = array(
-    'title' => 'Twitter accounts',
+    'title' => 'Twitter account',
     'page callback' => 'twitter_user_settings',
     'page arguments' => array(1),
     'access arguments' => array('add twitter accounts'),
@@ -46,7 +46,7 @@ function twitter_user($op, &$edit, &$account, $category = NULL) {
       return array(
         array(
           'name' => 'twitter',
-          'title' => 'Twitter accounts',
+          'title' => 'Twitter account',
           'weight' => 3,
         ),
       );

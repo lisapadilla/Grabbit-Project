@@ -33,8 +33,34 @@ function facebook_grabbit_menu () {
     'page callback' => '_get_current_user_info', 
     'access arguments' => array('access content')
   );
-	
+$items['user/%user_category/edit/facebook'] = array(
+    'title' => 'Facebook account',
+    'page callback' => 'grabbit_facebook_account',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'load arguments' => array('%map', '%index'),
+    'weight' => 10,
+    'file' => 'grabbit.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function facebook_grabbit_user($op, &$edit, &$account, $category = NULL) {
+  switch ($op) {
+    case 'categories':
+      return array(
+        array(
+          'name' => 'facebook',
+          'title' => 'Facebook account',
+          'weight' => 3,
+        ),
+      );
+  }
 }
 
 /**
@@ -88,13 +114,6 @@ function facebook_grabbit_update_form($form_state){
 		  drupal_set_message("Facebook connection failed, please try again","error");  	
 		}
 	
-	}
-	else{
-		$form['facebook'] = array(
-		  '#type' => 'item',
-		  '#title' => t('Allow Grabbit to update my Facebook Status'),
-		  '#value' => l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))),
-		);
 	}
 	
 	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
