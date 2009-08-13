@@ -137,6 +137,11 @@ function facebook_grabbit_update_form($form_state){
 		    '#size' => 60,
 		    '#maxlength' => 255,
 		    '#required' => true );
+		
+		$form['counter'] = array(
+		    '#type' => 'item',
+		    '#value' => '255',
+			 );
 
 		$form['submit'] = array(
 		    '#type' => 'submit',
