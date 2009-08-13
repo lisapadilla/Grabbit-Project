@@ -985,6 +985,9 @@
     width: 302px;
     float: left;
   }
+  .facebook-post{
+    padding: ;
+  }
   .facebook-post .facebook-post-header a.facebook-story-pic,
   .twitter-message-stream .twitter-image{
     width: 48px;
@@ -997,4 +1000,10 @@
     font-weight: bold;
     font-size: 12px;
     line-height: 13px;
+    display: block;
+    width: 220px;
+  }
+  .facebook-post .facebook-post-body{
+    width: 270px;
+    float: left;
   }
