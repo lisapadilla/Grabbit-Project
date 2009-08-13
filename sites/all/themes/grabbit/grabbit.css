@@ -978,4 +978,5 @@
   padding: 20px 30px;
   float: left;
   clear: left;
+  overflow: hidden;
 }
