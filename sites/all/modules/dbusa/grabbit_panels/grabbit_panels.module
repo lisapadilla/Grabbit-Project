@@ -236,7 +236,7 @@ function theme_panels($private_view,$id,$name){
     if(!$name)
       $name="Panel ".$id;
 
-	$output = '<div class="panel-grabbit" id="'.$id.'">
+	$output = '<div class="panel-grabbit" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">
 	               <h3 class="title">'.$name.'</h3>';
 	if($id>0){
