@@ -149,11 +149,7 @@
           <div id="mission"><?php print $mission; ?></div>
         <?php endif; ?>
 
-		<?php if ($content_form): ?>
-          <div id="content-form" class="region region-content_form">
-            <?php print $content_form; ?>
-          </div> <!-- /#content-form -->
-        <?php endif; ?>
+	
 
         <?php if ($content_top): ?>
           <div id="content-top" class="region region-content_top">
