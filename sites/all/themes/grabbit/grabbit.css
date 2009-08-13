@@ -964,15 +964,16 @@
   display: none;
 }
 #content-area{
-  width: 708px;
+  width: 718px;
   float: right;
+  padding: 20px 29px 20px 0px;
 }
 #block-friend_search-2{
   width: 100%;
 }
 #content-top{
   width: 192px;
-  padding: 20px 30px;
+  padding: 20px 20px 20px 30px;
   float: left;
   clear: left;
   overflow: hidden;
