@@ -193,3 +193,22 @@ $(document).ready(function() {
 	  }  		  
 	});
 });
+
+Drupal.behaviors.charCountDown = function(context)
+{
+  var limit = 140;
+  
+  $('#edit-status').keyup(function()
+  {
+    if(this.value.length >= limit) 
+    {
+      //handle the over the limit part here
+      $(this).addClass('overlimit');
+    } 
+    else 
+    {
+      $(this).removeClass('overlimit');
+    }
+    $('#counter div').text(limit-this.value.length);
+  });
+}
