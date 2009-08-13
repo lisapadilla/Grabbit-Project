@@ -880,109 +880,106 @@
     display: inline-block;
     height: 19px;
   }
-.twitter-message-stream, .facebook-post{
-	display:none;
-}
 
-/* Update form styles */
-.panels-update-form{
-  background: #FFCA00;
-}
-.panels-update-wraper{
-  padding: 15px 30px;
-}
-#facebook-grabbit-update-form{
-  height: 90px;
-  color: #666666;
-  font-size: 10px;
-  line-height: 12px;
-}
-#facebook-grabbit-update-form .user-data{
-  width: 211px;
-  float: left;
-  display: block;
-}
-#facebook-grabbit-update-form .picture{
-  width: 48px;
-  overflow: hidden;
-  margin-right: 10px;
-  float: left;
-}
-#facebook-grabbit-update-form .user-name{
-  width: 100px;
-  float: left;
-  color: #FFFFFF;
-  font-size: 12px;
-}
-#edit-status-wrapper{
-  display: block;
-  width: 387px;
-  float: left;
-}
-#facebook-grabbit-update-form .form-item{
-  margin: 0px;
-  padding: 0px;
-}
-#edit-status-wrapper textarea{
-  display: block;
-  width: 367px;
-  height: 90px;
-  background: url(images/various/up_txtarea.gif) 0 0 no-repeat;
-  border: none;
-}
-#facebook-grabbit-update-form .form-submit{
-  display: block;
-  border: none;
-  text-indent: -3000em;
-  float: left;
-  width: 77px;
-  height: 32px;
-  background: url(images/various/up_submit.gif);
-  clear: right;
-  padding: 0px;
-  margin: 10px 150px 10px 0px;
-}
-.grippie{
-  display: none;
-}
-#edit-facebook-wrapper{
-  float: left;
-  width: 85px;
-}
-#edit-twitter-wrapper{
-  width: 85px;
-  float: left;
-}
+  /* Update form styles */
+  .panels-update-form{
+    background: #FFCA00;
+  }
+  .panels-update-wraper{
+    padding: 15px 30px;
+  }
+  #facebook-grabbit-update-form{
+    height: 90px;
+    color: #666666;
+    font-size: 10px;
+    line-height: 12px;
+  }
+  #facebook-grabbit-update-form .user-data{
+    width: 211px;
+    float: left;
+    display: block;
+  }
+  #facebook-grabbit-update-form .picture{
+    width: 48px;
+    overflow: hidden;
+    margin-right: 10px;
+    float: left;
+  }
+  #facebook-grabbit-update-form .user-name{
+    width: 100px;
+    float: left;
+    color: #FFFFFF;
+    font-size: 12px;
+  }
+  #edit-status-wrapper{
+    display: block;
+    width: 387px;
+    float: left;
+  }
+  #facebook-grabbit-update-form .form-item{
+    margin: 0px;
+    padding: 0px;
+  }
+  #edit-status-wrapper textarea{
+    display: block;
+    width: 367px;
+    height: 90px;
+    background: url(images/various/up_txtarea.gif) 0 0 no-repeat;
+    border: none;
+  }
+  #facebook-grabbit-update-form .form-submit{
+    display: block;
+    border: none;
+    text-indent: -3000em;
+    float: left;
+    width: 77px;
+    height: 32px;
+    background: url(images/various/up_submit.gif);
+    clear: right;
+    padding: 0px;
+    margin: 10px 150px 10px 0px;
+  }
+  .grippie{
+    display: none;
+  }
+  #edit-facebook-wrapper{
+    float: left;
+    width: 85px;
+  }
+  #edit-twitter-wrapper{
+    width: 85px;
+    float: left;
+  }
 
-/* Estilos cuerpo de la pagina */
+  /* Estilos cuerpo de la pagina */
 
-#placeholderSortable{
-  display: none;
-}
-#content-header{
-  display: none;
-}
-#content-area{
-  width: 718px;
-  float: right;
-  padding: 20px 0px;
-}
-#block-friend_search-2{
-  width: 100%;
-}
-#content-top{
-  width: 192px;
-  padding: 20px 20px 20px 30px;
-  float: left;
-  clear: left;
-  overflow: hidden;
-}
-#0{
-  width: 368px;
-  float: left;
-  margin-right: 19px;
-}
-#1{
-  width: 302px;
-  float: left;
-}
+  #placeholderSortable{
+    display: none;
+  }
+  #content-header{
+    display: none;
+  }
+  #content-area{
+    width: 718px;
+    float: right;
+    padding: 20px 0px;
+  }
+  #block-friend_search-2{
+    width: 100%;
+  }
+  #content-top{
+    width: 192px;
+    padding: 20px 20px 20px 30px;
+    float: left;
+    clear: left;
+    overflow: hidden;
+  }
+  #panel-0{
+    width: 368px;
+    float: left;
+    margin-right: 19px;
+  }
+  #panel-1{
+    width: 302px;
+    float: left;
+  }
