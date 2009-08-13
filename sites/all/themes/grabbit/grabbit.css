@@ -988,6 +988,7 @@
   .facebook-post{
     padding: 0px 0px 10px 0px;
     margin-bottom: 10px;
+    background: url(images/various/separator.gif) bottom repeat-x;
   }
   .facebook-post .facebook-post-header a.facebook-story-pic,
   .twitter-message-stream .twitter-image{
