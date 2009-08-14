@@ -1034,3 +1034,7 @@
     font-size: 10px;
     color: #666666;
   }
+  .facebook-comments .facebook-user-pic{
+    width: 24px;
+    margin-right: 10px;
+  }
