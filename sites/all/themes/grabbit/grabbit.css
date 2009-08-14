@@ -985,7 +985,8 @@
     width: 302px;
     float: left;
   }
-  .facebook-post{
+  .facebook-post,
+  .twitter-message-stream{
     padding: 0px 0px 10px 0px;
     margin-bottom: 10px;
     background: url(images/various/separator.gif) bottom repeat-x;
@@ -1048,4 +1049,7 @@
       font-weight: bold;
       font-size: 12px;
       line-height: 13px;
+  }
+  .facebook-attach-photo{
+    display: block;
   }
