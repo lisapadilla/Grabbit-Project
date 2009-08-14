@@ -1038,7 +1038,14 @@
     width: 24px;
     margin-right: 10px;
   }
-  .facebook-post .facebook-comment-text{
+  .facebook-post .facebook-comment-text, 
+  .facebook-post .facebook-comment-timeline{
     font-size: 12px;
     line-height: 15px;
+  }
+  .facebook-post .facebook-comment-link{
+     color: #0073CF;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 13px;
   }
