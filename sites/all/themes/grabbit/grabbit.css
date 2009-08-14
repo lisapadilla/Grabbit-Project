@@ -1034,7 +1034,11 @@
     font-size: 10px;
     color: #666666;
   }
-  .facebook-comments .facebook-user-pic{
+  .facebook-comments .facebook-story-pic{
     width: 24px;
     margin-right: 10px;
+  }
+  .facebook-post .facebook-comment-text{
+    font-size: 12px;
+    line-height: 15px;
   }
