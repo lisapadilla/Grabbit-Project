@@ -877,10 +877,22 @@
   }
   #primary ul.links li{
     list-style: none;
+    padding: 0px;
   }
   #primary ul.links li a {
     display: inline-block;
     height: 19px;
+  }
+  
+  #primary ul.links li.menu-1844 a{
+    width: 70px;
+  }
+  #primary ul.links li.menu-1844 a.active{
+    background: url(images/navbar/home_ho.gif) 0 0 no-repeat;
+  }
+  #primary ul.links li.menu-1845 a{
+    width: 108px;
+    background: url(images/navbar/profile_nh.gif) 0 0 no-repeat;
   }
 
   /* Update form styles */
