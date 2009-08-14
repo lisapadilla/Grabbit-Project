@@ -1006,15 +1006,15 @@
     line-height: 13px;
     display: block;
     width: 200px;
-    padding-left: 20px;
+    padding-left: 15px;
     float: left;
     margin-bottom: 10px;
   }
   .facebook-post .facebook-post-header a.facebook-story-name{
-    background: url(images/various/facebook_ico_sml.gif) 0 0 no-repeat;
+    background: url(images/various/facebook_ico_sml.gif) 0 1px no-repeat;
   }
   .twitter-message-stream a.twitter-name-link{
-    background: url(images/various/twitter_ico_sml.gif) 0 0 no-repeat;
+    background: url(images/various/twitter_ico_sml.gif) 0 1px no-repeat;
   }
   .facebook-post .facebook-post-body, .facebook-post .facebook-attachment{
     width: 270px;
