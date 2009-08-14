@@ -1005,9 +1005,16 @@
     font-size: 12px;
     line-height: 13px;
     display: block;
-    width: 220px;
+    width: 200px;
+    padding-left: 15px;
     float: left;
     margin-bottom: 10px;
+  }
+  .facebook-post .facebook-post-header a.facebook-story-name{
+    background: url(images/various/facebook_ico_sml.gif) 0 1px no-repeat;
+  }
+  .twitter-message-stream a.twitter-name-link{
+    background: url(images/various/twitter_ico_sml.gif) 0 1px no-repeat;
   }
   .facebook-post .facebook-post-body, .facebook-post .facebook-attachment{
     width: 270px;
@@ -1022,14 +1029,14 @@
     float: left;
     font-size: 12px;
     line-height: 15px;
-    margin-bottom: 10px;
     display: block;
   }
   .facebook-post .facebook-comments{
     clear: both;
     padding-left: 58px;
   }
-  .facebook-post .facebook-date{
+  .facebook-post .facebook-date,
+  .twitter-message-stream .twitter-date{
     display: block;
     clear: both;
     color: #999999;
