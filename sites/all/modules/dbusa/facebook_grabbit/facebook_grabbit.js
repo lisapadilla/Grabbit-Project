@@ -5,7 +5,7 @@ $(document).ready(function() {
 	// PANEL 1
 	var stories_at_first_p1 = 4;
 	var stories_per_slide_p1 = 4;
-	var current_panel_1 = $('#0').children().next().children();
+	var current_panel_1 = $('#panel-0').children().next().children();
 	
 	$('#'+current_panel_1.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
 	current_panel_1 = $('#'+current_panel_1.attr('id'));
@@ -16,7 +16,7 @@ $(document).ready(function() {
 		current_panel_1.show();
 	}
 	
-	$('#0').append('<div class="panel-controller"></a><a class="main-stream-next-p1" href="javascript:void(0)">more</a></div>');
+	$('#panel-0').append('<div class="panel-controller"></a><a class="main-stream-next-p1" href="javascript:void(0)">more</a></div>');
 	
 	$('.main-stream-next-p1').click(function(){
 		// Verify if it is the last one
@@ -37,7 +37,7 @@ $(document).ready(function() {
 	// PANEL 2
 	var stories_at_first_p2 = 4;
 	var stories_per_slide_p2 = 4;
-	var current_panel_2 = $('#1').children().next().children();
+	var current_panel_2 = $('#panel-1').children().next().children();
 	
 	$('#'+current_panel_2.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
 	current_panel_2 = $('#'+current_panel_2.attr('id'));
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		current_panel_2.show();
 	}
 	
-	$('#1').append('<div class="panel-controller"></a><a class="main-stream-next-p2" href="javascript:void(0)">more</a></div>');
+	$('#panel-1').append('<div class="panel-controller"></a><a class="main-stream-next-p2" href="javascript:void(0)">more</a></div>');
 	
 	$('.main-stream-next-p2').click(function(){		
 		//Verify if it is the last one
