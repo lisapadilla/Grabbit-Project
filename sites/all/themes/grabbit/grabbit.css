@@ -882,8 +882,9 @@
   #primary ul.links li a {
     display: block;
     height: 19px;
-    text-indent: -3000em;
+    text-indent: 3000em;
     float: right;
+    overflow: hidden;
   }
   
   #primary ul.links li.menu-1844 a{
