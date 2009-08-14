@@ -1035,7 +1035,8 @@
     clear: both;
     padding-left: 58px;
   }
-  .facebook-post .facebook-date{
+  .facebook-post .facebook-date,
+  .twitter-message-stream .twitter-date{
     display: block;
     clear: both;
     color: #999999;
