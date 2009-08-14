@@ -880,9 +880,10 @@
     padding: 0px;
   }
   #primary ul.links li a {
-    display: inline-block;
+    display: block;
     height: 19px;
     text-indent: -3000em;
+    float: right;
   }
   
   #primary ul.links li.menu-1844 a{
