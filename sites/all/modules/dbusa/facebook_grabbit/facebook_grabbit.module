@@ -1140,7 +1140,7 @@ function theme_twitter_message($message){
 		
 	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix">
 	<div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
-	<a href="http://www.twitter.com/'.$message->user->name.'" target="_blank">'.$message->user->name.'</a>
+	<a href="http://www.twitter.com/'.$message->user->name.'" class="twitter-name-link" target="_blank">'.$message->user->name.'</a>
 	          <div class="twitter-body">'.$msg_formatted. ' <span class="twitter-date">on '. format_date(strtotime($message->created_at)) . '</span>
 	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a> - 
 	          <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
