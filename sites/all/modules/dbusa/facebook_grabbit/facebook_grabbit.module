@@ -437,7 +437,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a>
 	<div class="facebook-post-body">
 	  '.$msg_formatted.'
-	</div><div class="facebook-attachment">'.$attachment.'</div><span class="facebook-date">'.format_date($post['created_time']).'</div>
+	</div><div class="facebook-attachment">'.$attachment.'</div><span class="facebook-date">'.format_date($post['created_time']).'</span>
 	'.$show_comments.'
 	<div class="facebook-new-comments"></div>
 	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
