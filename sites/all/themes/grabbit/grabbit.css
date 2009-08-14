@@ -1017,6 +1017,14 @@
     margin-bottom: 10px;
     display: block;
   }
+  .twitter-message-stream .twitter-body{
+    width: 220px;
+    float: left;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 10px;
+    display: block;
+  }
   .facebook-post .facebook-comments{
     clear: both;
     padding-left: 58px;
