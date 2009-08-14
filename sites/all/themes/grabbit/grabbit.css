@@ -882,6 +882,7 @@
   #primary ul.links li a {
     display: inline-block;
     height: 19px;
+    text-indent: -3000em;
   }
   
   #primary ul.links li.menu-1844 a{
@@ -894,7 +895,19 @@
     width: 108px;
     background: url(images/navbar/profile_nh.gif) 0 0 no-repeat;
   }
-
+  #primary ul.links li.menu-1860 a{
+    width: 80px;
+    background: url(images/navbar/friends_nh.gif) 0 0 no-repeat;
+  }
+  #primary ul.links li.menu-1691 a{
+    width: 55px;
+    background: url(images/navbar/help_nh.gif) 0 0 no-repeat;
+  }
+  #primary ul.links li.menu-1861 a{
+    width: 72px;
+    background: url(images/navbar/sign_out_nh.gif) 0 0 no-repeat;
+  }
+  
   /* Update form styles */
   .panels-update-form{
     background: #FFCA00;
