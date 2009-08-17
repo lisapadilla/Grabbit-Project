@@ -18,7 +18,34 @@ function oauth_twitter_menu()
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
   );
+
+  $items['user/%user_category/edit/twitterapp'] = array(
+    'title' => 'Twitter account',
+    'page callback' => 'oauth_twitter_account',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'load arguments' => array('%map', '%index'),
+    'weight' => 10,
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
+  switch ($op) {
+    case 'categories':
+      return array(
+        array(
+          'name' => 'twitterapp',
+          'title' => 'Twitter account',
+          'weight' => 3,
+        ),
+      );
+  }
 }
 
 function oauth_twitter_page(){
@@ -28,27 +55,67 @@ function oauth_twitter_page(){
 	include 'includes/EpiTwitter.php';
 	include 'includes/secret.php';
 	
+	global $user;
+	
 	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
-//	$twitterObj->setToken($_GET['oauth_token']);
-//	$token = $twitterObj->getAccessToken();
-	$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
-	$twitterInfo= $twitterObj->get_accountVerify_credentials();
-	$twitterInfo->response;
-	$output = "Your twitter username is {$twitterInfo->screen_name} and your profile picture is <img src=\"{$twitterInfo->profile_image_url}\">";
-	$tok = $token->oauth_token;
-	$sec = $token->oauth_token_secret;
-
+	$twitterObj->setToken($_GET['oauth_token']);
+	$token = $twitterObj->getAccessToken();
+	$config=array('token'=>$token->oauth_token,
+	              'secret'=>$token->oauth_token_secret);
+	
+    oauth_twitter_save_config($user->uid,$config);
+    $output = "You can now use Grabbit.net to manage your Twitter updates and read your twitter streams";
 	return $output;
 }
 
-function oauth_twitter_authorize(){
+function oauth_twitter_account(){
 	include 'includes/EpiCurl.php';
 	include 'includes/EpiOAuth.php';
 	include 'includes/EpiTwitter.php';
 	include 'includes/secret.php';
+	
+    $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
-	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+    global $user;
 
-	echo '<a href="' . $twitterObj->getAuthorizationUrl() . '">Authorize with Twitter</a>';
+    $twitter_account = oauth_twitter_get_uid($user);
+
+    if($twitter_account){
+	  $token = unserialize($twitter_account->config);
+	  $twitterObj->setToken($token['token'], $token['secret']);
+	  $twitterInfo= $twitterObj->get_accountVerify_credentials();
+	  $twitterInfo->response;
+  	  $output = 'Your current Twitter account for grabbit is: <span class="user-twitter">'.$twitterInfo->screen_name.'</span>
+                 <span class="user-pic-twitter"><img src="'.$twitterInfo->profile_image_url.'"></span>';
+    }else{
+      $output = '<a href="' . $twitterObj->getAuthorizationUrl() . '">Click here to install the Grabbit.net app for Twitter</a>';
+    }
+
+	return $output;
+}
+
+function oauth_twitter_save_config($user,$config){
+
+  $savetodb = serialize($config);
+
+  db_query("INSERT INTO {oauth_twitter} (uid,config) VALUES (%d, '%s')",$user,$savetodb);	
+  $result = TRUE;
+
+  return $result;
+	
+}
+
+function oauth_twitter_get_uid($user){
+	
+  $result = db_query("SELECT * FROM {oauth_twitter} WHERE uid = %d",$user);
+
+  if ($user = db_fetch_object($result)) {
+	$user = $user;
+  }
+  else{
+    $user = FALSE;	
+  }
+
+  return $user;
 }

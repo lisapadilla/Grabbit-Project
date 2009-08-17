@@ -16,17 +16,6 @@ function twitter_menu() {
     'file' => 'twitter.pages.inc'
   );
 
-  $items['user/%user_category/edit/twitter'] = array(
-    'title' => 'Twitter account',
-    'page callback' => 'twitter_user_settings',
-    'page arguments' => array(1),
-    'access arguments' => array('add twitter accounts'),
-    'load arguments' => array('%map', '%index'),
-    'weight' => 10,
-    'file' => 'twitter.pages.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
-
   return $items;
 }
 

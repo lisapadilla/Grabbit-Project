@@ -29,11 +29,12 @@ function facebook_grabbit_menu () {
     'access arguments' => array('access content')
   );
 	
-	$items['facebook/getuserinfo'] = array( 
+  $items['facebook/getuserinfo'] = array( 
     'page callback' => '_get_current_user_info', 
     'access arguments' => array('access content')
   );
-$items['user/%user_category/edit/facebook'] = array(
+
+  $items['user/%user_category/edit/facebook'] = array(
     'title' => 'Facebook account',
     'page callback' => 'grabbit_facebook_account',
     'page arguments' => array(1),
@@ -184,12 +185,16 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	}
 	if($form_state['values']['twitter']){
 		global $user;
-		module_load_include('inc', 'twitter');
 		
-		$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
-		$account = array_shift($accounts); 
-
-		twitter_set_status($account['screen_name'], $account['password'], $form_state['values']['status'], $source = 'Grabbit.net');
+		include_once 'includes/EpiCurl.php';
+		include_once 'includes/EpiOAuth.php';
+		include_once 'includes/EpiTwitter.php';
+		include 'includes/secret.php';
+		
+		$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+		$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
+		$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
+		
 	}
 	
 	
@@ -504,21 +509,24 @@ function facebook_grabbit_add_favorite_twitter(){
 	$id = $_GET['id'];
 	$mode =  $_GET['mode'];
   
-	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
-	if(count($accounts)){
-		$account = array_shift($accounts); 		
-	}
-  
-	$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
-        $headers = array('Authorization' => 'Basic '. $twitter_encrypted,
-                           'Content-type' => 'application/x-www-form-urlencoded');
+	include_once 'includes/EpiCurl.php';
+	include_once 'includes/EpiOAuth.php';
+	include_once 'includes/EpiTwitter.php';
+	include 'includes/secret.php';
+	
+	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+	$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
+	
 
 	if ($mode == "create"){
-	  $result = drupal_http_request("http://twitter.com/favorites/create/".$id.".xml", $headers, 'POST');
+	  $method = "post_favoritesCreate{$id}";
 	}else{ //destroy
-	  $result = drupal_http_request("http://twitter.com/favorites/destroy/".$id.".xml", $headers, 'POST');
+	  $method = "post_favoritesDestroy{$id}";
 	}
-        print_r ($result);
+	
+	$timeline = $twitterObj->$method();
+	
+    print_r ($timeline->response);
 	
 }
 
@@ -901,20 +909,19 @@ function facebook_grabbit_private_view_panel($param){
 		$tw = TRUE;
 		if($GET['show_twitter']){
 			
-			$account = array_shift($accounts); 
-
-			$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
-
-			$headers = array('Authorization' => 'Basic '. $twitter_encrypted,
-			                   'Content-type' => 'application/x-www-form-urlencoded');
-
-			$result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
-			if($result->data){
-				
-			  $xml = new SimpleXMLElement($result->data);	
+			include_once 'includes/EpiCurl.php';
+			include_once 'includes/EpiOAuth.php';
+			include_once 'includes/EpiTwitter.php';
+			include 'includes/secret.php';
 			
-			  foreach ($xml->status as $message){
+			$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+			$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
+			$tweets = $twitterObj->get_statusesFriends_timeline();
 
+			if($tweets->response){
+
+			  foreach ($tweets->response as $arreglo){
+              $message = (object)$arreglo;
 			  $time = strtotime($message->created_at);
 			  $key = (string)$message->id;
 			  $twitface[$key]=array('time'=>$time,
@@ -1139,18 +1146,18 @@ function theme_twitter_message($message){
 	$msg_formatted=get_url_msg_formatted($msg);
 		
 	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix">
-	<div class="listable"><span class="twitter-image"><img src="'.$message->user->profile_image_url.'" /></span></div>
-	<a href="http://www.twitter.com/'.$message->user->name.'" class="twitter-name-link" target="_blank">'.$message->user->name.'</a>
+	<div class="listable"><span class="twitter-image"><img src="'.$message->user["profile_image_url"].'" /></span></div>
+	<a href="http://www.twitter.com/'.$message->user["name"].'" class="twitter-name-link" target="_blank">'.$message->user["name"].'</a>
 	          <div class="twitter-body">'.$msg_formatted. ' <span class="twitter-date">on '. format_date(strtotime($message->created_at)) . '</span>
-	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user->screen_name.'">Reply</a> - 
+	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a> - 
 	          <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
 		  
-		  if ($message->favorited == "false"){
-		    $output .= 'Add to favorites</a></div></div>
+		  if ($message->favorited){
+			$output .= 'Remove from favorites</a></div></div>
 		  </div>';
 		  }
 		  else{ //true
-		    $output .= 'Remove from favorites</a></div></div>
+		    $output .= 'Add to favorites</a></div></div>
 		  </div>';
 		  }
 		

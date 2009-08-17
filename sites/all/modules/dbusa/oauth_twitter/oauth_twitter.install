@@ -1,0 +1,44 @@
+<?php
+// $Id: oauth_twitter.install,v 1.1.2.2 2009/06/24 05:53:49 Exp $
+
+/**
+ * @file
+ * Grabbit user condiguration install file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function oauth_twitter_install() {
+  drupal_install_schema('oauth_twitter');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function oauth_twitter_uninstall() {
+  drupal_uninstall_schema('oauth_twitter');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function oauth_twitter_schema() {
+  $schema = array();
+$schema['oauth_twitter'] = array(
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'disp-width' => '10',
+      ),
+      'config' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      )
+    ),
+    'primary key' => array('uid'),
+  );
+  return $schema;
+}
