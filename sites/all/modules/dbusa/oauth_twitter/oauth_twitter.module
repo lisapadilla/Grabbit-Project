@@ -79,7 +79,7 @@ function oauth_twitter_account(){
 
     global $user;
 
-    $twitter_account = oauth_twitter_get_uid($user);
+    $twitter_account = oauth_twitter_get_uid($user->uid);
 
     if($twitter_account){
 	  $token = unserialize($twitter_account->config);

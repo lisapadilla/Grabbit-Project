@@ -117,7 +117,7 @@ function facebook_grabbit_update_form($form_state){
 	
 	}
 	
-	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
+	$accounts = oauth_twitter_get_uid($user->uid);
 	if(count($accounts)){
 		$tw=TRUE;
 		
@@ -192,7 +192,10 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		include 'includes/secret.php';
 		
 		$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-		$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
+		$twitter_account = oauth_twitter_get_uid($user->uid);
+		$token = unserialize($twitter_account->config);
+		$twitterObj->setToken($token['token'], $token['secret']);
+		
 		$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
 		
 	}
@@ -457,49 +460,6 @@ function prepeare_standar_update($post,$user,$profiles){
 }
 
 
-
-/**
- * Gets the twitter stream()
- */
-function facebook_grabbit_twitter_stream(){
-	global $user;
-	
-	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
-	if(count($accounts)){
-		$account = array_shift($accounts); 
-
-		$output = facebook_grabbit_get_friends_timeline($account);	
-	}
-	else{
-		$output = "You dont have a twitter account yet";
-	}
-	
-	
-	return $output;
-}
-
-/**
-* Grab the latest posts from you and your twitter friends.
-*/
-function facebook_grabbit_get_friends_timeline($account){
-
-  $twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
-
-  $headers = array('Authorization' => 'Basic '. $twitter_encrypted,
-                   'Content-type' => 'application/x-www-form-urlencoded');
-
-  $result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
-
-  $xml = new SimpleXMLElement($result->data);
-
-  foreach ($xml->status as $message){
-
-	$output .= theme_twitter_message($message);
-
-  }
-  return $output;
-}
-
 /**
  * Add a new post to favorites in Twitter
  */
@@ -515,7 +475,9 @@ function facebook_grabbit_add_favorite_twitter(){
 	include 'includes/secret.php';
 	
 	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-	$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
+	$twitter_account = oauth_twitter_get_uid($user->uid);
+	$token = unserialize($twitter_account->config);
+	$twitterObj->setToken($token['token'], $token['secret']);
 	
 
 	if ($mode == "create"){
@@ -674,31 +636,31 @@ function facebook_grabbit_private_view(){
 	    $fb = FALSE;
 	}
 	
-	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
+	$twitter_account = oauth_twitter_get_uid($user->uid);
 	if(count($accounts)){
 		$tw = TRUE;
 		if(!$_GET['hide_twitter']){
 			
-			$account = array_shift($accounts); 
+				include_once 'includes/EpiCurl.php';
+				include_once 'includes/EpiOAuth.php';
+				include_once 'includes/EpiTwitter.php';
+				include 'includes/secret.php';
 
-			$twitter_encrypted = base64_encode($account['screen_name'] .':'. $account['password']);
-			$headers = array('Authorization' => 'Basic '. $twitter_encrypted,
-			                   'Content-type' => 'application/x-www-form-urlencoded');
+				$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+				$token = unserialize($twitter_account->config);
+				$twitterObj->setToken($token['token'], $token['secret']);
+				$tweets = $twitterObj->get_statusesFriends_timeline();
 
-			$result = drupal_http_request('http://twitter.com/statuses/friends_timeline.xml', $headers, 'GET');
-			if($result->data){
-				
-			  $xml = new SimpleXMLElement($result->data);	
-			
-			  foreach ($xml->status as $message){
+				if($tweets->response){
 
-			  $time = strtotime($message->created_at);
-			  $key = (string)$message->id;
-			  $twitface[$key]=array('time'=>$time,
-				                              'value'=>$message);
+				  foreach ($tweets->response as $arreglo){
+	              $message = (object)$arreglo;
+				  $time = strtotime($message->created_at);
+				  $key = (string)$message->id;
+				  $twitface[$key]=array('time'=>$time,
+					                              'value'=>$message);
 
-			  }
-			
+                 }
 			}else{
 			  drupal_set_message("There was a problem connecting to Twitter, please try again","error");
 			}	
@@ -904,8 +866,8 @@ function facebook_grabbit_private_view_panel($param){
 	    $fb = FALSE;
 	}
 	
-	$accounts = module_invoke_all('twitter_accounts', $user, TRUE);
-	if(count($accounts)){
+	$twitter_account = oauth_twitter_get_uid($user->uid);
+	if($twitter_account){
 		$tw = TRUE;
 		if($GET['show_twitter']){
 			
@@ -915,7 +877,8 @@ function facebook_grabbit_private_view_panel($param){
 			include 'includes/secret.php';
 			
 			$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-			$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
+			$token = unserialize($twitter_account->config);
+			$twitterObj->setToken($token['token'], $token['secret']);
 			$tweets = $twitterObj->get_statusesFriends_timeline();
 
 			if($tweets->response){
