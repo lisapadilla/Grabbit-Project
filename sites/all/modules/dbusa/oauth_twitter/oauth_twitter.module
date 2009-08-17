@@ -57,14 +57,6 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 
 function oauth_twitter_ajuste(){
 
-	$usuario = array('token' => '46962247-BQJS12YNPkWad4MC6Z4FKfi42BYef4ONSpwL4pvWn',
-	                 'secret' => 'LvT8w2SUKERpGvpAbAb70j6MyRYHeXmsaiEUkC5F6yY');
-
-	$usuarios = serialize($usuario);
-	db_query("DELETE FROM {oauth_twitter} WHERE uid =%d",9);	
-	db_query("DELETE FROM {oauth_twitter} WHERE uid =%d",0);	
-    db_query("INSERT INTO {oauth_twitter} (uid,config) VALUES (%d, '%s')",9,$usuarios);
-
 	$output = "consulta lista";
 	return $output;
 }
