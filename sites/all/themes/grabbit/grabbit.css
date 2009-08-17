@@ -885,24 +885,25 @@
     text-indent: 3000em;
     float: right;
     overflow: hidden;
+    margin-left: 20px;
   }
   
   #primary ul.links li.menu-1844 a{
-    width: 70px;
+    width: 50px;
   }
   #primary ul.links li.menu-1844 a.active{
     background: url(images/navbar/home_ho.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1845 a{
-    width: 108px;
+    width: 88px;
     background: url(images/navbar/profile_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1860 a{
-    width: 80px;
+    width: 60px;
     background: url(images/navbar/friends_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1691 a{
-    width: 55px;
+    width: 38px;
     background: url(images/navbar/help_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1861 a{
@@ -922,6 +923,7 @@
     color: #666666;
     font-size: 10px;
     line-height: 12px;
+    position: relative;
   }
   #facebook-grabbit-update-form .user-data{
     width: 211px;
@@ -967,6 +969,7 @@
     clear: right;
     padding: 0px;
     margin: 10px 150px 10px 0px;
+    cursor: pointer;
   }
   .grippie{
     display: none;
@@ -1129,4 +1132,37 @@
 }
 #block-search-0 h2{
   display: none;
+}
+#edit-search-block-form-1{
+  width: 166px;
+  height: 23px;
+  border-top: 1px solid #B3B3B3;
+  border-left: 1px solid #B3B3B3;
+  border-bottom: 1px solid #B3B3B3;
+  border-right: none;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+}
+#search-block-form #edit-submit{
+  display: block;
+  float: left;
+  width: 25px;
+  height: 25px;
+  padding: 0px;
+  margin: 0px;
+  background: url(images/various/search_btn.gif) 0 0 no-repeat;
+  text-indent: -3000em;
+  border: none;
+  cursor: pointer;
+}
+#counter{
+  width: 25px;
+  height: 16px;
+  position: absolute;
+  left: 544px;
+  top: 68px;
+  color: #B3B3B3;
+  font-size: 15px;
+  line-height: 16px;
 }
