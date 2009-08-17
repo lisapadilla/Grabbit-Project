@@ -885,28 +885,29 @@
     text-indent: 3000em;
     float: right;
     overflow: hidden;
+    margin-left: 20px;
   }
   
   #primary ul.links li.menu-1844 a{
-    width: 70px;
+    width: 50px;
   }
   #primary ul.links li.menu-1844 a.active{
     background: url(images/navbar/home_ho.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1845 a{
-    width: 108px;
+    width: 88px;
     background: url(images/navbar/profile_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1860 a{
-    width: 80px;
+    width: 60px;
     background: url(images/navbar/friends_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1691 a{
-    width: 55px;
+    width: 35px;
     background: url(images/navbar/help_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1861 a{
-    width: 72px;
+    width: 52px;
     background: url(images/navbar/sign_out_nh.gif) 0 0 no-repeat;
   }
   
