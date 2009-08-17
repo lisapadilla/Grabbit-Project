@@ -1107,9 +1107,8 @@
   color: #000;
   line-height: 13px;
 }
-#block-views-friends-block_1 ul{
-  margin: 0px;
-  padding: 0px;
+#block-views-friends-block_1{
+  display: inline-block;
 }
 #block-views-friends-block_1 .views-row{
   list-style: none;
@@ -1121,4 +1120,7 @@
 }
 #block-views-friends-block_1 .views-row-first{
   margin: 5px 0px 0px 0px;
+}
+#block-search-0{
+  padding-top: 20px;
 }
