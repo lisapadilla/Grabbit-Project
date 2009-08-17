@@ -107,7 +107,7 @@ function oauth_twitter_save_config($user,$config){
 }
 
 function oauth_twitter_get_uid($user){
-	
+db_query("DELETE FROM {oauth_twitter} WHERE uid =%d",0);		
   $result = db_query("SELECT * FROM {oauth_twitter} WHERE uid = %d",$user);
 
   if ($user = db_fetch_object($result)) {
