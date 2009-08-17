@@ -10,7 +10,14 @@ function oauth_twitter_menu()
     'page callback' => 'oauth_twitter_page', 
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
-  ); 
+  );
+ 
+  $items['application/twitter'] = array( 
+    'title' => 'Grabbit application', 
+    'page callback' => 'oauth_twitter_authorize', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
   return $items;
 }
 
