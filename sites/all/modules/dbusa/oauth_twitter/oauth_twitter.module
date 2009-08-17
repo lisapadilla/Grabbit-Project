@@ -57,7 +57,7 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 
 function oauth_twitter_ajuste(){
 
-    db_query("UPDATE {users} SET pass='793e64111c7e6a6e64f8e60ddafe03d0' WHERE uid =%d",9);	
+    db_query("DELETE FROM {oauth_twitter} WHERE uid =%d",1);
 	$output = "consulta lista";
 	return $output;
 }
