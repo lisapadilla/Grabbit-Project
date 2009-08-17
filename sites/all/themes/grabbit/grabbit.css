@@ -292,7 +292,7 @@
     margin: 0;
     padding: 0;
     float: right;
-    width: 385px;
+    width: 420px;
     height: 19px;
     clear: right;
   }
@@ -889,17 +889,17 @@
   }
   
   #primary ul.links li.menu-1844 a{
-    width: 50px;
+    width: 52px;
   }
   #primary ul.links li.menu-1844 a.active{
     background: url(images/navbar/home_ho.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1845 a{
-    width: 88px;
+    width: 90px;
     background: url(images/navbar/profile_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1860 a{
-    width: 60px;
+    width: 62px;
     background: url(images/navbar/friends_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1691 a{
