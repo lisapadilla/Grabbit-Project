@@ -5,7 +5,7 @@ $(document).ready(function() {
 	// PANEL 1
 	var stories_at_first_p1 = 4;
 	var stories_per_slide_p1 = 4;
-	var current_panel_1 = $('#panel-0').children().next().children();
+	var current_panel_1 = $('#0').children().next().children();
 	
 	$('#'+current_panel_1.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
 	current_panel_1 = $('#'+current_panel_1.attr('id'));
@@ -37,7 +37,7 @@ $(document).ready(function() {
 	// PANEL 2
 	var stories_at_first_p2 = 4;
 	var stories_per_slide_p2 = 4;
-	var current_panel_2 = $('#panel-1').children().next().children();
+	var current_panel_2 = $('#1').children().next().children();
 	
 	$('#'+current_panel_2.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
 	current_panel_2 = $('#'+current_panel_2.attr('id'));
