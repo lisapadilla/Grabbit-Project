@@ -16,7 +16,7 @@ $(document).ready(function() {
 		current_panel_1.show();
 	}
 	
-	$('#panel-0').append('<div class="panel-controller"></a><a class="main-stream-next-p1" href="javascript:void(0)">more</a></div>');
+	$('#0').append('<div class="panel-controller"></a><a class="main-stream-next-p1" href="javascript:void(0)">more</a></div>');
 	
 	$('.main-stream-next-p1').click(function(){
 		// Verify if it is the last one
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		current_panel_2.show();
 	}
 	
-	$('#panel-1').append('<div class="panel-controller"></a><a class="main-stream-next-p2" href="javascript:void(0)">more</a></div>');
+	$('#1').append('<div class="panel-controller"></a><a class="main-stream-next-p2" href="javascript:void(0)">more</a></div>');
 	
 	$('.main-stream-next-p2').click(function(){		
 		//Verify if it is the last one
