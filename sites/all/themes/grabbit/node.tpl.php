@@ -48,7 +48,7 @@
  * @see template_preprocess_node()
  */
 ?>
-<div<?php print $attributes; ?> class="node-stream">
+<div<?php print $attributes; ?> class="node-stream-<?=$node->type?>">
     <div class="meta">
       <?php if ($submitted): ?>
       <?php print $picture; ?>
