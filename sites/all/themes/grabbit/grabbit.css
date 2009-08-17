@@ -1107,9 +1107,20 @@
   color: #000;
   line-height: 13px;
 }
-#block-views-friends-block_1 a{
+#block-views-friends-block_1 ul{
+  margin: 0px;
+  padding: 0px;
+}
+#block-views-friends-block_1 ul li{
+  list-style: none;
+  float: left;
   display: block;
   width: 24px;
   height: 24px;
+}
+#block-views-friends-block_1 ul li{
   margin: 5px 0px 0px 5px;
+}
+#block-views-friends-block_1 ul li.first{
+  margin: 5px 0px 0px 0px;
 }
