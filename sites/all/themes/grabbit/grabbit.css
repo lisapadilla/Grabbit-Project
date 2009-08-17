@@ -1130,3 +1130,11 @@
 #block-search-0 h2{
   display: none;
 }
+#edit-search-block-form-1{
+  width: 166px;
+  height: 23px;
+  border-top: 1px solid #B3B3B3;
+  border-left: 1px solid #B3B3B3;
+  border-bottom: 1px solid #B3B3B3;
+  border-right: none;
+}
