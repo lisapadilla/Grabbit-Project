@@ -1108,8 +1108,10 @@
   line-height: 13px;
   display: block;
 }
+#block-views-suggested_friends-block_1,
 #block-views-friends-block_1{
   display: inline-block;
+  width: 100%;
 }
 #block-views-friends-block_1 .views-row{
   list-style: none;
