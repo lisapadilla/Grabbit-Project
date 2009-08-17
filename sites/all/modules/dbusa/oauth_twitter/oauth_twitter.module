@@ -26,7 +26,7 @@ function oauth_twitter_page(){
 	include 'includes/EpiCurl.php';
 	include 'includes/EpiOAuth.php';
 	include 'includes/EpiTwitter.php';
-	include 'secret.php';
+	include 'includes/secret.php';
 	
 	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
@@ -46,7 +46,7 @@ function oauth_twitter_authorize(){
 	include 'includes/EpiCurl.php';
 	include 'includes/EpiOAuth.php';
 	include 'includes/EpiTwitter.php';
-	include 'secret.php';
+	include 'includes/secret.php';
 
 	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
