@@ -30,7 +30,7 @@ function oauth_twitter_page(){
 	
 	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
-	$twitterObj->setToken("kVXPwX6LKLvUxN8dUuyrr9kliLUdcalK9RKw3t8sfuE");
+	$twitterObj->setToken($GET_['oauth_token']);
 	print_r($twitterObj);
 	$token = $twitterObj->getAccessToken();
 	$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
