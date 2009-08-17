@@ -1137,4 +1137,14 @@
   border-left: 1px solid #B3B3B3;
   border-bottom: 1px solid #B3B3B3;
   border-right: none;
+  float: left;
+}
+#search-block-form #edit-submit{
+  display: block;
+  float: left;
+  width: 25px;
+  height: 25px;
+  padding: 0px;
+  margin: 0px;
+  background: url(images/various/search_btn.gif) 0 0 no-repeat;
 }
