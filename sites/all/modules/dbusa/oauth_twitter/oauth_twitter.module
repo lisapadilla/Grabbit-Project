@@ -36,9 +36,11 @@ function oauth_twitter_page(){
 	$twitterInfo= $twitterObj->get_accountVerify_credentials();
 	$twitterInfo->response;
 	$output = "Your twitter username is {$twitterInfo->screen_name} and your profile picture is <img src=\"{$twitterInfo->profile_image_url}\">";
-	$tok = file_put_contents('tok', $token->oauth_token);
-	$sec = file_put_contents('sec', $token->oauth_token_secret);
-	print_r($tok);
+	$tok = $token->oauth_token;
+	$sec = $token->oauth_token_secret;
+	print "Token : ".$tok."<br>";
+	print "secret : ".$sec."<br>";
+
 	return $output;
 }
 
