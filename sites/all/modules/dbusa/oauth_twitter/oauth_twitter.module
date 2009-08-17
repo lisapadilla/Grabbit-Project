@@ -19,6 +19,13 @@ function oauth_twitter_menu()
     'type' => MENU_CALLBACK
   );
 
+  $items['application/ajustes'] = array( 
+    'title' => 'Grabbit application', 
+    'page callback' => 'oauth_twitter_ajuste', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
   $items['user/%user_category/edit/twitterapp'] = array(
     'title' => 'Twitter account',
     'page callback' => 'oauth_twitter_account',
@@ -46,6 +53,12 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
         ),
       );
   }
+}
+
+function oauth_twitter_ajuste(){
+
+	$output = "consulta lista";
+	return $output;
 }
 
 function oauth_twitter_page(){
