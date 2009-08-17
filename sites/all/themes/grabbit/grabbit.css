@@ -1096,6 +1096,6 @@
     display: block;
   }
 
-.facebook-post, .twitter-message-stream, .node-stream{
+.facebook-post, .twitter-message-stream, .node-stream-news, .node-stream-deal{
 	display:none;
 }
