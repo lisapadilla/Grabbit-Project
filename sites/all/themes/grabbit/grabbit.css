@@ -1111,16 +1111,14 @@
   margin: 0px;
   padding: 0px;
 }
-#block-views-friends-block_1 ul li{
+#block-views-friends-block_1 .views-row{
   list-style: none;
   float: left;
   display: block;
   width: 24px;
   height: 24px;
-}
-#block-views-friends-block_1 ul li{
   margin: 5px 0px 0px 5px;
 }
-#block-views-friends-block_1 ul li.first{
+#block-views-friends-block_1 .views-row-first{
   margin: 5px 0px 0px 0px;
 }
