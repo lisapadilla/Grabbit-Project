@@ -90,7 +90,7 @@ function facebook_grabbit_update_form($form_state){
 	 );
 	
 	if ($fuser){
-		
+		$fb=TRUE;
 		$suser=$fuser->fid;
 		$session_key=$fuser->kid;
 		
@@ -118,7 +118,8 @@ function facebook_grabbit_update_form($form_state){
 	}
 	
 	$accounts = oauth_twitter_get_uid($user->uid);
-	if(count($accounts)){
+
+	if($accounts){
 		$tw=TRUE;
 		
         $form['twitter']= array(
