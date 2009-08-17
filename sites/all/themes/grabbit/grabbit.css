@@ -1107,3 +1107,9 @@
   color: #000;
   line-height: 13px;
 }
+#block-views-friends-block_1 a{
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 5px 0px 0px 5px;
+}
