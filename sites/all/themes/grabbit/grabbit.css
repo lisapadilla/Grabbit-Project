@@ -1106,10 +1106,12 @@
   font-size: 12px;
   color: #000;
   line-height: 13px;
+  display: block;
 }
-#block-views-friends-block_1 ul{
-  margin: 0px;
-  padding: 0px;
+#block-views-suggested_friends-block_1,
+#block-views-friends-block_1{
+  display: inline-block;
+  width: 100%;
 }
 #block-views-friends-block_1 .views-row{
   list-style: none;
@@ -1121,4 +1123,10 @@
 }
 #block-views-friends-block_1 .views-row-first{
   margin: 5px 0px 0px 0px;
+}
+#block-search-0{
+  padding-top: 20px;
+}
+#block-search-0 h2{
+  display: none;
 }
