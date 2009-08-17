@@ -967,6 +967,7 @@
     clear: right;
     padding: 0px;
     margin: 10px 150px 10px 0px;
+    cursor: pointer;
   }
   .grippie{
     display: none;
@@ -1151,4 +1152,5 @@
   background: url(images/various/search_btn.gif) 0 0 no-repeat;
   text-indent: -3000em;
   border: none;
+  cursor: pointer;
 }
