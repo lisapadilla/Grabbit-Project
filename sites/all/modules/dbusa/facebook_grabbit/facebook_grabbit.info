@@ -6,5 +6,4 @@ version = 6.x-1.5-dev
 core = 6.x
 php = 5.2
 dependencies[] = views
-dependencies[] = twitter
 dependencies[] = flag
