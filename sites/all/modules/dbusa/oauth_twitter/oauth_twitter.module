@@ -98,7 +98,7 @@ function oauth_twitter_account(){
 function oauth_twitter_save_config($user,$config){
 
   $savetodb = serialize($config);
-
+  db_query("DELETE FROM {oauth_twitter} WHERE uid =%d",$user);	
   db_query("INSERT INTO {oauth_twitter} (uid,config) VALUES (%d, '%s')",$user,$savetodb);	
   $result = TRUE;
 
