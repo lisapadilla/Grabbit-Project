@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * Implementation of hook_menu()
+ */
+function oauth_twitter_menu()
+{
+  $items['confirm/twitter'] = array( 
+    'title' => 'Grabbit application has been added', 
+    'page callback' => 'oauth_twitter_page', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+ 
+  $items['application/twitter'] = array( 
+    'title' => 'Grabbit application', 
+    'page callback' => 'oauth_twitter_authorize', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  return $items;
+}
+
+function oauth_twitter_page(){
+	
+	include 'includes/EpiCurl.php';
+	include 'includes/EpiOAuth.php';
+	include 'includes/EpiTwitter.php';
+	include 'includes/secret.php';
+	
+	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+
+//	$twitterObj->setToken($_GET['oauth_token']);
+//	$token = $twitterObj->getAccessToken();
+	$twitterObj->setToken('14914572-ZOKxErBUJCawkkTLumjuqVTzCzgNKRmKRcWIoAeMx', 'VAhxseMiBpUkImTT6f2zsbh5dK49dxo2KhethiE');
+	$twitterInfo= $twitterObj->get_accountVerify_credentials();
+	$twitterInfo->response;
+	$output = "Your twitter username is {$twitterInfo->screen_name} and your profile picture is <img src=\"{$twitterInfo->profile_image_url}\">";
+	$tok = $token->oauth_token;
+	$sec = $token->oauth_token_secret;
+
+	return $output;
+}
+
+function oauth_twitter_authorize(){
+	include 'includes/EpiCurl.php';
+	include 'includes/EpiOAuth.php';
+	include 'includes/EpiTwitter.php';
+	include 'includes/secret.php';
+
+	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+
+	echo '<a href="' . $twitterObj->getAuthorizationUrl() . '">Authorize with Twitter</a>';
+}

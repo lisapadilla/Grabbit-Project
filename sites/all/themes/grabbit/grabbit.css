@@ -1095,3 +1095,7 @@
   .facebook-attach-photo{
     display: block;
   }
+
+.facebook-post, .twitter-message-stream, .node-stream{
+	display:none;
+}
