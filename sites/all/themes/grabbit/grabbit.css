@@ -922,6 +922,7 @@
     color: #666666;
     font-size: 10px;
     line-height: 12px;
+    position: relative;
   }
   #facebook-grabbit-update-form .user-data{
     width: 211px;
@@ -1153,4 +1154,14 @@
   text-indent: -3000em;
   border: none;
   cursor: pointer;
+}
+#counter{
+  width: 25px;
+  height: 16px;
+  position: absolute;
+  left: 544px;
+  top: 68px;
+  color: #B3B3B3;
+  font-size: 15px;
+  line-height: 16px;
 }
