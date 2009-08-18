@@ -137,7 +137,7 @@ function facebook_grabbit_update_form($form_state){
 		$form['status'] = array(
 		    '#type' => 'textarea',
 		    '#size' => 60,
-		    '#maxlength' => 255,
+		    '#maxlength' => 140,
 		    '#required' => true );
 		
 		$form['counter'] = array(
