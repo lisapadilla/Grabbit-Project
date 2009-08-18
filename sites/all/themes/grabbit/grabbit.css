@@ -1056,7 +1056,8 @@
     float: left;
     margin-bottom: 10px;
   }
-  .node-stream-news h2 a{
+  .node-stream-news h2 a,
+  .node-stream-blogs h2 a{
     color: #0073CF;
     font-weight: bold;
     font-size: 12px;
