@@ -1206,6 +1206,7 @@ a.facebook-makecomment-link{
   background: url(images/various/reply_ico.gif) 0 0 no-repeat;
   float: right;
   text-indent: 3000em;
+  overflow: hidden;
 }
 .section-user #content-area
 {
