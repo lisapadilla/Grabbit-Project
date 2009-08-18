@@ -1029,7 +1029,9 @@
     float: left;
   }
   .facebook-post,
-  .twitter-message-stream{
+  .twitter-message-stream,
+  .node-stream-news
+  {
     padding: 0px 0px 10px 0px;
     margin-bottom: 10px;
     background: url(images/various/separator.gif) bottom repeat-x;
@@ -1059,7 +1061,6 @@
     font-size: 12px;
     line-height: 13px;
     display: block;
-    padding-left: 15px;
     margin-bottom: 10px;
   }
   .facebook-post .facebook-post-header a.facebook-story-name{
