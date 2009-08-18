@@ -376,6 +376,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	
 	// Output for wall and status update.
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
@@ -384,7 +385,8 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	
 	if ($target == ''){
 		$output .= '
-		<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
+		<div class="facebook-comment-form">
+		<div class="facebook-form" style="display:none;">
 		<form id="myForm">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
@@ -442,6 +444,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	
 	// Output for aplication updates
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">';
 	if($msg_formatted){
@@ -450,7 +453,8 @@ function prepeare_standar_update($post,$user,$profiles){
 	
 	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">'.format_date($post['created_time']).'</span></div></div>
 	'.$show_comments.'
-	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
+	<div class="facebook-comment-form">
+	<div class="facebook-form" style="display:none;">
 		<form id="myForm">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
@@ -1109,21 +1113,21 @@ function theme_twitter_message($message){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix">
-	<div class="listable"><span class="twitter-image"><img src="'.$message->user["profile_image_url"].'" /></span></div>
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a> - 
+  <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
+
+    if ($message->favorited){
+		$output .= 'Remove from favorites</a></div>';
+	  }
+	  else{ //true
+	    $output .= 'Add to favorites</a></div>';
+	  }
+
+	$output .='<div class="listable"><span class="twitter-image"><img src="'.$message->user["profile_image_url"].'" /></span></div>
 	<a href="http://www.twitter.com/'.$message->user["name"].'" class="twitter-name-link" target="_blank">'.$message->user["name"].'</a>
 	          <div class="twitter-body">'.$msg_formatted. ' <span class="twitter-date">on '. format_date(strtotime($message->created_at)) . '</span>
-	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a> - 
-	          <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
-		  
-		  if ($message->favorited){
-			$output .= 'Remove from favorites</a></div></div>
-		  </div>';
-		  }
-		  else{ //true
-		    $output .= 'Add to favorites</a></div></div>
-		  </div>';
-		  }
+	            </div>
+			  </div>';
 		
 	return $output;
 }
