@@ -890,6 +890,7 @@
   
   #primary ul.links li.menu-1844 a{
     width: 52px;
+    background: url(images/navbar/home_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1844 a.active{
     background: url(images/navbar/home_ho.gif) 0 0 no-repeat;
@@ -898,17 +899,30 @@
     width: 90px;
     background: url(images/navbar/profile_nh.gif) 0 0 no-repeat;
   }
+  #primary ul.links li.menu-1845 a.active{
+    background: url(images/navbar/profile_ho.gif) 0 0 no-repeat;
+  }
   #primary ul.links li.menu-1860 a{
     width: 62px;
     background: url(images/navbar/friends_nh.gif) 0 0 no-repeat;
+  }
+  #primary ul.links li.menu-1860 a.active{
+    background: url(images/navbar/friends_ho.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1691 a{
     width: 38px;
     background: url(images/navbar/help_nh.gif) 0 0 no-repeat;
   }
+  #primary ul.links li.menu-1691 a.active{
+    background: url(images/navbar/help_ho.gif) 0 0 no-repeat;
+  }
   #primary ul.links li.menu-1861 a{
     width: 72px;
     background: url(images/navbar/sign_out_nh.gif) 0 0 no-repeat;
+  }
+  #primary ul.links li.menu-1861 a.active{
+    width: 72px;
+    background: url(images/navbar/sign_out_ho.gif) 0 0 no-repeat;
   }
   
   /* Update form styles */
