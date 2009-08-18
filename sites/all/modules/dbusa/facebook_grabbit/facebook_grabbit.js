@@ -152,7 +152,7 @@ $(document).ready(function() {
 	
 	
 	$(".twit-reply").click(function () {
-	  var to = $(this).attr("id"); 
+	  var to = $(this).attr("id")+" "; 
 	  $("#edit-status").focus();
 	  $("#edit-status").val(to);
 	  $("#edit-status").focus();
