@@ -1205,6 +1205,7 @@ a.facebook-makecomment-link, a.twit-reply{
   float: right;
   text-indent: 3000em;
   overflow: hidden;
+  margin-left: 10px;
 }
 a.twitter_favorite{
   display: block;
@@ -1214,6 +1215,7 @@ a.twitter_favorite{
   background: url(images/various/favorites_ico.gif) 0 0 no-repeat;
   text-indent: 3000em;
   overflow: hidden;
+  margin-left: 10px;
 }
 .section-user #content-area
 {
