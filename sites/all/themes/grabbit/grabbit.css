@@ -1217,6 +1217,16 @@ a.twitter_favorite{
   overflow: hidden;
   margin-left: 10px;
 }
+a.twitter_favorite-remove{
+  display: block;
+  width: 12px;
+  height: 12px;
+  float: right;
+  background: url(images/various/favorites_ico_rm.gif) 0 0 no-repeat;
+  text-indent: 3000em;
+  overflow: hidden;
+  margin-left: 10px;
+}
 .section-user #content-area
 {
 	padding-right: 10px;
