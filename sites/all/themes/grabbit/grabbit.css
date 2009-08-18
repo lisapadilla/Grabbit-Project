@@ -1030,7 +1030,8 @@
   }
   .facebook-post,
   .twitter-message-stream,
-  .node-stream-news
+  .node-stream-news,
+  .node-stream-blogs
   {
     padding: 0px 0px 10px 0px;
     margin-bottom: 10px;
