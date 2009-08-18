@@ -1113,8 +1113,8 @@ function theme_twitter_message($message){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply"><a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">
-	 <a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a> - 
+  <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
 
     if ($message->favorited){
 		$output .= 'Remove from favorites</a></div>';
