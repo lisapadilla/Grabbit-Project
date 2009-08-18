@@ -52,8 +52,8 @@
     <div class="meta">
 		<?php if ($links_stream): ?>
 	      <div class="links_stream">
-	        <?php print $links_stream; ?>
 	        <?php print $comment_link; ?>
+	        <?php print $links_stream; ?>
 	      </div>
 	    <?php endif; ?>
       <?php if ($submitted): ?>
