@@ -15,7 +15,6 @@ function grabbit_panels_menu () {
     'access arguments' => array('access content')
   );
   $items['stream/user'] = array( 
-  'title' => 'Personal Stream', 
   'page callback' => 'grabbit_panels_get_panels', 
   'access arguments' => array('access content')
   );
