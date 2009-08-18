@@ -159,7 +159,7 @@ $(document).ready(function() {
 	  
 	});		
 	
-	$(".twitter_favorite").click(function () {
+	$(".twitter_favorite, .twitter_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
 	  var tag = $(this);
 	  
@@ -195,7 +195,6 @@ $(document).ready(function() {
 Drupal.behaviors.charCountDown = function(context)
 {
   var limit = 140;
-  var form = $('#facebook-grabbit-update-form');
   
   $('#edit-status').keyup(function()
   {
@@ -203,18 +202,14 @@ Drupal.behaviors.charCountDown = function(context)
     {
       //handle the over the limit part here
       $(this).addClass('overlimit');
-      $('input', form).attr('disabled', 'true');
-      $('input', form).css('opacity', '0.5');
-      //$('input', form).css('cursor', 'cross');
-      $('input', form).addClass('disabled-grabbit');
+      $('#edit-submit').attr('disabled', 'true');
+      $('#edit-submit').addClass('disabled-grabbit');
     } 
     else 
     {
       $(this).removeClass('overlimit');
-      $('input', form).removeAttr('disabled');
-      $('input', form).css('opacity', '1');
-      //$('input', form).css('cursor', 'pointer');
-      $('input', form).addClass('disabled-grabbit');
+      $('#edit-submit').attr('disabled', 'false');
+      $('#edit-submit').removeClass('disabled-grabbit');
     }
     $('#counter div').text(limit-this.value.length);
   });
