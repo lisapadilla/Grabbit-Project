@@ -153,8 +153,9 @@ $(document).ready(function() {
 	
 	$(".twit-reply").click(function () {
 	  var to = $(this).attr("id"); 
-	  $("#edit-status").val(to);
 	  $("#edit-status").focus();
+	  $("#edit-status").val(to);
+	  
 	});		
 	
 	$(".twitter_favorite").click(function () {
