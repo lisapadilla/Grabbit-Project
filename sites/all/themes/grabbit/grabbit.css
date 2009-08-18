@@ -1112,7 +1112,8 @@
   }
   .facebook-post .facebook-comment-text, 
   .facebook-post .facebook-comment-timeline,
-  .node-stream-news p{
+  .node-stream-news p,
+  .node-stream-blogs p{
     font-size: 12px;
     line-height: 15px;
   }
