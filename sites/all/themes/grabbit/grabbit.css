@@ -1199,7 +1199,14 @@
   font-size: 15px;
   line-height: 16px;
 }
-
+a.facebook-makecomment-link{
+  display: block;
+  width: 10px;
+  height: 12px;
+  background: url(images/various/reply_ico.gif) 0 0 no-repeat;
+  float: right;
+  text-indent: 3000em;
+}
 .section-user #content-area
 {
 	padding-right: 10px;
