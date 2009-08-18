@@ -5,10 +5,7 @@ $(document).ready(function() {
 	// PANEL 1
 	var stories_at_first_p1 = 4;
 	var stories_per_slide_p1 = 4;
-	var current_panel_1 = $('#panel-0').children().next().children();
-	
-	$('#'+current_panel_1.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
-	current_panel_1 = $('#'+current_panel_1.attr('id'));
+	var current_panel_1 = $('#panel-0 .panel-wraper div:first-child');
 	current_panel_1.show();
 	
 	for (var i = 1; i< stories_at_first_p1; i++){
@@ -37,10 +34,7 @@ $(document).ready(function() {
 	// PANEL 2
 	var stories_at_first_p2 = 4;
 	var stories_per_slide_p2 = 4;
-	var current_panel_2 = $('#panel-1').children().next().children();
-	
-	$('#'+current_panel_2.attr('id')).attr('id','nuevo-'+Math.round(Math.random()*1000));
-	current_panel_2 = $('#'+current_panel_2.attr('id'));
+	var current_panel_2 = $('#panel-1 .panel-wraper div:first-child');
 	current_panel_2.show();
 	
 	for (var i = 1; i< stories_at_first_p2; i++){
