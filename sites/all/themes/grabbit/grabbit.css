@@ -1206,6 +1206,15 @@ a.facebook-makecomment-link, a.twit-reply{
   text-indent: 3000em;
   overflow: hidden;
 }
+a.twitter_favorite{
+  display: block;
+  width: 12px;
+  height: 12px;
+  float: right;
+  background: url(images/various/favorites_ico.gif) 0 0 no-repeat;
+  text-indent: 3000em;
+  overflow: hidden;
+}
 .section-user #content-area
 {
 	padding-right: 10px;
