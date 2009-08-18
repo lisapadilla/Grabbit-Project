@@ -61,11 +61,11 @@ $(document).ready(function() {
 	});
 	
 	$(".facebook-makecomment-link").click(function () {
-	  var input = $(this).next("div").children("form").children("input").prev();
-		$(this).next("div").slideToggle("medium",function(){
+		var input1 = $(this).next("div");
+		var input = $("#myForm",input1).children("input").prev();
+		$("#myForm",input1).slideToggle("medium",function(){
 			input.focus();
 		});
-		$(this).next("div").children("form").children("input").prev().attr("value","");
 		
 	});
 

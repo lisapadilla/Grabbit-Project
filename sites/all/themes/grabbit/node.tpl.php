@@ -50,6 +50,12 @@
 ?>
 <div<?php print $attributes; ?> class="node-stream-<?=$node->type?>">
     <div class="meta">
+		<?php if ($links_stream): ?>
+	      <div class="links_stream">
+	        <?php print $links_stream; ?>
+	        <?php print $comment_link; ?>
+	      </div>
+	    <?php endif; ?>
       <?php if ($submitted): ?>
       <?php print $picture; ?>
       <?php endif; ?>
@@ -63,12 +69,7 @@
         <?php if ($submitted): ?>
           <p><?php print $submitted; ?></p>
         <?php endif; ?>
-        <?php if ($links_stream): ?>
-	      <div class="links_stream">
-	        <?php print $links_stream; ?>
-	        <?php print $comment_link; ?>
-	      </div>
-	    <?php endif; ?>
+        
       </div>
       <?php }else{ ?>
         <?php print $content; ?>

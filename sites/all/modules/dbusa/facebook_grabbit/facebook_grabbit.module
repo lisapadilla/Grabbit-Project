@@ -383,16 +383,16 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	  '.$msg_formatted.'<span class="facebook-date">'.format_date($post['created_time']).'</span>
 	</div></div>'.$show_comments;
 	
-	if ($target == ''){
+
 		$output .= '
 		<div class="facebook-comment-form">
 		<div class="facebook-form" style="display:none;">
-		<form id="myForm">
+		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
 		</form>
 		</div></div>';
-	}
+
 	
 	$output .= '</div></div>';
 	
@@ -455,7 +455,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	'.$show_comments.'
 	<div class="facebook-comment-form">
 	<div class="facebook-form" style="display:none;">
-		<form id="myForm">
+		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
 		</form>
