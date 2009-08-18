@@ -26,15 +26,19 @@ function grabbit_panels_menu () {
 function grabbit_panels_get_panels(){
 	global $user;
 	
-	$panel_1 = facebook_grabbit_private_view_panel(0);
+	$panel_1 = facebook_grabbit_private_view_panel(0);	
 	
-	$settings=grabbit_panels_get_uid($user->uid,1);
-	$panel_settings=unserialize($settings->config);
-    $panel_2 = facebook_grabbit_private_view_panel(1);
-	$output .= theme_panels($panel_1,0,"Main Stream");	
-	$output .= theme_panels($panel_2,1,$panel_settings['panel_name']);	
+	if ($user->uid > 0){
+		$output .= theme_panels($panel_1,0,"Main Stream");
+	  	$settings=grabbit_panels_get_uid($user->uid,1);
+		$panel_settings=unserialize($settings->config);
+	    $panel_2 = facebook_grabbit_private_view_panel(1);	
+	    $output .= theme_panels($panel_2,1,$panel_settings['panel_name']);
+	}
+	else{
+		$output .= theme_panels($panel_1,0,"Public Stream");
+	}
 	
-	$output .="</div>";
 	return $output;
 }
 

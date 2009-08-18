@@ -380,7 +380,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
-	  '.$msg_formatted.'<span class="facebook-date">'.format_date($post['created_time']).'</span>
+	  '.$msg_formatted.'<span class="facebook-date">on '.format_date($post['created_time']).'</span>
 	</div></div>'.$show_comments;
 	
 
@@ -423,7 +423,7 @@ function prepeare_standar_update($post,$user,$profiles){
 		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
 	      if($media['type'] =="video"){
-		    $attachment .='<span class="facebook-attach-video">Video: <a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
+		    $attachment .='<span class="facebook-attach-video">Video: <br><a href="'.$media['href'].'" target="_blank"><img src="'.$media['src'].'" width="100" /></a></span>';
 	      }
 		}
     }
@@ -451,7 +451,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">'.format_date($post['created_time']).'</span></div></div>
+	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">on '.format_date($post['created_time']).'</span></div></div>
 	'.$show_comments.'
 	<div class="facebook-comment-form">
 	<div class="facebook-form" style="display:none;">
@@ -675,10 +675,6 @@ function facebook_grabbit_private_view(){
 		$tw = FALSE;
 	}
 	
-	if(!$tw && !$fb){
-	  return "You have no Twitter or Facebook accounts yet";	
-	}
-	else{
 		if(is_array($twitface)){
 			usort($twitface, 'compare');
 			$result = array_reverse($twitface);
@@ -708,7 +704,7 @@ function facebook_grabbit_private_view(){
 			}	
 		}
 			
-	}
+	
 	
 	return $output;
 
@@ -906,10 +902,7 @@ function facebook_grabbit_private_view_panel($param){
 		$tw = FALSE;
 	}
 	
-	if(!$tw && !$fb){
-	  return "You have no Twitter or Facebook accounts yet";	
-	}
-	else{
+
 		if(is_array($twitface)){
 			usort($twitface, 'compare');
 			$result = array_reverse($twitface);
@@ -938,7 +931,7 @@ function facebook_grabbit_private_view_panel($param){
 			}	
 		}
 			
-	}
+	
     $GET=array();
 	return $output;
 
