@@ -1133,7 +1133,8 @@
   display: inline-block;
   width: 100%;
 }
-#block-views-friends-block_1 .views-row{
+#block-views-friends-block_1 .views-row,
+#block-views-suggested_friends-block_1 .views-row{
   list-style: none;
   float: left;
   display: block;
@@ -1141,7 +1142,8 @@
   height: 24px;
   margin: 5px 0px 0px 5px;
 }
-#block-views-friends-block_1 .views-row-first{
+#block-views-friends-block_1 .views-row-first,
+#block-views-suggested_friends-block_1 .views-row-first{
   margin: 5px 0px 0px 0px;
 }
 #block-search-0{
