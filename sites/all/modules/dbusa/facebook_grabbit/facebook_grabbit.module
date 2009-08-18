@@ -137,13 +137,12 @@ function facebook_grabbit_update_form($form_state){
 		$form['status'] = array(
 		    '#type' => 'textarea',
 		    '#size' => 60,
-		    '#maxlength' => 140,
 		    '#required' => true );
 		
 		$form['counter'] = array(
 		    '#type' => 'item',
 		    '#prefix'=>'<div id="counter">',
-		    '#value' => '255',
+		    '#value' => '240',
 		    '#suffix'=>'</div>'
 			 );
 
