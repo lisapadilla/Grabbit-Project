@@ -142,7 +142,7 @@ function facebook_grabbit_update_form($form_state){
 		$form['counter'] = array(
 		    '#type' => 'item',
 		    '#prefix'=>'<div id="counter">',
-		    '#value' => '240',
+		    '#value' => '140',
 		    '#suffix'=>'</div>'
 			 );
 
