@@ -1199,7 +1199,7 @@
   font-size: 15px;
   line-height: 16px;
 }
-a.facebook-makecomment-link{
+a.facebook-makecomment-link, a.twit-reply{
   display: block;
   width: 10px;
   height: 12px;
