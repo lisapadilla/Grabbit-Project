@@ -194,9 +194,7 @@
   {
   }
   
-  #content-header h1.title{
-    display: none;
-  }
+
 
   .breadcrumb /* The path to the current page in the form of a list of links */
   {
@@ -926,7 +924,7 @@
   }
   
   /* Update form styles */
-  .panels-update-form{
+  #content-form{
     background: #FFCA00;
   }
   .panels-update-wraper{
@@ -1177,7 +1175,7 @@
   padding: 0px;
   margin: 0px;
 }
-#search-block-form #edit-submit{
+#search-block-form .form-submit{
   display: block;
   float: left;
   width: 25px;
@@ -1209,7 +1207,9 @@
 {
 	border: 1px solid #CCCCCC;
 }
-.section-user #content-area legend
+.section-user #content-area legend, 
+.section-user #content-area legend a
 {
 	color: #333333;
+	font-size: 11px;
 }

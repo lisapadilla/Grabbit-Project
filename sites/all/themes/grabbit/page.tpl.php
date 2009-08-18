@@ -149,11 +149,14 @@
           <div id="mission"><?php print $mission; ?></div>
         <?php endif; ?>
 
-		<?php if ($content_form): ?>
           <div id="content-form" class="region region-content_form">
-            <?php print $content_form; ?>
+            <?php if ($content_form): ?>
+              <?php print $content_form; ?>
+            <?php else: ?>
+              <br/>
+            <?php endif; ?>
           </div> <!-- /#content-form -->
-        <?php endif; ?>
+        
 
         <?php if ($content_top): ?>
           <div id="content-top" class="region region-content_top">
@@ -161,21 +164,22 @@
           </div> <!-- /#content-top -->
         <?php endif; ?>
 
-        <?php if ($breadcrumb || $title || $tabs || $help || $messages): ?>
+        <?php if ($breadcrumb || $title || $help || $messages): ?>
           <div id="content-header">
             <?php print $breadcrumb; ?>
             <?php if ($title): ?>
               <h1 class="title"><?php print $title; ?></h1>
             <?php endif; ?>
             <?php print $messages; ?>
-            <?php if ($tabs): ?>
-              <div class="tabs"><?php print $tabs; ?></div>
-            <?php endif; ?>
+            
             <?php print $help; ?>
           </div> <!-- /#content-header -->
         <?php endif; ?>
 
         <div id="content-area">
+          <?php if ($tabs): ?>
+            <div class="tabs"><?php print $tabs; ?></div>
+          <?php endif; ?>
           <?php print $content; ?>
         </div>
 
