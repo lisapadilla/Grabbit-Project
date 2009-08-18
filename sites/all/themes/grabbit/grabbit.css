@@ -1116,6 +1116,9 @@
 .facebook-post, .twitter-message-stream, .node-stream-news, .node-stream-deal{
 	display:none;
 }
+#block-views-friends-block_1{
+ margin-bottom: 10px; 
+}
 #block-views-suggested_friends-block_1 h2,
 #block-views-friends-block_1 h2{
   background: #FFCA00;
