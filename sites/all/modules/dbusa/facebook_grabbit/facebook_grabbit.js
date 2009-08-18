@@ -170,6 +170,7 @@ $(document).ready(function() {
 	      //Testing if it works
 				if (data){
 								tag.text("Remove from favorites");
+								tag.attr("class","twitter_favorite-remove");
 				}else{
 								alert ("There was a connection problem. Try later");
 				}
@@ -182,6 +183,7 @@ $(document).ready(function() {
 	      //Testing if it works
 				if (data){
 								tag.text("Add to favorites");		
+								tag.attr("class","twitter_favorite");
 				}else{								
 								alert ("There was a connection problem. Try later");
 				}
