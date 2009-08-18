@@ -1042,8 +1042,7 @@
     margin-right: 10px;
   }
   .facebook-post .facebook-post-header a.facebook-story-name,
-  .twitter-message-stream a.twitter-name-link,
-  .node-stream-news h2 a{
+  .twitter-message-stream a.twitter-name-link{
     color: #0073CF;
     font-weight: bold;
     font-size: 12px;
@@ -1052,6 +1051,15 @@
     width: 200px;
     padding-left: 15px;
     float: left;
+    margin-bottom: 10px;
+  }
+  .node-stream-news h2 a{
+    color: #0073CF;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 13px;
+    display: block;
+    padding-left: 15px;
     margin-bottom: 10px;
   }
   .facebook-post .facebook-post-header a.facebook-story-name{
