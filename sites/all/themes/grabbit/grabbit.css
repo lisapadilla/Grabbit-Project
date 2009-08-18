@@ -1212,7 +1212,7 @@ a.twitter_favorite{
   width: 12px;
   height: 12px;
   float: right;
-  background: url(images/various/favorites_ico.gif) 0 0 no-repeat;
+  background: url(images/various/favorites_ico_rm.gif) 0 0 no-repeat;
   text-indent: 3000em;
   overflow: hidden;
   margin-left: 10px;
@@ -1222,7 +1222,7 @@ a.twitter_favorite-remove{
   width: 12px;
   height: 12px;
   float: right;
-  background: url(images/various/favorites_ico_rm.gif) 0 0 no-repeat;
+  background: url(images/various/favorites_ico.gif) 0 0 no-repeat;
   text-indent: 3000em;
   overflow: hidden;
   margin-left: 10px;
