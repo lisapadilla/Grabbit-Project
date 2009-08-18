@@ -859,14 +859,14 @@
     height: 33px;
     float: right;
   }
-  #block-facebook_grabbit-1 a{
+  #block-facebook_grabbit-1 .content a{
     display: block;
     width: 105px;
     height: 33px;
     background: url(images/btns/tell_friend.gif) 0 0 no-repeat;
     text-indent: -3000em;
   }
-  #block-facebook_grabbit-1 a:hover{
+  #block-facebook_grabbit-1 .content a:hover{
     border: none;
     text-decoration: none;
   }
@@ -1198,4 +1198,18 @@
   color: #B3B3B3;
   font-size: 15px;
   line-height: 16px;
+}
+
+.section-user #content-area
+{
+	padding-right: 10px;
+	width: 708px;
+}
+.section-user #content-area fieldset
+{
+	border: 1px solid #CCCCCC;
+}
+.section-user #content-area legend
+{
+	color: #333333;
 }
