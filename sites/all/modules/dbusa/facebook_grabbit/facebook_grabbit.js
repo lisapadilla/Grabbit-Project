@@ -155,6 +155,7 @@ $(document).ready(function() {
 	  var to = $(this).attr("id"); 
 	  $("#edit-status").focus();
 	  $("#edit-status").val(to);
+	  $("#edit-status").focus();
 	  
 	});		
 	
