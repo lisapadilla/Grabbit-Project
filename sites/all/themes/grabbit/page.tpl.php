@@ -167,9 +167,6 @@
         <?php if ($breadcrumb || $title || $help || $messages): ?>
           <div id="content-header">
             <?php print $breadcrumb; ?>
-            <?php if ($title): ?>
-              <h1 class="title"><?php print $title; ?></h1>
-            <?php endif; ?>
             <?php print $messages; ?>
             
             <?php print $help; ?>
@@ -177,6 +174,9 @@
         <?php endif; ?>
 
         <div id="content-area">
+          <?php if ($title): ?>
+            <h1 class="title"><?php print $title; ?></h1>
+          <?php endif; ?>
           <?php if ($tabs): ?>
             <div class="tabs"><?php print $tabs; ?></div>
           <?php endif; ?>
