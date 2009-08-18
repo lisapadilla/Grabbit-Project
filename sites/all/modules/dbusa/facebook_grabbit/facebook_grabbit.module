@@ -137,13 +137,12 @@ function facebook_grabbit_update_form($form_state){
 		$form['status'] = array(
 		    '#type' => 'textarea',
 		    '#size' => 60,
-		    '#maxlength' => 255,
 		    '#required' => true );
 		
 		$form['counter'] = array(
 		    '#type' => 'item',
 		    '#prefix'=>'<div id="counter">',
-		    '#value' => '255',
+		    '#value' => '140',
 		    '#suffix'=>'</div>'
 			 );
 
@@ -376,21 +375,23 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	
 	// Output for wall and status update.
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
-	  '.$msg_formatted.'<span class="facebook-date">'.format_date($post['created_time']).'</span>
+	  '.$msg_formatted.'<span class="facebook-date">on '.format_date($post['created_time']).'</span>
 	</div></div>'.$show_comments;
 	
-	if ($target == ''){
+
 		$output .= '
-		<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
-		<form id="myForm">
+		<div class="facebook-comment-form">
+		<div class="facebook-form" style="display:none;">
+		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
 		</form>
 		</div></div>';
-	}
+
 	
 	$output .= '</div></div>';
 	
@@ -421,7 +422,7 @@ function prepeare_standar_update($post,$user,$profiles){
 		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
 	      if($media['type'] =="video"){
-		    $attachment .='<span class="facebook-attach-video">Video: <a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
+		    $attachment .='<span class="facebook-attach-video">Video: <br><a href="'.$media['href'].'" target="_blank"><img src="'.$media['src'].'" width="100" /></a></span>';
 	      }
 		}
     }
@@ -442,16 +443,18 @@ function prepeare_standar_update($post,$user,$profiles){
 	
 	// Output for aplication updates
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">';
 	if($msg_formatted){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">'.format_date($post['created_time']).'</span></div></div>
+	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">on '.format_date($post['created_time']).'</span></div></div>
 	'.$show_comments.'
-	<div class="facebook-comment-form"><a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a><div class="facebook-form" style="display:none;">
-		<form id="myForm">
+	<div class="facebook-comment-form">
+	<div class="facebook-form" style="display:none;">
+		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
 		</form>
@@ -671,10 +674,6 @@ function facebook_grabbit_private_view(){
 		$tw = FALSE;
 	}
 	
-	if(!$tw && !$fb){
-	  return "You have no Twitter or Facebook accounts yet";	
-	}
-	else{
 		if(is_array($twitface)){
 			usort($twitface, 'compare');
 			$result = array_reverse($twitface);
@@ -704,7 +703,7 @@ function facebook_grabbit_private_view(){
 			}	
 		}
 			
-	}
+	
 	
 	return $output;
 
@@ -902,10 +901,7 @@ function facebook_grabbit_private_view_panel($param){
 		$tw = FALSE;
 	}
 	
-	if(!$tw && !$fb){
-	  return "You have no Twitter or Facebook accounts yet";	
-	}
-	else{
+
 		if(is_array($twitface)){
 			usort($twitface, 'compare');
 			$result = array_reverse($twitface);
@@ -934,7 +930,7 @@ function facebook_grabbit_private_view_panel($param){
 			}	
 		}
 			
-	}
+	
     $GET=array();
 	return $output;
 
@@ -971,7 +967,7 @@ function facebook_grabbit_block($op = 'list', $delta = 0, $edit = array()) {
           $blocks['content'] = drupal_get_form('facebook_grabbit_feeds_form');
           break;
         case 1:
-          $blocks['content'] = l("tell a friend","node/#");
+          $blocks['content'] = l("tell a friend","forward",array('query'=>'path=node/3'));
           break;
       }
       return $blocks;
@@ -1109,21 +1105,21 @@ function theme_twitter_message($message){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix">
-	<div class="listable"><span class="twitter-image"><img src="'.$message->user["profile_image_url"].'" /></span></div>
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply"><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a> - 
+  <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
+
+    if ($message->favorited){
+		$output .= 'Remove from favorites</a></div>';
+	  }
+	  else{ //true
+	    $output .= 'Add to favorites</a></div>';
+	  }
+
+	$output .='<div class="listable"><span class="twitter-image"><img src="'.$message->user["profile_image_url"].'" /></span></div>
 	<a href="http://www.twitter.com/'.$message->user["name"].'" class="twitter-name-link" target="_blank">'.$message->user["name"].'</a>
 	          <div class="twitter-body">'.$msg_formatted. ' <span class="twitter-date">on '. format_date(strtotime($message->created_at)) . '</span>
-	            <div class="twitter-reply"><a href="#facebook-grabbit-update-form" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a> - 
-	          <a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">';
-		  
-		  if ($message->favorited){
-			$output .= 'Remove from favorites</a></div></div>
-		  </div>';
-		  }
-		  else{ //true
-		    $output .= 'Add to favorites</a></div></div>
-		  </div>';
-		  }
+	            </div>
+			  </div>';
 		
 	return $output;
 }
