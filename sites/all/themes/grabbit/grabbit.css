@@ -1242,3 +1242,13 @@ a.twitter_favorite-remove{
 	color: #333333;
 	font-size: 11px;
 }
+#panel-0 .panel-title h3{
+  font-size: 20px;
+  color: #333333;
+  line-height: 21px;
+  margin-bottom: 0px;
+}
+#panel-0 .panel-title{
+  padding-bottom: 23px;
+  background: url(images/various/bg_main_top.gif) bottom left no-repeat;
+}
