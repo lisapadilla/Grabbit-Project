@@ -1031,8 +1031,7 @@
   .node-stream-news,
   .node-stream-blogs
   {
-    padding: 0px 0px 10px 0px;
-    margin-bottom: 10px;
+    padding: 10px;
     background: url(images/various/separator.gif) bottom repeat-x;
   }
   .facebook-post .facebook-post-header a.facebook-story-pic,
@@ -1042,14 +1041,24 @@
     overflow: hidden;
     margin-right: 10px;
   }
-  .facebook-post .facebook-post-header a.facebook-story-name,
-  .twitter-message-stream a.twitter-name-link{
+  .facebook-post .facebook-post-header a.facebook-story-name{
     color: #0073CF;
     font-weight: bold;
     font-size: 12px;
     line-height: 13px;
     display: block;
     width: 200px;
+    padding-left: 15px;
+    float: left;
+    margin-bottom: 10px;
+  }
+  .twitter-message-stream a.twitter-name-link{
+    color: #0073CF;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 13px;
+    display: block;
+    width: 155px;
     padding-left: 15px;
     float: left;
     margin-bottom: 10px;
@@ -1077,12 +1086,25 @@
     margin-bottom: 10px;
     display: block;
   }
-  .twitter-message-stream .twitter-body{
-    width: 220px;
+  #panel-1 .twitter-message-stream .twitter-body{
+    width: 200px;
     float: left;
     font-size: 12px;
     line-height: 15px;
     display: block;
+  }
+  #panel-0 .twitter-message-stream .twitter-body{
+    width: 270px;
+    float: left;
+    font-size: 12px;
+    line-height: 15px;
+    display: block;
+  }
+  .facebook-post-body a,
+  .facebook-attachment a,
+  .twitter-body a{
+    color: #0073CF;
+    text-decoration: none;
   }
   .facebook-post .facebook-comments{
     clear: both;
@@ -1241,4 +1263,53 @@ a.twitter_favorite-remove{
 {
 	color: #333333;
 	font-size: 11px;
+}
+#panel-0 .panel-title h3{
+  font-size: 20px;
+  color: #333333;
+  line-height: 21px;
+  margin-bottom: 0px;
+}
+#panel-1 .panel-title h3{
+  font-size: 20px;
+  color: #999999;
+  line-height: 21px;
+  margin-bottom: 0px;
+  width: 150px;
+  float: left;
+  display: block;
+}
+#panel-0 .panel-title{
+  padding-bottom: 23px;
+  background: url(images/various/bg_main_top.gif) bottom left no-repeat;
+}
+#panel-1 .panel-title{
+  padding-bottom: 23px;
+  background: url(images/various/bg_left_top.gif) bottom left no-repeat;
+}
+#panel-0 .panel-wraper{
+  background: url(images/various/bg_main_mid.gif) 0 0 repeat-y;
+  padding: 0px 5px 10px 5px;
+}
+#panel-1 .panel-wraper{
+  background: url(images/various/bg_left_mid.gif) 0 0 repeat-y;
+  padding: 0px 5px 10px 5px;
+}
+#panel-0 .panel-controller{
+  height: 26px;
+  background: url(images/various/p0_more.gif) 0 0 no-repeat;
+  text-align: center;
+}
+#panel-1 .panel-controller{
+  height: 26px;
+  background: url(images/various/p1_more.gif) 0 0 no-repeat;
+  text-align: center;
+}
+#panel-0 .panel-controller a,
+#panel-1 .panel-controller a{
+  font-size: 14px;
+  line-height: 15px;
+  text-decoration: none;
+  color: #999999;
+  margin: 0px;
 }
