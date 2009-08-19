@@ -68,6 +68,27 @@ $(document).ready(function() {
 		});
 		
 	});
+	
+	$('.comment-news').click(function(){
+		$(this).parent().parent().next().children().children().slideToggle('medium');
+	});
+	
+	$('.news-comment-submit').click(function(){
+		// Save comment
+		
+		var tag = $(this);
+		var nid = $(this).attr('id');
+		
+		$.get(Drupal.settings.basePath+"news/comment",{nid:nid},function(data){
+			if (data){
+				tag.prev().attr('value','');
+				tag.parent().slideToggle('medium');
+			}else{
+				// Handle this depending on the design
+				tag.prev().attr('value','Error when connecting, try later.');
+			}
+		});
+	});
 
 	// When user submits a comment in facebook
 	$(".facebook_comment_submit").click(function () {

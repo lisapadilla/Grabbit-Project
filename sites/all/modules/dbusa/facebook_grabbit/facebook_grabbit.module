@@ -44,6 +44,11 @@ function facebook_grabbit_menu () {
     'file' => 'grabbit.inc',
     'type' => MENU_LOCAL_TASK,
   );
+  
+  $items['news/comment'] = array( 
+    'page callback' => 'facebook_grabbit_news_comment', 
+    'access arguments' => array('access content')
+  );
 
   return $items;
 }
@@ -924,7 +929,35 @@ function facebook_grabbit_private_view_panel($param){
 				else{
 					if($entry['value']->nid){
 						$node=node_load($entry['value']->nid);
-						$output .= node_view($node, TRUE, FALSE, TRUE);
+						//$output .= node_view($node, TRUE, FALSE, TRUE);
+						$output .= '<div class="node-stream-news">
+														<div class="meta">
+															<div class="links_stream">
+																<a href="javascript:void(0)" class="comment-news">Comment</a>
+																<span class="flag-wrapper flag-bookmarks">
+																<a class="flag unflag-action flag-link-toggle flag-processed" title="Remove this post from your favorites" href="">Remove from favorites</a><span class="flag-throbber"> </span>
+															</span>
+															</div>
+															<div class="content-floated-left">
+																<h2>
+																	<a title="'.$node->title.'" href="'.$node->feedapi_node->url.'">'.$node->title.'</a>
+																</h2>
+															</div>
+															<div class="content-floated-right">
+																<p>'.$node->teaser.'</p>
+																<p>Submitted by <a title="View user profile." href="/grabbit/user/'.$node->uid.'">'.$node->name.'</a></p>
+															</div>
+														</div>
+														<div class="comment-news">
+															<div class="news-form" style="display:none;">
+																<form id="myForm" style="display:none;">
+																	<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
+																	<input id="'.$node->nid.'" class="news-comment-submit" type="button" value="Comment" onclick="javascript:void(0)">
+																</form>
+															</div>
+														</div>
+												</div>';
+						
 					}
 					else{
 	          $output .= theme_twitter_message($entry['value']);
@@ -1245,4 +1278,8 @@ function facebook_grabbit_tags_form(){
 	$form['#method'] = 'get';
 		
 	return $form;
+}
+
+function facebook_grabbit_news_comment(){
+	return 'yeah';
 }
