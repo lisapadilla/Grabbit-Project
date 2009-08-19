@@ -1253,7 +1253,7 @@ a.twitter_favorite-remove{
 }
 #panel-0 .panel-wraper{
   background: url(images/various/bg_main_mid.gif) 0 0 repeat-y;
-  padding: 0px 5px;
+  padding: 0px 5px 10px 0px;
 }
 #panel-0 .panel-controller{
   height: 26px;
