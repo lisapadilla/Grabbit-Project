@@ -1031,8 +1031,7 @@
   .node-stream-news,
   .node-stream-blogs
   {
-    padding: 0px 10px 10px 10px;
-    margin-top: 10px;
+    padding: 10px;
     background: url(images/various/separator.gif) bottom repeat-x;
   }
   .facebook-post .facebook-post-header a.facebook-story-pic,
