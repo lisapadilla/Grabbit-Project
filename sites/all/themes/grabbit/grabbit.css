@@ -1041,14 +1041,24 @@
     overflow: hidden;
     margin-right: 10px;
   }
-  .facebook-post .facebook-post-header a.facebook-story-name,
-  .twitter-message-stream a.twitter-name-link{
+  .facebook-post .facebook-post-header a.facebook-story-name{
     color: #0073CF;
     font-weight: bold;
     font-size: 12px;
     line-height: 13px;
     display: block;
     width: 200px;
+    padding-left: 15px;
+    float: left;
+    margin-bottom: 10px;
+  }
+  .twitter-message-stream a.twitter-name-link{
+    color: #0073CF;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 13px;
+    display: block;
+    width: 155px;
     padding-left: 15px;
     float: left;
     margin-bottom: 10px;
@@ -1076,8 +1086,15 @@
     margin-bottom: 10px;
     display: block;
   }
-  .twitter-message-stream .twitter-body{
-    width: 220px;
+  #panel-1 .twitter-message-stream .twitter-body{
+    width: 200px;
+    float: left;
+    font-size: 12px;
+    line-height: 15px;
+    display: block;
+  }
+  #panel-0 .twitter-message-stream .twitter-body{
+    width: 270px;
     float: left;
     font-size: 12px;
     line-height: 15px;
