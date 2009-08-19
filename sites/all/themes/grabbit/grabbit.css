@@ -1058,7 +1058,7 @@
     font-size: 12px;
     line-height: 13px;
     display: block;
-    width: 160px;
+    width: 155px;
     padding-left: 15px;
     float: left;
     margin-bottom: 10px;
@@ -1086,8 +1086,15 @@
     margin-bottom: 10px;
     display: block;
   }
-  .twitter-message-stream .twitter-body{
-    width: 220px;
+  #panel-1 .twitter-message-stream .twitter-body{
+    width: 200px;
+    float: left;
+    font-size: 12px;
+    line-height: 15px;
+    display: block;
+  }
+  #panel-0 .twitter-message-stream .twitter-body{
+    width: 270px;
     float: left;
     font-size: 12px;
     line-height: 15px;
