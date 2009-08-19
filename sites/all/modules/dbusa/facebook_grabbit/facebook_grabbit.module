@@ -383,7 +383,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	  '.$msg_formatted.'<span class="facebook-date">on '.format_date($post['created_time']).'</span>
-	</div></div>'.$show_comments;
+	</div></div><div class="facebook-post-comments">'.$show_comments.'</div>';
 	
 
 		$output .= '
@@ -454,7 +454,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	}
 	
 	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">on '.format_date($post['created_time']).'</span></div></div>
-	'.$show_comments.'
+	<div class="facebook-post-comments">'.$show_comments.'</div>
 	<div class="facebook-comment-form">
 	<div class="facebook-form" style="display:none;">
 		<form id="myForm" style="display:none;">
