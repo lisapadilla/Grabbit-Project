@@ -1031,7 +1031,7 @@
   .node-stream-news,
   .node-stream-blogs
   {
-    padding: 0px 0px 10px 0px;
+    padding: 0px 10px 10px 10px;
     margin-bottom: 10px;
     background: url(images/various/separator.gif) bottom repeat-x;
   }
@@ -1251,4 +1251,7 @@ a.twitter_favorite-remove{
 #panel-0 .panel-title{
   padding-bottom: 23px;
   background: url(images/various/bg_main_top.gif) bottom left no-repeat;
+}
+#panel-0 .panel-wraper{
+  background: url(images/various/bg_main_mid.gif) 0 0 repeat-y;
 }
