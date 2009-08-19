@@ -1247,9 +1247,22 @@ a.twitter_favorite-remove{
   line-height: 21px;
   margin-bottom: 0px;
 }
+#panel-1 .panel-title h3{
+  font-size: 20px;
+  color: #999999;
+  line-height: 21px;
+  margin-bottom: 0px;
+  width: 150px;
+  float: left;
+  display: block;
+}
 #panel-0 .panel-title{
   padding-bottom: 23px;
   background: url(images/various/bg_main_top.gif) bottom left no-repeat;
+}
+#panel-1 .panel-title{
+  padding-bottom: 23px;
+  background: url(images/various/bg_left_top.gif) bottom left no-repeat;
 }
 #panel-0 .panel-wraper{
   background: url(images/various/bg_main_mid.gif) 0 0 repeat-y;
