@@ -1268,12 +1268,22 @@ a.twitter_favorite-remove{
   background: url(images/various/bg_main_mid.gif) 0 0 repeat-y;
   padding: 0px 5px 10px 5px;
 }
+#panel-1 .panel-wraper{
+  background: url(images/various/bg_left_mid.gif) 0 0 repeat-y;
+  padding: 0px 5px 10px 5px;
+}
 #panel-0 .panel-controller{
   height: 26px;
   background: url(images/various/p0_more.gif) 0 0 no-repeat;
   text-align: center;
 }
-#panel-0 .panel-controller a{
+#panel-1 .panel-controller{
+  height: 26px;
+  background: url(images/various/p1_more.gif) 0 0 no-repeat;
+  text-align: center;
+}
+#panel-0 .panel-controller a,
+#panel-1 .panel-controller a{
   font-size: 14px;
   line-height: 15px;
   text-decoration: none;
