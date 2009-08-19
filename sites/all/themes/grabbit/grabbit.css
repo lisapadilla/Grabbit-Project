@@ -1100,6 +1100,12 @@
     line-height: 15px;
     display: block;
   }
+  .facebook-post-body a,
+  .facebook-attachment a,
+  .twitter-body a{
+    color: #0073CF;
+    text-decoration: none;
+  }
   .facebook-post .facebook-comments{
     clear: both;
     padding-left: 58px;
