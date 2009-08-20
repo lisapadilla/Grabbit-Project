@@ -335,7 +335,7 @@ class EpiOAuthException extends Exception
       case 401:
         throw new EpiOAuthUnauthorizedException($message, $code);
       case 503:
-print_r("error");
+	    throw new EpiOAuthBadRequestException($message, $code);
       default:
         throw new EpiOAuthException($message, $code);
     }

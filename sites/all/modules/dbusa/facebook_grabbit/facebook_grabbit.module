@@ -193,13 +193,22 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		include_once 'includes/EpiOAuth.php';
 		include_once 'includes/EpiTwitter.php';
 		include 'includes/secret.php';
-		
-		$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-		$twitter_account = oauth_twitter_get_uid($user->uid);
-		$token = unserialize($twitter_account->config);
-		$twitterObj->setToken($token['token'], $token['secret']);
-		
-		$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
+
+		try{
+        	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+			$twitter_account = oauth_twitter_get_uid($user->uid);
+			$token = unserialize($twitter_account->config);
+			$twitterObj->setToken($token['token'], $token['secret']);
+
+			$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
+	     }
+	     catch(EpiOAuthBadRequestException $e){  
+	        drupal_set_message("Connection error Twitter","error");
+	     }catch(EpiOAuthUnauthorizedException $e){  
+	        drupal_set_message("Error in Twitter","error");
+	     }catch(EpiOAuthException $e){  
+	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+	     }
 		
 	}
 	
@@ -480,22 +489,28 @@ function facebook_grabbit_add_favorite_twitter(){
 	include_once 'includes/EpiOAuth.php';
 	include_once 'includes/EpiTwitter.php';
 	include 'includes/secret.php';
-	
-	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-	$twitter_account = oauth_twitter_get_uid($user->uid);
-	$token = unserialize($twitter_account->config);
-	$twitterObj->setToken($token['token'], $token['secret']);
-	
+	try{
+    	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+		$twitter_account = oauth_twitter_get_uid($user->uid);
+		$token = unserialize($twitter_account->config);
+		$twitterObj->setToken($token['token'], $token['secret']);
+		if ($mode == "create"){
+		  $method = "post_favoritesCreate{$id}";
+		}else{ //destroy
+		  $method = "post_favoritesDestroy{$id}";
+		}
 
-	if ($mode == "create"){
-	  $method = "post_favoritesCreate{$id}";
-	}else{ //destroy
-	  $method = "post_favoritesDestroy{$id}";
-	}
-	
-	$timeline = $twitterObj->$method();
-	
-    print_r ($timeline->response);
+		$timeline = $twitterObj->$method();
+
+	    print_r ($timeline->response);
+     }
+     catch(EpiOAuthBadRequestException $e){  
+        drupal_set_message("Connection error Twitter","error");
+     }catch(EpiOAuthUnauthorizedException $e){  
+        drupal_set_message("Error in Twitter","error");
+     }catch(EpiOAuthException $e){  
+        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+     }
 	
 }
 
@@ -652,25 +667,36 @@ function facebook_grabbit_private_view(){
 				include_once 'includes/EpiOAuth.php';
 				include_once 'includes/EpiTwitter.php';
 				include 'includes/secret.php';
+				try{
+			    	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+					$token = unserialize($twitter_account->config);
+					$twitterObj->setToken($token['token'], $token['secret']);
+					$tweets = $twitterObj->get_statusesFriends_timeline();
+					
+					if($tweets->response){
 
-				$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-				$token = unserialize($twitter_account->config);
-				$twitterObj->setToken($token['token'], $token['secret']);
-				$tweets = $twitterObj->get_statusesFriends_timeline();
+					  foreach ($tweets->response as $arreglo){
+		              $message = (object)$arreglo;
+					  $time = strtotime($message->created_at);
+					  $key = (string)$message->id;
+					  $twitface[$key]=array('time'=>$time,
+						                              'value'=>$message);
 
-				if($tweets->response){
+	                 }
+				}else{
+				  drupal_set_message("There was a problem connecting to Twitter, please try again","error");
+				}
+			     }
+			     catch(EpiOAuthBadRequestException $e){  
+			        drupal_set_message("Connection error Twitter","error");
+			     }catch(EpiOAuthUnauthorizedException $e){  
+			        drupal_set_message("Error in Twitter","error");
+			     }catch(EpiOAuthException $e){  
+			        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+			     }
+				
 
-				  foreach ($tweets->response as $arreglo){
-	              $message = (object)$arreglo;
-				  $time = strtotime($message->created_at);
-				  $key = (string)$message->id;
-				  $twitface[$key]=array('time'=>$time,
-					                              'value'=>$message);
-
-                 }
-			}else{
-			  drupal_set_message("There was a problem connecting to Twitter, please try again","error");
-			}	
+				
 		}
 	}
 	else{
@@ -878,26 +904,35 @@ function facebook_grabbit_private_view_panel($param){
 			include_once 'includes/EpiOAuth.php';
 			include_once 'includes/EpiTwitter.php';
 			include 'includes/secret.php';
-			
-			$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-			$token = unserialize($twitter_account->config);
-			$twitterObj->setToken($token['token'], $token['secret']);
-			$tweets = $twitterObj->get_statusesFriends_timeline();
+			try{
+            	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+				$token = unserialize($twitter_account->config);
+				$twitterObj->setToken($token['token'], $token['secret']);
+				$tweets = $twitterObj->get_statusesFriends_timeline(); 
+				if($tweets->response){
 
-			if($tweets->response){
+				  foreach ($tweets->response as $arreglo){
+	              $message = (object)$arreglo;
+				  $time = strtotime($message->created_at);
+				  $key = (string)$message->id;
+				  $twitface[$key]=array('time'=>$time,
+					                              'value'=>$message);
 
-			  foreach ($tweets->response as $arreglo){
-              $message = (object)$arreglo;
-			  $time = strtotime($message->created_at);
-			  $key = (string)$message->id;
-			  $twitface[$key]=array('time'=>$time,
-				                              'value'=>$message);
+				  }
 
-			  }
-			
-			}else{ 
-			  drupal_set_message("There was a problem connecting to Twitter, please try again: ".$result->error,"error");
-			}	
+				}else{ 
+				  drupal_set_message("There was a problem connecting to Twitter, please try again: ".$result->error,"error");
+				}
+		     }
+		     catch(EpiOAuthBadRequestException $e){  
+		        drupal_set_message("Connection error Twitter","error");
+		     }catch(EpiOAuthUnauthorizedException $e){  
+		        drupal_set_message("Error in Twitter","error");
+		     }catch(EpiOAuthException $e){  
+		        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+		     }
+
+				
 		}
 	}
 	else{
