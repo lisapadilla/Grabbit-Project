@@ -70,19 +70,29 @@ $(document).ready(function() {
 	});
 	
 	$('.comment-news').click(function(){
-		$(this).parent().parent().next().children().children().slideToggle('medium');
+		var text_input = $(this).parent().parent().next().next().children().children().children().prev();
+		text_input.attr('value','');
+		text_input.focus();
+		
+		$(this).parent().parent().next().next().children().children().slideToggle('medium',function(){
+			text_input.focus();
+		});
 	});
 	
-	$('.news-comment-submit').click(function(){
+	$('.news-comment-submit-button').click(function(){
 		// Save comment
 		
 		var tag = $(this);
 		var nid = $(this).attr('id');
+		var tag_id = Math.round(Math.random()*1000);
+		var comment = $(this).prev().attr('value');
 		
-		$.get(Drupal.settings.basePath+"news/comment",{nid:nid},function(data){
+		$.get(Drupal.settings.basePath+"news/comment",{nid:nid,comment:comment,tag_id:tag_id},function(data){
 			if (data){
+				tag.parent().parent().parent().prev().append(data);
+				$('#tag_id').slideToggle('medium');
 				tag.prev().attr('value','');
-				tag.parent().slideToggle('medium');
+				$('#'+tag_id).slideToggle('medium');
 			}else{
 				// Handle this depending on the design
 				tag.prev().attr('value','Error when connecting, try later.');

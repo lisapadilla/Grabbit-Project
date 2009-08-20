@@ -930,6 +930,20 @@ function facebook_grabbit_private_view_panel($param){
 					if($entry['value']->nid){
 						$node=node_load($entry['value']->nid);
 						//$output .= node_view($node, TRUE, FALSE, TRUE);
+						
+						$comments = db_query("SELECT * FROM {comments} WHERE nid = %d", $node->nid);
+						
+						$comments_output = '<div class="news-comments">';
+						while ($item = db_fetch_object($comments)){
+							
+							$comments_output .= '<div id="'.$item->cid.'" class="news-comment">
+																		<span class="news-comment-title"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> commented:</span>
+																		<span class="news-comment-content">'.$item->comment.'</span>
+																	</div>';
+						}
+						
+						$comments_output .= '</div>';
+						
 						$output .= '<div class="node-stream-news">
 														<div class="meta">
 															<div class="links_stream">
@@ -948,16 +962,16 @@ function facebook_grabbit_private_view_panel($param){
 																<p>Submitted by <a title="View user profile." href="/grabbit/user/'.$node->uid.'">'.$node->name.'</a></p>
 															</div>
 														</div>
-														<div class="comment-news">
+														'.$comments_output.'
+														<div class="news-comment-submit">
 															<div class="news-form" style="display:none;">
 																<form id="myForm" style="display:none;">
-																	<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
-																	<input id="'.$node->nid.'" class="news-comment-submit" type="button" value="Comment" onclick="javascript:void(0)">
+																	<input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
+																	<input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
 																</form>
 															</div>
 														</div>
 												</div>';
-						
 					}
 					else{
 	          $output .= theme_twitter_message($entry['value']);
@@ -1281,5 +1295,25 @@ function facebook_grabbit_tags_form(){
 }
 
 function facebook_grabbit_news_comment(){
-	return 'yeah';
+	global $user;
+	
+	$nid = $_GET['nid'];
+	$comment = $_GET['comment'];
+	$tag_id = $_GET['tag_id'];
+	
+	$edit = array();
+	$edit['nid'] = $nid;
+	$edit['comment'] = $comment;
+	$edit['name'] = $user->name;
+	$edit['uid'] = $user->uid;
+	 
+	$result = comment_save($edit);
+	
+	if ($result > -1){
+		print '<div id="'.$tag_id.'" class="news-comment" style="display:none;">
+						<span class="news-comment-title"><a href="/grabbit/user/'.$user->uid.'">'.$user->name.'</a> commented:</span>
+						<span class="news-comment-content">'.$comment.'</span>
+					</div>';
+	}
+	
 }
