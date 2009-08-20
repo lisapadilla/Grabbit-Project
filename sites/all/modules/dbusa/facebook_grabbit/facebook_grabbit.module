@@ -181,7 +181,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		else{
 		  $facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
 										       'uid'=>"$suser",
-										       'status_includes_verb'=TRUE,
+										       'status_includes_verb'=>TRUE,
 										       'status'=>$form_state['values']['status'])); 
 		  drupal_set_message('You have changed your facebook status');
 		}
