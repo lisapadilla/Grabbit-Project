@@ -99,7 +99,7 @@ function facebook_grabbit_update_form($form_state){
 		
 		$facebook = new FacebookDesktop($api_key, $secret);
 		
-		$user = $facebook->set_user($suser, $session_key);
+		$facebook->set_user($suser, $session_key);
 		
 		$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
 		
