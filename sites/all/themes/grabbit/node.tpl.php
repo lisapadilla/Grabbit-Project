@@ -48,7 +48,7 @@
  * @see template_preprocess_node()
  */
 ?>
-<div<?php print $attributes; ?> class="node-stream-<?=$node->type?>">
+<div<?php print $attributes; ?> class="node-<?=$node->type?>">
     <div class="meta">
 		<?php if ($links_stream): ?>
 	      <div class="links_stream">
