@@ -193,7 +193,7 @@ $(document).ready(function() {
 	$(".grabb-that").click(function () {
 		alert('ss');
 	  	$.get('http://tinyurl.com/api-create.php',function(data){
-return false;
+alert(data);
 	    });
 	  
 	});	
