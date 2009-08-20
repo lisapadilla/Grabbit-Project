@@ -191,22 +191,12 @@ $(document).ready(function() {
 	});	
 	
 	$(".grabb-that").click(function () {
-		alert('ss');
-		makeTinyUrl('http://www.grabbit.net');
-		return false;
+
+		requestShortURL('http://www.mycompany.com', function(shortened){
+		    alert('new url: ' + shortened);
+		});		
 	  
 	});	
-	
-	function makeTinyUrl(url)
-	{
-	    $.getJSON('http://json-tinyurl.appspot.com/?url=' + url + '&callback=?', 
-	        function(data)
-	        { 
-	                alert(data.tinyurl); 
-	        }
-	    );
-	}
-	
 	
 	$(".twitter_favorite, .twitter_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
@@ -240,6 +230,15 @@ $(document).ready(function() {
 	  }  		  
 	});
 });
+
+function requestShortURL(longURL, success) {
+    var API = 'http://reque.st/create.api.php?json&url=',
+        URL = API + encodeURIComponent(longURL) + '&callback=?';
+    console.log('tweet apit url: ' + URL);
+    $.getJSON(URL, function(data){
+        success && success(data.url);
+    });
+}
 
 Drupal.behaviors.charCountDown = function(context)
 {
