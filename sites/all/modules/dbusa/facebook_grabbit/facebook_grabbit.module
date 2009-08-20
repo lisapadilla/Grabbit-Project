@@ -929,28 +929,36 @@ function facebook_grabbit_private_view_panel($param){
 				else{
 					if($entry['value']->nid){
 						$node=node_load($entry['value']->nid);
-						//$output .= node_view($node, TRUE, FALSE, TRUE);
 						
-						$comments = db_query("SELECT * FROM {comments} WHERE nid = %d", $node->nid);
+						$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 						
 						$comments_output = '<div class="news-comments">';
 						while ($item = db_fetch_object($comments)){
-							
+							$profile = content_profile_load('profile', $item->uid);
+	
 							$comments_output .= '<div id="'.$item->cid.'" class="news-comment">
-																		<span class="news-comment-title"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> commented:</span>
+																									<span class="news-comment-picture">';
+																			
+							if ($profile->field_profile_picture[0]['filepath'] == 'sites/default/files/avatars/1/333.jpg'){
+								$comments_output .= '<img width=30 src="'.drupal_get_path('theme','grabbit').'/images/default/default_profile.jpg"/>';
+							}else{
+								$comments_output .= '<img width=30 src="'.$profile->field_profile_picture[0]['filepath'].'"/>';
+							}
+																				
+							$comments_output .= '</span>
+																		<span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
 																		<span class="news-comment-content">'.$item->comment.'</span>
 																	</div>';
 						}
 						
 						$comments_output .= '</div>';
 						
-						$output .= '<div class="node-stream-news">
+						$output .= '<div class="node-stream-'.$node->type.'">
 														<div class="meta">
 															<div class="links_stream">
 																<a href="javascript:void(0)" class="comment-news">Comment</a>
-																<span class="flag-wrapper flag-bookmarks">
-																<a class="flag unflag-action flag-link-toggle flag-processed" title="Remove this post from your favorites" href="">Remove from favorites</a><span class="flag-throbber"> </span>
-															</span>
+																<span class="flag-wrapper flag-bookmarks">'.
+																flag_create_link('bookmarks', $node->nid).'	
 															</div>
 															<div class="content-floated-left">
 																<h2>
@@ -1309,9 +1317,23 @@ function facebook_grabbit_news_comment(){
 	 
 	$result = comment_save($edit);
 	
+	$node = db_query('SELECT timestamp FROM comments WHERE cid=%s',$result);
+	$node = db_fetch_object($node);
+	
+	$profile = content_profile_load('profile', $user->uid);
+	
 	if ($result > -1){
 		print '<div id="'.$tag_id.'" class="news-comment" style="display:none;">
-						<span class="news-comment-title"><a href="/grabbit/user/'.$user->uid.'">'.$user->name.'</a> commented:</span>
+						<span class="news-comment-picture">';
+																			
+							if ($profile->field_profile_picture[0]['filepath'] == 'sites/default/files/avatars/1/333.jpg'){
+								//print '<img width=30 src="'.$item->picture.'"/>';
+								print '<img id ="'.$user->picture.'" width=30 src="'.drupal_get_path('theme','grabbit').'/images/default/default_profile.jpg"/>';
+							}else{
+								print '<img width=30 src="'.$profile->field_profile_picture[0]['filepath'].'"/>';
+							}
+		print	'<span>
+						<span class="news-comment-title"><a href="/grabbit/user/'.$user->uid.'">'.$user->name.'</a> '.format_date($node->timestamp).':</span><br>
 						<span class="news-comment-content">'.$comment.'</span>
 					</div>';
 	}
