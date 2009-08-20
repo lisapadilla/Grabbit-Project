@@ -1219,11 +1219,21 @@
   font-size: 15px;
   line-height: 16px;
 }
-a.facebook-makecomment-link, a.twit-reply{
+a.twit-reply{
   display: block;
   width: 10px;
   height: 12px;
   background: url(images/various/reply_ico2.gif) 0 0 no-repeat;
+  float: right;
+  text-indent: 3000em;
+  overflow: hidden;
+  margin-left: 10px;
+}
+a.facebook-makecomment-link{
+  display: block;
+  width: 10px;
+  height: 12px;
+  background: url(images/various/reply_ico.gif) 0 0 no-repeat;
   float: right;
   text-indent: 3000em;
   overflow: hidden;
