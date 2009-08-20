@@ -188,7 +188,15 @@ $(document).ready(function() {
 	  $("#edit-status").val(to);
 	  $("#edit-status").focus();
 	  
-	});		
+	});	
+	
+	$(".grabb-that").click(function () {
+		alert('ss');
+	  	$.get('http://tinyurl.com/api-create.php',function(data){
+alert(data);
+	    });
+	  
+	});	
 	
 	$(".twitter_favorite, .twitter_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
