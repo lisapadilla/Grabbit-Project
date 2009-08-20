@@ -967,54 +967,8 @@ function facebook_grabbit_private_view_panel($param){
 						
 						$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 						
-						$comments_output = '<div class="news-comments">';
-						while ($item = db_fetch_object($comments)){
-							$profile = content_profile_load('profile', $item->uid);
-	
-							$comments_output .= '<div id="'.$item->cid.'" class="news-comment">
-																									<span class="news-comment-picture">';
-																			
-							if ($profile->field_profile_picture[0]['filepath'] == 'sites/default/files/avatars/1/333.jpg'){
-								$comments_output .= '<img width=30 src="'.drupal_get_path('theme','grabbit').'/images/default/default_profile.jpg"/>';
-							}else{
-								$comments_output .= '<img width=30 src="'.$profile->field_profile_picture[0]['filepath'].'"/>';
-							}
-																				
-							$comments_output .= '</span>
-																		<span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
-																		<span class="news-comment-content">'.$item->comment.'</span>
-																	</div>';
-						}
+						$output .= _news_theme($comments,$node);
 						
-						$comments_output .= '</div>';
-						
-						$output .= '<div class="node-stream-'.$node->type.'">
-														<div class="meta">
-															<div class="links_stream">
-																<a href="javascript:void(0)" class="comment-news">Comment</a>
-																<span class="flag-wrapper flag-bookmarks">'.
-																flag_create_link('bookmarks', $node->nid).'	
-															</div>
-															<div class="content-floated-left">
-																<h2>
-																	<a title="'.$node->title.'" href="'.$node->feedapi_node->url.'">'.$node->title.'</a>
-																</h2>
-															</div>
-															<div class="content-floated-right">
-																<p>'.$node->teaser.'</p>
-																<p>Submitted by <a title="View user profile." href="/grabbit/user/'.$node->uid.'">'.$node->name.'</a></p>
-															</div>
-														</div>
-														'.$comments_output.'
-														<div class="news-comment-submit">
-															<div class="news-form" style="display:none;">
-																<form id="myForm" style="display:none;">
-																	<input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
-																	<input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
-																</form>
-															</div>
-														</div>
-												</div>';
 					}
 					else{
 	          $output .= theme_twitter_message($entry['value']);
@@ -1335,6 +1289,59 @@ function facebook_grabbit_tags_form(){
 	$form['#method'] = 'get';
 		
 	return $form;
+}
+
+function _news_theme($comments,$node){
+	$comments_output = '<div class="news-comments">';
+						while ($item = db_fetch_object($comments)){
+							$profile = content_profile_load('profile', $item->uid);
+	
+							$comments_output .= '<div id="'.$item->cid.'" class="news-comment">
+																									<span class="news-comment-picture">';
+																			
+							if ($profile->field_profile_picture[0]['filepath'] == 'sites/default/files/avatars/1/333.jpg'){
+								$comments_output .= '<img width=30 src="'.drupal_get_path('theme','grabbit').'/images/default/default_profile.jpg"/>';
+							}else{
+								$comments_output .= '<img width=30 src="'.$profile->field_profile_picture[0]['filepath'].'"/>';
+							}
+																				
+							$comments_output .= '</span>
+																		<span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
+																		<span class="news-comment-content">'.$item->comment.'</span>
+																	</div>';
+						}
+						
+						$comments_output .= '</div>';
+						
+						$output = '<div class="node-stream-'.$node->type.'">
+														<div class="meta">
+															<div class="links_stream">
+																<a href="javascript:void(0)" class="comment-news">Comment</a>
+																<span class="flag-wrapper flag-bookmarks">'.
+																flag_create_link('bookmarks', $node->nid).'	
+															</div>
+															<div class="content-floated-left">
+																<h2>
+																	<a title="'.$node->title.'" href="'.$node->feedapi_node->url.'">'.$node->title.'</a>
+																</h2>
+															</div>
+															<div class="content-floated-right">
+																<p>'.$node->teaser.'</p>
+																<p>Submitted by <a title="View user profile." href="/grabbit/user/'.$node->uid.'">'.$node->name.'</a></p>
+															</div>
+														</div>
+														'.$comments_output.'
+														<div class="news-comment-submit">
+															<div class="news-form" style="display:none;">
+																<form id="myForm" style="display:none;">
+																	<input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
+																	<input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
+																</form>
+															</div>
+														</div>
+												</div>';
+						
+						return $output;
 }
 
 function facebook_grabbit_news_comment(){
