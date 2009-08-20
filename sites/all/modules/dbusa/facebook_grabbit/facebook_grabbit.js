@@ -186,7 +186,15 @@ $(document).ready(function() {
 	  $("#edit-status").val(to);
 	  $("#edit-status").focus();
 	  
-	});		
+	});	
+	
+	$(".grabb-that").click(function () {
+		return false;
+		requestShortURL('http://www.mycompany.com', function(shortened){
+		    alert('new url: ' + shortened);
+		});		
+	  
+	});	
 	
 	$(".twitter_favorite, .twitter_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
@@ -220,6 +228,15 @@ $(document).ready(function() {
 	  }  		  
 	});
 });
+
+function requestShortURL(longURL, success) {
+    var API = 'http://reque.st/create.api.php?json&url=',
+        URL = API + encodeURIComponent(longURL) + '&callback=?';
+    console.log('tweet apit url: ' + URL);
+    $.getJSON(URL, function(data){
+        success && success(data.url);
+    });
+}
 
 Drupal.behaviors.charCountDown = function(context)
 {

@@ -1313,21 +1313,30 @@ function _news_theme($comments,$node){
 						
 						$comments_output .= '</div>';
 						
-						$output = '<div class="node-stream-'.$node->type.'">
+						if($node->type=="deal"){
+						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
+						  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'">Deal</a></span>';
+					    }
+						
+						$output = '<div class="node-stream-'.$node->type.' clearfix">
 														<div class="meta">
-															<div class="links_stream">
+															<div class="content-floated-right">
+															  <div class="links_stream">
+															    <a href="JavaScript:void(0);" class="grabb-that">Grabbit</a>
 																<a href="javascript:void(0)" class="comment-news">Comment</a>
 																<span class="flag-wrapper flag-bookmarks">'.
 																flag_create_link('bookmarks', $node->nid).'	
+															  </div>
 															</div>
 															<div class="content-floated-left">
-																<h2>
-																	<a title="'.$node->title.'" href="'.$node->feedapi_node->url.'">'.$node->title.'</a>
-																</h2>
-															</div>
-															<div class="content-floated-right">
-																<p>'.$node->teaser.'</p>
-																<p>Submitted by <a title="View user profile." href="/grabbit/user/'.$node->uid.'">'.$node->name.'</a></p>
+															    '.$image.'
+															     <div class="content-body">
+																    <h2>
+																	  '.l($node->title,'node/'.$node->nid).'
+																    </h2>
+																	<p>'.$node->teaser.'</p>
+																	<p>Submitted by <a title="View user profile." href="/grabbit/user/'.$node->uid.'">'.$node->name.'</a></p>	
+																  </div>
 															</div>
 														</div>
 														'.$comments_output.'
