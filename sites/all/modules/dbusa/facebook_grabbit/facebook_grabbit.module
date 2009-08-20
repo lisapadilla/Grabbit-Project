@@ -103,7 +103,7 @@ function facebook_grabbit_update_form($form_state){
 		
 		$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
 		
-		if ($status){
+		if ($facebook){
 		  
 		  $form['facebook']= array(
 		  '#type' => 'checkbox',
