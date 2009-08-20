@@ -192,11 +192,21 @@ $(document).ready(function() {
 	
 	$(".grabb-that").click(function () {
 		alert('ss');
-	  	$.get('http://tinyurl.com/api-create.php',function(data){
-alert(data);
-	    });
+		makeTinyUrl('http://www.grabbit.net');
+		return false;
 	  
 	});	
+	
+	function makeTinyUrl(url)
+	{
+	    $.getJSON('http://json-tinyurl.appspot.com/?url=' + url + '&callback=?', 
+	        function(data)
+	        { 
+	                alert(data.tinyurl); 
+	        }
+	    );
+	}
+	
 	
 	$(".twitter_favorite, .twitter_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
