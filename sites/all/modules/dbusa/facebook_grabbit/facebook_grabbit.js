@@ -189,7 +189,6 @@ $(document).ready(function() {
 	});	
 	
 	$(".grabb-that").click(function () {
-		return false;
 		requestShortURL('http://www.mycompany.com', function(shortened){
 		    alert('new url: ' + shortened);
 		});		
