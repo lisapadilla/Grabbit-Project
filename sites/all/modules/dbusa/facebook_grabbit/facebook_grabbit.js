@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-	$(document).scrollTo($(document).children(),0);
-	
 	// PANEL 1
 	var stories_at_first_p1 = 4;
 	var stories_per_slide_p1 = 4;
@@ -191,7 +189,6 @@ $(document).ready(function() {
 	});	
 	
 	$(".grabb-that").click(function () {
-		return false;
 		requestShortURL('http://www.mycompany.com', function(shortened){
 		    alert('new url: ' + shortened);
 		});		
