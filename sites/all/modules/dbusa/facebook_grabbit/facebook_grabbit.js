@@ -68,11 +68,11 @@ $(document).ready(function() {
 	});
 	
 	$('.comment-news').click(function(){
-		var text_input = $(this).parent().parent().next().next().children().children().children().prev();
+		var text_input = $(this).parent().parent().parent().next().next().children().children().children().prev();
 		text_input.attr('value','');
 		text_input.focus();
 		
-		$(this).parent().parent().next().next().children().children().slideToggle('medium',function(){
+		$(this).parent().parent().parent().next().next().children().children().slideToggle('medium',function(){
 			text_input.focus();
 		});
 	});
