@@ -1379,6 +1379,9 @@ a.panel-filters{
 #panel-1 .node-stream-deal .content-body
 {
 	width: 214px;
+	float: left;
+	font-size:12px;
+  line-height:15px;
 }
 #panel-0 .node-stream-deal .content-body
 {
