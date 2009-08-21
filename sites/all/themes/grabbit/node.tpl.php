@@ -48,7 +48,7 @@
  * @see template_preprocess_node()
  */
 global $user;
-print_r($node->type);
+print_r($node);
 ?>
 <div<?php print $attributes; ?> class="node-<?=$node->type?>">
     <div class="meta">
