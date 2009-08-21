@@ -192,10 +192,10 @@ $(document).ready(function() {
 		ev.preventDefault();
 		urlcomplete = $(this).attr('href');
 		alert(urlcomplete);
-		$.getJSON('http://json-tinyurl.appspot.com/?url=' + urlcomplete + '&callback=?', 
+		$.getJSON("http://json-tinyurl.appspot.com/?url=" + urlcomplete + "&callback=?", 
 	        function(data)
 	        { 
-		alert(data);
+		alert(data.tinyurl);
 				$("#edit-status").focus();
 				$("#edit-status").val(data.tinyurl+' ');
 				$("#edit-status").focus();
