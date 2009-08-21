@@ -1477,6 +1477,9 @@ a.panel-filters{
   padding-left: 15px;
   margin-bottom: 10px;
 }
+.node-stream-news .news-comments{
+  padding-top: 10px;
+}
 .node-stream-news .news-comments .news-comment-picture,
 .node-stream-blogs .news-comments .news-comment-picture,
 .node-stream-deal .news-comments .news-comment-picture{
@@ -1506,4 +1509,13 @@ a.panel-filters{
 .node-stream-deal .news-comments .news-comment-content{
   font-size: 12px;
   line-height: 15px;
+}
+.submitted{
+  display: block;
+}
+.submitted a{
+  color:#0073CF;
+  font-size:12px;
+  font-weight:bold;
+  line-height:13px;
 }
