@@ -1226,7 +1226,7 @@ a.twit-reply{
   display: block;
   width: 10px;
   height: 12px;
-  background: url(images/various/reply_ico2.gif) 0 0 no-repeat;
+  background: url(images/various/reply_ico.gif) 0 0 no-repeat;
   float: right;
   text-indent: 3000em;
   overflow: hidden;
@@ -1258,6 +1258,16 @@ a.twitter_favorite-remove{
   height: 12px;
   float: right;
   background: url(images/various/favorites_ico.gif) 0 0 no-repeat;
+  text-indent: 3000em;
+  overflow: hidden;
+  margin-left: 10px;
+}
+a.retweet{
+  display: block;
+  width: 10px;
+  height: 12px;
+  background: url(images/various/reply_ico2.gif) 0 0 no-repeat;
+  float: right;
   text-indent: 3000em;
   overflow: hidden;
   margin-left: 10px;
