@@ -81,7 +81,7 @@ global $user;
 	  <?php } ?>
 		<? if ($node->type == "profile"){
 			?>
-				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/1">Add to Friends</a></p>
+				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/1?destination=user/<?=$node->uid?>">Add to Friends</a></p>
 			<?
 		}?>
     </div>
