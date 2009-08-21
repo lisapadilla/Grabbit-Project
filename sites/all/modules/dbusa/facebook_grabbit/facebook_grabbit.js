@@ -68,11 +68,12 @@ $(document).ready(function() {
 	});
 	
 	$('.comment-news').click(function(){
-		var text_input = $(this).parent().parent().parent().next().next().children().children().children().prev();
+		var space = $(this).parents('.node-stream-news');
+		var text_input = $('.form-text-content',space);
 		text_input.attr('value','');
 		text_input.focus();
 		
-		$(this).parent().parent().parent().next().next().children().children().slideToggle('medium',function(){
+		$('.news-form',space);.slideToggle('medium',function(){
 			text_input.focus();
 		});
 	});
