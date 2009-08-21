@@ -1461,6 +1461,18 @@ a.panel-filters{
 }
 #panel-0 .facebook-with-target{
   display: block;
-  width: 230px;
+  width: 215px;
   float: left;
+  color: #0073CF;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 13px;
+}
+#panel-0 .facebook-with-target a{
+  color: #0073CF;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 13px;
+  padding-left: 15px;
+  margin-bottom: 10px;
 }
