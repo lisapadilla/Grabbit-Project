@@ -1485,6 +1485,22 @@ a.panel-filters{
   float: left;
   display: block;
 }
+.node-stream-news .news-comments .facebook-comment-link,
+.node-stream-blogs .news-comments .facebook-comment-link,
+.node-stream-deal .news-comments .facebook-comment-link{
+  color:#999999;
+  font-size:10px;
+  line-height:15px;
+  margin-top:10px;
+}
+.node-stream-news .news-comments .facebook-comment-link a,
+.node-stream-blogs .news-comments .facebook-comment-link a,
+.node-stream-deal .news-comments .facebook-comment-link a{
+  color:#0073CF;
+  font-size:12px;
+  font-weight:bold;
+  line-height:13px;
+}
 .node-stream-news .news-comments .news-comment-content,
 .node-stream-blogs .news-comments .news-comment-content,
 .node-stream-deal .news-comments .news-comment-content{
