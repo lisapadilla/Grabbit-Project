@@ -1405,10 +1405,11 @@ a.panel-filters{
   display: inline-block;
   margin-bottom: 10px;
 }
-.node-stream-news .content-body p,
-.node-stream-blogs .content-body p,
-.node-stream-deal .content-body p{
+.node-stream-news .content-body,
+.node-stream-blogs .content-body,
+.node-stream-deal .content-body{
   display: block;
+  clear: both;
 }
 .facebook-post .facebook-image-comment
 {
