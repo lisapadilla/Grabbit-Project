@@ -1391,19 +1391,19 @@ a.panel-filters{
   font-weight: bold;
   font-size: 12px;
   line-height: 13px;
-  
-  margin-bottom: 10px;
 }
-.node-stream-news h2 a,
-.node-stream-blogs h2 a{
+.node-stream-news h2,
+.node-stream-blogs h2{
   width: 200px;
   float: left;
   display: inline-block;
+  margin-bottom: 10px;
 }
-.node-stream-deal h2 a{
+.node-stream-deal h2{
   width: 130px;
   float: left;
   display: inline-block;
+  margin-bottom: 10px;
 }
 .node-stream-news .content-body p,
 .node-stream-blogs .content-body p,
