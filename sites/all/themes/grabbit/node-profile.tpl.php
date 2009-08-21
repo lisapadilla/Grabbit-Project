@@ -47,6 +47,7 @@
  * @see template_preprocess()
  * @see template_preprocess_node()
  */
+global $user;
 ?>
 <div<?php print $attributes; ?> class="node-stream-<?=$node->type?>">
     <div class="meta">
@@ -78,5 +79,10 @@
 	      </div>
 	    <?php endif; ?>
 	  <?php } ?>
+		<? if ($node->type == "profile"){
+			?>
+				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
+			<?
+		}
     </div>
 </div>

@@ -47,8 +47,6 @@
  * @see template_preprocess()
  * @see template_preprocess_node()
  */
-global $user;
-
 ?>
 <div<?php print $attributes; ?> class="node-<?=$node->type?>">
     <div class="meta">
@@ -74,39 +72,20 @@ global $user;
 	       <? if(flag_create_link('myfeeds', $node->nid)):?>
 			<div class="myfeeds"><?=flag_create_link('myfeeds', $node->nid)?></div>
 		<? endif; ?>
-        <?
-
-		if ($node->type == "profile"){
-			?>
-				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
-			<?
-		}
-
-		?>
+        
       </div>
       <?php }else{ ?>
         <?php print $content; ?>
         <?php if ($submitted): ?>
           <p><?php print $submitted; ?></p>
         <?php endif; ?>
-
         <?php if ($links): ?>
 	      <div class="links">
 
 	        <?php print $links; ?>
 	      </div>
 	    <?php endif; ?>
-		<?
-
-		if ($node->type == "profile"){
-			?>
-				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
-			<?
-		}
-
-		?>
 	  <?php } ?>
-
     </div>
 
 </div>
