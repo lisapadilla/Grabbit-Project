@@ -1477,3 +1477,17 @@ a.panel-filters{
   padding-left: 15px;
   margin-bottom: 10px;
 }
+.node-stream-news .news-comments .news-comment-picture,
+.node-stream-blogs .news-comments .news-comment-picture,
+.node-stream-deal .news-comments .news-comment-picture{
+  width: 30px;
+  margin-right: 10px;
+  float: left;
+  display: block;
+}
+.node-stream-news .news-comments .news-comment-content,
+.node-stream-blogs .news-comments .news-comment-content,
+.node-stream-deal .news-comments .news-comment-content{
+  font-size: 12px;
+  line-height: 15px;
+}
