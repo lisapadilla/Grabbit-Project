@@ -73,7 +73,7 @@ $(document).ready(function() {
 		text_input.attr('value','');
 		text_input.focus();
 		
-		$('.news-form',space).slideToggle('medium',function(){
+		$('.myForm',space).slideToggle('medium',function(){
 			text_input.focus();
 		});
 	});
