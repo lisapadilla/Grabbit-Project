@@ -1313,7 +1313,7 @@ function _news_theme($comments,$node){
 						  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'">Deal</a></span>';
 					    }
 						
-						$output = '<div class="node-stream-'.$node->type.' clearfix">
+						$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
 														<div class="meta">
 															  <div class="links_stream">
 															    

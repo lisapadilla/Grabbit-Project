@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 	
 	$('.comment-news').click(function(){
-		var space = $(this).parents('.node-stream-news');
+		var space = $(this).parents('.stream-item-element');
 		var text_input = $('.form-text-content',space);
 		text_input.attr('value','');
 		text_input.focus();
