@@ -80,15 +80,7 @@ global $user;
         <?php if ($submitted): ?>
           <p><?php print $submitted; ?></p>
         <?php endif; ?>
-<?
 
-if ($node->type == "profile"){
-	?>
-		<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
-	<?
-}
-
-?>
         <?php if ($links): ?>
 	      <div class="links">
 
@@ -96,6 +88,15 @@ if ($node->type == "profile"){
 	      </div>
 	    <?php endif; ?>
 	  <?php } ?>
+	<?
+
+	if ($node->type == "profile"){
+		?>
+			<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
+		<?
+	}
+
+	?>
     </div>
 
 </div>
