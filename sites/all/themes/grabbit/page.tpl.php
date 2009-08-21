@@ -139,7 +139,7 @@ global $user;
           <?php print theme('links', $secondary_links); ?>
         </div> <!-- /#primary -->
       <?php endif; ?>
-      <?php if ($user->uid==1): ?>
+      <?php if ($user->uid!=0): ?>
         <div id="primary">
           <?php print theme('links', $primary_links); ?>
         </div> <!-- /#primary -->
