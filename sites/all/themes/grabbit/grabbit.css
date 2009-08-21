@@ -1371,3 +1371,45 @@ a.panel-gear{
     display: block;
     margin-bottom: 10px;
 }
+
+.facebook-post .facebook-image-comment
+{
+	float: left;
+	margin-right: 10px;
+}
+.facebook-post .facebook-comment-timeline
+{
+	display: block;
+}
+.facebook-post .facebook-comment-text
+{
+	float: left;
+}
+#panel-0 .facebook-post .facebook-comment-text
+{
+	width: 240px;
+}
+#panel-1 .facebook-post .facebook-comment-text
+{
+	width: 174px;
+}
+.facebook-post .facebook-comments .facebook-date
+{
+	float: left;
+	margin-left: 40px;
+	margin-top: 4px;
+}
+.facebook-post .facebook-comments
+{
+	margin-bottom: 10px;
+}
+
+#panel-1 .facebook-post .facebook-post-body
+{
+	width: 204px;
+}
+
+#panel-1 .facebook-post .facebook-post-header a.facebook-story-name
+{
+	width: 174px;
+}

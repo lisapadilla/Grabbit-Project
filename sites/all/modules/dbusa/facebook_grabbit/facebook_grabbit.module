@@ -379,7 +379,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 		
 		foreach($post['comments']['comment_list'] as $comment){
 			
-			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img class="facebook-image-comm" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
+			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments clearfix"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img class="facebook-image-comm" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
 				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a></span>
 				<span class="facebook-comment-text">'.$comment['text'].'</span><span class="facebook-date">on '.format_date($comment['time']).'</span>';
 			
@@ -397,7 +397,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	  '.$msg_formatted.'<span class="facebook-date">on '.format_date($post['created_time']).'</span>
-	</div></div><div class="facebook-post-comments">'.$show_comments.'</div>';
+	</div></div><div class="facebook-post-comments clearfix">'.$show_comments.'</div>';
 	
 
 		$output .= '
@@ -447,7 +447,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	if(is_array($post['comments']['comment_list'])){
 		foreach($post['comments']['comment_list'] as $comment){
 			
-			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-com" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
+			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments clearfix"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-com" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
 				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a></span>
 				<span class="facebook-comment-text">'.$comment['text'].'</span><span class="facebook-date">on '.format_date($comment['time']).'</span>';
 			
@@ -468,7 +468,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	}
 	
 	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">on '.format_date($post['created_time']).'</span></div></div>
-	<div class="facebook-post-comments">'.$show_comments.'</div>
+	<div class="facebook-post-comments clearfix">'.$show_comments.'</div>
 	<div class="facebook-comment-form">
 	<div class="facebook-form" style="display:none;">
 		<form id="myForm" style="display:none;">
