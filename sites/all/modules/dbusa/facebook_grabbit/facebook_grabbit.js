@@ -68,11 +68,11 @@ $(document).ready(function() {
 	});
 	
 	$('.comment-news').click(function(){
-		var text_input = $(this).parent().parent().next().next().children().children().children().prev();
+		var text_input = $(this).parent().parent().parent().next().next().children().children().children().prev();
 		text_input.attr('value','');
 		text_input.focus();
 		
-		$(this).parent().parent().next().next().children().children().slideToggle('medium',function(){
+		$(this).parent().parent().parent().next().next().children().children().slideToggle('medium',function(){
 			text_input.focus();
 		});
 	});
@@ -188,10 +188,20 @@ $(document).ready(function() {
 	  
 	});	
 	
-	$(".grabb-that").click(function () {
-		requestShortURL('http://www.mycompany.com', function(shortened){
-		    alert('new url: ' + shortened);
-		});		
+	$(".grabb-that").click(function (ev) {
+		ev.preventDefault();
+		urlcomplete = $(this).attr('href');
+		alert(urlcomplete);
+		$.getJSON("http://json-tinyurl.appspot.com/?url=" + urlcomplete + "&callback=?", 
+	        function(data)
+	        { 
+		alert(data.tinyurl);
+				$("#edit-status").focus();
+				$("#edit-status").val(data.tinyurl+' ');
+				$("#edit-status").focus();
+	        }
+	    );
+	 
 	  
 	});	
 	
@@ -228,14 +238,6 @@ $(document).ready(function() {
 	});
 });
 
-function requestShortURL(longURL, success) {
-    var API = 'http://reque.st/create.api.php?json&url=',
-        URL = API + encodeURIComponent(longURL) + '&callback=?';
-    console.log('tweet apit url: ' + URL);
-    $.getJSON(URL, function(data){
-        success && success(data.url);
-    });
-}
 
 Drupal.behaviors.charCountDown = function(context)
 {
