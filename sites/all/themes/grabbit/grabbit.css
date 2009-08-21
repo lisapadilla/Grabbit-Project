@@ -1253,6 +1253,18 @@ a.twitter_favorite, a.flag{
   overflow: hidden;
   margin-left: 10px;
 }
+.view-my-feeds a.flag{
+  display: inline-block;
+  width: auto;
+  height: auto;
+  text-indent: 0px;
+  margin: 0px;
+  padding: 0px;
+  color:#0073CF;
+  font-size:12px;
+  font-weight:bold;
+  line-height:13px;
+}
 a.twitter_favorite-remove{
   display: block;
   width: 12px;
