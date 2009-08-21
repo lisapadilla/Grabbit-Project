@@ -1359,10 +1359,12 @@ a.panel-gear{
 a.panel-filters{
   float: right;
   margin-right: 10px;
-  font-size: 14px;
+  font-size: 12px;
   color: #999999;
   line-height: 15px;
   text-decoration: none;
+  padding-top: 5px;
+  font-weight: bold;
 }
 .node-stream-deal .content-floated-right
 {
