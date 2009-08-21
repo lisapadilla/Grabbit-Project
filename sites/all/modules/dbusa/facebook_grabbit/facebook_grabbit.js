@@ -191,8 +191,7 @@ $(document).ready(function() {
 	
 	$('.retweet').click(function (event){
 	  var container = $(this).parents().filter('.twitter-message-stream');	
-	  var message = $('.twitter-body',container);
-	  alert(message.html());
+	  var message = $('.twitter-body-contains',container);
 		
 	});
 	
