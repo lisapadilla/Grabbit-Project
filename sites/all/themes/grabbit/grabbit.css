@@ -1384,12 +1384,6 @@ a.panel-filters{
 {
 	width: 280px;
 }
-.node-stream-news h2,
-.node-stream-blogs h2,
-.node-stream-deal h2{
-  display: block;
-  margin-bottom: 10px;
-}
 .node-stream-news h2 a,
 .node-stream-blogs h2 a,
 .node-stream-deal h2 a{
@@ -1397,13 +1391,15 @@ a.panel-filters{
   font-weight: bold;
   font-size: 12px;
   line-height: 13px;
+  display: block;
+  margin-bottom: 10px;
 }
-.node-stream-news h2,
-.node-stream-blogs h2{
+.node-stream-news h2 a,
+.node-stream-blogs h2 a{
   width: 200px;
   float: left;
 }
-.node-stream-deal h2{
+.node-stream-deal h2 a{
   width: 130px;
   float: left;
 }
