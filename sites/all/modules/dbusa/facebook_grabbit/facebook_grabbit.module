@@ -380,8 +380,8 @@ function prepeare_status_update($post,$user,$target,$profiles){
 		foreach($post['comments']['comment_list'] as $comment){
 			
 			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img class="facebook-image-comm" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
-				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a> commented on '.format_date($comment['time']).'</span>
-				<span class="facebook-comment-text">'.$comment['text'].'</span>';
+				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a></span>
+				<span class="facebook-comment-text">'.$comment['text'].'</span><span class="facebook-date">on '.format_date($comment['time']).'</span>';
 			
 			if ($profiles[$comment['fromid']]['name'] == $user_info[0]){
 				$show_comments .= '<br /><span><a class="facebook-comment-delete" href="javascript:void(0)">delete comment</a></span>';
@@ -448,8 +448,8 @@ function prepeare_standar_update($post,$user,$profiles){
 		foreach($post['comments']['comment_list'] as $comment){
 			
 			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-com" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
-				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a> commented on '.format_date($comment['time']).'</span>
-				<span class="facebook-comment-text">'.$comment['text'].'</span>';
+				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a></span>
+				<span class="facebook-comment-text">'.$comment['text'].'</span><span class="facebook-date">on '.format_date($comment['time']).'</span>';
 			
 			if ($profiles[$comment['fromid']]['name'] == $user_info[0]){
 				$show_comments .= '<br /><span><a class="facebook-comment-delete" href="javascript:void(0)">delete comment</a></span>';
