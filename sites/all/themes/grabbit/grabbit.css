@@ -1413,7 +1413,7 @@ a.panel-filters{
   display: block;
   clear: both;
 }
-.node-stream-deal meta{
+.node-stream-deal .meta{
   display: inline-block;
 }
 .facebook-post .facebook-image-comment
