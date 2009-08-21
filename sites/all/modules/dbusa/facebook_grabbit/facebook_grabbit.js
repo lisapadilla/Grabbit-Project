@@ -194,7 +194,7 @@ $(document).ready(function() {
 	  var message = $('.twitter-body-contains',container);
 	  var to = $('.twit-reply',container).attr('id');
 	  $("#edit-status").focus();
-	  $("#edit-status").val("RT "+to+" "+message.text);
+	  $("#edit-status").val("RT "+to+" "+message.html());
 	  $("#edit-status").focus();
 	});
 	
