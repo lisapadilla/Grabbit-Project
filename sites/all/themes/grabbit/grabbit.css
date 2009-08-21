@@ -1264,6 +1264,8 @@ a.twitter_favorite, a.flag{
   font-size:12px;
   font-weight:bold;
   line-height:13px;
+  background: none;
+  float: none;
 }
 a.twitter_favorite-remove{
   display: block;
