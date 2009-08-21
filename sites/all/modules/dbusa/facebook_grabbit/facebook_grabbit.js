@@ -188,6 +188,14 @@ $(document).ready(function() {
 	  
 	});	
 	
+	
+	$('.retweet').click(function (event){
+	  var container = $(this).parents().filter('.twitter-message-stream');	
+	  var message = $('.twitter-body',container);
+	  alert(message.html());
+		
+	});
+	
 	$(".grabb-that").click(function (ev) {
 		ev.preventDefault();
 		urlcomplete = $(this).attr('href');
