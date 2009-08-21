@@ -1401,7 +1401,16 @@ a.panel-filters{
     display: block;
     margin-bottom: 10px;
 }
-
+.node-stream-news .content-floated-left h2 a{
+  color: #0073CF;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 13px;
+    display: block;
+    margin-bottom: 10px;
+    float: left;
+    width: 200px;
+}
 .facebook-post .facebook-image-comment
 {
 	float: left;
