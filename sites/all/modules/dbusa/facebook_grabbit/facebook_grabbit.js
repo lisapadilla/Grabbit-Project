@@ -192,7 +192,10 @@ $(document).ready(function() {
 	$('.retweet').click(function (event){
 	  var container = $(this).parents().filter('.twitter-message-stream');	
 	  var message = $('.twitter-body-contains',container);
-		
+	  var to = $('.twit-reply',container).attr('id');
+	  $("#edit-status").focus();
+	  $("#edit-status").val("RT "+to+" "+message);
+	  $("#edit-status").focus();
 	});
 	
 	$(".grabb-that").click(function (ev) {
