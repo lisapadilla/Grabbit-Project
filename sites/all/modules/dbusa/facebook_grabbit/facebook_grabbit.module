@@ -1298,7 +1298,7 @@ function _news_theme($comments,$node){
 	
 							$comments_output .= '<div id="'.$item->cid.'" class="news-comment"><span class="news-comment-picture">';
 																			
-						    $comments_output .= '<img width=30 src="'.base_path().$profile->field_profile_picture[0]['filepath'].'"/>';
+						  $comments_output .= theme('imagecache', 'friend_comment_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image', '', array('width'=>'30'));
 																											
 							$comments_output .= '</span>
 																		<span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
@@ -1370,7 +1370,7 @@ function facebook_grabbit_news_comment(){
 		print '<div id="'.$tag_id.'" class="news-comment" style="display:none;">
 						<span class="news-comment-picture">';
 
-		print '<img width=30 src="'.base_path().'/'.$profile->field_profile_picture[0]['filepath'].'"/>';
+		print theme('imagecache', 'friend_comment_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image', '', array('width'=>'30'));
 							
 		print	'</span>
 						<span class="facebook-comment-link"><a href="/grabbit/user/'.$user->uid.'">'.$user->name.'</a> '.format_date($node->timestamp).':</span><br>
