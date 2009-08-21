@@ -82,7 +82,7 @@ global $user;
         <?php endif; ?>
 <?
 
-if ($node->type = "profile"){
+if ($node->type == "profile"){
 	?>
 		<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
 	<?
