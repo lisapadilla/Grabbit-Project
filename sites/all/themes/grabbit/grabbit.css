@@ -1048,10 +1048,7 @@
     font-weight: bold;
     font-size: 12px;
     line-height: 13px;
-    display: block;
-    width: 200px;
     padding-left: 15px;
-    float: left;
     margin-bottom: 10px;
   }
   #panel-0 .twitter-message-stream a.twitter-name-link{
@@ -1461,4 +1458,9 @@ a.panel-filters{
 }
 .links_stream{
   float: right;
+}
+#panel-0 .facebook-with-target{
+  display: block;
+  width: 230px;
+  float: left;
 }
