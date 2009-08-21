@@ -74,7 +74,7 @@ global $user;
 			<div class="myfeeds"><?=flag_create_link('myfeeds', $node->nid)?></div>
 		<? endif; ?>
         <?
-
+print_r($node->type);
 		if ($node->type == "profile"){
 			?>
 				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
