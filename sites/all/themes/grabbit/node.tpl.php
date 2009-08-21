@@ -76,6 +76,7 @@
         <?php if ($submitted): ?>
           <p><?php print $submitted; ?></p>
         <?php endif; ?>
+<?=flag_create_link('myfeeds', $node->nid)?>
        <? if(flag_create_link('myfeeds', $node->nid)):?>
 		<div class="myfeeds"><?=flag_create_link('myfeeds', $node->nid)?></div>
 	<? endif; ?>
