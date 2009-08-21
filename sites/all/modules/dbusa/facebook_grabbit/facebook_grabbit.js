@@ -191,9 +191,11 @@ $(document).ready(function() {
 	$(".grabb-that").click(function (ev) {
 		ev.preventDefault();
 		urlcomplete = $(this).attr('href');
+		alert(urlcomplete);
 		$.getJSON('http://json-tinyurl.appspot.com/?url=' + urlcomplete + '&callback=?', 
 	        function(data)
 	        { 
+		alert(data);
 				$("#edit-status").focus();
 				$("#edit-status").val(data.tinyurl+' ');
 				$("#edit-status").focus();
