@@ -73,7 +73,15 @@ global $user;
 	       <? if(flag_create_link('myfeeds', $node->nid)):?>
 			<div class="myfeeds"><?=flag_create_link('myfeeds', $node->nid)?></div>
 		<? endif; ?>
-        
+        <?
+
+		if ($node->type == "profile"){
+			?>
+				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
+			<?
+		}
+
+		?>
       </div>
       <?php }else{ ?>
         <?php print $content; ?>
@@ -87,16 +95,17 @@ global $user;
 	        <?php print $links; ?>
 	      </div>
 	    <?php endif; ?>
-	  <?php } ?>
-	<?
-
-	if ($node->type == "profile"){
-		?>
-			<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
 		<?
-	}
 
-	?>
+		if ($node->type == "profile"){
+			?>
+				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
+			<?
+		}
+
+		?>
+	  <?php } ?>
+
     </div>
 
 </div>
