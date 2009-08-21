@@ -1411,8 +1411,7 @@ a.panel-filters{
   width: 130px;
 }
 .node-stream-news .content-body,
-.node-stream-blogs .content-body,
-.node-stream-deal .content-body{
+.node-stream-blogs .content-body{
   display: block;
   clear: both;
 }
