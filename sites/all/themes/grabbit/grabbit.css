@@ -1403,9 +1403,9 @@ a.panel-filters{
   width: 130px;
   float: left;
 }
-.node-stream-news .content-body,
-.node-stream-blogs .content-body,
-.node-stream-deal .content-body{
+.node-stream-news .content-body p,
+.node-stream-blogs .content-body p,
+.node-stream-deal .content-body p{
   display: block;
 }
 .facebook-post .facebook-image-comment
