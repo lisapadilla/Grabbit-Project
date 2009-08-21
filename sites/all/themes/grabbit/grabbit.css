@@ -1384,6 +1384,14 @@ a.panel-filters{
 {
 	width: 280px;
 }
+.node-stream-news h2,
+.node-stream-blogs h2,
+.node-stream-deal h2{
+  float: left;
+  display: inline-block;
+  margin-bottom: 10px;
+  line-height: 13px;
+}
 .node-stream-news h2 a,
 .node-stream-blogs h2 a,
 .node-stream-deal h2 a{
@@ -1395,15 +1403,9 @@ a.panel-filters{
 .node-stream-news h2,
 .node-stream-blogs h2{
   width: 200px;
-  float: left;
-  display: inline-block;
-  margin-bottom: 10px;
 }
 .node-stream-deal h2{
   width: 130px;
-  float: left;
-  display: inline-block;
-  margin-bottom: 10px;
 }
 .node-stream-news .content-body,
 .node-stream-blogs .content-body,
