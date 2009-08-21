@@ -394,7 +394,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
-	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'
+	<span class="facebook-with-target"><a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'</span>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	  '.$msg_formatted.'<span class="facebook-date">on '.format_date($post['created_time']).'</span>
 	</div></div><div class="facebook-post-comments clearfix">'.$show_comments.'</div>';
