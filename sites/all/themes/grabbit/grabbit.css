@@ -1076,15 +1076,7 @@
     float: left;
     margin-bottom: 10px;
   }
-  .node-stream-news h2 a,
-  .node-stream-blogs h2 a{
-    color: #0073CF;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 13px;
-    display: block;
-    margin-bottom: 10px;
-  }
+  
   .facebook-post .facebook-post-header a.facebook-story-name{
     background: url(images/various/facebook_ico_sml.gif) 0 1px no-repeat;
   }
@@ -1392,24 +1384,24 @@ a.panel-filters{
 {
 	width: 280px;
 }
-.node-stream-deal .content-floated-left h2 a
-{
-	color: #0073CF;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 13px;
-    display: block;
-    margin-bottom: 10px;
-}
-.node-stream-news .content-floated-left h2 a{
+.node-stream-news h2 a,
+.node-stream-blogs h2 a,
+.node-stream-deal h2 a{
   color: #0073CF;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 13px;
-    display: block;
-    margin-bottom: 10px;
-    float: left;
-    width: 130px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 13px;
+  display: block;
+  margin-bottom: 10px;
+}
+.node-stream-news h2 a,
+.node-stream-blogs h2 a{
+  width: 200px;
+  float: left;
+}
+.node-stream-deal h2 a{
+  width: 130px;
+  float: left;
 }
 .facebook-post .facebook-image-comment
 {
