@@ -1369,15 +1369,11 @@ function facebook_grabbit_news_comment(){
 	if ($result > -1){
 		print '<div id="'.$tag_id.'" class="news-comment" style="display:none;">
 						<span class="news-comment-picture">';
-																			
-							if ($profile->field_profile_picture[0]['filepath'] == 'sites/default/files/avatars/1/333.jpg'){
-								//print '<img width=30 src="'.$item->picture.'"/>';
-								print '<img id ="'.$user->picture.'" width=30 src="'.drupal_get_path('theme','grabbit').'/images/default/default_profile.jpg"/>';
-							}else{
-								print '<img width=30 src="'.$profile->field_profile_picture[0]['filepath'].'"/>';
-							}
-		print	'<span>
-						<span class="news-comment-title"><a href="/grabbit/user/'.$user->uid.'">'.$user->name.'</a> '.format_date($node->timestamp).':</span><br>
+
+		print '<img width=30 src="'.base_path().'/'.$profile->field_profile_picture[0]['filepath'].'"/>';
+							
+		print	'</span>
+						<span class="facebook-comment-link"><a href="/grabbit/user/'.$user->uid.'">'.$user->name.'</a> '.format_date($node->timestamp).':</span><br>
 						<span class="news-comment-content">'.$comment.'</span>
 					</div>';
 	}
