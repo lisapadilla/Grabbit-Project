@@ -1113,7 +1113,8 @@
     padding-left: 58px;
   }
   .facebook-post .facebook-date,
-  .twitter-message-stream .twitter-date{
+  .twitter-message-stream .twitter-date,
+  .node-stream-deal .submitted {
     display: block;
     clear: both;
     color: #999999;
@@ -1337,8 +1338,29 @@ a.panel-gear{
 
 .node-stream-deal .content-floated-right
 {
+	float: right;
+}
+.node-stream-deal .content-floated-left
+{
 	font-size: 12px;
 	line-height: 15px;
+}
+.node-stream-deal .image-deal
+{
+	float: left;
+	margin-right: 10px;
+}
+.node-stream-deal .content-body
+{
+	float: left;
+}
+#panel-1 .node-stream-deal .content-body
+{
+	width: 214px;
+}
+#panel-0 .node-stream-deal .content-body
+{
+	width: 280px;
 }
 .node-stream-deal .content-floated-left h2 a
 {
