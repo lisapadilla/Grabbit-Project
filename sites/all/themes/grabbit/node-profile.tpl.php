@@ -83,6 +83,6 @@ global $user;
 			?>
 				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/<?=$user->uid?>">Add to Friends</a></p>
 			<?
-		}
+		}?>
     </div>
 </div>
