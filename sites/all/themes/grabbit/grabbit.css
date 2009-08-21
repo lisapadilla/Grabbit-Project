@@ -1243,7 +1243,7 @@ a.twit-reply{
   overflow: hidden;
   margin-left: 10px;
 }
-a.facebook-makecomment-link{
+a.facebook-makecomment-link, a.comment-news{
   display: block;
   width: 10px;
   height: 12px;
@@ -1253,7 +1253,7 @@ a.facebook-makecomment-link{
   overflow: hidden;
   margin-left: 10px;
 }
-a.twitter_favorite{
+a.twitter_favorite, a.flag{
   display: block;
   width: 12px;
   height: 12px;
@@ -1273,7 +1273,7 @@ a.twitter_favorite-remove{
   overflow: hidden;
   margin-left: 10px;
 }
-a.retweet{
+a.retweet, a.grabb-that{
   display: block;
   width: 10px;
   height: 12px;
