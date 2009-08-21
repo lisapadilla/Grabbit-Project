@@ -69,6 +69,9 @@
         <?php if ($submitted): ?>
           <p><?php print $submitted; ?></p>
         <?php endif; ?>
+	       <? if(flag_create_link('myfeeds', $node->nid)):?>
+			<div class="myfeeds"><?=flag_create_link('myfeeds', $node->nid)?></div>
+		<? endif; ?>
         
       </div>
       <?php }else{ ?>
@@ -78,6 +81,7 @@
         <?php endif; ?>
         <?php if ($links): ?>
 	      <div class="links">
+
 	        <?php print $links; ?>
 	      </div>
 	    <?php endif; ?>
