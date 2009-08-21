@@ -1356,7 +1356,14 @@ a.panel-gear{
   text-indent: 3000em;
   background: url(images/various/engrane.gif) 0 0 no-repeat;
 }
-
+a.panel-filters{
+  float: right;
+  margin-right: 10px;
+  font-size: 14px;
+  color: #999999;
+  line-height: 15px;
+  text-decoration: none;
+}
 .node-stream-deal .content-floated-right
 {
 	float: right;
