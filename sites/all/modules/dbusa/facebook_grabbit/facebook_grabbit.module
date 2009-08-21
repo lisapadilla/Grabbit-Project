@@ -1152,7 +1152,7 @@ function theme_twitter_message($message){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply"><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply"><a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
 
     if ($message->favorited){
 		$output .= '<a id="'.$message->id.'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
@@ -1296,15 +1296,10 @@ function _news_theme($comments,$node){
 						while ($item = db_fetch_object($comments)){
 							$profile = content_profile_load('profile', $item->uid);
 	
-							$comments_output .= '<div id="'.$item->cid.'" class="news-comment">
-																									<span class="news-comment-picture">';
+							$comments_output .= '<div id="'.$item->cid.'" class="news-comment"><span class="news-comment-picture">';
 																			
-							if ($profile->field_profile_picture[0]['filepath'] == 'sites/default/files/avatars/1/333.jpg'){
-								$comments_output .= '<img width=30 src="'.drupal_get_path('theme','grabbit').'/images/default/default_profile.jpg"/>';
-							}else{
-								$comments_output .= '<img width=30 src="'.$profile->field_profile_picture[0]['filepath'].'"/>';
-							}
-																				
+						    $comments_output .= '<img width=30 src="'.base_path().$profile->field_profile_picture[0]['filepath'].'"/>';
+																											
 							$comments_output .= '</span>
 																		<span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
 																		<span class="news-comment-content">'.$item->comment.'</span>
