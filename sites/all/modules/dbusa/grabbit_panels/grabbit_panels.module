@@ -36,6 +36,8 @@ function grabbit_panels_get_panels(){
 	}
 	else{
 		$output .= theme_panels($panel_1,0,"Public Stream");
+		$panel_2 = facebook_grabbit_private_view_panel(0);	
+	    $output .= theme_panels($panel_2,1,"Most Visited");
 	}
 	
 	return $output;
