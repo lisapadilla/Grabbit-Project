@@ -34,7 +34,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
   }
 }
 
-function friends_search_are_friends(){
+function friend_search_are_friends(){
 	require_once("facebook/facebook.php");
 	require_once("facebook/facebook_desktop.php");
 	include("facebook/config.php");
