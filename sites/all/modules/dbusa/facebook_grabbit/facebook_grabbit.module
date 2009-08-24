@@ -1393,6 +1393,7 @@ function _news_theme($comments,$node){
 						  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'">Deal</a></span>';
 					    }else{
 						  if($source_image = facebook_grabbit_get_image($node->body))
+						print_r($source_image);
 						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $source_image, 'Deal Image').'</span>';
 					    }
 						
