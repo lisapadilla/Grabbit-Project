@@ -1533,3 +1533,9 @@ a.panel-filters{
   font-weight:bold;
   line-height:13px;
 }
+.view-friends .views-row .views-field-action-socital-networks .field-content .from-facebook{
+  background: url(images/various/facebook_ico_sml.gif) 0 1px no-repeat;
+}
+.view-friends .views-row .views-field-action-socital-networks .field-content .from-twitter{
+  background: url(images/various/twitter_ico_sml.gif) 0 1px no-repeat;
+}

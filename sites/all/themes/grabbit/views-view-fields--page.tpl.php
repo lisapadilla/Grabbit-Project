@@ -1,9 +1,9 @@
 <?php
 if(facebook_grabbit_get_fid($row->users_friendlist_relations_uid))
-  $social_networks .='<span class="from-facebook"> Facebook</span>';
+  $social_networks .='<span class="from-facebook"> &nbsp;</span>';
 
 if(oauth_twitter_get_uid($row->users_friendlist_relations_uid))
-  $social_networks .='<span class="from-twitter"> Twitter</span>';
+  $social_networks .='<span class="from-twitter"> &nbsp;</span>';
 ?>
 <div class="views-row">
       
