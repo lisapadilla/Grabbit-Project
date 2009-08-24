@@ -1465,7 +1465,7 @@ function facebook_grabbit_news_comment(){
 function facebook_grabbit_get_images($body) {
 	preg_match_all('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'\s>]*)/i', $body, $matches);
 	if ($matches[1][0]){
-		if(strpos($matches[1[0]], 'ads') !== false){
+		if(strpos($matches[1[0], 'ads') !== FALSE){
 		  return $matches[1][0];	
 		}else{
 			return FALSE;
