@@ -16,19 +16,19 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
       {
 		case 0:
           $blocks['title'] = 'Are this people yor friends?';
-//          $blocks['content'] = drupal_get_form('friend_search_people_form');
+          $blocks['content'] = drupal_get_form('friend_search_people_form');
 
           break;
 		case 1:
           $blocks['title'] = 'Search Content';
-//          $blocks['content'] = drupal_get_form('search_form');
-          $blocks['content']= friend_search_are_friends();
+          $blocks['content'] = drupal_get_form('search_form');
+          
           break;
 		case 2:
-         // $blocks['content'] = '<div class="panels-update-form">
-		 //            <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>
-		  //         </div>';
-		          $blocks['content']= friend_search_are_friends();
+          $blocks['content'] = '<div class="panels-update-form">
+		             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>
+		           </div>';
+
           break;
       }
       return $blocks;
