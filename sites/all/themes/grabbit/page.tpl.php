@@ -207,12 +207,6 @@ global $user;
 
           <a name="navigation" id="navigation"></a>
 
-          <?php if ($search_box): ?>
-            <div id="search-box">
-              <?php print $search_box; ?>
-            </div> <!-- /#search-box -->
-          <?php endif; ?>
-
           <?php if ($secondary_links): ?>
             <div id="secondary">
               <?php print theme('links', $secondary_links); ?>
