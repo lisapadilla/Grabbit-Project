@@ -194,7 +194,7 @@ function tagadelic_tags_lists($node) {
       $title = l($vocabulary->name, "tagadelic/chunk/$vid");
       $items = array();
       foreach ($terms as $term) {
-        $items[] = l($term->name, taxonomy_term_path($term), array('attributes' => array('title' => t('view all posts tagged with "@tag"', array('@tag' => $term->name)))));
+        $items[] = l($term->name, "stream/user/".$term->id, array('attributes' => array('title' => t('view all posts tagged with "@tag"', array('@tag' => $term->name)))));
       }
       $output .= theme('item_list', $items, $title);
     }
@@ -308,7 +308,7 @@ function _tagadelic_sort_by_weight($a, $b) {
 function theme_tagadelic_weighted($terms) {
   $output = '';
   foreach ($terms as $term) {
-    $output .= l($term->name, taxonomy_term_path($term), array('attributes' => array('class' => "tagadelic level$term->weight", 'rel' => 'tag'))) ." \n";
+    $output .= l($term->name, "stream/user/".$term->tid, array('attributes' => array('class' => "tagadelic level$term->weight", 'rel' => 'tag'))) ." \n";
   }
   return $output;
 }

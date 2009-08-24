@@ -35,7 +35,15 @@ function grabbit_panels_get_panels(){
 	    $output .= theme_panels($panel_2,1,$panel_settings['panel_name']);
 	}
 	else{
-		$output .= theme_panels($panel_1,0,"Public Stream");
+
+		if(arg(2)){
+			$panel_term = facebook_grabbit_private_view_panel_term(arg(2));
+			$term = taxonomy_get_term(arg(2));
+			$output .= theme_panels($panel_term,0,$term->name);
+		}else{
+			$output .= theme_panels($panel_1,0,"Public Stream");
+		}
+		
 		$panel_2 = facebook_grabbit_private_view_panel(0);	
 	    $output .= theme_panels($panel_2,1,"Most Visited");
 	}
@@ -237,6 +245,7 @@ function grabbit_panels_tags_form($form,$panel_id){
 
 
 function theme_panels($private_view,$id,$name){
+    global $user;
 
     if(!$name)
       $name="Panel ".$id;
@@ -244,7 +253,7 @@ function theme_panels($private_view,$id,$name){
 	$output = '<div class="panel-grabbit" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">
 	               <h3 class="title">'.$name.'</h3>';
-	if($id>0){
+	if($id>0 && $user->uid != 0){
 		$output .=l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
                 '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE));	
 	}

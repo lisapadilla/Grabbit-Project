@@ -984,6 +984,86 @@ function facebook_grabbit_private_view_panel($param){
 }
 
 /**
+ * Creates users pannel()
+ */
+function facebook_grabbit_private_view_panel_term($param){
+	
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
+	global $user;
+		
+	$view = views_get_view('grabbit_public_stream');
+    $view->pager['items_per_page']=30;
+
+    $view_deals = views_get_view('grabbit_private_deals');
+    $view_deals->pager['items_per_page']=30;
+
+	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
+
+	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
+	    $view->display['default']->display_options['relationships']=array();	
+
+		$filters[0] = $param;
+ 
+	$view->set_arguments(array($filters[0]));	
+	
+	$view->execute();
+
+    foreach($view->result as $node){
+	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+
+	$deals_tags = 'all';	
+	
+    $view_deals->set_arguments(array($deals_tags));	
+	$view_deals->execute();
+
+    foreach($view_deals->result as $node){
+	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+
+		if(is_array($twitface)){
+			usort($twitface, 'compare');
+			$result = array_reverse($twitface);
+			foreach($result as $entry){
+				if(is_array($entry['value'])){
+					if(!$entry['value']['attachment']){ //STATUS UPDATE
+						$target='';
+						if($entry['value']['target_id'])
+						  $target='&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
+
+						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles);
+						$comments=array();
+					}else{		             // OTHER UPDATES SUPPORTED
+						$output .= prepeare_standar_update($entry['value'], $profiles[$entry['value']['actor_id']],$profiles);
+					}
+				}
+				else{
+					if($entry['value']->nid){
+						$node=node_load($entry['value']->nid);
+						
+						$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+						
+						$output .= _news_theme($comments,$node);
+						
+					}
+					else{
+	          $output .= theme_twitter_message($entry['value']);
+	        }
+				}
+			}	
+		}
+			
+	
+    $GET=array();
+	return $output;
+
+}
+
+/**
  * Helper function to sort the entries
  */
 function compare($x, $y)
