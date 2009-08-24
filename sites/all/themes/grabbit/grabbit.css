@@ -1243,7 +1243,7 @@ a.facebook-makecomment-link, a.comment-news{
   overflow: hidden;
   margin-left: 10px;
 }
-a.twitter_favorite, a.flag{
+a.twitter_favorite, a.flag-action{
   display: block;
   width: 12px;
   height: 12px;
@@ -1267,7 +1267,7 @@ a.twitter_favorite, a.flag{
   background: none;
   float: none;
 }
-a.twitter_favorite-remove{
+a.twitter_favorite-remove, a.unflag-action{
   display: block;
   width: 12px;
   height: 12px;
