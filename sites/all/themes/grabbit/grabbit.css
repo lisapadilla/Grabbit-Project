@@ -919,10 +919,8 @@
     background: url(images/navbar/sign_out_nh.gif) 0 0 no-repeat;
   }
   #primary ul.links li.menu-1861 a.active{
-    width: 72px;
     background: url(images/navbar/sign_out_ho.gif) 0 0 no-repeat;
   }
-  
   /* Update form styles */
   #content-form{
     background: #FFCA00;
