@@ -1392,8 +1392,7 @@ function _news_theme($comments,$node){
 						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 						  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'">Deal</a></span>';
 					    }else{
-						  if($source_image = facebook_grabbit_get_image($node->body))
-						print_r($source_image);
+						  $source_image = facebook_grabbit_get_images($node->body); 
 						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $source_image, 'Deal Image').'</span>';
 					    }
 						
@@ -1463,19 +1462,8 @@ function facebook_grabbit_news_comment(){
 	
 }
 
-function facebook_grabbit_get_image($body){
-	$html= "<img class=\"...\" src=\"s...\"";
-	$html .= "alt='...' title='...' />";
-
-	$pattern = '/<img[^>]+src[\\s=\'"]';
-	$pattern .= '+([^"\'>\\s]+)/is';
-
-
-	if(preg_match($pattern,$html,$match)){
-	  $output = $match[1];
-	}else{
-		return FALSE;
-	}
+function facebook_grabbit_get_images($body) {
+	preg_match_all('/<img[^>]*>/Ui', $input, $matches);
+	print_r($matches);
 	
-	return $output;
 }
