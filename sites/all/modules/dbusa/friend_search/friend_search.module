@@ -48,9 +48,9 @@ function friends_search_are_friends(){
 		$facebook->set_user($suser, $session_key);
 		
 		$status = $facebook->api_client->call_method("Friends.areFriends", array('uids1'=>$fuser->fid, 'uids2'=>'5'));
-		
 		print_r($status);
-	}catch{
+	}
+	catch($exepcion){
 		drupal_set_message("error", "Facebook connection failed, from grabbit");
 	}
 }
