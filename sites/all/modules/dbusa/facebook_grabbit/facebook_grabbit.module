@@ -1392,8 +1392,8 @@ function _news_theme($comments,$node){
 						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 						  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'">Deal</a></span>';
 					    }else{
-						  $source_image = facebook_grabbit_get_images($node->body); 
-						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $source_image, 'Deal Image').'</span>';
+						  if($source_image = facebook_grabbit_get_images($node->body)) 
+						    $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $source_image, 'Deal Image').'</span>';
 					    }
 						
 						$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
@@ -1464,5 +1464,9 @@ function facebook_grabbit_news_comment(){
 
 function facebook_grabbit_get_images($body) {
 	preg_match_all('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'\s>]*)/i', $body, $matches);
-	print_r($matches[1][0]);
+	if ($matches[1][0]){
+		return $matches[1][0];
+	}else{
+		return FALSE;
+	}
 }
