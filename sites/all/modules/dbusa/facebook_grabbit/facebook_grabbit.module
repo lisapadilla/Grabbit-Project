@@ -1463,7 +1463,7 @@ function facebook_grabbit_news_comment(){
 }
 
 function facebook_grabbit_get_images($body) {
-	preg_match_all('/<img[^>]*>/Ui', $input, $matches);
+	preg_match_all('/<img[^>]*>/Ui', $body, $matches);
 	print_r($matches);
 	
 }
