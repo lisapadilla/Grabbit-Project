@@ -14,14 +14,3 @@
 }
 
 /* The rest deals with indicating the waiting state. */
-
-.flag-waiting a {
-  /* Give an impression of a disabled link. */
-  opacity: 0.5;
-  filter: alpha(opacity=50); /* IE */
-}
-
-.flag-waiting .flag-throbber {
-  background: url(flag-throbber.gif) no-repeat right center;
-  padding-right: 13px;
-}

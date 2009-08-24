@@ -16,17 +16,19 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
       {
 		case 0:
           $blocks['title'] = 'Are this people yor friends?';
-//          $blocks['content'] = drupal_get_form('friend_search_people_form');
-          $blocks['content']= friend_search_are_friends();
+          $blocks['content'] = drupal_get_form('friend_search_people_form');
+
           break;
 		case 1:
           $blocks['title'] = 'Search Content';
           $blocks['content'] = drupal_get_form('search_form');
+          
           break;
 		case 2:
           $blocks['content'] = '<div class="panels-update-form">
 		             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>
 		           </div>';
+
           break;
       }
       return $blocks;
@@ -34,22 +36,6 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
   }
 }
 
-function friend_search_are_friends(){
-	require_once("facebook/facebook.php");
-	require_once("facebook/facebook_desktop.php");
-	include("facebook/config.php");
-	
-		$fuser = facebook_grabbit_get_fid(1);
-		$suser=$fuser->fid;
-		$session_key=$fuser->kid;
-		
-		$facebook = new FacebookDesktop($api_key, $secret);
-		$facebook->set_user($suser, $session_key);
-		
-		$status = $facebook->api_client->call_method("Friends.areFriends", array('uids1'=>$fuser->fid, 'uids2'=>'5'));
-		print_r($status);
-
-}
 
 /**
  * Implementation of hook_menu()

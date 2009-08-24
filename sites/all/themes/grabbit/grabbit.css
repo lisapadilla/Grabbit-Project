@@ -885,6 +885,13 @@
     overflow: hidden;
     margin-left: 20px;
   }
+  #primary ul.links li.menu-2445 a, #primary ul.links li.menu-2445 a{
+    width: 60px;
+    background: url(images/navbar/sig_in_nh.gif) 0 0 no-repeat;
+  }
+  #primary ul.links li.menu-2445 a.active, #primary ul.links li.menu-2445 a.active{
+    background: url(images/navbar/sig_in_ho.gif) 0 0 no-repeat;
+  }
   
   #primary ul.links li.menu-1844 a, #primary ul.links li.menu-2446 a{
     width: 52px;
@@ -1241,7 +1248,7 @@ a.facebook-makecomment-link, a.comment-news{
   overflow: hidden;
   margin-left: 10px;
 }
-a.twitter_favorite, a.flag{
+a.twitter_favorite, a.flag-action{
   display: block;
   width: 12px;
   height: 12px;
@@ -1265,7 +1272,7 @@ a.twitter_favorite, a.flag{
   background: none;
   float: none;
 }
-a.twitter_favorite-remove{
+a.twitter_favorite-remove, a.unflag-action{
   display: block;
   width: 12px;
   height: 12px;
@@ -1530,4 +1537,10 @@ a.panel-filters{
   font-size:12px;
   font-weight:bold;
   line-height:13px;
+}
+.view-friends .views-row .views-field-action-socital-networks .field-content .from-facebook{
+  margin-left:5px;
+}
+.view-friends .views-row .views-field-action-socital-networks .field-content .from-twitter{
+  margin-left:5px;
 }
