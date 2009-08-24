@@ -36,8 +36,8 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
   }
 }
 
-function friend_search_are_friends(){
-
+function friend_search_views_pre_render(&$view){
+print_r($view);
 }
 
 /**

@@ -207,12 +207,6 @@ global $user;
 
           <a name="navigation" id="navigation"></a>
 
-          <?php if ($secondary_links): ?>
-            <div id="secondary">
-              <?php print theme('links', $secondary_links); ?>
-            </div> <!-- /#secondary -->
-          <?php endif; ?>
-
           <?php print $navbar; ?>
 
         </div></div> <!-- /#navbar-inner, /#navbar -->
