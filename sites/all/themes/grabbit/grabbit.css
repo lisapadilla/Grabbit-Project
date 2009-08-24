@@ -885,6 +885,13 @@
     overflow: hidden;
     margin-left: 20px;
   }
+  #primary ul.links li.menu-2445 a, #primary ul.links li.menu-2445 a{
+    width: 52px;
+    background: url(images/navbar/sig_in_nh.gif) 0 0 no-repeat;
+  }
+  #primary ul.links li.menu-2445 a.active, #primary ul.links li.menu-2445 a.active{
+    background: url(images/navbar/sig_in_ho.gif) 0 0 no-repeat;
+  }
   
   #primary ul.links li.menu-1844 a, #primary ul.links li.menu-2446 a{
     width: 52px;
