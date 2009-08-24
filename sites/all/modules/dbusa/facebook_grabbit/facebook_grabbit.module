@@ -1393,7 +1393,7 @@ function _news_theme($comments,$node){
 						  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'">Deal</a></span>';
 					    }else{
 						  $source_image = facebook_grabbit_get_images($node->body); 
-						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $source_image[0], 'Deal Image').'</span>';
+						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $source_image, 'Deal Image').'</span>';
 					    }
 						
 						$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
