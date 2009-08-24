@@ -1319,8 +1319,7 @@ function _news_theme($comments,$node){
 															    
 															    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
 																<a href="javascript:void(0)" class="comment-news">Comment</a>
-																<span class="flag-wrapper flag-bookmarks">'.
-																flag_create_link('bookmarks', $node->nid).'	
+																<span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
 															  </div>
 															     '.$image.'
 															     <h2>
