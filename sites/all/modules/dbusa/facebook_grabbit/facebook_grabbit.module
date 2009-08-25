@@ -1387,6 +1387,7 @@ function _news_theme($comments,$node){
 	$comments_output .= '</div>';
 						
 	if($node->type=="deal"){
+		print_r($node->field_deal_link);
 	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'" targt="_blank">Deal</a></span>';
 	}else{
