@@ -1396,7 +1396,7 @@ a.panel-filters{
 	font-size: 12px;
 	line-height: 15px;
 }
-.node-stream-deal .image-deal
+.node-stream-deal .image-deal, .node-stream-blogs .image-deal, .node-stream-news .image-deal
 {
 	float: left;
 	margin-right: 10px;
