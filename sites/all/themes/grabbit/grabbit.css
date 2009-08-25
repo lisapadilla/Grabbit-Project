@@ -1144,9 +1144,7 @@
     margin-right: 10px;
   }
   .facebook-post .facebook-comment-text, 
-  .facebook-post .facebook-comment-timeline,
-  .node-stream-news p,
-  .node-stream-blogs p{
+  .facebook-post .facebook-comment-timeline{
     font-size: 12px;
     line-height: 15px;
   }
