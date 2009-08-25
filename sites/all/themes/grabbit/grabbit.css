@@ -1124,7 +1124,7 @@
   .twitter-message-stream .twitter-date,
   .node-stream-deal .submitted, 
   .node-stream-news .submitted,
-  .node-stream-blog .submitter,{
+  .node-stream-blog .submitter{
     display: block;
     clear: both;
     color: #999999;
