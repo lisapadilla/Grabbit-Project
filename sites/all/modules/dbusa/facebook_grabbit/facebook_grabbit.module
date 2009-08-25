@@ -1392,7 +1392,7 @@ function _news_theme($comments,$node){
 	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
 	}else{
 	  if($source_image = facebook_grabbit_get_images($node->body)); 	
-	    $image = '<img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/>';
+	    $image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/></span>';
 	}
 	$node->teaser = strip_tags($node->teaser);
 	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
