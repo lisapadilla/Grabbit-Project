@@ -1390,8 +1390,12 @@ function _news_theme($comments,$node){
 	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'" targt="_blank">Deal</a></span>';
 	}else{
-	  if($source_image = facebook_grabbit_get_images($node->body)) 
-	  $image = '<img width="48" height="48" title="" alt="'.$node->title.'" src="'.$source_image.'"/>';
+	  if(strpos($node->body, 'ads') !== FALSE){
+		$node->body = strip_tags($node->body);
+	  }else{
+	    if($source_image = facebook_grabbit_get_images($node->body)); 	
+	    $image = '<img width="48" height="48" title="" alt="'.$node->title.'" src="'.$source_image.'"/>';
+	  }
 	}
 						
 	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
