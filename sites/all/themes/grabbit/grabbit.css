@@ -1124,7 +1124,7 @@
   .twitter-message-stream .twitter-date,
   .node-stream-deal .submitted, 
   .node-stream-news .submitted,
-  .node-stream-blog .submitter{
+  .node-stream-blogs .submitted{
     display: block;
     clear: both;
     color: #999999;
@@ -1406,7 +1406,7 @@ a.panel-filters{
 	float: left;
 }
 #panel-1 .node-stream-deal .content-body, #panel-1 .node-stream-news .content-body,
-#panel-1 .node-stream-blog .content-body
+#panel-1 .node-stream-blogs .content-body
 {
 	width: 214px;
 	float: left;
@@ -1414,7 +1414,7 @@ a.panel-filters{
   line-height:15px;
 }
 #panel-0 .node-stream-deal .content-body, #panel-0 .node-stream-news .content-body,
-#panel-0 .node-stream-blog .content-body
+#panel-0 .node-stream-blogs .content-body
 {
 	width: 280px;
 	font-size:12px;
@@ -1559,4 +1559,22 @@ a.panel-filters{
 }
 .view-friends .views-row .views-field-action-socital-networks .field-content .from-twitter{
   margin-left:5px;
+}
+a.truncate_show{
+	display:block;
+	color:#0073CF;
+	font-weight:bold;
+	margin-top:10px;
+	font-size:12px;
+	background: url(images/various/more.gif) 0 0 no-repeat;
+	padding-left:10px;
+}
+a.truncate_hide{
+	display:block;
+	color:#0073CF;
+	font-weight:bold;
+	margin-top:10px;
+	font-size:12px;
+	background: url(images/various/less.gif) 0 0 no-repeat;
+	padding-left:10px;
 }

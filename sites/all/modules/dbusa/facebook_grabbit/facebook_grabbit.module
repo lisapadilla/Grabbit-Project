@@ -396,7 +396,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<span class="facebook-with-target"><a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'</span>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
-	  '.$msg_formatted.'<span class="facebook-date">on '.format_date($post['created_time']).'</span>
+	<div class="content-truncated">'.$msg_formatted.'</div><span class="facebook-date">on '.format_date($post['created_time']).'</span>
 	</div></div><div class="facebook-post-comments clearfix">'.$show_comments.'</div>';
 	
 
@@ -462,12 +462,13 @@ function prepeare_standar_update($post,$user,$profiles){
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
-	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">';
+	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">
+	<div class="content-truncated">';
 	if($msg_formatted){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">on '.format_date($post['created_time']).'</span></div></div>
+	$output .='<div class="facebook-attachment">'.$attachment.'</div></div><span class="facebook-date">on '.format_date($post['created_time']).'</span></div>
 	<div class="facebook-post-comments clearfix">'.$show_comments.'</div>
 	<div class="facebook-comment-form">
 	<div class="facebook-form" style="display:none;">
@@ -1390,14 +1391,10 @@ function _news_theme($comments,$node){
 	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
 	}else{
-	  if(strpos($node->body, 'ads') !== FALSE){
-		$node->body = strip_tags($node->body);
-	  }else{
-	    if($source_image = facebook_grabbit_get_images($node->body)); 	
-	    $image = '<img width="48" height="48" title="" alt="'.$node->title.'" src="'.$source_image.'"/>';
-	  }
+	  if($source_image = facebook_grabbit_get_images($node->body)); 	
+	    $image = '<img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/>';
 	}
-						
+	$node->teaser = strip_tags($node->teaser);
 	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
 	             <div class="meta">
 					<div class="links_stream">  
@@ -1409,7 +1406,7 @@ function _news_theme($comments,$node){
 					'.$image.'
 					<h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					<div class="content-body">
-					  <p>'.$node->body.'</p>
+					  <div class="content-truncated">'.$node->teaser.'</div>
 					  <span class="submitted">
 					    <p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>
 					  </span>	
