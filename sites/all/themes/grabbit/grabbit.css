@@ -1407,7 +1407,8 @@ a.panel-filters{
 {
 	float: left;
 }
-#panel-1 .node-stream-deal .content-body
+#panel-1 .node-stream-deal .content-body, #panel-1 .node-stream-news .content-body,
+#panel-1 .node-stream-blog .content-body
 {
 	width: 214px;
 	float: left;
