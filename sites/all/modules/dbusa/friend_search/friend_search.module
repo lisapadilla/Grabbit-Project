@@ -93,6 +93,7 @@ function friend_search_show_friends(){
 									
 	  $output .='<div class="facebook-list"><a href="#" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container">'.$view->render().'</div></div>';
 	}
+}
 
     $accounts = oauth_twitter_get_uid($user->uid);
 
