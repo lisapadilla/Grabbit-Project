@@ -92,11 +92,16 @@ function friend_search_show_friends(){
 		$uids = implode(", ",$friends);						
 		$details = $facebook->api_client->call_method('Users.getInfo', array('api_key' => $api_key,
 																       'uids'=>$uids,
-																        'fields'=>'last_name, first_name'));
+																        'fields'=>'last_name, first_name, pic_small'));
 																
-		print_r($details);
+		foreach($details as $amigo_facebook){
+			$facebooks .='<div class="facebook-friend">
+			               <div class="picture">'.$amigo_facebook['pic_small'].'</div>
+			               <div class="name">'.$amigo_facebook['first_name'].' '.$amigo_facebook['last_name'].'</div>
+			             </div>';
+		}
 									
-	    $output .='<div class="facebook-list"><a href="#" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container">'.$view->render().'</div></div>';
+	    $output .='<div class="facebook-list"><a href="#" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container">'.$facebooks.'</div></div>';
 	  }
     }
 
