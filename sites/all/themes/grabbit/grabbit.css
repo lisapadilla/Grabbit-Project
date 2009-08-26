@@ -974,11 +974,12 @@
     height: 90px;
     background: url(images/various/up_txtarea.gif) 0 0 no-repeat;
     border: none;
+    overflow: hidden;
   }
   #facebook-grabbit-update-form .form-submit{
     display: block;
     border: none;
-    text-indent: -3000em;
+    text-indent: -999px;
     float: left;
     width: 77px;
     height: 32px;
@@ -987,6 +988,9 @@
     padding: 0px;
     margin: 10px 150px 10px 0px;
     cursor: pointer;
+    overflow: hidden;
+    font-size: 0px;
+    line-height: 1000px;
   }
   .grippie{
     display: none;
@@ -1218,6 +1222,9 @@
   text-indent: -3000em;
   border: none;
   cursor: pointer;
+  overflow: hidden;
+  font-size: 0px;
+  line-height: 1000px;
 }
 #counter{
   width: 25px;
@@ -1440,7 +1447,7 @@ a.panel-filters{
   display: block;
   margin-bottom: 10px;
   line-height: 13px;
-  width: 160px;
+  width: 145px;
 }
 .node-stream-news h2 a,
 .node-stream-blogs h2 a,
@@ -1507,6 +1514,7 @@ a.panel-filters{
 }
 .links_stream{
   float: right;
+  width: 63px;
 }
 #panel-0 .facebook-with-target{
   display: block;
@@ -1604,4 +1612,10 @@ a.truncate_hide{
 #panel-1 .node-stream-deal .item-body{
   width: 210px;
   float: left;
+}
+
+#panel-1 .node-stream-news .item-body .content-body,
+#panel-1 .node-stream-blogs .item-body .content-body,
+#panel-1 .node-stream-deal .item-body .content-body{
+  width: 209px;
 }
