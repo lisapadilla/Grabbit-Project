@@ -62,6 +62,8 @@ function friend_search_show_friends(){
 	
 	global $user;
 	
+	drupal_add_js(drupal_get_path('module', 'friend_search').'/engine.js', $type = 'module');
+	
 	$view = views_get_view('friends');
     $display_id = 'page_1';
     $view->set_display($display_id);	
