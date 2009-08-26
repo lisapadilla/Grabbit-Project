@@ -974,6 +974,7 @@
     height: 90px;
     background: url(images/various/up_txtarea.gif) 0 0 no-repeat;
     border: none;
+    overflow: hidden;
   }
   #facebook-grabbit-update-form .form-submit{
     display: block;
