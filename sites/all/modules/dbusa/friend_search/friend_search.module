@@ -122,8 +122,8 @@ function friend_search_show_friends(){
 			 $twit_id = $twitterInfo2->screen_name;
 			
 			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
-			$unser = unserialize($requ->data);
-			print_r($requ->data);
+			$unser = json_decode($requ->data);
+			print_r($unser);
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
