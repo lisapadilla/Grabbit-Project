@@ -1411,9 +1411,14 @@ function _news_theme($comments,$node){
 					<h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					<div class="content-body">
 					  <div class="content-truncated">'.$node->teaser.'</div>
-					  <span class="submitted">
-					    <p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>
-					  </span>	
+					  <span class="submitted">';
+					  if($nod->type=="deal"){
+					    $output .='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
+					  }else{
+						print_r($node);
+						$output .='<p>Source <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
+					  }
+			$output .'</span>	
 					</div>
 				</div>
 				'.$comments_output.'
