@@ -1390,13 +1390,16 @@ function _news_theme($comments,$node){
 	if($node->type=="deal"){
 	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
+	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
+
 	}else{
+	  $rss=node_load(reset($node->feedapi_node->feed_nids));
 	  if($source_image = facebook_grabbit_get_images($node->body)){
 		 $image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/></span>'; 
 	    }else{
-		 $rss=node_load(reset($node->feedapi_node->feed_nids));
 		 $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $rss->title).'</span>';
 	    }
+	  $submitted ='<p>Source <a title="View user profile." href="'.base_path().'node/'.$rss->nid.'">'.$rss->title.'</a></p>';
 	}
 	$node->teaser = strip_tags($node->teaser);
 	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
@@ -1411,14 +1414,7 @@ function _news_theme($comments,$node){
 					<h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					<div class="content-body">
 					  <div class="content-truncated">'.$node->teaser.'</div>
-					  <span class="submitted">';
-					  if($nod->type=="deal"){
-					    $output .='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
-					  }else{
-						print_r($node);
-						$output .='<p>Source <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
-					  }
-			$output .'</span>	
+					  <span class="submitted">'.$submitted.'</span>	
 					</div>
 				</div>
 				'.$comments_output.'
