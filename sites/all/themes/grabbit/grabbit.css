@@ -1421,7 +1421,6 @@ a.panel-filters{
 #panel-0 .node-stream-deal .content-body, #panel-0 .node-stream-news .content-body,
 #panel-0 .node-stream-blogs .content-body
 {
-	width: 280px;
 	font-size:12px;
   line-height:15px;
 }
@@ -1443,7 +1442,6 @@ a.panel-filters{
 }
 .node-stream-news h2,
 .node-stream-blogs h2{
-  width: 200px;
 }
 .node-stream-deal h2{
   width: 130px;
@@ -1587,6 +1585,6 @@ a.truncate_hide{
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
 #panel-0 .node-stream-deal .item-body{
-  width: 200px;
+  width: 250px;
   float: left;
 }
