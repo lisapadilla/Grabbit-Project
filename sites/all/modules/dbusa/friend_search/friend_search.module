@@ -87,7 +87,7 @@ function friend_search_show_friends(){
 	  }
 	  else{
 	     $friends =  $facebook->api_client->call_method('Friends.get', array('api_key' => $api_key,
-									       'uid'=>"$suser"); 
+									       'uid'=>"$suser")); 
 									
 									print_r($friends);
 									
