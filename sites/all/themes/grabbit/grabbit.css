@@ -979,7 +979,7 @@
   #facebook-grabbit-update-form .form-submit{
     display: block;
     border: none;
-    text-indent: -3000em;
+    text-indent: -999px;
     float: left;
     width: 77px;
     height: 32px;
@@ -988,6 +988,7 @@
     padding: 0px;
     margin: 10px 150px 10px 0px;
     cursor: pointer;
+    overflow: hidden;
   }
   .grippie{
     display: none;
