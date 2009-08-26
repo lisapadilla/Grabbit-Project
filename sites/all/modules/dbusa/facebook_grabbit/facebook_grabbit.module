@@ -1411,10 +1411,12 @@ function _news_theme($comments,$node){
 					  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
 					</div>
 					'.$image.'
-					<h2>'.l($node->title,'node/'.$node->nid).'</h2>
-					<div class="content-body">
-					  <div class="content-truncated">'.$node->teaser.'</div>
-					  <span class="submitted">'.$submitted.'</span>	
+					<div class="item-body">
+					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
+					  <div class="content-body">
+					    <div class="content-truncated">'.$node->teaser.'</div>
+					    <span class="submitted">'.$submitted.'</span>	
+					  </div>
 					</div>
 				</div>
 				'.$comments_output.'
