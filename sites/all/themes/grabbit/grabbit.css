@@ -1222,6 +1222,9 @@
   text-indent: -3000em;
   border: none;
   cursor: pointer;
+  overflow: hidden;
+  font-size: 0px;
+  line-height: 1000px;
 }
 #counter{
   width: 25px;
