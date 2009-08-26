@@ -1394,8 +1394,6 @@ function _news_theme($comments,$node){
 	  if($source_image = facebook_grabbit_get_images($node->body)){
 		 $image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/></span>'; 
 	    }else{
-		print "Titulo: ".$node->title."<br><br>";
-		print_r($node);
 		 $rss=node_load(reset($node->feedapi_node->feed_nids));
 		 $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $rss->title).'</span>';
 	    }
