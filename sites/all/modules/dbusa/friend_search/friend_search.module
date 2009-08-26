@@ -118,8 +118,9 @@ function friend_search_show_friends(){
 			$twitter_account = oauth_twitter_get_uid($user->uid);
 			$token = unserialize($twitter_account->config);
 			$twitterObj->setToken($token['token'], $token['secret']);
-			$twitterObj->get_accountVerify_credentials();
-			print_r($twitterObj->curl->responses);
+			 $twitterInfo2= $twitterObj->get_accountVerify_credentials();  
+			 $twit_id = $twitterInfo2->screen_name;
+			print_r($twit_id);
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
