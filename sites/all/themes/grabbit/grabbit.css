@@ -1606,3 +1606,9 @@ a.truncate_hide{
   width: 210px;
   float: left;
 }
+
+#panel-1 .node-stream-news .item-body .content-body,
+#panel-1 .node-stream-blogs .item-body .content-body,
+#panel-1 .node-stream-deal .item-body .content-body{
+  width: 209px;
+}
