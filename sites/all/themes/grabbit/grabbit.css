@@ -1423,14 +1423,23 @@ a.panel-filters{
 	font-size:12px;
   line-height:15px;
 }
-.node-stream-news h2,
-.node-stream-blogs h2,
-.node-stream-deal h2{
+#panel-0 .node-stream-news h2,
+#panel-0 .node-stream-blogs h2,
+#panel-0 .node-stream-deal h2{
   float: left;
   display: block;
   margin-bottom: 10px;
   line-height: 13px;
   width: 200px;
+}
+#panel-1 .node-stream-news h2,
+#panel-1 .node-stream-blogs h2,
+#panel-1 .node-stream-deal h2{
+  float: left;
+  display: block;
+  margin-bottom: 10px;
+  line-height: 13px;
+  width: 160px;
 }
 .node-stream-news h2 a,
 .node-stream-blogs h2 a,
