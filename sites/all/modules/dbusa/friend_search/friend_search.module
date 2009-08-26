@@ -88,12 +88,16 @@ function friend_search_show_friends(){
 	  else{
 	     $friends =  $facebook->api_client->call_method('Friends.get', array('api_key' => $api_key,
 									       'uid'=>"$suser")); 
+		
+		$uids = implode(", ",$friends);						
+		$details = $facebook->api_client->call_method('Users.getInfo', array('api_key' => $api_key,
+																       'uids'=>$uids));
+																
+		print_r($details);
 									
-									print_r($friends);
-									
-	  $output .='<div class="facebook-list"><a href="#" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container">'.$view->render().'</div></div>';
-	}
-}
+	    $output .='<div class="facebook-list"><a href="#" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container">'.$view->render().'</div></div>';
+	  }
+    }
 
     $accounts = oauth_twitter_get_uid($user->uid);
 
