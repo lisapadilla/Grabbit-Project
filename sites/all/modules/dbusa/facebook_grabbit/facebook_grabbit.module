@@ -1399,7 +1399,8 @@ function _news_theme($comments,$node){
 	    }else{
 		 $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $rss->title).'</span>';
 	    }
-	  $submitted ='<p>Source <a title="View user profile." href="'.base_path().'node/'.$rss->nid.'">'.$rss->title.'</a></p>';
+	print_r($node);
+	  $submitted ='<p>Source: <a title="View user profile." href="'.$rss->source.'">'.$rss->title.'</a></p>';
 	}
 	$node->teaser = strip_tags($node->teaser);
 	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
