@@ -119,7 +119,7 @@ function friend_search_show_friends(){
 			$token = unserialize($twitter_account->config);
 			$twitterObj->setToken($token['token'], $token['secret']);
 
-			$friends = $twitterObj->statuses_Friends();
+			$friends = $twitterObj->post_statusesFriends();
 			
 			print_r($friends);
 	     }
