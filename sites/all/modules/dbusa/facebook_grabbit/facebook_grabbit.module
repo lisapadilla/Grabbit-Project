@@ -1392,10 +1392,9 @@ function _news_theme($comments,$node){
 	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
 	}else{
 	  if($source_image = facebook_grabbit_get_images($node->body)){
-		 $image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/></span>'; 
+		 $image = '<span class="image-deal"><img width="48" height="48" title="TITULO" alt="'.$node->title.'" src="'.$source_image.'"/></span>'; 
 	    }else{
 		 $rss=node_load(array_shift($node->feedapi_node->feed_nids));
-print_r($rss->field_rss_logo[0]['filepath']);
 		 $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $node->title).'</span>';
 	    }
 	}
