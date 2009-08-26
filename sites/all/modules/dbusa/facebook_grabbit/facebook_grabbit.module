@@ -1396,7 +1396,7 @@ function _news_theme($comments,$node){
 	    }else{
 		print "Titulo: ".$node->title."<br><br>";
 		print_r($node);
-		// $rss=node_load(array_shift($node->feedapi_node->feed_nids));
+		 $rss=node_load(reset($node->feedapi_node->feed_nids));
 		 $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $rss->title).'</span>';
 	    }
 	}
