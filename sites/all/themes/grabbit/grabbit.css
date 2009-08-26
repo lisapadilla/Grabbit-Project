@@ -1507,6 +1507,7 @@ a.panel-filters{
 }
 .links_stream{
   float: right;
+  width: 60px;
 }
 #panel-0 .facebook-with-target{
   display: block;
