@@ -1526,6 +1526,7 @@ a.panel-filters{
 }
 .node-stream-news .news-comments{
   padding-top: 10px;
+  clear: both;
 }
 .node-stream-news .news-comments .news-comment-picture,
 .node-stream-blogs .news-comments .news-comment-picture,
