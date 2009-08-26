@@ -125,8 +125,8 @@ function friend_search_show_friends(){
 			$unser = json_decode($requ->data);
 			foreach($unser as $twitter){
 				$twitters .='<div class="twitter-friend">
-				               <div class="picture"><img src="'.$twitter['profile_image_url'].'" /></div>
-				               <div class="name">'.$twitter['name'].'</div>
+				               <div class="picture"><img src="'.$twitter->profile_image_url.'" /></div>
+				               <div class="name">'.$twitter->name.'</div>
 				             </div>';
 			  
 			}
