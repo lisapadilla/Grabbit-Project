@@ -123,7 +123,13 @@ function friend_search_show_friends(){
 			
 			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
 			$unser = json_decode($requ->data);
-			print_r($unser);
+			foreach($unser as $twitter){
+				$twitters .='<div class="twitter-friend">
+				               <div class="picture"><img src="'.$twitter['profile_image_url'].'" /></div>
+				               <div class="name">'.$twitter['name'].'</div>
+				             </div>';
+			  
+			}
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
@@ -133,7 +139,7 @@ function friend_search_show_friends(){
 	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
 	     }
 	
-	  $output .='<div class="twitter-list"><a href="#" class="twitter-friends"><h2>Twitter Following</h2></a><div class="twitter-container">'.$view->render().'</div></div>';	
+	  $output .='<div class="twitter-list"><a href="#" class="twitter-friends"><h2>Twitter Following</h2></a><div class="twitter-container">'.$twitters.'</div></div>';	
 	}
 	
 	return $output;
