@@ -1407,7 +1407,6 @@ a.panel-filters{
 #panel-1 .node-stream-deal .content-body, #panel-1 .node-stream-news .content-body,
 #panel-1 .node-stream-blogs .content-body
 {
-	width: 214px;
 	float: left;
 	font-size:12px;
   line-height:15px;
@@ -1592,6 +1591,6 @@ a.truncate_hide{
 #panel-1 .node-stream-news .item-body,
 #panel-1 .node-stream-blogs .item-body,
 #panel-1 .node-stream-deal .item-body{
-  width: 180px;
+  width: 170px;
   float: left;
 }
