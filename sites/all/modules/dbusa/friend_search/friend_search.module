@@ -68,7 +68,7 @@ function friend_search_show_friends(){
     $display_id = 'page_1';
     $view->set_display($display_id);	
 
-    $output .='<div class="grabbit-list"><a href="#" class="grabbit-friends"><h2>Grabbit Friends</h2></a><div class="grabbit-container" style="display:none">'.$view->render().'</div></div>';
+    $output .='<div class="grabbit-list"><a href="JavaScript:void(0);" class="grabbit-friends"><h2>Grabbit Friends</h2></a><div class="grabbit-container" style="display:none">'.$view->render().'</div></div>';
 
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	$profile = content_profile_load('profile', $user->uid);
@@ -103,7 +103,7 @@ function friend_search_show_friends(){
 			             </div>';
 		}
 									
-	    $output .='<div class="facebook-list"><a href="#" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container" style="display:none">'.$facebooks.'</div></div>';
+	    $output .='<div class="facebook-list"><a href="JavaScript:void(0);" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container" style="display:none">'.$facebooks.'</div></div>';
 	  }
     }
 
@@ -141,7 +141,7 @@ function friend_search_show_friends(){
 	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
 	     }
 	
-	  $output .='<div class="twitter-list"><a href="#" class="twitter-friends"><h2>Twitter Following</h2></a><div class="twitter-container" style="display:none">'.$twitters.'</div></div>';	
+	  $output .='<div class="twitter-list"><a href="JavaScript:void(0);" class="twitter-friends"><h2>Twitter Following</h2></a><div class="twitter-container" style="display:none">'.$twitters.'</div></div>';	
 	}
 	
 	return $output;
