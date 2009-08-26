@@ -1412,7 +1412,7 @@ a.panel-filters{
   line-height:15px;
 }
 .news-comments{
-	padding-left:58px;
+  padding-top: 10px;
 }
 .news-comments .news-comment{
 	margin-bottom:10px;
@@ -1427,9 +1427,10 @@ a.panel-filters{
 .node-stream-blogs h2,
 .node-stream-deal h2{
   float: left;
-  display: inline-block;
+  display: block;
   margin-bottom: 10px;
   line-height: 13px;
+  width: 200px;
 }
 .node-stream-news h2 a,
 .node-stream-blogs h2 a,
@@ -1584,13 +1585,13 @@ a.truncate_hide{
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
 #panel-0 .node-stream-deal .item-body{
-  width: 230px;
+  width: 280px;
   float: left;
 }
 
 #panel-1 .node-stream-news .item-body,
 #panel-1 .node-stream-blogs .item-body,
 #panel-1 .node-stream-deal .item-body{
-  width: 170px;
+  width: 210px;
   float: left;
 }
