@@ -48,7 +48,23 @@ function friend_search_menu()
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
   ); 
+
+  $items['user/friends'] = array( 
+    'title' => 'Friends', 
+    'page callback' => 'friend_search_show_friends', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
   return $items;
+}
+
+function friend_search_show_friends(){
+	
+	$view = views_get_view('friend_search');
+    $display_id = 'page';
+    $view->set_display($display_id);	
+
+    return $view->render();
 }
 
 /**
