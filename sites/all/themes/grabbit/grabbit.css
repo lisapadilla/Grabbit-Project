@@ -1410,7 +1410,7 @@ a.panel-filters{
 #panel-1 .node-stream-blogs .content-body
 {
 	width: 214px;
-	float: right;
+	float: left;
 	font-size:12px;
   line-height:15px;
 }
