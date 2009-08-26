@@ -91,7 +91,8 @@ function friend_search_show_friends(){
 		
 		$uids = implode(", ",$friends);						
 		$details = $facebook->api_client->call_method('Users.getInfo', array('api_key' => $api_key,
-																       'uids'=>$uids));
+																       'uids'=>$uids,
+																        'fields'=>'last_name, first_name'));
 																
 		print_r($details);
 									
