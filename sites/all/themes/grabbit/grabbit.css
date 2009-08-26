@@ -1013,6 +1013,7 @@
     width: 718px;
     float: right;
     padding: 20px 0px;
+    overflow:hidden;
   }
   #block-friend_search-2{
     width: 100%;
