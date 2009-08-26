@@ -205,9 +205,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 			$token = unserialize($twitter_account->config);
 			$twitterObj->setToken($token['token'], $token['secret']);
 
-			$friends = $twitterObj->statusesFriends();
-			
-			print_r($friends);
+			$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
