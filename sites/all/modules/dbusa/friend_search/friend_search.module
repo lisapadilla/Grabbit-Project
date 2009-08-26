@@ -60,11 +60,68 @@ function friend_search_menu()
 
 function friend_search_show_friends(){
 	
+	global $user;
+	
 	$view = views_get_view('friends');
     $display_id = 'page_1';
     $view->set_display($display_id);	
 
-    return $view->render();
+    $output .='<div class="grabbit-list"><a href="#" class="grabbit-friends"><h2>Grabbit Friends</h2></a><div class="grabbit-container">'.$view->render().'</div></div>';
+
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	$profile = content_profile_load('profile', $user->uid);
+	
+	if ($fuser){
+		
+	  require_once("facebook/facebook.php");
+	  require_once("facebook/facebook_desktop.php");
+	  include("facebook/config.php");
+
+	  $suser=$fuser->fid;
+	  $session_key=$fuser->kid;
+
+	  $facebook = new FacebookDesktop($api_key, $secret);
+	
+	  if ($facebook->set_user($suser, $session_key) != null){
+		  drupal_set_message("Facebook connection failed","error");
+	  }
+	  else{
+	     $friends =  $facebook->api_client->call_method('Friends.get', array('api_key' => $api_key,
+									       'uid'=>"$suser"); 
+									
+									print_r($friends);
+									
+	  $output .='<div class="facebook-list"><a href="#" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container">'.$view->render().'</div></div>';
+	}
+
+    $accounts = oauth_twitter_get_uid($user->uid);
+
+	if($accounts){
+		include_once 'includes/EpiCurl.php';
+		include_once 'includes/EpiOAuth.php';
+		include_once 'includes/EpiTwitter.php';
+		include 'includes/secret.php';
+
+		try{
+        	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+			$twitter_account = oauth_twitter_get_uid($user->uid);
+			$token = unserialize($twitter_account->config);
+			$twitterObj->setToken($token['token'], $token['secret']);
+
+			$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
+	     }
+	     catch(EpiOAuthBadRequestException $e){  
+	        drupal_set_message("Connection error Twitter","error");
+	     }catch(EpiOAuthUnauthorizedException $e){  
+	        drupal_set_message("Error in Twitter","error");
+	     }catch(EpiOAuthException $e){  
+	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+	     }
+	
+	  $output .='<div class="twitter-list"><a href="#" class="twitter-friends"><h2>Twitter Following</h2></a><div class="twitter-container">'.$view->render().'</div></div>';	
+	}
+	
+	return $output;
 }
 
 /**

@@ -1,0 +1,18 @@
+***************
+*** 31,38 ****
+  // | For help with this library, contact developers-help@facebook.com          |
+  // +---------------------------------------------------------------------------+
+  
+- // NOTE: if you change this file near this line, you must update facebook.patch!
+- include_once $_SERVER['PHP_ROOT'].'/lib/api/client/php_1_1/facebookapi_php5_restlib.php';
+  
+  define('FACEBOOK_API_VALIDATION_ERROR', 1);
+  class Facebook {
+--- 31,37 ----
+  // | For help with this library, contact developers-help@facebook.com          |
+  // +---------------------------------------------------------------------------+
+  
++ include_once 'facebookapi_php5_restlib.php';
+  
+  define('FACEBOOK_API_VALIDATION_ERROR', 1);
+  class Facebook {
