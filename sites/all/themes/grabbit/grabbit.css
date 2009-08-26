@@ -1583,3 +1583,10 @@ a.truncate_hide{
 	background: url(images/various/less.gif) 0 0 no-repeat;
 	padding-left:10px;
 }
+
+#panel-0 .node-stream-news .item-body,
+#panel-0 .node-stream-blogs .item-body,
+#panel-0 .node-stream-deal .item-body{
+  width: 200px;
+  float: left;
+}
