@@ -1427,9 +1427,10 @@ a.panel-filters{
 .node-stream-blogs h2,
 .node-stream-deal h2{
   float: left;
-  display: inline-block;
+  display: block;
   margin-bottom: 10px;
   line-height: 13px;
+  width: 200px;
 }
 .node-stream-news h2 a,
 .node-stream-blogs h2 a,
