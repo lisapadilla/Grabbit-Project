@@ -119,7 +119,7 @@ function friend_search_show_friends(){
 			$token = unserialize($twitter_account->config);
 			$twitterObj->setToken($token['token'], $token['secret']);
 			$twitterObj->get_accountVerify_credentials();
-			print_r($twitterObj->curlre->sponses);
+			print_r($twitterObj->curlr->responses);
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
