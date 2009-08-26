@@ -1011,6 +1011,7 @@
     width: 718px;
     float: right;
     padding: 20px 0px;
+    overflow:hidden;
   }
   #block-friend_search-2{
     width: 100%;
@@ -1120,7 +1121,9 @@
   }
   .facebook-post .facebook-date,
   .twitter-message-stream .twitter-date,
-  .node-stream-deal .submitted {
+  .node-stream-deal .submitted, 
+  .node-stream-news .submitted,
+  .node-stream-blogs .submitted{
     display: block;
     clear: both;
     color: #999999;
@@ -1140,9 +1143,7 @@
     margin-right: 10px;
   }
   .facebook-post .facebook-comment-text, 
-  .facebook-post .facebook-comment-timeline,
-  .node-stream-news p,
-  .node-stream-blogs p{
+  .facebook-post .facebook-comment-timeline{
     font-size: 12px;
     line-height: 15px;
   }
@@ -1243,6 +1244,16 @@ a.facebook-makecomment-link, a.comment-news{
   width: 10px;
   height: 12px;
   background: url(images/various/reply_ico.gif) 0 0 no-repeat;
+  float: right;
+  text-indent: 3000em;
+  overflow: hidden;
+  margin-left: 10px;
+}
+.url-deal a{
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: url(images/various/dollar_ico.gif) 0 0 no-repeat;
   float: right;
   text-indent: 3000em;
   overflow: hidden;
@@ -1384,7 +1395,7 @@ a.panel-filters{
 	font-size: 12px;
 	line-height: 15px;
 }
-.node-stream-deal .image-deal
+.node-stream-deal .image-deal, .node-stream-blogs .image-deal, .node-stream-news .image-deal
 {
 	float: left;
 	margin-right: 10px;
@@ -1393,16 +1404,26 @@ a.panel-filters{
 {
 	float: left;
 }
-#panel-1 .node-stream-deal .content-body
+#panel-1 .node-stream-deal .content-body, #panel-1 .node-stream-news .content-body,
+#panel-1 .node-stream-blogs .content-body
 {
 	width: 214px;
 	float: left;
 	font-size:12px;
   line-height:15px;
 }
-#panel-0 .node-stream-deal .content-body
+.news-comments{
+	padding-left:58px;
+}
+.news-comments .news-comment{
+	margin-bottom:10px;
+}
+#panel-0 .node-stream-deal .content-body, #panel-0 .node-stream-news .content-body,
+#panel-0 .node-stream-blogs .content-body
 {
 	width: 280px;
+	font-size:12px;
+  line-height:15px;
 }
 .node-stream-news h2,
 .node-stream-blogs h2,
@@ -1543,4 +1564,22 @@ a.panel-filters{
 }
 .view-friends .views-row .views-field-action-socital-networks .field-content .from-twitter{
   margin-left:5px;
+}
+a.truncate_show{
+	display:block;
+	color:#0073CF;
+	font-weight:bold;
+	margin-top:10px;
+	font-size:12px;
+	background: url(images/various/more.gif) 0 0 no-repeat;
+	padding-left:10px;
+}
+a.truncate_hide{
+	display:block;
+	color:#0073CF;
+	font-weight:bold;
+	margin-top:10px;
+	font-size:12px;
+	background: url(images/various/less.gif) 0 0 no-repeat;
+	padding-left:10px;
 }

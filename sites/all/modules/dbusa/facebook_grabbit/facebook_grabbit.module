@@ -396,7 +396,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<span class="facebook-with-target"><a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'</span>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
-	  '.$msg_formatted.'<span class="facebook-date">on '.format_date($post['created_time']).'</span>
+	<div class="content-truncated">'.$msg_formatted.'</div><span class="facebook-date">on '.format_date($post['created_time']).'</span>
 	</div></div><div class="facebook-post-comments clearfix">'.$show_comments.'</div>';
 	
 
@@ -462,12 +462,13 @@ function prepeare_standar_update($post,$user,$profiles){
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
-	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">';
+	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">
+	<div class="content-truncated">';
 	if($msg_formatted){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .='<div class="facebook-attachment">'.$attachment.'<span class="facebook-date">on '.format_date($post['created_time']).'</span></div></div>
+	$output .='<div class="facebook-attachment">'.$attachment.'</div></div><span class="facebook-date">on '.format_date($post['created_time']).'</span></div>
 	<div class="facebook-post-comments clearfix">'.$show_comments.'</div>
 	<div class="facebook-comment-form">
 	<div class="facebook-form" style="display:none;">
@@ -1372,57 +1373,62 @@ function facebook_grabbit_tags_form(){
 }
 
 function _news_theme($comments,$node){
-	$comments_output = '<div class="news-comments">';
-						while ($item = db_fetch_object($comments)){
-							$profile = content_profile_load('profile', $item->uid);
 	
-							$comments_output .= '<div id="'.$item->cid.'" class="news-comment"><span class="news-comment-picture">';
-																			
-						  $comments_output .= theme('imagecache', 'friend_comment_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image', '', array('width'=>'30'));
-																											
-							$comments_output .= '</span>
-																		<span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
-																		<span class="news-comment-content">'.$item->comment.'</span>
-																	</div>';
-						}
+	$comments_output = '<div class="news-comments">';
+	
+	while ($item = db_fetch_object($comments)){
+	  $profile = content_profile_load('profile', $item->uid);
+
+      $comments_output .= '<div id="'.$item->cid.'" class="news-comment"><span class="news-comment-picture">';																			
+      $comments_output .= theme('imagecache', 'friend_comment_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image', '', array('width'=>'30'));																											
+	  $comments_output .= '</span><span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
+						  <span class="news-comment-content">'.$item->comment.'</span></div>';
+	}
 						
-						$comments_output .= '</div>';
+	$comments_output .= '</div>';
 						
-						if($node->type=="deal"){
-						  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
-						  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['value'].'">Deal</a></span>';
-					    }
+	if($node->type=="deal"){
+	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
+	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
+	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
+
+	}else{
+	  $rss=node_load(reset($node->feedapi_node->feed_nids));
+	  if($source_image = facebook_grabbit_get_images($node->body)){
+		 $image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/></span>'; 
+	    }else{
+		 $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $rss->title).'</span>';
+	    }
+	  $submitted ='<p>Source: <a title="View original article" target="_blank" href="'.$node->feedapi_node->url.'">'.$rss->title.'</a></p>';
+	}
+	$node->teaser = strip_tags($node->teaser);
+	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
+	             <div class="meta">
+					<div class="links_stream">  
+					  '.$deal.'
+					  '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
+					  <a href="javascript:void(0)" class="comment-news">Comment</a>
+					  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
+					</div>
+					'.$image.'
+					<h2>'.l($node->title,'node/'.$node->nid).'</h2>
+					<div class="content-body">
+					  <div class="content-truncated">'.$node->teaser.'</div>
+					  <span class="submitted">'.$submitted.'</span>	
+					</div>
+				</div>
+				'.$comments_output.'
+				<div class="news-comment-submit">
+				  <div class="news-form" style="display:none;">
+				    <form id="myForm" style="display:none;">
+					  <input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
+					  <input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
+					</form>
+				  </div>
+				</div>
+			</div>';
 						
-						$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
-														<div class="meta">
-															  <div class="links_stream">
-															    
-															    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
-																<a href="javascript:void(0)" class="comment-news">Comment</a>
-																<span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
-															  </div>
-															     '.$image.'
-															     <h2>
-																  '.l($node->title,'node/'.$node->nid).'
-																 </h2>
-															     <div class="content-body">
-																    
-																	<p>'.$node->teaser.'</p>
-																	<span class="submitted"><p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p></span>	
-																  </div>
-														</div>
-														'.$comments_output.'
-														<div class="news-comment-submit">
-															<div class="news-form" style="display:none;">
-																<form id="myForm" style="display:none;">
-																	<input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
-																	<input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
-																</form>
-															</div>
-														</div>
-												</div>';
-						
-						return $output;
+	 return $output;
 }
 
 function facebook_grabbit_news_comment(){
@@ -1457,4 +1463,17 @@ function facebook_grabbit_news_comment(){
 					</div>';
 	}
 	
+}
+
+function facebook_grabbit_get_images($body) {
+	preg_match_all('/<\s*img [^\>]*src\s*=\s*[\""\']?([^\""\'\s>]*)/i', $body, $matches);
+	if ($matches[1][0]){
+		if(strpos($matches[1][0], 'ads') !== FALSE){
+		  return FALSE;
+		}else{
+			return $matches[1][0];
+		}
+	}else{
+		return FALSE;
+	}
 }
