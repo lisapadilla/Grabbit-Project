@@ -18,6 +18,8 @@ function grabbit_facebook_account($account){
 		
 		$facebook->set_user($suser, $session_key);
 		$user_details = $facebook->api_client->users_getInfo($suser, 'last_name, first_name, pic_square '); 
+		
+		print_r($user_details);
 
 		$output = '<div class="facebook-details">You have a facebook account with grabbit:
 		            <div class="facebook-details-name">'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'</div>
