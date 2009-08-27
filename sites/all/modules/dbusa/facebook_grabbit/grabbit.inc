@@ -21,10 +21,6 @@ function grabbit_facebook_account($account){
 		
 		print_r($user_details);
 
-		$output = '<div class="facebook-details">You have a facebook account with grabbit:
-		            <div class="facebook-details-name">'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'</div>
-		            <div class="facebook-details-pic"><img src="'.$user_details[0]['pic_square'].'" /></div>
-		           </div>';
 		
 	}else{
 		
