@@ -881,7 +881,7 @@ function facebook_grabbit_private_view_panel($param){
 											       'limit'=>"15"));		      
 
 			if ($stream){
-			  
+			  print_r($stream);
 			  $friends = $stream['profiles'];
 			  $posts = $stream['posts'];
   
