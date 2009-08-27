@@ -248,7 +248,7 @@ function facebook_grabbit_facebook(){
 	  	$sessionkey = $_REQUEST['fb_sig_session_key'];
 
 	    $fid=$facebook->api_client->user;
-	print_r($fid);
+
 	    facebook_grabbit_save_fid($_GET["duid"],$fid,$sessionkey);
 	}
     
@@ -285,8 +285,6 @@ function facebook_grabbit_save_fid($user,$fid,$kid){
     db_query("UPDATE {facebook_grabbit} SET kid='%s', fid=%d WHERE uid=%s",$kid,$fid,$user);	
     $result = TRUE;
   }
-
-print_r($fid);
 
   return $result;
 
