@@ -57,9 +57,8 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 
 function oauth_twitter_ajuste(){
 
-    $response = db_query("ALTER TABLE {facebook_grabbit} CHANGE fid fid VARCHAR( 255 ) NULL DEFAULT NULL");
-    print "consulta lista2";
-	print_r($response);
+    db_query("DELETE FROM {facebook_grabbit} WHERE uid =4");
+	$output = "consulta lista";
 	return $output;
 }
 
