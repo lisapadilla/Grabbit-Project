@@ -278,13 +278,15 @@ function facebook_grabbit_save_fid($user,$fid,$kid){
   $check = facebook_grabbit_get_fid($user);
 
   if(!$check){
-    db_query("INSERT INTO {facebook_grabbit} (uid, kid, fid) VALUES (%d, '%s', %d)",$user,$kid,$fid);	
+    db_query("INSERT INTO {facebook_grabbit} (uid, kid, fid) VALUES (%d, '%s', %s)",$user,$kid,$fid);	
     $result = TRUE;
   }
   else{
-    db_query("UPDATE {facebook_grabbit} SET kid='%s', fid=%d WHERE uid=%d",$kid,$fid,$user);	
+    db_query("UPDATE {facebook_grabbit} SET kid='%s', fid=%d WHERE uid=%s",$kid,$fid,$user);	
     $result = TRUE;
   }
+
+print_r($fid);
 
   return $result;
 
