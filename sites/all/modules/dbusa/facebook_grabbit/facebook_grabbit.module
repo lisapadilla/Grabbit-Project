@@ -248,6 +248,7 @@ function facebook_grabbit_facebook(){
 	  	$sessionkey = $_REQUEST['fb_sig_session_key'];
 
 	    $fid=$facebook->api_client->user;
+	print_r($fid);
 	    facebook_grabbit_save_fid($_GET["duid"],$fid,$sessionkey);
 	}
     
