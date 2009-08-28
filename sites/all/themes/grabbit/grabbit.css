@@ -1099,6 +1099,14 @@
     margin-bottom: 10px;
     display: block;
   }
+#panel-1 .facebook-post .facebook-post-body, #panel-1 .facebook-post .facebook-attachment{
+    width: 200px;
+    float: left;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 10px;
+    display: block;
+  }
   #panel-1 .twitter-message-stream .twitter-body{
     width: 200px;
     float: left;
