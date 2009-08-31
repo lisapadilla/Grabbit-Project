@@ -7,7 +7,6 @@ $(document).ready(function() {
 	$("#"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
 	        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 	});
-	alert(current_panel_1.attr('id'));
 	current_panel_1.show();
 	
 	for (var i = 1; i< stories_at_first_p1; i++){
@@ -27,7 +26,7 @@ $(document).ready(function() {
 			for (var i = 0; i< stories_per_slide_p1; i++){	
 				if (current_panel_1.next().attr('class') != undefined){
 					current_panel_1 = current_panel_1.next();
-					alert(current_panel_1.attr('id'));
+					alert($("#"+current_panel_1.attr('id')+" .content-truncated").html());
 					$("#"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
 					        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 					});
