@@ -1245,7 +1245,7 @@ function theme_twitter_message($message){
 
 	$output .='<div class="listable"><span class="twitter-image"><img src="'.$message->user["profile_image_url"].'" /></span></div>
 	<a href="http://www.twitter.com/'.$message->user["screen_name"].'" class="twitter-name-link" target="_blank">'.$message->user["name"].'</a>
-	          <div class="twitter-body"><div class="twitter-body-contains">'.$msg_formatted. '</div> <span class="twitter-date">on '. format_date(strtotime($message->created_at)) . '</span>
+	          <div class="twitter-body"><div class="twitter-body-contains"><div class="content-truncated">'.$msg_formatted. '</div></div> <span class="twitter-date">on '. format_date(strtotime($message->created_at)) . '</span>
 	            </div>
 			  </div>';
 		
@@ -1403,7 +1403,7 @@ function _news_theme($comments,$node){
 	  $submitted ='<p>Source: <a title="View original article" target="_blank" href="'.$node->feedapi_node->url.'">'.$rss->title.'</a></p>';
 	}
 	$node->teaser = strip_tags($node->teaser);
-	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element">
+	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element" id="node-'.$node->nid.'">
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
