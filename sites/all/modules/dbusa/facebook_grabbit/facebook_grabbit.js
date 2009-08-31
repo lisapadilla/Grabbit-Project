@@ -13,10 +13,10 @@ $(document).ready(function() {
 	for (var i = 1; i< stories_at_first_p1; i++){
 		current_panel_1 = current_panel_1.next();
 	
-/*		$("#"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
+		$("#"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
 		        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 		});
-*/		current_panel_1.show();
+		current_panel_1.show();
 	}
 	
 	$('#panel-0').append('<div class="panel-controller"></a><a class="main-stream-next-p1" href="javascript:void(0)">more</a></div>');
