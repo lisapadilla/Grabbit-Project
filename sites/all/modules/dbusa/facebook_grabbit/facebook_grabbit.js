@@ -5,7 +5,7 @@ $(document).ready(function() {
 	var stories_per_slide_p1 = 4;
 	var current_panel_1 = $('#panel-0 .panel-wraper div:first-child');
 
-	$("#"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
+	$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
 	        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 	});
 	current_panel_1.show();
@@ -13,7 +13,7 @@ $(document).ready(function() {
 	for (var i = 1; i< stories_at_first_p1; i++){
 		current_panel_1 = current_panel_1.next();
 	
-		$("#"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
+		$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
 		        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 		});
 		current_panel_1.show();
@@ -29,7 +29,7 @@ $(document).ready(function() {
 				if (current_panel_1.next().attr('class') != undefined){
 					current_panel_1 = current_panel_1.next();
 			
-					$("#"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
+					$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 80,{
 					        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 					});
 					current_panel_1.show();
@@ -46,18 +46,18 @@ $(document).ready(function() {
 	var stories_per_slide_p2 = 4;
 	var current_panel_2 = $('#panel-1 .panel-wraper div:first-child');
 
-/*	$("#"+current_panel_2.attr('id')+" .content-truncated").truncate( 80,{
+	$("#panel-1 .panel-wraper #"+current_panel_2.attr('id')+" .content-truncated").truncate( 80,{
 	        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 	});
-*/	current_panel_2.show();
+	current_panel_2.show();
 	
 	for (var i = 1; i< stories_at_first_p2; i++){
 		
 		current_panel_2 = current_panel_2.next();		
-/*		$("#"+current_panel_2.attr('id')+" .content-truncated").truncate( 80,{
+		$("#panel-1 .panel-wraper #"+current_panel_2.attr('id')+" .content-truncated").truncate( 80,{
 		        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 		});
-*/		current_panel_2.show();
+		current_panel_2.show();
 		
 	}
 	
@@ -70,7 +70,7 @@ $(document).ready(function() {
 			for (var i = 0; i< stories_per_slide_p2; i++){	
 				if (current_panel_2.next().attr('class') != undefined){
 					current_panel_2 = current_panel_2.next();
-					$("#"+current_panel_2.attr('id')+" .content-truncated").truncate( 80,{
+					$("#panel-1 .panel-wraper #"+current_panel_2.attr('id')+" .content-truncated").truncate( 80,{
 					        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 					});
 					current_panel_2.show();
