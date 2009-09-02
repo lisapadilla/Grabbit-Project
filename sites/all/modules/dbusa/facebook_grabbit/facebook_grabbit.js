@@ -5,7 +5,7 @@ $(document).ready(function() {
 	var stories_per_slide_p1 = 4;
 	var current_panel_1 = $('#panel-0 .panel-wraper div:first-child');
 
-	$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 130,{
+	$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 135,{
 	        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 	});
 	current_panel_1.show();
@@ -13,7 +13,7 @@ $(document).ready(function() {
 	for (var i = 1; i< stories_at_first_p1; i++){
 		current_panel_1 = current_panel_1.next();
 	
-		$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 130,{
+		$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 135,{
 		        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 		});
 		current_panel_1.show();
@@ -29,7 +29,7 @@ $(document).ready(function() {
 				if (current_panel_1.next().attr('class') != undefined){
 					current_panel_1 = current_panel_1.next();
 			
-					$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 130,{
+					$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 135,{
 					        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 					});
 					current_panel_1.show();
