@@ -53,13 +53,13 @@ $(document).ready(function() {
 	current_panel_2.show();
 	
 	for (var i = 1; i< stories_at_first_p2; i++){
-		
+		alert(current_panel_2.next().attr('id'));
 		if(current_panel_2.next().attr('id') != undefined){
 			current_panel_2 = current_panel_2.next()
-	/*		$("#panel-1 .panel-wraper #"+current_panel_2.attr('id')+" .content-truncated").truncate( 100,{
+			$("#panel-1 .panel-wraper #"+current_panel_2.attr('id')+" .content-truncated").truncate( 100,{
 			        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 			});
-		*/	current_panel_2.show();
+			current_panel_2.show();
 		}		
 		
 	}
