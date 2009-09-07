@@ -20,7 +20,7 @@ $_pluginInfo=array(
  * @version 1.0.8
  */
 
-
+if (0>1):
 class facebook extends OpenInviter_Base
 	{
 	private $login_ok=false;
@@ -231,5 +231,7 @@ class facebook extends OpenInviter_Base
 		$this->stopPlugin();
 		return true;	
 		}
-	}	
+	}
+		
+	endif;
 ?>
