@@ -58,8 +58,8 @@ $(document).ready(function() {
 			current_panel_2 = current_panel_2.next()
 	/*		$("#panel-1 .panel-wraper #"+current_panel_2.attr('id')+" .content-truncated").truncate( 100,{
 			        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
-	*/		});
-			current_panel_2.show();
+			});
+		*/	current_panel_2.show();
 		}		
 		
 	}
