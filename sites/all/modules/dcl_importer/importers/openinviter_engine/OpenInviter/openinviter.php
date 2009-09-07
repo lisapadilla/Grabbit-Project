@@ -208,7 +208,7 @@ class OpenInviter
 		{
 	//	if (!$this->checkLoginCredentials($user)) return false;
 		return $this->plugin->login($user,$pass);
-	//	}
+		}
 	
 	/**
 	 * Get the current user's contacts
