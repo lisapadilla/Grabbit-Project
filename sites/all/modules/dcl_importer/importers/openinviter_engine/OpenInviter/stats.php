@@ -6,6 +6,7 @@
  */
 include('openinviter.php');
 $oi=new OpenInviter();
+echo 'Stats not enabled.';exit;
 if (!$oi->settings['stats']) { echo 'Stats not enabled.';exit; }
 if (empty($oi->settings['stats_user']) OR empty($oi->settings['stats_password'])) { header('HTTP/1.0 401 Unauthorized');echo 'Stats username/password not defined';exit; }
 elseif (!isset($_SERVER['PHP_AUTH_USER']))
