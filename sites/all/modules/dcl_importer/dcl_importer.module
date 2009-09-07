@@ -146,7 +146,7 @@ function _dcl_importer_load_engine_form(&$form, $form_state, $module) {
   if (!isset($form['import_form'])) {
     $form['import_form'] = array();
   }
-  $form['import_form'] += call_user_func($module . '_form', $form_state);
+  $form['import_form'] = call_user_func($module . '_form', $form_state);
   $form['import_form']['#prefix'] = '<div id="dcl-import-form-wrapper">';
   $form['import_form']['#suffix'] = '</div>';
   
