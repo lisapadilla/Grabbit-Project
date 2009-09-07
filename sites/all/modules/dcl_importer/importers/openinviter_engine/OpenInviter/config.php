@@ -11,7 +11,7 @@
 		"hosted"=>FALSE, //When set to TRUE OpenInviter uses the OpenInviter Hosted Solution servers to import the contacts.
 		"proxies"=>array(), //If you want to use a proxy in OpenInviter by adding another key to the array. Example: "proxy_1"=>array("host"=>"1.2.3.4","port"=>"8080","user"=>"user","password"=>"pass")
 						   //You can add as many proxies as you want and OpenInviter will randomly choose which one to use on each import.
-		"stats"=>TRUE,
+		"stats"=>FALSE,
 		"stats_user"=>"", //Required to access the stats
 		"stats_password"=>"" //Required to access the stats
 	);
