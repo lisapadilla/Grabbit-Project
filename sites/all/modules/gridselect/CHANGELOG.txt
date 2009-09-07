@@ -1,0 +1,10 @@
+// $Id: CHANGELOG.txt,v 1.2 2009/08/28 23:40:15 hadsie Exp $
+
+Grid Select 6.x-1.x-dev - Aug 28, 2009
+-------------------------------
+Added support for CCK userreference field
+Cleaned up a lot of the theming
+
+Grid Select 6.x-1.x-dev - Aug 20, 2009
+------------------------------- 
+Initial release of the gridselect module.

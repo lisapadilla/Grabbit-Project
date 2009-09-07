@@ -1,0 +1,65 @@
+<?php
+// $Id: dcl_importer_service.module,v 1.1.4.2 2009/08/21 03:16:32 hadsie Exp $
+
+/**
+ * @file
+ * Integration of services module with dcl_importer module.
+ */
+
+/**
+ * Implementation of hook_service().
+ */
+function dcl_importer_service_service() {
+  return array(
+    // Get providers.
+    array(
+      '#method'           => 'dcl_service.getProviders',
+      '#callback'         => 'dcl_service_get_providers',
+      '#key'              => FALSE,
+      '#return'           => 'array',
+      '#help'             => t('Returns the providers.'),
+    ),
+
+    // Get contact from provider.
+    array(
+      '#method'           => 'dcl_service.getContacts',
+      '#callback'         => 'dcl_service_get_contacts',
+      '#key'              => FALSE,
+      '#args'             => array(
+        array(
+          '#name'         => 'provider',
+          '#type'         => 'string',
+          '#description'  => t('The provider.')
+        ),
+        array(
+          '#name'         => 'username',
+          '#type'         => 'string',
+          '#description'  => t('The username.')
+        ),
+        array(
+          '#name'         => 'password',
+          '#type'         => 'string',
+          '#description'  => t('The user\'s password.')
+        ),
+      ),
+      '#return'           => 'array',
+      '#help'             => t('Returns the contacts from the selected provider.'),
+    ),
+  );
+}
+
+/**
+ * Service callback; Returns the providers.
+ */
+function dcl_service_get_providers() {
+  return dcl_importer_api_get_providers();
+}
+
+/**
+ * Service callback; Returns the contacts from the selected provider.
+ */
+function dcl_service_get_contacts($provider, $username, $password) {
+  $errors = array();
+  $token = dcl_importer_api_authenticate($errors, $provider, $username, $password);
+  return dcl_importer_api_get_contacts($token);
+}

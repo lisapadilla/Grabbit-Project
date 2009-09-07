@@ -1,0 +1,91 @@
+<?php
+// $Id: dcl_importer_friendlist.module,v 1.1.4.2 2009/08/22 05:52:50 hadsie Exp $
+/**
+ * @file
+ * This module provides integration between the dcl_importer module and the
+ * friendlist module
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function dcl_importer_friendlist_menu() {
+  $items = array();
+
+  $items['user/%user/find_friends'] = array(
+    'title' => 'Find friends',
+    'description' => t('Find and invite friends'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dcl_importer_form'),
+    'access callback' => 'dcl_importer_multi_user_access',
+    'access arguments' => array('have relationships with friendlist', 'access DCL Importer'),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_import_action().
+ */
+function dcl_importer_friendlist_import_action($op, $a2, $a3 = NULL) {
+  if ($op == 'contact_actions' && user_access('have relationships with friendlist')) {
+    $actions = array();
+    foreach ($a2 as $uid) {
+      if (!is_numeric($uid)) {
+        continue;
+      }
+      $friendlist_actions = dcl_importer_friendlist_links($uid);
+      foreach ($friendlist_actions as $action) {
+        $actions[$uid] = $action;
+        $actions[$uid]['uid'] = $uid;
+      }
+    }
+    return $actions;
+  }
+  elseif ($op == 'submit') {
+    global $user;
+    
+    $form = $a2;
+    $form_state = $a3;
+
+    $contacts = $form_state['values']['existing_contacts'];
+    $rtid = $form_state['values']['rtid'];
+    $message = $form_state['values']['message'];
+    if (is_array($contacts)) {
+      foreach ($contacts as $contact_uid) {
+        friendlist_api_relation_add($user->uid, $contact_uid, $rtid, $message, FALSE);
+      }
+    }
+  }
+}
+
+function dcl_importer_friendlist_links($account_uid) {
+  global $user;
+
+  $allowed_statuses = array('OW_NONE', 'OW_2_TO_1', 'TW_NONE', 'TW_2_TO_1_P', 'TW_2_TO_1_D');
+  // The user is "self": return nothing.
+  if ($user->uid == $account_uid) {
+    return array();
+  }
+
+  // Load the relation types
+  $relation_types = friendlist_api_relation_types_load_all();
+  $links = array();
+  $op = 'add';
+  foreach ($relation_types as $rt) {
+    if ($rt->active) {
+      // Get the status data.
+      $status = friendlist_api_relation_status_get($user, $account_uid, $rt->rtid);
+      if (!in_array($status, $allowed_statuses)) {
+        continue;
+      }
+
+      $links[] = array(
+        'key name' => 'rtid',
+        'key value' => $rt->rtid,
+      );
+    }
+  }
+  return $links;
+}

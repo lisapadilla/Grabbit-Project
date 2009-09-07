@@ -1,0 +1,77 @@
+<?php
+// $Id: dcl_importer_user_relationships.module,v 1.1.4.3 2009/09/01 04:01:42 hadsie Exp $
+/**
+ * @file
+ * This module provides integration between the dcl_importer module and the
+ * user relationships module
+ */
+
+function dcl_importer_user_relationships_menu() {
+  $items = array();
+
+  $items['relationships/find_friends'] = array(
+    'title' => 'Find friends',
+    'description' => t('Find and invite friends'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dcl_importer_form'),
+    'access callback' => 'dcl_importer_multi_user_access',
+    'access arguments' => array('access DCL Importer', 'can have relationships'),
+    'weight' => -8,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_import_action().
+ */
+function dcl_importer_user_relationships_import_action($op, $a2, $a3 = NULL) {
+  global $user;
+  
+  if ($op == 'contact_actions') {
+    $actions = array();
+    // This currently only uses the first type returned
+    $default_relationship = user_relationships_type_load();
+
+    foreach ($a2 as $uid) {
+      if (!is_numeric($uid)) {
+        continue;
+      }
+      
+      $relationships = user_relationships_load(array("between" => array($uid, $user->uid)));
+      // Don't add them if we they already have a relationship
+      $found = FALSE;
+      foreach ($relationships as $relationship) {
+        if ($relationship->rtid == $default_relationship->rtid) {
+          $found = TRUE;
+          break;
+        }
+      }
+      if ($found) {
+        continue;
+      }
+      
+      $actions[$uid] = array(
+        'key name' => 'ur_rtid',
+        'key value' => $relationship->rtid,
+        'uid' => $uid,
+      );
+    }
+    return $actions;
+  }
+  elseif ($op == 'submit') {
+    global $user;
+    $form = $a2;
+    $form_state = $a3;
+
+    $contacts = $form_state['values']['existing_contacts'];
+    $rtid = $form_state['values']['ur_rtid'];
+    $message = $form_state['values']['message'];
+    if (is_array($contacts)) {
+      foreach ($contacts as $contact_uid) {
+        user_relationships_request_relationship($user, $contact_uid, $rtid);
+      }
+    }
+  }
+}

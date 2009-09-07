@@ -1,0 +1,14 @@
+; $Id: dcl_importer_friendlist.info,v 1.1.4.2 2009/08/21 03:16:31 hadsie Exp $
+name = DCL Importer - Friendlist connector
+description = Connects the DCL Importer module with the friendlist module
+core = 6.x
+package = DCL Importer
+dependencies[] = dcl_importer
+dependencies[] = friendlist_ui
+
+; Information added by drupal.org packaging script on 2009-09-01
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "dcl_importer"
+datestamp = "1251806890"
+

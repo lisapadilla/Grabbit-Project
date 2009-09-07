@@ -1,0 +1,150 @@
+<?php
+// $Id: gridselectwidget.module,v 1.3 2009/09/02 00:25:40 hadsie Exp $
+/**
+ * @file
+ * Implementation of the CCK specific hooks for the gridselect widget.
+ */
+
+/**
+ * Implementation of hook_theme().
+ */
+function gridselectwidget_theme() {
+  return array(
+    'gridselectwidget_select' => array(
+      'arguments' => array('element' => NULL),
+    ),
+  );
+}
+
+/**
+ * Implementation hook_info().
+ */
+function gridselectwidget_widget_info() {
+  return array(
+    'gridselectwidget_select' => array(
+      'label' => t('Grid Select'),
+      'field types' => array('userreference'),
+      'multiple values' => CONTENT_HANDLE_MODULE,
+      'callbacks' => array(
+        'default value' => CONTENT_CALLBACK_DEFAULT,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of FAPI hook_elements().
+ */
+function gridselectwidget_elements() {
+  return array(
+    'gridselectwidget_select' => array(
+      '#input' => TRUE,
+      '#columns' => array('value'), '#delta' => 0,
+      '#process' => array('gridselectwidget_select_process'),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_widget_settings().
+ */
+function gridselectwidget_widget_settings($op, $widget) {
+  // Do nothing until we have the sidebar configured properly.
+  return;
+  switch ($op) {
+    case 'form':
+      $form = array();
+      $form['sidebar'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Display sidebar'),
+        '#default_value' => isset($widget['sidebar']) ? $widget['sidebar'] : FALSE,
+        '#description' => t('If selected a sidebar containing all currently selected users will be added to the gridselect box.'),
+      );
+      return $form;
+
+    case 'save':
+      return array('sidebar');
+  }
+}
+
+
+/**
+ * Implementation of hook_widget().
+ */
+function gridselectwidget_widget(&$form, &$form_state, $field, $items, $delta = 0) {
+  $element = array(
+    '#type' => $field['widget']['type'],
+    '#default_value' => !empty($items) ? $items : array(),
+  );
+  return $element;
+}
+
+function gridselectwidget_select_process($element, $edit, &$form_state, $form) {
+  $field = $form['#field_info'][$field_name];
+  $field_key  = $element['#columns'][0];
+
+  $element[$field_key] = array(
+    '#type' => 'optionwidgets_select',
+    '#default_value' => isset($element['#value']) ? $element['#value'] : '',
+    '#required' => $element['#required'],
+    '#description' => $element['#description'],
+    '#field_name' => $element['#field_name'],
+    '#type_name' => $element['#type_name'],
+    '#delta' => $element['#delta'],
+    '#columns' => $element['#columns'],
+    '#multiple' => TRUE,
+    '#sidebar' => isset($field['widget']['sidebar']) ? $field['widget']['sidebar'] : FALSE,
+  );
+
+  if (empty($element[$field_key]['#element_validate'])) {
+    $element[$field_key]['#element_validate'] = array();
+  }
+  // Use the userreference validation function
+  array_unshift($element[$field_key]['#element_validate'], 'userreference_optionwidgets_validate');
+
+  return $element;
+}
+
+function gridselectwidget_avatar($uid) {
+  // Grab a profile picture if one exists
+  if (variable_get('user_pictures', FALSE)) {
+    $account = user_load($uid);
+    $picfile = $account->picture;
+    if (empty($picfile)) {
+      $picfile = variable_get('user_picture_default', '');
+    }
+    return !empty($picfile) ? '/' . $picfile : '';
+  }
+}
+
+function theme_gridselectwidget_select($element) {
+  // Get to the bottom most field in the tree. This is the one with the values.
+  $field_key = $element['#columns'][0];
+  $field = $element[$field_key];
+  while ($field_key = $field['#columns'][0]) {
+    $field = $field[$field_key];
+  }
+
+  $options = $field['#options'];
+  $processed_options = array();
+  foreach ($options as $uid => $name) {
+    $processed_options[$uid] = array(
+      'data' => array(
+        'avatar' => gridselectwidget_avatar($uid),
+        'primary' => $name,
+      ),
+      'title' => $name,
+    );
+  }
+  $field['#options'] = $processed_options;
+  $field['#title'] = $element['#title'];
+
+  $settings = array(
+    'gridselect_id' => '#' . $field['#id'],
+  );
+  drupal_add_js(array('gridselect' => $settings), "setting");
+
+  $output = theme('gridselect_field', $field);
+  $output .= '<div class="no-js">' . $element['#children'] . '</div>';
+  return theme('form_element', $element, $output);
+}

@@ -1,0 +1,226 @@
+<?php
+// $Id: openinviter_engine.module,v 1.1.4.2 2009/08/22 05:52:50 hadsie Exp $
+
+/**
+ * @file Openinviter Import Engine.  Integrates DCL Importer with the OpenInviter Import library
+ */
+
+/**
+ * Implementation of hook_menu()
+ */
+function openinviter_engine_menu() {
+  $items['admin/settings/dcl_importer/openinviter'] = array(
+    'title' => 'OpenInviter Settings',
+    'description' => t('DCL OpenInviter Settings'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('openinviter_engine_admin'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+/**
+ * The admin settings form.
+ */
+function openinviter_engine_admin() {
+  $form = array();
+  
+  $form['openinviter_engine_cookie_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('OpenInviter cookie path'),
+    '#default_value' => variable_get('openinviter_cookie_path', file_directory_temp()),
+    '#required' => TRUE,
+  );
+
+  $form['openinviter_engine_transport'] = array(
+    '#type' => 'select',
+    '#title' => t('OpenInviter transport method'),
+    '#default_value' => variable_get('openinviter_transport', 'curl'),
+    '#description' => t('The library to use for fetching URLs.'),
+    '#required' => TRUE,
+    '#options' => array(
+      'curl' => t('curl'),
+      'wget' => t('wget'),
+    ),
+  );
+
+  $form['openinviter_engine_providers'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('OpenInviter Providers'),
+    '#descriptions' => t('Select all of the services users should be allowed to import contacts from.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#tree' => TRUE,
+    '#theme' => 'dcl_importer_admin_plugin_table',
+  );
+
+  $plugin_settings = variable_get('openinviter_engine_providers', NULL);
+  $import_plugins = dcl_importer_api_get_providers(TRUE);
+  foreach ($import_plugins['openinviter_engine'] as $plugin => $name) {
+    $default = $plugin_settings != NULL ? $plugin_settings[$plugin] : TRUE;
+    $form['openinviter_engine_providers'][$plugin] = array(
+      '#type' => 'checkbox',
+      '#title' => $name,
+      '#default_value' => $default,
+    );
+  }
+
+  return system_settings_form($form);
+}
+
+
+/**
+ * Implementation of hook_import_engine_info()
+ * 
+ *  @return array
+ *  With keys for:
+ *    name - Name of the provider. 
+ *    url - URL of provider's homepage.
+ *    inc - The path to the service's main include file, without which the engine cannot function.
+ */ 
+function openinviter_engine_import_engine_info() {
+  return array(
+    'name' => 'OpenInviter',
+    'url' => 'http://openinviter.com/',
+    'inc' => 'OpenInviter/openinviter.php',
+  );
+}
+
+/**
+ * The main importer form.
+ */
+function openinviter_engine_form($form_state) {
+  $form['username'] = array(
+    '#title' => t('Username'),
+    '#type' => 'textfield',
+    '#maxlength' => 44,
+  );
+
+  $form['password'] = array(
+    '#title' => t('Password'),
+    '#type' => 'password',
+    '#maxlength' => 64,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Get My Contacts'),
+  );
+  
+  return $form;
+}
+
+/**
+ * Validation handler.
+ * Attempt to authenticate and return any errors that arrise.
+ */
+function openinviter_engine_form_validate($form, &$form_state) {
+  $provider = isset($form_state['storage']['provider']) ? $form_state['storage']['provider'] : $form_state['values']['provider'];
+
+  $errors = array();
+  $inviter = openinviter_engine_authenticate(
+    $errors,
+    $provider,
+    $form_state['values']['username'],
+    $form_state['values']['password']
+  );
+      
+  if (!empty($errors)) {
+    foreach ($errors as $error) {
+      form_set_error('username', $error);
+    }
+  }
+  else {
+    $form_state['storage']['inviter'] = $inviter;
+  }
+}
+
+/**
+ * Submit handler
+ * Get and store the contacts for further processing.
+ */
+function openinviter_engine_form_submit($form, &$form_state) {
+  $contacts = openinviter_engine_get_contacts($form_state['storage']['inviter']);
+  $form_state['storage']['imported_emails'] = $contacts;
+}
+
+/**
+ * Authenticate to the specified provider.
+ *
+ * @param &$errors - records any authentication errors that occur.
+ * @param $provider - the email or social network to grab the contacts from
+ * @param $username
+ * @param $password
+ * @return
+ *   The authenticated OpenInviter object. Also any errors will be stored in
+ *   $errors.
+ */
+function openinviter_engine_authenticate(&$errors, $provider, $username, $password) {
+  include_once('OpenInviter/openinviter.php');
+  $inviter = new OpenInviter();
+  $inviter->startPlugin($provider);
+  $internal = $inviter->getInternalError();
+
+  $errors = array();
+  if ($internal) {
+    $errors['inviter'] = $internal;
+  }
+  elseif (!$inviter->login($username, $password)) {
+    $internal = $inviter->getInternalError();
+    $errors['login'] = $internal ? $internal : t('Login failed. Please check the email and password you have provided and try again later');
+  }
+
+  return $inviter;
+}
+
+/**
+ * @param $inviter - the authenticated OpenInviter object
+ * @return - the list of contacts as required by dcl_importer_api_get_contacts
+ *   function
+ */
+function openinviter_engine_get_contacts($inviter) {
+  $contacts = $inviter->getMyContacts();
+  if ($contacts === FALSE) {
+    drupal_set_message(t('Unable to get contacts.'), 'error');
+  }
+  $inviter->stopPlugin(TRUE);
+
+  // Cleanup the results
+  $contact_list = array();
+  foreach ($contacts as $email => $name) {
+    $email = trim($email);
+    if ($email) {
+      $contact_list[] = array(
+        'mail' => $email,
+        'name' => $name,
+      );
+    }
+  }
+
+  return $contact_list;
+}
+
+function openinviter_engine_init() {
+  // Load all the providers up front to avoid triggering a weird OI bug
+  openinviter_engine_get_providers();
+}
+
+/**
+ * Generate a list of supported services.
+ */
+function openinviter_engine_get_providers() {
+  static $openinviter_plugins;
+
+  if (!isset($openinviter_plugins)) {
+    include_once('OpenInviter/openinviter.php');
+    $inviter = new OpenInviter();
+    $plugins = $inviter->getPlugins();
+    foreach ($plugins as $plugin_type => $plugin_list) {
+      foreach ($plugin_list as $plugin => $plugin_details) {
+        $openinviter_plugins[$plugin] = $plugin_details;
+      }
+    }
+  }
+  return $openinviter_plugins;
+}

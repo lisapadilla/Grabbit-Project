@@ -1,0 +1,48 @@
+// $Id: CHANGELOG.txt,v 1.5.2.1 2009/08/21 03:16:31 hadsie Exp $
+
+DCL Importer 6.x-2.x-dev - Aug 20, 2009
+------------------------------------
+ * Major reworking of the import_action hook to make it simpler and more effective
+ * The invite flow has changed dramatically and instead of being redirected to the
+   invite page you simply add your message on the invite page itself.
+ * The gridselect module is now needed to properly display the existing contacts
+   (i.e. "Friends on this site")
+ * There is now an "advanced" form that can be used. This is still experimental and
+   needs the ahah_helper and gridselect module to work
+ * #551030: Added more requirements checking to the openinviter engine to ensure
+   that the user has the proper modules and libraries installed
+ * #539412: The select-all functionality has been moved into the global admin area
+   and done more cleanly with javascript (select-all will now fail without javascript).
+ * user_relationships support is currently broken.
+ 
+DCL Importer 6.x-1.x-dev - Aug 8, 2009
+------------------------------------
+ * #544738: Fixes the problem with listing and saving the providers for openinviter
+
+DCL Importer 6.x-1.x-dev - Aug 7, 2009
+------------------------------------
+ * Minor UI improvements
+ * #539412: Added select all / select none option to the invite import form.
+
+DCL Importer 6.x-1.x-dev - Aug 6, 2009
+------------------------------------
+ * Refactored the module to allow for the addition of importers
+ besides the OpenInviter. See the README for details. The OpenInviter
+ library will need to be moved.
+
+DCL Importer 6.x-1.x-dev - July 31, 2009
+------------------------------------
+ * #530504: Added integration for the services module - thanks giorgio79
+ * #525440: Fixed friends list permissions error.
+ * Re-organized the modules folder.
+
+DCL Importer 6.x-1.x-dev
+------------------------------------
+ * Major architectural changes
+ * Removed invite integration and putting it in it's own module.
+ * #331880: Added initial integration support for friendlist and user_relationship modules
+ * #227521: Moved generic api code into a .inc file and split out most of the UI code into separate integration modules
+ * #512874: Modified the way that contacts are passed to the invite form
+ * #268482: Converting simple email array to an associative array with email and name (more can be added as required) (item 1)
+ * #268482: Removing hardcoding of the drupal_goto('invite') (item 4)
+ 

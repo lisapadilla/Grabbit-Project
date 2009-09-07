@@ -1,0 +1,26 @@
+#dcl-importer-form .provider-button {
+    float: none;
+    border: 1px solid #D3E7F4;
+    border-bottom: none;
+/*    background-color: #027AC6;*/
+    background-color: #EDF5FA;
+    margin-bottom: 0px;
+    font-size: 1.1em;
+}
+
+/* A bit of an ugly hack to make the form a bit prettier in the case that
+   multiple engines are being used AND javascript is disabled. */
+#dcl-importer-form .no-js-provider-button {
+    float: left;
+    margin-left: 150px;
+    margin-top: -4em;
+}
+
+#dcl-importer-form .provider-buttons-border {
+    border-top: 1px solid #D3E7F4;
+    margin-top: -2px;
+}
+
+#dcl-import-form-wrapper #edit-provider-wrapper .description {
+    clear: both;
+}

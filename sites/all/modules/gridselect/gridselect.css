@@ -1,0 +1,118 @@
+#multi-grid-selector {
+    display: none;
+    clear: both;
+}
+
+#multi-grid-selector #selected-items,
+#multi-grid-selector #items {
+    float: left;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    font-size: 11px;
+    text-align: left;
+    border: 1px solid #C1C1C1;
+    overflow: auto;
+/*    height: 350px; */
+}
+#multi-grid-selector #items {
+/*    width: 536px; */
+}
+#multi-grid-selector #selected-items {
+    width: 140px;
+}
+
+#multi-grid-selector #selected-items li.item,
+#multi-grid-selector #items li.item {
+    float: left;
+    list-style-type: none;
+    background: none;
+    height: 65px;
+    overflow: hidden;
+    width: 134px;
+    margin: 3px;
+    padding: 0px;
+    line-height: 1.2em;
+}
+
+#multi-grid-selector #selected-items a,
+#multi-grid-selector #items a {
+    display: block;
+    height: 56px;
+    padding: 4px;
+    cursor: pointer;
+    outline-style: none;
+    text-decoration: none;
+}
+#multi-grid-selector #selected-items a:hover,
+#multi-grid-selector #items a:hover {
+    background-color: #D3E7F4;
+}
+
+#multi-grid-selector #items .disabled {
+    opacity: 0.5;
+}
+#multi-grid-selector #items .disabled a {
+    cursor: default;
+}
+#multi-grid-selector #items .disabled a:hover {
+    background-color: #FFF;
+}
+
+#multi-grid-selector li.selected,
+#multi-grid-selector #selected-items a.selected,
+#multi-grid-selector #items a.selected {
+    background-color: #027AC6;
+    border: 2px solid #D3E7F4;
+    padding: 2px;
+}
+#multi-grid-selector li.selected .primary,
+#multi-grid-selector #selected-items a.selected .primary,
+#multi-grid-selector #items a.selected .primary {
+    color: #FFF;
+}
+#multi-grid-selector li.selected .secondary,
+#multi-grid-selector #selected-items a.selected .secondary,
+#multi-grid-selector #items a.selected .secondary {
+    color: #C3CDDF;
+}
+
+#multi-grid-selector #selected-items .primary,
+#multi-grid-selector #items .primary {
+    color: #222;
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 2px;
+}
+
+#multi-grid-selector #selected-items .secondary,
+#multi-grid-selector #items .secondary {
+    color: #666;
+    font-size: 9px;
+    margin-top: 1px;
+    white-space: nowrap;
+}
+
+#multi-grid-selector #selected-items .primary,
+#multi-grid-selector #selected-items .secondary,
+#multi-grid-selector #items .primary,
+#multi-grid-selector #items .secondary {
+    display: block;
+}
+
+#multi-grid-selector .end-selector {
+    clear: left;
+}
+
+
+#multi-grid-selector .avatar {
+    width: 50px;
+    height: 50px;
+    display: block;
+    float: left;
+    background: #FFF none no-repeat 2px 2px;
+    position: relative;
+    padding: 2px;
+    margin-right: 5px;
+    border: 1px solid #E0E0E0;
+}

@@ -1,0 +1,14 @@
+; $Id: dcl_importer_service.info,v 1.1.4.2 2009/08/21 03:16:32 hadsie Exp $
+name = DCL Importer Service
+description = Creates a service for the DCL Importer module
+core = 6.x
+package = DCL Importer
+dependencies[] = dcl_importer
+dependencies[] = services
+
+; Information added by drupal.org packaging script on 2009-09-01
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "dcl_importer"
+datestamp = "1251806890"
+

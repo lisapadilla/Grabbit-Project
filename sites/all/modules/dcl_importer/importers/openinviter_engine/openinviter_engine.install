@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * Implementation of hook_requirements().
+ */
+function openinviter_engine_requirements($phase) {
+  $requirements = array();
+  if ($phase == 'install') {
+    $t = get_t();
+    $path = drupal_get_path('module', 'openinviter_engine');
+    if (!file_exists($path . '/OpenInviter/openinviter.php')) {
+      $requirements['openinviter_engine'] = array(
+        'description' => $t('The OpenInviter library could not be found. Please follow the instructions in the README.txt to ensure that the library has been installed correctly.'),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function openinviter_engine_uninstall() {
+  variable_del('openinviter_cookie_path');
+  variable_del('openinviter_transport');
+  variable_del('openinviter_engine_providers');
+}

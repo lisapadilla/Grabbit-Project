@@ -1,0 +1,213 @@
+<?php
+// $Id: gridselect.module,v 1.4 2009/09/02 00:05:36 hadsie Exp $
+
+/**
+ * @file
+ * Adds another form type that creates a facebook like grid selection box.
+ * The sort of thing you see when inviting your friends to events. In the
+ * event that JS is disabled it will fall back to a multi-select element.
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function gridselect_init() {
+  $path = drupal_get_path('module', 'gridselect');
+  drupal_add_js($path .'/gridselect.js');
+  drupal_add_css($path . '/gridselect.css', 'module');
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function gridselect_theme() {
+  return array(
+    'gridselect' => array(
+      'arguments' => array('element' => NULL),
+    ),
+    'gridselect_field' => array(
+      'arguments' => array('field' => NULL),
+      'template' => 'gridselect-field',
+    ),
+    'gridselect_cell' => array(
+      'arguments' => array('key' => NULL, 'cell' => NULL, 'disabled' => NULL, 'selected' => NULL),
+      'template' => 'gridselect-cell',
+    ),
+    'gridselect_cell_data' => array(
+      'arguments' => array('key' => NULL, 'cell' => NULL),
+      'template' => 'gridselect-cell-data',
+    ),
+  );
+}
+
+/**
+ * Implementation of FAPI hook_elements().
+ */
+function gridselect_elements() {
+  return array(
+    'gridselect' => array(
+      '#input' => TRUE,
+      '#columns' => array('value'), '#delta' => 0,
+      '#process' => array('gridselect_process'),
+    ),
+  );
+}
+
+/**
+ * Implementation of the process callback.
+ * Adds a multiselector for non-js users and an element that submits the
+ * totally raw data as passed in from the calling form.
+ */
+function gridselect_process($element, $edit, $form_state, $form) {
+  $field_key  = $element['#columns'][0];
+  $items = $element['#options'];
+
+  $element['#sidebar'] = isset($element['#sidebar']) ? $element['#sidebar'] : TRUE;
+
+  $options_plain = array();
+  foreach ($items as $key => $value) {
+    $title = isset($value['title']) ? $value['title'] : $key;
+    $options_plain[$key] = $title;
+  }
+
+  $element[$element['#name']] = array(
+    '#type' => 'select',
+    '#name' => $element['#name'],
+    '#multiple' => TRUE,
+    '#default_value' => $element['#default_value'],
+    '#options' => $options_plain,
+    '#size' => 10,
+    '#attributes' => array('class' => 'no-js'),
+  );
+
+  $element[$element['#name'] . "-raw"] = array(
+    '#type' => 'value',
+    '#value' => $items,
+  );
+
+  // We need the -1 here because of how forms api handles sub elements
+  $settings = array(
+    'gridselect_id' => '#' . $element['#id'] . '-1',
+  );
+  drupal_add_js(array('gridselect' => $settings), "setting");
+
+  return $element;
+}
+
+/**
+ * Theme function for the gridselect box.
+ */
+function theme_gridselect($element) {
+  $output = theme('gridselect_field', $element);
+  return theme('form_element', $element, $output . $element['#children']);
+}
+
+/**
+ * Process variables for gridselect-field.tpl.php.
+ *
+ * The $variables array contains the following arguments:
+ * - $field
+ */
+function template_preprocess_gridselect_field($variables) {
+  $field = $variables['field'];
+
+  $cell_width = 140; // pixels
+  $cell_height = 71; // pixels
+
+  // The default rows is 5 and cols is 4;
+  $cols = isset($field['#cols']) ? $field['#cols'] : 4;
+  $rows = isset($field['#rows']) ? $field['#rows'] : 5;
+  $style = 'style="width: ' . $cell_width*$cols . 'px; height: ' . $cell_height*$rows . 'px;"';
+
+  $variables['items'] = $field['#options'];
+  $variables['disabled'] = $field['#disabled_items'];
+  $variables['selected'] = isset($field['#default_value']) ? $field['#default_value'] : array();
+  $variables['inline_style'] = $style;
+  $variables['sidebar'] = $field['#sidebar'];
+  $variables['sidebar_style'] = 'style="height: ' . $cell_height*$rows . 'px;"';
+}
+
+/**
+ * Process variables for gridselect-cell.tpl.php.
+ *
+ * The $variables array contains the following arguments:
+ * - $key
+ * - $cell
+ * - $disabled
+ * - $selected
+ */
+function template_preprocess_gridselect_cell(&$variables) {
+  $cell = $variables['cell'];
+  $key = $variables['key'];
+  $disabled = $variables['disabled'];
+
+  // Strip out any non-alphanumeric characters for the id
+  $key_id = preg_replace('/[^0-9A-Za-z]/', '', $key);
+  $class = isset($disabled) && in_array($key, $disabled) ? ' disabled' : '';
+  $class = 'item' . $class;
+
+  $data = theme('gridselect_cell_data', $key, $cell);
+  
+  $attributes = '';
+  if (is_array($cell)) {
+    $title = isset($cell['title']) ? $cell['title'] : '';
+    $cell['class'] = isset($cell['class']) ? $cell['class'] . $class : $class;
+    unset($cell['data']);
+    $attributes = drupal_attributes($cell);
+  }
+  else {
+    $title = '';
+    $attributes = 'class="' . $class . '"';
+  }
+  
+  $variables['disabled'] = isset($disabled) && in_array($key, $disabled) ? TRUE : FALSE;
+  $variables['attributes'] = !empty($attributes) ? " $attributes" : '';
+  $variables['data'] = $data;
+  $variables['key_id'] = $key_id;
+  $variables['title'] = $title;
+}
+
+/**
+ * Process variables for gridselect-cell-data.tpl.php.
+ *
+ * The $variables array contains the following arguments:
+ * - $key
+ * - $cell
+ */
+function template_preprocess_gridselect_cell_data(&$variables) {
+  $cell = $variables['cell'];
+  if (!is_array($cell)) {
+    $primary = $cell;
+  }
+  elseif (!is_array($cell['data'])) {
+    $primary = isset($cell['data']) ? $cell['data'] : '';
+  }
+  else {
+    $primary = isset($cell['data']['primary']) ? $cell['data']['primary'] : '';
+  }
+
+  if (isset($cell['data']['avatar'])) {
+    $variables['picture'] = $cell['data']['avatar'];
+  }
+
+  $variables['primary_rendered'] = $primary;
+  if (is_array($cell['data']) && $cell['data']['secondary']) {
+    $variables['secondary_rendered'] = $cell['data']['secondary'];
+  }
+}
+
+/**
+ * Find all the whitespace and shorten the words that need to be
+ * Maxlength for a word is 11 chars
+ */
+function _gridselect_trim_text($text) {
+  $text = explode(' ', $text);
+  foreach ($text as $key => $part) {
+    if (drupal_strlen($part) > 10) {
+      $part = drupal_substr($part, 0, 7);
+      $part .= "...";
+    }
+    $text[$key] = $part;
+  }
+  return implode(' ', $text);
+}

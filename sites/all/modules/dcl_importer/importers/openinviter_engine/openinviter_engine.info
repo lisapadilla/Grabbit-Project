@@ -1,0 +1,13 @@
+; $Id: openinviter_engine.info,v 1.1.4.2 2009/08/22 05:52:50 hadsie Exp $
+name = OpenInviter Importer Engine
+description = Integrates OpenInviter with the DCL Importer. Needs the Open Inviter library from <a href="http://openinviter.com/download.php">openinviter.com</a>.
+core = 6.x
+package = DCL Importer
+dependencies[] = dcl_importer
+
+; Information added by drupal.org packaging script on 2009-09-01
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "dcl_importer"
+datestamp = "1251806890"
+

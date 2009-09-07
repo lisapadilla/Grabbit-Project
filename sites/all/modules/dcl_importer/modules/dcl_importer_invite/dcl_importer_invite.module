@@ -1,0 +1,113 @@
+<?php
+// $Id: dcl_importer_invite.module,v 1.1.4.2 2009/08/22 05:52:51 hadsie Exp $
+/**
+ * @file
+ * This module provides integration between the dcl_importer module and the
+ * invite module
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function dcl_importer_invite_menu() {
+  $items = array();
+
+  // Create tabs on the invite page
+  $items['invite/invite'] = array(
+    'title' => 'Invite',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+  );
+
+  $items['invite/import'] = array(
+    'title' => 'Import Contacts',
+    'description' => t('Import your email contacts'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dcl_importer_form'),
+    'access arguments' => array('access DCL Importer'),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_import_action().
+ */
+function dcl_importer_invite_import_action($op, $a2, $a3 = NULL) {
+  global $user;
+
+  switch ($op) {
+    case 'contact_actions':
+      $actions = array();
+      foreach ($a2 as $email) {
+        // Process only if it matches the email regex
+        if (preg_match('/^[a-zA-Z0-9\._%\+\-]+@[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,4}$/', $email)) {
+          // Don't add if this email has already been invited by this user.
+          $sql = db_query("SELECT count(*) FROM {invite} WHERE email = '%s' AND uid = %d", $email, $user->uid);
+          if (db_result($sql)) {
+            continue;
+          }
+          
+          $actions[] = array(
+            'mail' => $email,
+            'key name' => 'email_address',
+            'key value' => $email,
+          );
+        }
+      }
+      return $actions;
+      
+    case 'submit':
+      $form = $a2;
+      $form_state = $a3;
+      
+      $contacts = $form_state['values']['new_contacts'];
+      // Remove all contacts that weren't selected
+      $contacts = array_filter($contacts);
+
+      if (empty($contacts)) {
+        return;
+      }
+
+      $from = NULL;
+      if (!variable_get('invite_use_users_email', 0)) {
+        $from = variable_get('invite_manual_from', NULL);
+      }
+      else if ($user->uid) {
+        $from = $user->mail;
+      }
+      
+      $subject = invite_get_subject();
+      $message = $form_state['values']['message'];
+      foreach ($contacts as $email => $contact) {
+        _dcl_importer_invite_send($email, $from, $subject, $message);
+      }
+      
+      break;
+  }
+}
+
+// Most of this is taken out of invite_form_submit
+function _dcl_importer_invite_send($email, $from, $subject, $message) {
+  global $language;
+  
+  $code = invite_generate_code();
+  $invite = _invite_substitutions(array(
+    'email' => $email,
+    'code'  => $code,
+    'resent'  => FALSE,
+    'data'  => array('subject' => $subject, 'message' => $message),
+  ));
+  
+  // Send e-mail.
+  $params = array('invite' => $invite);
+  $message = drupal_mail('invite', 'invite', $email, $language, $params, $from, TRUE);
+  
+  // Save invite.
+  invite_save($invite);
+
+  // Notify other modules.
+  $args = array('inviter' => $invite->inviter, 'email' => $invite->email, 'code' => $invite->code);
+  module_invoke_all('invite', 'invite', $args);
+}

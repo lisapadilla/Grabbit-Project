@@ -1,0 +1,13 @@
+; $Id: dcl_importer.info,v 1.8.2.2 2009/08/21 16:15:10 hadsie Exp $
+name = DCL Importer
+description = Imports contacts from various service providers. Needs at least one engine importer module enabled.
+core = 6.x
+package = DCL Importer
+dependencies[] = gridselect
+
+; Information added by drupal.org packaging script on 2009-09-01
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "dcl_importer"
+datestamp = "1251806890"
+
