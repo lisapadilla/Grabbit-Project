@@ -1096,7 +1096,7 @@ function facebook_grabbit_block($op = 'list', $delta = 0, $edit = array()) {
           $blocks['content'] = drupal_get_form('facebook_grabbit_feeds_form');
           break;
         case 1:
-          $blocks['content'] = l("tell a friend","forward",array('query'=>'path=node/3'));
+          $blocks['content'] = l("tell a friend","forward",array('query'=>'invite'));
           break;
       }
       return $blocks;
