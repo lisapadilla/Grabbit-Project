@@ -11,7 +11,8 @@ $(document).ready(function() {
 	current_panel_1.show();
 	
 	for (var i = 1; i< stories_at_first_p1; i++){
-		if(current_panel_1 = current_panel_1.next()){
+		if(current_panel_1.next().attr('class') != undefined){
+			current_panel_1 = current_panel_1.next()
 			$("#panel-0 .panel-wraper #"+current_panel_1.attr('id')+" .content-truncated").truncate( 135,{
 			        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 			});
@@ -53,7 +54,8 @@ $(document).ready(function() {
 	
 	for (var i = 1; i< stories_at_first_p2; i++){
 		
-		if(current_panel_2 = current_panel_2.next()){
+		if(current_panel_2.next().attr('class')!= undefined){
+			current_panel_2 = current_panel_2.next()
 			$("#panel-1 .panel-wraper #"+current_panel_2.attr('id')+" .content-truncated").truncate( 100,{
 			        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
 			});
