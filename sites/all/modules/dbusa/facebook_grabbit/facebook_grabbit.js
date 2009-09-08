@@ -53,6 +53,16 @@ function display_items(panel){
 	}
 }
 
+function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
+	var height = $("#"+slideElement.id).height();
+	$(".user-panels").height(height);
+}
+
+function fixtheheightMore(element){
+	var height = element.height();
+	$(".user-panels").height(height);
+}
+
 $(document).ready(function() {
 
     $(".panel-grabbit").each(function(elemento){
@@ -64,12 +74,14 @@ $(document).ready(function() {
 	$('.user-panels').cycle({
 	    fx:      'scrollRight',
 	    next:   '.move-right',
-	    timeout:  0
+	    timeout:  0,
+	    prevNextClick: fixtheheight
 	});
 	
 	$('.main-stream-next').click(function(){
         panel=$(this).parents(".panel-grabbit");
         display_items(panel);
+        fixtheheightMore(panel);
 	});
 	
 	$(".facebook-makecomment-link").click(function () {
@@ -1179,6 +1191,7 @@ $.fn.cycle.transitions.scrollRight = function($cont, $slides, opts) {
 	opts.cssBefore= { left: -w, top: 0 };
 	opts.animIn	  = { left: 0 };
 	opts.animOut  = { left: w };
+	
 };
 $.fn.cycle.transitions.scrollHorz = function($cont, $slides, opts) {
 	$cont.css('overflow','hidden').width();
