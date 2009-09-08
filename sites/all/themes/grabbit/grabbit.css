@@ -1034,7 +1034,7 @@
   }
   #panel-1{
     width: 302px;
-    
+    float:left;
   }
   .facebook-post,
   .twitter-message-stream,
