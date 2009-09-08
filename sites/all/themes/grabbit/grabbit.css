@@ -1034,7 +1034,7 @@
   }
   #panel-1{
     width: 302px;
-    float: left;
+    
   }
   .facebook-post,
   .twitter-message-stream,
@@ -1626,4 +1626,7 @@ a.truncate_hide{
 #panel-1 .node-stream-blogs .item-body .content-body,
 #panel-1 .node-stream-deal .item-body .content-body{
   width: 209px;
+}
+.user-panels .panel-grabbit{
+	width:302px;
 }

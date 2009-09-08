@@ -32,10 +32,17 @@ function grabbit_panels_get_panels(){
 	
 	if ($user->uid > 0){
 		$output .= theme_panels($panel_1,0,"Main Stream");
-	  	$settings=grabbit_panels_get_uid($user->uid,1);
-		$panel_settings=unserialize($settings->config);
-	    $panel_2 = facebook_grabbit_private_view_panel(1);	
-	    $output .= theme_panels($panel_2,1,$panel_settings['panel_name']);
+		$output .='<div class="user-panels">';
+		$all_panels=grabbit_panels_get_all_panels($user->uid);
+		while($panel = db_fetch_object($all_panels)){
+		  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
+			$panel_settings=unserialize($settings->config);
+		    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
+		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name']);	
+		}
+		$output .'</div>';
+	  	
+	    
 	}
 	else{
 
@@ -55,10 +62,15 @@ function grabbit_panels_get_panels(){
 }
 
 function grabbit_panels_edit_panels(){
-	$panel=arg(2);
-	
-	$output = drupal_get_form("grabbit_panels_source_form",$panel);
-	print $output;
+	if(arg(2)){
+		$panel=arg(2);
+		$output = drupal_get_form("grabbit_panels_source_form",$panel);
+		print $output;	
+	}
+	else{
+		$output = drupal_get_form("grabbit_panels_source_create_form",$panel);
+		print $output;
+	}
 }
 
 function grabbit_panels_filters(){
@@ -68,21 +80,35 @@ function grabbit_panels_filters(){
 	print $output;
 }
 
+
+function grabbit_panels_get_all_panels($user){
+  	$result = db_query("SELECT * FROM {grabbit_panels} WHERE uid = %d ORDER BY pid",$user);
+    return $result;
+}
+
 function grabbit_panels_save_panel($user,$config,$pid){
-  $check = grabbit_panels_get_uid($user,$pid);
+  if($pid){
+  	$check = grabbit_panels_get_uid($user,$pid);
 
-  $savetodb = serialize($config);
+	$savetodb = serialize($config);
 
-  if(!$check){
-    db_query("INSERT INTO {grabbit_panels} (pid,uid,config) VALUES (%d, %d, '%s')",$pid,$user,$savetodb);	
-    $result = TRUE;
+	if(!$check){
+	  db_query("INSERT INTO {grabbit_panels} (pid,uid,config) VALUES (%d, %d, '%s')",$pid,$user,$savetodb);	
+	  $result = TRUE;
+	}
+	else{
+	  db_query("UPDATE {grabbit_panels} SET config='%s' WHERE uid=%d AND pid= %d",$savetodb,$user,$pid);	
+	  $result = TRUE;
+	}
+	  return $result;	
+  }else{
+	$result = db_query("SELECT * FROM {grabbit_panels} WHERE uid = %d ORDER BY pid DESC LIMIT 1",$user);
+    $last_panel = db_fetch_object($result);
+  	$savetodb = serialize($config);
+    $new_pid=$last_panel->pid+1;
+    db_query("INSERT INTO {grabbit_panels} (pid,uid,config) VALUES (%d, %d, '%s')",$new_pid,$user,$savetodb);	
+	$result = TRUE;
   }
-  else{
-    db_query("UPDATE {grabbit_panels} SET config='%s' WHERE uid=%d AND pid= %d",$savetodb,$user,$pid);	
-    $result = TRUE;
-  }
-
-  return $result;
 	
 }
 
@@ -205,6 +231,91 @@ function grabbit_panels_source_form($form,$panel_id){
 }
 
 /**
+* Generate the creation form for panels
+*/
+function grabbit_panels_source_create_form($form,$panel_id){
+	global $user;
+
+	if($_GET['form_id']){
+	  grabbit_panels_save_panel($user->uid,$_GET,NULL);
+	  drupal_goto("stream/user");
+      return;	
+	}
+	
+	$form['instructions'] = array(
+	    '#type'=> 'item',
+		'#title' => t('Create a new Stream Panel')
+	    );
+	
+	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = $user->uid, $reset = FALSE);
+
+	if(is_array($flag['myfeeds'])){
+		foreach($flag['myfeeds'] as $term){
+			$nodo = node_load($term->content_id);
+			$terms[$nodo->nid]=$nodo->title;
+		}	
+	}
+	else{
+		$terms=array();
+	}
+	
+	
+	$panels=array();
+    $feeds=array();
+	
+	$form['panel_name'] = array(
+	    '#type'=> 'textfield',
+		'#title' => t('Panel Name'),
+		'#default_value' => $panels['panel_name']
+	    );  
+
+	$form['show_facebook'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('Show Facebook'),
+		'#default_value' => $panels['show_facebook']
+	    );
+	
+	$form['show_twitter'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('Show Twitter'),
+		'#default_value' => $panels['show_twitter']
+	    );
+	
+	$form['blogs'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('Blogs'),
+		'#default_value' => $panels['blogs']
+	    );
+
+	$form['news'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('News'),
+		'#default_value' => $panels['news']
+	    );
+	
+	$form['favorites'] = array(
+	    '#type'=> 'checkbox',
+		'#title' => t('Only Favorites'),
+		'#default_value' => $panels['favorites']
+	    );
+	
+	$form['feeds'] = array(
+	    '#type'=> 'checkboxes',
+	    '#title'=>'My Feeds',
+	    '#options'=> $terms,
+	    '#default_value'=> $feeds,
+	    '#description'=> l('Modify my Feeds','user/'.$user->uid.'/myfeeds'),
+	    );
+	
+	$form['submit'] = array('#type' => 'submit', 
+	                        '#value' => t('Save'));
+
+	$form['#method'] = 'get';
+		
+	return $form;
+}
+
+/**
 * Generate the MORE TAGS form
 */
 function grabbit_panels_tags_form($form,$panel_id){
@@ -258,7 +369,8 @@ function theme_panels($private_view,$id,$name){
 	               <h3 class="title">'.$name.'</h3>';
 	if($id>0 && $user->uid != 0){
 		$output .=l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE));	
+                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+                 <a href="JavaScript:void(0);" class="move-right">Next</a>';	
 	}
 	             
 	$output .='</div>

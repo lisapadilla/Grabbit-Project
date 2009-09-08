@@ -403,7 +403,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 
 		$output .= '
 		<div class="facebook-comment-form">
-		<div class="facebook-form" style="display:none;">
+		<div class="facebook-form">
 		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
@@ -472,7 +472,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	$output .='<div class="facebook-attachment">'.$attachment.'</div></div><span class="facebook-date">on '.format_date($post['created_time']).'</span></div>
 	<div class="facebook-post-comments clearfix">'.$show_comments.'</div>
 	<div class="facebook-comment-form">
-	<div class="facebook-form" style="display:none;">
+	<div class="facebook-form">
 		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
 			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
@@ -1421,7 +1421,7 @@ function _news_theme($comments,$node){
 					
 					 '.$comments_output.'
 					 <div class="news-comment-submit">
-					  <div class="news-form" style="display:none;">
+					  <div class="news-form"s>
 					    <form id="myForm" style="display:none;">
 						  <input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
 						  <input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
