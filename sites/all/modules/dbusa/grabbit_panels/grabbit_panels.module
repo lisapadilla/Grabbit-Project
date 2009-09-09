@@ -36,6 +36,7 @@ function grabbit_panels_get_panels(){
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
 		if($panel = db_fetch_object($all_panels)){
 			print "AKooooo";
+			print_r($panel);
 			while($panel = db_fetch_object($all_panels)){
 			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
 				$panel_settings=unserialize($settings->config);
