@@ -1073,7 +1073,7 @@
     float: left;
     margin-bottom: 10px;
   }
-  #panel-1 .twitter-message-stream a.twitter-name-link{
+  #panel-1 .twitter-message-stream a.twitter-name-link, .user-panels .panel-grabbit .twitter-message-stream a.twitter-name-link{
     color: #0073CF;
     font-weight: bold;
     font-size: 12px;
@@ -1099,7 +1099,8 @@
     margin-bottom: 10px;
     display: block;
   }
-#panel-1 .facebook-post .facebook-post-body, #panel-1 .facebook-post .facebook-attachment{
+#panel-1 .facebook-post .facebook-post-body, #panel-1 .facebook-post .facebook-attachment,
+.user-panels .panel-grabbit .facebook-post .facebook-post-body, .user-panels .panel-grabbit .facebook-post .facebook-attachment{
     width: 200px;
     float: left;
     font-size: 12px;
@@ -1107,7 +1108,7 @@
     margin-bottom: 10px;
     display: block;
   }
-  #panel-1 .twitter-message-stream .twitter-body{
+  #panel-1 .twitter-message-stream .twitter-body, .user-panels .panel-grabbit .twitter-message-stream .twitter-body{
     width: 200px;
     float: left;
     font-size: 12px;
@@ -1339,7 +1340,7 @@ a.retweet, a.grabb-that{
   line-height: 21px;
   margin-bottom: 0px;
 }
-#panel-1 .panel-title h3{
+#panel-1 .panel-title h3, .user-panels .panel-grabbit .panel-title h3{
   font-size: 20px;
   color: #999999;
   line-height: 21px;
@@ -1352,7 +1353,7 @@ a.retweet, a.grabb-that{
   padding-bottom: 23px;
   background: url(images/various/bg_main_top.gif) bottom left no-repeat;
 }
-#panel-1 .panel-title{
+#panel-1 .panel-title, .user-panels .panel-grabbit .panel-title{
   padding-bottom: 23px;
   background: url(images/various/bg_left_top.gif) bottom left no-repeat;
 }
@@ -1360,7 +1361,7 @@ a.retweet, a.grabb-that{
   background: url(images/various/bg_main_mid.gif) 0 0 repeat-y;
   padding: 0px 5px 10px 5px;
 }
-#panel-1 .panel-wraper{
+#panel-1 .panel-wraper, .user-panels .panel-grabbit .panel-wraper{
   background: url(images/various/bg_left_mid.gif) 0 0 repeat-y;
   padding: 0px 5px 10px 5px;
 }
@@ -1369,13 +1370,14 @@ a.retweet, a.grabb-that{
   background: url(images/various/p0_more.gif) 0 0 no-repeat;
   text-align: center;
 }
-#panel-1 .panel-controller{
+#panel-1 .panel-controller, .user-panels .panel-grabbit .panel-controller{
   height: 26px;
   background: url(images/various/p1_more.gif) 0 0 no-repeat;
   text-align: center;
 }
 #panel-0 .panel-controller a,
-#panel-1 .panel-controller a{
+#panel-1 .panel-controller a,
+.user-panels .panel-grabbit .panel-controller a{
   font-size: 14px;
   line-height: 15px;
   text-decoration: none;
@@ -1450,7 +1452,10 @@ a.panel-filters{
 }
 #panel-1 .node-stream-news h2,
 #panel-1 .node-stream-blogs h2,
-#panel-1 .node-stream-deal h2{
+#panel-1 .node-stream-deal h2,
+.user-panels .panel-grabbit .node-stream-news h2,
+.user-panels .panel-grabbit .node-stream-blogs h2,
+.user-panels .panel-grabbit .node-stream-deal h2{
   float: left;
   display: block;
   margin-bottom: 10px;
@@ -1496,7 +1501,8 @@ a.panel-filters{
 {
 	width: 240px;
 }
-#panel-1 .facebook-post .facebook-comment-text
+#panel-1 .facebook-post .facebook-comment-text,
+.user-panels .panel-grabbit .facebook-post .facebook-comment-text
 {
 	width: 174px;
 }
@@ -1511,12 +1517,14 @@ a.panel-filters{
 	margin-bottom: 10px;
 }
 
-#panel-1 .facebook-post .facebook-post-body
+#panel-1 .facebook-post .facebook-post-body,
+.user-panels .panel-grabbit .facebook-post .facebook-post-body
 {
 	width: 204px;
 }
 
-#panel-1 .facebook-post .facebook-post-header a.facebook-story-name
+#panel-1 .facebook-post .facebook-post-header a.facebook-story-name,
+.user-panels .panel-grabbit .facebook-post .facebook-post-header a.facebook-story-name
 {
 	width: 174px;
 }
@@ -1617,14 +1625,20 @@ a.truncate_hide{
 
 #panel-1 .node-stream-news .item-body,
 #panel-1 .node-stream-blogs .item-body,
-#panel-1 .node-stream-deal .item-body{
+#panel-1 .node-stream-deal .item-body,
+.user-panels .panel-grabbit .node-stream-news .item-body,
+.user-panels .panel-grabbit .node-stream-blogs .item-body,
+.user-panels .panel-grabbit .node-stream-deal .item-body{
   width: 210px;
   float: left;
 }
 
 #panel-1 .node-stream-news .item-body .content-body,
 #panel-1 .node-stream-blogs .item-body .content-body,
-#panel-1 .node-stream-deal .item-body .content-body{
+#panel-1 .node-stream-deal .item-body .content-body,
+.user-panels .panel-grabbit .node-stream-news .item-body .content-body,
+.user-panels .panel-grabbit .node-stream-blogs .item-body .content-body,
+.user-panels .panel-grabbit .node-stream-deal .item-body .content-body{
   width: 209px;
 }
 .user-panels .panel-grabbit{
