@@ -34,11 +34,16 @@ function grabbit_panels_get_panels(){
 		$output .= theme_panels($panel_1,0,"Main Stream");
 		$output .='<div class="user-panels">';
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
-		while($panel = db_fetch_object($all_panels)){
-		  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
-			$panel_settings=unserialize($settings->config);
-		    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
-		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name']);	
+		if($panel = db_fetch_object($all_panels)){
+			while($panel = db_fetch_object($all_panels)){
+			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
+				$panel_settings=unserialize($settings->config);
+			    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
+			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name']);	
+			}	
+		}else{
+			$panel_2 = facebook_grabbit_private_view_panel(1);
+			$output .= theme_panels($panel_2,1,"Filtered Stream");
 		}
 		$output .'</div>';
 	  	
