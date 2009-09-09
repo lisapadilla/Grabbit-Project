@@ -59,7 +59,7 @@ function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
 }
 
 function fixtheheightMore(element){
-	var height = $(".panel-wraper",element).height();
+	var height = $(".panel-wraper",element).height()+$(".panel-title",element).height()+$(".panel-controller",element).height();
 	alert(height);
 	element.height(height);
 	$(".user-panels").height(height);
