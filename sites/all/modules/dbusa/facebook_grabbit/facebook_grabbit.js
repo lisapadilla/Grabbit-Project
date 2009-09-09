@@ -59,9 +59,10 @@ function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
 }
 
 function fixtheheightMore(element){
-	var height = element.height();
+	var height = $(".panel-weaper",element).height();
 	alert(height);
-	//$(".user-panels").height(height);
+	element.height(height);
+	$(".user-panels").height(height);
 }
 
 $(document).ready(function() {
@@ -507,7 +508,7 @@ function buildOptions($cont, $slides, els, options, o) {
 	if (opts.width)
 		$cont.width(opts.width);
 	if (opts.height && opts.height != 'auto')
-		//$cont.height(opts.height);
+		$cont.height(opts.height);
 
 	if (opts.startingSlide)
         opts.startingSlide = parseInt(opts.startingSlide);
@@ -540,7 +541,7 @@ function buildOptions($cont, $slides, els, options, o) {
 	if (opts.fit && opts.width)
 		$slides.width(opts.width);
 	if (opts.fit && opts.height && opts.height != 'auto')
-		//$slides.height(opts.height);
+		$slides.height(opts.height);
 
     // stretch container
 	var reshape = opts.containerResize && !$cont.innerHeight();
@@ -745,7 +746,7 @@ function exposeAddSlide(opts, els) {
 		if (opts.fit && opts.width)
 			$s.width(opts.width);
 		if (opts.fit && opts.height && opts.height != 'auto')
-			//$slides.height(opts.height);
+			$slides.height(opts.height);
 		s.cycleH = (opts.fit && opts.height) ? opts.height : $s.height();
 		s.cycleW = (opts.fit && opts.width) ? opts.width : $s.width();
 
