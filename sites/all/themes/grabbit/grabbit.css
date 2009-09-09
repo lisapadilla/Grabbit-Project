@@ -1643,4 +1643,5 @@ a.truncate_hide{
 }
 .user-panels .panel-grabbit{
 	width:302px;
+	float:left;
 }
