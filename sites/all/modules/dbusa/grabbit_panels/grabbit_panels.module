@@ -35,6 +35,7 @@ function grabbit_panels_get_panels(){
 		$output .='<div class="user-panels">';
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
 		if($panel = db_fetch_object($all_panels)){
+			print "AKIIIIII";
 			while($panel = db_fetch_object($all_panels)){
 			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
 				$panel_settings=unserialize($settings->config);
@@ -44,6 +45,7 @@ function grabbit_panels_get_panels(){
 		}else{
 			$panel_2 = facebook_grabbit_private_view_panel(1);
 			print_r($panel_2);
+			print "AKIIIIII";
 			$output .= theme_panels($panel_2,1,"Filtered Stream");
 		}
 		$output .'</div>';
