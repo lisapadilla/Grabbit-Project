@@ -837,7 +837,7 @@ function _flag_clear_cache() {
 function flag_page($action, $flag_name, $content_id) {
   $js = isset($_REQUEST['js']);
   $token = $_REQUEST['token'];
-print_r($_REQUEST);
+  $token = drupal_get_token($content_id);
   // Check the flag token, then perform the flagging.
   if (!flag_check_token($token, $content_id)) {
     $error = t('Bad token. You seem to have followed an invalid link.');
