@@ -1511,5 +1511,6 @@ function flag_get_token($nid) {
  * Check to see if a token value matches the specified node.
  */
 function flag_check_token($token, $seed) {
+	print_r(drupal_get_token($seed));
   return drupal_get_token($seed) == $token;
 }
