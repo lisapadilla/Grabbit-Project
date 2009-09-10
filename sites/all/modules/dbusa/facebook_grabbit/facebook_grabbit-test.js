@@ -61,6 +61,8 @@ $(document).ready(function() {
 		var current_panel_1 = $('#'+panel_aid+' .panel-wraper div:first');
 		display_panel(panel_aid,current_panel_1);
     });
+
+    $('.user-panels').width('auto');
 	
 	$('.main-stream-next').click(function(){
         panel=$(this).parents(".panel-grabbit");
