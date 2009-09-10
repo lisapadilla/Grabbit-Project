@@ -56,13 +56,15 @@ function display_items(panel){
 
 $(document).ready(function() {
 
+    panels_width=306;
     $(".panel-grabbit").each(function(elemento){
 	    var panel_aid=$(this).attr('id');
 		var current_panel_1 = $('#'+panel_aid+' .panel-wraper div:first');
 		display_panel(panel_aid,current_panel_1);
+		panels_width=panels_width+306;
     });
 
-    $('.user-panels').width('auto');
+    $('.user-panels').width(panels_width);
 	
 	$('.main-stream-next').click(function(){
         panel=$(this).parents(".panel-grabbit");
