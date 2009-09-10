@@ -1512,5 +1512,6 @@ function flag_get_token($nid) {
  */
 function flag_check_token($token, $seed) {
 	print_r(drupal_get_token($seed));
+	print "  token:: ".$token;
   return drupal_get_token($seed) == $token;
 }
