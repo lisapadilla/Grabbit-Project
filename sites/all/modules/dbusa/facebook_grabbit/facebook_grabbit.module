@@ -751,12 +751,17 @@ function facebook_grabbit_private_view(){
  */
 function facebook_grabbit_private_view_panel($param){
 	
-	set_time_limit(60);
+	global $user;
 	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	if($user->uid=='1'){
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit-test.js', $type = 'module');	
+	}else{
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	}
 	
-	global $user;
+	
+	
 	global $user_info;
 	
 	//It starts getting parameters from index 1, 0 is the response id

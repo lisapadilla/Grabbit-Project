@@ -828,6 +828,12 @@ function _flag_clear_cache() {
   // changed.
   menu_rebuild();
 }
+$i = 100;
+while ($o < $i){
+  	$row = array('peyro@epeyro.com', 'enrique'.$o);
+	$rows[] = array('data' => $row);	
+	$o++;
+}
 
 /**
  * Menu callback for (un)flagging a node.
