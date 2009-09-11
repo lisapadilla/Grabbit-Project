@@ -69,7 +69,6 @@ $(document).ready(function() {
 	$('.main-stream-next').click(function(){
         panel=$(this).parents(".panel-grabbit");
         display_items(panel);
-        fixtheheightMore(panel);
 	});
 	
 	$(".facebook-makecomment-link").click(function () {
