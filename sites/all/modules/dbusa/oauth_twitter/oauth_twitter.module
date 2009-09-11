@@ -56,10 +56,7 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 }
 
 function oauth_twitter_ajuste(){
-$result = db_query("SELECT * FROM {oauth_twitter}");
-	while($tot = db_fetch_array($result)){
-	  print_r($tot);	
-	}
+$result = db_query("DELETE FROM {oauth_twitter} WHERE uid=4");
 	
 	return $output;
 }
