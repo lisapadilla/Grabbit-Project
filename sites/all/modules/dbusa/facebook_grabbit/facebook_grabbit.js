@@ -889,7 +889,9 @@ function go(els, opts, manual, fwd) {
 
 // invoked after transition
 $.fn.cycle.updateActivePagerLink = function(pager, currSlide) {
-	$(pager).find('a').removeClass('activeSlide').filter('a:eq('+currSlide+')').addClass('activeSlide');
+	//$(pager).find('a').removeClass('activeSlide').filter('a').eq(currSlide).addClass('activeSlide');
+	$('.activeSlide',pager).removeClass('activeSlide');
+	$(pager).find('a').filter('a').eq(currSlide).addClass('activeSlide');
 };
 
 // calculate timeout value for current transition
