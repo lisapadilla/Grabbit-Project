@@ -50,7 +50,7 @@ function grabbit_panels_get_panels(){
 			$panel_2 = facebook_grabbit_private_view_panel(1);
 			$output .= theme_panels($panel_2,1,"Filtered Stream");
 		}
-		$output .'</div>';
+		$output .='</div>';
 	  	
 	    
 	}
