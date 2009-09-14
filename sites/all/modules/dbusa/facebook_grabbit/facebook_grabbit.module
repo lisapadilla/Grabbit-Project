@@ -754,7 +754,7 @@ function facebook_grabbit_private_view_panel($param){
 	global $user;
 	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-	if($user->uid=='1'){
+	if($user->uid=='000'){
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit-test.js', $type = 'module');	
 	}else{
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
