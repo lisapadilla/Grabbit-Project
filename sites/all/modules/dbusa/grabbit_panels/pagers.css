@@ -1,0 +1,14 @@
+.panels-pager a{
+	width:5px; 
+	height:5px; 
+	margin:2px; 
+	float:left; 
+    border:1px #CCCCCC solid;
+    text-indent: 3000em;
+}
+.panels-pager a.activeSlide{
+    background:#CCCCCC;
+}
+.user-panels .panel-grabbit .panel-title h3{
+	font-size:14px;
+}
