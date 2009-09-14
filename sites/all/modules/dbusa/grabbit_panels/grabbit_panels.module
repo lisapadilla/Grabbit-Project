@@ -34,8 +34,7 @@ function grabbit_panels_get_panels(){
 		$output .= theme_panels($panel_1,0,"Main Stream");
 		$output .='<div class="user-panels">';
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
-		if(count($all_panels)){
-			
+		if(db_affected_rows($all_panels)){
 			while($panel = db_fetch_object($all_panels)){
 			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
 				$panel_settings=unserialize($settings->config);
