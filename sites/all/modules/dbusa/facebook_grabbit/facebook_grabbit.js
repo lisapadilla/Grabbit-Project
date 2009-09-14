@@ -73,8 +73,10 @@ $(document).ready(function() {
     });
 
 	$('.user-panels').cycle({
-	    fx:      'scrollRight',
-	    next:   '.move-right',
+	    fx:      'scrollHorz',
+	    next:    '.move-right',
+	    prev:    '.move-left',
+	    pager: '.panels-pager',
 	    timeout:  0,
 	    prevNextClick: fixtheheight
 	});

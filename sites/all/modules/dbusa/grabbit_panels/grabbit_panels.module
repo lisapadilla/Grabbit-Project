@@ -32,7 +32,12 @@ function grabbit_panels_get_panels(){
 	
 	if ($user->uid > 0){
 		$output .= theme_panels($panel_1,0,"Main Stream");
-		$output .='<div class="user-panels">';
+		$output .='<div class="panels-controllers">
+		           <span class="panels-pager"></span>
+		           <a href="JavaScript:void(0);" class="move-left">Prev</a>
+		           <a href="JavaScript:void(0);" class="move-right">Next</a>
+		           '.l('<span>Add New</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+		           </div><div class="user-panels">';
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
 		if(db_affected_rows($all_panels)){
 			while($panel = db_fetch_object($all_panels)){
@@ -374,8 +379,7 @@ function theme_panels($private_view,$id,$name){
 	               <h3 class="title">'.$name.'</h3>';
 	if($id>0 && $user->uid != 0){
 		$output .=l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                 <a href="JavaScript:void(0);" class="move-right">Next</a>';	
+                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE));	
 	}
 	             
 	$output .='</div>
