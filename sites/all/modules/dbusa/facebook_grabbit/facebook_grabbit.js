@@ -54,7 +54,7 @@ function display_items(panel){
 }
 
 function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
-	var height = $("#"+slideElement.id).height();
+	var height = $("#"+slideElement.id).height()+100;
 	$(".user-panels").height(height);
 }
 
@@ -959,10 +959,11 @@ function buildPager(els, opts) {
 
 $.fn.cycle.createPagerAnchor = function(i, el, $p, els, opts) {
 	var a;
+	var stitle = $('.title','#'+el.id);
 	if ($.isFunction(opts.pagerAnchorBuilder))
 		a = opts.pagerAnchorBuilder(i,el);
 	else
-		a = '<a href="#">'+(i+1)+'</a>';
+		a = '<a href="#" title="'+stitle.html()+'">'+(i+1)+'</a>';
 		
 	if (!a)
 		return;
