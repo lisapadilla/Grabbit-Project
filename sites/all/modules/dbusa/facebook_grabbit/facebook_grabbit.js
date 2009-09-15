@@ -292,6 +292,51 @@ $(document).ready(function() {
 	  }  		  
 	});
 	
+	$(".trash-facebook").click(function () {
+	  var id = $(this).attr("face_id"); //post_id
+	
+	  $.get(Drupal.settings.basePath+"trash/save/facebook",{id:id,type:"facebook"},function(data){
+	      //Successfully added to favorites
+	      //Testing if it works
+				if (data){
+								$('#fb_story_'+id).slideToggle('fast');
+				}else{
+								alert ("There was a connection problem. Try later");
+				}
+	    });
+	  
+	});
+	
+	$(".trash-twitter").click(function () {
+	  var id = $(this).attr("tweet_id"); //post_id
+	
+	  $.get(Drupal.settings.basePath+"trash/save/facebook",{id:id,type:"twitter"},function(data){
+	      //Successfully added to favorites
+	      //Testing if it works
+				if (data){
+								$('#fb_story_'+id).slideToggle('fast');
+				}else{
+								alert ("There was a connection problem. Try later");
+				}
+	    });
+	  
+	});
+	
+	$(".trash-item").click(function () {
+	  var id = $(this).attr("face_id"); //post_id
+	
+	  $.get(Drupal.settings.basePath+"trash/save/facebook",{id:id,type:"facebook"},function(data){
+	      //Successfully added to favorites
+	      //Testing if it works
+				if (data){
+								$('#fb_story_'+id).slideToggle('fast');
+				}else{
+								alert ("There was a connection problem. Try later");
+				}
+	    });
+	  
+	});
+	
 	$(".facebook_favorite, .facebook_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
 	  var tag = $(this);
