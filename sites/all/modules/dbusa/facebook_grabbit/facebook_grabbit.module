@@ -1264,7 +1264,7 @@ function theme_twitter_message($message){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div id="twitter-post-'.$message->id.'" class="twitter-message-stream clearfix"><div class="twitter-reply">
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply">
 	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$message->id.'">TR</a>
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
 
