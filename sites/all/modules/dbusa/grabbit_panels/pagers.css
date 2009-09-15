@@ -7,6 +7,12 @@
     text-indent: 3000em;
 }
 
+.panels-pager{
+	position:absolute;
+	margin-left:500px;
+	margin-top:-15px;
+}
+
 .panels-pager a.activeSlide{
     background:#CCCCCC;
 }
