@@ -1,0 +1,80 @@
+<?
+//$Id$
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_favorites_menu () {
+
+  $items['favorites/save/facebook'] = array( 
+    'page callback' => 'grabbit_favorites_facebook', 
+    'access arguments' => array('access content')
+  );
+
+  $items['favorites/remove/facebook'] = array( 
+    'page callback' => 'grabbit_favorites_facebook_remove', 
+    'access arguments' => array('access content')
+  );
+
+  $items['trash/save/facebook'] = array( 
+    'page callback' => 'grabbit_favorites_facebook_trash', 
+    'access arguments' => array('access content')
+  );
+
+  $items['trash/remove/facebook'] = array( 
+    'page callback' => 'grabbit_favorites_facebook_trash_remove', 
+    'access arguments' => array('access content')
+  );
+
+  return $items;
+}
+
+function grabbit_favorites_get($type,$id){
+	global $user;
+	$uid=$user->uid;
+	$result = db_query("SELECT * FROM {grabbit_favorites} WHERE uid=%d AND type='%s' AND id='%s'",$uid,$type,$id);
+	if(db_affected_rows($result)){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
+
+function grabbit_favorites_facebook(){
+	global $user;
+	$uid=$user->uid;
+	$type=$_GET['type'];
+	$id=$_GET['id'];
+  	db_query("INSERT INTO {grabbit_favorites} (uid,type,id) VALUES (%d, '%s', '%s')",$uid,$type,$id);	
+    $result = TRUE;
+    return "all OK";	
+}
+
+function grabbit_favorites_facebook_remove(){
+	global $user;
+	$uid=$user->uid;
+	$type=$_GET['type'];
+	$id=$_GET['id'];
+  	db_query("DELETE FROM {grabbit_favorites} where uid=%d AND type='%s' AND id='%s'",$uid,$type,$id);	
+    $result = TRUE;	
+    return "all OK";
+}
+
+function grabbit_favorites_facebook_trash_remove(){
+	global $user;
+	$uid=$user->uid;
+	$type=$_GET['type'];
+	$id=$_GET['id'];
+    db_query("DELETE FROM {grabbit_trash} where uid=%d AND type='%s' AND id='%s'",$uid,$type,$id);
+    $result = TRUE;
+   return "all OK";
+}
+
+function grabbit_favorites_facebook_trash(){
+	global $user;
+	$uid=$user->uid;
+	$type=$_GET['type'];
+	$id=$_GET['id'];
+    db_query("INSERT INTO {grabbit_trash} (uid,type,id) VALUES (%d, '%s', '%s')",$uid,$type,$id);	
+    $result = TRUE;
+    return "all OK";
+}

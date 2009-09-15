@@ -1,0 +1,78 @@
+<?php
+// $Id: grabbit_config.install,v 1.1.2.2 2009/06/24 05:53:49 Exp $
+
+/**
+ * @file
+ * Grabbit user condiguration install file.
+ */
+
+
+function grabbit_favorites_install() {
+  drupal_install_schema('grabbit_favorites');
+  drupal_install_schema('grabbit_trash');
+}
+
+
+ 
+function grabbit_favorites_uninstall() {
+  drupal_uninstall_schema('grabbit_favorites');
+  drupal_uninstall_schema('grabbit_trash');
+}
+
+
+function grabbit_favorites_schema() {
+  $schema = array();
+$schema['grabbit_favorites'] = array(
+    'fields' => array(
+      	'faid' => array('type' => 'serial', 
+	                       'unsigned' => TRUE, 
+	                       'not null' => TRUE
+	      ),
+      'uid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'disp-width' => '100',
+      ),
+      'type' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'id' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      )
+    ),
+    'primary key' => array('faid'),
+  );
+  return $schema;
+}
+
+
+function grabbit_trash_schema() {
+  $schema = array();
+$schema['grabbit_trash'] = array(
+    'fields' => array(
+      'faid' => array('type' => 'serial', 
+                       'unsigned' => TRUE, 
+                       'not null' => TRUE
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'disp-width' => '100',
+      ),
+      'type' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'id' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      )
+    ),
+    'primary key' => array('faid'),
+  );
+  return $schema;
+}
