@@ -870,8 +870,11 @@ function facebook_grabbit_private_view_panel($param){
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	
 	$view->execute();
-
+	
+	$trashes =  grabbit_favorites_get_trash('item');
+    
     foreach($view->result as $node){
+	  if(!in_array($node->nid,$trashes))
 	  $twitface[$node->nid]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
@@ -919,8 +922,9 @@ function facebook_grabbit_private_view_panel($param){
 			  foreach($friends as $friend){
 				  $profiles[$friend['id']] = $friend; 
 			  }
-  
+              $trashes_face =  grabbit_favorites_get_trash('facebook');
 			  foreach ($posts as $post){
+				  if(!in_array($post['post_id'],$trashes_face))
 				  $twitface[$post['post_id']]=array('time'=>$post['created_time'],
 								'value'=>$post);
 			  }
@@ -947,12 +951,15 @@ function facebook_grabbit_private_view_panel($param){
 				$twitterObj->setToken($token['token'], $token['secret']);
 				$tweets = $twitterObj->get_statusesFriends_timeline(); 
 				if($tweets->response){
-
+					
+                  $trashes_twit =  grabbit_favorites_get_trash('twitter');
+				  
 				  foreach ($tweets->response as $arreglo){
-	              $message = (object)$arreglo;
-				  $time = strtotime($message->created_at);
-				  $key = (string)$message->id;
-				  $twitface[$key]=array('time'=>$time,
+	               $message = (object)$arreglo;
+				   $time = strtotime($message->created_at);
+				   $key = (string)$message->id;
+				   if(!in_array($key,$trashes_twit))
+				   $twitface[$key]=array('time'=>$time,
 					                              'value'=>$message);
 
 				  }
@@ -1051,7 +1058,7 @@ function facebook_grabbit_private_view_panel_term($param){
 	
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
-
+ 
     foreach($view_deals->result as $node){
 	  $twitface[$node->nid]=array('time'=>$node->node_created,
 	                              'value'=>$node);
