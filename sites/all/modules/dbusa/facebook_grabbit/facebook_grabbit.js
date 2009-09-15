@@ -326,13 +326,15 @@ $(document).ready(function() {
 	});
 	
 	$(".trash-item").click(function () {
-	  var id = $(this).attr("face_id"); //post_id
+	  var id = $(this).attr("item_id"); //post_id
+	  var trashElement = $(this);
 	
-	  $.get(Drupal.settings.basePath+"trash/save/facebook",{id:id,type:"facebook"},function(data){
+	  $.get(Drupal.settings.basePath+"trash/save/facebook",{id:id,type:"item"},function(data){
 	      //Successfully added to favorites
 	      //Testing if it works
 				if (data){
-								$('#fb_story_'+id).slideToggle('fast');
+					trashContainer = trashElement.parents().filter('.stream-item-element');
+					trashContainer.slideToggle('fast');
 				}else{
 								alert ("There was a connection problem. Try later");
 				}
