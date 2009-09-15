@@ -1268,7 +1268,7 @@ function theme_twitter_message($message){
 	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$message->id.'">TR</a>
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
 
-    if ($message->favorited){
+    if (grabbit_favorites_get('twitter',$message->id)){
 		$output .= '<a id="'.$message->id.'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
 	  }
 	  else{ //true
