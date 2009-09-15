@@ -391,12 +391,24 @@ function prepeare_status_update($post,$user,$target,$profiles){
 		}	
 	}
 	
+	$fav_value='Add to favorites';
+	$fav_style='facebook_favorite';
+	
+	if(grabbit_favorites_get('facebook',$post['post_id'])){
+		$fav_value='Remove from favorites';
+		$fav_style='facebook_favorite-remove';
+	}
+	
 	// Output for wall and status update.
-	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	$output = '
+	<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
+	<a id="'.$post['post_id'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic" href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<span class="facebook-with-target"><a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'"><span class="facebook-user-name">'.$user['name'].'</span></a>'.$target.'</span>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
+	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">'.$msg_formatted.'</div><span class="facebook-date">on '.format_date($post['created_time']).'</span>
 	</div></div><div class="facebook-post-comments clearfix">'.$show_comments.'</div>';
 	
@@ -459,11 +471,22 @@ function prepeare_standar_update($post,$user,$profiles){
 		}	
 	}
 	
+	$fav_value='Add to favorites';
+	$fav_style='facebook_favorite';
+	
+	if(grabbit_favorites_get('facebook',$post['post_id'])){
+		$fav_value='Remove from favorites';
+		$fav_style='facebook_favorite-remove';
+	}
+	
 	// Output for aplication updates
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
+	<a id="'.$post['post_id'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">
+	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">';
 	if($msg_formatted){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
