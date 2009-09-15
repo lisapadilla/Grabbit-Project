@@ -6,9 +6,55 @@
     border:1px #CCCCCC solid;
     text-indent: 3000em;
 }
+
 .panels-pager a.activeSlide{
     background:#CCCCCC;
 }
+
 .user-panels .panel-grabbit .panel-title h3{
 	font-size:14px;
+}
+
+#panel-1 .panel-title .title{
+	position: relative;
+	left: -15px;
+}
+
+#panel-1 a.move-left{
+	background: transparent url(img/paneluser_move_left.png) no-repeat scroll left center;
+	float:left;
+	width: 15px ;
+	height: 15px ;
+	position: relative;
+	left: -20px;
+	top: 2px;
+}
+
+#panel-1 .panel-title a.move-right{
+	background: transparent url(img/paneluser_move_right.png) no-repeat scroll right center;
+	float:right;
+	width: 15px ;
+	height: 15px ;
+}
+
+#panel-1 .panel-title .panel-title-left-border{
+	background: transparent url(img/paneluser_title_left.png) no-repeat scroll left top;
+	width: 9px;
+	height: 20px;
+	float: left;
+	position: relative;
+	left: -15px;
+}
+
+#panel-1 .panel-title .title{
+	background-color: #CCCCCC;
+	color: #666666;
+	font-size: 13px;
+}
+
+#panel-1 .panel-title .wrapper{
+	float: left;
+	position: relative;
+	left: -15px;
+	background-color: #CCCCCC;
 }
