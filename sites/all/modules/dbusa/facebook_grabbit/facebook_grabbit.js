@@ -231,6 +231,17 @@ $(document).ready(function() {
 	  $("#edit-status").focus();
 	});
 	
+	$('.retweet-facebook').click(function (event){
+	  var container = $(this).parents().filter('.facebook-post');	
+	  var message = $('.retweet-hide',container);
+	  var to = $('.facebook-story-name',container).attr('title');
+	  
+	  $("#edit-status").val("RT "+to+" "+message.text());
+	  var scroll = $("#edit-status");
+	  $(document).scrollTo(scroll,100);
+	  $("#edit-status").focus();
+	});
+	
 	$(".grabb-that").click(function (ev) {
 		ev.preventDefault();
 		urlcomplete = $(this).attr('href');
@@ -255,7 +266,7 @@ $(document).ready(function() {
 	  
 	  if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
-	    $.get(Drupal.settings.basePath+"twitter/addfavorite",{id:id,mode:"create"},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{id:id,type:"twitter"},function(data){
 	      //Successfully added to favorites
 	      //Testing if it works
 				if (data){
@@ -268,7 +279,7 @@ $(document).ready(function() {
 	  }
 	  else{ //Remove from favorites
 	  tag.text("Removing from favorites...");
-	    $.get(Drupal.settings.basePath+"twitter/addfavorite",{id:id,mode:"destroy"},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{id:id,type:"twitter"},function(data){
 	      //Successfully removed from favorites
 	      //Testing if it works
 				if (data){
@@ -280,6 +291,40 @@ $(document).ready(function() {
 	    });		    
 	  }  		  
 	});
+	
+	$(".facebook_favorite, .facebook_favorite-remove").click(function () {
+	  var id = $(this).attr("id"); //post_id
+	  var tag = $(this);
+	  
+	  if (tag.text() == "Add to favorites"){
+	    tag.text("Adding to favorites...");
+	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{id:id,type:"facebook"},function(data){
+	      //Successfully added to favorites
+	      //Testing if it works
+				if (data){
+								tag.text("Remove from favorites");
+								tag.attr("class","facebook_favorite-remove");
+				}else{
+								alert ("There was a connection problem. Try later");
+				}
+	    });
+	  }
+	  else{ //Remove from favorites
+	  tag.text("Removing from favorites...");
+	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{id:id,type:"facebook"},function(data){
+	      //Successfully removed from favorites
+	      //Testing if it works
+				if (data){
+								tag.text("Add to favorites");		
+								tag.attr("class","facebook_favorite");
+				}else{								
+								alert ("There was a connection problem. Try later");
+				}
+	    });		    
+	  }  		  
+	});
+	
+	
 });
 
 

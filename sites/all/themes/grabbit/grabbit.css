@@ -1275,7 +1275,7 @@ a.facebook-makecomment-link, a.comment-news{
   overflow: hidden;
   margin-left: 10px;
 }
-a.twitter_favorite, a.flag-action{
+a.twitter_favorite, a.flag-action, a.facebook_favorite{
   display: block;
   width: 12px;
   height: 12px;
@@ -1299,7 +1299,7 @@ a.twitter_favorite, a.flag-action{
   background: none;
   float: none;
 }
-a.twitter_favorite-remove, a.unflag-action{
+a.twitter_favorite-remove, a.unflag-action, a.facebook_favorite-remove{
   display: block;
   width: 12px;
   height: 12px;
@@ -1309,7 +1309,7 @@ a.twitter_favorite-remove, a.unflag-action{
   overflow: hidden;
   margin-left: 10px;
 }
-a.retweet, a.grabb-that{
+a.retweet, a.grabb-that, a.retweet-facebook{
   display: block;
   width: 10px;
   height: 12px;
