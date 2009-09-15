@@ -1440,6 +1440,7 @@ function _news_theme($comments,$node){
 					'.$image.'
 					<div class="item-body">
 					  <div class="links_stream">  
+					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    '.$deal.'
 					    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
 					    <a href="javascript:void(0)" class="comment-news">Comment</a>
