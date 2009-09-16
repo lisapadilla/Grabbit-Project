@@ -30,9 +30,12 @@
 	top: 2px;
 }
 
-#panel-1 .panel-title a.move-right{
+#panel-1 a.move-right{
 	background: transparent url(img/paneluser_move_right.png) no-repeat scroll right center;
 	float:right;
+	position: relative;
+	left: 20px;
+	top: -40px;
 	width: 15px ;
 	height: 15px ;
 }
@@ -46,15 +49,43 @@
 	left: -15px;
 }
 
+#panel-1 .panel-title .panel-title-right-border{
+	background: transparent url(img/paneluser_title_right.png) no-repeat scroll right top;
+	width: 20px;
+	height: 20px;
+}
+
 #panel-1 .panel-title .title{
 	background-color: #CCCCCC;
 	color: #666666;
 	font-size: 13px;
+	height: 20px;
 }
 
-#panel-1 .panel-title .wrapper{
+#panel-1 .panel-title .thickbox{
+	background-color: #CCCCCC;
 	float: left;
 	position: relative;
 	left: -15px;
-	background-color: #CCCCCC;
+	color: #666666;
+	font-size: 10px;
+	margin-right: 0px;
+	height: 13px;
+}
+
+#panel-1 .panel-title .thickbox span{
+	position: relative;
+	top: -3px;
+	padding-left: 10px;
+}
+
+#panel-1 .panel-title .thickbox a{
+	height: 20px;
+}
+
+#panel-1 .panel-title .panel-gear{
+	background: transparent url(img/paneluser_title_right.png) no-repeat scroll left center;
+	position: relative;
+	left: -15px;
+	height: 20px;
 }

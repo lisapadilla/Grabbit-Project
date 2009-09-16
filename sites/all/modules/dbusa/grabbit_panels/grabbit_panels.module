@@ -380,14 +380,17 @@ function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
 	             '.$prev.'
 	             <div class="panel-title clearfix">       
 	               <span class="panel-title-left-border"></span>
-	               <h3 class="title">'.$name.'</h3>'.$next;
+	               <h3 class="title">'.$name.'</h3>';
 	if($id>0 && $user->uid != 0){
-		$output .=l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).
-                '<span class="panel-title-right-border"></span>';	
+		$output .= l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).
+							l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+                </span>';	
 	}
 	             
-	$output .='</div>
+	$output .='
+						 </div>
+						 	 '.$next.'
+						 	 <div class="border-top"></div>
 	             <div class="panel-wraper">'.$private_view."</div>
 	           </div>";
 	
