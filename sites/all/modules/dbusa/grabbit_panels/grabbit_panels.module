@@ -30,27 +30,27 @@ function grabbit_panels_get_panels(){
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/pagers.css', $type = 'module');
 	
 	$panel_1 = facebook_grabbit_private_view_panel(0);	
-	
-	$prev = '<a href="JavaScript:void(0);" class="move-left"></a>';
-	$next = '<a href="JavaScript:void(0);" class="move-right"></a>';
-	
+		
 	if ($user->uid > 0){
 		$output .= theme_panels($panel_1,0,"Main Stream");
 		$output .='<div class="panels-controllers">
-		           <span class="panels-pager"></span>'.'</div><div class="user-panels">';/*
-		           .l('<span>Add New</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'*/
-		           
+		           <span class="panels-pager"></span>
+		           <a href="JavaScript:void(0);" class="move-left">Prev</a>
+		           <a href="JavaScript:void(0);" class="move-right">Next</a>
+		           '.l('<span>Add New</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+		           </div><div class="user-panels">';
+		           		           
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
 		if(db_affected_rows($all_panels)){
 			while($panel = db_fetch_object($all_panels)){
 			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
 				$panel_settings=unserialize($settings->config);
 			    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
-			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$prev,$next);	
+			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name']);	
 			}	
 		}else{
 			$panel_2 = facebook_grabbit_private_view_panel(1);
-			$output .= theme_panels($panel_2,1,"Filtered Stream",$prev,$next);
+			$output .= theme_panels($panel_2,1,"Filtered Stream");
 		}
 		$output .='</div>';
 	  	
@@ -377,20 +377,14 @@ function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
       $name="Panel ".$id;
 
 	$output = '<div class="panel-grabbit" id="panel-'.$id.'">
-	             '.$prev.'
-	             <div class="panel-title clearfix">       
-	               <span class="panel-title-left-border"></span>
+	             <div class="panel-title clearfix">
 	               <h3 class="title">'.$name.'</h3>';
 	if($id>0 && $user->uid != 0){
-		$output .= l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).
-							l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                </span>';	
+		$output .=l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE));	
 	}
 	             
-	$output .='
-						 </div>
-						 	 '.$next.'
-						 	 <div class="border-top"></div>
+	$output .='</div>
 	             <div class="panel-wraper">'.$private_view."</div>
 	           </div>";
 	
