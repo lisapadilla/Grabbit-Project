@@ -402,6 +402,7 @@ function prepeare_status_update($post,$user,$target,$profiles){
 	// Output for wall and status update.
 	$output = '
 	<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="JavaScript:void(0);" face_id="'.$post['post_id'].'" class="trash-facebook">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post['post_id'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
@@ -481,6 +482,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	
 	// Output for aplication updates
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
+	<a href="JavaScript:void(0);" face_id="'.$post['post_id'].'" class="trash-facebook">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post['post_id'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
@@ -868,8 +870,11 @@ function facebook_grabbit_private_view_panel($param){
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	
 	$view->execute();
-
+	
+	$trashes =  grabbit_favorites_get_trash('item');
+    
     foreach($view->result as $node){
+	  if(!in_array($node->nid,$trashes))
 	  $twitface[$node->nid]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
@@ -917,8 +922,9 @@ function facebook_grabbit_private_view_panel($param){
 			  foreach($friends as $friend){
 				  $profiles[$friend['id']] = $friend; 
 			  }
-  
+              $trashes_face =  grabbit_favorites_get_trash('facebook');
 			  foreach ($posts as $post){
+				  if(!in_array($post['post_id'],$trashes_face))
 				  $twitface[$post['post_id']]=array('time'=>$post['created_time'],
 								'value'=>$post);
 			  }
@@ -945,12 +951,15 @@ function facebook_grabbit_private_view_panel($param){
 				$twitterObj->setToken($token['token'], $token['secret']);
 				$tweets = $twitterObj->get_statusesFriends_timeline(); 
 				if($tweets->response){
-
+					
+                  $trashes_twit =  grabbit_favorites_get_trash('twitter');
+				  
 				  foreach ($tweets->response as $arreglo){
-	              $message = (object)$arreglo;
-				  $time = strtotime($message->created_at);
-				  $key = (string)$message->id;
-				  $twitface[$key]=array('time'=>$time,
+	               $message = (object)$arreglo;
+				   $time = strtotime($message->created_at);
+				   $key = (string)$message->id;
+				   if(!in_array($key,$trashes_twit))
+				   $twitface[$key]=array('time'=>$time,
 					                              'value'=>$message);
 
 				  }
@@ -1049,7 +1058,7 @@ function facebook_grabbit_private_view_panel_term($param){
 	
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
-
+ 
     foreach($view_deals->result as $node){
 	  $twitface[$node->nid]=array('time'=>$node->node_created,
 	                              'value'=>$node);
@@ -1262,9 +1271,11 @@ function theme_twitter_message($message){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
-	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply"><a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply">
+	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$message->id.'">TR</a>
+	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
 
-    if ($message->favorited){
+    if (grabbit_favorites_get('twitter',$message->id)){
 		$output .= '<a id="'.$message->id.'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
 	  }
 	  else{ //true
@@ -1436,6 +1447,7 @@ function _news_theme($comments,$node){
 					'.$image.'
 					<div class="item-body">
 					  <div class="links_stream">  
+					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    '.$deal.'
 					    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
 					    <a href="javascript:void(0)" class="comment-news">Comment</a>

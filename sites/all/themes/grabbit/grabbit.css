@@ -1285,6 +1285,16 @@ a.twitter_favorite, a.flag-action, a.facebook_favorite{
   overflow: hidden;
   margin-left: 10px;
 }
+a.trash-facebook, a.trash-twitter, a.trash-item{
+  	  display: block;
+	  width: 12px;
+	  height: 12px;
+	  float: right;
+	  background: url(images/various/trashcan.gif) 0 0 no-repeat;
+	  text-indent: 3000em;
+	  overflow: hidden;
+	  margin-left: 10px;
+}
 .view-my-feeds a.flag{
   display: inline-block;
   width: auto;
@@ -1530,7 +1540,7 @@ a.panel-filters{
 }
 .links_stream{
   float: right;
-  width: 63px;
+  width: 123px;
 }
 #panel-0 .facebook-with-target{
   display: block;
