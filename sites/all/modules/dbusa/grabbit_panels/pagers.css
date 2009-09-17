@@ -60,6 +60,7 @@
 
 #content-area .user-panels{
 	width: 332px !important;
+	float: left;
 }
 
 #panel-1 {
