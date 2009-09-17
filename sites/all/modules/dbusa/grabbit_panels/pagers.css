@@ -29,3 +29,9 @@
 #content-area .panel-controllers{
 	margin-top: -10px;
 }
+
+#panel-0 .panel-wraper{
+  background: url(img/bg_main_mid.gif) 0 0 repeat-y !important;
+  padding: 0px 5px 10px 5px;
+  width: 324px;
+}
