@@ -146,6 +146,10 @@ function facebook_grabbit_update_form($form_state){
 		    '#size' => 60,
 		    '#required' => true );
 		
+		$form['RT'] = array(
+			    '#type' => 'hidden',
+			    '#value' => 0 );
+		
 		$form['counter'] = array(
 		    '#type' => 'item',
 		    '#prefix'=>'<div id="counter">',
@@ -189,6 +193,9 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 										       'status_includes_verb'=>TRUE,
 										       'status'=>$form_state['values']['status'])); 
 		  drupal_set_message('You have changed your facebook status');
+		  //add to statistics
+		  grabbit_statistics_post_entry($user->uid,'facebook');
+		  $statistics=TRUE;
 		}
 	}
 	if($form_state['values']['twitter']){
@@ -206,6 +213,10 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 			$twitterObj->setToken($token['token'], $token['secret']);
 
 			$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
+			if(!$statistics){
+				//add to statistics
+				grabbit_statistics_post_entry($user->uid,'twitter');
+			}
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
@@ -216,7 +227,9 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	     }
 		
 	}
-	
+	global $user;
+	if($_POST['RT'])
+	  grabbit_statistics_post_entry($user->uid,'RT');
 	
 }
 
@@ -792,7 +805,7 @@ function facebook_grabbit_private_view_panel($param){
 	//It starts getting parameters from index 1, 0 is the response id
 	//prepeare_status_update & prepeare_standar_update request 'name' at index 1, if it's needed to get more params, leave 'name' as first
 	$params = array('name','pic_square','profile_url');
-  $user_info = _get_current_user_info($params);
+    $user_info = _get_current_user_info($params);
 	
 	
 	require_once("facebook/facebook.php");
@@ -802,6 +815,8 @@ function facebook_grabbit_private_view_panel($param){
 	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=15;
+
+    $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=15;
@@ -1429,7 +1444,7 @@ function _news_theme($comments,$node){
 						
 	if($node->type=="deal"){
 	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
-	  $deal = '<span class="url-deal"><a href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
+	  $deal = '<span class="url-deal"><a price="'.$node->field_price[0]['value'].'" href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
 	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
 
 	}else{

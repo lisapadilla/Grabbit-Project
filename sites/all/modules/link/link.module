@@ -536,7 +536,8 @@ function link_field_formatter_info() {
 function theme_link_formatter_default($element) {
   // Display a normal link if both title and URL are available.
   if (!empty($element['#item']['display_title']) && !empty($element['#item']['url'])) {
-    return l($element['#item']['display_title'], $element['#item']['url'], $element['#item']);
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/link-deals.js', $type = 'module');
+    return l($element['#item']['display_title'], $element['#item']['url'], array('attributes'=>array('class'=>'deal-url','target'=>'_blank')));
   }
   // If only a title, display the title.
   elseif (!empty($element['#item']['display_title'])) {

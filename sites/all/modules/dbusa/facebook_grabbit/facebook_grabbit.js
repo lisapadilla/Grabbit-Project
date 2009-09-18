@@ -212,18 +212,17 @@ $(document).ready(function() {
 	
 	$(".twit-reply").click(function () {
 	  var to = $(this).attr("id")+" "; 
-	  
 	  $("#edit-status").val(to);
 	  var scroll = $("#edit-status");
 	  $(document).scrollTo(scroll,100);
 	  $("#edit-status").focus();
-	});	
-	
-	
+	});
+		
 	$('.retweet').click(function (event){
 	  var container = $(this).parents().filter('.twitter-message-stream');	
 	  var message = $('.twitter-body-contains',container);
 	  var to = $('.twit-reply',container).attr('id');
+	  $('#edit-RT').val(1);
 	  
 	  $("#edit-status").val("RT "+to+" "+message.text());
 	  var scroll = $("#edit-status");
@@ -235,11 +234,26 @@ $(document).ready(function() {
 	  var container = $(this).parents().filter('.facebook-post');	
 	  var message = $('.retweet-hide',container);
 	  var to = $('.facebook-story-name',container).attr('title');
+	  $('#edit-RT').val(1);
 	  
 	  $("#edit-status").val("RT "+to+" "+message.text());
 	  var scroll = $("#edit-status");
 	  $(document).scrollTo(scroll,100);
 	  $("#edit-status").focus();
+	});
+	
+	$(".url-deal a").click(function (element){
+		
+		d_deal=$(this).attr('href');
+		d_price=$(this).attr('price');
+		$.get(Drupal.settings.basePath+"statistics/save/deal",{deal:d_deal,price:d_price},function(data){
+	      
+				if (data){
+																						
+				}else{
+		
+				}
+        });
 	});
 	
 	$(".grabb-that").click(function (ev) {
@@ -254,6 +268,7 @@ $(document).ready(function() {
 				var scroll = $("#edit-status");
 				$(document).scrollTo(scroll,100);
 				$("#edit-status").focus();
+				$('#edit-RT').val(1);
 	        }
 	    );
 	 
