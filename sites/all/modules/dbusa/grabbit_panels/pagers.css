@@ -50,7 +50,7 @@
 	margin-left: 58px;
 }
 
-#panel-1 .facebook-post .facebook-post-header .facebook-post-comments{
+.user-panel .facebook-post .facebook-post-header .facebook-post-comments{
 	width: 242px;
 }
 
@@ -96,6 +96,10 @@
 .facebook-post .facebook-comment-form .facebook-form .form-text{
 	width: 159px;
 	margin-top: 10px;
+}
+
+#myForm .form-text-content {
+	width: 159px;
 }
 
 .facebook-post .facebook-comment-text{
@@ -147,9 +151,9 @@
 	padding: 0px !important;
 }
 
-#panel-0 .margin-top{
+/*#panel-0 .margin-top{
 	margin-top:5px;
-}
+}*/
 
 #content-area .panel-controllers{
 	margin-top: -10px;
@@ -175,6 +179,14 @@
 .panel-wraper .facebook-post .facebook-comment-delete{
 	font-size: 10px;
 	float: right;
+}
+
+.facebook-post-body * {
+	font-size: 11px !important;
+}
+
+.node-stream-news .item-body .content-body, .node-stream-news .item-body .news-comments, .node-stream-news .item-body .news-comment-submit{
+	font-size: 11px !important;
 }
 
 .panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
@@ -204,7 +216,15 @@
 }
 
 .panel-grabbit .panel-wraper .node-stream-news .item-body {
-	width: 239px !important;
+	width: 236px !important;
+}
+
+.user-panel .panel-wraper .node-stream-news .item-body {
+	width: 240px;
+}
+
+.user-panel .panel-wraper .node-stream-deal .item-body {
+	width: 240px !important;
 }
 
 .panel-grabbit .panel-wraper .node-stream-news .item-body .links_stream{
@@ -253,13 +273,38 @@
 }
 
 .panel-grabbit .node-stream-news .item-body, .panel-grabbit .node-stream-blogs .item-body, .panel-grabbit .node-stream-deal .item-body, .user-panels .panel-grabbit .node-stream-news .item-body, .user-panels .panel-grabbit .node-stream-blogs .item-body, .user-panels .panel-grabbit .node-stream-deal .item-body {
-	width: 215px !important;
+	width: 215px;
 }
 
-#panel-0 .panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+/*#panel-0 .panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+	width: 334px !important;
+}*/
+
+.panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
 	width: 334px !important;
 }
 
-.panel-grabbit .panel-wraper .node-stream-deal content-truncated{
-	width: auto !important;
+.user-panel .facebook-with-target a {
+color:#0073CF;
+font-size:12px;
+font-weight:bold;
+line-height:13px;
+margin-bottom:10px;
+padding-left:15px;
+}
+
+.user-panel .twitter-name-link{
+	margin-top: 11px;
+}
+
+.user-panel .twitter-message-stream{
+	padding-bottom: 0px;
+}
+
+.user-panel .node-stream-news .item-body{
+	
+}
+
+#panel-0 .node-stream-deal .item-body{
+	width: 236px;
 }
