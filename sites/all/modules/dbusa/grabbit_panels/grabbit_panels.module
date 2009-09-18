@@ -30,13 +30,13 @@ function grabbit_panels_get_panels(){
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/pagers.css', $type = 'module');
 	
 	$panel_1 = facebook_grabbit_private_view_panel(0);	
-		
+	
 	if ($user->uid > 0){
 		$output .= theme_panels($panel_1,0,"Main Stream");
 		$output .='<div class="panels-controllers">
 		           <span class="panels-pager"></span>
-		           <a href="JavaScript:void(0);" class="move-left">Prev</a>
-		           <a href="JavaScript:void(0);" class="move-right">Next</a>
+		           <a href="JavaScript:void(0);" class="move-left"></a>
+		           <a href="JavaScript:void(0);" class="move-right"></a>
 		           '.l('<span>Add New</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
 		           </div><div class="user-panels">';
 		           		           
@@ -53,7 +53,6 @@ function grabbit_panels_get_panels(){
 			$output .= theme_panels($panel_2,1,"Filtered Stream");
 		}
 		$output .='</div>';
-	  	
 	    
 	}
 	else{
@@ -369,8 +368,7 @@ function grabbit_panels_tags_form($form,$panel_id){
 	return $form;
 }
 
-
-function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
+function theme_panels($private_view,$id,$name){
     global $user;
 
     if(!$name)
@@ -379,10 +377,10 @@ function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
 	if($id>0 && $user->uid != 0){
 		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">
-	               <h3 class="title">'.$name.'</h3>';
+	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
 	               
 		$output .=l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE));	
+                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';	
 	}else{
 		$output = '<div class="panel-grabbit" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">
@@ -390,8 +388,8 @@ function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
 	}
 	             
 	$output .='</div>
-	             <div class="panel-wraper">'.$private_view."</div>
-	           </div>";
+	             <div class="panel-wraper">'.$private_view.'</div>
+	           </div>';
 	
 	return $output;
 }
