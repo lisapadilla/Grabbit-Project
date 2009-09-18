@@ -1,3 +1,7 @@
+#page, .no-sidebars #content{
+	height: auto;
+}
+
 .panels-pager a{
 	width:5px; 
 	height:5px; 
@@ -5,6 +9,111 @@
 	float:left; 
     border:1px #CCCCCC solid;
     text-indent: 3000em;
+}
+
+.facebook-post .facebook-post-header .facebook-story-pic {
+	margin-right: 8px;
+}
+
+.facebook-post .facebook-post-header a.facebook-story-name {	
+	position: relative !important;
+	top: -3px !important;
+}
+
+.facebook-post .facebook-post-header .img {
+	float: left;
+}
+
+.facebook-post .facebook-post-header .facebook-post-body {
+	float: left;
+	width: 230px !important;
+	position: relative;
+	top: 3px;
+	font-size: 11px;
+}
+
+.facebook-post .facebook-post-header .facebook-post-body .content-truncated .facebook-attachment {
+	float: left;
+	width: 230px !important;
+	font-size: 11px;
+}
+
+.twitter-message-stream .twitter-body{
+	float: left;
+	width: 230px !important;
+	position: relative;
+	top: -18px;
+	font-size: 11px !important;
+}
+
+.facebook-post .facebook-post-header .facebook-post-comments{
+	margin-left: 58px;
+}
+
+#panel-1 .facebook-post .facebook-post-header .facebook-post-comments{
+	width: 242px;
+}
+
+.facebook-post .facebook-comments {
+	margin-bottom: 1px !important;
+}
+
+.panel-wraper .facebook-post-comments .facebook-comments{
+	background-color: #E6E6E6;
+	padding: 5px;
+}
+
+#panel-0 .panel-wraper div div .facebook-comments{
+	padding: 5px !important;
+}
+
+.facebook-post .facebook-comment-link {
+	font-size: 10px !important;
+	position: relative;
+	top: -3px;
+}
+
+.facebook-post .facebook-comments .facebook-date{
+	font-size: 9px !important;
+	margin-left:36px !important;
+	margin-top:0 !important;
+	position:relative !important;
+	top: 0px !important;
+}
+
+.facebook-post .facebook-image-comment {
+	margin-right: 5px !important;
+}
+
+.facebook-post .facebook-comment-form {
+	margin-left: 58px !important;
+}
+
+.facebook-post .facebook-comment-form .facebook-form .facebook_comment_submit{
+	margin-top: 10px;
+}
+
+.facebook-post .facebook-comment-form .facebook-form .form-text{
+	width: 159px;
+	margin-top: 10px;
+}
+
+.facebook-post .facebook-comment-text{
+	width: 190px !important;
+	font-size: 10px !important;
+	position: relative;
+	top: -2px;
+	line-height: 13px !important;
+}
+
+.facebook-post .facebook-post-header .facebook-post-body .facebook-date, .twitter-message-stream .twitter-body .twitter-date{
+	margin-top: 4px !important;
+}
+
+.twitter-message-stream a.twitter-name-link {
+	position: relative;
+	top: -12px;	
+	color: #007DC3;
 }
 
 .panels-pager{
@@ -26,6 +135,18 @@
 	margin-right: 25px !important;
 }
 
+#panel-0 .panel-title{
+	background: transparent url(img/bg_main_top.gif) no-repeat scroll left bottom !important;
+}
+
+#panel-0 .panel-wraper div{
+	padding: 10px 15px !important;
+}
+
+#panel-0 .panel-wraper div div{
+	padding: 0px !important;
+}
+
 #panel-0 .margin-top{
 	margin-top:5px;
 }
@@ -40,8 +161,10 @@
   width: 324px;
 }
 
-#panel-0 .facebook-with-target{
-	width: 160px !important;
+.facebook-with-target{
+	width: 150px !important;
+	position: relative;
+	top: 3px;
 }
 
 #panel-0 .panel-controller{
@@ -49,13 +172,12 @@
 	height: 29px !important;
 }
 
-#panel-0 .panel-wraper .facebook-post .facebook-comment-delete{
-	position: relative;
+.panel-wraper .facebook-post .facebook-comment-delete{
 	font-size: 10px;
-	top: -18px;
+	float: right;
 }
 
-#panel-1 .panel-title, .user-panels .panel-grabbit .panel-title {
+.panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
 	background: url(img/bg_left_top.jpg) no-repeat scroll left bottom !important;
 }
 
@@ -64,27 +186,80 @@
 	float: left;
 }
 
-#panel-1 {
+.panel-grabbit {
 	width: 332px !important;
 }
 
-#panel-1 .panel-wraper, .user-panels .panel-grabbit .panel-wraper {
+.panel-grabbit .panel-wraper, .user-panels .panel-grabbit .panel-wraper {
 	background:transparent url(img/bg_left_mid.gif) repeat-y scroll 0 0 !important;
 }
 
-#panel-1 .panel-controller, .user-panels .panel-grabbit .panel-controller {
+.panel-grabbit .panel-controller, .user-panels .panel-grabbit .panel-controller {
 	background: url(img/p1_more.jpg) no-repeat scroll 0 0 !important;
 	height: 27px !important;
 }
 
-#panel-1 .panel-title, .user-panels .panel-grabbit .panel-title {
+.panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
 	padding-bottom: 33px !important;
 }
 
-#panel-1 .panel-wraper div{
-	width: 300px !important;
+.panel-grabbit .panel-wraper .node-stream-news .item-body {
+	width: 239px !important;
 }
 
-#panel-1 .node-stream-news .item-body, #panel-1 .node-stream-blogs .item-body, #panel-1 .node-stream-deal .item-body, .user-panels .panel-grabbit .node-stream-news .item-body, .user-panels .panel-grabbit .node-stream-blogs .item-body, .user-panels .panel-grabbit .node-stream-deal .item-body {
-	width: 300px !important;
+.panel-grabbit .panel-wraper .node-stream-news .item-body .links_stream{
+	width: 90px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-blogs .item-body {
+	width: 239px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-blogs .item-body .links_stream{
+	width: 90px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-deal .item-body .content-body{
+	font-size: 11px;
+	line-height: 15px;
+}
+
+.panel-grabbit .panel-wraper .node-stream-deal .item-body .links_stream{
+	width: 106px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-deal .item-body h2{
+	width: 100px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body{
+	width: 200px;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body .links_stream{
+	width: 106px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body h2{
+	width: 100px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-blogs .item-body .links_stream{
+	width: 106px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-blogs .item-body h2{
+	width: 100px !important;
+}
+
+.panel-grabbit .node-stream-news .item-body, .panel-grabbit .node-stream-blogs .item-body, .panel-grabbit .node-stream-deal .item-body, .user-panels .panel-grabbit .node-stream-news .item-body, .user-panels .panel-grabbit .node-stream-blogs .item-body, .user-panels .panel-grabbit .node-stream-deal .item-body {
+	width: 215px !important;
+}
+
+#panel-0 .panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+	width: 334px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-deal content-truncated{
+	width: auto !important;
 }
