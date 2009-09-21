@@ -123,7 +123,6 @@ $(document).ready(function() {
 				$('#'+tag_id).slideToggle('medium');
 			}else{
 				// Handle this depending on the design
-				tag.prev().attr('value','Error when connecting, try later.');
 			}
 		});
 	});
@@ -168,7 +167,7 @@ $(document).ready(function() {
 									
 									// Add the new handler to jQuery using live() function
 									$('#facebook-comment-delete-'+data).live('click',function(){
-										var tag = $(this).parent().parent();
+										var tag = $(this).parent();
 										var post_id = id;
 										
 										$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,mode:"delete"},function(data){
