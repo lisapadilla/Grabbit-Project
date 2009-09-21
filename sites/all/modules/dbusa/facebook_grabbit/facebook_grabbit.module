@@ -559,231 +559,6 @@ function facebook_grabbit_add_favorite_twitter(){
 	
 }
 
-
-/**
- * Creates users private view()
- */
-function facebook_grabbit_private_view(){
-	
-	global $user;
-	global $user_info;
-	
-	//It starts getting parameters from index 1, 0 is the response id
-	//prepeare_status_update & prepeare_standar_update request 'name' at index 1, if it's needed to get more params, leave 'name' as first
-	$params = array('name','pic_square','profile_url');
-  $user_info = _get_current_user_info($params);
-	
-	require_once("facebook/facebook.php");
-	require_once("facebook/facebook_desktop.php");
-	include("facebook/config.php");
-	$app_id='90953553995';
-	
-	$view = views_get_view('grabbit_public_stream');
-    $view->pager['items_per_page']=15;
-
-    $view_deals = views_get_view('grabbit_private_deals');
-    $view_deals->pager['items_per_page']=15;
-
-    if(count($_GET)<=2){  //Get saved configuration
-	  if($result = grabbit_config_get_uid($user->uid)){
-        $config = $result->config;
-		$_GET = unserialize($config);			
-	  }
-    }else{  // Save configuration
-	  $config = $_GET;
-      grabbit_config_save_config($user->uid,$config);
-    }
-
-	// Filters of all kind
-	
-	if($_GET['blogs'] || $_GET['news']){
-	  $view->display['default']->display_options['filters']['type']['value']=array();
-	  if($_GET['blogs'])
-	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
-	  if($_GET['news'])
-	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
-	}
-	
-	if(!$_GET['favorites']){
-	  $view->display['default']->display_options['relationships']=array();	
-	}
-	
-	if ($_GET['tags']){
-		$tags = implode(" ", $_GET['tags']);
-		$filters[0] = $tags;
-	}else{
-		$filters[0] = 'all';	
-	}
-	if ($_GET['feeds']){
-		$tags = implode(",", $_GET['feeds']);
-        $filters[1] = $tags;
-	}else{
-		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
-
-		if(is_array($flag['myfeeds'])){
-			
-		  	foreach($flag['myfeeds'] as $my_feeds){
-			  $user_feeds[]=$my_feeds->content_id;	
-			}
-			
-			$tags = implode(",", $user_feeds);
-			$filters[1] = $tags;	
-		}
-		else{
-			$filters[1] = "all";	
-		}
-
-	}
-	
-	//End filters of all kind
- 
-	$view->set_arguments(array($filters[0],$filters[1]));	
-	
-	$view->execute();
-
-    foreach($view->result as $node){
-	  $twitface[$node->nid]=array('time'=>$node->node_created,
-	                              'value'=>$node);
-    }
-
-    // prepeare the deals view according to the user's tags
-	$deals_profile = content_profile_load('profile', $user->uid);
-	if (count($deals_profile->taxonomy)){
-	  foreach ($deals_profile->taxonomy as $term){
-	    $d_tags[] = $term->tid;
-	  }
-	  $deals_tags = implode("+", $d_tags);
-	}else{
-		$deals_tags = 'all';	
-	}
-	
-    $view_deals->set_arguments(array($deals_tags));	
-	$view_deals->execute();
-
-    foreach($view_deals->result as $node){
-	  $twitface[$node->nid]=array('time'=>$node->node_created,
-	                              'value'=>$node);
-    }
-    // end of deals view
-
-	$output .=drupal_get_form('facebook_grabbit_update_form');
-	
-	$fuser = facebook_grabbit_get_fid($user->uid);
-	
-	if ($fuser){
-		$fb = TRUE;
-		if(!$_GET['hide_facebook']){
-			
-			$suser=$fuser->fid;
-			$session_key=$fuser->kid;
-			
-			$facebook = new FacebookDesktop($api_key, $secret);
-			$facebook->set_user($suser, $session_key);
-			$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
-											       'viewer_id'=>$suser,    
-											       'limit'=>"15"));		      
-			if ($stream){
-			  
-			  $friends = $stream['profiles'];
-			  $posts = $stream['posts'];
-  
-			  foreach($friends as $friend){
-				  $profiles[$friend['id']] = $friend; 
-			  }
-  
-			  foreach ($posts as $post){
-				  $twitface[$post['post_id']]=array('time'=>$post['created_time'],
-								'value'=>$post);
-			  }
-			}
-		
-		}
-				
-	}else{
-	    $fb = FALSE;
-	}
-	
-	$twitter_account = oauth_twitter_get_uid($user->uid);
-	if(count($accounts)){
-		$tw = TRUE;
-		if(!$_GET['hide_twitter']){
-			
-				include_once 'includes/EpiCurl.php';
-				include_once 'includes/EpiOAuth.php';
-				include_once 'includes/EpiTwitter.php';
-				include 'includes/secret.php';
-				try{
-			    	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-					$token = unserialize($twitter_account->config);
-					$twitterObj->setToken($token['token'], $token['secret']);
-					$tweets = $twitterObj->get_statusesFriends_timeline();
-					
-					if($tweets->response){
-
-					  foreach ($tweets->response as $arreglo){
-		              $message = (object)$arreglo;
-					  $time = strtotime($message->created_at);
-					  $key = (string)$message->id;
-					  $twitface[$key]=array('time'=>$time,
-						                              'value'=>$message);
-
-	                 }
-				}else{
-				  drupal_set_message("There was a problem connecting to Twitter, please try again","error");
-				}
-			     }
-			     catch(EpiOAuthBadRequestException $e){  
-			        drupal_set_message("Connection error Twitter","error");
-			     }catch(EpiOAuthUnauthorizedException $e){  
-			        drupal_set_message("Error in Twitter","error");
-			     }catch(EpiOAuthException $e){  
-			        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
-			     }
-				
-
-				
-		}
-	}
-	else{
-		$tw = FALSE;
-	}
-	
-		if(is_array($twitface)){
-			usort($twitface, 'compare');
-			$result = array_reverse($twitface);
-			foreach($result as $entry){
-				if(is_array($entry['value'])){
-					if(!$entry['value']['attachment']){ //STATUS UPDATE
-						$target='';
-						if($entry['value']['target_id'])
-						  $target='&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
-
-						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles);
-						$comments=array();
-					}else{		             // OTHER UPDATES SUPPORTED
-						$output .= prepeare_standar_update($entry['value'], $profiles[$entry['value']['actor_id']],$profiles);
-					}
-				}
-				else{
-					if($entry['value']->nid){
-						$node=node_load($entry['value']->nid);
-						$output .= node_view($node, TRUE, FALSE, TRUE);
-					}
-					else{
-	                  $output .= theme_twitter_message($entry['value']);
-	                }
-
-				}
-			}	
-		}
-			
-	
-	
-	return $output;
-
-}
-
-
 /**
  * Creates users pannel()
  */
@@ -792,13 +567,7 @@ function facebook_grabbit_private_view_panel($param){
 	global $user;
 	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-	if($user->uid=='000'){
-	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit-test.js', $type = 'module');	
-	}else{
-	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-	}
-	
-	
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	global $user_info;
 	
@@ -807,11 +576,19 @@ function facebook_grabbit_private_view_panel($param){
 	$params = array('name','pic_square','profile_url');
     $user_info = _get_current_user_info($params);
 	
-	
-	require_once("facebook/facebook.php");
-	require_once("facebook/facebook_desktop.php");
-	include("facebook/config.php");
-	$app_id='90953553995';
+	//get FB,TW and soon GMAIL
+	$view_elements = views_get_view('grabbit_public_elements');
+	$view_elements->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
+	$view_elements->pager['items_per_page']=30;
+	if(!$GET['favorites']){
+	  $view_elements->display['default']->display_options['relationships']=array();	
+	}
+	$view_elements->execute();
+	foreach($view_elements->result as $node){
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+	// end of elements
 	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=15;
@@ -836,7 +613,13 @@ function facebook_grabbit_private_view_panel($param){
 	   $GET['show_facebook']=1;
 	   $GET['show_twitter']=1;
      }
-	  
+	
+	if($GET['show_facebook']){
+		
+	}
+	if($GET['show_twitter']){
+		
+	}
       
 	// Filters of all kind
 	$view->display['default']->display_options['filters']['type']['value']=array();
@@ -890,7 +673,7 @@ function facebook_grabbit_private_view_panel($param){
     
     foreach($view->result as $node){
 	  if(!in_array($node->nid,$trashes))
-	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
 
@@ -909,126 +692,27 @@ function facebook_grabbit_private_view_panel($param){
 	$view_deals->execute();
 
     foreach($view_deals->result as $node){
-	  $twitface[$node->nid]=array('time'=>$node->node_created,
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
     // end of deals view
 	
-	$fuser = facebook_grabbit_get_fid($user->uid);
-	
-	if ($fuser){
-		$fb = TRUE;
-		if($GET['show_facebook']){
-			
-			$suser=$fuser->fid;
-			$session_key=$fuser->kid;
-			
-			$facebook = new FacebookDesktop($api_key, $secret);
-			$facebook->set_user($suser, $session_key);
-			$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
-											       'viewer_id'=>$suser,    
-											       'limit'=>"15"));		      
-
-			if ($stream){
-
-			  $friends = $stream['profiles'];
-			  $posts = $stream['posts'];
-  
-			  foreach($friends as $friend){
-				  $profiles[$friend['id']] = $friend; 
-			  }
-              $trashes_face =  grabbit_favorites_get_trash('facebook');
-			  foreach ($posts as $post){
-				  if(!in_array($post['post_id'],$trashes_face))
-				  $twitface[$post['post_id']]=array('time'=>$post['created_time'],
-								'value'=>$post);
-			  }
-			}
-		
-		}
-			
-	}else{
-	    $fb = FALSE;
-	}
-	
-	$twitter_account = oauth_twitter_get_uid($user->uid);
-	if($twitter_account){
-		$tw = TRUE;
-		if($GET['show_twitter']){
-			
-			include_once 'includes/EpiCurl.php';
-			include_once 'includes/EpiOAuth.php';
-			include_once 'includes/EpiTwitter.php';
-			include 'includes/secret.php';
-			try{
-            	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-				$token = unserialize($twitter_account->config);
-				$twitterObj->setToken($token['token'], $token['secret']);
-				$tweets = $twitterObj->get_statusesFriends_timeline(); 
-				if($tweets->response){
-					
-                  $trashes_twit =  grabbit_favorites_get_trash('twitter');
-				  
-				  foreach ($tweets->response as $arreglo){
-	               $message = (object)$arreglo;
-				   $time = strtotime($message->created_at);
-				   $key = (string)$message->id;
-				   if(!in_array($key,$trashes_twit))
-				   $twitface[$key]=array('time'=>$time,
-					                              'value'=>$message);
-
-				  }
-
-				}else{ 
-				  drupal_set_message("There was a problem connecting to Twitter, please try again: ".$result->error,"error");
-				}
-		     }
-		     catch(EpiOAuthBadRequestException $e){  
-		        drupal_set_message("Connection error Twitter","error");
-		     }catch(EpiOAuthUnauthorizedException $e){  
-		        drupal_set_message("Error in Twitter","error");
-		     }catch(EpiOAuthException $e){  
-		        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
-		     }
-
-				
-		}
-	}
-	else{
-		$tw = FALSE;
-	}
-	
-
-		if(is_array($twitface)){
-			usort($twitface, 'compare');
+	if(is_array($twitface)){
+			ksort($twitface);
 			$result = array_reverse($twitface);
 			foreach($result as $entry){
-				if(is_array($entry['value'])){
-					if(!$entry['value']['attachment']){ //STATUS UPDATE
-						$target='';
-						if($entry['value']['target_id'])
-						  $target='&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
-
-						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles);
-						$comments=array();
-					}else{		             // OTHER UPDATES SUPPORTED
-						$output .= prepeare_standar_update($entry['value'], $profiles[$entry['value']['actor_id']],$profiles);
-					}
-				}
-				else{
 					if($entry['value']->nid){
-						$node=node_load($entry['value']->nid);
 						
+						$node=node_load($entry['value']->nid);
+						if($node->type!="twitter"){
 						$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 						
 						$output .= _news_theme($comments,$node);
+					    }
 						
 					}
-					else{
-	          $output .= theme_twitter_message($entry['value']);
-	        }
-				}
-			}	
+			}
+				
 		}
 			
 	
@@ -1536,4 +1220,134 @@ function facebook_grabbit_get_images($body) {
 	}else{
 		return FALSE;
 	}
+}
+
+function facebook_grabbit_update_facebook($user){
+	
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	$app_id='90953553995';
+	
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	$suser=$fuser->fid;
+	$session_key=$fuser->kid;
+	  
+	$facebook = new FacebookDesktop($api_key, $secret);
+	$facebook->set_user($suser, $session_key);
+	if($timing = grabbit_users_get($user->uid,'facebook_timing')) // get the last time the api was called and retrieve from it
+	{
+	  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+										           'viewer_id'=>$suser,    
+										           'limit'=>"15",
+										           'start_time'=>$timing->extra));		      
+		
+	}
+	else{
+	  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+										       'viewer_id'=>$suser,    
+										       'limit'=>"15"));		      
+		
+	}
+	
+	if (!empty($stream['posts'])){
+	  
+	  $time=time();
+	  grabbit_users_save($user->uid,$time,'facebook_timing');
+		
+	  $friends = $stream['profiles'];
+	  $posts = $stream['posts'];
+
+	  foreach($friends as $friend){
+		  $profiles[$friend['id']] = $friend; 
+	  }
+
+	  foreach ($posts as $post){
+		  $node = new stdClass();
+		  $node->title = $profiles[$post['actor_id']]['name'].' - '.$post['created_time'];
+		  $node->created = $post['created_time'];
+		  $node->type = 'facebook';
+		  $node->status = 1;
+		  $node->uid = $user->uid;
+		  $node->field_text[0]['value'] = $post['message'];
+		  $node->field_user[0]['value'] = $post['actor_id'];
+		  $node->field_user_name[0]['value'] = $profiles[$post['actor_id']]['name'];
+		  $node->field_user_picture[0]['value'] = $profiles[$post['actor_id']]['pic_square'];
+		  $node->field_user_url[0]['value'] = $profiles[$post['actor_id']]['url'];
+		  $node->field_date[0]['value'] = $post['created_time'];
+		  $node->field_post_id[0]['value'] = $post['post_id'];
+		  if($post['target_id'])
+		    $node->field_target[0]['value'] = $target='&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
+		
+		  if($post['attachment'])
+		    $node->field_attachment[0]['value']=serialize($post['attachment']);
+		
+		  $edit->validated = TRUE;
+		
+		  node_save($node);
+		
+	  }
+	
+	}
+	
+	
+	
+}
+
+function facebook_grabbit_update_twitter($user){
+
+	include_once 'includes/EpiCurl.php';
+	include_once 'includes/EpiOAuth.php';
+	include_once 'includes/EpiTwitter.php';
+	include 'includes/secret.php';
+	
+	if($since_id = grabbit_users_get($user->uid,'twitter_timing'))
+	  $timeline=array('since_id'=>$since_id->extra);
+	
+	try{
+		$twitter_account = oauth_twitter_get_uid($user->uid);
+    	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+		$token = unserialize($twitter_account->config);
+		$twitterObj->setToken($token['token'], $token['secret']);
+
+		$tweets = $twitterObj->get_statusesFriends_timeline($timeline);
+
+		if($tweets->response[0]){
+        $last=$tweets->response[0]['id'];
+		grabbit_users_save($user->uid,$last,'twitter_timing');
+		
+		  foreach ($tweets->response as $arreglo){
+			
+			$message = (object)$arreglo;
+			$time = strtotime($message->created_at);
+			$key = (string)$message->id;
+			
+			  $node = new stdClass();
+			  $node->title = $arreglo['user']['name'].' - '.$key;
+			  $node->created = $time;
+			  $node->type = 'twitter';
+			  $node->status = 1;
+			  $node->uid = $user->uid;
+			  $node->body = $message->text;
+			  $node->field_twitter_user[0]['value'] = $message->user['id'];
+			  $node->field_twitter_name[0]['value'] = $message->user['name'];
+			  $node->field_twitter_picture[0]['value'] = $message->user['profile_image_url'];
+			  $node->field_twitter_url[0]['value'] = 'http://www.twitter.com/'.$message->user["screen_name"];
+			  $node->field_twitter_date[0]['value'] = $time;
+			  $node->field_twitter_post_id[0]['value'] = $key;
+			 
+			  $edit->validated = TRUE;
+			  node_save($node);
+			
+          }
+	    }
+     }
+     catch(EpiOAuthBadRequestException $e){  
+        drupal_set_message("Connection error Twitter","error");
+     }catch(EpiOAuthUnauthorizedException $e){  
+        drupal_set_message("Error in Twitter","error");
+     }catch(EpiOAuthException $e){  
+        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+     }
+
 }

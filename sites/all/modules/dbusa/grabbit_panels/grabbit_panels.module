@@ -1,4 +1,4 @@
-	<?
+<?
 //$Id$
 
 /**
@@ -33,7 +33,8 @@ function grabbit_panels_menu () {
 
 function grabbit_panels_get_panels(){
 	global $user;
-	
+	facebook_grabbit_update_facebook($user);
+	facebook_grabbit_update_twitter($user);
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/pagers.css', $type = 'module');
@@ -377,7 +378,7 @@ function grabbit_panels_tags_form($form,$panel_id){
 }
 
 
-function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
+function theme_panels($private_view,$id,$name){
     global $user;
 
     if(!$name)

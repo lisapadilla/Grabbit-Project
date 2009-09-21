@@ -128,7 +128,7 @@ function gmail_connect_view_message($account, $mid = -1) {
   $body = imap_fetchbody($mbox, $msgno, '1');
   imap_setflag_full($mbox, $msgno, "\\Seen");
   imap_close($mbox);
-
+////// GRABBIT
   // update the cached message to set it as read
   $messages = gmail_connect_get_messages($account->uid);
   if ($messages[$mid]->Unseen == 'U') {

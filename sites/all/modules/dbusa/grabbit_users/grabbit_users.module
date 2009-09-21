@@ -1,0 +1,28 @@
+<?
+//$Id$
+/**
+ * Implementation of hook_menu()
+ */
+
+function grabbit_users_save($user,$time,$type){
+	
+    $result = db_query("SELECT * FROM {grabbit_statistics} WHERE uid='%s' AND type='%s'",$user,$type);
+    if(db_affected_rows($result)>0){  //If that time already exist then update 
+	  db_query("UPDATE {grabbit_statistics} SET extra='%s' WHERE uid='%s' AND type='%s'",$time,$user,$type);
+    }else{ // Create the time for the first time.
+	  $result = db_query("INSERT INTO {grabbit_statistics} (uid,type,extra) 
+		          VALUES ('%s','%s','%s')",$user,$type,$time);
+    }
+     
+}
+
+function grabbit_users_get($user,$type){
+	
+    $result = db_query("SELECT * FROM {grabbit_statistics} WHERE uid='%s' AND type='%s'",$user,$type);
+    if(db_affected_rows($result)>0){ 
+	  return db_fetch_object($result);
+    }else{ 
+	  return NULL;
+    }
+     
+}
