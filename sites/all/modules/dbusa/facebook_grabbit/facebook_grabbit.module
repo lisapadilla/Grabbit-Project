@@ -1270,7 +1270,7 @@ function facebook_grabbit_update_facebook($user){
 		  $node->title = $profiles[$post['actor_id']]['name'].' - '.$post['created_time'];
 		  $node->created = $post['created_time'];
 		  $node->type = 'facebook';
-		  $node->status = 1;
+		  $node->status = 0;
 		  $node->uid = $user->uid;
 		  $node->field_text[0]['value'] = $post['message'];
 		  $node->field_user[0]['value'] = $post['actor_id'];
@@ -1329,7 +1329,7 @@ function facebook_grabbit_update_twitter($user){
 			  $node->title = $arreglo['user']['name'].' - '.$key;
 			  $node->created = $time;
 			  $node->type = 'twitter';
-			  $node->status = 1;
+			  $node->status = 0;
 			  $node->uid = $user->uid;
 			  $node->body = $message->text;
 			  $node->field_twitter_user[0]['value'] = $message->user['id'];
