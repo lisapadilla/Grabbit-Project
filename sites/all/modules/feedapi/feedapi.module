@@ -67,7 +67,7 @@ function feedapi_menu() {
   );
   $items['admin/content/feed/import_opml'] = array(
     'title' => 'Import OPML',
-    'access arguments' => array('administer feedapi'),
+    'access arguments' => array('access content'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('feedapi_import_opml'),
     'file' => 'feedapi.opml.inc',

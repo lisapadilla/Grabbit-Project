@@ -1,0 +1,55 @@
+<?php
+// $Id: gmail_connect.install,v 1.1 2009/05/04 22:18:06 elliottf Exp $
+
+/**********************************************************/
+/* gmail_connect.install - installation and update        */
+/*  functions for the gmail_connect module.               */
+/*                                                        */
+/* This program is free software: you can redistribute it */
+/*  and/or modify it under the terms of the GNU General   */
+/*  Public License as published by the Free Software      */
+/*  Foundation, either version 3 of the License, or (at   */
+/*  your option) any later version.                       */
+/*                                                        */
+/* This program is distributed in the hope that it will   */
+/*  be useful, but WITHOUT ANY WARRANTY; without even the */
+/*  implied warranty of MERCHANTABILITY or FITNESS FOR A  */
+/*  PARTICULAR PURPOSE.  See the GNU General Public       */
+/*  License for more details.                             */
+/*                                                        */
+/* You should have received a copy of the GNU General     */
+/*  Public License along with this program.  If not, see  */
+/*  <http://www.gnu.org/licenses/>.                       */
+/*                                                        */
+/* @author: Elliott Foster                                */
+/* @copyright: Elliott Foster 2009                        */
+/**********************************************************/
+
+/**
+ * Implementatino of hook_requirements()
+ */
+function gmail_connect_requirements($phase) {
+  $php_mods = array();
+  $requrements['php_imap'] = array(
+    'title' => t('PHP IMAP Module'),
+  );
+
+  // check to make sure the imap module is
+  // installed on the current server
+  $php_mods = get_loaded_extensions();
+  if (array_search('imap', $php_mods) === FALSE) {
+    if ($phase == 'runtime') {
+      $requrements['php_imap']['value'] = t('missing');
+    }
+    $requrements['php_imap']['description'] = t('Your webserver must have the PHP IMAP module installed to use the gmail_connect module');
+    $requrements['php_imap']['severity'] = REQUIREMENT_ERROR;
+  } else {
+    if ($phase == 'runtime') {
+      $requrements['php_imap']['value'] = t('installed');
+    }
+    $requrements['php_imap']['severity'] = REQUIREMENT_OK;
+  }
+
+  return $requrements;
+}
+

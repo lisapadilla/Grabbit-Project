@@ -1,0 +1,13 @@
+=====================================================
+ BASE INSTALL
+=====================================================
+1. Navigate to /admin/build/modules
+2. Enable the GMail Connect module
+3. Save the settings
+
+=====================================================
+ SETTINGS
+=====================================================
+You can change the default time that inbox messages
+will be cached before they are reloaded by changing
+the value at /admin/settings/gmail_connect

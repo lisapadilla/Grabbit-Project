@@ -62,7 +62,6 @@ function feedapi_import_opml_submit($form, &$form_state) {
   else {
     drupal_set_message(t('Data could not be retrieved, invalid or empty file.'), 'error');
   }
-  $form_state['redirect'] = 'admin/content/feed';
 }
 
 
@@ -124,9 +123,6 @@ function _feedapi_import_opml($opml, $args = array()) {
       if (strlen($feed['XMLURL']) > 1) {
         // check if feed url is already in the list
         $dupe = db_result(db_query("SELECT nid FROM {feedapi} WHERE url = '%s'", $feed['XMLURL']));
-
-        // If the feed is not already in the list, add it
-        if ($dupe === FALSE) {
           // Generate a feed structure
           $node = new stdClass();
           $node->type = $args['feed_type'];
@@ -140,7 +136,7 @@ function _feedapi_import_opml($opml, $args = array()) {
           $node->og_public = (int) $args['og_public'];
           $node = feedapi_create_node($node, $feed['XMLURL']);
           $count++;
-        }
+        
       }
     }
   }

@@ -1,0 +1,12 @@
+; $Id: gmail_connect.info,v 1.1 2009/05/04 22:18:06 elliottf Exp $
+name = GMail Connect
+description = Allows users to see an unread message count on their homepage
+core = 6.x
+
+
+; Information added by drupal.org packaging script on 2009-05-05
+version = "6.x-0.x-dev"
+core = "6.x"
+project = "gmail_connect"
+datestamp = "1241482418"
+

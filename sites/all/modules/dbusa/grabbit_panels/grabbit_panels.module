@@ -10,6 +10,15 @@ function grabbit_panels_menu () {
     'page callback' => 'grabbit_panels_edit_panels', 
     'access arguments' => array('access content')
   );
+
+  $items['user/%user/add_rss'] = array(
+   'title' => 'Add RSS',
+   'description' => t('Add or Import RSS feeds'),
+   'page callback' => 'grabbit_panels_rss',
+   'access arguments' => array('access content'),
+   'type' => MENU_LOCAL_TASK,
+  );
+
   $items['panels/filters'] = array( 
     'page callback' => 'grabbit_panels_filters', 
     'access arguments' => array('access content')
@@ -369,7 +378,6 @@ function grabbit_panels_tags_form($form,$panel_id){
 	return $form;
 }
 
-
 function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
     global $user;
 
@@ -391,3 +399,32 @@ function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
 	return $output;
 }
 
+function grabbit_panels_rss(){
+
+	 global $user;
+	 
+	 $type = 'feed';
+	 $node = array('uid' => $user->uid, 'name' => $user->name, 'type' => $type);
+	 module_load_include('inc', 'node', 'node.pages');
+	 $form = drupal_get_form($type .'_node_form',  $node);
+
+	 return $form;
+	 
+}
+
+function grabbit_panels_form_alter($form,$values,$form_id){
+	if($form_id=='feed_node_form'){
+		
+		unset($form['body_field']);
+	}
+}
+
+function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
+	if($op == 'insert'){
+		$flag = flag_get_flag('myfeeds') or die('no flag defined');
+		// Flag node #456:
+		if($node->type=='feed')
+		   $flag->flag('flag', $node->nid); 
+		
+	}
+}

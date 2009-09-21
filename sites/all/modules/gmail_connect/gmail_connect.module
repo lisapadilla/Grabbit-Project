@@ -1,0 +1,487 @@
+<?php
+// $Id: gmail_connect.module,v 1.1 2009/05/04 22:18:06 elliottf Exp $
+
+/**********************************************************/
+/* gmail_connect.module - this module will allow users to */
+/*  get an unread messages count for their GMail inbox.   */
+/*                                                        */
+/* This program is free software: you can redistribute it */
+/*  and/or modify it under the terms of the GNU General   */
+/*  Public License as published by the Free Software      */
+/*  Foundation, either version 3 of the License, or (at   */
+/*  your option) any later version.                       */
+/*                                                        */
+/* This program is distributed in the hope that it will   */
+/*  be useful, but WITHOUT ANY WARRANTY; without even the */
+/*  implied warranty of MERCHANTABILITY or FITNESS FOR A  */
+/*  PARTICULAR PURPOSE.  See the GNU General Public       */
+/*  License for more details.                             */
+/*                                                        */
+/* You should have received a copy of the GNU General     */
+/*  Public License along with this program.  If not, see  */
+/*  <http://www.gnu.org/licenses/>.                       */
+/*                                                        */
+/* @author: Elliott Foster                                */
+/* @copyright: Elliott Foster 2009                        */
+/**********************************************************/
+
+/**
+ * Implementation of hook_help()
+ */
+function gmail_connect_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#gmail_connect':
+      return '<p>' . t('Enable this module to allow your users ' .
+        'to see their new message count in their GMail inbox.') . '</p>';
+  }
+}
+
+/**
+ * Implementation of hook_init()
+ */
+function gmail_connect_init() {
+  define('GMAIL_CONNECT_AUTO_REPLY', t("Thanks for your email!  I'm tied up right now but will respond as soon as I can."));
+}
+
+/**
+ * Implementation of hook_perm()
+ */
+function gmail_connect_perm() {
+  return array('admin gmail connect');
+}
+
+/**
+ * Implementaiton of hook_menu()
+ */
+function gmail_connect_menu() {
+  $items = array();
+
+  $items['admin/settings/gmail_connect'] = array(
+    'title' => 'GMail Connect Settings',
+    'description' => 'Change the default behavior of the GMail Connect module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gmail_connect_settings'),
+    'access arguments' => array('admin gmail connect'),
+    'file' => 'gmail_connect.admin.inc',
+  );
+
+  $items['gmail_connect/logout'] = array(
+    'page callback' => 'gmail_connect_logout',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'gmail_connect.pages.inc',
+  );
+  $items['gmail_connect/js'] = array(
+    'page callback' => 'gmail_connect_js',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'gmail_connect.js.inc',
+  );
+  $items['gmail_connect/js/delete'] = array(
+    'page callback' => 'gmail_connect_js_delete',
+    'page argguments' => array(3),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'gmail_connect.js.inc',
+  );
+
+  // user GMail Connect tab
+  $items['user/%user/gmail_connect'] = array(
+    'title' => 'GMail Connect',
+    'title callback' => 'gmail_connect_page_title',
+    'title arguments' => array(1),
+    'page callback' => 'gmail_connect_page',
+    'page arguments' => array(1),
+    'access callback' => 'gmail_connect_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 100,
+    'file' => 'gmail_connect.pages.inc',
+  );
+  $items['user/%user/gmail_connect/view'] = array(
+    'title' => 'View Message',
+    'page callback' => 'gmail_connect_view_message',
+    'page arguments' => array(1, 4),
+    'access callback' => 'gmail_connect_access',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'file' => 'gmail_connect.pages.inc'
+  );
+  $items['user/%user/gmail_connect/auto_reply'] = array(
+    'title' => 'Auto Reply',
+    'page callback' => 'gmail_connect_auto_reply',
+    'page arguments' => array(1, 4),
+    'access callback' => 'gmail_connect_access',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+    'file' => 'gmail_connect.pages.inc'
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_theme()
+ */
+function gmail_connect_theme($existing, $type, $theme, $path) {
+  return array(
+    'gmail_connect_counts' => array(
+      'arguments' => array('messages' => '', 'links' => array()),
+      'template' => 'theme/gmail_connect_counts',
+    ),
+    'gmail_connect_page' => array(
+      'arguments' => array('messages' => '', 'pager' => ''),
+      'template' => 'theme/gmail_connect_page',
+    ),
+    'gmail_connect_message' => array(
+      'arguments' => array('header' => NULL, 'body' => ''),
+      'template' => 'theme/gmail_connect_message',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_user()
+ */
+function gmail_connect_user($op, &$edit, &$account, $category = NULL) {
+  switch ($op) {
+    case 'logout':
+      // purge the session
+      cache_clear_all('gmail_connect:'.$account->uid, 'cache');
+      cache_clear_all('gmail_connect_messages:'.$account->uid, 'cache');
+      break;
+    case 'form':
+      // set the default account name.  If the user's email address
+      // is a GMail address and they haven't specified something
+      // different then use that as the default
+      $default_name = (stripos($user->mail, '@gmail.com') !== FALSE ? $user->mail : '');
+      if (isset($account->gmail_name)) {
+        $default_name = $account->gmail_name;
+      }
+
+      $form['gmail_connect'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('GMail Connect Settings'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+      );
+      $form['gmail_connect']['gmail_name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('GMail Account Name'),
+        '#default_value' => $default_name,
+        '#description' => t('Enter your GMail address, i.e. foo@gmail.com'),
+      );
+      $form['gmail_connect']['gmail_auto_reply'] = array(
+        '#type' => 'textarea',
+        '#title' => t('EMail Auto-Reply Text'),
+        '#default_value' => (isset($account->gmail_auto_reply) ? $account->gmail_auto_reply : variable_get('gmail_connect_auto_reply', GMAIL_CONNECT_AUTO_REPLY)),
+        '#description' => t('This text will be used to create auto-reply messages'),
+      );
+
+      // storing a password would be convienient, but not ethical...
+      // we'll store it in the cache table and the user will need
+      // to re-enter during every new session and will be destroyed
+      // at the end of every session
+      return $form;
+  }
+}
+
+/**
+ * Implementation of hook_block()
+ */
+function gmail_connect_block($op = 'list', $delta = 0, $edit = array()) {
+  global $user;
+
+  // only available to auth users
+  if ($user->uid > 0) {
+    switch ($op) {
+      case 'list':
+        $blocks = array();
+        $blocks[0] = array(
+          'info' => t('GMail Connect'),
+          'weight' => 0,
+          'status' => 1,
+          'region' => 'left',
+          'pages' => 'user/*/gmail_connect',
+        );
+        return $blocks;
+      case 'configure':
+        break;
+      case 'save':
+        break;
+      case 'view':
+        if ($delta == 0) {
+          $block = array('subject' => t('GMail Connect'));
+          $sess = gmail_connect_get_session($user->uid);
+          if (sizeof($sess) > 0) {
+            $block['content'] = theme('gmail_connect_counts', gmail_connect_get_count($sess), gmail_connect_get_links());
+          } else {
+            if (isset($user->gmail_name)) {
+              $sess['gmail_name'] = $user->gmail_name;
+            }
+            $block['content'] = '<div id="gmail_connect_form">' . drupal_get_form('gmail_connect_get_login', $sess) . '</div>';
+          }
+          return $block;
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * gmail_connect_get_session - return a session array
+ *  for the given user.
+ *
+ * @param: $uid - the user ID to check
+ * @param: $edit - the updated session
+ * @return: a session array.
+ */
+function gmail_connect_get_session($uid = 0, $edit = array()) {
+  $gmail_session = cache_get('gmail_connect:'.$uid);
+  $gmail_session = $gmail_session->data;
+  $sess = array();
+
+  if ($uid > 0) {
+    if (isset($edit['gmail_name']) && isset($edit['gmail_pass'])) {
+      $gmail_session = array(
+        'gmail_name' => $edit['gmail_name'],
+        'gmail_pass' => $edit['gmail_pass'],
+      );
+
+      cache_set('gmail_connect:'.$uid, $gmail_session, 'cache');
+    }
+
+    if (isset($gmail_session)) {
+      $sess = $gmail_session;
+    }
+  }
+
+  return $sess;
+}
+
+/**
+ * gmail_connect_get_count - return the number of
+ *  new messages in a user's GMail Inbox.
+ *
+ * @param: $gmail_sess - the session array for the
+ *  given user.
+ * @param: $type - the message type to display
+ */
+function gmail_connect_get_count(&$gmail_sess = array(), $type = 'all') {
+  $messages = array();
+
+  $mbox = @imap_open(
+    "{imap.googlemail.com:993/imap/ssl}INBOX",
+    $gmail_sess['gmail_name'],
+    $gmail_sess['gmail_pass'],
+    OP_READONLY
+  );
+
+  if ($mbox === FALSE) {
+    // purge the session since there was a login problem
+    global $user;
+    cache_clear_all('gmail_connect:'.$user->uid, 'cache');
+    
+    return "imap_status failed: " . imap_last_error() . "\n";
+  }
+
+  $status = imap_status($mbox, "{imap.googlemail.com:993/imap/ssl}INBOX", SA_ALL);
+  if ($status) {
+    switch ($type) {
+      case 'messages':
+        $messages['messages'] = $status->messages;
+        break;
+      case 'recent':
+        $messages['recent'] = $status->recent;
+        break;
+      case 'unseen':
+        $messages['unseen'] = $status->unseen;
+        break;
+      default:  // all
+        $messages['messages'] = $status->messages;
+        $messages['recent'] = $status->recent;
+        $messages['unseen'] = $status->unseen;
+        break;
+    }
+  } else {
+    $messages = "imap_status failed: " . imap_last_error() . "\n";
+  }
+
+  imap_close($mbox);
+
+  return $messages;
+}
+
+/**
+ * gmail_connect_get_login - return the login form
+ *  for the GMail Connect block.  When the form is
+ *  submitted the block values will be replaced
+ *  using AHAH instead of causing a page reload.
+ *
+ * @param: $gmail_sess - the session array for the
+ *  given user.
+ */
+function gmail_connect_get_login($form_state, &$gmail_sess = array(), $ahah = TRUE) {
+  $form = array();
+
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('GMail Address'),
+    '#default_value' => $gmail_sess['gmail_name'],
+    '#required' => TRUE,
+    '#size' => 20,
+  );
+  $form['pass'] = array(
+    '#type' => 'password',
+    '#title' => t('Password'),
+    '#required' => TRUE,
+    '#size' => 20,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Login'),
+  );
+
+  // allow the form to replace itself with data from the inbox
+  if ($ahah) {
+    $form['submit']['#ahah'] = array(
+      'path' => 'gmail_connect/js',
+      'wrapper' => 'gmail_connect_form',
+      'method' => 'replace',
+      'effect' => 'fade',
+      'progress' => array('type' => 'throbber'), 
+    );
+  }
+
+  return $form;
+}
+
+/**
+ * gmail_connect_get_login_validate - validate the login form
+ */
+function gmail_connect_get_login_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['name']) || stripos($form_state['values']['name'], '@gmail') === FALSE) {
+    form_set_error('name', t('The e-mail address %mail is not valid.', array('%mail' => $form_state['values']['name'])));
+  }
+}
+
+/**
+ * gmail_connect_get_login_submit - submit the login form
+ */
+function gmail_connect_get_login_submit($form, &$form_state) {
+  global $user;
+  gmail_connect_get_session($user->uid, array('gmail_name' => $form_state['values']['name'], 'gmail_pass' => $form_state['values']['pass'])); 
+}
+
+/**
+ * gmail_connect_get_links - helper function to return
+ *  links used with the GMail Connect block.
+ *
+ * @return - an array of links.
+ */
+function gmail_connect_get_links() {
+  global $user;
+  $path = isset($_GET['q']) ? $_GET['q'] : '';
+  $query = drupal_query_string_encode($_GET, array('q'));
+  if ($query != '') {
+    $path .= '?'. $query;
+  }
+
+  // right now just inbox and logout... could add more
+  return array(
+    'inbox' => l(
+      t('Inbox'),
+      'user/'. $user->uid . '/gmail_connect' 
+    ),
+    'logout' => l(
+      t('Logout'), 
+      'gmail_connect/logout', 
+      array('query' => array('destination' => urlencode($path)))
+    )
+  );
+}
+
+/**
+ * gmail_connect_access - check to see if the current user can access
+ *  the GMail Connect page.
+ */
+function gmail_connect_access($account = 0) {
+  global $user;
+
+  if ($user->uid == $account->uid && $account->uid > 0) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * gmail_connect_page_title - helper function to set
+ *  the title of the GMail Connect tab on the user
+ *  profile page.
+ */
+function gmail_connect_page_title($account = 0) {
+  $sess = gmail_connect_get_session($account->uid);
+
+  $title = t('GMail Connect');
+
+  if (is_array($sess)) {
+    $new_count = gmail_connect_get_count($sess, 'unseen');
+
+    if ($new_count['unseen'] > 0) {
+      $title .= ' (' . $new_count['unseen'] . ')';
+    }
+  }
+  return $title;
+}
+
+/**
+ * gmail_connect_get_messages - set the message list
+ *  cache and return the array of messages for the
+ *  current user's inbox.
+ */
+function gmail_connect_get_messages($uid = 0) {
+  global $user;
+
+  if ($user->uid != $uid  || $uid == 0) {
+    return FALSE;
+  }
+
+  $sess = gmail_connect_get_session($uid);
+  $messages = array();
+  $messages = cache_get('gmail_connect_messages:'.$uid);
+
+  if (!is_array($messages->data) || $messages->expire < time()) {
+    $mbox = @imap_open(
+      "{imap.googlemail.com:993/imap/ssl}INBOX",
+      $sess['gmail_name'],
+      $sess['gmail_pass'],
+      OP_READONLY
+    );
+
+    if ($mbox === FALSE) {
+      return FALSE; // problem connectnig to mailbox
+    }
+
+    $messages = array();
+    $headers = imap_search($mbox, 'ALL', SE_UID);
+
+    if (is_array($headers)) {
+      $headers = array_reverse($headers, TRUE);
+    } else if ($headers === FALSE) {
+      return FALSE; // problem getting messages
+    }
+
+    foreach ($headers as $k => $v) {
+      $messages[$v] = imap_headerinfo($mbox, $k+1);
+    }
+
+    imap_close($mbox);
+    cache_set('gmail_connect_messages:'.$uid, $messages, 'cache', (time() + variable_get('gmail_connect_cache_timeout', 60)));
+  } else {
+    $messages = $messages->data;
+  }
+
+  return $messages;
+}
+
