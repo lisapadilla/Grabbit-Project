@@ -46,7 +46,6 @@ function grabbit_panels_get_panels(){
 		           <span class="panels-pager"></span>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           '.l('<span>Add New</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
 		           </div><div class="user-panels">';
 		           		           
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
@@ -389,8 +388,8 @@ function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
 	             <div class="panel-title clearfix">
 	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
 	               
-		$output .=l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';	
+		$output .= l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';	
 	}else{
 		$output = '<div class="panel-grabbit" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">

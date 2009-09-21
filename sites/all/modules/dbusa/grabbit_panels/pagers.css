@@ -124,13 +124,6 @@
 	color: #007DC3;
 }
 
-.panels-pager{
-	position:absolute;
-	margin-left:125px;
-	margin-top:-15px;
-	overflow:hidden;
-}
-
 .panels-pager a.activeSlide{
     background:#CCCCCC;
 }
@@ -216,12 +209,13 @@
 	height: 27px !important;
 }
 
-.panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+.user-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
 	padding-bottom: 33px !important;
 }
 
 .panel-grabbit .panel-wraper .node-stream-news .item-body {
 	width: 236px !important;
+	line-height: 15px;
 }
 
 .user-panel .panel-wraper .node-stream-news .item-body {
@@ -285,7 +279,7 @@
 	width: 334px !important;
 }*/
 
-.panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+.user-panel .panel-title, .user-panels .panel-grabbit .panel-title {
 	width: 334px !important;
 }
 
@@ -322,6 +316,10 @@ padding-left:15px;
 
 .user-panel .panel-title .controller-top a.panel-gear{
 	background: #CCCCCC url(img/paneluser_title_right.png) no-repeat right center;
+	display: block;
+	position: relative;
+	left: 0px;
+	top: 0px;
 }
 
 .user-panel .panel-title .controller-top h3.title{
@@ -340,6 +338,24 @@ padding-left:15px;
 	left: 25px;
 }
 
+.user-panel .panel-title .controller-top .add-new-panel{
+	font-size: 10px;
+	color: #666666;
+	position: relative;
+	top: 2px;
+	font-weight: bold;
+	float: right;
+	left: 20px;
+}
+
+.panels-controllers {
+	position: relative;
+	float: left;
+	margin: 10px auto;
+	width: 333px;
+	text-align: center;
+}
+
 .panels-controllers a.move-left {
 	background: transparent url(img/paneluser_move_left.png) no-repeat scroll 0 0;
 	width: 16px;
@@ -347,8 +363,8 @@ padding-left:15px;
 	overflow: hidden;
 	display: block;
 	position: absolute;
-	left: 581px;
-	top: 160px;
+	left: -18px;
+	top: 23px;
 }
 
 .panels-controllers a.move-right {
@@ -358,17 +374,26 @@ padding-left:15px;
 	overflow: hidden;
 	display: block;
 	position: absolute;
-	left: 938px;
-	top: 160px;
+	left: 335px;
+	top: 23px;
 }
 
-.panels-controllers .panels-pager {
+.panels-controllers .panels-pager a{
+	float: left;
+	display: block;
+}
+
+.panels-controllers .panels-pager{
 	text-align: center;
-	margin: 0px;
-	position: absolute;
-	margin-top: -13px;
+	float: none;
+	display: block;
 }
 
-.panels-controllers{
-	text-align: center !important;
+.panel-grabbit .panel-title{
+	margin-top: 28px;
+	padding-bottom: 20px !important;
+}
+
+.user-panel .panel-title{
+	margin-top: 0px;
 }
