@@ -1,4 +1,4 @@
-<?
+	<?
 //$Id$
 
 /**
@@ -377,11 +377,8 @@ function grabbit_panels_tags_form($form,$panel_id){
 	return $form;
 }
 
-<<<<<<< HEAD
+
 function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
-=======
-function theme_panels($private_view,$id,$name){
->>>>>>> 6677306883848986f8d1b65d4c8ea9ada85a33a8
     global $user;
 
     if(!$name)
