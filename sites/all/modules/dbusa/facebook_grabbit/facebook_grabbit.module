@@ -705,9 +705,12 @@ function facebook_grabbit_private_view_panel($param){
 						
 						$node=node_load($entry['value']->nid);
 						if($node->type!="twitter"){
-						$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
-						
-						$output .= _news_theme($comments,$node);
+						  if($node->type!='facebook'){
+						    $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+
+							  $output .= _news_theme($comments,$node);	
+						  }
+						  
 					    }
 						
 					}
