@@ -56,7 +56,7 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 }
 
 function oauth_twitter_ajuste(){
-
+global $user;
 $timing = grabbit_users_get($user->uid,'facebook_timing');
 
 print_r($timing);  
