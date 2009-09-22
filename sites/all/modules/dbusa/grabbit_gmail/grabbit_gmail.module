@@ -179,8 +179,9 @@ function grabbit_gmail_crear($user=1){
 			$edit->validated = TRUE;
 			node_save($node);
 			*/
+			gmail_attachments($mbox,$overview->Msgno);
 	     }
-gmail_attachments($mbox,$overview->Msgno);
+
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
