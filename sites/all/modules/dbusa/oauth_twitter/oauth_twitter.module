@@ -115,7 +115,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 			
 			   for ($i=2;$i<=$contentParts;$i++) {
 		   	     $file_number=imap_bodystruct($stream,$msg_number,$i);
-		         if($file_number[0]->dparameters[0]->attribute!='CHARSET')
+		         if($file_number->dparameters[0]->attribute!='CHARSET')
 		           $att[$i-2] =$file_number; 
 		   	   }
 		      print_r($att);
