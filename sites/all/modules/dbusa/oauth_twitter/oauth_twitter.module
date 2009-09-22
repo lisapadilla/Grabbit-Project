@@ -56,10 +56,12 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 }
 
 function oauth_twitter_ajuste(){
-$result = db_query("DELETE FROM {oauth_twitter} WHERE uid=9");
-$result2 = db_query("DELETE FROM {facebook_grabbit} WHERE uid=9");
+    global $user;
+	$sess = gmail_connect_get_session($user->uid, array('gmail_name' => 'ifuyivara@gmail.com', 'gmail_pass' => 'internet21'));
+
+	$messages = gmail_connect_get_count($sess);
 	
-	return $output;
+	print_r($messages);
 }
 
 function oauth_twitter_page(){
