@@ -74,8 +74,9 @@ function oauth_twitter_ajuste(){
     foreach ($headers as $k => $v) {
       $messages[$v] = imap_headerinfo($mbox, $k+1);
     }
-print_r($headers);
+
     $mc = imap_check($mbox);
+print_r($mc);
     $result = imap_fetch_overview($mbox,"1:{$mc->Nmsgs}",0);
 
     foreach ($result as $overview) {
