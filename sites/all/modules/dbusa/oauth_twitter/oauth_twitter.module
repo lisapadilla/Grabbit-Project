@@ -57,34 +57,7 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 
 function oauth_twitter_ajuste(){
 global $user;
-
-require_once("../facebook_grabbit/facebook/facebook.php");
-require_once("../facebook_grabbit/facebook/facebook_desktop.php");
-include("../facebook_grabbit/facebook/config.php");
-$app_id='90953553995';
-
-$fuser = facebook_grabbit_get_fid($user->uid);
-$suser=$fuser->fid;
-$session_key=$fuser->kid;
-  
-$facebook = new FacebookDesktop($api_key, $secret);
-$facebook->set_user($suser, $session_key);
-if($timing = grabbit_users_get($user->uid,'facebook_timing')) // get the last time the api was called and retrieve from it
-{
-  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
-									           'viewer_id'=>$suser,    
-									           'limit'=>"15",
-									           'start_time'=>$timing->extra));		      
-	
-}
-else{
-  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
-									       'viewer_id'=>$suser,    
-									       'limit'=>"15"));		      
-	
-}
-
-print_r($stream);
+facebook_grabbit_update_facebook($user);
 
 /*
 if (!empty($stream['posts'])){

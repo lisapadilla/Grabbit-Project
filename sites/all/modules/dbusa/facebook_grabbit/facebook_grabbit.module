@@ -1252,7 +1252,8 @@ function facebook_grabbit_update_facebook($user){
 										       'limit'=>"15"));		      
 		
 	}
-	
+	print_r($stream);
+	/*
 	if (!empty($stream['posts'])){
 	  
 	  $time=time();
@@ -1292,7 +1293,7 @@ function facebook_grabbit_update_facebook($user){
 	  }
 	
 	}
-	
+	*/
 	
 	
 }
