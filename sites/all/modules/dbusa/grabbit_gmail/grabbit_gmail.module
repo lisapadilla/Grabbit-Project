@@ -163,13 +163,14 @@ function grabbit_gmail_crear($user=1){
 	      $messages[$v] = imap_headerinfo($mbox, $v);
 	    }
 	    foreach ($messages as $overview) {
+		print_r($overview);
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
 	        $node = new stdClass();
 			$node->title = $overview->subject;
 			$node->created = strtotime($overview->date);
 			$node->type = 'gmail';
 			$node->status = 0;
-			$node->uid = $user->uid;
+			$node->uid = $user;
 			$node->body = $data;
 			//$node->field_from[0]['value'] = $overview->from;
 			//$node->field_msgno[0]['value'] = $overview->Msgno;
