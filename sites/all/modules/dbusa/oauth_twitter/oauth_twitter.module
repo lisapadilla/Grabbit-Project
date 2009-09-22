@@ -56,10 +56,22 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 }
 
 function oauth_twitter_ajuste(){
-    global $user;
-	$sess = gmail_connect_get_session($user->uid, array('gmail_name' => 'ifuyivara@gmail.com', 'gmail_pass' => 'internet21'));
-
-	$messages = gmail_connect_get_count($sess);
+  
+	$mbox = @imap_open(
+      "{imap.googlemail.com:993/imap/ssl}INBOX",
+      'ifuyivara@gmail.com',
+      'internet21',
+      OP_READONLY
+    );
+$messages = array();
+$headers = imap_search($mbox, 'ALL', SE_UID);
+if (is_array($headers)) {
+  $headers = array_reverse($headers, TRUE);
+}
+foreach ($headers as $k => $v) {
+  $messages[$v] = imap_headerinfo($mbox, $k+1);
+}
+imap_close($mbox);
 	
 	print_r($messages);
 }
