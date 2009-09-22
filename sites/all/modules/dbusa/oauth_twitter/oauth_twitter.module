@@ -86,7 +86,7 @@ foreach ($result as $overview) {
           echo "Seen: {$overview->seen}<br>";
           $msgbody = imap_fetchbody($mbox,$overview->msgno,"1");
 $data = get_part($mbox, $overview->msgno, "TEXT/HTML");           
-echo "Message: <input type='textarea' value='$data'> <br>";
+echo "Message: <textarea rows='20' cols='20'>$data </textarea> <br>";
            // end if
        } // end foreach
 
