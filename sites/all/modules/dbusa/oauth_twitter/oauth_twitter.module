@@ -84,8 +84,8 @@ foreach ($result as $overview) {
    	  {$overview->from} {$overview->subject}<br>";
           echo "UID: {$overview->uid}<br>";
           echo "Seen: {$overview->seen}<br>";
-          $msgbody = imap_fetchbody($mbox,$overview->msgno,1);
-          print_r (read_all_parts($overview->msgno));
+          $msgbody = imap_fetchbody($mbox,$overview->msgno,"1.2");
+          echo "Message: $msgbody <br>";
            // end if
        } // end foreach
 
@@ -93,44 +93,7 @@ foreach ($result as $overview) {
 	
 }
 
-function read_all_parts($uid){
- global $mime,$ret_info,$enc;
-  $mime = array("text","multipart","message","application","audio",
-"image","video","other","unknow");
-  $enc  = array("7BIT","8BIT","BINARY","BASE64",
-"QUOTED-PRINTABLE","OTHER");
-     
 
- $struct = imap_fetchstructure( $this -> Link, $uid );
-
- $ret_info = array();
-
-function scan($struct,$subkey){
- global $mime,$enc,$ret_info;
- 
- foreach($struct as $key => $value){
-
- 
-  if($subkey!=0){
-  $pid = $subkey.".".($key+1); }
-  else { $pid = ($key+1); }
- 
-  $ret_info[]['pid'] = $pid;
-  $ret_info[key($ret_info)]['type'] = $mime["$value->type"];
-  $ret_info[key($ret_info)]['encoding'] = $enc["$value->encoding"];
-
-  next($ret_info);
- 
-  if(($value->parts)!= null) {scan($value->parts,$pid); }
- }
- 
- }
-
-scan($struct->parts,0);
-
-return $ret_info;
-
-}
 
 function oauth_twitter_page(){
 	
