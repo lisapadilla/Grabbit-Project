@@ -140,7 +140,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 				}
 
 				if($attachments[$i]['is_attachment']) {
-					$attachments[$i]['attachment'] = imap_fetchbody($connection, $message_number, $i+1);
+					$attachments[$i]['attachment'] = imap_fetchbody($stream, $msg_number, $i+1);
 					if($structure->parts[$i]->encoding == 3) { // 3 = BASE64
 						$attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
 					}
