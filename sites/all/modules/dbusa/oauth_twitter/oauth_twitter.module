@@ -74,8 +74,6 @@ foreach ($headers as $k => $v) {
 $mc = imap_check($mbox);
 $result = imap_fetch_overview($mbox,"1:{$mc->Nmsgs}",0);
 
-imap_close($mbox);
-
 foreach ($result as $overview) {
        //check to see if message has been viewed yet
        $seen_msg = $overview->seen;
@@ -86,10 +84,12 @@ foreach ($result as $overview) {
    	  {$overview->from} {$overview->subject}<br>";
           echo "UID: {$overview->uid}<br>";
           echo "Seen: {$overview->seen}<br>";
-          $msgbody = imap_fetchbody($mbox,12);
+          $msgbody = imap_fetchbody($mbox,$overview->msgno,1);
           echo "Message: $msgbody <br>";
            // end if
        } // end foreach
+
+	imap_close($mbox);
 	
 }
 
