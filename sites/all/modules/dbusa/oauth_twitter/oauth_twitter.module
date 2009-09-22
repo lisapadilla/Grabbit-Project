@@ -109,6 +109,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
          $structure = imap_fetchstructure($stream, $msg_number);
      }
     if($structure) {
+	print_r($structure);
         $contentParts = count($structure->parts);	
 		if ($contentParts >= 2) {
 			   for ($i=2;$i<=$contentParts;$i++) {
