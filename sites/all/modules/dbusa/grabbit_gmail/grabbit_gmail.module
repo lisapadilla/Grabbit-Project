@@ -198,6 +198,8 @@ function get_mime_type(&$structure) {
 }
 
 function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false) {
+	print "<br>num: ".$msg_number;
+    
     if (!$structure) {
          $structure = imap_fetchstructure($stream, $msg_number);
      }
@@ -222,8 +224,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		   		}
 		   	}
 		   }
-		print "<br>num: ".$msg_number;
-         print_r($selectBoxDisplay);
+		
 		
          if($mime_type == get_mime_type($structure)) {
               if(!$part_number) {
