@@ -151,31 +151,40 @@ function grabbit_gmail_crear($user=1){
 
 	    $messages = array();
 	    if(!$gmail['lastime']){
-		  $headers = imap_search($mbox, 'ALL');
+		  $headers = imap_search($mbox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
 	    }else{
-		  $headers = imap_search($mbox, 'SINCE', $gmail['lastime']);
+		  $headers = imap_search($mbox, 'SINCE "'.$gmail['lastime'].'"');
 	    }
 
 	    if (is_array($headers)) {
 	      $headers = array_reverse($headers, TRUE);
 	    }
-	print_r($headers);
 	    foreach ($headers as $k => $v) {
 	      $messages[$v] = imap_headerinfo($mbox, $v);
 	    }
 	    foreach ($messages as $overview) {
-	       
-	       echo "<p>{$overview->Msgno} ({$overview->date}) - From:
-	   	  {$overview->from} {$overview->subject}<br>";
-	        
-	        $data = get_part($mbox, $overview->Msgno, "TEXT/HTML");           
-	        echo "Message: $data <br>";
+	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
+	       /* $node = new stdClass();
+			$node->title = $overview->subject;
+			$node->created = strtotime($overview->date);
+			$node->type = 'gmail';
+			$node->status = 0;
+			$node->uid = $user->uid;
+			$node->body = $data;
+			$node->field_from[0]['value'] = $overview->from;
+			$node->field_msgno[0]['value'] = $overview->Msgno;
+			
+			$node->field_gmail_attachment[0]['value']
+			
+			$edit->validated = TRUE;
+			node_save($node);
+			*/
 	     }
 
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
-		//grabbit_gmail_save($user,$settings);
+		grabbit_gmail_save($user,$settings);
     }
 
 }
@@ -222,7 +231,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		   	}
 		   	$attachment .= "</select>";
 		   }
-		
+		print_r($attachment);
          if($mime_type == get_mime_type($structure)) {
               if(!$part_number) {
                    $part_number = "1";
