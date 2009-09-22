@@ -171,7 +171,7 @@ function grabbit_gmail_crear($user=1){
 			$node->status = 0;
 			$node->uid = $user->uid;
 			$node->body = $data;
-			$node->field_from[0]['value'] = $overview->from;
+			//$node->field_from[0]['value'] = $overview->from;
 			//$node->field_msgno[0]['value'] = $overview->Msgno;
 			
 			//$attachments_array = gmail_attachments($mbox,$overview->Msgno);
