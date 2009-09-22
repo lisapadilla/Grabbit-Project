@@ -424,6 +424,12 @@ padding-left:15px;
 	width: 234px !important;
 }
 
-.panel-most-visited .item-body .news-comments{
-	display: inline;
+.item-body .news-comments{
+	margin-top: 10px;
+}
+
+.item-body .news-comments .news-comment-picture img{
+	height: 30px;
+	width: 30px;
+	overflow: hidden;
 }
