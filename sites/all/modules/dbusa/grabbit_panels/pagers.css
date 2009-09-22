@@ -210,7 +210,7 @@
 }
 
 .user-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
-	padding-bottom: 33px !important;
+	padding-bottom: 28px !important;
 }
 
 .panel-grabbit .panel-wraper .node-stream-news .item-body {
@@ -259,16 +259,16 @@
 	width: 106px !important;
 }
 
+.user-panel .panel-wraper .node-stream-news .item-body h2{
+	width: 130px !important;
+}
+
 .panel-grabbit .panel-wraper .node-stream-news .item-body h2{
 	width: 100px !important;
 }
 
 .panel-grabbit .panel-wraper .node-stream-blogs .item-body .links_stream{
 	width: 106px !important;
-}
-
-.panel-grabbit .panel-wraper .node-stream-blogs .item-body h2{
-	width: 100px !important;
 }
 
 .panel-grabbit .node-stream-news .item-body, .panel-grabbit .node-stream-blogs .item-body, .panel-grabbit .node-stream-deal .item-body, .user-panels .panel-grabbit .node-stream-news .item-body, .user-panels .panel-grabbit .node-stream-blogs .item-body, .user-panels .panel-grabbit .node-stream-deal .item-body {
@@ -340,7 +340,7 @@ padding-left:15px;
 
 .user-panel .panel-title .controller-top .add-new-panel{
 	font-size: 10px;
-	color: #666666;
+	color: #FFFFFF;
 	position: relative;
 	top: 2px;
 	font-weight: bold;
@@ -351,9 +351,8 @@ padding-left:15px;
 .panels-controllers {
 	position: relative;
 	float: left;
-	margin: 10px auto;
-	width: 333px;
-	text-align: center;
+	height: 27px;
+	width: 332px;
 }
 
 .panels-controllers a.move-left {
@@ -364,7 +363,7 @@ padding-left:15px;
 	display: block;
 	position: absolute;
 	left: -18px;
-	top: 23px;
+	top: 29px;
 }
 
 .panels-controllers a.move-right {
@@ -372,21 +371,18 @@ padding-left:15px;
 	width: 16px;
 	height: 15px;
 	overflow: hidden;
-	display: block;
 	position: absolute;
 	left: 335px;
-	top: 23px;
+	top: 29px;
+}
+
+.panels-controllers .panels-pager{
+	float: left;
 }
 
 .panels-controllers .panels-pager a{
 	float: left;
-	display: block;
-}
-
-.panels-controllers .panels-pager{
-	text-align: center;
-	float: none;
-	display: block;
+	margin-top: 10px;
 }
 
 .panel-grabbit .panel-title{
@@ -396,4 +392,18 @@ padding-left:15px;
 
 .user-panel .panel-title{
 	margin-top: 0px;
+}
+
+#content-area {
+	padding: 0px !important;
+}
+
+.panel-wraper .panel-closer{
+	background: transparent url(img/paneluser_close.gif) no-repeat right top;
+	position: absolute;
+	left: 310px;
+	top: 38px;
+	z-index: 100;
+	width: 13px;
+	height: 13px;
 }

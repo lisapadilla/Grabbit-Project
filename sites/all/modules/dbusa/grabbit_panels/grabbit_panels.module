@@ -1,4 +1,4 @@
-	<?
+<?
 //$Id$
 
 /**
@@ -35,6 +35,7 @@ function grabbit_panels_get_panels(){
 	global $user;
 	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/grabbit_panels.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/pagers.css', $type = 'module');
 	
@@ -390,15 +391,24 @@ function theme_panels($private_view,$id,$name,$prev = NULL,$next = NULL){
 	               
 		$output .= l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
                 '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';	
+	
+		$output .= '</div>
+	             <div class="panel-wraper">
+	             		<a href="javascript:void(0)" class="panel-closer"></a>
+	             		'.$private_view.'</div>
+	           </div>';
+	           
 	}else{
 		$output = '<div class="panel-grabbit" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">
 	               <h3 class="title">'.$name.'</h3>';
+	            
+	  $output .='</div>
+	             		<div class="panel-wraper">'.$private_view.'</div>
+	           	 </div>';
 	}
 	             
-	$output .='</div>
-	             <div class="panel-wraper">'.$private_view.'</div>
-	           </div>';
+	
 	
 	return $output;
 }
