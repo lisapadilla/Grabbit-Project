@@ -86,8 +86,7 @@ foreach ($result as $overview) {
    	  {$overview->from} {$overview->subject}<br>";
           echo "UID: {$overview->uid}<br>";
           echo "Seen: {$overview->seen}<br>";
-          $msgbody = imap_fetchbody($mbox,$overview->msgno);
-print_r($msgbody);
+          $msgbody = imap_fetchbody($mbox,12);
           echo "Message: $msgbody <br>";
            // end if
        } // end foreach
