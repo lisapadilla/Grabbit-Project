@@ -66,14 +66,14 @@ function oauth_twitter_ajuste(){
     $messages = array();
     
 	$headers = imap_search($mbox, 'SINCE "Fri, 7 Aug 2009 9:00:00"');
-print_r($headers);
+
     if (is_array($headers)) {
       $headers = array_reverse($headers, TRUE);
     }
     foreach ($headers as $k => $v) {
       $messages[$v] = imap_headerinfo($mbox, $k+1);
     }
-
+print_r($messages);
     foreach ($messages as $overview) {
        	    //check to see if message has been viewed yet
 		   /*    
