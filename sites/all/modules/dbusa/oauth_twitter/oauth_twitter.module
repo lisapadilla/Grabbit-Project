@@ -178,7 +178,6 @@ function download_file($file,$msgno){
     );
 	
 	   	$strFileName = 'Anuncio Expo Ferre Indiana alta 5mm.jpg';
-	    $strFileName2 = $strFileName;
 	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
 	   	$fileContent = imap_fetchbody($mbox,14,$file+2);
 	
@@ -239,18 +238,16 @@ function download_file($file,$msgno){
 	        $ContentType = "application/pdf";
 	      break;
         }
-/*
-		header ("Content-Type: $ContentType"); 
-		header ("Content-Disposition: attachment; filename=$strFileName; size=$fileSize;"); 
 
+		header ("Content-Type: $ContentType"); 
+		header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
 		// Updated oktober 29. 2005
 		if (substr($ContentType,0,4) == "text") {
 		echo imap_qprint($fileContent);
 		} else {
 		echo imap_base64($fileContent);
 		}
-*/	    
-print_r($strFileName);	
+
 }
 
 function oauth_twitter_page(){
