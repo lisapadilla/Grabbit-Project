@@ -264,7 +264,7 @@
 }
 
 .panel-grabbit .panel-wraper .node-stream-news .item-body h2{
-	width: 100px !important;
+	width: 130px !important;
 }
 
 .panel-grabbit .panel-wraper .node-stream-blogs .item-body .links_stream{
@@ -418,4 +418,8 @@ padding-left:15px;
 
 .panel-most-visited .panel-title{
 	background:transparent url(img/bg_left_top_mvisited.jpg) no-repeat scroll left bottom !important;
+}
+
+.item-body .content-body {
+	width: 234px !important;
 }
