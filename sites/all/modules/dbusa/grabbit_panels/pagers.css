@@ -423,3 +423,7 @@ padding-left:15px;
 .item-body .content-body {
 	width: 234px !important;
 }
+
+.panel-most-visited .item-body .news-comments{
+	display: inline;
+}
