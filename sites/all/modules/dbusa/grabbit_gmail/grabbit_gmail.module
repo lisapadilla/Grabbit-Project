@@ -180,13 +180,13 @@ function grabbit_gmail_crear($user=1){
 			
 			$edit->validated = TRUE;
 			node_save($node);
-			exit;
+			
 	     }
 
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
-		//grabbit_gmail_save($user,$settings);
+		grabbit_gmail_save($user,$settings);
     }
 
 }
