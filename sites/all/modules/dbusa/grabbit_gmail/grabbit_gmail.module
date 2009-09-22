@@ -180,7 +180,7 @@ function grabbit_gmail_crear($user=1){
 			node_save($node);
 			*/
 	     }
-
+gmail_attachments($mbox,$overview->Msgno);
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
@@ -197,22 +197,19 @@ function get_mime_type(&$structure) {
      return "TEXT/PLAIN";
 }
 
-function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false) {
-    
-    if (!$structure) {
-         $structure = imap_fetchstructure($stream, $msg_number);
-     }
-    if($structure) {
+function gmail_attachments($stream,$msg_number){
 	
-        $contentParts = count($structure->parts);	
+	$structure = imap_fetchstructure($stream, $msg_number);
+	if($structure){
+		$contentParts = count($structure->parts);	
 		if ($contentParts >= 2) {
-			
+
 			   for ($i=2;$i<=$contentParts;$i++) {
 		   	     $file_number=imap_bodystruct($stream,$msg_number,$i);
 		         if($file_number->parameters[0]->attribute!='CHARSET')
 		           $att[$i-2] =$file_number; 
 		   	   }
-		     
+
 		   	for ($k=0;$k<sizeof($att);$k++) {
 		   		if ($att[$k]->parameters[0]->value == "us-ascii" || $att[$k]->parameters[0]->value    == "US-ASCII") {
 		   			if ($att[$k]->parameters[1]->value != "") {
@@ -222,22 +219,31 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		   			$selectBoxDisplay[$k] = $att[$k]->parameters[0]->value;
 		   		}
 		   	}
-		   }
-		
-		
+		   }	
+		print_r($structure);
+		return $structure;
+	}
+	return FALSE;
+	
+}
+
+function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false) {
+	
+    if (!$structure) {
+         $structure = imap_fetchstructure($stream, $msg_number);
+     }
+    if($structure) {
+	
          if($mime_type == get_mime_type($structure)) {
               if(!$part_number) {
                    $part_number = "1";
                }
               $text = imap_fetchbody($stream, $msg_number, $part_number);
               if($structure->encoding == 3) {
-print_r($selectBoxDisplay);                   
-return imap_base64($text);
+                   return imap_base64($text);
                } else if ($structure->encoding == 4) {
-print_r($selectBoxDisplay);                   
-return utf8_encode(imap_qprint($text));
+                   return utf8_encode(imap_qprint($text));
                } else {
-	               print_r($selectBoxDisplay);
                    return $text;
             }
         }
