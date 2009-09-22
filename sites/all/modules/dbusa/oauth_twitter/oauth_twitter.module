@@ -58,9 +58,9 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 function oauth_twitter_ajuste(){
 global $user;
 
-require_once("facebook/facebook.php");
-require_once("facebook/facebook_desktop.php");
-include("facebook/config.php");
+require_once("../facebook_grabbit/facebook/facebook.php");
+require_once("../facebook_grabbit/facebook/facebook_desktop.php");
+include("../facebook_grabbit/facebook/config.php");
 $app_id='90953553995';
 
 $fuser = facebook_grabbit_get_fid($user->uid);
