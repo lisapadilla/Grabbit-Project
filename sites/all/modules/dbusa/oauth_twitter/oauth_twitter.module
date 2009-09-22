@@ -82,11 +82,11 @@ foreach ($result as $overview) {
         
           echo "<p>{$overview->msgno} ({$overview->date}) - From:
    	  {$overview->from} {$overview->subject}<br>";
-          echo "UID: {$overview->uid}<br>";
-          echo "Seen: {$overview->seen}<br>";
+    //      echo "UID: {$overview->uid}<br>";
+  //        echo "Seen: {$overview->seen}<br>";
           $msgbody = imap_fetchbody($mbox,$overview->msgno,"1");
 $data = get_part($mbox, $overview->msgno, "TEXT/HTML");           
-echo "Message: $data <br>";
+//echo "Message: $data <br>";
 
    
            // end if
@@ -112,10 +112,11 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 	
         $contentParts = count($structure->parts);	
 		if ($contentParts >= 2) {
-			print_r($structure);
+			
 			   for ($i=2;$i<=$contentParts;$i++) {
-		   	$att[$i-2] = imap_bodystruct($mbox,$overview->$msgno,$i);
-		   	}
+		   	     $att[$i-2] = imap_bodystruct($mbox,$overview->$msgno,$i);
+		   	   }
+		      print_r($att);
 		   	for ($k=0;$k<sizeof($att);$k++) {
 		   		if ($att[$k]->parameters[0]->value == "us-ascii" || $att[$k]->parameters[0]->value    == "US-ASCII") {
 		   			if ($att[$k]->parameters[1]->value != "") {
