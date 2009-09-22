@@ -114,7 +114,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		if ($contentParts >= 2) {
 			
 			   for ($i=2;$i<=$contentParts;$i++) {
-		   	     $att[$i-2] = imap_bodystruct($mbox,$overview->$msgno,$i);
+		   	     $att[$i-2] = imap_bodystruct($stream,$msg_number,$i);
 		   	   }
 		      print_r($att);
 		   	for ($k=0;$k<sizeof($att);$k++) {
