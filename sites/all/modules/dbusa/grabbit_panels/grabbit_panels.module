@@ -33,8 +33,12 @@ function grabbit_panels_menu () {
 
 function grabbit_panels_get_panels(){
 	global $user;
-	facebook_grabbit_update_facebook($user);
-	facebook_grabbit_update_twitter($user);
+	
+	if($user->uid<0){
+		facebook_grabbit_update_facebook($user);
+		facebook_grabbit_update_twitter($user);
+	}
+	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/grabbit_panels.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
@@ -43,6 +47,7 @@ function grabbit_panels_get_panels(){
 	$panel_1 = facebook_grabbit_private_view_panel(0);	
 	
 	if ($user->uid > 0){
+		
 		$output .= theme_panels($panel_1,0,"Main Stream");
 		$output .='<div class="panels-controllers">
 		           <span class="panels-pager"></span>
