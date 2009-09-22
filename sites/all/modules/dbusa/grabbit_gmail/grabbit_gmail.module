@@ -172,7 +172,7 @@ function grabbit_gmail_crear($user=1){
 			$node->status = 0;
 			$node->uid = $user;
 			$node->body = $data;
-			//$node->field_from[0]['value'] = $overview->from[0]['personal'];
+			$node->field_from[0]['value'] = $overview->from[0]->personal;
 			$node->field_from_add[0]['value'] = $overview->fromaddress;
 			$node->field_msgno[0]['value'] = $overview->Msgno;
 			
