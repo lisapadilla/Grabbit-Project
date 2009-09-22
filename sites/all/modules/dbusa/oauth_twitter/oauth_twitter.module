@@ -77,11 +77,11 @@ function oauth_twitter_ajuste(){
     foreach ($messages as $overview) {
        	    //check to see if message has been viewed yet
 		       
-		       echo "<p>{$overview->msgno} ({$overview->date}) - From:
+		       echo "<p>{$overview->Msgno} ({$overview->date}) - From:
 		   	  {$overview->fromaddress} {$overview->subject}<br>";
 		        echo "UID: {$overview->uid}<br>";
 
-		        $data = get_part($mbox, $overview->msgno, "TEXT/HTML");           
+		        $data = get_part($mbox, $overview->Msgno, "TEXT/HTML");           
 		        echo "Message: $data <br>";
     
      }
