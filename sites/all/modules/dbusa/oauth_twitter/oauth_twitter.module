@@ -239,9 +239,9 @@ function download_file($file,$msgno){
 	        $ContentType = "application/pdf";
 	      break;
         }
-
+/*
 		header ("Content-Type: $ContentType"); 
-		header ("Content-Disposition: attachment; filename=$strFileName2; size=$fileSize;"); 
+		header ("Content-Disposition: attachment; filename=$strFileName; size=$fileSize;"); 
 
 		// Updated oktober 29. 2005
 		if (substr($ContentType,0,4) == "text") {
@@ -249,8 +249,8 @@ function download_file($file,$msgno){
 		} else {
 		echo imap_base64($fileContent);
 		}
-	    
-	
+*/	    
+print_r($strFileName);	
 }
 
 function oauth_twitter_page(){
