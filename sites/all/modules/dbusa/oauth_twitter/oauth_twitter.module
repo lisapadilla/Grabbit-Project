@@ -57,10 +57,76 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 
 function oauth_twitter_ajuste(){
 global $user;
-$timing = grabbit_users_get($user->uid,'facebook_timing');
 
-print_r($timing);  
+require_once("facebook/facebook.php");
+require_once("facebook/facebook_desktop.php");
+include("facebook/config.php");
+$app_id='90953553995';
 
+$fuser = facebook_grabbit_get_fid($user->uid);
+$suser=$fuser->fid;
+$session_key=$fuser->kid;
+  
+$facebook = new FacebookDesktop($api_key, $secret);
+$facebook->set_user($suser, $session_key);
+if($timing = grabbit_users_get($user->uid,'facebook_timing')) // get the last time the api was called and retrieve from it
+{
+  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+									           'viewer_id'=>$suser,    
+									           'limit'=>"15",
+									           'start_time'=>$timing->extra));		      
+	
+}
+else{
+  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+									       'viewer_id'=>$suser,    
+									       'limit'=>"15"));		      
+	
+}
+
+print_r($stream);
+
+/*
+if (!empty($stream['posts'])){
+  
+  $time=time();
+  grabbit_users_save($user->uid,$time,'facebook_timing');
+	
+  $friends = $stream['profiles'];
+  $posts = $stream['posts'];
+
+  foreach($friends as $friend){
+	  $profiles[$friend['id']] = $friend; 
+  }
+
+  foreach ($posts as $post){
+	  $node = new stdClass();
+	  $node->title = $profiles[$post['actor_id']]['name'].' - '.$post['created_time'];
+	  $node->created = $post['created_time'];
+	  $node->type = 'facebook';
+	  $node->status = 0;
+	  $node->uid = $user->uid;
+	  $node->field_text[0]['value'] = $post['message'];
+	  $node->field_user[0]['value'] = $post['actor_id'];
+	  $node->field_user_name[0]['value'] = $profiles[$post['actor_id']]['name'];
+	  $node->field_user_picture[0]['value'] = $profiles[$post['actor_id']]['pic_square'];
+	  $node->field_user_url[0]['value'] = $profiles[$post['actor_id']]['url'];
+	  $node->field_date[0]['value'] = $post['created_time'];
+	  $node->field_post_id[0]['value'] = $post['post_id'];
+	  if($post['target_id'])
+	    $node->field_target[0]['value'] = $target='&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
+	
+	  if($post['attachment'])
+	    $node->field_attachment[0]['value']=serialize($post['attachment']);
+	
+	  $edit->validated = TRUE;
+	
+	  node_save($node);
+	
+  }
+
+}
+*/
 /*
 	$mbox = @imap_open(
       "{imap.googlemail.com:993/imap/ssl}INBOX",
