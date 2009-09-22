@@ -71,9 +71,9 @@ function oauth_twitter_ajuste(){
       $headers = array_reverse($headers, TRUE);
     }
     foreach ($headers as $k => $v) {
-      $messages[$v] = imap_headerinfo($mbox, $k+1);
+      $messages[$v] = imap_headerinfo($mbox, $v);
     }
-print_r($messages);
+
     foreach ($messages as $overview) {
        	    //check to see if message has been viewed yet
 		   /*    
