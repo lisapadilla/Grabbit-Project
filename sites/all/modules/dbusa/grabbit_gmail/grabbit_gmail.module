@@ -1,0 +1,334 @@
+<?
+//$Id$
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_gmail_menu () {
+
+  $items['gmail/ajustes/settings'] = array( 
+    'page callback' => 'grabbit_gmail_crear', 
+    'access arguments' => array('access content')
+  );
+
+  $items['gmail/delete/account'] = array( 
+    'page callback' => 'grabbit_gmail_delete', 
+    'access arguments' => array('access content')
+  );
+
+  $items['user/%user/add_gmail'] = array(
+   'title' => 'Add Gmail Account',
+   'description' => t('Add Your Gmail account to Grabbit'),
+   'page callback' => 'grabbit_gmail_add',
+   'access arguments' => array('access content'),
+   'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+function grabbit_gmail_add(){
+	global $user;
+	
+	$account = grabbit_gmail_get($user->uid);
+	
+	if($account){
+	  $output = "You already have a Gmail account in Grabbit. You must delete the current account in order to add another one<br><br>
+	             <div class='gmail-account-details'>".$account['user']." - ".l('Delete','gmail/delete/account')."</div>";	
+	}else{
+	  $output = drupal_get_form('grabbit_gmail_add_form');	
+	}
+	
+	return $output;
+}
+
+function grabbit_gmail_delete(){
+	global $user;
+	db_query("DELETE FROM {grabbit_gmail} WHERE uid=%d",$user->uid);
+	
+	drupal_goto('user/'.$user->uid.'/add_gmail');
+}
+
+function grabbit_gmail_add_form($form_state){
+
+		$form['counter'] = array(
+		    '#type' => 'item',
+		    '#prefix'=>'<div id="description">',
+		    '#value' => 'Add a Gmail account to your grabbit stream',
+		    '#suffix'=>'</div>'
+			 );	 
+		$form['user'] = array(
+		    '#type' => 'textfield',
+		    '#title' => t('GMail Address'),
+		    '#default_value' => $gmail_sess['gmail_name'],
+		    '#required' => TRUE,
+		    '#size' => 20,
+		  );
+		  $form['pass'] = array(
+		    '#type' => 'password',
+		    '#title' => t('Password'),
+		    '#required' => TRUE,
+		    '#size' => 20,
+		  );
+		  $form['submit'] = array(
+		    '#type' => 'submit',
+		    '#value' => t('Save'),
+		  ); 
+		
+		return $form;
+}
+
+
+/**
+ * gmail_connect_get_login_validate - validate the login form
+ */
+function grabbit_gmail_add_form_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['user']) || stripos($form_state['values']['user'], '@gmail') === FALSE) {
+    form_set_error('user', t('The e-mail address %mail is not valid.', array('%mail' => $form_state['values']['user'])));
+  }else{
+	$mbox = @imap_open(
+	       "{imap.googlemail.com:993/imap/ssl}INBOX",
+	      $form_state['values']['user'],
+	      $form_state['values']['pass'],
+	      OP_READONLY
+	    );	
+	if(!$mbox)
+	  form_set_error('user', t('Your account did not validate, check your user name and password.', array('%mail' => $form_state['values']['user'])));
+  }
+}
+
+/**
+ * Save the data
+ */
+function grabbit_gmail_add_form_submit($form, &$form_state) {
+  global $user;
+  $settings=array();
+  $settings['user']=$form_state['values']['user'];
+  $settings['password']=$form_state['values']['pass'];
+  grabbit_gmail_save($user->uid,$settings);
+
+}
+
+function grabbit_gmail_save($user,$settings){
+	$check = db_query("SELECT * FROM {grabbit_gmail} WHERE uid=%d",$user);
+	
+	if(db_affected_rows($check)){
+	  if($settings['lastime']){
+		  db_query("UPDATE {grabbit_gmail} SET lastime='%s' WHERE uid=%d",$settings['lastime'],$user);	
+	  }else{
+		  db_query("UPDATE {grabbit_gmail} SET user='%s', password='%s', WHERE uid=%d",$settings['user'],$settings['password'],$user);	
+	  }
+	}else{
+	  db_query("INSERT INTO {grabbit_gmail} SET uid=%d, user='%s', password='%s', lastime='%s'",$user,$settings['user'],$settings['password'],$settings['lastime']);		
+	}
+}
+
+function grabbit_gmail_get($user){
+	
+	$check = db_query("SELECT * FROM {grabbit_gmail} WHERE uid=%d",$user);
+	
+	if(db_affected_rows($check)){
+	  $return = array();
+	  $object=db_fetch_object($check);
+	  $return['user']=$object->user;
+	  $return['password']=$object->password;
+	  $return['lastime']=$object->lastime;
+	  return $return;
+	}
+	return NULL;
+}
+
+function grabbit_gmail_crear($user=1){
+	
+    $gmail = grabbit_gmail_get($user);
+  
+    if($gmail){
+	  	$mbox = @imap_open(
+	      "{imap.googlemail.com:993/imap/ssl}INBOX",
+	      $gmail['user'],
+	      $gmail['password'],
+	      OP_READONLY
+	    );
+
+	    $messages = array();
+	    if(!$gmail['lastime']){
+		  $headers = imap_search($mbox, 'ALL', SE_UID);
+	    }else{
+		  $headers = imap_search($mbox, 'SINCE', $gmail['lastime']);
+	    }
+
+	    if (is_array($headers)) {
+	      $headers = array_reverse($headers, TRUE);
+	    }
+	    foreach ($headers as $k => $v) {
+	      $messages[$v] = imap_headerinfo($mbox, $v);
+	    }
+
+	    foreach ($messages as $overview) {
+	       
+	       echo "<p>{$overview->Msgno} ({$overview->date}) - From:
+	   	  {$overview->from} {$overview->subject}<br>";
+	        
+	        $data = get_part($mbox, $overview->Msgno, "TEXT/HTML");           
+	        echo "Message: $data <br>";
+	     }
+
+		imap_close($mbox);
+		$settings=array();
+		$settings['lastime']=date('D, j M Y G:i:s');
+		grabbit_gmail_save($user,$settings);
+    }
+
+}
+
+function get_mime_type(&$structure) {
+    $primary_mime_type = array("TEXT", "MULTIPART", "MESSAGE", "APPLICATION", "AUDIO", "IMAGE", "VIDEO", "OTHER");
+    if($structure->subtype) {
+         return $primary_mime_type[(int) $structure->type] . '/' . $structure->subtype;
+     }
+     return "TEXT/PLAIN";
+}
+
+function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false) {
+    if (!$structure) {
+         $structure = imap_fetchstructure($stream, $msg_number);
+     }
+    if($structure) {
+	
+        $contentParts = count($structure->parts);	
+		if ($contentParts >= 2) {
+			
+			   for ($i=2;$i<=$contentParts;$i++) {
+		   	     $file_number=imap_bodystruct($stream,$msg_number,$i);
+		         if($file_number->parameters[0]->attribute!='CHARSET')
+		           $att[$i-2] =$file_number; 
+		   	   }
+		     
+		   	for ($k=0;$k<sizeof($att);$k++) {
+		   		if ($att[$k]->parameters[0]->value == "us-ascii" || $att[$k]->parameters[0]->value    == "US-ASCII") {
+		   			if ($att[$k]->parameters[1]->value != "") {
+		   				$selectBoxDisplay[$k] = $att[$k]->parameters[1]->value;
+		   			}
+		   		} elseif ($att[$k]->parameters[0]->value != "iso-8859-1" &&    $att[$k]->parameters[0]->value != "ISO-8859-1") {
+		   			$selectBoxDisplay[$k] = $att[$k]->parameters[0]->value;
+		   		}
+		   	}
+		   }
+		
+
+		   if (sizeof($selectBoxDisplay) > 0) {
+		   	$attachment = "<select name=\"attachments\" size=\"3\" class=\"tblContent\"    onChange=\"handleFile(this.value)\" style=\"width:170;\">";
+		   	for ($j=0;$j<sizeof($selectBoxDisplay);$j++) {
+		   		$attachment .= "\n<option value=\"$j\">". $selectBoxDisplay[$j]    ."</option>";
+		   	}
+		   	$attachment .= "</select>";
+		   }
+		
+         if($mime_type == get_mime_type($structure)) {
+              if(!$part_number) {
+                   $part_number = "1";
+               }
+              $text = imap_fetchbody($stream, $msg_number, $part_number);
+              if($structure->encoding == 3) {
+                   return imap_base64($text)." ATTACHMENTS: ".$attachment;
+               } else if ($structure->encoding == 4) {
+                   return utf8_encode(imap_qprint($text))." ATTACHMENTS: ".$attachment;
+               } else {
+                   return $text." ATTACHMENTS: ".$attachment;
+            }
+        }
+         if ($structure->type == 1) { /* multipart */
+              while (list($index, $sub_structure) = each($structure->parts)) {
+                if ($part_number) {
+                    $prefix = $part_number . '.';
+                }
+                $data = get_part($stream, $msg_number, $mime_type, $sub_structure, $prefix . ($index + 1));
+                if ($data) {
+                    return $data;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+function download_file($msgno,$file){
+	
+	$mbox = @imap_open(
+      "{imap.googlemail.com:993/imap/ssl}INBOX",
+      $gmail_name,
+      $gmail_pass,
+      OP_READONLY
+    );
+	
+	   	$strFileName = $file;
+	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
+	   	$fileContent = imap_fetchbody($mbox,$msgno,$file+2);
+	
+	   	$ContentType = "application/octet-stream";
+        switch($strFileType){
+	      case ".asf":
+	        $ContentType = "video/x-ms-asf";
+	      break;
+	      case ".avi":
+	        $ContentType = "video/avi";
+	      break;
+	      case ".doc":
+	        $ContentType = "application/msword";
+	      break;
+	      case ".zip":
+	        $ContentType = "application/zip";
+	      break;
+	      case ".xls":
+	        $ContentType = "application/vnd.ms-excel";
+	      break;
+	      case ".gif":
+	        $ContentType = "image/gif";
+	      break;
+	      case ".jpg":
+	      case "jpeg":
+	        $ContentType = "image/jpeg";
+	      break;
+	      case ".wav":
+	        $ContentType = "audio/wav";
+	      break;
+	      case ".mp3":
+	   		$ContentType = "audio/mpeg3";
+	      break;
+	      case ".mpg":
+	      case "mpeg":
+	        $ContentType = "video/mpeg";
+	      break;
+	      case ".rtf":
+	        $ContentType = "application/rtf";
+	      break;
+	      case ".htm":
+	      case "html":
+	        $ContentType = "text/html";
+	      break;
+	      case ".xml":
+	   		$ContentType = "text/xml";
+	      break;
+	      case ".xsl":
+	        $ContentType = "text/xsl";
+	      break;
+	      case ".css":
+	     	$ContentType = "text/css";
+	      break;
+	      case ".php":
+	        $ContentType = "text/php";
+	      break;
+	      case ".pdf":
+	        $ContentType = "application/pdf";
+	      break;
+        }
+
+		header ("Content-Type: $ContentType"); 
+		header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
+		// Updated oktober 29. 2005
+		if (substr($ContentType,0,4) == "text") {
+		echo imap_qprint($fileContent);
+		} else {
+		echo imap_base64($fileContent);
+		}
+
+}
