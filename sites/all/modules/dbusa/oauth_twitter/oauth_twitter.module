@@ -65,7 +65,7 @@ function oauth_twitter_ajuste(){
 
     $messages = array();
     
-	$headers = imap_search($mbox, 'SINCE 01-Sep-2009');
+	$headers = imap_search($mbox, 'SINCE 22 Sep 2009');
 
     if (is_array($headers)) {
       $headers = array_reverse($headers, TRUE);
@@ -138,11 +138,11 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                }
               $text = imap_fetchbody($stream, $msg_number, $part_number);
               if($structure->encoding == 3) {
-                   return imap_base64($text)." ATTACHMENTS: ".$attachment;
+                   return imap_base64($text);
                } else if ($structure->encoding == 4) {
-                   return utf8_encode(imap_qprint($text))." ATTACHMENTS: ".$attachment;
+                   return utf8_encode(imap_qprint($text));
                } else {
-                   return $text." ATTACHMENTS: ".$attachment;
+                   return $text;
             }
         }
          if ($structure->type == 1) { /* multipart */
