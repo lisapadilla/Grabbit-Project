@@ -223,7 +223,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		   	}
 		   }
 		
-
+           $attachment='';
 		   if (sizeof($selectBoxDisplay) > 0) {
 		   	$attachment = "<select name=\"attachments\" size=\"3\" class=\"tblContent\"    onChange=\"handleFile(this.value)\" style=\"width:170;\">";
 		   	for ($j=0;$j<sizeof($selectBoxDisplay);$j++) {
