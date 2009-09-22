@@ -113,11 +113,11 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                }
               $text = imap_fetchbody($stream, $msg_number, $part_number);
               if($structure->encoding == 3) {
-                   return "tres";
+                   return imap_base64($text);
                } else if ($structure->encoding == 4) {
-                   return "uatro";
+                   return imap_qprint($text);
                } else {
-                   return "Ninguno";
+                   return imap_utf8($text);
             }
         }
          if ($structure->type == 1) { /* multipart */
