@@ -93,7 +93,7 @@ function grabbit_gmail_add_form_validate($form, &$form_state) {
 	    );	
 	if(!$mbox)
 	  form_set_error('user', t('Your account did not validate, check your user name and password.', array('%mail' => $form_state['values']['user'])));
-		
+  }
 }
 
 /**
