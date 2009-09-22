@@ -178,50 +178,70 @@ function download_file($file,$msgno){
     );
 	
 	   	$strFileName = 'Anuncio Expo Ferre Indiana alta 5mm.jpg';
+	    $strFileName2 = $strFileName;
 	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
 	   	$fileContent = imap_fetchbody($mbox,14,$file+2);
 	
 	   	$ContentType = "application/octet-stream";
-
-	   	if ($strFileType == ".asf") 
-	   		$ContentType = "video/x-ms-asf";
-	   	if ($strFileType == ".avi")
-	   		$ContentType = "video/avi";
-	   	if ($strFileType == ".doc")
-	   		$ContentType = "application/msword";
-	   	if ($strFileType == ".zip")
-	   		$ContentType = "application/zip";
-	   	if ($strFileType == ".xls")
-	   		$ContentType = "application/vnd.ms-excel";
-	   	if ($strFileType == ".gif")
-	   		$ContentType = "image/gif";
-	   	if ($strFileType == ".jpg" || $strFileType == "jpeg")
-	   		$ContentType = "image/jpeg";
-	   	if ($strFileType == ".wav")
-	   		$ContentType = "audio/wav";
-	   	if ($strFileType == ".mp3")
+        switch($strFileType){
+	      case ".asf":
+	        $ContentType = "video/x-ms-asf";
+	      break;
+	      case ".avi":
+	        $ContentType = "video/avi";
+	      break;
+	      case ".doc":
+	        $ContentType = "application/msword";
+	      break;
+	      case ".zip":
+	        $ContentType = "application/zip";
+	      break;
+	      case ".xls":
+	        $ContentType = "application/vnd.ms-excel";
+	      break;
+	      case ".gif":
+	        $ContentType = "image/gif";
+	      break;
+	      case ".jpg":
+	      case "jpeg":
+	        $ContentType = "image/jpeg";
+	      break;
+	      case ".wav":
+	        $ContentType = "audio/wav";
+	      break;
+	      case ".mp3":
 	   		$ContentType = "audio/mpeg3";
-	   	if ($strFileType == ".mpg" || $strFileType == "mpeg")
-	   		$ContentType = "video/mpeg";
-	   	if ($strFileType == ".rtf")
-	   		$ContentType = "application/rtf";
-	   	if ($strFileType == ".htm" || $strFileType == "html")
-	   		$ContentType = "text/html";
-	   	if ($strFileType == ".xml") 
+	      break;
+	      case ".mpg":
+	      case "mpeg":
+	        $ContentType = "video/mpeg";
+	      break;
+	      case ".rtf":
+	        $ContentType = "application/rtf";
+	      break;
+	      case ".htm":
+	      case "html":
+	        $ContentType = "text/html";
+	      break;
+	      case ".xml":
 	   		$ContentType = "text/xml";
-	   	if ($strFileType == ".xsl") 
-	   		$ContentType = "text/xsl";
-	   	if ($strFileType == ".css") 
-	   		$ContentType = "text/css";
-	   	if ($strFileType == ".php") 
-	   		$ContentType = "text/php";
-	   	if ($strFileType == ".asp") 
-	   		$ContentType = "text/asp";
-	   	if ($strFileType == ".pdf")
-	   		$ContentType = "application/pdf";
+	      break;
+	      case ".xsl":
+	        $ContentType = "text/xsl";
+	      break;
+	      case ".css":
+	     	$ContentType = "text/css";
+	      break;
+	      case ".php":
+	        $ContentType = "text/php";
+	      break;
+	      case ".pdf":
+	        $ContentType = "application/pdf";
+	      break;
+        }
 
 		header ("Content-Type: $ContentType"); 
-		header ("Content-Disposition: attachment; filename=$strFileName; size=$fileSize;"); 
+		header ("Content-Disposition: attachment; filename=$strFileName2; size=$fileSize;"); 
 
 		// Updated oktober 29. 2005
 		if (substr($ContentType,0,4) == "text") {
