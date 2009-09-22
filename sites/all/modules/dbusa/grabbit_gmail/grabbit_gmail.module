@@ -172,10 +172,10 @@ function grabbit_gmail_crear($user=1){
 			$node->uid = $user->uid;
 			$node->body = $data;
 			$node->field_from[0]['value'] = $overview->from;
-			$node->field_msgno[0]['value'] = $overview->Msgno;
+			//$node->field_msgno[0]['value'] = $overview->Msgno;
 			
-			$attachments_array = gmail_attachments($mbox,$overview->Msgno);
-			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
+			//$attachments_array = gmail_attachments($mbox,$overview->Msgno);
+			//$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
 			
 			$edit->validated = TRUE;
 			node_save($node);
