@@ -77,7 +77,7 @@ function grabbit_panels_get_panels(){
 			$term = taxonomy_get_term(arg(2));
 			$output .= theme_panels($panel_term,0,$term->name);
 		}else{
-			$output .= theme_panels($panel_1,0,"Public Stream");
+			$output .= theme_panels($panel_1,0,"My Main Stream");
 		}
 		
 		$panel_2 = facebook_grabbit_private_view_panel(0);	
@@ -405,8 +405,12 @@ function theme_panels($private_view,$id,$name){
 	           </div>';
 	           
 	}else{
-		$output = '<div class="panel-grabbit" id="panel-'.$id.'">
-	             <div class="panel-title clearfix">
+		if ($name == 'Most Visited'){
+			$output = '<div class="panel-grabbit panel-most-visited" id="panel-'.$id.'">';
+		}else{
+			$output = '<div class="panel-grabbit" id="panel-'.$id.'">';
+		}
+		$output .= ' <div class="panel-title clearfix">
 	               <h3 class="title">'.$name.'</h3>';
 	            
 	  $output .='</div>

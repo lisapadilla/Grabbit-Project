@@ -231,7 +231,7 @@
 }
 
 .panel-grabbit .panel-wraper .node-stream-blogs .item-body {
-	width: 239px !important;
+	width: 236px !important;
 }
 
 .panel-grabbit .panel-wraper .node-stream-blogs .item-body .links_stream{
@@ -305,7 +305,7 @@ padding-left:15px;
 }
 
 #panel-0 .node-stream-deal .item-body{
-	width: 236px;
+	width: 236px !important;
 }
 
 .user-panel .panel-title .controller-top{
@@ -406,4 +406,16 @@ padding-left:15px;
 	z-index: 100;
 	width: 13px;
 	height: 13px;
+}
+
+#panel-0 .node-stream-news h2, #panel-0 .node-stream-blogs h2, #panel-0 .node-stream-deal h2 {
+	width: 130px !important;
+}
+
+#panel-1 .node-stream-news .item-body, #panel-1 .node-stream-blogs .item-body, #panel-1 .node-stream-deal .item-body, .user-panels .panel-grabbit .node-stream-news .item-body, .user-panels .panel-grabbit .node-stream-blogs .item-body, .user-panels .panel-grabbit .node-stream-deal .item-body {
+	width: 236px !important;
+}
+
+.panel-most-visited .panel-title{
+	background:transparent url(img/bg_left_top_mvisited.jpg) no-repeat scroll left bottom !important;
 }
