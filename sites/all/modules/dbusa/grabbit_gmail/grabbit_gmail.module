@@ -87,8 +87,8 @@ function grabbit_gmail_add_form_validate($form, &$form_state) {
   }else{
 	$mbox = @imap_open(
 	       "{imap.googlemail.com:993/imap/ssl}INBOX",
-	      'ifuyivara@gmail.com',
-	      'internet21',
+	      $form_state['values']['user'],
+	      $form_state['values']['pass'],
 	      OP_READONLY
 	    );	
 	if(!$mbox){
