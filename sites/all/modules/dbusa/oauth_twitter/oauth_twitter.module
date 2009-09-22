@@ -65,7 +65,7 @@ function oauth_twitter_ajuste(){
 
     $messages = array();
     
-	$headers = imap_search($mbox, 'SINCE 01-Jul-2009');
+	$headers = imap_search($mbox, 'SINCE 01-Aug-2009');
 
     if (is_array($headers)) {
       $headers = array_reverse($headers, TRUE);
