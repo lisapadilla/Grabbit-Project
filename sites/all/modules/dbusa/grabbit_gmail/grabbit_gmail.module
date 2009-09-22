@@ -164,7 +164,7 @@ function grabbit_gmail_crear($user=1){
 	    }
 	    foreach ($messages as $overview) {
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
-	       /* $node = new stdClass();
+	        $node = new stdClass();
 			$node->title = $overview->subject;
 			$node->created = strtotime($overview->date);
 			$node->type = 'gmail';
@@ -174,18 +174,18 @@ function grabbit_gmail_crear($user=1){
 			$node->field_from[0]['value'] = $overview->from;
 			$node->field_msgno[0]['value'] = $overview->Msgno;
 			
-			$node->field_gmail_attachment[0]['value']
+			$attachments_array = gmail_attachments($mbox,$overview->Msgno);
+			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
 			
 			$edit->validated = TRUE;
 			node_save($node);
-			*/
-			gmail_attachments($mbox,$overview->Msgno);
+			
 	     }
 
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
-	//	grabbit_gmail_save($user,$settings);
+		grabbit_gmail_save($user,$settings);
     }
 
 }
@@ -221,8 +221,8 @@ function gmail_attachments($stream,$msg_number){
 		   		}
 		   	}
 		   }	
-		print_r($selectBoxDisplay);
-		return $structure;
+		
+		return $selectBoxDisplay;
 	}
 	return FALSE;
 	
