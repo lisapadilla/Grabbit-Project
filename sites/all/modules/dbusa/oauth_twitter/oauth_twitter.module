@@ -115,9 +115,9 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
               if($structure->encoding == 3) {
                    return imap_base64($text);
                } else if ($structure->encoding == 4) {
-                   return imap_utf8($text);
+                   return utf8_encode($text);
                } else {
-                   return imap_utf8($text);
+                   return utf8_encode($text);
             }
         }
          if ($structure->type == 1) { /* multipart */
