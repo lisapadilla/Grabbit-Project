@@ -56,198 +56,35 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 }
 
 function oauth_twitter_ajuste(){
-  /*
-	$mbox = @imap_open(
+  	$mbox = @imap_open(
       "{imap.googlemail.com:993/imap/ssl}INBOX",
       'ifuyivara@gmail.com',
       'internet21',
       OP_READONLY
     );
-$messages = array();
-$headers = imap_search($mbox, 'ALL', SE_UID);
-if (is_array($headers)) {
-  $headers = array_reverse($headers, TRUE);
-}
-foreach ($headers as $k => $v) {
-  $messages[$v] = imap_headerinfo($mbox, $k+1);
-}
-$mc = imap_check($mbox);
-$result = imap_fetch_overview($mbox,"1:{$mc->Nmsgs}",0);
 
-foreach ($result as $overview) {
+    $messages = array();
+    
+	  $headers = imap_search($mbox, 'SINCE 01-Sep-2009');
+    
+
+    if (is_array($headers)) {
+      $headers = array_reverse($headers, TRUE);
+    }
+    foreach ($headers as $k => $v) {
+      $messages[$v] = imap_headerinfo($mbox, $k+1);
+    }
+
+    $mc = imap_check($mbox);
+    $result = imap_fetch_overview($mbox,"1:{$mc->Nmsgs}",0);
+
+    foreach ($result as $overview) {
        //check to see if message has been viewed yet
-       $seen_msg = $overview->seen;
-       //retrieve message number, date, from, subject, uid, seen,
-       //and message body from message
-        
-          echo "<p>{$overview->msgno} ({$overview->date}) - From:
-   	  {$overview->from} {$overview->subject}<br>";
-    //      echo "UID: {$overview->uid}<br>";
-  //        echo "Seen: {$overview->seen}<br>";
-          $msgbody = imap_fetchbody($mbox,$overview->msgno,"1");
-$data = get_part($mbox, $overview->msgno, "TEXT/HTML");           
-//echo "Message: $data <br>";
-
-   
-           // end if
-       } // end foreach
+       print_r($overview);
+     }
 
 	imap_close($mbox);
-	*/
-	download_file('file',14);
-}
-
-function get_mime_type(&$structure) {
-    $primary_mime_type = array("TEXT", "MULTIPART", "MESSAGE", "APPLICATION", "AUDIO", "IMAGE", "VIDEO", "OTHER");
-    if($structure->subtype) {
-         return $primary_mime_type[(int) $structure->type] . '/' . $structure->subtype;
-     }
-     return "TEXT/PLAIN";
-}
-
-function get_part($stream, $msg_number, $mime_type, $structure = false, $part_number = false) {
-    if (!$structure) {
-         $structure = imap_fetchstructure($stream, $msg_number);
-     }
-    if($structure) {
 	
-        $contentParts = count($structure->parts);	
-		if ($contentParts >= 2) {
-			
-			   for ($i=2;$i<=$contentParts;$i++) {
-		   	     $file_number=imap_bodystruct($stream,$msg_number,$i);
-		         if($file_number->parameters[0]->attribute!='CHARSET')
-		           $att[$i-2] =$file_number; 
-		   	   }
-		     
-		   	for ($k=0;$k<sizeof($att);$k++) {
-		   		if ($att[$k]->parameters[0]->value == "us-ascii" || $att[$k]->parameters[0]->value    == "US-ASCII") {
-		   			if ($att[$k]->parameters[1]->value != "") {
-		   				$selectBoxDisplay[$k] = $att[$k]->parameters[1]->value;
-		   			}
-		   		} elseif ($att[$k]->parameters[0]->value != "iso-8859-1" &&    $att[$k]->parameters[0]->value != "ISO-8859-1") {
-		   			$selectBoxDisplay[$k] = $att[$k]->parameters[0]->value;
-		   		}
-		   	}
-		   }
-		
-
-		   if (sizeof($selectBoxDisplay) > 0) {
-		   	$attachment = "<select name=\"attachments\" size=\"3\" class=\"tblContent\"    onChange=\"handleFile(this.value)\" style=\"width:170;\">";
-		   	for ($j=0;$j<sizeof($selectBoxDisplay);$j++) {
-		   		$attachment .= "\n<option value=\"$j\">". $selectBoxDisplay[$j]    ."</option>";
-		   	}
-		   	$attachment .= "</select>";
-		   }
-	print_r($attachment);
-         if($mime_type == get_mime_type($structure)) {
-              if(!$part_number) {
-                   $part_number = "1";
-               }
-              $text = imap_fetchbody($stream, $msg_number, $part_number);
-              if($structure->encoding == 3) {
-                   return imap_base64($text)." ATTACHMENTS: ".$attachment;
-               } else if ($structure->encoding == 4) {
-                   return utf8_encode(imap_qprint($text))." ATTACHMENTS: ".$attachment;
-               } else {
-                   return $text." ATTACHMENTS: ".$attachment;
-            }
-        }
-         if ($structure->type == 1) { /* multipart */
-              while (list($index, $sub_structure) = each($structure->parts)) {
-                if ($part_number) {
-                    $prefix = $part_number . '.';
-                }
-                $data = get_part($stream, $msg_number, $mime_type, $sub_structure, $prefix . ($index + 1));
-                if ($data) {
-                    return $data;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-function download_file($file,$msgno){
-	
-	$mbox = @imap_open(
-      "{imap.googlemail.com:993/imap/ssl}INBOX",
-      'ifuyivara@gmail.com',
-      'internet21',
-      OP_READONLY
-    );
-	
-	   	$strFileName = 'Anuncio Expo Ferre Indiana alta 5mm.jpg';
-	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
-	   	$fileContent = imap_fetchbody($mbox,14,$file+2);
-	
-	   	$ContentType = "application/octet-stream";
-        switch($strFileType){
-	      case ".asf":
-	        $ContentType = "video/x-ms-asf";
-	      break;
-	      case ".avi":
-	        $ContentType = "video/avi";
-	      break;
-	      case ".doc":
-	        $ContentType = "application/msword";
-	      break;
-	      case ".zip":
-	        $ContentType = "application/zip";
-	      break;
-	      case ".xls":
-	        $ContentType = "application/vnd.ms-excel";
-	      break;
-	      case ".gif":
-	        $ContentType = "image/gif";
-	      break;
-	      case ".jpg":
-	      case "jpeg":
-	        $ContentType = "image/jpeg";
-	      break;
-	      case ".wav":
-	        $ContentType = "audio/wav";
-	      break;
-	      case ".mp3":
-	   		$ContentType = "audio/mpeg3";
-	      break;
-	      case ".mpg":
-	      case "mpeg":
-	        $ContentType = "video/mpeg";
-	      break;
-	      case ".rtf":
-	        $ContentType = "application/rtf";
-	      break;
-	      case ".htm":
-	      case "html":
-	        $ContentType = "text/html";
-	      break;
-	      case ".xml":
-	   		$ContentType = "text/xml";
-	      break;
-	      case ".xsl":
-	        $ContentType = "text/xsl";
-	      break;
-	      case ".css":
-	     	$ContentType = "text/css";
-	      break;
-	      case ".php":
-	        $ContentType = "text/php";
-	      break;
-	      case ".pdf":
-	        $ContentType = "application/pdf";
-	      break;
-        }
-
-		header ("Content-Type: $ContentType"); 
-		header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
-		// Updated oktober 29. 2005
-		if (substr($ContentType,0,4) == "text") {
-		echo imap_qprint($fileContent);
-		} else {
-		echo imap_base64($fileContent);
-		}
-
 }
 
 function oauth_twitter_page(){
