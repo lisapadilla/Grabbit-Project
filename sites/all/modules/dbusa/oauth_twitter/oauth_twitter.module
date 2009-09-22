@@ -86,7 +86,7 @@ foreach ($result as $overview) {
   //        echo "Seen: {$overview->seen}<br>";
           $msgbody = imap_fetchbody($mbox,$overview->msgno,"1");
 $data = get_part($mbox, $overview->msgno, "TEXT/HTML");           
-echo "Message: $data <br>";
+//echo "Message: $data <br>";
 
    
            // end if
@@ -129,6 +129,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		   		}
 		   	}
 		   }
+		
 
 		   if (sizeof($selectBoxDisplay) > 0) {
 		   	$attachment = "<select name=\"attachments\" size=\"3\" class=\"tblContent\"    onChange=\"handleFile(this.value)\" style=\"width:170;\">";
@@ -137,7 +138,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		   	}
 		   	$attachment .= "</select>";
 		   }
-	
+	print_r($attachment);
          if($mime_type == get_mime_type($structure)) {
               if(!$part_number) {
                    $part_number = "1";
