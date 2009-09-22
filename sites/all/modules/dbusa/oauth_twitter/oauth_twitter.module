@@ -86,7 +86,7 @@ foreach ($result as $overview) {
   //        echo "Seen: {$overview->seen}<br>";
           $msgbody = imap_fetchbody($mbox,$overview->msgno,"1");
 $data = get_part($mbox, $overview->msgno, "TEXT/HTML");           
-echo "Message: $data <br>";
+//echo "Message: $data <br>";
 
    
            // end if
@@ -109,35 +109,49 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
          $structure = imap_fetchstructure($stream, $msg_number);
      }
     if($structure) {
-	
-        $contentParts = count($structure->parts);	
-		if ($contentParts >= 2) {
-			
-			   for ($i=2;$i<=$contentParts;$i++) {
-		   	     $file_number=imap_bodystruct($stream,$msg_number,$i);
-		         if($file_number->parameters[0]->attribute!='CHARSET')
-		           $att[$i-2] =$file_number; 
-		   	   }
-		     
-		   	for ($k=0;$k<sizeof($att);$k++) {
-		   		if ($att[$k]->parameters[0]->value == "us-ascii" || $att[$k]->parameters[0]->value    == "US-ASCII") {
-		   			if ($att[$k]->parameters[1]->value != "") {
-		   				$selectBoxDisplay[$k] = $att[$k]->parameters[1]->value;
-		   			}
-		   		} elseif ($att[$k]->parameters[0]->value != "iso-8859-1" &&    $att[$k]->parameters[0]->value != "ISO-8859-1") {
-		   			$selectBoxDisplay[$k] = $att[$k]->parameters[0]->value;
-		   		}
-		   	}
-		   }
+		$attachments = array();
+		if(isset($structure->parts) && count($structure->parts)) {
 
-		   if (sizeof($selectBoxDisplay) > 0) {
-		   	$attachment = "<select name=\"attachments\" size=\"3\" class=\"tblContent\"    onChange=\"handleFile(this.value)\" style=\"width:170;\">";
-		   	for ($j=0;$j<sizeof($selectBoxDisplay);$j++) {
-		   		$attachment .= "\n<option value=\"$j\">". $selectBoxDisplay[$j]    ."</option>";
-		   	}
-		   	$attachment .= "</select>";
-		   }
+			for($i = 0; $i < count($structure->parts); $i++) {
+
+				$attachments[$i] = array(
+					'is_attachment' => false,
+					'filename' => '',
+					'name' => '',
+					'attachment' => ''
+				);
+
+				if($structure->parts[$i]->ifdparameters) {
+					foreach($structure->parts[$i]->dparameters as $object) {
+						if(strtolower($object->attribute) == 'filename') {
+							$attachments[$i]['is_attachment'] = true;
+							$attachments[$i]['filename'] = $object->value;
+						}
+					}
+				}
+
+				if($structure->parts[$i]->ifparameters) {
+					foreach($structure->parts[$i]->parameters as $object) {
+						if(strtolower($object->attribute) == 'name') {
+							$attachments[$i]['is_attachment'] = true;
+							$attachments[$i]['name'] = $object->value;
+						}
+					}
+				}
+
+				if($attachments[$i]['is_attachment']) {
+					$attachments[$i]['attachment'] = imap_fetchbody($connection, $message_number, $i+1);
+					if($structure->parts[$i]->encoding == 3) { // 3 = BASE64
+						$attachments[$i]['attachment'] = base64_decode($attachments[$i]['attachment']);
+					}
+					elseif($structure->parts[$i]->encoding == 4) { // 4 = QUOTED-PRINTABLE
+						$attachments[$i]['attachment'] = quoted_printable_decode($attachments[$i]['attachment']);
+					}
+				}
+			}
+		}
 	
+	print_r($attachments);
          if($mime_type == get_mime_type($structure)) {
               if(!$part_number) {
                    $part_number = "1";
