@@ -159,10 +159,11 @@ function grabbit_gmail_crear($user=1){
 	    if (is_array($headers)) {
 	      $headers = array_reverse($headers, TRUE);
 	    }
+	print_r($headers);
 	    foreach ($headers as $k => $v) {
 	      $messages[$v] = imap_headerinfo($mbox, $v);
 	    }
-
+print_r($messages);
 	    foreach ($messages as $overview) {
 	       
 	       echo "<p>{$overview->Msgno} ({$overview->date}) - From:
