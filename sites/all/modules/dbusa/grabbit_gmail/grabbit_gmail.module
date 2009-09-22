@@ -87,13 +87,18 @@ function grabbit_gmail_add_form_validate($form, &$form_state) {
   }else{
 	$mbox = @imap_open(
 	       "{imap.googlemail.com:993/imap/ssl}INBOX",
-	      $form_state['values']['user'],
-	      $form_state['values']['pass'],
+	      'ifuyivara@gmail.com',
+	      'internet21',
 	      OP_READONLY
 	    );	
-	if(!$mbox)
+	if(!$mbox){
 	  form_set_error('user', t('Your account did not validate, check your user name and password.', array('%mail' => $form_state['values']['user'])));
-  }
+		
+	}else{
+	  form_set_error('user', t('WIN.', array('%mail' => $form_state['values']['user'])));
+		
+	}
+}
 }
 
 /**
