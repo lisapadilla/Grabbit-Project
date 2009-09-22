@@ -224,14 +224,12 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
 		   }
 		
            print_r($selectBoxDisplay);
+
 		   if (sizeof($selectBoxDisplay) > 0) {
-		   	$attachment = "<select name=\"attachments\" size=\"3\" class=\"tblContent\"    onChange=\"handleFile(this.value)\" style=\"width:170;\">";
-		   	for ($j=0;$j<sizeof($selectBoxDisplay);$j++) {
-		   		$attachment .= "\n<option value=\"$j\">". $selectBoxDisplay[$j]    ."</option>";
-		   	}
+		   
 		   
 		   }
-		print_r($attachment);
+		
          if($mime_type == get_mime_type($structure)) {
               if(!$part_number) {
                    $part_number = "1";
