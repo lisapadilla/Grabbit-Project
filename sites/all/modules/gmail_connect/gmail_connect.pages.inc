@@ -138,6 +138,7 @@ function gmail_connect_view_message($account, $mid = -1) {
   return theme('gmail_connect_message', $header, $body);
 }
 
+
 /**
  * gmail_connect_delete_message - delete a message from
  *  the user's inbox.

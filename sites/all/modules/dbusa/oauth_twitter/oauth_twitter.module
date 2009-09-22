@@ -56,7 +56,12 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 }
 
 function oauth_twitter_ajuste(){
-  /*
+
+$timing = grabbit_users_get($user->uid,'facebook_timing');
+
+print_r($timing);  
+
+/*
 	$mbox = @imap_open(
       "{imap.googlemail.com:993/imap/ssl}INBOX",
       'ifuyivara@gmail.com',
@@ -94,7 +99,7 @@ $data = get_part($mbox, $overview->msgno, "TEXT/HTML");
 
 	imap_close($mbox);
 	*/
-	download_file('file',14);
+	//download_file('file',14);
 }
 
 function get_mime_type(&$structure) {
