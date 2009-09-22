@@ -81,14 +81,14 @@ foreach ($result as $overview) {
        $seen_msg = $overview->seen;
        //retrieve message number, date, from, subject, uid, seen,
        //and message body from message
-        if (!$seen_msg){
-          echo "<p># {$overview->msgno} ({$overview->date}) - From:
+        
+          echo "<p>{$overview->msgno} ({$overview->date}) - From:
    	  {$overview->from} {$overview->subject}<br>";
           echo "UID: {$overview->uid}<br>";
           echo "Seen: {$overview->seen}<br>";
           $msgbody = imap_fetchbody($mbox,$overview->msgno,1);
           echo "Message: $msgbody <br>";
-          } // end if
+           // end if
        } // end foreach
 	
 }
