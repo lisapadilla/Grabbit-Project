@@ -220,7 +220,7 @@ function gmail_attachments($stream,$msg_number){
 		   		}
 		   	}
 		   }	
-		print_r($structure);
+		print_r($selectBoxDisplay);
 		return $structure;
 	}
 	return FALSE;
