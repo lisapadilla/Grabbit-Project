@@ -71,9 +71,12 @@ if (is_array($headers)) {
 foreach ($headers as $k => $v) {
   $messages[$v] = imap_headerinfo($mbox, $k+1);
 }
+$mc = imap_check($mbox);
+$result = imap_fetch_overview($mbox,"1:{$mc->Nmsgs}",0);
+
 imap_close($mbox);
 	
-	print_r($messages);
+	print_r($result);
 }
 
 function oauth_twitter_page(){
