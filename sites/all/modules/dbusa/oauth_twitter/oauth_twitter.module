@@ -65,8 +65,7 @@ function oauth_twitter_ajuste(){
 
     $messages = array();
     
-	  $headers = imap_search($mbox, 'SINCE 01-Sep-2009');
-    print_r($headers);
+	$headers = imap_search($mbox, 'SINCE 01-Sep-2009');
 
     if (is_array($headers)) {
       $headers = array_reverse($headers, TRUE);
@@ -74,7 +73,7 @@ function oauth_twitter_ajuste(){
     foreach ($headers as $k => $v) {
       $messages[$v] = imap_headerinfo($mbox, $k+1);
     }
-
+print_r($messages);
     $mc = imap_check($mbox);
 
     $result = imap_fetch_overview($mbox,"1:{$mc->Nmsgs}",0);
