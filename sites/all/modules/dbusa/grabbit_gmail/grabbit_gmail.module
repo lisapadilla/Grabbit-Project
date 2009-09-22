@@ -163,7 +163,7 @@ function grabbit_gmail_crear($user=1){
 	      $messages[$v] = imap_headerinfo($mbox, $v);
 	    }
 	    foreach ($messages as $overview) {
-		print_r($overview);
+	
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
 	        $node = new stdClass();
 			$node->title = $overview->subject;
@@ -172,11 +172,12 @@ function grabbit_gmail_crear($user=1){
 			$node->status = 0;
 			$node->uid = $user;
 			$node->body = $data;
-			//$node->field_from[0]['value'] = $overview->from;
-			//$node->field_msgno[0]['value'] = $overview->Msgno;
+			$node->field_from[0]['value'] = $overview->from[0]['personal'];
+			$node->field_from_add[0]['value'] = $overview->fromaddress;
+			$node->field_msgno[0]['value'] = $overview->Msgno;
 			
-			//$attachments_array = gmail_attachments($mbox,$overview->Msgno);
-			//$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
+			$attachments_array = gmail_attachments($mbox,$overview->Msgno);
+			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
 			
 			$edit->validated = TRUE;
 			node_save($node);
