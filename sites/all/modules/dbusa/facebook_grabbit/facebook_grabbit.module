@@ -1256,7 +1256,7 @@ function _news_theme($comments,$node){
 	 return $output;
 }
 
-function theme_gmail_message($comments, $node){
+function theme_gmail_message($comments,$node){
 	
 	$gmail_image='';
 						
@@ -1276,7 +1276,7 @@ function theme_gmail_message($comments, $node){
 	}
 						
 	$comments_output .= '</div>';
-	
+	print_r($node);
 	$node->teaser = strip_tags($node->teaser);
 	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element" id="node-'.$node->nid.'">
 	             <div class="meta">
