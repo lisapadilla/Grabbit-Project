@@ -1088,6 +1088,7 @@ function facebook_grabbit_facebook_comment_submit_action() {
 		foreach($update as $users){
 			$users_list[1]=1;
 		}
+		print_r($users_list);
 		$list = explode(',', $users_list); 
 		print_r($list);
 		$users_back = $facebook->api_client->users_getInfo($list,'birthday, locale, name');
