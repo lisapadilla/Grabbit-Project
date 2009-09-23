@@ -617,6 +617,7 @@ function facebook_grabbit_private_view_panel($param){
 		if(!$GET['favorites']){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
+		print_r($view_elements);
 		$view_elements->execute();
 		foreach($view_elements->result as $node){
 		  $twitface[$node->node_created]=array('time'=>$node->node_created,
