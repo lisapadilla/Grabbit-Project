@@ -187,7 +187,7 @@ function grabbit_gmail_crear($user=1){
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
-		grabbit_gmail_save($user,$settings);
+	//	grabbit_gmail_save($user,$settings);
     }
 
 }
@@ -209,6 +209,7 @@ function gmail_attachments($stream,$msg_number){
 
 			   for ($i=2;$i<=$contentParts;$i++) {
 		   	     $file_number=imap_bodystruct($stream,$msg_number,$i);
+		         print_r($file_number);
 		         if($file_number->parameters[0]->attribute!='CHARSET')
 		           $att[$i-2] =$file_number; 
 		   	   }
