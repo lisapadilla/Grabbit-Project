@@ -181,7 +181,7 @@ function grabbit_gmail_crear($user=1){
 			
 			$edit->validated = TRUE;
 		print "kk<br><br>";
-		print html_entity_decode($overview->from[0]->personal);
+		print imap_base64($overview->from[0]->personal);
 		//	node_save($node);
 			
 	     }
