@@ -1083,10 +1083,10 @@ function facebook_grabbit_facebook_comment_submit_action() {
 		}
 		
 		$update = $facebook->api_client->call_method('facebook.Stream.getComments', array('post_id'=>$_GET['post_id']));
-		print_r($update);
-		$users=array();
+		
+		$users_list=array();
 		foreach($update as $users){
-			$users_list[]=$users['fromid'];
+			$users_list[$users['fromid']]=$users['fromid'];
 		}
 		$list = explode(',', $users_list); 
 		print_r($list);
