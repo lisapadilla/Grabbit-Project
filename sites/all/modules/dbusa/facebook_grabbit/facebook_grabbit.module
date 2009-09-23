@@ -386,7 +386,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	
 	global $user_info;
 	
-	$msg=$post->body;
+	$msg=$post->field_text[0]['value'];
 	$msg_formatted=get_url_msg_formatted($msg);
 	
 	if(count($comenta)>0){
@@ -1016,7 +1016,7 @@ function theme_twitter_message($node){
 	    $output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a></div>';
 	  }
 
-	$output .='<div class="listable"><span class="twitter-image"><img src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
+	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
 	<a href="http://www.twitter.com/'.$node->field_twitter_name[0]['value'].'" class="twitter-name-link" target="_blank">'.$node->field_twitter_name[0]['value'].'</a>
 	          <div class="twitter-body"><div class="twitter-body-contains">'.$msg_formatted. '</div> <span class="twitter-date">on '. format_date(strtotime($node->created)) . '</span>
 	            </div>
