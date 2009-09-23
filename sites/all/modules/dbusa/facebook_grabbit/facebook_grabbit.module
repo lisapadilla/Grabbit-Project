@@ -412,7 +412,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook
 	// Output for wall and status update.
 	$output = '
 	<div class="facebook-post clearfix" id="fb_story_'.$post->field_post_id[0]['value'].'">
-	<a href="JavaScript:void(0);" face_id="'.$post->field_post_id[0]['value'].'" class="trash-facebook">TR</a>
+	<a href="JavaScript:void(0);" face_id="'.$post->nid.'" class="trash-facebook">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post->field_post_id[0]['value'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
@@ -492,7 +492,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	
 	// Output for aplication updates
 	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
-	<a href="JavaScript:void(0);" face_id="'.$post['post_id'].'" class="trash-facebook">TR</a>
+	<a href="JavaScript:void(0);" face_id="'.$post->nid.'" class="trash-facebook">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post['post_id'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
@@ -582,6 +582,8 @@ function facebook_grabbit_private_view_panel($param){
     $view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=15;
 
+    $trashes =  grabbit_favorites_get_trash('item');
+    
     if($param>0){
 		if($result = grabbit_panels_get_uid($user->uid,$param)){
 			$GET = unserialize($result->config);
@@ -619,6 +621,7 @@ function facebook_grabbit_private_view_panel($param){
 		}
 		$view_elements->execute();
 		foreach($view_elements->result as $node){
+		  if(!in_array($node->nid,$trashes))
 		  $twitface[$node->node_created]=array('time'=>$node->node_created,
 		                              'value'=>$node);
 	    }
@@ -673,8 +676,6 @@ function facebook_grabbit_private_view_panel($param){
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	
 	$view->execute();
-	
-	$trashes =  grabbit_favorites_get_trash('item');
     
     foreach($view->result as $node){
 	  if(!in_array($node->nid,$trashes))
@@ -1006,7 +1007,7 @@ function theme_twitter_message($node){
 	$msg_formatted=get_url_msg_formatted($msg);
 	$screen_name=str_replace('http://www.twitter.com/','',$node->field_twitter_url[0]['value']);
 	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply">
-	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$node->field_twitter_post_id[0]['value'].'">TR</a>
+	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$node->nid.'">TR</a>
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$screen_name.'">Reply</a>';
 
     if (grabbit_favorites_get('twitter',$node->field_twitter_post_id[0]['value'])){
