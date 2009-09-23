@@ -387,7 +387,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook
 	global $user_info;
 	
 	$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
-										           'viewer_id'=>$suser);
+										           'viewer_id'=>$suser));
 	
 	$msg=$post->field_text[0]['value'];
 	$msg_formatted=get_url_msg_formatted($msg);
