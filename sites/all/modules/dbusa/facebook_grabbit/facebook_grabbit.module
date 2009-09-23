@@ -382,7 +382,7 @@ function _get_current_user_info($params=array()){
 	}
 }
 
-function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook){
+function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook,$session_key,$suser){
 	
 	global $user_info;
 	
@@ -745,7 +745,7 @@ function facebook_grabbit_private_view_panel($param){
 									if($node->field_target[0]['value'])
 									  $target=$node->field_target[0]['value'];
                                          
-									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta,$facebook);
+									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta,$facebook,$session_key,$suser);
 									$comments=array();
 									}
 							
