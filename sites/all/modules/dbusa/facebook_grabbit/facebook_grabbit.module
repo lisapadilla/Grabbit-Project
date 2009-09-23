@@ -1258,7 +1258,7 @@ function _news_theme($comments,$node){
 
 function theme_gmail_message($comments,$node){
 	
-	$gmail_image='';
+	$gmail_image=base_path().path_to_theme().'/images/various/gmail.jpg';
 						
 	$image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$gmail_image.'"/></span>'; 
 
