@@ -40,6 +40,10 @@ function grabbit_panels_get_panels(){
 	
 		if($twitter_account = oauth_twitter_get_uid($user->uid))
 		  facebook_grabbit_update_twitter($user);
+		
+		if($gmail_user = grabbit_gmail_get($user->uid))
+		  grabbit_gmail_crear($user->uid);
+		  
 	}
 	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
