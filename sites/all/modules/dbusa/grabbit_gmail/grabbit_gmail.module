@@ -172,24 +172,24 @@ function grabbit_gmail_crear($user=1){
 			$node->status = 0;
 			$node->uid = $user;
 			$node->body = $data;
-			$node->field_from[0]['value'] = $overview->from[0]->personal;
-			$node->field_from_add[0]['value'] = html_entity_decode($overview->fromaddress);
+			
+			$string = $overview->from[0]->personal;
+			$string=str_replace("=?ISO-8859-1?Q?","",$string);
+		    $string=str_replace("?=","",$string);
+		
+		    $string=utf8_encode(imap_qprint($overview->from[0]->personal));
+			
+			$node->field_from[0]['value'] = $string;
+			$node->field_from_add[0]['value'] = $overview->fromaddress;
 			$node->field_msgno[0]['value'] = $overview->Msgno;
 			
 			$attachments_array = gmail_attachments($mbox,$overview->Msgno);
 			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
 			
 			$edit->validated = TRUE;
-			$string = $overview->fromaddress;
-			print_r($string);
-			$string=str_replace("=?ISO-8859-1?Q?","",$string);
-		    $string=str_replace("?=","",$string);
-		
-		    $string=utf8_encode(imap_qprint($string));
-		
-		print "<br><br>";
-		print $string;
-		//	node_save($node);
+			
+			node_save($node);
+			$string='';
 			
 	     }
 
