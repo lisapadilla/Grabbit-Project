@@ -180,15 +180,16 @@ function grabbit_gmail_crear($user=1){
 			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
 			
 			$edit->validated = TRUE;
-			
-			node_save($node);
+		print 	"<br><br";
+		print    html_entity_decode($overview->from[0]->personal);
+		//	node_save($node);
 			
 	     }
 
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
-		grabbit_gmail_save($user,$settings);
+		//grabbit_gmail_save($user,$settings);
     }
 
 }
