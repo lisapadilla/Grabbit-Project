@@ -382,14 +382,14 @@ function _get_current_user_info($params=array()){
 	}
 }
 
-function prepeare_status_update($post,$user,$target,$profiles,$comenta){
+function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook){
 	
 	global $user_info;
 	
 	$stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
 										           'viewer_id'=>$suser,
 										           'source_ids'=>$post->field_post_id[0]['value']));
-print_r($stream);	
+	
 	$msg=$post->field_text[0]['value'];
 	$msg_formatted=get_url_msg_formatted($msg);
 	print_r($profiles);
@@ -573,6 +573,18 @@ function facebook_grabbit_private_view_panel($param){
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
+	require_once("facebook/facebook.php");
+	require_once("facebook/facebook_desktop.php");
+	include("facebook/config.php");
+	$app_id='90953553995';
+	
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	$suser=$fuser->fid;
+	$session_key=$fuser->kid;
+	  
+	$facebook = new FacebookDesktop($api_key, $secret);
+	$facebook->set_user($suser, $session_key);
+	
 	global $user_info;
 	
 	//It starts getting parameters from index 1, 0 is the response id
@@ -733,7 +745,7 @@ function facebook_grabbit_private_view_panel($param){
 									if($node->field_target[0]['value'])
 									  $target=$node->field_target[0]['value'];
                                          
-									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta);
+									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta,$facebook);
 									$comments=array();
 									}
 							
