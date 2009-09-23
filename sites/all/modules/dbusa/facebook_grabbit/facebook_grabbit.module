@@ -568,20 +568,7 @@ function facebook_grabbit_private_view_panel($param){
 	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-	
-	$fuser = facebook_grabbit_get_fid($user->uid);
-	if($fuser){
-	  	require_once("facebook/facebook.php");
-		require_once("facebook/facebook_desktop.php");
-		include("facebook/config.php");
-		$app_id='90953553995';
 
-		$suser=$fuser->fid;
-		$session_key=$fuser->kid;
-
-		$facebook = new FacebookDesktop($api_key, $secret);
-		$facebook->set_user($suser, $session_key);	
-	}
 	
 	global $user_info;
 	
