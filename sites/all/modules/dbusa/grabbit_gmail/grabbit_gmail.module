@@ -184,7 +184,7 @@ function grabbit_gmail_crear($user=1){
 			$string=str_replace("=?ISO-8859-1?Q?","",$string);
 		    $string=str_replace("?=","",$string);
 		
-		    $string=utf8_encode(imap_qprint($string));
+		    $string=utf8_encode($string);
 		
 		print "<br><br>";
 		print $string;
