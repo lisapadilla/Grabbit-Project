@@ -1290,7 +1290,7 @@ function theme_gmail_message($comments,$node){
 					  </div>
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
-					    <div class="content-truncated">'.$node->body.'
+					    <div class="content-not-truncated">'.$node->body.'
 					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=300&width=250')).'
 					  </div>
 					    <span class="submitted">'.$submitted.'</span>	
