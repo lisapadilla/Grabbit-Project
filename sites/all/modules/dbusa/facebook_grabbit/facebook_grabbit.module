@@ -445,15 +445,16 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	
 	
 	$attachment = '';
+    $attachment_array=unserialize($post->field_attachment[0]['value']);
 	
-	if($post->field_attachment[0]['value']['name'])
-	  $attachment .='<span class="facebook-attach-title">'.$post->field_attachment[0]['value']['name'].'</span>';
+	if($attachment_array['name'])
+	  $attachment .='<span class="facebook-attach-title">'.$attachment_array['name'].'</span>';
 	
-	if($post->field_attachment[0]['value']['description'])
-	  $attachment .='<span class="facebook-attach-text">'.$post->field_attachment[0]['value']['description'].'</span>';
+	if($attachment_array['description'])
+	  $attachment .='<span class="facebook-attach-text">'.$attachment_array['description'].'</span>';
 
-    if($post->field_attachment[0]['value']['media']!=''){
-	  	foreach($post->field_attachment[0]['value']['media'] as $media){
+    if($attachment_array['media']!=''){
+	  	foreach($attachment_array['media'] as $media){
 	      if($media['type'] =="photo"){
 		    $attachment .='<span class="facebook-attach-photo"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
