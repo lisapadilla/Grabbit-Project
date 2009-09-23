@@ -204,10 +204,12 @@ function grabbit_gmail_crear($user=1){
 			$title='';
 			$from='';
 	     }
-
+print_r($headers);
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
+		
+		print_r($settings);
 		grabbit_gmail_save($user,$settings);
     }
 
