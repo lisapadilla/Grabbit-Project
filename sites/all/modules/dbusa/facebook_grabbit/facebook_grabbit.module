@@ -723,7 +723,7 @@ function facebook_grabbit_private_view_panel($param){
 									if($node->field_target[0]['value'])
 									  $target=$node->field_target[0]['value'];
                                          
-									$output .= prepeare_status_update($node,$actor,$target,$profiles['profiles']);
+									//$output .= prepeare_status_update($node,$actor,$target,$profiles['profiles']);
 									$comments=array();
 									}
 							
