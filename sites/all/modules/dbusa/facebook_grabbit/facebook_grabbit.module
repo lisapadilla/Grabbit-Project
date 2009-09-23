@@ -1277,6 +1277,14 @@ function facebook_grabbit_update_facebook($user){
 	  }
 
 	  foreach ($posts as $post){
+		  
+		  if(is_array($post['comments']['comment_list'])){
+		    $comments_list['comments']=$post['comments']['comment_list'];
+		    foreach($comments_list['comments'] as $comment){
+			  $comments_list['profiles']=$profiles[$comment['fromid']];
+		    }
+		  }
+		
 		  $node = new stdClass();
 		  $node->title = $profiles[$post['actor_id']]['name'].' - '.$post['created_time'];
 		  $node->created = $post['created_time'];
@@ -1295,6 +1303,9 @@ function facebook_grabbit_update_facebook($user){
 		
 		  if($post['attachment'])
 		    $node->field_attachment[0]['value']=serialize($post['attachment']);
+		
+		  if($comments_list)
+		    $node->field_comments[0]['value'] = serialize($comments_list);
 		
 		  $edit->validated = TRUE;
 		
