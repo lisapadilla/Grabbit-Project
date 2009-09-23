@@ -1095,9 +1095,9 @@ function facebook_grabbit_facebook_comment_submit_action() {
 
 		foreach($users_back as $ruser){
 			$pofiles[$ruser['uid']]=array(
-				'id'=>$ruser['uid']
-				'url'=>$ruser['profile_url']
-				'name'=>$ruser['name']
+				'id'=>$ruser['uid'],
+				'url'=>$ruser['profile_url'],
+				'name'=>$ruser['name'],
 				'pic_square'=>$ruser['pic_square']
 				 );
 		}
