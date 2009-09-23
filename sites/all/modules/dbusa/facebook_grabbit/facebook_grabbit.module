@@ -1092,9 +1092,14 @@ function facebook_grabbit_facebook_comment_submit_action() {
 		$list = implode(',', $users_list); 
 		
 		$users_back = $facebook->api_client->users_getInfo($list,'name, pic_square, profile_url');
-		print_r($users_back);
+
 		foreach($users_back as $ruser){
-			$pofiles['uid']=$ruser;
+			$pofiles[$ruser['uid']]=array(
+				'id'=>$ruser['uid']
+				'url'=>$ruser['profile_url']
+				'name'=>$ruser['name']
+				'pic_square'=>$ruser['pic_square']
+				 );
 		}
 		
 		$node=node_load('4078');
