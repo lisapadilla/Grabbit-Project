@@ -710,6 +710,7 @@ function facebook_grabbit_private_view_panel($param){
 							  	$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 								$output .= _news_theme($comments,$node);	
 							  }else{ 
+								print_r($node);
 							      $output .=theme_twitter_message($node);	
 							  }
 						      	
