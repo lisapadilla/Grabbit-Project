@@ -712,6 +712,21 @@ function facebook_grabbit_private_view_panel($param){
 						
 						switch($node->type){
 							case 'facebook':
+							    $actor=array('name'=>$node->field_user_name[0]['value'],
+								             'url'=>$node->field_user_url[0]['value'],
+								             'pic_square'=>$node->field_user_picture[0]['value']
+								             );
+								$profiles=unserialize($node->field_comments[0]['value']);
+								 
+								if(!$node->field_attachment[0]['value']){ //STATUS UPDATE
+									$target='';
+									if($node->field_target[0]['value'])
+									  $target=$node->field_target[0]['value'];
+                                         
+									$output .= prepeare_status_update($node,$actor,$target,$profiles['profiles']);
+									$comments=array();
+									}
+							
 							break;
 							case 'twitter':
 							  $output .=theme_twitter_message($node);
