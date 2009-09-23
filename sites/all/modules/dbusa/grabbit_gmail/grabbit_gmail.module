@@ -154,7 +154,7 @@ function grabbit_gmail_crear($user=1){
 	    if(!$gmail['lastime']){
 		  $headers = imap_search($mbox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
 	    }else{
-		  $headers = imap_search($mbox, 'SINCE "23-Sep-2009 23:13:57 +0000"');
+		  $headers = imap_search($mbox, 'SINCE "23-Sep-2009 23:59:57 +0000"');
 	    }
 
 	    if (is_array($headers)) {
