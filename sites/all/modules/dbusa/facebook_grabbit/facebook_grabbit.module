@@ -716,7 +716,7 @@ function facebook_grabbit_private_view_panel($param){
 								             'url'=>$node->field_user_url[0]['value'],
 								             'pic_square'=>$node->field_user_picture[0]['value']
 								             );
-								$comenta=array();
+								$commenta=array();
 								$actors=array();
 								if($node->field_comments[0]['value']){
 									$profiles=unserialize($node->field_comments[0]['value']);
