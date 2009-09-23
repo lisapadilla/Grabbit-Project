@@ -1080,8 +1080,7 @@ function facebook_grabbit_facebook_comment_submit_action() {
 										       'comment_id'=>$_GET['post_id']));
 		}
 		
-		$update = $facebook->api_client->call_method('facebook.Stream.getComments', array('session_key' => $session_key,
-									       'post_id'=>$_GET['post_id']));
+		$update = $facebook->api_client->call_method('facebook.Stream.getComments', array('post_id'=>$_GET['post_id']));
 		$node=node_load($_GET['nid']);
 		
 		print_r($update);
