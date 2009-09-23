@@ -133,7 +133,7 @@ $(document).ready(function() {
 		var post_id = $(this).attr("id");
 		var comment = $(this).prev("input").attr("value");
 		var nid=$(this).attr("nid");		
-		
+		alert(nid);
 		$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,comment:comment,mode:"create",nid:nid},function(data){
 	      // Comment has succesfully added and the comment box is hidden again
 				if (data){
