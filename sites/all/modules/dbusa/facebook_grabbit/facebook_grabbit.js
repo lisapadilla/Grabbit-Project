@@ -131,9 +131,10 @@ $(document).ready(function() {
 	$(".facebook_comment_submit").click(function () {
 		var tag = $(this);
 		var post_id = $(this).attr("id");
-		var comment = $(this).prev("input").attr("value");		
+		var comment = $(this).prev("input").attr("value");
+		var nid=$(this).attr("nid");		
 		
-		$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,comment:comment,mode:"create"},function(data){
+		$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,comment:comment,mode:"create",nid:nid},function(data){
 	      // Comment has succesfully added and the comment box is hidden again
 				if (data){
 								//Try grabbit/facebook/getuserinfo?params=first_name,last_name,sex

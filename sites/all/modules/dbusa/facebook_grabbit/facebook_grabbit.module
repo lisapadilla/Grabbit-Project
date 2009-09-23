@@ -397,9 +397,6 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook
 				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a></span>
 				<span class="facebook-comment-text">'.$comment['text'].'</span><span class="facebook-date">on '.format_date($comment['time']).'</span>';
 			
-			if ($profiles[$comment['fromid']]['name'] == $user_info[0]){
-				$show_comments .= '<br /><span><a class="facebook-comment-delete" href="javascript:void(0)">delete comment</a></span>';
-			}
 			$show_comments .= '</div>';						
 		}	
 	}
@@ -432,7 +429,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook
 		<div class="facebook-form">
 		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
-			<input id="'.$post->field_post_id[0]['value'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
+			<input nid="'.$post->nid.'" id="'.$post->field_post_id[0]['value'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
 		</form>
 		</div></div>';
 
@@ -709,7 +706,7 @@ function facebook_grabbit_private_view_panel($param){
 			foreach($result as $entry){
 					if($entry['value']->nid){
 						
-						$node=node_load($entry['value']->nid);
+						$node=node_load($entry['value']->nid,NULL,TRUE);
 						
 						switch($node->type){
 							case 'facebook':
@@ -1082,6 +1079,11 @@ function facebook_grabbit_facebook_comment_submit_action() {
 			$test = $facebook->api_client->call_method('facebook.Stream.removeComment', array('session_key' => $session_key,
 										       'comment_id'=>$_GET['post_id']));
 		}
+		
+		$update = $facebook->api_client->call_method('facebook.Stream.getComments', array('session_key' => $session_key,
+									       'post_id'=>$_GET['post_id']));
+		$node=node_load($_GET['nid']);
+		
 		print_r ($test);
 		
 }
