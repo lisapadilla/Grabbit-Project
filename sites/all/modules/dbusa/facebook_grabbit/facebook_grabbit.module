@@ -382,7 +382,7 @@ function _get_current_user_info($params=array()){
 	}
 }
 
-function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook,$session_key,$suser){
+function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	
 	global $user_info;
 	
@@ -412,7 +412,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook
 	// Output for wall and status update.
 	$output = '
 	<div class="facebook-post clearfix" id="fb_story_'.$post->field_post_id[0]['value'].'">
-	<a href="JavaScript:void(0);" face_id="'.$post->nid.'" class="trash-facebook">TR</a>
+	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post->field_post_id[0]['value'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
@@ -439,23 +439,21 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook
 	return $output;
 }
 
-function prepeare_standar_update($post,$user,$profiles){
+function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	
 	global $user_info;
 	
-	$msg=$post['message'];
-	$msg_formatted=get_url_msg_formatted($msg);
 	
 	$attachment = '';
 	
-	if($post['attachment']['name'])
-	  $attachment .='<span class="facebook-attach-title">'.$post['attachment']['name'].'</span>';
+	if($post->field_attachment[0]['value']['name'])
+	  $attachment .='<span class="facebook-attach-title">'.$post->field_attachment[0]['value']['name'].'</span>';
 	
-	if($post['attachment']['description'])
-	  $attachment .='<span class="facebook-attach-text">'.$post['attachment']['description'].'</span>';
+	if($post->field_attachment[0]['value']['description'])
+	  $attachment .='<span class="facebook-attach-text">'.$post->field_attachment[0]['value']['description'].'</span>';
 
-    if($post['attachment']['media']!=''){
-	  	foreach($post['attachment']['media'] as $media){
+    if($post->field_attachment[0]['value']['media']!=''){
+	  	foreach($post->field_attachment[0]['value']['media'] as $media){
 	      if($media['type'] =="photo"){
 		    $attachment .='<span class="facebook-attach-photo"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
@@ -468,36 +466,37 @@ function prepeare_standar_update($post,$user,$profiles){
 		}
     }
 	
-	if(is_array($post['comments']['comment_list'])){
-		foreach($post['comments']['comment_list'] as $comment){
+	$msg=$post->field_text[0]['value'];
+	$msg_formatted=get_url_msg_formatted($msg);
+	
+	if(count($comenta)>0){
+		
+		foreach($comenta as $comment){
 			
-			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments clearfix"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-com" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
+			$show_comments .='<div id="'.$comment['id'].'" class="facebook-comments clearfix"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-image-comment" href="'.$profiles[$comment['fromid']]['url'].'"><span class="facebook-user-pic"><img class="facebook-image-comm" alt="'.$profiles[$comment['fromid']]['name'].'" src="'.$profiles[$comment['fromid']]['pic_square'].'" width="30"/></span></a>
 				<span class="facebook-comment-timeline"><a target="_blank" title="'.$profiles[$comment['fromid']]['name'].'" class="facebook-comment-link" href="'.$profiles[$comment['fromid']]['url'].'">'.$profiles[$comment['fromid']]['name'].'</a></span>
 				<span class="facebook-comment-text">'.$comment['text'].'</span><span class="facebook-date">on '.format_date($comment['time']).'</span>';
 			
-			if ($profiles[$comment['fromid']]['name'] == $user_info[0]){
-				$show_comments .= '<br /><span><a class="facebook-comment-delete" href="javascript:void(0)">delete comment</a></span>';
-			}
-			$show_comments .= '</div>';
+			$show_comments .= '</div>';						
 		}	
 	}
 	
 	$fav_value='Add to favorites';
 	$fav_style='facebook_favorite';
 	
-	if(grabbit_favorites_get('facebook',$post['post_id'])){
+	if(grabbit_favorites_get('facebook',$post->field_post_id[0]['value'])){
 		$fav_value='Remove from favorites';
 		$fav_style='facebook_favorite-remove';
 	}
 	
 	// Output for aplication updates
-	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post['post_id'].'">
-	<a href="JavaScript:void(0);" face_id="'.$post->nid.'" class="trash-facebook">TR</a>
+	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post->field_post_id[0]['value'].'">
+	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
-	<a id="'.$post['post_id'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
-	<div class="facebook-post-header"><a target="_blank" title="'.$user['name'].'" class="facebook-story-pic"  href="'.$user['url'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$user['name'].'" src="'.$user['pic_square'].'" width="48"/></span></a>
-	<a target="_blank" title="'.$user['name'].'" class="facebook-story-name" href="'.$post['permalink'].'><span class="facebook-user-name">'.$user['name'].'</span></a><div class="facebook-post-body">
+	<a id="'.$post->field_post_id[0]['value'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
+	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
+	<a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a><div class="facebook-post-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">';
 	if($msg_formatted){
@@ -510,7 +509,7 @@ function prepeare_standar_update($post,$user,$profiles){
 	<div class="facebook-form">
 		<form id="myForm" style="display:none;">
 			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
-			<input id="'.$post['post_id'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
+			<input nid="'.$post->nid.'" id="'.$post->field_post_id[0]['value'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
 		</form>
 	</div></div></div></div>';
 	return $output;
@@ -730,8 +729,15 @@ function facebook_grabbit_private_view_panel($param){
 									if($node->field_target[0]['value'])
 									  $target=$node->field_target[0]['value'];
                                          
-									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta,$facebook,$session_key,$suser);
+									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta);
 									$comments=array();
+									}else{
+										$target='';
+										if($node->field_target[0]['value'])
+										  $target=$node->field_target[0]['value'];
+
+										$output .= prepeare_standar_update($node,$actor,$target,$actors,$commenta);
+										$comments=array();
 									}
 							
 							break;
