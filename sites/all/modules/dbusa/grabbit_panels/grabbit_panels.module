@@ -35,8 +35,11 @@ function grabbit_panels_get_panels(){
 	global $user;
 	
 	if($user->uid>0){
-		facebook_grabbit_update_facebook($user);
-		facebook_grabbit_update_twitter($user);
+		if($fuser = facebook_grabbit_get_fid($user->uid))
+		  facebook_grabbit_update_facebook($user);
+	
+		if($twitter_account = oauth_twitter_get_uid($user->uid))
+		  facebook_grabbit_update_twitter($user);
 	}
 	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
