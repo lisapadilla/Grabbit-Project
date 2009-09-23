@@ -1279,7 +1279,7 @@ function theme_gmail_message($comments,$node){
 	
 	$node->body =substr(strip_tags($node->body),0,150); 
 	
-	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element" id="node-'.$node->nid.'">
+	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element" id="node-'.$node->nid.'">
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
