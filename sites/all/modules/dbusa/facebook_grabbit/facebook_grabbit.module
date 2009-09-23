@@ -503,7 +503,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .='<div class="facebook-attachment">'.$attachment.'</div></div><span class="facebook-date">on '.format_date($post['created_time']).'</span></div>
+	$output .='<div class="facebook-attachment">'.$attachment.'</div></div><span class="facebook-date">on '.format_date($post->created).'</span></div>
 	<div class="facebook-post-comments clearfix">'.$show_comments.'</div>
 	<div class="facebook-comment-form">
 	<div class="facebook-form">
