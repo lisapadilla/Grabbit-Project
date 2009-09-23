@@ -247,8 +247,8 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
               if(!$part_number) {
                    $part_number = "1";
                }
-print_r($part_number);
-              $text = imap_fetchbody($stream, $msg_number, $part_number);
+
+              $text = imap_fetchbody($stream, $msg_number, 1);
 print_r($text);
               if($structure->encoding == 3) {
                    return imap_base64($text);
