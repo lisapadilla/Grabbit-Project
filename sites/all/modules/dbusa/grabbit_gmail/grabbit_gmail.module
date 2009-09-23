@@ -166,7 +166,14 @@ function grabbit_gmail_crear($user=1){
 	    foreach ($messages as $overview) {
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
 	        $node = new stdClass();
-			$node->title = html_entity_decode($overview->subject);
+	
+	        $title = $overview->subject;
+			$title=str_replace("=?ISO-8859-1?Q?","",$title);
+		    $title=str_replace("?=","",$title);
+		
+		    $title=utf8_encode(imap_qprint($title));
+		
+			$node->title = $title;
 			$node->created = strtotime($overview->date);
 			$node->type = 'gmail';
 			$node->status = 0;
@@ -177,7 +184,7 @@ function grabbit_gmail_crear($user=1){
 			$string=str_replace("=?ISO-8859-1?Q?","",$string);
 		    $string=str_replace("?=","",$string);
 		
-		    $string=utf8_encode(imap_qprint($overview->from[0]->personal));
+		    $string=utf8_encode(imap_qprint($string));
 			
 			$node->field_from[0]['value'] = $string;
 			$node->field_from_add[0]['value'] = $overview->fromaddress;
@@ -190,6 +197,7 @@ function grabbit_gmail_crear($user=1){
 			
 			node_save($node);
 			$string='';
+			$title='';
 			
 	     }
 
