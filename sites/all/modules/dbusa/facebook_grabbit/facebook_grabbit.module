@@ -1089,7 +1089,7 @@ function facebook_grabbit_facebook_comment_submit_action() {
 			$users_list[]=$users['fromid'];
 		}
 		$list = explode(',', $users_list); 
-		$users_back = $facebook->api_client->call_method('facebook.Stream.getComments', array('post_id'=>$_GET['post_id']));
+		$users_back = $facebook->api_client->call_method('facebook.Users.getInfo', array('uids'=>$list));
 		//$node=node_load($_GET['nid']);
 		
 		print_r($users_back);
