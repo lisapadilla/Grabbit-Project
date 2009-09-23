@@ -1086,8 +1086,9 @@ function facebook_grabbit_facebook_comment_submit_action() {
 			$users[]=$user['fromid'];
 		}
 		$list = explode(',', $users); 
-		
-		$users = $facebook->api_client->call_method('facebook.Users.getInfo', array('session_key' => $session_key,'uids'=>$list));
+		print_r($list);
+		$users = $facebook->api_client->call_method('facebook.Users.getInfo', array('session_key' => $session_key,
+		                                                                            'uids'=>$list));
 		//$node=node_load($_GET['nid']);
 		
 		print_r($users);
