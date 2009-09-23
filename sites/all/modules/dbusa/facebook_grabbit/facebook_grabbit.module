@@ -1089,6 +1089,7 @@ function facebook_grabbit_facebook_comment_submit_action() {
 			$users_list[]=$users['fromid'];
 		}
 		$list = explode(',', $users_list); 
+		print_r($list);
 		$users_back = $facebook->api_client->users_getInfo($list,'birthday, locale, name');
 				//$node=node_load($_GET['nid']);
 		
