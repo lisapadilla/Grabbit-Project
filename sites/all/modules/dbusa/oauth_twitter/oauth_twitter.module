@@ -56,7 +56,8 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 }
 
 function oauth_twitter_ajuste(){
-	
+$return = grabbit_gmail_get(1);
+	print_r($return);
 }
 function oauth_twitter_page(){
 	
