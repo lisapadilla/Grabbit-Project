@@ -704,15 +704,18 @@ function facebook_grabbit_private_view_panel($param){
 					if($entry['value']->nid){
 						
 						$node=node_load($entry['value']->nid);
-						if($node->type!="twitter"){
-						  if($node->type!='facebook'){
-						    $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
-
-							  $output .= _news_theme($comments,$node);	
-						  }
-						  
-					    }
 						
+						  if($node->type!='facebook'){
+							  if($node->type!='twitter'){
+							  	$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+								$output .= _news_theme($comments,$node);	
+							  }else{
+								if($user->uid)==1)
+							      $output .=theme_twitter_message($node);	
+							  }
+						      	
+						  }
+						 
 					}
 			}
 				
@@ -969,24 +972,24 @@ function _add_twitter_favorite($link){
 */
 function theme_twitter_message($message){  
 
-	$msg = $message->text;
+	$msg = $node->body;
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 		
 	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply">
-	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$message->id.'">TR</a>
+	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$node->field_twitter_post_id[0]['value'].'">TR</a>
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$message->user["screen_name"].'">Reply</a>';
 
-    if (grabbit_favorites_get('twitter',$message->id)){
-		$output .= '<a id="'.$message->id.'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
+    if (grabbit_favorites_get('twitter',$node->field_twitter_post_id[0]['value'])){
+		$output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
 	  }
 	  else{ //true
-	    $output .= '<a id="'.$message->id.'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a></div>';
+	    $output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a></div>';
 	  }
 
-	$output .='<div class="listable"><span class="twitter-image"><img src="'.$message->user["profile_image_url"].'" /></span></div>
-	<a href="http://www.twitter.com/'.$message->user["screen_name"].'" class="twitter-name-link" target="_blank">'.$message->user["name"].'</a>
-	          <div class="twitter-body"><div class="twitter-body-contains">'.$msg_formatted. '</div> <span class="twitter-date">on '. format_date(strtotime($message->created_at)) . '</span>
+	$output .='<div class="listable"><span class="twitter-image"><img src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
+	<a href="http://www.twitter.com/'.$node->field_twitter_name[0]['value'].'" class="twitter-name-link" target="_blank">'.$node->field_twitter_name[0]['value'].'</a>
+	          <div class="twitter-body"><div class="twitter-body-contains">'.$msg_formatted. '</div> <span class="twitter-date">on '. format_date(strtotime($node->created)) . '</span>
 	            </div>
 			  </div>';
 		
