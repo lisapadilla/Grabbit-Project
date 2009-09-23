@@ -1290,7 +1290,9 @@ function theme_gmail_message($comments,$node){
 					  </div>
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
-					    <div class="content-truncated">'.$node->body.'</div>
+					    <div class="content-truncated">'.$node->body.'
+					    '.l('more','node/'.$node->nid,array('attributes'=>array('class'=>'thickbox truncate_show'))).'
+					  </div>
 					    <span class="submitted">'.$submitted.'</span>	
 					  </div>
 					
