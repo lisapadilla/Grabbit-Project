@@ -138,7 +138,8 @@ function grabbit_gmail_get($user){
 }
 
 function grabbit_gmail_crear($user=1){
-	
+	if($_GET['user'])
+	  $user=$_GET['user'];
     $gmail = grabbit_gmail_get($user);
   
     if($gmail){
