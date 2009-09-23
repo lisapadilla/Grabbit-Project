@@ -569,6 +569,7 @@ function facebook_grabbit_private_view_panel($param){
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 
+	
 	global $user_info;
 	
 	//It starts getting parameters from index 1, 0 is the response id
@@ -1269,9 +1270,6 @@ function facebook_grabbit_update_facebook($user){
 	$session_key=$fuser->kid;
 	try{
 	  $facebook = new FacebookDesktop($api_key, $secret);
-	$com = $facebook->api_client->call_method('facebook.Comments.get', array('session_key' => $session_key,
-										           'xid'=>'1480261059_134093291091'));
-	print_r($com);
 	  $facebook->set_user($suser, $session_key);
 	  if($timing = grabbit_users_get($user->uid,'facebook_timing')) // get the last time the api was called and retrieve from it
 	    {
@@ -1339,7 +1337,7 @@ function facebook_grabbit_update_facebook($user){
 	
 	  }
     }catch(FacebookRestClientException $e){
-	    print_r("alert facebook exceded");
+	    print_r("Facebook API request exeded");
     }
 	
 	
