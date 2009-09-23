@@ -188,7 +188,7 @@ function grabbit_gmail_crear($user=1){
 			
 			$node->field_from[0]['value'] = $string;
 			
-			$from = $overview->from[0]->mailbox.$overview->from[0]->host;
+			$from = $overview->from[0]->mailbox."@".$overview->from[0]->host;
 			
 			$node->field_from_add[0]['value'] = $from;
 			
