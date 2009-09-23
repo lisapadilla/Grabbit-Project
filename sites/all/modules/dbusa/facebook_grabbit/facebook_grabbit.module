@@ -389,8 +389,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta,$facebook
 	try{
 	  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
 										           'viewer_id'=>$suser,    
-										           'limit'=>"15"));		      
-      print_r($stream);	
+										           'source_ids'=>array('767440463_133109606593')));		      	
     }catch(FacebookRestClientException $e){
 	    print_r("alert facebook exceded");
     }
