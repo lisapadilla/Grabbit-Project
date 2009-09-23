@@ -10,6 +10,11 @@ function grabbit_gmail_menu () {
     'access arguments' => array('access content')
   );
 
+  $items['gmail/open/email'] = array( 
+    'page callback' => 'grabbit_gmail_open', 
+    'access arguments' => array('access content')
+  );
+
   $items['gmail/delete/account'] = array( 
     'page callback' => 'grabbit_gmail_delete', 
     'access arguments' => array('access content')
@@ -24,6 +29,16 @@ function grabbit_gmail_menu () {
   );
 
   return $items;
+}
+
+function grabbit_gmail_open(){
+	global $user;
+	
+	$node = node_load(arg(3));
+	if ($node->user == $user->uid){
+		print_r($node);
+	}
+	
 }
 
 function grabbit_gmail_add(){
