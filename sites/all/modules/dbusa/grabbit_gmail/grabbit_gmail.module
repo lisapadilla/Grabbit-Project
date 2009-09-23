@@ -181,6 +181,7 @@ function grabbit_gmail_crear($user=1){
 			
 			$edit->validated = TRUE;
 			print_r($node);
+			exit;
 		//	node_save($node);
 			
 	     }
