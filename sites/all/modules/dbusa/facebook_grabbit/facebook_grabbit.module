@@ -1075,19 +1075,13 @@ function facebook_grabbit_facebook_comment_submit_action() {
 			$test = $facebook->api_client->call_method('facebook.Stream.addComment', array('session_key' => $session_key,
 										       'post_id'=>$_GET['post_id'],
 										       'comment'=>$_GET['comment']));
+		}else{ 													// Delete a comment
+			$test = $facebook->api_client->call_method('facebook.Stream.removeComment', array('session_key' => $session_key,
+										       'comment_id'=>$_GET['post_id']));
 		}
-		//$update = $facebook->api_client->call_method('facebook.Stream.getComments', array('post_id'=>$_GET['post_id']));
-		$users=array();
-		foreach($update as $user){
-			$users[]=$user['fromid'];
-		}
-		$list = explode(',', $users); 
-		print_r($list);
-		//$users = $facebook->api_client->call_method('facebook.Users.getInfo', array('session_key' => $session_key,
-		 //                                                                           'uids'=>$list));
-		//$node=node_load($_GET['nid']);
 		
-		print_r($users);
+		
+		print_r($update);
 		//$node->field_comments[0]['value']=serialize($comments_list);
 		
 	//	print_r ($test);
