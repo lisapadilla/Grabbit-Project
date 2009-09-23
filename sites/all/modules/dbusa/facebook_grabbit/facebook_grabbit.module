@@ -388,7 +388,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	
 	$msg=$post->field_text[0]['value'];
 	$msg_formatted=get_url_msg_formatted($msg);
-	print_r($comenta);
+	
 	if(count($comenta)>0){
 		
 		foreach($comenta as $comment){
