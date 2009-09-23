@@ -209,9 +209,11 @@ function gmail_attachments($stream,$msg_number){
 
 			   for ($i=2;$i<=$contentParts;$i++) {
 		   	     $file_number=imap_bodystruct($stream,$msg_number,$i);
-		         print_r($file_number);
-		         if($file_number->parameters[0]->attribute!='CHARSET')
-		           $att[$i-2] =$file_number; 
+		         if(is_array($file_number->parameters)){
+			     	if($file_number->parameters[0]->attribute!='CHARSET')
+			           $att[$i-2] =$file_number;
+		         }
+		          
 		   	   }
 
 		   	for ($k=0;$k<sizeof($att);$k++) {
