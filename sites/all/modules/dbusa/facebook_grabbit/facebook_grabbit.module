@@ -597,7 +597,7 @@ function facebook_grabbit_private_view_panel($param){
 	   $GET['show_facebook']=1;
 	   $GET['show_twitter']=1;
      }
-	
+	print_r($user);
 	//get FB,TW and soon GMAIL
 	$view_elements = views_get_view('grabbit_public_elements');
 	$view_elements->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
