@@ -34,8 +34,9 @@ function grabbit_gmail_menu () {
 function grabbit_gmail_open(){
 	global $user;
 	print "Email";
-	print_r($node);
 	$node = node_load(arg(3));
+	print_r($node);
+	
 	if ($node->user == $user->uid){
 		print_r($node);
 	}
