@@ -598,6 +598,7 @@ function facebook_grabbit_private_view_panel($param){
 	   $GET['news']="news";
 	   $GET['show_facebook']=1;
 	   $GET['show_twitter']=1;
+	   $GET['show_gmail']=1;
      }
     if($user->uid>0){
 	  	//get FB,TW and soon GMAIL
@@ -614,6 +615,9 @@ function facebook_grabbit_private_view_panel($param){
 		}
 		if($GET['show_twitter']){
 			$view_elements->display['default']->display_options['filters']['type']['value']['twitter']='twitter';
+		}
+		if($GET['show_gmail']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['gmail']='gmail';
 		}
 
 		if(!$GET['favorites']){
@@ -746,6 +750,8 @@ function facebook_grabbit_private_view_panel($param){
 							  $output .=theme_twitter_message($node);
 							break;
 							case 'gmail':
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= theme_gmail_message($comments,$node);
 							break;
 							default:
 							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
@@ -1249,6 +1255,61 @@ function _news_theme($comments,$node){
 						
 	 return $output;
 }
+
+function theme_gmail_message($comments, $node){
+	
+	$gmail_image='';
+						
+	$image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$gmail_image.'"/></span>'; 
+
+	$submitted ='<p>Source: '.l('Gmail','node/'.$node->nid).'</p>';
+	
+	$comments_output = '<div class="news-comments">';
+	
+	while ($item = db_fetch_object($comments)){
+	  $profile = content_profile_load('profile', $item->uid);
+
+      $comments_output .= '<div id="'.$item->cid.'" class="news-comment"><span class="news-comment-picture">';																			
+      $comments_output .= theme('imagecache', 'friend_comment_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image', '', array('width'=>'30'));																											
+	  $comments_output .= '</span><span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
+						  <span class="news-comment-content">'.$item->comment.'</span></div>';
+	}
+						
+	$comments_output .= '</div>';
+	
+	$node->teaser = strip_tags($node->teaser);
+	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element" id="node-'.$node->nid.'">
+	             <div class="meta">
+					'.$image.'
+					<div class="item-body">
+					  <div class="links_stream">  
+					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
+					    <a href="javascript:void(0)" class="comment-news">Comment</a>
+					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
+					  </div>
+					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
+					  <div class="content-body">
+					    <div class="content-truncated">'.$node->teaser.'</div>
+					    <span class="submitted">'.$submitted.'</span>	
+					  </div>
+					
+					 '.$comments_output.'
+					 <div class="news-comment-submit">
+					  <div class="news-form"s>
+					    <form id="myForm" style="display:none;">
+						  <input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
+						  <input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
+						</form>
+					  </div>
+					 </div>
+					</div>
+				</div>
+				
+			</div>';
+						
+	 return $output;
+}
+
 
 function facebook_grabbit_news_comment(){
 	global $user;
