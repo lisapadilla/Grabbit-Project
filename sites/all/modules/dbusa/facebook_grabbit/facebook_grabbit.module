@@ -710,17 +710,19 @@ function facebook_grabbit_private_view_panel($param){
 						
 						$node=node_load($entry['value']->nid);
 						
-						  if($node->type!='facebook'){
-							  if($node->type!='twitter'){
-							  	$comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
-								$output .= _news_theme($comments,$node);	
-							  }else{
-								if($user->uid==1){
-							      $output .=theme_twitter_message($node);
-							    }	
-							  }
-						      	
-						  }
+						switch($node->type){
+							case 'facebook':
+							break;
+							case 'twitter':
+							  $output .=theme_twitter_message($node);
+							break;
+							case 'gmail':
+							break;
+							default:
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= _news_theme($comments,$node);
+							break;
+						}
 						 
 					}
 			}
