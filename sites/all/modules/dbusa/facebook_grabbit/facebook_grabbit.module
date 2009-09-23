@@ -1085,14 +1085,14 @@ function facebook_grabbit_facebook_comment_submit_action() {
 		$update = $facebook->api_client->call_method('facebook.Stream.getComments', array('post_id'=>$_GET['post_id']));
 		print_r($update);
 		$users=array();
-		//foreach($update as $user){
-			//$users[]=$user['fromid'];
-		//}
-		//$list = explode(',', $users); 
-		//$users = $facebook->api_client->call_method('facebook.Stream.getComments', array('post_id'=>$_GET['post_id']));
+		foreach($update as $users){
+			$users_list[]=$users['fromid'];
+		}
+		$list = explode(',', $users_list); 
+		$users_back = $facebook->api_client->call_method('facebook.Stream.getComments', array('post_id'=>$_GET['post_id']));
 		//$node=node_load($_GET['nid']);
 		
-		//print_r($update);
+		print_r($users_back);
 		//$node->field_comments[0]['value']=serialize($comments_list);
 		
 		//print_r ($test);
