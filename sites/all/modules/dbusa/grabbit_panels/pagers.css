@@ -433,3 +433,12 @@ padding-left:15px;
 	width: 30px;
 	overflow: hidden;
 }
+
+.meta .content-body {
+	font-size: 11px !important;
+}
+
+.news-comment-content{
+	font-size: 11px !important;
+}
+
