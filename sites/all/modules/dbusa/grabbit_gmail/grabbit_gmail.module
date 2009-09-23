@@ -181,7 +181,7 @@ function grabbit_gmail_crear($user=1){
 			
 			$edit->validated = TRUE;
 		print "kk<br><br>";
-		print utf8_encode(imap_qprint(($overview->from[0]->personal));
+		print utf8_encode(imap_qprint($overview->from[0]->personal));
 		//	node_save($node);
 			
 	     }
