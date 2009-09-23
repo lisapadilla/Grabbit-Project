@@ -1268,25 +1268,25 @@ function facebook_grabbit_update_facebook($user){
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	$suser=$fuser->fid;
 	$session_key=$fuser->kid;
-	  
-	$facebook = new FacebookDesktop($api_key, $secret);
-	$facebook->set_user($suser, $session_key);
-	if($timing = grabbit_users_get($user->uid,'facebook_timing')) // get the last time the api was called and retrieve from it
-	{
-	  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+	try{
+	  $facebook = new FacebookDesktop($api_key, $secret);
+	  $facebook->set_user($suser, $session_key);
+	  if($timing = grabbit_users_get($user->uid,'facebook_timing')) // get the last time the api was called and retrieve from it
+	    {
+	      $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
 										           'viewer_id'=>$suser,    
 										           'limit'=>"15",
 										           'start_time'=>$timing->extra));		      
 		
-	}
-	else{
-	  $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+	   }
+	  else{
+	    $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
 										       'viewer_id'=>$suser,    
 										       'limit'=>"15"));		      
 		
-	}
+	  }
 	
-	if (!empty($stream['posts'])){
+	  if (!empty($stream['posts'])){
 	  
 	  $time=time();
 	  grabbit_users_save($user->uid,$time,'facebook_timing');
@@ -1333,9 +1333,12 @@ function facebook_grabbit_update_facebook($user){
 		
 		  node_save($node);
 		
-	  }
+	    }
 	
-	}
+	  }
+    }catch(FacebookRestClientException $e){
+	    print_r("alert facebook exceded");
+    }
 	
 	
 	
