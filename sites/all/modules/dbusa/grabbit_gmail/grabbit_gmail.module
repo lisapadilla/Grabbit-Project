@@ -49,12 +49,22 @@ function grabbit_gmail_open(){
 
 function theme_gmail_mail($node){
 	
+	$attach=unserialize($node->field_attachments[0]['value']);
+	if(is_array($attach)){
+		foreach ($attach as $key=>$value){
+			$attachments. ='<a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail">'.$value.'</a>';
+		}
+	}
+	
 	$output = '<div class="gmail-body">
 	<span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
 	<span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
 	<span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
 	<div class="gmail-email">
 	'.$node->body.'
+	</div>
+	<div class="gmail-atachments">
+	'.$attachments.'
 	</div>
 	</div>';
 	
