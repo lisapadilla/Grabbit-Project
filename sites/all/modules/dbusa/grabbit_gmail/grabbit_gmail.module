@@ -311,7 +311,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                    return utf8_encode(imap_qprint($text));
                }else if ($structure->encoding==0) {
 	               $text = imap_fetchbody($stream, $msg_number,1.2);
-                   return $text;
+                   return imap_qprint($text);
                }else {
 	               return quoted_printable_decode($text);
 	           }
