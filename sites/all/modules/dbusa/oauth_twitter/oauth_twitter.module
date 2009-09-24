@@ -191,7 +191,7 @@ class receiveMail
                 if(!$this->marubox)
                         return false;
 
-                $headers=imap_headers($this->marubox);
+                $headers=imap_search($this->marubox,'ALL');
 print_r($headers);
                 return count($headers);
         }
