@@ -91,6 +91,11 @@ class receiveMail
                         if($port=='') $port='143';
                         $strConnect='{'.$mailserver.':'.$port. '}INBOX';
                 }
+                else if($servertype=='gmail')
+                {
+                        
+                        $strConnect='{imap.googlemail.com:993/imap/ssl}INBOX';
+                }
                 else
                 {
                         $strConnect='{'.$mailserver.':'.$port. '/pop3'.($ssl ? "/ssl" : "").'}INBOX';
@@ -307,7 +312,7 @@ function oauth_twitter_ajuste(){
 	 * Cell : +91 9825273322
 	 */
 	// Creating a object of reciveMail Class
-	$obj= new receiveMail('ifuyivara@gmail.com','internet21','ifuyivara@gmail.com','imap.googlemail.com','imap','993');
+	$obj= new receiveMail('ifuyivara@gmail.com','internet21','ifuyivara@gmail.com','imap.googlemail.com','gmail');
 
 	//Connect to the Mail Box
 	$obj->connect();         //If connection fails give error message and exit
