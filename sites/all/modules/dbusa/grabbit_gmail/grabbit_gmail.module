@@ -20,6 +20,11 @@ function grabbit_gmail_menu () {
     'access arguments' => array('access content')
   );
 
+  $items['gmail/get/file'] = array( 
+    'page callback' => 'grabbit_gmail_get_file', 
+    'access arguments' => array('access content')
+  );
+
   $items['user/%user/add_gmail'] = array(
    'title' => 'Add Gmail Account',
    'description' => t('Add Your Gmail account to Grabbit'),
@@ -499,19 +504,31 @@ function grabbit_gmail_crear($user=1){
     
 }
 
-
-function download_file($msgno,$file){
+function grabbit_gmail_get_file(){
 	
-	$mbox = @imap_open(
-      "{imap.googlemail.com:993/imap/ssl}INBOX",
-      $gmail_name,
-      $gmail_pass,
-      OP_READONLY
-    );
+	if(arg(3) && arg(4) && arg(5)){
+	  $return = download_file(arg(3),arg(4),arg(5));	
+	}else{
+		$return = "All arguments are needed to download the file";
+	}
+	
+	
+	print $return;
+}
+
+function download_file($msgno,$file,$account){
+	global $user;
+	
+	if($account=='gmail'){
+		$gmail = grabbit_gmail_get($user->uid);
+	  	$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
+		$obj->connect();	
+	}
+	
 	
 	   	$strFileName = $file;
 	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
-	   	$fileContent = imap_fetchbody($mbox,$msgno,$file+2);
+	   	$fileContent = imap_fetchbody($obj->marubox,$msgno,$file+2);
 	
 	   	$ContentType = "application/octet-stream";
         switch($strFileType){
@@ -579,6 +596,8 @@ function download_file($msgno,$file){
 		} else {
 		echo imap_base64($fileContent);
 		}
+		
+		$obj->close_mailbox();
 
 }
 
