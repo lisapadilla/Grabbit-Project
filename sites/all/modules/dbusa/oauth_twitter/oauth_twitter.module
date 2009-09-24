@@ -302,7 +302,7 @@ function oauth_twitter_ajuste(){
 	 * Cell : +91 9825273322
 	 */
 	// Creating a object of reciveMail Class
-	$obj= new receiveMail('ifuyivara@gmail.com','internet21','ifuyivara@gmail.com','imap.googlemail.com','imap','993',false);
+	$obj= new receiveMail('ifuyivara@gmail.com','internet21','ifuyivara@gmail.com');
 
 	//Connect to the Mail Box
 	$obj->connect();         //If connection fails give error message and exit
