@@ -443,6 +443,7 @@ function grabbit_gmail_crear($user=1){
 	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
 	    if(strtotime($head['date'])>strtotime($time)){
 		print_r($head);
+		print_r($time);
 			$boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
 
 		    $body=quoted_printable_decode(utf8_encode($boby));
