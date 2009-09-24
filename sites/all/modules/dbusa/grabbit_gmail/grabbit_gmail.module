@@ -441,10 +441,9 @@ function grabbit_gmail_crear($user=1){
 	{
 		
 	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
-	print_r($head['date']);
+	
 	    if(strtotime($head['date'])>strtotime($time)){
-		print_r($head);
-		print_r($time);
+	
 			$boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
 
 		    $body=quoted_printable_decode(utf8_encode($boby));
@@ -483,7 +482,7 @@ function grabbit_gmail_crear($user=1){
 
 			$edit->validated = TRUE;
 
-		//	node_save($node);
+			node_save($node);
 
 			$string='';
 			$title='';
@@ -495,68 +494,9 @@ function grabbit_gmail_crear($user=1){
 	}
 	$obj->close_mailbox();   //Close Mail Box
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
-	print_r($settings);
+	
 	grabbit_gmail_save($user,$settings);
     endif;
-/*
-		  $headers = imap_search($mbox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
-
-
-
-
-	    foreach ($messages as $overview) {
-		  if(strtotime($overview->MailDate)>$imes){
-			
-	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
-
-	        $node = new stdClass();
-	
-	        $title = $overview->subject;
-			$title=str_replace("=?ISO-8859-1?Q?","",$title);
-		    $title=str_replace("?=","",$title);
-		
-		    $title=utf8_encode(imap_qprint($title));
-		
-			$node->title = $title;
-			$node->created = strtotime($overview->date);
-			$node->type = 'gmail';
-			$node->status = 0;
-			$node->uid = $user;
-			$node->body = $data;
-			
-			$string = $overview->from[0]->personal;
-			$string=str_replace("=?ISO-8859-1?Q?","",$string);
-		    $string=str_replace("?=","",$string);
-		
-		    $string=utf8_encode(imap_qprint($string));
-			
-			$node->field_from[0]['value'] = $string;
-			
-			$from = $overview->from[0]->mailbox."@".$overview->from[0]->host;
-			
-			$node->field_from_add[0]['value'] = $from;
-			
-			$node->field_msgno[0]['value'] = $overview->Msgno;
-			
-			$attachments_array = gmail_attachments($mbox,$overview->Msgno);
-			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
-			
-			$edit->validated = TRUE;
-		
-			 // node_save($node);
-			
-			$string='';
-			$title='';
-			$from='';
-		  }
-	     }
-	
-		imap_close($mbox);
-		$settings=array();
-		$settings['lastime']=date('D, j M Y G:i:s');
-		grabbit_gmail_save($user,$settings);
-    }
-*/
 }
 
 
