@@ -339,7 +339,7 @@ function oauth_twitter_ajuste(){
          $encoding = mb_detect_encoding($boby);
          if($encoding == 'UTF-8')
           // $body=utf8_encode($boby);
-print $body;
+print $boby;
 	    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
 	    $ar=explode(",",$str);
 	    foreach($ar as $key=>$value)
