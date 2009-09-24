@@ -518,8 +518,8 @@ function grabbit_gmail_crear($user=1){
 
 function grabbit_gmail_get_file(){
 	
-	if(arg(3) && arg(4) && arg(5)){
-	  $return = download_file(arg(3),arg(4),arg(5));	
+	if(arg(3) && arg(4) && arg(5) && arg(6)){
+	  $return = download_file(arg(3),arg(4),arg(5),arg(6));	
 	}else{
 		$return = "All arguments are needed to download the file";
 	}
