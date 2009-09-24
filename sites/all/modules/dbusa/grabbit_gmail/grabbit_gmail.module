@@ -199,7 +199,7 @@ function grabbit_gmail_crear($user=1){
 	    }
 	    foreach ($messages as $overview) {
 		  if(strtotime($overview->MailDate)>$imes){
-		
+		print_r("uno<br>");
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
 
 	        $node = new stdClass();
@@ -236,7 +236,7 @@ function grabbit_gmail_crear($user=1){
 			
 			$edit->validated = TRUE;
 	        if($user->uid==1)		
-			node_save($node);
+		//	node_save($node);
 			
 			$string='';
 			$title='';
