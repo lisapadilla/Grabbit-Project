@@ -442,7 +442,7 @@ function grabbit_gmail_crear($user=1){
          $encoding = mb_detect_encoding($boby);
          if($encoding == 'UTF-8')
            $body=utf8_encode(imap_qprint($boby));
-print $boby;
+print $encoding;
 	    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
 	    $ar=explode(",",$str);
 	    foreach($ar as $key=>$value)
