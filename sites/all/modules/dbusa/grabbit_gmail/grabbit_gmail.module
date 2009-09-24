@@ -418,6 +418,11 @@ class receiveMail
 }
 
 function grabbit_gmail_crear($user=1){
+	
+	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 1, date("Y")));
+	
+	print_r($yesterday);
+	
 	if($_GET['user'])
 	  $user=$_GET['user'];
     $gmail = grabbit_gmail_get($user);
@@ -468,7 +473,7 @@ function grabbit_gmail_crear($user=1){
 		
 		$edit->validated = TRUE;
 	
-		node_save($node);
+	//	node_save($node);
 		
 		$string='';
 		$title='';
