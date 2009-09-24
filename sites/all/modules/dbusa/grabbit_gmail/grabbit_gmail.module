@@ -199,8 +199,7 @@ function grabbit_gmail_crear($user=1){
 		  if(strtotime($overview->MailDate)!=strtotime($gmail['lastime'])){
 		
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
-print $data;
-print "--------MESSAGE END-----";
+
 	        $node = new stdClass();
 	
 	        $title = $overview->subject;
@@ -234,8 +233,9 @@ print "--------MESSAGE END-----";
 			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
 			
 			$edit->validated = TRUE;
+	        if($user->uid==1)		
+			node_save($node);
 			
-	//		node_save($node);
 			$string='';
 			$title='';
 			$from='';
@@ -245,7 +245,7 @@ print "--------MESSAGE END-----";
 		imap_close($mbox);
 		$settings=array();
 		$settings['lastime']=date('D, j M Y G:i:s');
-	//	grabbit_gmail_save($user,$settings);
+		grabbit_gmail_save($user,$settings);
     }
 
 }
