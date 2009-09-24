@@ -183,10 +183,12 @@ function grabbit_gmail_crear($user=1){
 
 	    $messages = array();
 	    if(!$gmail['lastime']){
+		  $imes=0;  
 		  $headers = imap_search($mbox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
 	    }else{
-		 // $headers = imap_search($mbox, 'SINCE "'.$gmail['lastime'].'"');
-		 $headers = imap_search($mbox, 'SINCE "Tue, 22 Sep 2009 1:00:00"');
+		 $headers = imap_search($mbox, 'SINCE "'.$gmail['lastime'].'"');
+		 $imes=$gmail['lastime'];
+		 //$headers = imap_search($mbox, 'SINCE "Tue, 22 Sep 2009 1:00:00"');
 	    }
 
 	    if (is_array($headers)) {
@@ -196,7 +198,7 @@ function grabbit_gmail_crear($user=1){
 	      $messages[$v] = imap_headerinfo($mbox, $v);
 	    }
 	    foreach ($messages as $overview) {
-		  if(strtotime($overview->MailDate)!=strtotime($gmail['lastime'])){
+		  if(strtotime($overview->MailDate)>strtotime($imes)){
 		
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
 
