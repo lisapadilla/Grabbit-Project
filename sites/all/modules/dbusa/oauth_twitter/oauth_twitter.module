@@ -278,7 +278,7 @@ class receiveMail
                 if ($body == "") {
                         return "";
                 }
-                return $body;
+                return utf8_encode($body);
         }
         function deleteMails($mid) // Delete That Mail
         {
