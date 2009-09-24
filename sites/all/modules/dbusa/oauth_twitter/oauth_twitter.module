@@ -304,13 +304,7 @@ class receiveMail
 function oauth_twitter_ajuste(){
 
 	/*
-	 * File: example.php
-	 * Description: Received Mail Example
-	 * Created: 01-03-2006
-	 * Author: Mitul Koradia
-	 * Email: mitulkoradia@gmail.com
-	 * Cell : +91 9825273322
-	 */
+
 	// Creating a object of reciveMail Class
 	$obj= new receiveMail('ifuyivara@gmail.com','internet21','ifuyivara@gmail.com','imap.googlemail.com','gmail');
 
@@ -344,6 +338,57 @@ function oauth_twitter_ajuste(){
 	    //$obj->deleteMails($i); // Delete Mail from Mail box
 	}
 	$obj->close_mailbox();   //Close Mail Box
+*/
+// See this thread for more info: <a href="http://drupal.org/node/92861
+//" title="http://drupal.org/node/92861
+//" rel="nofollow">http://drupal.org/node/92861
+//</a> Display our form
+print "<p>Note that it may take several minutes if you are deleting a lot of nodes.</p>";
+print drupal_get_form('form_del_all_by_node_type');
+
+}
+
+// Our form for deleteing nodes of given type
+function form_del_all_by_node_type() {
+  $form['node_type'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Content Type to delete:'),
+    '#description' => t('Enter the type of content to delete. This must be the exact content name used in the database.'),
+  );
+  $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Delete now'),
+  );
+$form['#attributes'] = array(
+    'enctype' => 'multipart/form-data',
+    'id' => ' form_del_all_by_node_type',
+  );
+  return $form;
+}
+
+// We do no validation
+function form_del_all_by_node_type_validate($form_id, $form_values) {
+  // left blank
+}
+
+// Function to delete all nodes
+function form_del_all_by_node_type_submit($form_id, $form_values) {
+  $node_type = $form_values['values']['node_type'];
+ 
+  if(user_access('administer nodes')) {
+    $aquery = db_query("SELECT n.nid FROM {node} n WHERE n.type = '" . $node_type . "'");
+    $deleted_count = 0;
+    while ($n = db_fetch_object($aquery)) {
+      set_time_limit(5);
+      node_delete($n->nid);
+      $deleted_count += 1;
+    }
+    drupal_get_messages();
+    drupal_set_message( $deleted_count . ' nodes of type "' . $node_type . '" were found and deleted.');
+  }
+  else {
+    drupal_set_message(t('You do not have permission to perform this operation')); 
+  }
 
 }
 function oauth_twitter_page(){

@@ -236,7 +236,7 @@ function grabbit_gmail_crear($user=1){
 			
 			$edit->validated = TRUE;
 		
-			  node_save($node);
+			 // node_save($node);
 			
 			$string='';
 			$title='';
