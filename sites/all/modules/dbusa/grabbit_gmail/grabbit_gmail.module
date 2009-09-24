@@ -302,10 +302,12 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                    $part_number = "1";
                }
 
-              $text = imap_fetchbody($stream, $msg_number,1.2);
-	print "TEXT -------------- :<br><br>";
-	print_r($text);
-	print "---------------END TEXT----------<br><br>";
+              if($text = imap_fetchbody($stream, $msg_number,1.2)){
+	
+              }else{
+	
+              }
+print_f($structure);
               if($structure->encoding == 3) {
                    return imap_base64($text);
                } else if ($structure->encoding == 4) {
