@@ -493,8 +493,7 @@ function grabbit_gmail_crear($user=1){
 	    
 	}
 	$obj->close_mailbox();   //Close Mail Box
-	$setings=array('lastime'=>date('D, j M Y G:i:s'));
-	print_r($settings);
+	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	grabbit_gmail_save($user,$settings);
     endif;
 /*
