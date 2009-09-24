@@ -195,6 +195,7 @@ function grabbit_gmail_crear($user=1){
 	    foreach ($headers as $k => $v) {
 	      $messages[$v] = imap_headerinfo($mbox, $v);
 	    }
+	print "swsgs";
 	    foreach ($messages as $overview) {
 		  if(strtotime($overview->MailDate)>strtotime($gmail['lastime'])){
 		
