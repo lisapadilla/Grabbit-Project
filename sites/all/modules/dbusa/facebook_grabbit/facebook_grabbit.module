@@ -497,7 +497,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post->field_post_id[0]['value'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
-	<a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a><div class="facebook-post-body">
+	<a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a><div class="facebook-post-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">';
 	if($msg_formatted){
