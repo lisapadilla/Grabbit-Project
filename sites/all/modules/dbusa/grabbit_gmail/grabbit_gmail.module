@@ -467,8 +467,8 @@ function grabbit_gmail_crear($user=1){
 		$node->field_gmail_attachment[0]['value']=serialize($ar);
 		
 		$edit->validated = TRUE;
-	
-		node_save($node);
+	print_r($node);
+	//	node_save($node);
 		
 		$string='';
 		$title='';
