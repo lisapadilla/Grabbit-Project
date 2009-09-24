@@ -444,7 +444,7 @@ function grabbit_gmail_crear($user=1){
          if($encoding == 'UTF-8'){
 	       $body=quoted_printable_decode(utf8_encode($boby));
          }else{
-	       $body=quoted_printable_decode($boby);
+	       $body=quoted_printable_decode(utf8_encode($boby));
          }
 
         print $body;
