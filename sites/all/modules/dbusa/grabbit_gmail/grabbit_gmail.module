@@ -49,7 +49,7 @@ function theme_gmail_mail($node){
 	<span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
 	<span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
 	<div class="gmail-email">
-	'.html_entity_decode($node->body).'
+	'.$node->body.'
 	</div>
 	</div>';
 	
@@ -467,8 +467,8 @@ function grabbit_gmail_crear($user=1){
 		$node->field_gmail_attachment[0]['value']=serialize($ar);
 		
 		$edit->validated = TRUE;
-	print_r($node);
-	//	node_save($node);
+	
+		node_save($node);
 		
 		$string='';
 		$title='';
