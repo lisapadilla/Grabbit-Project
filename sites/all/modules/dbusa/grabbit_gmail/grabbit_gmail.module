@@ -53,7 +53,7 @@ function theme_gmail_mail($node){
 	if(is_array($attach)){
 		$num=2;
 		foreach ($attach as $key=>$value){
-			$attachments .='<a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a>';
+			$attachments .='<br>Attachment: <a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a>';
 			$num++;
 		}
 	}
