@@ -255,7 +255,7 @@ class receiveMail
                                         'date'=>$mail_header->date
                                 );
                 }
-print_r($mail_header);
+
                 return $mail_details;
         }
         function get_mime_type(&$structure) //Get Mime type Internal Private Use
@@ -439,52 +439,57 @@ function grabbit_gmail_crear($user=1){
 	if($user==1):
 	foreach($tot as $i)
 	{
+		
 	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
-	    $boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
-       
-	    $body=quoted_printable_decode(utf8_encode($boby));
-       
-	    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
-	    $ar=explode(",",$str);
-	
-		$node = new stdClass();
+	    if(strtotime($head['date'])>strtotime($time)){
+		print_r($head);
+			$boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
 
-        $title = $head['subject'];
-		$title=str_replace("=?ISO-8859-1?Q?","",$title);
-	    $title=str_replace("?=","",$title);
-	
-	    $title=utf8_encode(imap_qprint($title));
-	
-		$node->title = $title;
-		$node->created = strtotime($head['date']);
-		$node->type = 'gmail';
-		$node->status = 0;
-		$node->uid = $user;
-		$node->body = $body;
-		
-		$string = $head['fromName'];
-		$string=str_replace("=?ISO-8859-1?Q?","",$string);
-	    $string=str_replace("?=","",$string);
-	
-	    $string=utf8_encode(imap_qprint($string));
-		
-		$node->field_from[0]['value'] = $string;
-		
-		$node->field_from_add[0]['value'] = $head['from'];
-		
-		$node->field_msgno[0]['value'] = $i;
-		
-		$node->field_gmail_attachment[0]['value']=serialize($ar);
-		
-		$edit->validated = TRUE;
-	
-	//	node_save($node);
-		
-		$string='';
-		$title='';
-		$from='';
+		    $body=quoted_printable_decode(utf8_encode($boby));
 
-	  
+		    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
+		    $ar=explode(",",$str);
+
+			$node = new stdClass();
+
+	        $title = $head['subject'];
+			$title=str_replace("=?ISO-8859-1?Q?","",$title);
+		    $title=str_replace("?=","",$title);
+
+		    $title=utf8_encode(imap_qprint($title));
+
+			$node->title = $title;
+			$node->created = strtotime($head['date']);
+			$node->type = 'gmail';
+			$node->status = 0;
+			$node->uid = $user;
+			$node->body = $body;
+
+			$string = $head['fromName'];
+			$string=str_replace("=?ISO-8859-1?Q?","",$string);
+		    $string=str_replace("?=","",$string);
+
+		    $string=utf8_encode(imap_qprint($string));
+
+			$node->field_from[0]['value'] = $string;
+
+			$node->field_from_add[0]['value'] = $head['from'];
+
+			$node->field_msgno[0]['value'] = $i;
+
+			$node->field_gmail_attachment[0]['value']=serialize($ar);
+
+			$edit->validated = TRUE;
+
+		//	node_save($node);
+
+			$string='';
+			$title='';
+			$from='';
+
+		
+ 	    }
+	    
 	}
 	$obj->close_mailbox();   //Close Mail Box
 	$setings=array('lastime'=>date('D, j M Y G:i:s'));
