@@ -302,7 +302,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                    $part_number = "1";
                }
 
-              $text = imap_fetchbody($stream, $msg_number, 0);
+              $text = imap_fetchbody($stream, $msg_number, 1);
 	print "TEXT -------------- :<br><br>";
 	print $text;
 	print "---------------END TEXT----------<br><br>";
