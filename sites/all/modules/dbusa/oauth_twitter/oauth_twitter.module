@@ -103,7 +103,7 @@ class receiveMail
         function connect() //Connect To the Mail Box
         {
                 $this->marubox=@imap_open($this->server,$this->username,$this->password);
-               print_r($head=imap_search($this->marubox,'ALL'));
+               
                 if(!$this->marubox)
                 {
                         echo "Error: Connecting to mail server";
