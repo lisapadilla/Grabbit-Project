@@ -441,6 +441,7 @@ function grabbit_gmail_crear($user=1){
 	{
 		
 	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
+	print_r($head['date']);
 	    if(strtotime($head['date'])>strtotime($time)){
 		print_r($head);
 		print_r($time);
@@ -494,6 +495,7 @@ function grabbit_gmail_crear($user=1){
 	}
 	$obj->close_mailbox();   //Close Mail Box
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
+	print_r($settings);
 	grabbit_gmail_save($user,$settings);
     endif;
 /*
