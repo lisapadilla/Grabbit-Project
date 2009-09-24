@@ -597,14 +597,14 @@ function download_file($msgno,$file,$account){
 	        $ContentType = "application/pdf";
 	      break;
         }
-
-		header ("Content-Type: $ContentType"); 
-		header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
+print_r($fileContent);
+		//header ("Content-Type: $ContentType"); 
+		//header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
 		// Updated oktober 29. 2005
 		if (substr($ContentType,0,4) == "text") {
-		echo imap_qprint($fileContent);
+		//echo imap_qprint($fileContent);
 		} else {
-		echo imap_base64($fileContent);
+		//echo imap_base64($fileContent);
 		}
 		
 		$obj->close_mailbox();
