@@ -182,7 +182,7 @@ function grabbit_gmail_crear($user=1){
 	    );
 
 	    $messages = array();
-	    if(!$gmail['lastime']){
+	    if($gmail['lastime']){
 		  $imes=0;  
 		  $headers = imap_search($mbox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
 	    }else{
@@ -201,6 +201,8 @@ function grabbit_gmail_crear($user=1){
 		  if(strtotime($overview->MailDate)>$imes){
 			
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
+	print ($data);
+	print "<br><br> END --------------- <br><br>";
 	        $node = new stdClass();
 	
 	        $title = $overview->subject;
@@ -235,7 +237,7 @@ function grabbit_gmail_crear($user=1){
 			
 			$edit->validated = TRUE;
 	        if($user==1)		
-			node_save($node);
+			//node_save($node);
 			
 			$string='';
 			$title='';
