@@ -347,9 +347,9 @@ class receiveMail
                                                 $message = quoted_printable_decode($message);
                                         if ($enc == 5)
                                                 $message = $message;
-                                        $fp=fopen($path.$name,"w");
-                                        fwrite($fp,$message);
-                                        fclose($fp);
+                                        //$fp=fopen($path.$name,"w");
+                                        //fwrite($fp,$message);
+                                        //fclose($fp);
                                         $ar=$ar.$name.",";
                                 }
                                 // Support for embedded attachments starts here
@@ -375,9 +375,9 @@ class receiveMail
                                                                    $message = quoted_printable_decode($message);
                                                         if ($enc == 5)
                                                                    $message = $message;
-                                                        $fp=fopen($path.$name,"w");
-                                                        fwrite($fp,$message);
-                                                        fclose($fp);
+                                                        //$fp=fopen($path.$name,"w");
+                                                        //fwrite($fp,$message);
+                                                        //fclose($fp);
                                                         $ar=$ar.$name.",";
                                                 }
                                         }
