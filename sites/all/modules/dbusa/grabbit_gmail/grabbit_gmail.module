@@ -197,7 +197,7 @@ function grabbit_gmail_crear($user=1){
 	    }
 	    foreach ($messages as $overview) {
 		  if(strtotime($overview->MailDate)!=strtotime($gmail['lastime'])){
-		
+		print "<br><br><br><br>";
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
 	print_r($data);
 	        $node = new stdClass();
