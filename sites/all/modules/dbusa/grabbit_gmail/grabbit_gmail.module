@@ -252,7 +252,7 @@ class receiveMail
                                         'toNameOth'=>$sender_replyto->personal,
                                         'subject'=>$mail_header->subject,
                                         'to'=>strtolower($mail_header->toaddress),
-                                        'date'=>$mail_header->date;
+                                        'date'=>$mail_header->date
                                 );
                 }
                 return $mail_details;
