@@ -51,8 +51,10 @@ function theme_gmail_mail($node){
 	
 	$attach=unserialize($node->field_gmail_attachment[0]['value']);
 	if(is_array($attach)){
+		$num=2;
 		foreach ($attach as $key=>$value){
-			$attachments .='<a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail">'.$value.'</a>';
+			$attachments .='<a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a>';
+			$num++;
 		}
 	}
 	
@@ -526,7 +528,7 @@ function grabbit_gmail_get_file(){
 	print $return;
 }
 
-function download_file($msgno,$file,$account){
+function download_file($msgno,$file,$account,$number){
 	global $user;
 	
 	if($account=='gmail'){
@@ -538,7 +540,7 @@ function download_file($msgno,$file,$account){
 	
 	   	$strFileName = $file;
 	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
-	   	$fileContent = imap_fetchbody($obj->marubox,$msgno,2);
+	   	$fileContent = imap_fetchbody($obj->marubox,$msgno,$number);
 	
 	   	$ContentType = "application/octet-stream";
         switch($strFileType){
@@ -597,14 +599,14 @@ function download_file($msgno,$file,$account){
 	        $ContentType = "application/pdf";
 	      break;
         }
-print_r($fileContent);
-		//header ("Content-Type: $ContentType"); 
-		//header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
+
+		header ("Content-Type: $ContentType"); 
+		header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
 		// Updated oktober 29. 2005
 		if (substr($ContentType,0,4) == "text") {
-		//echo imap_qprint($fileContent);
+		  echo imap_qprint($fileContent);
 		} else {
-		//echo imap_base64($fileContent);
+		  echo imap_base64($fileContent);
 		}
 		
 		$obj->close_mailbox();
