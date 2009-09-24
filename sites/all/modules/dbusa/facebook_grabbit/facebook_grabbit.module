@@ -1402,7 +1402,7 @@ function facebook_grabbit_update_facebook($user){
 	  }
 
 	  foreach ($posts as $post){
-		  
+		  $comments_list=array();
 		  if(is_array($post['comments']['comment_list'])){
 		    $comments_list['comments']=$post['comments']['comment_list'];
 		    foreach($comments_list['comments'] as $comment){
