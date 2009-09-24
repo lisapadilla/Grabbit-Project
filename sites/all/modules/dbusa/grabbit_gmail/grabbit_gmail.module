@@ -426,9 +426,7 @@ function grabbit_gmail_crear($user=1){
 
 	$tot=$obj->getTotalMails();
 	
-	print_r($tot);
-	
-	/*for($i=$tot;$i>0;$i--)
+	foreach($tot as $i)
 	{
 	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
 	    echo "Subjects :: ".$head['subject']."<br>";
@@ -454,7 +452,7 @@ print $boby;
 	    //$obj->deleteMails($i); // Delete Mail from Mail box
 	}
 	$obj->close_mailbox();   //Close Mail Box
-    */
+    
 /*
 		  $headers = imap_search($mbox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
 
