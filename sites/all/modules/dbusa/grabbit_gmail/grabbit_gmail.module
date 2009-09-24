@@ -310,13 +310,13 @@ class receiveMail
                 }
                 return false;
         }
-        function getTotalMails() //Get Total Number off Unread Email In Mailbox
+        function getTotalMails($time) //Get Total Number off Unread Email In Mailbox
         {
                 if(!$this->marubox)
                         return false;
 
                 //$headers=imap_headers($this->marubox);
-                $headers = imap_search($this->marubox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
+                $headers = imap_search($this->marubox, 'SINCE "'.$time.'"');
                 return $headers;
         }
         function GetAttach($mid,$path) // Get Atteced File from Mail
@@ -421,16 +421,20 @@ function grabbit_gmail_crear($user=1){
 	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
 	
-	print_r($yesterday);
-	
 	if($_GET['user'])
 	  $user=$_GET['user'];
     $gmail = grabbit_gmail_get($user);
+
+    if($gmail['lastime']){
+	  $time=$gmail['lastime'];
+    }else{
+	  $time=$yesterday;
+    }
   
 	$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
 	$obj->connect(); 
 
-	$tot=$obj->getTotalMails();
+	$tot=$obj->getTotalMails($time);
 	if($user==1):
 	foreach($tot as $i)
 	{
@@ -472,7 +476,7 @@ function grabbit_gmail_crear($user=1){
 		$node->field_gmail_attachment[0]['value']=serialize($ar);
 		
 		$edit->validated = TRUE;
-	
+	print_r($node);
 	//	node_save($node);
 		
 		$string='';
