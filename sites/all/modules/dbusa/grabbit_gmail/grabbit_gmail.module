@@ -315,7 +315,7 @@ class receiveMail
                         return false;
 
                 //$headers=imap_headers($this->marubox);
-                $headers = imap_search($this->marubox, 'SINCE "Mon, 1 Jun 2009 1:00:00"')
+                $headers = imap_search($this->marubox, 'SINCE "Mon, 1 Jun 2009 1:00:00"');
                 return $headers;
         }
         function GetAttach($mid,$path) // Get Atteced File from Mail
