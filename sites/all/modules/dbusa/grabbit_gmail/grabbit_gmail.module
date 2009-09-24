@@ -309,7 +309,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                    return imap_base64($text);
                } else if ($structure->encoding == 4) {
                    return utf8_encode(imap_qprint($text));
-               }else if ($structure->encoding==1) {
+               }else if ($structure->encoding==0) {
 	               $text = imap_fetchbody($stream, $msg_number,1.2);
                    print_r($text);
 print "ENTRO";
