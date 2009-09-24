@@ -199,7 +199,8 @@ function grabbit_gmail_crear($user=1){
 		  if(strtotime($overview->MailDate)!=strtotime($gmail['lastime'])){
 		
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
-
+print $data;
+print "-------END TEXT------<br><br>";
 	        $node = new stdClass();
 	
 	        $title = $overview->subject;
@@ -302,19 +303,18 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                    $part_number = "1";
                }
 
-              if($text = imap_fetchbody($stream, $msg_number,1.2)){
-	
-              }else{
-	
-              }
- print_r($structure);
+              $text = imap_fetchbody($stream, $msg_number,1.2);
+ 
               if($structure->encoding == 3) {
                    return imap_base64($text);
                } else if ($structure->encoding == 4) {
                    return utf8_encode(imap_qprint($text));
-               } else {
+               }else if ($structure->encoding==1) {
+	               $text = imap_fetchbody($stream, $msg_number,1.2);
                    return quoted_printable_decode($text);
-            }
+               }else {
+	               return quoted_printable_decode($text);
+	           }
         
          if ($structure->type == 1) { /* multipart */
               while (list($index, $sub_structure) = each($structure->parts)) {
