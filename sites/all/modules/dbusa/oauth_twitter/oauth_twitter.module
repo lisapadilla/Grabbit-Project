@@ -283,9 +283,6 @@ class receiveMail
                 if ($body == "") {
                         return "";
                 }
-                $encoding = mb_detect_encoding($body);
-                if($encoding == 'UTF-8')
-                  $body=utf8_encode($body);
 
                 return $body;
         }
@@ -337,8 +334,12 @@ function oauth_twitter_ajuste(){
 	    echo "FromName :: ".$head['fromName']."<br>";
 	    echo "<br><br>";
 	    echo "<br>*******************************************************************************************<BR>";
-	    echo $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
-
+	     $boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
+        	
+         $encoding = mb_detect_encoding($boby);
+         if($encoding == 'UTF-8')
+           $body=utf8_encode($boby);
+print $body;
 	    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
 	    $ar=explode(",",$str);
 	    foreach($ar as $key=>$value)
