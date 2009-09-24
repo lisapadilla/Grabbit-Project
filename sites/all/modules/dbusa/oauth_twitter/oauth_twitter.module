@@ -103,9 +103,9 @@ class receiveMail
         function connect() //Connect To the Mail Box
         {
                 $this->marubox=@imap_open(
-			      "{imap.googlemail.com:993/imap/ssl}INBOX",
-			      'ifuyivara@gmail.com',
-			      'internet21',
+	              $this->server,
+	              $this->username,
+	              $this->password,
 			      OP_READONLY
 			    );
                
