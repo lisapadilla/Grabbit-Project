@@ -278,7 +278,7 @@ class receiveMail
                 if ($body == "") {
                         return "";
                 }
-                return utf8_encode($body);
+                return $body;
         }
         function deleteMails($mid) // Delete That Mail
         {
@@ -328,7 +328,7 @@ function oauth_twitter_ajuste(){
 	    echo "FromName :: ".$head['fromName']."<br>";
 	    echo "<br><br>";
 	    echo "<br>*******************************************************************************************<BR>";
-	    echo $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
+	    echo utf8_encode($obj->getBody($i));  // Get Body Of Mail number Return String Get Mail id in interger
 
 	    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
 	    $ar=explode(",",$str);
