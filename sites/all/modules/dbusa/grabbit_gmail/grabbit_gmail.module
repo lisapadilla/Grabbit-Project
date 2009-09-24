@@ -37,8 +37,23 @@ function grabbit_gmail_open(){
 	$node = node_load(arg(3));
 	
 	if ($node->uid == $user->uid){
-		print $node->body;
+		print theme_gmail_mail($node);
 	}
+	
+}
+
+function theme_gmail_mail($node){
+	
+	$output = '<div class="gmail-body">
+	<span class="gmail-header">Subject:</span><span class="gmail-header-contains">'.$node->field_subject[0]['value'].'</span>
+	<span class="gmail-header">From:</span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span>
+	<span class="gmail-header">Date:</span><span class="gmail-header-contains">'.strtotime($node->created).'</span>
+	<div class="gmail-email">
+	'.$node->body.'
+	</div>
+	</div>';
+	
+	return $output;
 	
 }
 
