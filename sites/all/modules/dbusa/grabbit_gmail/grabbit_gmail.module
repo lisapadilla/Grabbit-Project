@@ -199,9 +199,8 @@ function grabbit_gmail_crear($user=1){
 	    }
 	    foreach ($messages as $overview) {
 		  if(strtotime($overview->MailDate)>$imes){
-		print_r("uno<br>");
+			
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
-
 	        $node = new stdClass();
 	
 	        $title = $overview->subject;
@@ -235,7 +234,8 @@ function grabbit_gmail_crear($user=1){
 			$node->field_gmail_attachment[0]['value']=serialize($attachments_array);
 			
 			$edit->validated = TRUE;
-	        if($user->uid==1)		
+	        if($user->uid==1)
+	        print_r("saved<br>");		
 		//	node_save($node);
 			
 			$string='';
