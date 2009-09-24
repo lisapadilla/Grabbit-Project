@@ -35,7 +35,7 @@ function grabbit_gmail_open(){
 	global $user;
 
 	$node = node_load(arg(3));
-	
+	print_r($node);
 	if ($node->uid == $user->uid){
 		print theme_gmail_mail($node);
 	}
