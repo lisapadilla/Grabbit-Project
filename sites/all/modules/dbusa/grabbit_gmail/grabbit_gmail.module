@@ -311,7 +311,7 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                }else if ($structure->encoding==0) {
 	               $html = imap_fetchbody($stream, $msg_number,1.2);
 	               $string = trim($html);
-	               if ($string=='s'){
+	               if ($string==){
 		             return utf8_encode(imap_qprint($html));
 	               }else{
 		print $text;
