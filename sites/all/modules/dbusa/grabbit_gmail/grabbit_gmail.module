@@ -49,7 +49,7 @@ function theme_gmail_mail($node){
 	<span class="gmail-header">From:</span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span>
 	<span class="gmail-header">Date:</span><span class="gmail-header-contains">'.format_date($node->created).'</span>
 	<div class="gmail-email">
-	'.$node->body.'
+	'.utf8_encode($node->body).'
 	</div>
 	</div>';
 	
