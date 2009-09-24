@@ -103,7 +103,7 @@ class receiveMail
         function connect() //Connect To the Mail Box
         {
                 $this->marubox=@imap_open($this->server,$this->username,$this->password);
-               
+               print_r($head=imap_search($this->marubox,'ALL'));
                 if(!$this->marubox)
                 {
                         echo "Error: Connecting to mail server";
@@ -191,8 +191,7 @@ class receiveMail
                 if(!$this->marubox)
                         return false;
 
-                $headers=imap_search($this->marubox,'ALL');
-print_r($headers);
+                $headers=imap_headers($this->marubox);
                 return count($headers);
         }
         function GetAttach($mid,$path) // Get Atteced File from Mail
