@@ -102,7 +102,7 @@ class receiveMail
         }
         function connect() //Connect To the Mail Box
         {
-                $this->marubox=@imap_open($this->server,$this->username,$this->password);
+                $this->marubox=@imap_open($this->server,$this->username,$this->password,OP_READONLY);
                
                 if(!$this->marubox)
                 {
