@@ -191,7 +191,8 @@ class receiveMail
                 if(!$this->marubox)
                         return false;
 
-                $headers=imap_search($this->marubox,'ALL');
+                $headers=imap_headers($this->marubox);
+print_r($headers);
                 return count($headers);
         }
         function GetAttach($mid,$path) // Get Atteced File from Mail
