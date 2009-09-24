@@ -199,8 +199,7 @@ function grabbit_gmail_crear($user=1){
 		  if(strtotime($overview->MailDate)!=strtotime($gmail['lastime'])){
 		
 	     	$data = get_part($mbox, $overview->Msgno, "TEXT/HTML");
-print $data;
-print "-------END TEXT------<br><br>";
+
 	        $node = new stdClass();
 	
 	        $title = $overview->subject;
@@ -311,7 +310,8 @@ function get_part($stream, $msg_number, $mime_type, $structure = false, $part_nu
                    return utf8_encode(imap_qprint($text));
                }else if ($structure->encoding==0) {
 	               $html = imap_fetchbody($stream, $msg_number,1.2);
-	                if ($html){
+	               if ($html){
+		print_r($html);
 		             return utf8_encode(imap_qprint($html));
 	               }else{
 		             return quoted_printable_decode($text);
