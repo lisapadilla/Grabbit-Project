@@ -538,7 +538,7 @@ function download_file($msgno,$file,$account){
 	
 	   	$strFileName = $file;
 	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
-	   	$fileContent = imap_fetchbody($obj->marubox,$msgno,$file+2);
+	   	$fileContent = imap_fetchbody($obj->marubox,$msgno,2);
 	
 	   	$ContentType = "application/octet-stream";
         switch($strFileType){
