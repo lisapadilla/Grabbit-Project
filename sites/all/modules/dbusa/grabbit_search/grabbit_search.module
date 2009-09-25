@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_menu()
  */
-function grabbit_imap_menu () {
+function grabbit_search_menu () {
 
   $items['grabbit/search/settings'] = array( 
     'page callback' => 'grabbit_search_ajustes', 
