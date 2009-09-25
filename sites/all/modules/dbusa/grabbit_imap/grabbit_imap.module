@@ -168,8 +168,8 @@ function grabbit_imap_add_form_validate($form, &$form_state) {
     form_set_error('user', t('The e-mail address %mail is not valid.', array('%mail' => $form_state['values']['user'])));
   }else{
 	
-	$obj= new receiveMail($form_state['values']['user'],$form_state['values']['pass'],
-	                      $form_state['values']['email'],$form_state['values']['server'],$form_state['values']['server_port']);
+	$obj= new receiveMail('ivan.fuyivara@ehe.com.mx','internet',
+	                      'ivan.fuyivara@ehe.com.mx','mail.ehe.com.mx','110');
 	
 	if(!$obj->connect())
 	  form_set_error('user', t('Your account did not validate, check your server settings and try again.', array('%mail' => $form_state['values']['user'])));
