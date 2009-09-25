@@ -51,7 +51,6 @@ function grabbit_panels_get_panels(){
 	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/grabbit_panels.js', $type = 'module');
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/pagers.css', $type = 'module');
 	
 	$panel_1 = facebook_grabbit_private_view_panel(0);	
