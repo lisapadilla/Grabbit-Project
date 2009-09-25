@@ -1,0 +1,414 @@
+<?
+//$Id$
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_imap_menu () {
+
+  $items['imap/ajustes/settings'] = array( 
+    'page callback' => 'grabbit_imap_crear', 
+    'access arguments' => array('access content')
+  );
+
+  $items['imap/open/email'] = array( 
+    'page callback' => 'grabbit_imap_open', 
+    'access arguments' => array('access content')
+  );
+
+  $items['imap/delete/account'] = array( 
+    'page callback' => 'grabbit_imap_delete', 
+    'access arguments' => array('access content')
+  );
+
+  $items['imap/get/file'] = array( 
+    'page callback' => 'grabbit_imap_get_file', 
+    'access arguments' => array('access content')
+  );
+
+  $items['user/%user/add_imap'] = array(
+   'title' => 'Add SMTP Account',
+   'description' => t('Add Your POP/IMAP Email account to Grabbit'),
+   'page callback' => 'grabbit_imap_add',
+   'access arguments' => array('access content'),
+   'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+
+function grabbit_imap_add(){
+	global $user;
+	if($user->uid==1):
+	$account = grabbit_imap_get($user->uid);
+	print_r($account);
+	if($account){
+	  $output = "You have a POP/IMAP account in Grabbit.<br>
+	             If you want to add a new account you must first delete this one. Multiple accounts will be featured in the future<br>
+	             <div class='imap-account-details'>".$account['user']." - ".l('Delete','imap/delete/account')."</div>";	
+	}else{
+	  $output = drupal_get_form('grabbit_imap_add_form');	
+	}
+	
+	return $output;
+	endif;
+}
+
+function grabbit_imap_delete(){
+	global $user;
+	db_query("DELETE FROM {grabbit_imap} WHERE uid=%d",$user->uid);
+	
+	drupal_goto('user/'.$user->uid.'/add_imap');
+}
+
+function grabbit_imap_add_form($form_state){
+
+		$form['counter'] = array(
+		    '#type' => 'item',
+		    '#prefix'=>'<div id="description">',
+		    '#value' => 'Add a POP3/IMAP account to your grabbit stream',
+		    '#suffix'=>'</div>'
+			 );	 
+		$form['user'] = array(
+		    '#type' => 'textfield',
+		    '#title' => t('User name'),
+		    '#required' => TRUE,
+		    '#size' => 20,
+		    '#description'=>'This is your user name in your server, commonly is your email address'
+		  );
+		  $form['email'] = array(
+		    '#type' => 'textfield',
+		    '#title' => t('Email Address'),
+		    '#required' => TRUE,
+		    '#size' => 20,
+		  );
+		
+		$form['pass'] = array(
+		    '#type' => 'password',
+		    '#title' => t('Password'),
+		    '#required' => TRUE,
+		    '#size' => 20,
+		  );
+		
+		$form['server_type'] = array(
+		    '#type' => 'select',
+		    '#title' => t('Server Type'),
+		    '#options'=>array('pop3'=>'POP3','imap'=>'IMAP'),
+		    '#required' => TRUE
+		  );
+		
+		  $form['server'] = array(
+		    '#type' => 'textfield',
+		    '#title' => t('Server Address'),
+		    '#description'=>'Examples: imap.example.com OR pop.example.com',
+		    '#required' => TRUE,
+		    '#size' => 20,
+		  );
+		
+		$form['server_port'] = array(
+		    '#type' => 'textfield',
+		    '#title' => t('Server Port'),
+		    '#description'=>'Examples: 995',
+		    '#required' => TRUE,
+		    '#size' => 20,
+		  );
+		  $form['submit'] = array(
+		    '#type' => 'submit',
+		    '#value' => t('Save'),
+		  ); 
+		
+		return $form;
+}
+
+
+function grabbit_imap_open(){
+	global $user;
+
+	$node = node_load(arg(3));
+	
+	if ($node->uid == $user->uid){
+		print theme_imap_mail($node);
+	}
+	
+}
+
+function theme_imap_mail($node){
+	
+	$attach=unserialize($node->field_gmail_attachment[0]['value']);
+	if(is_array($attach)){
+		$num=2;
+		foreach ($attach as $key=>$value){
+			$attachments .='<br>Attachment: <a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a>';
+			$num++;
+		}
+	}
+	
+	$output = '<div class="imap-body">
+	<span class="imap-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
+	<span class="imap-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
+	<span class="imap-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
+	<div class="imap-email">
+	'.$node->body.'
+	</div>
+	<div class="imap-atachments">
+	'.$attachments.'
+	</div>
+	</div>';
+	
+	return $output;
+	
+}
+
+
+/**
+ * gmail_connect_get_login_validate - validate the login form
+ */
+function grabbit_imap_add_form_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['user'])) {
+    form_set_error('user', t('The e-mail address %mail is not valid.', array('%mail' => $form_state['values']['user'])));
+  }else{
+	
+	$obj= new receiveMail($form_state['values']['user'],$form_state['values']['pass'],
+	                      $form_state['values']['email'],$form_state['values']['server'],$form_state['values']['server_port']);
+	
+	if(!$obj->connect())
+	  form_set_error('user', t('Your account did not validate, check your server settings and try again.', array('%mail' => $form_state['values']['user'])));
+  }
+}
+
+/**
+ * Save the data
+ */
+function grabbit_imap_add_form_submit($form, &$form_state) {
+  global $user;
+  $settings=array();
+  $settings['user']=$form_state['values']['user'];
+  $settings['password']=$form_state['values']['pass'];
+  $settings['email']=$form_state['values']['email'];
+  $settings['server']=$form_state['values']['server'];
+  $settings['port']=$form_state['values']['server_port'];
+  $settings['type']=$form_state['values']['server_type'];
+  grabbit_imap_save($user->uid,$settings);
+
+}
+
+function grabbit_imap_save($user,$settings){
+	$check = db_query("SELECT * FROM {grabbit_imap} WHERE uid=%d",$user);
+	
+	if(db_affected_rows($check)){
+	  if($settings['lastime']){
+		  db_query("UPDATE {grabbit_imap} SET lastime='%s' WHERE uid=%d",$settings['lastime'],$user);	
+	  }else{
+		  db_query("UPDATE {grabbit_imap} SET user='%s', password='%s',
+			                                  server='%s', email='%s',
+			                                  port='%s', type='%s', WHERE uid=%d",$settings['user'],$settings['password'],
+			                                                                      $settings['server'],$settings['email'],
+			                                                                      $settings['port'],$settings['type'],$user);	
+	  }
+	}else{
+	  db_query("INSERT INTO {grabbit_imap} SET uid=%d, user='%s', password='%s', lastime='%s',
+	                                           server='%s', email='%s',
+			                                  port='%s', type='%s'",$user,$settings['user'],$settings['password'],
+			                                  	$settings['lastime'],$settings['server'], $settings['email'],$settings['port'],$settings['type']);		
+	}
+}
+
+function grabbit_imap_get($user){
+	
+	$check = db_query("SELECT * FROM {grabbit_imap} WHERE uid=%d",$user);
+	
+	if(db_affected_rows($check)){
+	  $return = array();
+	  $object=db_fetch_object($check);
+	  $return['user']=$object->user;
+	  $return['password']=$object->password;
+	  $return['lastime']=$object->lastime;
+	  $return['email']=$object->email;
+	  $return['server']=$object->server;
+	  $return['type']=$object->type;
+	  $return['port']=$object->port;
+	  return $return;
+	}
+	return NULL;
+}
+
+
+function grabbit_imap_crear($user=1){
+	
+	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
+	
+	if($_GET['user'])
+	  $user=$_GET['user'];
+    $gmail = grabbit_imap_get($user);
+
+    if($gmail['lastime']){
+	  $time=$gmail['lastime'];
+    }else{
+	  $time=$yesterday;
+    }
+  
+	$obj= new receiveMail();
+	$obj->connect(); 
+
+	$tot=$obj->getTotalMails($time);
+	
+	foreach($tot as $i)
+	{
+		
+	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
+	
+	    if(strtotime($head['date'])>strtotime($time)){
+	
+			$boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
+
+		    $body=quoted_printable_decode(utf8_encode($boby));
+
+		    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
+		    $ar=explode(",",$str);
+		print_r($head);
+/*
+			$node = new stdClass();
+
+	        $title = $head['subject'];
+			$title=str_replace("=?ISO-8859-1?Q?","",$title);
+		    $title=str_replace("?=","",$title);
+
+		    $title=utf8_encode(imap_qprint($title));
+
+			$node->title = $title;
+			$node->created = strtotime($head['date']);
+			$node->type = 'gmail';
+			$node->status = 0;
+			$node->uid = $user;
+			$node->body = $body;
+
+			$string = $head['fromName'];
+			$string=str_replace("=?ISO-8859-1?Q?","",$string);
+		    $string=str_replace("?=","",$string);
+
+		    $string=utf8_encode(imap_qprint($string));
+
+			$node->field_from[0]['value'] = $string;
+
+			$node->field_from_add[0]['value'] = $head['from'];
+
+			$node->field_msgno[0]['value'] = $i;
+
+			$node->field_gmail_attachment[0]['value']=serialize($ar);
+
+			$edit->validated = TRUE;
+
+			node_save($node);
+
+			$string='';
+			$title='';
+			$from='';
+
+		*/
+ 	    }
+	    
+	}
+	$obj->close_mailbox();   //Close Mail Box
+	$settings=array('lastime'=>date('D, j M Y G:i:s'));
+	
+	grabbit_gmail_save($user,$settings);
+    
+}
+
+function grabbit_imap_get_file(){
+	
+	if(arg(3) && arg(4) && arg(5) && arg(6)){
+	  $return = download_file(arg(3),arg(4),arg(5),arg(6));	
+	}else{
+		$return = "All arguments are needed to download the file";
+	}
+	
+	
+	print $return;
+}
+
+function imap_download_file($msgno,$file,$account,$number){
+	global $user;
+	
+	
+		$imap = grabbit_imap_get($user->uid);
+	  	$obj= new receiveMail($imap['user'],$imap['password'],$imap['mail'],$imap['server'],$imap['type'],$imap['port']);
+		$obj->connect();	
+	
+	
+	
+	   	$strFileName = $file;
+	   	$strFileType = strrev(substr(strrev($strFileName),0,4));
+	   	$fileContent = imap_fetchbody($obj->marubox,$msgno,$number);
+	
+	   	$ContentType = "application/octet-stream";
+        switch($strFileType){
+	      case ".asf":
+	        $ContentType = "video/x-ms-asf";
+	      break;
+	      case ".avi":
+	        $ContentType = "video/avi";
+	      break;
+	      case ".doc":
+	        $ContentType = "application/msword";
+	      break;
+	      case ".zip":
+	        $ContentType = "application/zip";
+	      break;
+	      case ".xls":
+	        $ContentType = "application/vnd.ms-excel";
+	      break;
+	      case ".gif":
+	        $ContentType = "image/gif";
+	      break;
+	      case ".jpg":
+	      case "jpeg":
+	        $ContentType = "image/jpeg";
+	      break;
+	      case ".wav":
+	        $ContentType = "audio/wav";
+	      break;
+	      case ".mp3":
+	   		$ContentType = "audio/mpeg3";
+	      break;
+	      case ".mpg":
+	      case "mpeg":
+	        $ContentType = "video/mpeg";
+	      break;
+	      case ".rtf":
+	        $ContentType = "application/rtf";
+	      break;
+	      case ".htm":
+	      case "html":
+	        $ContentType = "text/html";
+	      break;
+	      case ".xml":
+	   		$ContentType = "text/xml";
+	      break;
+	      case ".xsl":
+	        $ContentType = "text/xsl";
+	      break;
+	      case ".css":
+	     	$ContentType = "text/css";
+	      break;
+	      case ".php":
+	        $ContentType = "text/php";
+	      break;
+	      case ".pdf":
+	        $ContentType = "application/pdf";
+	      break;
+        }
+
+		header ("Content-Type: $ContentType"); 
+		header("Content-Disposition: attachment; filename=\"" . $strFileName . "\"; size=$fileSize;");
+		// Updated oktober 29. 2005
+		if (substr($ContentType,0,4) == "text") {
+		  echo imap_qprint($fileContent);
+		} else {
+		  echo imap_base64($fileContent);
+		}
+		
+		$obj->close_mailbox();
+
+}
+
