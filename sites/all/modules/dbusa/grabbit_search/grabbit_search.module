@@ -11,7 +11,7 @@ function grabbit_search_menu () {
   );
 
   $items['grabbit/search/go'] = array( 
-    'page callback' => 'grabbit_search_ajustes', 
+    'page callback' => 'grabbit_search_page', 
     'access arguments' => array('access content')
   );
 
