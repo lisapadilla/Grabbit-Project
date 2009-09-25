@@ -585,7 +585,7 @@ class receiveMail
 function grabbit_gmail_crear($user=1){
 	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 1, date("Y")));
-	
+	$barra=0;
 	if($_GET['user'])
 	  $user=$_GET['user'];
     $gmail = grabbit_gmail_get($user);
@@ -593,8 +593,8 @@ function grabbit_gmail_crear($user=1){
     if($gmail['lastime']){
 	  $time=$gmail['lastime'];
     }else{
-	  $bar->initialize($elements); //print the empty bar
 	  $time=$yesterday;
+	  $barra=1;
     }
   
 	$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
@@ -602,7 +602,12 @@ function grabbit_gmail_crear($user=1){
 
 	$tot=$obj->getTotalMails($time);
 	if(is_array($tot)):
-	$total_mails=count($tot);
+	
+	if($barra==1){
+	  $total_mails=count($tot);
+	  $bar = new ProgressBar();
+	  $bar->initialize($total_mails); //print the empty bar
+	}
 	
 	foreach($tot as $i)
 	{
