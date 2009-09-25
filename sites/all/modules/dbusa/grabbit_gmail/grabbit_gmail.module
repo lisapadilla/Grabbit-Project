@@ -456,7 +456,7 @@ function grabbit_gmail_crear($user=1){
 	$obj->connect(); 
 
 	$tot=$obj->getTotalMails($time);
-	
+	if(is_array($tot)):
 	foreach($tot as $i)
 	{
 		
@@ -512,6 +512,7 @@ function grabbit_gmail_crear($user=1){
  	    }
 	    
 	}
+	endif;
 	$obj->close_mailbox();   //Close Mail Box
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
