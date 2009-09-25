@@ -161,11 +161,10 @@ function grabbit_imap_add_form_validate($form, &$form_state) {
     form_set_error('user', t('The e-mail address %mail is not valid.', array('%mail' => $form_state['values']['user'])));
   }else{
 	
-
-
-
-	print_r($contra);
-	if(!$contra)
+	$obj= new receiveMail($form_state['values']['user'],$form_state['values']['pass'],
+	                      $form_state['values']['email'],$form_state['values']['server'],'imap',$form_state['values']['server_port']);
+	
+	if(!$obj->connect())
 	  form_set_error('user', t('Your account did not validate, check your server settings and try again.', array('%mail' => $form_state['values']['user'])));
   }
 }
@@ -228,15 +227,7 @@ function grabbit_imap_get($user){
 
 
 function grabbit_imap_crear($user=1){
-
-	$contra=@imap_open(
-	        '{imap.googlemail.com:993/imap/ssl}INBOX',
-	        'ifuyivara@gmail.com',
-	        'internet21',
-		      OP_READONLY
-		    );
-		print_($contra);
-/*	
+	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
 	
 	if($_GET['user'])
@@ -268,7 +259,7 @@ function grabbit_imap_crear($user=1){
 		    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
 		    $ar=explode(",",$str);
 		print_r($head);
-
+/*
 			$node = new stdClass();
 
 	        $title = $head['subject'];
@@ -306,7 +297,7 @@ function grabbit_imap_crear($user=1){
 			$title='';
 			$from='';
 
-		
+		*/
  	    }
 	    
 	}
@@ -314,7 +305,7 @@ function grabbit_imap_crear($user=1){
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
 	grabbit_gmail_save($user,$settings);
-    */
+    
 }
 
 function grabbit_imap_get_file(){
