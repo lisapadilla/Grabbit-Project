@@ -40,7 +40,7 @@ function grabbit_search_ajustes(){
 		((node.title) LIKE ('%toca%')))
 	");
 	
-	foreach ($nid=db_fetch_object($result)){
+	while($nid=db_fetch_object($result)){
 		$node=node_load($nid->nid);
 		print_r($node);
 	}
