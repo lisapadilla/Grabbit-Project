@@ -1,0 +1,48 @@
+<?
+//$Id$
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_imap_menu () {
+
+  $items['grabbit/search/settings'] = array( 
+    'page callback' => 'grabbit_search_ajustes', 
+    'access arguments' => array('access content')
+  );
+
+  $items['grabbit/search/go'] = array( 
+    'page callback' => 'grabbit_search_ajustes', 
+    'access arguments' => array('access content')
+  );
+
+  return $items;
+}
+
+function grabbit_search_ajustes(){
+	
+	$result = db_query("SELECT node.nid AS nid
+	 FROM node node 
+	 INNER JOIN users users ON node.uid = users.uid
+	 LEFT JOIN content_type_gmail node_data_field_from ON node.vid = node_data_field_from.vid
+	 LEFT JOIN content_type_imap node_data_field_imap_from ON node.vid = node_data_field_imap_from.vid
+	 LEFT JOIN content_type_facebook node_data_field_text ON node.vid = node_data_field_text.vid
+	 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+	 WHERE (node.type in ('facebook', 'gmail', 'imap', 'twitter')) AND 
+	 (users.uid in ('1')) 
+	 AND (
+		((node_data_field_from.field_from_value) LIKE ('%toca%')) OR 
+		((node_data_field_imap_from.field_imap_from_value) LIKE ('%toca%')) OR
+		((node_data_field_imap_from.field_imap_subject_value) LIKE ('%toca%')) OR 
+		((node_data_field_from.field_subject_value) LIKE ('%toca%')) OR 
+		((node_data_field_text.field_text_value) LIKE ('%toca%')) OR 
+		((node_data_field_text.field_comments_value) LIKE ('%toca%')) OR 
+		((node_revisions.body) LIKE ('%toca%')) OR 
+		((node.title) LIKE ('%toca%')))
+	");
+	
+	foreach ($nid=db_fetch_object($result)){
+		$node=node_load($nid->nid);
+		print_r($node);
+	}
+	
+}
