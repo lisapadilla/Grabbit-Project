@@ -599,6 +599,7 @@ function facebook_grabbit_private_view_panel($param){
 	   $GET['show_facebook']=1;
 	   $GET['show_twitter']=1;
 	   $GET['show_gmail']=1;
+	   $GET['show_imap']=1;
      }
     if($user->uid>0){
 	  	//get FB,TW and soon GMAIL
@@ -609,6 +610,7 @@ function facebook_grabbit_private_view_panel($param){
 		$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='FALSE';
 		$view_elements->display['default']->display_options['filters']['type']['value']['twitter']='FALSE';
 		$view_elements->display['default']->display_options['filters']['type']['value']['gmail']='FALSE';
+		$view_elements->display['default']->display_options['filters']['type']['value']['imap']='FALSE';
 
 		if($GET['show_facebook']){
 			$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='facebook';
@@ -618,6 +620,9 @@ function facebook_grabbit_private_view_panel($param){
 		}
 		if($GET['show_gmail']){
 			$view_elements->display['default']->display_options['filters']['type']['value']['gmail']='gmail';
+		}
+		if($GET['show_imap']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['imap']='imap';
 		}
 
 		if(!$GET['favorites']){
@@ -752,6 +757,10 @@ function facebook_grabbit_private_view_panel($param){
 							case 'gmail':
 							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 							  $output .= theme_gmail_message($comments,$node);
+							break;
+							case 'imap':
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= theme_imap_message($comments,$node);
 							break;
 							default:
 							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
@@ -1292,6 +1301,64 @@ function theme_gmail_message($comments,$node){
 					  <div class="content-body">
 					    <div class="content-not-truncated">'.$node->body.'
 					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=550')).'
+					  </div>
+					    <span class="submitted">'.$submitted.'</span>	
+					  </div>
+					
+					 '.$comments_output.'
+					 <div class="news-comment-submit">
+					  <div class="news-form"s>
+					    <form id="myForm" style="display:none;">
+						  <input class="form-text-content" type="textfield" size=30 maxlength=255 required=true/>
+						  <input id="'.$node->nid.'" class="news-comment-submit-button" type="button" value="Comment" onclick="javascript:void(0)"/>
+						</form>
+					  </div>
+					 </div>
+					</div>
+				</div>
+				
+			</div>';
+						
+	 return $output;
+}
+
+function theme_imap_message($comments,$node){
+	
+	$gmail_image=base_path().path_to_theme().'/images/various/imap.jpg';
+						
+	$image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$gmail_image.'"/></span>'; 
+
+	$submitted ='<p>From: '.$node->field_imap_from.'</p>
+	             <p>Source: '.l('IMAP','node/'.$node->nid).'</p>';
+	
+	$comments_output = '<div class="news-comments">';
+	
+	while ($item = db_fetch_object($comments)){
+	  $profile = content_profile_load('profile', $item->uid);
+
+      $comments_output .= '<div id="'.$item->cid.'" class="news-comment"><span class="news-comment-picture">';																			
+      $comments_output .= theme('imagecache', 'friend_comment_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image', '', array('width'=>'30'));																											
+	  $comments_output .= '</span><span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
+						  <span class="news-comment-content">'.$item->comment.'</span></div>';
+	}
+						
+	$comments_output .= '</div>';
+	
+	$node->body =substr(strip_tags($node->body),0,150); 
+	
+	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element" id="node-'.$node->nid.'">
+	             <div class="meta">
+					'.$image.'
+					<div class="item-body">
+					  <div class="links_stream">  
+					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
+					    <a href="javascript:void(0)" class="comment-news">Comment</a>
+					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
+					  </div>
+					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
+					  <div class="content-body">
+					    <div class="content-not-truncated">'.$node->body.'
+					    '.l('more','imap/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=550')).'
 					  </div>
 					    <span class="submitted">'.$submitted.'</span>	
 					  </div>
