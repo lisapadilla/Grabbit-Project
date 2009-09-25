@@ -36,6 +36,7 @@ function grabbit_gmail_menu () {
   return $items;
 }
 
+
 function grabbit_gmail_open(){
 	global $user;
 
@@ -80,7 +81,8 @@ function grabbit_gmail_add(){
 	$account = grabbit_gmail_get($user->uid);
 	
 	if($account){
-	  $output = "You already have a Gmail account in Grabbit. You must delete the current account in order to add another one<br><br>
+	  $output = "You have a Gmail account in Grabbit.<br>
+	             If you want to add a new account you must first delete this one<br>
 	             <div class='gmail-account-details'>".$account['user']." - ".l('Delete','gmail/delete/account')."</div>";	
 	}else{
 	  $output = drupal_get_form('grabbit_gmail_add_form');	
@@ -246,10 +248,10 @@ class receiveMail
                
                 if(!$this->marubox)
                 {
-                        echo "Error: Connecting to mail server";
-                        echo $this->marubox;
-                        echo "Error: Connecting to mail server";                       
-                        exit;
+                        return FALSE;                     
+                        
+                }else{
+	                return TRUE;
                 }
         }
         function getHeaders($mid) // Get Header info
