@@ -221,9 +221,8 @@ class receiveMail
                 if($servertype=='imap')
                 {
                         if($port=='') $port='143';
-                        $strConnect='{'.$mailserver.':'.$port. '}INBOX';
-print $strConnect;
-exit;
+                        $strConnect='{'.$mailserver.':'.$port. '/imap}INBOX';
+
                 }
                 else if($servertype=='gmail')
                 {
