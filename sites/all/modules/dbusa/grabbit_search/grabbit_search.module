@@ -19,6 +19,9 @@ function grabbit_search_menu () {
 }
 
 function grabbit_search_ajustes(){
+	global $user;
+	
+	$busqueda=$_GET['busqueda']
 	
 	$result = db_query("SELECT node.nid AS nid
 	 FROM node node 
@@ -28,16 +31,16 @@ function grabbit_search_ajustes(){
 	 LEFT JOIN content_type_facebook node_data_field_text ON node.vid = node_data_field_text.vid
 	 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
 	 WHERE (node.type in ('facebook', 'gmail', 'imap', 'twitter')) AND 
-	 (users.uid in ('1')) 
+	 (users.uid in ('".$user->uid."')) 
 	 AND (
-		((node_data_field_from.field_from_value) LIKE ('%toca%')) OR 
-		((node_data_field_imap_from.field_imap_from_value) LIKE ('%toca%')) OR
-		((node_data_field_imap_from.field_imap_subject_value) LIKE ('%toca%')) OR 
-		((node_data_field_from.field_subject_value) LIKE ('%toca%')) OR 
-		((node_data_field_text.field_text_value) LIKE ('%toca%')) OR 
-		((node_data_field_text.field_comments_value) LIKE ('%toca%')) OR 
-		((node_revisions.body) LIKE ('%toca%')) OR 
-		((node.title) LIKE ('%toca%')))
+		((node_data_field_from.field_from_value) LIKE ('%".$busqueda."%')) OR 
+		((node_data_field_imap_from.field_imap_from_value) LIKE ('%".$busqueda."%')) OR
+		((node_data_field_imap_from.field_imap_subject_value) LIKE ('%".$busqueda."%')) OR 
+		((node_data_field_from.field_subject_value) LIKE ('%".$busqueda."%')) OR 
+		((node_data_field_text.field_text_value) LIKE ('%".$busqueda."%')) OR 
+		((node_data_field_text.field_comments_value) LIKE ('%".$busqueda."%')) OR 
+		((node_revisions.body) LIKE ('%".$busqueda."%')) OR 
+		((node.title) LIKE ('%".$busqueda."%')))
 	");
 	
 	while($nid=db_fetch_object($result)){
