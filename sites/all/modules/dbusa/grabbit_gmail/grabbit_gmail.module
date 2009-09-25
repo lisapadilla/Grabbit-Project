@@ -449,7 +449,8 @@ function grabbit_gmail_crear($user=1){
     if($gmail['lastime']){
 	  $time=$gmail['lastime'];
     }else{
-	  $time=$yesterday;
+	  drupal_set_message('You have a Gmail account with grabbit. Please '.l('import','user/'.$user.'/add_gmail').' your emails here (you will not see this message after the import)');
+	  exit;
     }
   
 	$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
