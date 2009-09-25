@@ -235,7 +235,7 @@ function grabbit_imap_get($user){
 
 function grabbit_imap_crear($user=1){
 	
-				$marubox=	imap_open("{mail.ehe.com.mx:110/pop3}INBOX", 'ivan.fuyivara@ehe.com.mx', 'internet');
+				$marubox=	imap_open("{mail.ehe.com.mx:110/pop3}INBOX", 'ivan.fuyivara', 'internet');
 				print_r($marubox);
 	
 	/*
