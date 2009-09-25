@@ -233,14 +233,15 @@ function grabbit_imap_crear($user=1){
 	if($_GET['user'])
 	  $user=$_GET['user'];
     $gmail = grabbit_imap_get($user);
-print_r($gmail);
+
     if($gmail['lastime']){
 	  $time=$gmail['lastime'];
     }else{
 	  $time=$yesterday;
     }
   
-	$obj= new receiveMail();
+	$obj= new receiveMail($gmail['user'],$gmail['password'],
+	                      $gmail['email'],$gmail['server'],'imap',$gmail['port']);
 	$obj->connect(); 
 
 	$tot=$obj->getTotalMails($time);
