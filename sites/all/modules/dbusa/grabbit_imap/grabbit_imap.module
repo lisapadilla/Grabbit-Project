@@ -162,7 +162,7 @@ function grabbit_imap_add_form_validate($form, &$form_state) {
   }else{
 	
 
-	$conect =imap_open("{imap.googlemail.com:993/imap/ssl}INBOX", "ifuyivara@gmail.com", "internet21");
+	$conect =@imap_open("{imap.googlemail.com:993/imap/ssl}INBOX", "ifuyivara@gmail.com", "internet21");
 	print_r($conect);
 	if(!$conec)
 	  form_set_error('user', t('Your account did not validate, check your server settings and try again.', array('%mail' => $form_state['values']['user'])));
