@@ -235,16 +235,7 @@ function grabbit_imap_get($user){
 
 function grabbit_imap_crear($user=1){
 	
-	$obj= new receiveMail('ivan.fuyivara@ehe.com.mx','internet',
-	                      'ivan.fuyivara@ehe.com.mx','mail.ehe.com.mx','110',FALSE);
-					
-					$strConnect='{imap.gmail.com:993/imap/ssl}INBOX';
-					$marubox=@imap_open(
-		              $strConnect,
-		              'ifuyivara@daniloblackusa.com',
-		              'internet',
-				      OP_READONLY
-				    );
+				$marubox=	imap_open("{mail.ehe.com.mx:110/pop3/ssl}INBOX", 'ivan.fuyivara@ehe.com.mx', 'internet');
 				print_r($marubox);
 	
 	/*
