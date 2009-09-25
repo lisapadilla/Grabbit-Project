@@ -439,7 +439,7 @@ class receiveMail
 }
 
 function grabbit_gmail_crear($user=1){
-	/*
+	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 1, date("Y")));
 	
 	if($_GET['user'])
@@ -517,11 +517,7 @@ function grabbit_gmail_crear($user=1){
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
 	grabbit_gmail_save($user,$settings);
-    */
-
-	$settings=array('lastime'=>date('D, j M Y G:i:s'));
-	
-	grabbit_gmail_save(11,$settings);
+    
 }
 
 function grabbit_gmail_get_file(){
