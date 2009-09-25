@@ -238,10 +238,10 @@ function grabbit_panels_source_form($form,$panel_id){
 			'#default_value' => $panels['show_gmail']
 		    );
 		
-			$form['show_smtp'] = array(
+			$form['show_imap'] = array(
 			    '#type'=> 'checkbox',
-				'#title' => t('Show SMTP'),
-				'#default_value' => $panels['show_SMTP']
+				'#title' => t('Show IMAP'),
+				'#default_value' => $panels['show_imap']
 			    );
 	
 	$form['blogs'] = array(
@@ -334,6 +334,12 @@ function grabbit_panels_source_create_form($form,$panel_id){
 			'#title' => t('Show Gmail'),
 			'#default_value' => $panels['show_gmail']
 		    );
+		
+				$form['show_imap'] = array(
+				    '#type'=> 'checkbox',
+					'#title' => t('Show IMAP'),
+					'#default_value' => $panels['show_imap']
+				    );
 	
 	$form['blogs'] = array(
 	    '#type'=> 'checkbox',
