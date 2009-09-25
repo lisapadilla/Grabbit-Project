@@ -1328,7 +1328,7 @@ function theme_imap_message($comments,$node){
 						
 	$image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$gmail_image.'"/></span>'; 
 
-	$submitted ='<p>From: '.$node->field_imap_from.'</p>
+	$submitted ='<p>From: '.$node->field_imap_from[0]['value'].'</p>
 	             <p>Source: '.l('IMAP','node/'.$node->nid).'</p>';
 	
 	$comments_output = '<div class="news-comments">';
