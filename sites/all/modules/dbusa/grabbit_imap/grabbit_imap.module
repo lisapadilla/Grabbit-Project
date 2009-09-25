@@ -162,7 +162,7 @@ function grabbit_imap_add_form_validate($form, &$form_state) {
   }else{
 	
 
-	$conect = 	=@imap_open(
+	$conect =@imap_open(
         '{imap.gmail.com:993/imap/ssl}INBOX',
         'ifuyivara@daniloblackusa.com',
         'internet',
