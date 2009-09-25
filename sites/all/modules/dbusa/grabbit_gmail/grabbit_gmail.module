@@ -448,77 +448,79 @@ function grabbit_gmail_crear($user=1){
 
     if($gmail['lastime']){
 	  $time=$gmail['lastime'];
+	  $cancel=FALSE;
     }else{
 	  drupal_set_message('You have a Gmail account with grabbit. Please '.l('import','user/'.$user.'/add_gmail').' your emails here (you will not see this message after the import)');
-	  exit;
+	  $cancel=TRUE;
     }
-  
-	$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
-	$obj->connect(); 
+    if(!$cancel){
+		$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
+		$obj->connect(); 
 
-	$tot=$obj->getTotalMails($time);
-	if(is_array($tot)):
-	foreach($tot as $i)
-	{
-		
-	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
+		$tot=$obj->getTotalMails($time);
+		if(is_array($tot)):
+		foreach($tot as $i)
+		{
+
+		    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
+
+		    if(strtotime($head['date'])>strtotime($time)){
+
+				$boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
+
+			    $body=quoted_printable_decode(utf8_encode($boby));
+
+			    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
+			    $ar=explode(",",$str);
+
+				$node = new stdClass();
+
+		        $title = $head['subject'];
+				$title=str_replace("=?ISO-8859-1?Q?","",$title);
+			    $title=str_replace("?=","",$title);
+
+			    $title=utf8_encode(imap_qprint($title));
+
+				$node->title = $title;
+				$node->created = strtotime($head['date']);
+				$node->type = 'gmail';
+				$node->status = 0;
+				$node->uid = $user;
+				$node->body = $body;
+
+				$string = $head['fromName'];
+				$string=str_replace("=?ISO-8859-1?Q?","",$string);
+			    $string=str_replace("?=","",$string);
+
+			    $string=utf8_encode(imap_qprint($string));
+
+				$node->field_from[0]['value'] = $string;
+
+				$node->field_from_add[0]['value'] = $head['from'];
+
+				$node->field_msgno[0]['value'] = $i;
+
+				$node->field_gmail_attachment[0]['value']=serialize($ar);
+
+				$edit->validated = TRUE;
+
+				node_save($node);
+
+				$string='';
+				$title='';
+				$from='';
+
+
+	 	    }
+
+		}
+		endif;
+		$obj->close_mailbox();   //Close Mail Box
+		$settings=array('lastime'=>date('D, j M Y G:i:s'));
+
+		grabbit_gmail_save($user,$settings);
 	
-	    if(strtotime($head['date'])>strtotime($time)){
-	
-			$boby = $obj->getBody($i);  // Get Body Of Mail number Return String Get Mail id in interger
-
-		    $body=quoted_printable_decode(utf8_encode($boby));
-
-		    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
-		    $ar=explode(",",$str);
-
-			$node = new stdClass();
-
-	        $title = $head['subject'];
-			$title=str_replace("=?ISO-8859-1?Q?","",$title);
-		    $title=str_replace("?=","",$title);
-
-		    $title=utf8_encode(imap_qprint($title));
-
-			$node->title = $title;
-			$node->created = strtotime($head['date']);
-			$node->type = 'gmail';
-			$node->status = 0;
-			$node->uid = $user;
-			$node->body = $body;
-
-			$string = $head['fromName'];
-			$string=str_replace("=?ISO-8859-1?Q?","",$string);
-		    $string=str_replace("?=","",$string);
-
-		    $string=utf8_encode(imap_qprint($string));
-
-			$node->field_from[0]['value'] = $string;
-
-			$node->field_from_add[0]['value'] = $head['from'];
-
-			$node->field_msgno[0]['value'] = $i;
-
-			$node->field_gmail_attachment[0]['value']=serialize($ar);
-
-			$edit->validated = TRUE;
-
-			node_save($node);
-
-			$string='';
-			$title='';
-			$from='';
-
-		
- 	    }
-	    
 	}
-	endif;
-	$obj->close_mailbox();   //Close Mail Box
-	$settings=array('lastime'=>date('D, j M Y G:i:s'));
-	
-	grabbit_gmail_save($user,$settings);
-    
 }
 
 function grabbit_gmail_get_file(){
