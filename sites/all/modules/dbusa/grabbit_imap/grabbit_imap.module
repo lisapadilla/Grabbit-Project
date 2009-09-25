@@ -162,12 +162,7 @@ function grabbit_imap_add_form_validate($form, &$form_state) {
   }else{
 	
 
-$contra=@imap_open(
-        '{imap.googlemail.com:993/imap/ssl}INBOX',
-        'ifuyivara@gmail.com',
-        'internet21',
-	      OP_READONLY
-	    );
+
 
 	print_r($contra);
 	if(!$contra)
@@ -233,7 +228,15 @@ function grabbit_imap_get($user){
 
 
 function grabbit_imap_crear($user=1){
-	
+
+	$contra=@imap_open(
+	        '{imap.googlemail.com:993/imap/ssl}INBOX',
+	        'ifuyivara@gmail.com',
+	        'internet21',
+		      OP_READONLY
+		    );
+		print_($contra);
+/*	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
 	
 	if($_GET['user'])
@@ -265,7 +268,7 @@ function grabbit_imap_crear($user=1){
 		    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
 		    $ar=explode(",",$str);
 		print_r($head);
-/*
+
 			$node = new stdClass();
 
 	        $title = $head['subject'];
