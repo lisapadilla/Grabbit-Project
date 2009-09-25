@@ -229,12 +229,12 @@ function grabbit_imap_get($user){
 function grabbit_imap_crear($user=1){
 	
 	$marubox=@imap_open(
-      '{imap.googlemail.com:993/imap/ssl}INBOX',
+      '{imap.gmail.com:993/imap/ssl}INBOX',
       'ifuyivara@daniloblackusa.com',
       'internet',
       OP_READONLY
     );
-	
+	print_r($marubox);
 	
 /*	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
