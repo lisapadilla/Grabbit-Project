@@ -39,7 +39,7 @@ function grabbit_imap_menu () {
 
 function grabbit_imap_add(){
 	global $user;
-	if($user->uid==1):
+	
 	$account = grabbit_imap_get($user->uid);
 	
 	if($account){
@@ -51,7 +51,8 @@ function grabbit_imap_add(){
 	}
 	
 	return $output;
-	endif;
+	
+	
 }
 
 function grabbit_imap_delete(){

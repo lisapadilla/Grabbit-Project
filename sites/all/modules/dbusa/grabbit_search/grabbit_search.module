@@ -49,3 +49,73 @@ function grabbit_search_ajustes(){
 	}
 	
 }
+
+function grabbit_search_perform($busqueda){
+	
+	$result = db_query("SELECT node.nid AS nid
+	 FROM node node 
+	 INNER JOIN users users ON node.uid = users.uid
+	 LEFT JOIN content_type_gmail node_data_field_from ON node.vid = node_data_field_from.vid
+	 LEFT JOIN content_type_imap node_data_field_imap_from ON node.vid = node_data_field_imap_from.vid
+	 LEFT JOIN content_type_facebook node_data_field_text ON node.vid = node_data_field_text.vid
+	 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
+	 WHERE (node.type in ('facebook', 'gmail', 'imap', 'twitter')) AND 
+	 (users.uid in ('$user->uid')) 
+	 AND (
+		((node_data_field_from.field_from_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_imap_from.field_imap_from_value) LIKE ('%$busqueda%')) OR
+		((node_data_field_imap_from.field_imap_subject_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_from.field_subject_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_text.field_text_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_text.field_comments_value) LIKE ('%$busqueda%')) OR 
+		((node_revisions.body) LIKE ('%$busqueda%')) OR 
+		((node.title) LIKE ('%$busqueda%')))
+	");
+	
+	if(db_affected_rows($result)){
+		return $result;
+	}else{
+		return NULL;
+	}
+}
+
+function grabbit_search_page(){
+	
+	$term = arg(2);
+	if($term!=''){
+		if($result grabbit_search_perform($term)){
+            $output = grabbit_search_results($results);
+		}else{
+			$output = grabbit_search_no_results();
+		}
+	}
+	
+	return $output;
+}
+
+function grabbit_search_form($form){
+	$form['counter'] = array(
+	    '#type' => 'item',
+	    '#prefix'=>'<div id="description">',
+	    '#value' => 'You can perform a search of your grabbit stream, just type the keyword(s) below',
+	    '#suffix'=>'</div>'
+		 );	 
+	$form['searc'] = array(
+	    '#type' => 'textfield',
+	    '#title' => t('Search'),
+	    '#required' => TRUE,
+	    '#size' => 20
+	  );
+	  $form['submit'] = array(
+	    '#type' => 'submit',
+	    '#value' => t('Save'),
+	  ); 
+	
+	return $form;
+}
+
+function grabbit_search_form_validate($form, &$form_state) {
+	if (!$form_state['values']['search']) {
+	    form_set_error('search', t('You must enter a value to perform a search.');
+	  }
+}
