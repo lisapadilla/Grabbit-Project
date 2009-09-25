@@ -127,19 +127,19 @@ function grabbit_imap_open(){
 
 function theme_imap_mail($node){
 	
-	$attach=unserialize($node->field_gmail_attachment[0]['value']);
+	$attach=unserialize($node->field_imap_attachment[0]['value']);
 	if(is_array($attach)){
 		$num=2;
 		foreach ($attach as $key=>$value){
-			$attachments .='<br>Attachment: <a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a>';
+			$attachments .='<br>Attachment: <a href="'.base_path().'imap/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/imap/'.$num.'">'.$value.'</a>';
 			$num++;
 		}
 	}
 	
 	$output = '<div class="imap-body">
-	<span class="imap-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
-	<span class="imap-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
-	<span class="imap-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
+	<span class="imap-header"><strong>Subject: </strong></span><span class="imap-header-contains">'.$node->title.'</span><br>
+	<span class="imap-header"><strong>From: </strong></span><span class="imap-header-contains">'.$node->field_from[0]['value'].'</span><br>
+	<span class="imap-header"><strong>Date: </strong></span><span class="imap-header-contains">'.format_date($node->created).'</span><br><br>
 	<div class="imap-email">
 	'.$node->body.'
 	</div>
@@ -154,7 +154,7 @@ function theme_imap_mail($node){
 
 
 /**
- * gmail_connect_get_login_validate - validate the login form
+ * imap_connect_get_login_validate - validate the login form
  */
 function grabbit_imap_add_form_validate($form, &$form_state) {
   if (!valid_email_address($form_state['values']['user'])) {
@@ -228,15 +228,6 @@ function grabbit_imap_get($user){
 
 function grabbit_imap_crear($user=1){
 	
-	$marubox=@imap_open(
-      '{imap.gmail.com:993/imap/ssl}INBOX',
-      'ifuyivara@daniloblackusa.com',
-      'internet',
-      OP_READONLY
-    );
-	print_r($marubox);
-	
-/*	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
 	
 	if($_GET['user'])
@@ -267,8 +258,7 @@ function grabbit_imap_crear($user=1){
 
 		    $str=$obj->GetAttach($i,"./"); // Get attached File from Mail Return name of file in comma separated string  args. (mailid, Path to store file)
 		    $ar=explode(",",$str);
-		print_r($head);
-/*
+
 			$node = new stdClass();
 
 	        $title = $head['subject'];
@@ -279,7 +269,7 @@ function grabbit_imap_crear($user=1){
 
 			$node->title = $title;
 			$node->created = strtotime($head['date']);
-			$node->type = 'gmail';
+			$node->type = 'imap';
 			$node->status = 0;
 			$node->uid = $user;
 			$node->body = $body;
@@ -290,13 +280,13 @@ function grabbit_imap_crear($user=1){
 
 		    $string=utf8_encode(imap_qprint($string));
 
-			$node->field_from[0]['value'] = $string;
+			$node->field_imap_from[0]['value'] = $string;
 
-			$node->field_from_add[0]['value'] = $head['from'];
+			$node->field_imap_from_add[0]['value'] = $head['from'];
 
-			$node->field_msgno[0]['value'] = $i;
+			$node->field_imap_msgno[0]['value'] = $i;
 
-			$node->field_gmail_attachment[0]['value']=serialize($ar);
+			$node->field_imap_attachment[0]['value']=serialize($ar);
 
 			$edit->validated = TRUE;
 
@@ -305,16 +295,15 @@ function grabbit_imap_crear($user=1){
 			$string='';
 			$title='';
 			$from='';
-
-		
+			
  	    }
 	    
 	}
 	$obj->close_mailbox();   //Close Mail Box
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
-	grabbit_gmail_save($user,$settings);
-  */  
+	grabbit_imap_save($user,$settings);
+  
 }
 
 function grabbit_imap_get_file(){
