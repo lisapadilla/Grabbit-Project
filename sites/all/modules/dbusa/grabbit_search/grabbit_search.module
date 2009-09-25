@@ -83,7 +83,7 @@ function grabbit_search_page(){
 	
 	$term = arg(2);
 	if($term!=''){
-		if($result grabbit_search_perform($term)){
+		if($result =grabbit_search_perform($term)){
             $output = grabbit_search_results($results);
 		}else{
 			$output = grabbit_search_no_results();
@@ -118,4 +118,14 @@ function grabbit_search_form_validate($form, &$form_state) {
 	if (!$form_state['values']['search']) {
 	    form_set_error('search', t('You must enter a value to perform a search.');
 	  }
+}
+
+
+/**
+ * Save the data
+ */
+function grabbit_search_form_submit($form, &$form_state) {
+ 
+   $result grabbit_search_perform($term);
+
 }
