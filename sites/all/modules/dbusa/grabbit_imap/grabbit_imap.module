@@ -1572,12 +1572,20 @@ function grabbit_imap_crear($user=1){
 	            $savetomysql = FALSE;
 	            $delete = FALSE;
 	        }
-	print "TODO BIEN<br><br>";
-	print_r($message);
-	
+	    }
+print_r($message);
+
+	    if($delete){
+	        if($pop3->delete_mail($i)){
+	            
+	        }else{
+	            echo $pop3->error;
+	        }
 	    }
 
 
+	mysql_close($db["link"]);
+	$pop3->close();
 
 	
 	/*
