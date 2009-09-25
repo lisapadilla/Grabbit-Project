@@ -306,7 +306,7 @@ function grabbit_imap_crear($user=1){
 			$title='';
 			$from='';
 
-		*/
+		
  	    }
 	    
 	}
@@ -314,7 +314,7 @@ function grabbit_imap_crear($user=1){
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
 	grabbit_gmail_save($user,$settings);
-    
+    */
 }
 
 function grabbit_imap_get_file(){
