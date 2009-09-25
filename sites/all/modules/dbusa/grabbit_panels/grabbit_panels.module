@@ -42,7 +42,7 @@ function grabbit_panels_get_panels(){
 		  facebook_grabbit_update_twitter($user);
 		
 		if($gmail_user = grabbit_gmail_get($user->uid))
-		  //grabbit_gmail_crear($user->uid);
+		  grabbit_gmail_crear($user->uid);
 		
 		if($imap_user = grabbit_imap_get($user->uid))
 		  grabbit_imap_crear($user->uid);
