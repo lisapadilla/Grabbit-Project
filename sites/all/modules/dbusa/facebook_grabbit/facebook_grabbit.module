@@ -1271,7 +1271,7 @@ function theme_gmail_message($comments,$node){
 						
 	$image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$gmail_image.'"/></span>'; 
 
-	$submitted ='<p>From: '.$node->field_gmail_from[0]['value'].'</p>
+	$submitted ='<p>From: '.$node->field_from[0]['value'].'</p>
 	             <p>Source: '.l('Gmail','node/'.$node->nid).'</p>';
 	
 	$comments_output = '<div class="news-comments">';
