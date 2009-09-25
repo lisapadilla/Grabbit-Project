@@ -222,6 +222,8 @@ class receiveMail
                 {
                         if($port=='') $port='143';
                         $strConnect='{'.$mailserver.':'.$port. '}INBOX';
+print $strConnect;
+exit;
                 }
                 else if($servertype=='gmail')
                 {
