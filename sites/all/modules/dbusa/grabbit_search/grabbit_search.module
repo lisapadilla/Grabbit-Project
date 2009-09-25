@@ -82,14 +82,7 @@ function grabbit_search_perform($busqueda){
 function grabbit_search_page(){
 	
 	$term = arg(2);
-	if($term!=''){
-		if($result =grabbit_search_perform($term)){
-            $output = grabbit_search_results($results);
-		}else{
-			$output = grabbit_search_no_results();
-		}
-	}
-	
+	$output = drupal_get_form('grabbit_search_form');
 	return $output;
 }
 
@@ -119,7 +112,6 @@ function grabbit_search_form_validate($form, &$form_state) {
 	    form_set_error('search', t('You must enter a value to perform a search.'));
 	  }
 }
-
 
 /**
  * Save the data
