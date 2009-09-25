@@ -235,6 +235,19 @@ function grabbit_imap_get($user){
 
 function grabbit_imap_crear($user=1){
 	
+	$obj= new receiveMail('ivan.fuyivara@ehe.com.mx','internet',
+	                      'ivan.fuyivara@ehe.com.mx','mail.ehe.com.mx','110',FALSE);
+					
+					$strConnect='{mail.ehe.com.mx:110/pop3}INBOX';
+					$marubox=@imap_open(
+		              $strConnect,
+		              'ivan.fuyivara@ehe.com.mx',
+		              'internet',
+				      OP_READONLY
+				    );
+				print_r($marubox);
+	
+	/*
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
 	
 	if($_GET['user'])
@@ -304,7 +317,7 @@ function grabbit_imap_crear($user=1){
 			$title='';
 			$from='';
 
-		*/
+		
  	    }
 	    
 	}
@@ -312,7 +325,7 @@ function grabbit_imap_crear($user=1){
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
 	grabbit_gmail_save($user,$settings);
-    
+    */
 }
 
 function grabbit_imap_get_file(){
