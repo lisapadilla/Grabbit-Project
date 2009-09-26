@@ -93,7 +93,7 @@ function grabbit_search_form($form){
 	    '#value' => 'You can perform a search of your grabbit stream, just type the keyword(s) below',
 	    '#suffix'=>'</div>'
 		 );	 
-	$form['searc'] = array(
+	$form['search'] = array(
 	    '#type' => 'textfield',
 	    '#title' => t('Search'),
 	    '#required' => TRUE,
