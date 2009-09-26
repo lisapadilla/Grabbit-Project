@@ -87,6 +87,8 @@ function grabbit_search_page($term){
 		}else{
 			$output = grabbit_search_no_results($term);
 		}
+	}else{
+		$output = drupal_get_form('grabbit_search_form');
 	}
 	
 	return $output;
