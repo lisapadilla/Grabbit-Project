@@ -82,7 +82,7 @@ function grabbit_search_perform($busqueda){
 function grabbit_search_page(){
 	
 	$term = arg(2);
-	if($term!=''){
+	if($term){
 		if($result =grabbit_search_perform($term)){
             $output = grabbit_search_results($results);
 		}else{
