@@ -84,7 +84,7 @@ function grabbit_search_page(){
 	return $output;
 }
 
-function grabbit_search_custom_form($form){
+function grabbit_search_custom_form(){
 
 	$form['search'] = array(
 	    '#type' => 'textfield',
@@ -99,4 +99,3 @@ function grabbit_search_custom_form($form){
 	
 	return $form;
 }
-
