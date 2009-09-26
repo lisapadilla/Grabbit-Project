@@ -80,13 +80,35 @@ function grabbit_search_perform($busqueda){
 }
 
 function grabbit_search_page(){
-	$output = drupal_get_form('grabbit_search_custom_form');
+	
+	$term = arg(2);
+	if($term!=''){
+		if($result =grabbit_search_perform($term)){
+            $output = grabbit_search_results($results);
+		}else{
+			$output = grabbit_search_no_results($term);
+		}
+	}
+	
 	return $output;
 }
 
-function grabbit_search_custom_form(){
+function grabbit_search_no_results($term){
+	$output = drupal_get_form('grabbit_search_form');
+	
+	$output .='<div class="grabbit-search-empty">Your search did not match any results, please try again</div>';
+	
+	return $output;
+}
 
-	$form['search'] = array(
+function grabbit_search_form($form_state){
+	$form['counter'] = array(
+	    '#type' => 'item',
+	    '#prefix'=>'<div id="description">',
+	    '#value' => 'You can perform a search of your grabbit stream, just type the keyword(s) below',
+	    '#suffix'=>'</div>'
+		 );	 
+	$form['searc'] = array(
 	    '#type' => 'textfield',
 	    '#title' => t('Search'),
 	    '#required' => TRUE,
@@ -94,8 +116,24 @@ function grabbit_search_custom_form(){
 	  );
 	  $form['submit'] = array(
 	    '#type' => 'submit',
-	    '#value' => t('Search'),
+	    '#value' => t('Save'),
 	  ); 
 	
 	return $form;
+}
+
+function grabbit_search_form_validate($form, &$form_state) {
+	if (!$form_state['values']['search']) {
+	    form_set_error('search', t('You must enter a value to perform a search.'));
+	  }
+}
+
+
+/**
+ * Save the data
+ */
+function grabbit_search_form_submit($form, &$form_state) {
+ 
+   $result= grabbit_search_perform($term);
+
 }
