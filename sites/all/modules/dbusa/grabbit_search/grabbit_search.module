@@ -79,9 +79,8 @@ function grabbit_search_perform($busqueda){
 	}
 }
 
-function grabbit_search_page(){
+function grabbit_search_page($term){
 	
-	$term = arg(2);
 	if($term){
 		if($result =grabbit_search_perform($term)){
             $output = grabbit_search_results($results);
@@ -134,6 +133,6 @@ function grabbit_search_form_validate($form, &$form_state) {
  */
 function grabbit_search_form_submit($form, &$form_state) {
  
-   $result= grabbit_search_perform($term);
+   $result= grabbit_search_page($form_state['values']['search']);
 
 }
