@@ -100,18 +100,6 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 		
 		$types="'facebook', 'gmail', 'imap', 'twitter'";
 	}
-	
-	print_r("SELECT node.nid AS nid
-	 FROM node node 
-	 INNER JOIN users users ON node.uid = users.uid
-	 LEFT JOIN content_type_gmail node_data_field_from ON node.vid = node_data_field_from.vid
-	 LEFT JOIN content_type_imap node_data_field_imap_from ON node.vid = node_data_field_imap_from.vid
-	 LEFT JOIN content_type_facebook node_data_field_text ON node.vid = node_data_field_text.vid
-	 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
-	 WHERE (node.type in (".$types.")) AND 
-	 (users.uid in ('$user->uid')) 
-	 AND (".$filter.")
-	");
 
 	$result = db_query("SELECT node.nid AS nid
 	 FROM node node 
