@@ -176,7 +176,7 @@ function grabbit_search_form(&$form_state){
 	    '#size' => 20
 	  );
 	
-	$form['#action'] = url('grabbit/results');
+	$form['#action'] = url('private/results');
 	$form['#redirect'] = FALSE;
 	
 	$form['detailed'] = array(
