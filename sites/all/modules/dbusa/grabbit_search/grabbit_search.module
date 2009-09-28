@@ -17,8 +17,7 @@ function grabbit_search_menu () {
   );
 
   $items['grabbit/results'] = array( 
-    'page callback' => 'grabbit_search_page',
-    'page arguments' => $form_state['values']['search'], 
+    'page callback' => 'grabbit_search_page', 
     'access arguments' => array('access content')
   );
 
@@ -99,7 +98,7 @@ function grabbit_search_page($term=NULL){
 		$output = drupal_get_form('grabbit_search_form');
 	}
 	*/
-	print_r($term);
+	print_r($form_state['values']['search']);
 	$output='probano';
 	return $output;
 }
