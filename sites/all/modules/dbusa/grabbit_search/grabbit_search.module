@@ -13,12 +13,14 @@ function grabbit_search_menu () {
   $items['private/search'] = array( 
     'page callback' => 'drupal_get_form',
     'page arguments' => array('grabbit_search_custom_form'), 
-    'access arguments' => array('access content')
+    'access arguments' => array('access content'),
+    'title'=>'Search your Stream'
   );
 
   $items['private/results'] = array( 
     'page callback' => 'grabbit_search_custom_page', 
-    'access arguments' => array('access content')
+    'access arguments' => array('access content'),
+    'title'=>'Search your Stream'
   );
 
   return $items;
@@ -138,7 +140,7 @@ function grabbit_search_custom_page($term=NULL){
 function grabbit_search_no_results($term){
 	$output = drupal_get_form('grabbit_search_custom_form');
 	
-	$output .='<div class="grabbit-search-empty">Your search did not match any results, please try again</div>';
+	$output .='<div class="grabbit-search-empty">'.t('Your search did not match any results, please try again').'</div>';
 	
 	return $output;
 }
@@ -147,7 +149,7 @@ function grabbit_search_no_results($term){
 function grabbit_search_custom_results($results){
 	$output = drupal_get_form('grabbit_search_custom_form');
 	
-	$output .='<div class="grabbit-search-results"><span class="title"><h2>Search results:</h2></span>
+	$output .='<div class="grabbit-search-results"><span class="title"><h2>'.t('Search results').':</h2></span>
 	           <dl class="search-results node-results">';
 
 	while($nid = db_fetch_object($results)){

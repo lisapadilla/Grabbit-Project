@@ -23,12 +23,29 @@ function grabbit_panels_menu () {
     'page callback' => 'grabbit_panels_filters', 
     'access arguments' => array('access content')
   );
+
+  $items['panels/delete'] = array( 
+    'page callback' => 'grabbit_panels_delete', 
+    'access arguments' => array('access content')
+  );
+
   $items['stream/user'] = array( 
   'page callback' => 'grabbit_panels_get_panels', 
   'access arguments' => array('access content')
   );
 
   return $items;
+}
+
+function grabbit_panels_delete(){
+	global $user;
+	
+	if (!$_GET['panel'])
+	  return NULL;
+	
+	$panel = $_GET['panel'];
+	$result = db_query("DELETE FROM {grabbit_panels} WHERE uid = %d AND pid = %d",$user->uid,$panel);
+	print 1;
 }
 
 function grabbit_panels_get_panels(){
