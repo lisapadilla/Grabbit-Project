@@ -56,9 +56,9 @@ function grabbit_search_ajustes(){
 	
 }
 
-function grabbit_search_perform($busqueda){
+function grabbit_search_perform($busqueda,$filters){
 	global $user;
-	
+	print_r($filters);
 	$result = db_query("SELECT node.nid AS nid
 	 FROM node node 
 	 INNER JOIN users users ON node.uid = users.uid
@@ -89,7 +89,7 @@ function grabbit_search_perform($busqueda){
 function grabbit_search_page($term=NULL){
 	
 	if($_POST['search']){
-		if($result =grabbit_search_perform($_POST['search'])){
+		if($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
             $output = grabbit_search_results($result);
 		}else{
 			$output = grabbit_search_no_results($_POST['search']);
