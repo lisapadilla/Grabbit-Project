@@ -123,13 +123,6 @@ function grabbit_search_form($form_state){
 	return $form;
 }
 
-function grabbit_search_form_validate($form, &$form_state) {
-	if (!$form_state['values']['search']) {
-	    form_set_error('search', t('You must enter a value to perform a search.'));
-	  }
-}
-
-
 /**
  * Save the data
  */
