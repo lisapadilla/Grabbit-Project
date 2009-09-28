@@ -117,8 +117,9 @@ function grabbit_search_results($results){
 	           ';
 	print_r($results);
 	while($nid = db_fetch_object($results)){
+		
 		$node=node_load($nid);
-		print_r($node);
+		print_r($nid);
 		$output .= $node->title."<br><br>";
 	}
 	
