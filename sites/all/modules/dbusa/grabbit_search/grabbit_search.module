@@ -82,6 +82,8 @@ function grabbit_search_perform($busqueda){
 function grabbit_search_page($term=NULL){
 	
 	if($term){
+		print_r($term);
+		exit;
 		if($result =grabbit_search_perform($term)){
             $output = grabbit_search_results($results);
 		}else{
