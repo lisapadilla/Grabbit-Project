@@ -10,13 +10,13 @@ function grabbit_search_menu () {
     'access arguments' => array('access content')
   );
 
-  $items['grabbit/search'] = array( 
+  $items['private/search'] = array( 
     'page callback' => 'drupal_get_form',
     'page arguments' => array('grabbit_search_form'), 
     'access arguments' => array('access content')
   );
 
-  $items['grabbit/results'] = array( 
+  $items['private/results'] = array( 
     'page callback' => 'grabbit_search_page', 
     'access arguments' => array('access content')
   );
