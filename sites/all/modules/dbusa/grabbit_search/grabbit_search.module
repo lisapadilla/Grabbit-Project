@@ -124,7 +124,7 @@ function grabbit_search_custom_page($term=NULL){
 	
 	if($_POST['search']){
 		if($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
-            $output = grabbit_search_results($result);
+            $output = grabbit_search_custom_results($result);
 		}else{
 			$output = grabbit_search_no_results($_POST['search']);
 		}
@@ -144,7 +144,7 @@ function grabbit_search_no_results($term){
 }
 
 
-function grabbit_search_results($results){
+function grabbit_search_custom_results($results){
 	$output = drupal_get_form('grabbit_search_custom_form');
 	
 	$output .='<div class="grabbit-search-results"><span class="title"><h2>Search results:</h2></span>
