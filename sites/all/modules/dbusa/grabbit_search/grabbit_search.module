@@ -90,7 +90,7 @@ function grabbit_search_page($term=NULL){
 		$output = drupal_get_form('grabbit_search_form');
 	}
 	
-	return $output;
+	//return $output;
 }
 
 function grabbit_search_no_results($term){
