@@ -16,6 +16,12 @@ function grabbit_search_menu () {
     'access arguments' => array('access content')
   );
 
+  $items['grabbit/results'] = array( 
+    'page callback' => 'grabbit_search_page',
+    'page arguments' => $form_state['values']['search'], 
+    'access arguments' => array('access content')
+  );
+
   return $items;
 }
 
@@ -82,7 +88,7 @@ function grabbit_search_perform($busqueda){
 }
 
 function grabbit_search_page($term=NULL){
-	
+	/*
 	if($term){
 		if($result =grabbit_search_perform($term)){
             $output = grabbit_search_results($results);
@@ -92,7 +98,8 @@ function grabbit_search_page($term=NULL){
 	}else{
 		$output = drupal_get_form('grabbit_search_form');
 	}
-	
+	*/
+	print_r($term);
 	return $output;
 }
 
@@ -118,7 +125,7 @@ function grabbit_search_results($results){
 }
 
 function grabbit_search_form(&$form_state){
-print_r($form_state);
+ 
 	$form['counter'] = array(
 	    '#type' => 'item',
 	    '#prefix'=>'<div id="description">',
@@ -131,7 +138,11 @@ print_r($form_state);
 	    '#required' => TRUE,
 	    '#size' => 20
 	  );
-	  $form['submit'] = array(
+	
+	 $form['#action'] = url('zoek');
+	 $form['#redirect'] = FALSE;
+	
+	 $form['submit'] = array(
 	    '#type' => 'submit',
 	    '#value' => t('Save'),
 	  ); 
