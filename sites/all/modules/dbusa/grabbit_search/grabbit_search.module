@@ -153,9 +153,9 @@ function grabbit_search_custom_results($results){
 	while($nid = db_fetch_object($results)){
 		
 		$node=node_load($nid->nid);
-		$body =substr(strip_tags($node->body),0,150);
+		$body =substr(strip_tags($node->body),0,250);
 		$output .= '<dt class="title">'.l($node->title,"node/".$node->nid).'</dt><dd>
-		      <p class="search-snippet">'.$body.'</p>
+		      <p class="search-snippet">'.$body.'... <br></p>
 		      <p class="search-info">'.$node->type.' - '.format_date($node->created).'</p>
 		  </dd>';
 	}
