@@ -156,7 +156,7 @@ function grabbit_search_custom_results($results){
 		$body =substr(strip_tags($node->body),0,250);
 		if($node->field_text[0]['value'])
 		  $body =substr(strip_tags($node->field_text[0]['value']),0,250);
-		$output .= '<dt class="title">'.l($node->title,"node/".$node->nid).'</dt><dd>
+		$output .= '<br><dt class="title">'.l($node->title,"node/".$node->nid).'</dt><dd>
 		      <p class="search-snippet">'.$body.'... <br></p>
 		      <p class="search-info"><br>'.$node->type.' - '.format_date($node->created).'</p>
 		  </dd>';
