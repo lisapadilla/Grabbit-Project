@@ -17,7 +17,7 @@ function grabbit_search_menu () {
   );
 
   $items['private/results'] = array( 
-    'page callback' => 'grabbit_search_page', 
+    'page callback' => 'grabbit_search_custom_page', 
     'access arguments' => array('access content')
   );
 
@@ -120,7 +120,7 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 	}
 }
 
-function grabbit_search_page($term=NULL){
+function grabbit_search_custom_page($term=NULL){
 	
 	if($_POST['search']){
 		if($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
