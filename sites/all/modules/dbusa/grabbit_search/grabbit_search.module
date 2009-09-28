@@ -119,7 +119,7 @@ function grabbit_search_results($results){
 	while($nid = db_fetch_object($results)){
 		
 		$node=node_load($nid->nid);
-		$output .= $node->title."<br><br>";
+		$output .= node_view($node, TRUE);
 	}
 	
 	$output .='</div>';
