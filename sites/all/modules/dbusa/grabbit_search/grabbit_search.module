@@ -51,6 +51,7 @@ function grabbit_search_ajustes(){
 }
 
 function grabbit_search_perform($busqueda){
+	global $user;
 	
 	$result = db_query("SELECT node.nid AS nid
 	 FROM node node 
@@ -82,8 +83,6 @@ function grabbit_search_perform($busqueda){
 function grabbit_search_page($term=NULL){
 	
 	if($term){
-		print_r($term);
-		exit;
 		if($result =grabbit_search_perform($term)){
             $output = grabbit_search_results($results);
 		}else{
@@ -100,6 +99,23 @@ function grabbit_search_no_results($term){
 	$output = drupal_get_form('grabbit_search_form');
 	
 	$output .='<div class="grabbit-search-empty">Your search did not match any results, please try again</div>';
+	
+	return $output;
+}
+
+
+function grabbit_search_results($results){
+	$output = drupal_get_form('grabbit_search_form');
+	
+	$output .='<div class="grabbit-search-results"><span class="title"><h2>Search results:</h2></span>
+	           ';
+	
+	while($nid=db_fecth_object($results)){
+	  $node=node_load($nid);
+	  $output .=$node->title."<br>";	
+	}
+	
+	$output .='</div>';
 	
 	return $output;
 }
