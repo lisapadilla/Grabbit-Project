@@ -139,7 +139,7 @@ function grabbit_search_form(&$form_state){
 	    '#size' => 20
 	  );
 	
-	 $form['#action'] = url('zoek');
+	 $form['#action'] = url('grabbit/rsults');
 	 $form['#redirect'] = FALSE;
 	
 	 $form['submit'] = array(
