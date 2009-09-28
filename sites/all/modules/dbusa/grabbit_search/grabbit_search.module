@@ -53,25 +53,7 @@ function grabbit_search_ajustes(){
 function grabbit_search_perform($busqueda){
 	global $user;
 	
-	$result = db_query("SELECT node.nid AS nid
-	 FROM node node 
-	 INNER JOIN users users ON node.uid = users.uid
-	 LEFT JOIN content_type_gmail node_data_field_from ON node.vid = node_data_field_from.vid
-	 LEFT JOIN content_type_imap node_data_field_imap_from ON node.vid = node_data_field_imap_from.vid
-	 LEFT JOIN content_type_facebook node_data_field_text ON node.vid = node_data_field_text.vid
-	 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
-	 WHERE (node.type in ('facebook', 'gmail', 'imap', 'twitter')) AND 
-	 (users.uid in ('$user->uid')) 
-	 AND (
-		((node_data_field_from.field_from_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_imap_from.field_imap_from_value) LIKE ('%$busqueda%')) OR
-		((node_data_field_imap_from.field_imap_subject_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_from.field_subject_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_text.field_text_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_text.field_comments_value) LIKE ('%$busqueda%')) OR 
-		((node_revisions.body) LIKE ('%$busqueda%')) OR 
-		((node.title) LIKE ('%$busqueda%')))
-	");
+
 	
 	if(db_affected_rows($result)){
 		return $result;
