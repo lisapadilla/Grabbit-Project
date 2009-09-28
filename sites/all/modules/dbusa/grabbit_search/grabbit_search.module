@@ -144,4 +144,5 @@ function grabbit_search_form_submit($form, &$form_state) {
  
   // $result= grabbit_search_page($form_state['values']['search']);
   $result = 'lgun proc';
+return $result;
 }
