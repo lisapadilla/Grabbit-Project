@@ -110,10 +110,6 @@ function grabbit_search_results($results){
 	$output .='<div class="grabbit-search-results"><span class="title"><h2>Search results:</h2></span>
 	           ';
 	
-	while($nid=db_fecth_object($results)){
-	  $node=node_load($nid);
-	  $output .=$node->title."<br>";	
-	}
 	
 	$output .='</div>';
 	
