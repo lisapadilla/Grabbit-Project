@@ -87,20 +87,17 @@ function grabbit_search_perform($busqueda){
 }
 
 function grabbit_search_page($term=NULL){
-	/*
-	if($term){
-		if($result =grabbit_search_perform($term)){
+	
+	if($_POST['search']){
+		if($result =grabbit_search_perform($_POST['search'])){
             $output = grabbit_search_results($results);
 		}else{
-			$output = grabbit_search_no_results($term);
+			$output = grabbit_search_no_results($_POST['search']);
 		}
 	}else{
 		$output = drupal_get_form('grabbit_search_form');
 	}
-	*/
-	print_r($form_state);
-	print_r($_POST);
-	$output='probano';
+	
 	return $output;
 }
 
@@ -119,6 +116,11 @@ function grabbit_search_results($results){
 	$output .='<div class="grabbit-search-results"><span class="title"><h2>Search results:</h2></span>
 	           ';
 	
+	while($nid = db_fetch_object($results)){
+		$node=node_load($nid);
+		
+		$output = $node->title."<br><br>";
+	}
 	
 	$output .='</div>';
 	
