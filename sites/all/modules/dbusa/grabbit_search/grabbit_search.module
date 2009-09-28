@@ -157,7 +157,7 @@ function grabbit_search_custom_results($results){
 		$output .= '<dt class="title">'.l($node->title,"node/".$node->nid).'</dt><dd>
 		      <p class="search-snippet">'.$body.'</p>
 		      <p class="search-info">'.$node->type.' - '.format_date($node->created).'</p>
-		  </dd>'
+		  </dd>';
 	}
 	
 	$output .='</dl></div>';
