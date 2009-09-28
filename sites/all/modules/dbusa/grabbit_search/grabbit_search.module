@@ -142,15 +142,34 @@ function grabbit_search_form(&$form_state){
 	    '#size' => 20
 	  );
 	
-	 $form['#action'] = url('grabbit/results');
-	 $form['#redirect'] = FALSE;
+	$form['#action'] = url('grabbit/results');
+	$form['#redirect'] = FALSE;
 	
-	 $form['submit'] = array(
-	    '#type' => 'submit',
-	    '#value' => t('Save'),
-	  ); 
+	$form['detailed'] = array(
+	  '#type' => 'fieldset',
+	  '#title' => t('Advanced Search'),
+	  '#weight' => 5,
+	  '#collapsible' => TRUE,
+	  '#collapsed' => TRUE,
+	);
+	
+	$form['detailed']['details'] = array(
+	  '#type' => 'checkboxes',
+	  '#title' => t('Search only in')
+	  '#options' => array(
+	    'facebook' => t('Facebook'),
+	    'twitter' => t('Twitter'),
+	    'gmail' => t('Gmail'),
+	    'imap' => t('IMAP'),
+	    'RSS' => t('RSS feeds'),
+	  ),
+	  '#description' => t('You can filter your search by selecting one or more sources. Leave all unchecked to search all.'),
+	);
+	
+	$form['submit'] = array(
+	  '#type' => 'submit',
+	  '#value' => t('Search'),
+	); 
 	
 	return $form;
 }
-
- 
