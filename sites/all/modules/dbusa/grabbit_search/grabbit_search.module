@@ -155,7 +155,7 @@ function grabbit_search_form(&$form_state){
 	
 	$form['detailed']['details'] = array(
 	  '#type' => 'checkboxes',
-	  '#title' => t('Search only in')
+	  '#title' => t('Search only in'),
 	  '#options' => array(
 	    'facebook' => t('Facebook'),
 	    'twitter' => t('Twitter'),
