@@ -450,7 +450,7 @@ function theme_panels($private_view,$id,$name){
 	
 		$output .= '</div>
 	             <div class="panel-wraper">
-	             		<a href="javascript:void(0)" class="panel-closer"></a>
+	             		<a href="javascript:void(0)" panelid="'.$id.'" class="panel-closer"></a>
 	             		'.$private_view.'</div>
 	           </div>';
 	           
