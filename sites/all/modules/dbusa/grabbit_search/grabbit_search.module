@@ -118,7 +118,7 @@ function grabbit_search_results($results){
 }
 
 function grabbit_search_form(&$form_state){
-
+print_r($form_state);
 	$form['counter'] = array(
 	    '#type' => 'item',
 	    '#prefix'=>'<div id="description">',
