@@ -10,8 +10,9 @@ function grabbit_search_menu () {
     'access arguments' => array('access content')
   );
 
-  $items['grabbit/search/go'] = array( 
-    'page callback' => 'grabbit_search_page', 
+  $items['grabbit/search'] = array( 
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('grabbit_search_form'), 
     'access arguments' => array('access content')
   );
 
@@ -117,11 +118,11 @@ function grabbit_search_results($results){
 }
 
 function grabbit_search_form($form_state){
-	print_r($form_state);
+
 	$form['counter'] = array(
 	    '#type' => 'item',
 	    '#prefix'=>'<div id="description">',
-	    '#value' => 'You can perform a search of your grabbit stream, just type the keyword(s) below',
+	    '#value' => t('You can perform a search of your grabbit stream, just type the keyword(s) below'),
 	    '#suffix'=>'</div>'
 		 );	 
 	$form['search'] = array(
