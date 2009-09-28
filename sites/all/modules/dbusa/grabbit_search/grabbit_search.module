@@ -12,7 +12,7 @@ function grabbit_search_menu () {
 
   $items['private/search'] = array( 
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('grabbit_search_form'), 
+    'page arguments' => array('grabbit_search_custom_form'), 
     'access arguments' => array('access content')
   );
 
@@ -129,14 +129,14 @@ function grabbit_search_custom_page($term=NULL){
 			$output = grabbit_search_no_results($_POST['search']);
 		}
 	}else{
-		$output = drupal_get_form('grabbit_search_form');
+		$output = drupal_get_form('grabbit_search_custom_form');
 	}
 	
 	return $output;
 }
 
 function grabbit_search_no_results($term){
-	$output = drupal_get_form('grabbit_search_form');
+	$output = drupal_get_form('grabbit_search_custom_form');
 	
 	$output .='<div class="grabbit-search-empty">Your search did not match any results, please try again</div>';
 	
@@ -145,7 +145,7 @@ function grabbit_search_no_results($term){
 
 
 function grabbit_search_results($results){
-	$output = drupal_get_form('grabbit_search_form');
+	$output = drupal_get_form('grabbit_search_custom_form');
 	
 	$output .='<div class="grabbit-search-results"><span class="title"><h2>Search results:</h2></span>
 	           ';
@@ -161,7 +161,7 @@ function grabbit_search_results($results){
 	return $output;
 }
 
-function grabbit_search_form(&$form_state){
+function grabbit_search_custom_form(&$form_state){
  
 	$form['counter'] = array(
 	    '#type' => 'item',
