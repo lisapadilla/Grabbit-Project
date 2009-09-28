@@ -56,9 +56,51 @@ function grabbit_search_ajustes(){
 	
 }
 
-function grabbit_search_perform($busqueda,$filters){
+function grabbit_search_perform($busqueda,$filters=NULL){
 	global $user;
-	print_r($filters);
+	
+	if($filters){
+		$types=array();
+		$filter="((node_revisions.body) LIKE ('%$busqueda%')) OR 
+		((node.title) LIKE ('%$busqueda%'))";
+		
+		if($filters['facebook']){
+		  $filter .="((node_data_field_text.field_text_value) LIKE ('%$busqueda%')) OR 
+		             ((node_data_field_text.field_comments_value) LIKE ('%$busqueda%')) OR";
+		  $types[]="'facebook'";
+		}
+		if($filters['twitter']){
+		  $types[]="'twitter'";
+		}
+		
+		if($filters['gmail']){
+		  $filter .="((node_data_field_from.field_subject_value) LIKE ('%$busqueda%')) OR
+		             ((node_data_field_from.field_from_value) LIKE ('%$busqueda%')) OR ";
+		  $types[]="'gmail'";
+		}
+		if($filters['imap']){
+		  $filter .="((node_data_field_imap_from.field_imap_from_value) LIKE ('%$busqueda%')) OR
+			((node_data_field_imap_from.field_imap_subject_value) LIKE ('%$busqueda%')) OR";
+	      $types[]="'imap'";
+	    }
+		if($filters['RSS'])
+		  $fil=' ';
+		
+		$types=implode(",",$types);
+		
+	}else{
+		$filter="((node_data_field_from.field_from_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_imap_from.field_imap_from_value) LIKE ('%$busqueda%')) OR
+		((node_data_field_imap_from.field_imap_subject_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_from.field_subject_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_text.field_text_value) LIKE ('%$busqueda%')) OR 
+		((node_data_field_text.field_comments_value) LIKE ('%$busqueda%')) OR 
+		((node_revisions.body) LIKE ('%$busqueda%')) OR 
+		((node.title) LIKE ('%$busqueda%'))";
+		
+		$types="'facebook', 'gmail', 'imap', 'twitter'";
+	}
+
 	$result = db_query("SELECT node.nid AS nid
 	 FROM node node 
 	 INNER JOIN users users ON node.uid = users.uid
@@ -66,17 +108,9 @@ function grabbit_search_perform($busqueda,$filters){
 	 LEFT JOIN content_type_imap node_data_field_imap_from ON node.vid = node_data_field_imap_from.vid
 	 LEFT JOIN content_type_facebook node_data_field_text ON node.vid = node_data_field_text.vid
 	 LEFT JOIN node_revisions node_revisions ON node.vid = node_revisions.vid
-	 WHERE (node.type in ('facebook', 'gmail', 'imap', 'twitter')) AND 
+	 WHERE (node.type in (".$types.")) AND 
 	 (users.uid in ('$user->uid')) 
-	 AND (
-		((node_data_field_from.field_from_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_imap_from.field_imap_from_value) LIKE ('%$busqueda%')) OR
-		((node_data_field_imap_from.field_imap_subject_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_from.field_subject_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_text.field_text_value) LIKE ('%$busqueda%')) OR 
-		((node_data_field_text.field_comments_value) LIKE ('%$busqueda%')) OR 
-		((node_revisions.body) LIKE ('%$busqueda%')) OR 
-		((node.title) LIKE ('%$busqueda%')))
+	 AND (".$filter.")
 	");
 	
 	if(db_affected_rows($result)){
