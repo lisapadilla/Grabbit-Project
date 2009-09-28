@@ -117,6 +117,7 @@ function grabbit_search_results($results){
 }
 
 function grabbit_search_form($form_state){
+	print_r($form_state);
 	$form['counter'] = array(
 	    '#type' => 'item',
 	    '#prefix'=>'<div id="description">',
@@ -137,12 +138,4 @@ function grabbit_search_form($form_state){
 	return $form;
 }
 
-/**
- * Save the data
- */
-function grabbit_search_form_submit($form, &$form_state) {
  
-  // $result= grabbit_search_page($form_state['values']['search']);
-  $result = 'lgun proc';
-return $result;
-}
