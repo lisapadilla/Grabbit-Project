@@ -73,7 +73,7 @@ function grabbit_panels_get_panels(){
 	$panel_1 = facebook_grabbit_private_view_panel(0);	
 	
 	if ($user->uid > 0){
-		
+		$unique=0;
 		$output .= theme_panels($panel_1,0,"Main Stream");
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
@@ -82,12 +82,15 @@ function grabbit_panels_get_panels(){
 		           </div><div class="user-panels">';
 		           		           
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
-		if(db_affected_rows($all_panels)){
+		if($total_u=db_affected_rows($all_panels)){
+			if($total_u==1)
+			  $unique=1;
+			
 			while($panel = db_fetch_object($all_panels)){
 			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
 				$panel_settings=unserialize($settings->config);
 			    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
-			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name']);	
+			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 			}	
 		}else{
 			$panel_2 = facebook_grabbit_private_view_panel(1);
@@ -434,8 +437,11 @@ function grabbit_panels_tags_form($form,$panel_id){
 }
 
 
-function theme_panels($private_view,$id,$name){
+function theme_panels($private_view,$id,$name,$unique){
     global $user;
+
+    if($unique!=1)
+      $clooser='<a href="javascript:void(0)" panelid="'.$id.'" class="panel-closer"></a>';
 
     if(!$name)
       $name="Panel ".$id;
@@ -450,7 +456,7 @@ function theme_panels($private_view,$id,$name){
 	
 		$output .= '</div>
 	             <div class="panel-wraper">
-	             		<a href="javascript:void(0)" panelid="'.$id.'" class="panel-closer"></a>
+	             		'.$clooser.'
 	             		'.$private_view.'</div>
 	           </div>';
 	           
