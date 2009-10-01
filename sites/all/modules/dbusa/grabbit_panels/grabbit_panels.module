@@ -69,6 +69,8 @@ function grabbit_panels_get_panels(){
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/pagers.css', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
 	
 	$panel_1 = facebook_grabbit_private_view_panel(0);	
 	
@@ -437,7 +439,7 @@ function grabbit_panels_tags_form($form,$panel_id){
 }
 
 
-function theme_panels($private_view,$id,$name,$unique){
+function theme_panels($private_view,$id,$name,$unique=0){
     global $user;
 
     if($unique!=1)
@@ -471,6 +473,7 @@ function theme_panels($private_view,$id,$name,$unique){
 	            
 	  $output .='</div>
 	             		<div class="panel-wraper">'.$private_view.'</div>
+	            
 	           	 </div>';
 	}
 	             

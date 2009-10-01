@@ -269,6 +269,7 @@ $(document).ready(function() {
 				$(document).scrollTo(scroll,100);
 				$("#edit-status").focus();
 				$('#edit-RT').val(1);
+				pageTracker._trackPageview(myurl);
 	        }
 	    );
 	 

@@ -244,8 +244,9 @@ function grabbit_imap_crear($user=1){
 	$obj= new receiveMail($gmail['user'],$gmail['password'],
 	                      $gmail['email'],$gmail['server'],'imap',$gmail['port']);
 	$obj->connect(); 
-
-	$tot=$obj->getTotalMails($time);
+    $tot=array();
+	if($obj->getTotalMails($time))
+	  $tot=$obj->getTotalMails($time);
 	
 	foreach($tot as $i)
 	{

@@ -9,12 +9,36 @@ function grabbit_statistics_menu () {
     'page callback' => 'grabbit_statistics_statistics', 
     'access arguments' => array('access content')
   );
+
+  $items['admin/custom/detail/deals'] = array( 
+    'page callback' => 'grabbit_statistics_detail_deals', 
+    'access arguments' => array('access content')
+  );
+
   $items['statistics/save/deal'] = array( 
     'page callback' => 'grabbit_statistics_save_deal', 
     'access arguments' => array('access content')
   );
 
   return $items;
+}
+
+function grabbit_statistics_detail_deals(){
+	$us=arg(4);
+	$users=user_load(array('uid'=>$us));
+	
+	$output = '<div class="user-details">This are the deals that the user '.$users->name.' has clicked:</div>';
+	$result = db_query("SELECT * FROM {grabbit_statistics} WHERE uid=%d AND type='deal'",$us);	
+    
+    $header = array(t('Deal URL'), 
+                    t('Deal price'));
+    $rows = array();
+    while($deals=db_fetch_object($result)){
+	  $row=array( $deals->extra, $deals->number );
+	  $rows[]=$row; 
+    }
+    $output .= theme('table', $header, $rows,array('class' => 'deals-table'));
+	return $output;
 }
 
 function grabbit_statistics_statistics(){
@@ -64,7 +88,7 @@ function grabbit_statistics_members_and_friends(){
 	                 $total_post, 
 	                 $total_post_today,
 	                 $today_friends,
-	                 $deals);
+	                 l($deals,'admin/custom/detail/deals/'.$requester->uid));
 	  $rows[]=$row;
 	}
 	
