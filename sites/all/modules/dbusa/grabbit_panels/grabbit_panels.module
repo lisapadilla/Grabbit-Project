@@ -440,6 +440,7 @@ function grabbit_panels_tags_form($form,$panel_id){
 
 
 function theme_panels($private_view,$id,$name,$unique=0){
+	
     global $user;
 
     if($unique!=1)
