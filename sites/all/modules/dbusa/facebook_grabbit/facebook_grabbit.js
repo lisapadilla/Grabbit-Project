@@ -47,7 +47,7 @@ function display_items(panel){
 				current_panel.show();
 			}			
 		}
-		$(document).scrollTo(scroll_to,1000,{axis:'y'});
+	
 	}else{
 		current_panel.parent().next().html('There\'s no more posts');
 	}
