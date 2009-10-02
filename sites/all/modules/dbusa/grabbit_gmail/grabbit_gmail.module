@@ -585,6 +585,7 @@ class receiveMail
 function grabbit_gmail_crear($user=1){
 	
 	$yesterday = date('D, j M Y');
+	set_time_limit(0);
 
 	if($_GET['user'])
 	  $user=$_GET['user'];
