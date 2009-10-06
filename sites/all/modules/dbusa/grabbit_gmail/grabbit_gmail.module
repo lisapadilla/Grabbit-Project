@@ -654,9 +654,6 @@ function grabbit_gmail_crear($user=1){
 			$title='';
 			$from='';
 
-		    if(!$gmail['lastime']){
-              $bar->increase(); //calls the bar with every processed element
-		    }
  	    }
 	    
 	}
