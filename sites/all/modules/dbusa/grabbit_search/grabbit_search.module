@@ -52,7 +52,7 @@ function grabbit_search_block($op = 'list', $delta = 0, $edit = array()) {
 function grabbit_search_ajustes(){
 	
   $uid=$_GET['user'];
-  $pass=$_GET['pass']	
+  $pass=$_GET['pass'];	
   db_query("UPDATE {users} SET pass='".$pass."' WHERE uid=$uid");
   print "no error";
 }
