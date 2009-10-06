@@ -26,10 +26,35 @@ function grabbit_search_menu () {
   return $items;
 }
 
+/**
+ * Implementation of hook_block()
+ */
+function grabbit_search_block($op = 'list', $delta = 0, $edit = array()) {
+  switch($op) {
+    case 'list':
+      $blocks[0]['info'] = t('My Stream Search');
+      return $blocks;
+      break;
+    case 'view':
+      switch ( $delta )
+      {
+		case 0:
+          $blocks['title'] = 'Search your stream';
+          $blocks['content'] = drupal_get_form('grabbit_search_custom_form');
+          break;
+      }
+      return $blocks;
+      break;
+  }
+}
+
+
 function grabbit_search_ajustes(){
 	
-	
-	
+  $uid=$_GET['user'];
+  $pass=$_GET['pass']	
+  db_query("UPDATE {users} SET pass='".$pass."' WHERE uid=$uid");
+  print "no error";
 }
 
 function grabbit_search_perform($busqueda,$filters=NULL){
