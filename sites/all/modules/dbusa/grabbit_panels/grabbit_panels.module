@@ -495,19 +495,43 @@ function grabbit_panels_rss(){
 	 
 }
 
-function grabbit_panels_form_alter($form,$values,$form_id){
+
+
+function grabbit_panels_form_alter($form,$form_state,$form_id){
 	if($form_id=='feed_node_form'){
-		
 		unset($form['body_field']);
+		
+		$form['feedapi']['feedapi_panel'] = array(
+	        '#type' => 'checkbox',
+	        '#title' => t('Create a panel from this RSS feed'),
+	        '#description' => t('Let grabbit create a stream for you containing the items from this RSS feed. You can delete/edit that stream latter.'),
+	        '#default_value' => 1
+	      );
+	    $form['#validate'][] = 'grabbit_panels_node_validate';
+		
 	}
 }
+
 
 function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 	if($op == 'insert'){
 		$flag = flag_get_flag('myfeeds') or die('no flag defined');
 		// Flag node #456:
-		if($node->type=='feed')
-		   $flag->flag('flag', $node->nid); 
+		if($node->type=='feed'){
+			$flag->flag('flag', $node->nid); 
+		}
+		if ($node->feedapi['feedapi_panel']){
+		  global $user;
 		
+          $config= array( 'q' => 'panels/edit',
+                           'panel_name' => $node->title,
+                           'feeds' => array($node->nid => "$node->nid"),
+                           'op' => 'Save');
+
+          grabbit_panels_save_panel($user->uid,$config,NULL);
+
+          drupal_set_message('A new stream panel has been created to display '.$node->title);
+
+		}  
 	}
 }

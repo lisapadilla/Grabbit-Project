@@ -516,6 +516,7 @@ function feedapi_form_alter(&$form, $form_state, $form_id) {
     else {
       $form['feedapi']['feedapi_url'] = array(
         '#type' => 'textfield',
+        '#required'=>TRUE,
         '#title' => t('Feed URL'),
         '#description' => t('Enter feed URL.'),
         '#default_value' => $feedapi_url_default,
@@ -589,7 +590,7 @@ function feedapi_node_validate($form, &$form_state) {
 
   // Validate and transform settings for submission.
   if (empty($form_state['values']['feedapi']['feedapi_url']) && !$has_upload) {
-    form_set_error('source', t('The Feed URL or uploading a file is required.'));
+    form_set_error('source', t('The Feed URL is required.'));
   }
   else {
     if ($has_upload) {

@@ -137,6 +137,10 @@ function friendlist_access_form_alter(&$form, $form_state, $form_id) {
   if ($form_id != $form['type']['#value'] .'_node_form') {
     return;
   }
+  // Avoid the access fields in creating feeds
+  if($form_id=='feed_node_form'){
+    return;	
+  }
 
   $form['friendlist_access'] = array(
     '#type'         => 'fieldset',
