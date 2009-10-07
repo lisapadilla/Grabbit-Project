@@ -520,8 +520,8 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 		if($node->type=='feed'){
 			$flag->flag('flag', $node->nid); 
 		}
-		print_r($node->feedapi);
-		if ($node->feedapi){
+		
+		if ($node->feedapi['feedapi_panel']){
 		  global $user;
 		
           $config= array( 'q' => 'panels/edit',
