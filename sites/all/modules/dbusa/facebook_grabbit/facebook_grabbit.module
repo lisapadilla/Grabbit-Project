@@ -1229,7 +1229,11 @@ function _news_theme($comments,$node){
 	  if($source_image = facebook_grabbit_get_images($node->body)){
 		 $image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/></span>'; 
 	    }else{
-		 $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $rss->title).'</span>';
+		  if($rss->field_rss_logo[0]['filepath']){
+		    $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $rss->field_rss_logo[0]['filepath'], $rss->title).'</span>';	
+		  }else{
+			$image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', 'sites/default/files/imagefield_default_images/blue-rss-button.png', $rss->title).'</span>';
+		  }
 	    }
 	  $submitted ='<p>Source: <a title="View original article" target="_blank" href="'.$node->feedapi_node->url.'">'.$rss->title.'</a></p>';
 	}
