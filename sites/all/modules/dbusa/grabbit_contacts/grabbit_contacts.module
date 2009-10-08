@@ -17,8 +17,7 @@ function grabbit_contacts_menu () {
 }
 
 function grabbit_contacts_add($edit,$nombre){
-	print_r($edit);
-  //  $result = db_query("INSERT INTO {grabbit_contacts} (uid, mail, name) VALUES (%d, '%s', '%s')", $edit['inviter']->uid, $edit['email'], $nombre);
+  $result = db_query("INSERT INTO {grabbit_contacts} (uid, mail, name) VALUES (%d, '%s', '%s')", $edit->inviter->uid, $edit->email, $nombre);
 }
 
 function grabbit_contacts_list(){
