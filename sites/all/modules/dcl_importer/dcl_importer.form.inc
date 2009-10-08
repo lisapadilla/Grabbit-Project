@@ -260,7 +260,7 @@ function _dcl_importer_form_contacts(&$form, &$form_state, $new, $existing) {
  * function afterwards.
  */
 function _dcl_importer_new_contacts_form($contacts) {
-	print_r($contacts);
+	
   $contact_actions = _dcl_importer_invoke_import_action('contact_actions', array_keys($contacts));
 //  if (empty($contact_actions)) {
 //    return array();
@@ -415,6 +415,6 @@ function theme_dcl_importer_new_contacts($form) {
   }
   $output .= theme('table', $header, $rows, array('class' => 'new_dcl_contacts'));
   $output .= drupal_render($form);
-
+  unset($_SESSION['dcl_contacts_new']);
   return $output;
 }
