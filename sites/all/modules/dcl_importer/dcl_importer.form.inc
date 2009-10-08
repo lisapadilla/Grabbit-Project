@@ -33,7 +33,7 @@ function dcl_importer_simple_form($form_state) {
     // The "Get Contacts" button was pressed, so let's render the contacts
     list($new, $existing) = dcl_importer_api_split_users($imported_emails);
     list($new, $existing) = _dcl_importer_session_contacts($new, $existing);
-    _dcl_importer_form_contacts($form, $form_state, $new, $existing=array());
+    _dcl_importer_form_contacts($form, $form_state, $new, $existing);
   }
 
   return $form;
@@ -275,7 +275,8 @@ function _dcl_importer_new_contacts_form($contacts) {
    // $form['mail'][$id] = array('#value' => $contact['mail']);
    // $form['name'][$id] = array('#value' => $contact['name']);
   }
-
+print_r($form);
+print_r($contacts);
   foreach($contacts as $contact){
 	if(!is_numeric($contact["mail"])){
 		$options[$contact['mail']]="";
