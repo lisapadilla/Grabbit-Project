@@ -61,7 +61,6 @@ function dcl_importer_invite_import_action($op, $a2, $a3 = NULL) {
     case 'submit':
       $form = $a2;
       $form_state = $a3;
-      print_r($form['contacts']['new']['name'][$email]);
       $contacts = $form_state['values']['new_contacts'];
       // Remove all contacts that weren't selected
       $contacts = array_filter($contacts);
@@ -81,6 +80,7 @@ function dcl_importer_invite_import_action($op, $a2, $a3 = NULL) {
       $subject = invite_get_subject();
       $message = $form_state['values']['message'];
       foreach ($contacts as $email => $contact) {
+print_r($contact);
         _dcl_importer_invite_send($email, $from, $subject, $message);
       }
       
