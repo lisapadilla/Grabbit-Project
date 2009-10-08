@@ -79,8 +79,9 @@ function dcl_importer_invite_import_action($op, $a2, $a3 = NULL) {
       
       $subject = invite_get_subject();
       $message = $form_state['values']['message'];
+print_r($contacts);
       foreach ($contacts as $email => $contact) {
-print_r($contact);
+print_r($email);
         _dcl_importer_invite_send($email, $from, $subject, $message);
       }
       
