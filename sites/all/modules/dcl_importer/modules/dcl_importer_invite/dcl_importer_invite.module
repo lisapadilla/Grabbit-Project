@@ -61,7 +61,7 @@ function dcl_importer_invite_import_action($op, $a2, $a3 = NULL) {
     case 'submit':
       $form = $a2;
       $form_state = $a3;
-      print_r($form['contacts']['new']['name'][$email]['#value']);
+      print_r($form['contacts']['new']['name']);
       $contacts = $form_state['values']['new_contacts'];
       // Remove all contacts that weren't selected
       $contacts = array_filter($contacts);
