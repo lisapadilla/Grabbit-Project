@@ -105,9 +105,11 @@ function facebook_grabbit_update_form($form_state){
 		$facebook = new FacebookDesktop($api_key, $secret);
 		
 		$facebook->set_user($suser, $session_key);
-		
-		$status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
-		
+		try{
+		  $status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
+		}catch(FacebookRestClientException $e){
+			$e;
+		}
 		if ($facebook){
 		  
 		  $form['facebook']= array(
@@ -355,9 +357,11 @@ function _get_current_user_info($params=array()){
 			
 	$facebook = new FacebookDesktop($api_key, $secret);
 	$facebook->set_user($suser, $session_key);
-	
-	$user_details = $facebook->api_client->users_getInfo($suser, $params);      
-	
+	try{
+	  $user_details = $facebook->api_client->users_getInfo($suser, $params);      
+	}catch(FacebookRestClientException $e){
+		$e;
+	}
 	if ($user_details){
 		if ($_GET["params"]){ // Return it in param1,param2,etc to split it in jQuery and manipulate data
 			// The last index contains the uid, BE CAREFUL it returns values in alphabetical order no matter which you gave it.
@@ -1515,7 +1519,7 @@ function facebook_grabbit_update_facebook($user){
 	
 	  }
     }catch(FacebookRestClientException $e){
-	    print_r("Facebook API request exeded");
+	    drupal_set_message("Ooops! you exeeded the facebook api calls, try again latter.","error");
     }
 	
 	
