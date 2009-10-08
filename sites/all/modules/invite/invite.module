@@ -461,6 +461,8 @@ function _invite_accept($invite, $account) {
   _invite_escalate_role($account);
   // Unblock user account.
   db_query("UPDATE {users} SET status = 1 WHERE uid = %d", $account->uid);
+  // Add friend request from all the users who invited this email account.
+  friendlist_api_relation_add($invite->uid, $account->uid, 1, "Now that you have joined Grabbit lets be friends!!!");
 }
 
 /**

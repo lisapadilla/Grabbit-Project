@@ -1539,13 +1539,19 @@ function facebook_grabbit_update_twitter($user){
 		$twitterObj->setToken($token['token'], $token['secret']);
 
 		$tweets = $twitterObj->get_statusesFriends_timeline($timeline);
-
+$shit = getrusage();
+print_r($shit);
+print "<br><br>";
 		if($tweets->response[0]){
         $last=$tweets->response[0]['id'];
 		grabbit_users_save($user->uid,$last,'twitter_timing');
-		
+		$shit = getrusage();
+		print_r($shit);
+		print "<br><br>";
 		  foreach ($tweets->response as $arreglo){
-			
+			$shit = getrusage();
+			print_r($shit);
+			print "<br><br>";
 			$message = (object)$arreglo;
 			$time = strtotime($message->created_at);
 			$key = (string)$message->id;
