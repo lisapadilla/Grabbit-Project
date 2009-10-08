@@ -268,6 +268,7 @@ function _dcl_importer_new_contacts_form($contacts) {
   $form['#theme'] = 'dcl_importer_new_contacts';
   
   $options = array();
+print_r($contact_actions);
   foreach ($contact_actions as $action) {
     $contact = $contacts[$action['mail']];
     $id = $contact['mail'];
@@ -275,8 +276,7 @@ function _dcl_importer_new_contacts_form($contacts) {
    // $form['mail'][$id] = array('#value' => $contact['mail']);
    // $form['name'][$id] = array('#value' => $contact['name']);
   }
-print_r($form);
-print_r($contacts);
+
   foreach($contacts as $contact){
 	if(!is_numeric($contact["mail"])){
 		$options[$contact['mail']]="";
