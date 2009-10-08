@@ -15,8 +15,9 @@ function grabbit_facebook_account($account){
 		$session_key=$fuser->kid;
 		
 		$facebook = new FacebookDesktop($api_key, $secret);
+		$facebook->set_user($suser, $session_key);
 		try{
-		  $facebook->set_user($suser, $session_key);
+		  
 		  $user_details = $facebook->api_client->users_getInfo($suser, 'last_name, first_name, pic_square '); 
 
 		  $output = '<div class="facebook-details">You have a facebook account with grabbit:
@@ -24,7 +25,7 @@ function grabbit_facebook_account($account){
 		            <div class="facebook-details-pic"><img src="'.$user_details[0]['pic_square'].'" /></div>
 		           </div>';
 		}catch(FacebookRestClientException $e){
-		  $output = "Your facebook session ID is no longer valid, please try to delete the Grabbit application from your facebook account and install it again from grabbit.net";
+		  $output ="There was a problem with your current facebook account. Please try to ".l('re-install','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank')))." it (remember that you first need to delete the application from your facebook account.)";
 		}
 	}else{
 		
