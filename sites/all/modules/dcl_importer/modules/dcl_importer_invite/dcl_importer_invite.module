@@ -80,9 +80,7 @@ function dcl_importer_invite_import_action($op, $a2, $a3 = NULL) {
       $subject = invite_get_subject();
       $message = $form_state['values']['message'];
       foreach ($contacts as $email => $contact) {
-	
-	      print_r($form['contacts']['new']['name'][$email]['#value']);
-        _dcl_importer_invite_send($email, $from, $subject, $message);
+        _dcl_importer_invite_send($email, $from, $subject, $message, $form['contacts']['new']['name'][$email]['#value']);
       }
       
       break;
@@ -90,7 +88,7 @@ function dcl_importer_invite_import_action($op, $a2, $a3 = NULL) {
 }
 
 // Most of this is taken out of invite_form_submit
-function _dcl_importer_invite_send($email, $from, $subject, $message) {
+function _dcl_importer_invite_send($email, $from, $subject, $message,$name) {
   global $language;
   
   $code = invite_generate_code();
@@ -107,6 +105,9 @@ function _dcl_importer_invite_send($email, $from, $subject, $message) {
   
   // Save invite.
   invite_save($invite);
+
+  //save contact info  
+  grabbit_contacts_add($invite,$name);
 
   // Notify other modules.
   $args = array('inviter' => $invite->inviter, 'email' => $invite->email, 'code' => $invite->code);
