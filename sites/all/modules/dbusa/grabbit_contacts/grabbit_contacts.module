@@ -1,0 +1,73 @@
+<?
+//$Id$
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_contacts_menu () {
+
+  $items['user/%user/vew_contacts'] = array(
+   'title' => 'Contacts',
+   'description' => t('These are the contacts you imported/invited from other networks/emails.'),
+   'page callback' => 'grabbit_contacts_list',
+   'access arguments' => array('access content'),
+   'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+function grabbit_contacts_add($edit,$nombre){
+    $result = db_query("INSERT INTO {grabbit_contacts} (uid, mail, name) VALUES (%d, '%s', '%s')", $edit['inviter']->uid, $edit['email'], $nombre);
+}
+
+function grabbit_contacts_list(){
+	$account = arg(1);
+	$now = time();
+	  $status_sort = '';
+	  if (isset($_GET['order']) && $_GET['order'] == t('Status')) {
+	    $sort = db_escape_string($_GET['sort']);
+	    if ($_GET['sort'] == 'asc') {
+	      $status_sort = "IF(i.joined != 0, 0, 1) $sort, IF(i.expiry < $now, 0, 1) $sort, i.canceled";
+	    }
+	    else {
+	      $status_sort = "i.canceled $sort, IF(i.expiry < $now, 0, 1) $sort, IF(i.joined != 0, 0, 1)";
+	    }
+	  }
+	  $header = array(
+	    array('data' => t('E-mail'), 'field' => 'i.email', 'sort' => 'asc'),
+	    array('data' => t('Username'), 'field' => 'if(u.name IS NULL, 0, 1) DESC, u.name'),
+	    array('data' => t('Created'), 'field' => 'i.created'),
+	    array('data' => t('Status'), 'field' => $status_sort),
+	  );
+
+	  $output = '';
+	  $filter = $filter_args = NULL;
+	  if (isset($_GET['filter']) && $_GET['filter'] != '') {
+	    $filter = " AND LOWER(u.name) LIKE '%s%%'";
+	    $filter_args = $_GET['filter'];
+	    $output .= drupal_get_form('invite_admin_details_filter_form', $account, $_GET['filter']);
+	  }
+	  $sql  = "SELECT i.email, i.invitee AS uid, u.name, i.created, i.expiry, i.joined, i.canceled FROM {invite} i LEFT JOIN {users} u ON u.uid = i.invitee AND u.uid <> 0 WHERE i.uid = %d". $filter;
+	  $sql .= tablesort_sql($header);
+	  $result = pager_query($sql, 50, 0, NULL, $account, $filter_args);
+	  $rows = array();
+
+	  while ($row = db_fetch_object($result)) {
+	    $cells = array();
+	    $cells[] = check_plain($row->email);
+	    $cells[] = $row->joined ? theme('username', $row) : '';
+	    $cells[] = format_date($row->created, 'custom', 'Y-m-d');
+	    $cells[] = $row->canceled ? t('Withdrawn') : ($row->joined ? t('Joined') : ($row->expiry < $now ? t('Expired') : t('Pending')));
+	    $rows[] = $cells;
+	  }
+
+	  $output .= theme('table', $header, $rows, array('id' => 'invite'));
+	  if (!$rows) {
+	    $output .= t('No invitees found.');
+	  }
+	  else {
+	    $output .= theme('pager', array(), 50, 0);
+	  }
+	
+	return $output;
+}
