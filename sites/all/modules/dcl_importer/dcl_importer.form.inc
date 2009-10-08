@@ -266,7 +266,7 @@ function _dcl_importer_new_contacts_form($contacts) {
 //  }
 
   $form['#theme'] = 'dcl_importer_new_contacts';
-
+  $contacts=array();
   
   $options = array();
   foreach ($contact_actions as $action) {
