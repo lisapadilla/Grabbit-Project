@@ -22,11 +22,11 @@ function grabbit_contacts_add($edit,$nombre){
 
 function grabbit_contacts_have_contacts($user){
 	$result = db_query("SELECT * from {grabbit_contacts} where uid=%d",$user);
-	print_r(db_affected_rows($result));
+	
 	if (db_affected_rows($result)){
 		return TRUE;
 	}else{
-		return true;
+		return FALSE;
 	}
 }
 
@@ -43,7 +43,7 @@ function grabbit_contacts_mail($key, &$message, $params) {
   $language = $message['language'];
   $variables = user_mail_tokens($params['contact'], $language);
   switch($key) {
-    case 'notice':
+    case 'update':
     $message['subject'] = t('Status update from !site', $variables, $language->language);
     $message['body'][] = t("Your buddy has updated his/her status on grabbit, 
                             you received this notification because you are a grabbit contact, Join grabbit to receive this notifications on grabbit.net!.
