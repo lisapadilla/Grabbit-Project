@@ -47,7 +47,9 @@ function grabbit_contacts_mail($key, &$message, $params) {
     case 'update':
     $message['subject'] = t('Status update from '.$params['user'].' on Grabbit.net');
     $message['body'][] = t("The user ".$params['user']." has updated his/her status on grabbit, 
-                            you received this notification because you are a grabbit contact, ".l('Join Grabbit', 'user', array('absolute'=>TRUE))." to receive this notifications on grabbit.net!.
+                            you received this notification because you are a grabbit contact, 
+
+                            Join Grabbit http://daniloblackusa.net/grabbit/use to receive this notifications on grabbit.net!.
 
                             ".$params['message']);
   break;
