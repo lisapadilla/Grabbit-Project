@@ -31,12 +31,13 @@ function grabbit_contacts_have_contacts($user){
 }
 
 function grabbit_contacts_send_messages($user,$message){
-	$sql  = db_query("SELECT i.email, i.invitee AS uid, u.name, i.created, i.expiry, i.joined, i.canceled, c.name AS names, c.mail FROM {invite} i LEFT JOIN {users} u ON (u.uid = i.invitee AND u.uid <> 0) LEFT JOIN {grabbit_contacts} c ON c.mail=i.email WHERE i.uid = %d AND i.joined=''",$user);
+	
+	$sql  = db_query("SELECT i.email, i.invitee AS uid, u.name, i.created, i.expiry, i.joined, i.canceled FROM {invite} i LEFT JOIN {users} u ON (u.uid = i.invitee AND u.uid <> 0) WHERE i.uid = %d AND i.joined=''",$user->uid);
 	while($contact = db_fetch_object($sql)){
 		$params['contact'] = $contact;
 		$params['message'] = $message;
+		$params['user'] = $user->name;
 		drupal_mail('grabbit_contacts', 'update', $contact->email, user_preferred_language($user), $params);
-		print_r($contact);
 	}
 }
 
@@ -44,9 +45,9 @@ function grabbit_contacts_mail($key, &$message, $params) {
 
   switch($key) {
     case 'update':
-    $message['subject'] = t('Status update from !site');
-    $message['body'][] = t("Your buddy has updated his/her status on grabbit, 
-                            you received this notification because you are a grabbit contact, Join grabbit to receive this notifications on grabbit.net!.
+    $message['subject'] = t('Status update from '.$params['user'].' on Grabbit.net');
+    $message['body'][] = t("The user ".$params['user']." has updated his/her status on grabbit, 
+                            you received this notification because you are a grabbit contact, ".l('Join Grabbit', 'user', array('absolute'=>TRUE))." to receive this notifications on grabbit.net!.
 
                             ".$params['message']);
   break;
