@@ -35,20 +35,20 @@ function grabbit_contacts_send_messages($user,$message){
 	while($contact = db_fetch_object($sql)){
 		$params['contact'] = $contact;
 		$params['message'] = $message;
-		drupal_mail('grabbit_contacts', 'update', $contact->email, user_preferred_language($account), $params);
+		drupal_mail('grabbit_contacts', 'update', $contact->email, user_preferred_language($user), $params);
+		print_r($contact);
 	}
 }
 
 function grabbit_contacts_mail($key, &$message, $params) {
-  $language = $message['language'];
-  $variables = user_mail_tokens($params['contact'], $language);
+
   switch($key) {
     case 'update':
-    $message['subject'] = t('Status update from !site', $variables, $language->language);
+    $message['subject'] = t('Status update from !site');
     $message['body'][] = t("Your buddy has updated his/her status on grabbit, 
                             you received this notification because you are a grabbit contact, Join grabbit to receive this notifications on grabbit.net!.
 
-                            ".$params['message'], $variables, $language->language);
+                            ".$params['message']);
   break;
   }
 }
