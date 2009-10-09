@@ -1686,3 +1686,8 @@ a.truncate_hide{
 .block-search{
 	padding-top: 8px !important;
 }
+
+#edit-contacts-wrapper{
+	float:left;
+	width:100px;
+}

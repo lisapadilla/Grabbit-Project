@@ -20,6 +20,41 @@ function grabbit_contacts_add($edit,$nombre){
   $result = db_query("INSERT INTO {grabbit_contacts} (uid, mail, name) VALUES (%d, '%s', '%s')", $edit->inviter->uid, $edit->email, $nombre);
 }
 
+function grabbit_contacts_have_contacts($user){
+	$result = db_query("SELECT * from {grabbit_contacts} where uid=%d",$user);
+	print_r(db_affected_rows($result));
+	if (db_affected_rows($result)){
+		return TRUE;
+	}else{
+		return true;
+	}
+}
+
+function grabbit_contacts_send_messages($user,$message){
+	$sql  = db_query("SELECT i.email, i.invitee AS uid, u.name, i.created, i.expiry, i.joined, i.canceled, c.name AS names, c.mail FROM {invite} i LEFT JOIN {users} u ON (u.uid = i.invitee AND u.uid <> 0) LEFT JOIN {grabbit_contacts} c ON c.mail=i.email WHERE i.uid = %d AND i.joined=''",$user);
+	while($contact = db_fetch_object($sql)){
+		$params['contact'] = $contact;
+		$params['message'] = $message;
+		drupal_mail('grabbit_contacts', 'update', $contact->email, user_preferred_language($account), $params);
+	}
+}
+
+function grabbit_contacts_mail($key, &$message, $params) {
+  $language = $message['language'];
+  $variables = user_mail_tokens($params['contact'], $language);
+  switch($key) {
+    case 'notice':
+    $message['subject'] = t('Status update from !site', $variables, $language->language);
+    $message['body'][] = t("Your buddy has updated his/her status on grabbit, 
+                            you received this notification because you are a grabbit contact, Join grabbit to receive this notifications on grabbit.net!.
+
+                            ".$params['message'], $variables, $language->language);
+  break;
+  }
+}
+
+
+
 function grabbit_contacts_list(){
 	$account = arg(1);
 	$now = time();

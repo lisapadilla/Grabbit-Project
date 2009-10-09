@@ -142,7 +142,23 @@ function facebook_grabbit_update_form($form_state){
 		$tw=FALSE;
 	}
 	
-	if($tw || $fb){
+	$contacts = grabbit_contacts_have_contacts($user->uid);
+
+	if($contacts){
+		$ct=TRUE;
+		
+        $form['contacts']= array(
+		'#type' => 'checkbox',
+		'#default_value' => 0,
+		'#title'=>'Contacts (email)',
+		'#weight'=>6
+		);
+	}
+	else{
+		$ct=FALSE;
+	}
+	
+	if($tw || $fb || $ct){
 		$form['status'] = array(
 		    '#type' => 'textarea',
 		    '#size' => 60,
@@ -229,6 +245,13 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	     }
 		
 	}
+	
+	if($form_state['values']['contacts']){
+		global $user;
+		grabbit_contacts_send_messages($user,$form_state['values']['status']);
+		
+	}
+	
 	global $user;
 	if($_POST['RT'])
 	  grabbit_statistics_post_entry($user->uid,'RT');
