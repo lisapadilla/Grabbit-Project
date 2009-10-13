@@ -91,5 +91,65 @@ function grabbit_favorites_facebook_trash(){
 	$id=$_GET['id'];
     db_query("INSERT INTO {grabbit_trash} (uid,type,id) VALUES (%d, '%s', '%s')",$uid,$type,$id);	
     $result = TRUE;
+    $node = node_load($id);
+    $terms=taxonomy_node_get_terms_by_vocabulary($node, 3, $key = 'tid');
+    grabbit_favorites_tags_fav($user->uid,$terms,$action='del');
     return "all OK";
+}
+
+function grabbit_favorites_flag($action, $flag, $content_id, $account) {
+  
+   if ($flag->name == 'bookmarks') {      
+
+      if ($action == 'unflag') {
+        $node = node_load($content_id);
+        $terms=taxonomy_node_get_terms_by_vocabulary($node, 3, $key = 'tid');
+
+        grabbit_favorites_tags_fav($account->uid,$terms,'del');
+
+      }
+      if ($action == 'flag') {
+	    $node = node_load($content_id);
+        $terms=taxonomy_node_get_terms_by_vocabulary($node, 3, $key = 'tid');
+
+        grabbit_favorites_tags_fav($account->uid,$terms,'add');        
+
+      }
+   }
+}
+
+function grabbit_favorites_tags_fav($account,$terms,$action='add'){
+	$profile = content_profile_load('profile', $account);
+	if($profile){
+		switch($action){
+			case 'add':
+			
+			  $tax = $profile->taxonomy;
+			  $taxonomy = $tax + $terms;
+			  $tags=array();
+			
+			  foreach($taxonomy as $tax) {
+			    $taks .= $tax->name .', ';
+			  }
+			
+			  $tags=$taxonomy;
+			
+			  taxonomy_node_save($profile,$tags);
+			
+			break;
+			case 'del':
+			
+			  $taxo = $profile->taxonomy;
+			  foreach($terms as $key => $term){
+			    unset($taxo[$key]);	
+			  }
+			 
+			  $tags=$taxo;
+
+			  taxonomy_node_save($profile,$tags);
+			
+			break;
+		}
+		
+	}
 }
