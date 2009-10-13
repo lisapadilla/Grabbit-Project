@@ -19,6 +19,15 @@ function grabbit_panels_menu () {
    'type' => MENU_LOCAL_TASK,
   );
 
+  $items['user/%user/import_rss'] = array(
+   	'title' => 'Import OPML',
+    'access arguments' => array('access content'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('feedapi_import_opml'),
+    'file' => 'feedapi.opml.inc',
+   'type' => MENU_LOCAL_TASK,
+  );
+
   $items['panels/filters'] = array( 
     'page callback' => 'grabbit_panels_filters', 
     'access arguments' => array('access content')
@@ -36,6 +45,7 @@ function grabbit_panels_menu () {
 
   return $items;
 }
+
 
 function grabbit_panels_delete(){
 	global $user;
