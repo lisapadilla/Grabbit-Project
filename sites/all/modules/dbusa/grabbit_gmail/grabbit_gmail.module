@@ -626,7 +626,7 @@ function grabbit_gmail_crear($user=1){
 
 		    $title=utf8_encode(imap_qprint($title));
 
-			$node->title = $title;
+			$node->title = str_replace('_',' ',$title);
 			$node->created = strtotime($head['date']);
 			$node->type = 'gmail';
 			$node->status = 0;
