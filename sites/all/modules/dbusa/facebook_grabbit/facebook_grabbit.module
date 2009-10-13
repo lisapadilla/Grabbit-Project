@@ -488,7 +488,9 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
 	      if($media['type'] =="video"){
-		    $attachment .='<span class="facebook-attach-video">Video: <br><a href="'.$media['href'].'" target="_blank"><img src="'.$media['src'].'" width="100" /></a></span>';
+		    $attachment .='<span class="facebook-attach-video"><br>
+		                   '.swf($media['video']['source_url'], array('params' => array('width' => '230', 'height'=>'200'),'flashvars'=>array('image'=>$media['src']))).'
+		                   </span>';
 	      }
 		}
     }
