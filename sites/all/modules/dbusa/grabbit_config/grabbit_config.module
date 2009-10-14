@@ -94,12 +94,9 @@ function grabbit_config_cron_time() {
   static $time_limit;
 
   if (!$time_limit) {
-    $time_limit = time() + (variable_get('feedapi_cron_percentage', 15) / 100) * ini_get('max_execution_time');
+    $time_limit = time() + 15 / 100) * ini_get('max_execution_time');
     // However, check for left time, maybe some other cron processing already occured
-    $cron_semaphore = variable_get('cron_semaphore', 0);
-    if ($cron_semaphore) {
-      $time_limit = min($time_limit, $cron_semaphore + ini_get('max_execution_time'));
-    }
+    
     timer_start('grabbit_config_cron');
   }
   return max($time_limit - time(), 0);
