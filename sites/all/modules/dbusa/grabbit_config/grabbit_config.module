@@ -36,29 +36,3 @@ function grabbit_config_get_uid($user){
 
   return $user;
 }
-
-/**
- * Implementation of hook_cron().
- */
-function grabbit_config_cron() {
-  global $user;
-
-}
-
-/**
- * Check for time limits in cron processing.
- *
- * @return
- *   Number of seconds left, zero if none.
- */
-function grabbit_config_cron_time() {
-  static $time_limit;
-
-  if (!$time_limit) {
-    $time_limit = time() + (15 / 100) * ini_get('max_execution_time');
-    // However, check for left time, maybe some other cron processing already occured
-    
-    timer_start('grabbit_config_cron');
-  }
-  return max($time_limit - time(), 0);
-}
