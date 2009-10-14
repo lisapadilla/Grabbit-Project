@@ -178,9 +178,9 @@ global $user;
         <?php endif; ?>
 
         <div id="content-area">
-          <?php if ($messages): ?>
-            <?php print $messages; ?>
-          <?php endif; ?>
+          <?php //if ($messages): ?>
+            <?php //print $messages; ?>
+          <?php //endif; ?>
           <?php if ($title): ?>
             <h1 class="title"><?php print $title; ?></h1>
           <?php endif; ?>

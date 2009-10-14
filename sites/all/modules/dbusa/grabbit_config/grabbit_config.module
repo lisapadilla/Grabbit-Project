@@ -1,6 +1,10 @@
 <?
 //$Id$
- 
+ // Number of feeds to process for each step in cron.
+define('GRABBIT_CRON_FEEDS', 500);
+// Default time that should elapse before a feed can be refreshed again on cron.
+define('GRABBIT_CRON_DEFAULT_REFRESH_TIME', 1800);
+
 function grabbit_config_save_config($user,$config){
   $check = grabbit_config_get_uid($user);
 
@@ -31,4 +35,72 @@ function grabbit_config_get_uid($user){
   }
 
   return $user;
+}
+
+/**
+ * Implementation of hook_cron().
+ */
+function grabbit_config_cron() {
+  global $user;
+
+  // Saves the currently logged in user and start safe impersonating
+  $original_user = $user;
+  session_save_session(FALSE);
+    $last_procesed = variable_get('last_procesed',0);
+    $result = db_query("SELECT * FROM {users} where uid > %d",$last_procesed);
+    $process = db_affected_rows($result);
+    $count = 0;
+
+    while ($guser = db_fetch_object($result)) {
+	  if(grabbit_config_cron_time()){
+	  	$last_procesed = $guser->uid;
+	      $user = user_load(array('uid' => $guser->uid));
+	      // Call the refresh process for each feed and store counters
+	      if($user->uid>0){
+			if($fuser = facebook_grabbit_get_fid($user->uid))
+			  facebook_grabbit_update_facebook($user);
+
+			if($twitter_account = oauth_twitter_get_uid($user->uid))
+			  facebook_grabbit_update_twitter($user);
+
+			if($gmail_user = grabbit_gmail_get($user->uid))
+			  grabbit_gmail_crear($user->uid);
+
+			if($imap_user = grabbit_imap_get($user->uid))
+			  grabbit_imap_crear($user->uid);
+
+	        $count++;
+		  }
+		  if($count!=$process){
+		    variable_set('last_procesed', $last_procesed);	
+		  }else{
+		    variable_set('last_procesed', 0);	
+		  }	
+	  }
+    }
+print $last_procesed;
+  // Loads back the logged in user
+  $user = $original_user;
+  session_save_session(TRUE);
+}
+
+/**
+ * Check for time limits in cron processing.
+ *
+ * @return
+ *   Number of seconds left, zero if none.
+ */
+function grabbit_config_cron_time() {
+  static $time_limit;
+
+  if (!$time_limit) {
+    $time_limit = time() + (variable_get('feedapi_cron_percentage', 15) / 100) * ini_get('max_execution_time');
+    // However, check for left time, maybe some other cron processing already occured
+    $cron_semaphore = variable_get('cron_semaphore', 0);
+    if ($cron_semaphore) {
+      $time_limit = min($time_limit, $cron_semaphore + ini_get('max_execution_time'));
+    }
+    timer_start('grabbit_config_cron');
+  }
+  return max($time_limit - time(), 0);
 }
