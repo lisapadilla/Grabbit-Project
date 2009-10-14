@@ -1,9 +1,6 @@
 <?
 //$Id$
- // Number of feeds to process for each step in cron.
-define('GRABBIT_CRON_FEEDS', 500);
-// Default time that should elapse before a feed can be refreshed again on cron.
-define('GRABBIT_CRON_DEFAULT_REFRESH_TIME', 1800);
+
 
 function grabbit_config_save_config($user,$config){
   $check = grabbit_config_get_uid($user);
