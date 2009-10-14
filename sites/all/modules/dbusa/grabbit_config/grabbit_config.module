@@ -42,7 +42,7 @@ function grabbit_config_get_uid($user){
  */
 function grabbit_config_cron() {
   global $user;
-print_r(grabbit_config_cron_time());
+
 }
 
 /**
