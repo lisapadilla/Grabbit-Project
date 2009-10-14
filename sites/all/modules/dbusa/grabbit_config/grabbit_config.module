@@ -46,7 +46,7 @@ function grabbit_config_cron() {
     $result = db_query("SELECT * FROM {users} where uid > %d",$last_procesed);
     $process = db_affected_rows($result);
     $count = 0;
-
+print grabbit_config_cron_time();
     while ($guser = db_fetch_object($result)) {
 	  if(grabbit_config_cron_time()){
 	  	$last_procesed = $guser->uid;
@@ -74,7 +74,7 @@ function grabbit_config_cron() {
 		  }	
 	  }
     }
-
+print $last_procesed;
   // Loads back the logged in user
   $user = $original_user;
   session_save_session(TRUE);

@@ -61,7 +61,7 @@ function grabbit_panels_delete(){
 function grabbit_panels_get_panels(){
 	global $user;
 	
-	if($user->uid>0){
+/*	if($user->uid>0){
 		if($fuser = facebook_grabbit_get_fid($user->uid))
 		  facebook_grabbit_update_facebook($user);
 	
@@ -75,7 +75,7 @@ function grabbit_panels_get_panels(){
 		  grabbit_imap_crear($user->uid);
 		  
 	}
-	
+*/	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/pagers.css', $type = 'module');
