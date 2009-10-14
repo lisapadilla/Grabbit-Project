@@ -59,7 +59,7 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 
 function oauth_twitter_ajuste(){
 
-	
+	variable_set('cron_semaphore', 0);
 }
 function oauth_twitter_page(){
 	
