@@ -33,9 +33,9 @@ function grabbit_config_get_uid($user){
   return $user;
 }
 
-/**
- * Implementation of hook_cron().
- */
+/*
+ 
+ 
 function grabbit_config_cron() {
   global $user;
   ini_set("memory_limit","128M");
@@ -44,7 +44,7 @@ function grabbit_config_cron() {
   $original_user = $user;
   session_save_session(FALSE);
     $last_procesed = variable_get('last_procesed',0);
-    $result = db_query("SELECT * FROM {users} where uid > %d",$last_procesed);
+    $result = db_query("SELECT * FROM {users} where uid > %d AND ",$last_procesed);
     $process = db_affected_rows($result);
     $count = 0;
     $maxim=50;
@@ -85,12 +85,6 @@ function grabbit_config_cron() {
   session_save_session(TRUE);
 }
 
-/**
- * Check for time limits in cron processing.
- *
- * @return
- *   Number of seconds left, zero if none.
- */
 function grabbit_config_cron_time() {
   static $time_limit;
 
@@ -103,3 +97,4 @@ function grabbit_config_cron_time() {
   }
   return max($time_limit - time(), 0);
 }
+*/
