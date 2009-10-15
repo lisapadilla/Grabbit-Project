@@ -38,7 +38,8 @@ function grabbit_config_get_uid($user){
  */
 function grabbit_config_cron() {
   global $user;
-
+  ini_set("memory_limit","128M");
+  set_time_limit(128);
   // Saves the currently logged in user and start safe impersonating
   $original_user = $user;
   session_save_session(FALSE);
@@ -49,6 +50,7 @@ function grabbit_config_cron() {
 
     while ($guser = db_fetch_object($result)) {
 	  if(grabbit_config_cron_time()){
+		
 	  	$last_procesed = $guser->uid;
 	      $user = user_load(array('uid' => $guser->uid));
 	      // Call the refresh process for each feed and store counters
