@@ -218,3 +218,45 @@ function grabbit_search_custom_form(&$form_state){
 	
 	return $form;
 }
+
+
+/**
+ * Implementation of hook_cron().
+ */
+function grabbit_search_cron() {
+  global $user;
+  ini_set("memory_limit","128M");
+  set_time_limit(128);
+
+  $original_user = $user;
+  session_save_session(FALSE);
+
+  $delete = db_query("SELECT node.nid AS nid FROM node WHERE node.created >= date(now() + interval 21 day)");
+
+  while($nodes = db_fetch_object($delete)){
+    if(grabbit_search_cron_time())
+      node_delete($nodes->nid);	
+  }
+
+  $user = $original_user;
+  session_save_session(TRUE);
+}
+
+/**
+ * Check for time limits in cron processing.
+ *
+ * @return
+ *   Number of seconds left, zero if none.
+ */
+function grabbit_search_cron_time() {
+  static $time_limit;
+
+  if (!$time_limit) {
+    $time_limit = time() + (15 / 100) * ini_get('max_execution_time');
+    $cron_semaphore = variable_get('cron_semaphore', 0);
+    if ($cron_semaphore) {
+      $time_limit = min($time_limit, $cron_semaphore + ini_get('max_execution_time'));
+    }
+  }
+  return max($time_limit - time(), 0);
+}
