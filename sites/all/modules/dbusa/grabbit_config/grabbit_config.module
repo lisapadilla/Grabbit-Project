@@ -47,7 +47,7 @@ function grabbit_config_cron() {
     $result = db_query("SELECT * FROM {users} where uid > %d",$last_procesed);
     $process = db_affected_rows($result);
     $count = 0;
-    $maxim=20;
+    $maxim=50;
     while ($guser = db_fetch_object($result)) {
 	  if($maxim==$count)
 	    break;
