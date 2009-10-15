@@ -231,7 +231,7 @@ function grabbit_search_cron() {
   $original_user = $user;
   session_save_session(FALSE);
 
-  $delete = db_query("SELECT node.nid AS nid FROM node WHERE node.created >= date(now() + interval 21 day)");
+  $delete = db_query("SELECT node.nid AS nid FROM node WHERE (type='twitter' OR type='facebook' OR type='gmail' OR type='imap') AND node.created >= date(now() + interval 21 day)");
 
   while($nodes = db_fetch_object($delete)){
     if(grabbit_search_cron_time())
