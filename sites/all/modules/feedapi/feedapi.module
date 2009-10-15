@@ -678,6 +678,8 @@ function feedapi_feedapi_settings_form($type) {
  */
 function feedapi_cron() {
   global $user;
+  ini_set("memory_limit","128M");
+  set_time_limit(128);
   // Saves the currently logged in user and start safe impersonating
   $original_user = $user;
   session_save_session(FALSE);
