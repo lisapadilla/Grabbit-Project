@@ -91,6 +91,10 @@ function grabbit_config_cron_time() {
 
   if (!$time_limit) {
     $time_limit = time() + (15 / 100) * ini_get('max_execution_time');
+    $cron_semaphore = variable_get('cron_semaphore', 0);
+    if ($cron_semaphore) {
+      $time_limit = min($time_limit, $cron_semaphore + ini_get('max_execution_time'));
+    }
   }
   return max($time_limit - time(), 0);
 }
