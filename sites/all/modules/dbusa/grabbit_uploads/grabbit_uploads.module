@@ -49,13 +49,12 @@ function grabbit_uploads_file_form($form_state){
 	return $form;
 }
 
-class twitpic
+class yfrog
 {
   /* 
    * variable declarations
    */
-  var $post_url='http://twitpic.com/api/upload';
-  var $post_tweet_url='http://twitpic.com/api/uploadAndPost';
+  var $post_url='http://yfrog.com/api/upload';
   var $url='';
   var $post_data='';
   var $result='';
@@ -120,8 +119,8 @@ class twitpic
 
 
 function grabbit_uploads_file_form_getit(){
-	print "test";
-	$file=$_FILES['media'];
+	
+	  $file=$_FILES['media'];
 	  $postfields = array();
 
 	  $postfields['username'] = 'ivanfuyivara';
@@ -130,10 +129,10 @@ function grabbit_uploads_file_form_getit(){
 	  $postfields['message'] = "message";
 	  $postfields['media'] = "@$file[tmp_name]";
 
-	  $t=new twitpic($postfields,true,true);
+	  $t=new yfrog($postfields,true,true);
 	  $t->post();
 	
-	print_r($t);
+	  print_r($t);
 
 //	$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
 //	print_r($headers['media']);
