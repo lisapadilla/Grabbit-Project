@@ -79,7 +79,7 @@ class yfrog
  
   function post()
   {
-    $this->url=($this->tweet)?$this->post_tweet_url:$this->post_url; //assigns URL for curl request based on the nature of request by user
+    $this->url=$this->post_url; //assigns URL for curl request based on the nature of request by user
     $this->makeCurl();
   }
   private function makeCurl()
@@ -96,8 +96,7 @@ class yfrog
     curl_close($curl);
     if($this->display)
     {
-    
-      print_r($this->result);
+      $this->result;
     }
  
   }
@@ -131,7 +130,7 @@ function grabbit_uploads_file_form_getit(){
 
 	  $t=new yfrog($postfields,true,true);
 	  $t->post();
-	  print "test";
+	  print_r("test");
 	  print_r($t);
 
 //	$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
