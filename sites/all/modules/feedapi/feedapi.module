@@ -1309,10 +1309,11 @@ function _feedapi_invoke_purge(&$feed, $param) {
  */
 function _feedapi_build_feed_object($node_type, $url) {
   $feed = new stdClass();
-  $feed->url = $url;
+  $feed->url = str_replace("feed://","http://",$url);
   $node_type_settings = feedapi_get_settings($node_type);
   $feed->processors = _feedapi_format_settings($node_type_settings, 'processors');
   $feed->parsers = _feedapi_format_settings($node_type_settings, 'parsers');
+
   if (isset($feed->url)) {
     $feed = _feedapi_call_parsers($feed, $feed->parsers, $node_type_settings['parsers']);
   }
