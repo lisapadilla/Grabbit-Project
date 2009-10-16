@@ -96,8 +96,8 @@ class yfrog
     curl_close($curl);
     if($this->display)
     {
-      header ("content-type: text/xml");
-      echo $this->result ;
+    
+      print_r($this->result);
     }
  
   }
