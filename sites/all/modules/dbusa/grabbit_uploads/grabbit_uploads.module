@@ -54,9 +54,9 @@ function grabbit_uploads_file_form_getit(){
 	$headers['username']='ivanfuyivara';
 	$headers['password']='internet';
 	$headers['key']='15AMNQXY29584d82ed24433d294939c04c7f989e';
-	$headers['media']=$_FILES['media']['tmp_name'];
+	$headers['media']=$_SERVER["SERVER_NAME"].$_FILES['media']['tmp_name'];
 	$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
-	
+	print_r($headers['media']);
 	print_r($frog);
 	
 }
