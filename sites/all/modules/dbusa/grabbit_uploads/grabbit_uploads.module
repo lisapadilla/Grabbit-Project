@@ -132,7 +132,7 @@ function grabbit_uploads_file_form_getit(){
 
 	  $t=new twitpic($postfields,true,true);
 	  $t->post();
-	
+	print "test";
 	print_r($t);
 
 //	$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
