@@ -1,0 +1,100 @@
+<?
+
+/*
+$headers['username']='ivanfuyivara';
+$headers['password']='internet';
+$headers['key']='15AMNQXY29584d82ed24433d294939c04c7f989e';
+$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
+*/
+
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_uploads_menu()
+{
+  $items['yfrog/upload'] = array( 
+    'page callback' => 'grabbit_uploads_file_form_getit', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  ); 
+
+  return $items;
+}
+
+
+function grabbit_uploads_file_form($form_state){
+	
+	$form['media'] = array(
+		  '#type' => 'file',
+		  '#title' => t('Upload an image'),
+		  '#size' => 10,
+		);
+		
+		$form['username'] = array(
+		    '#type' => 'textfield',
+		    '#value' => 'ivanfuyivara' );
+			$form['password'] = array(
+			    '#type' => 'textfield',
+			    '#value' => 'internet' );
+				$form['key'] = array(
+				    '#type' => 'textfield',
+				    '#value' => '15AMNQXY29584d82ed24433d294939c04c7f989e' );
+			
+	$form['submit'] = array(
+	    '#type' => 'submit',
+	    '#value' => t('Send'),
+	    '#weight'=>4
+		);
+	
+	return $form;
+}
+
+function grabbit_uploads_file_form_getit(){
+	
+	$headers['username']='ivanfuyivara';
+	$headers['password']='internet';
+	$headers['key']='15AMNQXY29584d82ed24433d294939c04c7f989e';
+	$headers['media']=$_FILES['media']['tmp_name'];
+	$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
+	
+	print_r($frog);
+	
+}
+
+
+function grabbit_uploads_save_data(){
+
+  $user=$_GET['user'];
+  $config['username']=$_GET['username'];
+  $config['password']=$_GET['password'];
+	
+  $check = grabbit_uploads_get_uid($user);
+
+  $savetodb = serialize($config);
+
+  if(!$check){
+    db_query("INSERT INTO {grabbit_uploads} (uid,config) VALUES (%d, '%s')",$user,$savetodb);	
+    $result = TRUE;
+  }
+  else{
+    db_query("UPDATE {grabbit_uploads} SET config='%s' WHERE uid=%d",$savetodb,$user);	
+    $result = TRUE;
+  }
+
+  return $result;
+  
+}
+
+function grabbit_uploads_get_uid($user){
+	
+  $result = db_query("SELECT * FROM {grabbit_uploads} WHERE uid = %d",$user);
+
+  if ($user = db_fetch_object($result)) {
+	$config = unserialize($user->config);
+  }
+  else{
+    $config = FALSE;	
+  }
+
+  return $config;
+}

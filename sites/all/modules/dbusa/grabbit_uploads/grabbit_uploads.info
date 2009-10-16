@@ -1,0 +1,8 @@
+;$Id$
+name = "Grabbit files uploads"
+description = "Support for uploading images and videos to yfrog."
+package = "Danilo Black USA"
+version = 6.x-1.5-dev
+core = 6.x
+php = 5.2
+dependencies[] = facebook_grabbit
