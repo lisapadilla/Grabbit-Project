@@ -39,7 +39,7 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
 
 	var options = { 
 	        success:       showResponse,
-	        url:           "http://yfrog.com/api/upload",
+	        url:           Drupal.settings.basePath+"yfrog/upload",
 	        beforeSubmit:  showRequest,
 	        target: "#block-views-friends-block_1"  
 	    }; 

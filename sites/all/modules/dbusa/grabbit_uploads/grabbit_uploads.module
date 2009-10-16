@@ -55,9 +55,27 @@ function grabbit_uploads_file_form_getit(){
 	$headers['password']='internet';
 	$headers['key']='15AMNQXY29584d82ed24433d294939c04c7f989e';
 	$headers['media']="http://".$_SERVER["SERVER_NAME"].$_FILES['media']['tmp_name'];
-	$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
-	print_r($headers['media']);
-	print_r($frog);
+
+	$data = array
+	(
+	                'username' => 'ivanfuyivara',
+	                'userfile[]' => $_FILES['media']['tmp_name'],
+	                'password' => 'internet',
+	);
+
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, "http://yfrog.com/api/upload");
+	curl_setopt($curl, CURLOPT_VERBOSE, true);
+	curl_setopt($curl, CURLOPT_POST, true);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+	$result = curl_exec($curl);
+	curl_close($curl);
+print_r($result);
+//	$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
+//	print_r($headers['media']);
+//	print_r($frog);
 	
 }
 

@@ -29,7 +29,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 		    $blocks['content'] = '<div class="panels-update-form_file" style="display:none">
 			             <div class="panels-update-wraper_file">
 			             <form id="yfrog-form" action="html-echo.php" method="post"> 
-						    <input type="file" size="10" id="edit-media" class="form-file" name="media"/>
+						    <input type="file" size="10" id="media" class="form-file" name="media"/>
 						     
 						    <input type="submit" value="Upload" /> 
 						</form>
