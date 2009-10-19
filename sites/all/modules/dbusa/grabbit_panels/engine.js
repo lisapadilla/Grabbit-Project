@@ -68,7 +68,7 @@ function showResponse(responseText, statusText)  {
     alert("Image larger than 4MB");
   break;
   default:
-    $("#block-views-friends-block_1").html(responseText);
+    $("#edit-status").append(" "+responseText);
   break;
   } 
 }
