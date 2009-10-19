@@ -53,7 +53,7 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
 };
 
 function showResponse(responseText, statusText)  { 
- // var url = responseText.attr("mediaurl");
+ 
   switch(responseText){
   case '1001':
     alert("Invalid twitter username or password");
