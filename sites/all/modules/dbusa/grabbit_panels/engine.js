@@ -53,6 +53,6 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
 };
 
 function showResponse(responseText, statusText)  { 
-  var url = responseText.attr("mediaurl");
-  alert(url); 
+ // var url = responseText.attr("mediaurl");
+  alert(responseText); 
 }
