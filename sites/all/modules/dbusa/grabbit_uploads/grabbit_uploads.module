@@ -97,8 +97,8 @@ class twitpic
     curl_close($curl);
     if($this->display)
     {
-      header ("content-type: text/xml");
-      echo $this->result ;
+     
+      $this->result ;
     }
  
   }
@@ -128,7 +128,7 @@ function grabbit_uploads_file_form_getit(){
 	  $postfields['password'] = "internet";
 	  $postfields['media'] = "@$file[tmp_name]";
 
-	  $t=new twitpic($postfields,true,false);
+	  $t=new twitpic($postfields,true);
 	  $t->post();
 	  
 	   // $xml = new SimpleXMLElement($t->result);	
