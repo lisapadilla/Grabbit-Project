@@ -68,7 +68,8 @@ function showResponse(responseText, statusText)  {
     alert("Image larger than 4MB");
   break;
   default:
-    $("#edit-status").append(" "+responseText);
+    var valor = $("#edit-status").val();
+    $("#edit-status").val(valor+" "+responseText);
   break;
   } 
 }
