@@ -164,6 +164,7 @@
     height: 33px;
     float: right;
     margin-bottom: 24px;
+    display: none;
   }
 
 /** main (container for everything else) **/
@@ -873,7 +874,7 @@
   }
   #primary ul.links{
     margin: 0px;
-    padding: 0px;
+    padding: 43px 0px 0px 0px;
     text-align: right;
   }
   #primary ul.links li{
