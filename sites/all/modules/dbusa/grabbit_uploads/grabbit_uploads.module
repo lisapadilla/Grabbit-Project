@@ -97,7 +97,6 @@ class twitpic
     curl_close($curl);
     if($this->display)
     {
-     
       $this->result ;
     }
  
@@ -131,12 +130,14 @@ function grabbit_uploads_file_form_getit(){
 	  $t=new twitpic($postfields,true);
 	  $t->post();
 	  
-	   // $xml = new SimpleXMLElement($t->result);	
-	   // $xml->mediaurl;
+	   $xml = new SimpleXMLElement($t->result);	
+       if($xml->rsp['stat']!="fail"){
+	     print $xml->mediaurl;
+       }else{
+	     print $xml->err['msg'];
+       }
 
-	   print $t->result;
 }
-
 
 function grabbit_uploads_save_data(){
 
