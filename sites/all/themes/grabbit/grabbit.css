@@ -857,6 +857,7 @@
     width: 105px;
     height: 33px;
     float: right;
+    display: none;
   }
   #block-facebook_grabbit-1 .content a{
     display: block;
@@ -881,53 +882,80 @@
   #primary ul.links li a {
     display: block;
     height: 19px;
-    text-indent: 3000em;
     float: right;
     overflow: hidden;
     margin-left: 20px;
+    color: #FFFFFF;
+  }
+  a.active{
+    color: #291c0e;
   }
   #primary ul.links li.menu-2445 a, #primary ul.links li.menu-2445 a{
     width: 60px;
+    /*
     background: url(images/navbar/sig_in_nh.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-2445 a.active, #primary ul.links li.menu-2445 a.active{
+    /*
     background: url(images/navbar/sig_in_ho.gif) 0 0 no-repeat;
+    */
   }
   
   #primary ul.links li.menu-1844 a, #primary ul.links li.menu-2446 a{
     width: 52px;
+    /*
     background: url(images/navbar/home_nh.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1844 a.active, #primary ul.links li.menu-2446 a.active{
+    /*
     background: url(images/navbar/home_ho.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1845 a{
     width: 90px;
+    /*
     background: url(images/navbar/profile_nh.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1845 a.active{
+    /*
     background: url(images/navbar/profile_ho.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1860 a{
     width: 62px;
+    /*
     background: url(images/navbar/friends_nh.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1860 a.active{
+    /*
     background: url(images/navbar/friends_ho.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1691 a, #primary ul.links li.menu-2444 a{
     width: 38px;
+    /*
     background: url(images/navbar/help_nh.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1691 a.active, #primary ul.links li.menu-2444 a.active{
+    /*
     background: url(images/navbar/help_ho.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1861 a{
     width: 72px;
+    /*
     background: url(images/navbar/sign_out_nh.gif) 0 0 no-repeat;
+    */
   }
   #primary ul.links li.menu-1861 a.active{
+    /*
     background: url(images/navbar/sign_out_ho.gif) 0 0 no-repeat;
+    */
   }
   /* Update form styles */
   #content-form{
