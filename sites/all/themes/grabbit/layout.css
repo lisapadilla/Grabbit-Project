@@ -130,9 +130,9 @@
   .no-sidebars #content
   {
     float: left;
-    width: 960px;
+    width: 953px;
     margin-left: 0;
-    margin-right: -960px; /* Negative value of #content's width + left margin. */
+    margin-right: -953px; /* Negative value of #content's width + left margin. */
     padding: 0; /* DO NOT CHANGE. Add padding or margin to #content-inner. */
   }
 
