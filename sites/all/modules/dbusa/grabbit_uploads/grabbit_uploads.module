@@ -129,9 +129,9 @@ function grabbit_uploads_file_form_getit(){
 
 	  $t=new yfrog($postfields,true,true);
 	  $t->post();
-	  $xml = new SimpleXMLElement('<rsp stat="ok"><mediaid>14iywj</mediaid><mediaurl>http://yfrog.com/14iywj</mediaurl></rsp>');
-	  
-	print $xml->mediaurl;
+	  $xml = new SimpleXMLElement($t->result);
+
+	print $t->result.$xml->mediaurl;
 }
 
 
