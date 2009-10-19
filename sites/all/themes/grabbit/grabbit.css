@@ -874,7 +874,7 @@
   }
   #primary ul.links{
     margin: 0px;
-    padding: 43px 0px 0px 0px;
+    padding: 15px 0px 0px 0px;
     text-align: right;
   }
   #primary ul.links li{
@@ -886,7 +886,7 @@
     height: 19px;
     float: right;
     overflow: hidden;
-    margin-left: 20px;
+    margin-left: 10px;
     color: #FFFFFF;
   }
   a.active{
