@@ -1527,7 +1527,7 @@ function facebook_grabbit_update_facebook($user){
 		  $node->field_date[0]['value'] = $post['created_time'];
 		  $node->field_post_id[0]['value'] = $post['post_id'];
 		  if($post['target_id'])
-		    $node->field_target[0]['value'] = '&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
+		    $node->field_target[0]['value'] = '&raquo; <a href="'.$profiles[$post['actor_id']]['url'].'">'.$profiles[$post['target_id']]['name'].'</a>';
 		
 		  if($post['attachment'])
 		    $node->field_attachment[0]['value']=serialize($post['attachment']);
