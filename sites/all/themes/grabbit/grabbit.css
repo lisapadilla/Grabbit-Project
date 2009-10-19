@@ -96,12 +96,12 @@
 
   #page
   {
-    background: #FFFFFF;
+    background: url(images/grabbit_mid.gif) repeat-y;
   }
 
   #page-inner
   {
-        background: url(images/grabbit_top.gif) 0 0 no-repeat;
+    background: url(images/grabbit_top.gif) 0 0 no-repeat;
   }
 
 /** header **/
