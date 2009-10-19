@@ -130,7 +130,8 @@ function grabbit_uploads_file_form_getit(){
 	  $t=new twitpic($postfields,true);
 	  $t->post();
 	  
-	   $xml = new SimpleXMLElement($t->result);	
+	   $xml = new SimpleXMLElement($t->result);
+	print_r($xml);	
        if($xml->rsp['stat']!="fail"){
 	     print $xml->mediaurl;
        }else{
