@@ -54,5 +54,21 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
 
 function showResponse(responseText, statusText)  { 
  // var url = responseText.attr("mediaurl");
-  alert(responseText); 
+  switch(responseText){
+  case '1001':
+    alert("Invalid twitter username or password");
+  break;
+  case '1002':
+    alert("Image not found");
+  break;
+  case '1003':
+    alert("Invalid image type");
+  break;
+  case '1004':
+    alert("Image larger than 4MB");
+  break;
+  default:
+    $("#block-views-friends-block_1").html(responseText);
+  break;
+  } 
 }

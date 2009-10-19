@@ -135,7 +135,7 @@ function grabbit_uploads_file_form_getit(){
        if(findAttribute($xml, 'stat')!='fail'){
 	     print $xml->mediaurl;
        }else{
-	     print findAttribute($xml->err, 'msg');
+	     print findAttribute($xml->err, 'code');
        }
 
 }
