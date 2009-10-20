@@ -965,7 +965,7 @@
     background: #FFCA00;
   }
   .panels-update-wraper{
-    padding: 15px 30px;
+    padding: 9px;
   }
   #facebook-grabbit-update-form{
     height: 90px;
@@ -975,9 +975,13 @@
     position: relative;
   }
   #facebook-grabbit-update-form .user-data{
-    width: 211px;
+    width: 247px;
     float: left;
     display: block;
+    background: #e9ecef url(images/udata_bot.gif) bottom no-repeat;
+  }
+  #facebook-grabbit-update-form .user-data-wraper{
+    background: url(images/udata_top.gif) top no-repeat;
   }
   #facebook-grabbit-update-form .picture{
     width: 48px;
