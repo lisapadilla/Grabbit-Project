@@ -9,23 +9,23 @@
 /**
  * Implementation of hook_install().
  */
-function grabbit_upload_install() {
+function grabbit_uploads_install() {
   drupal_install_schema('grabbit_uploads');
 }
 
 /**
  * Implementation of hook_uninstall().
  */
-function grabbit_upload_uninstall() {
-  drupal_uninstall_schema('grabbit_upload');
+function grabbit_uploads_uninstall() {
+  drupal_uninstall_schema('grabbit_uploads');
 }
 
 /**
  * Implementation of hook_schema().
  */
-function grabbit_upload_schema() {
+function grabbit_uploads_schema() {
   $schema = array();
-$schema['grabbit_upload'] = array(
+$schema['grabbit_uploads'] = array(
     'fields' => array(
       'uid' => array(
         'type' => 'int',

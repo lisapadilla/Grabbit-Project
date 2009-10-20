@@ -1,10 +1,16 @@
 <?
 
 /*
-$headers['username']='ivanfuyivara';
-$headers['password']='internet';
-$headers['key']='15AMNQXY29584d82ed24433d294939c04c7f989e';
-$frog = drupal_http_request('http://yfrog.com/api/upload', array('Content-Type' => 'multipart/form-data'), $method = 'POST', http_build_query($headers, '', '&'), $retry = 3);
+
+	$blocks['content'] = '<div class="panels-update-form_file" style="display:none">
+	             <div class="panels-update-wraper_file">
+	             <form id="yfrog-form" action="#" method="post"> 
+				    <input type="file" size="10" id="media" class="form-file" name="media"/>
+				     
+				    <input type="submit" value="Upload" /> 
+				</form>
+	             </div></div>';
+
 */
 
 /**
@@ -16,38 +22,16 @@ function grabbit_uploads_menu()
     'page callback' => 'grabbit_uploads_file_form_getit', 
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
+  );
+  $items['uploads/credentials'] = array( 
+    'page callback' => 'grabbit_uploads_save_data', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
   ); 
 
   return $items;
 }
 
-
-function grabbit_uploads_file_form($form_state){
-	
-	$form['media'] = array(
-		  '#type' => 'file',
-		  '#title' => t('Upload an image'),
-		  '#size' => 10,
-		);
-		
-		$form['username'] = array(
-		    '#type' => 'textfield',
-		    '#value' => 'ivanfuyivara' );
-			$form['password'] = array(
-			    '#type' => 'textfield',
-			    '#value' => 'internet' );
-				$form['key'] = array(
-				    '#type' => 'textfield',
-				    '#value' => '15AMNQXY29584d82ed24433d294939c04c7f989e' );
-			
-	$form['submit'] = array(
-	    '#type' => 'submit',
-	    '#value' => t('Send'),
-	    '#weight'=>4
-		);
-	
-	return $form;
-}
 
 class twitpic
 {
@@ -153,9 +137,9 @@ function findAttribute($object, $attribute) {
 
 function grabbit_uploads_save_data(){
 
-  $user=$_GET['user'];
-  $config['username']=$_GET['username'];
-  $config['password']=$_GET['password'];
+  $user=$_POST['user'];
+  $config['username']=$_POST['username'];
+  $config['password']=$_POST['password'];
 	
   $check = grabbit_uploads_get_uid($user);
 
@@ -163,14 +147,18 @@ function grabbit_uploads_save_data(){
 
   if(!$check){
     db_query("INSERT INTO {grabbit_uploads} (uid,config) VALUES (%d, '%s')",$user,$savetodb);	
-    $result = TRUE;
+    $result = '<form id="yfrog-form" action="#" method="post">
+	                <input type="hidden" value="'.$user.'"/> 
+				    <input type="file" size="10" id="media" class="form-file" name="media"/>	     
+				    <input type="submit" value="Upload" /> 
+				</form>';
   }
   else{
     db_query("UPDATE {grabbit_uploads} SET config='%s' WHERE uid=%d",$savetodb,$user);	
     $result = TRUE;
   }
 
-  return $result;
+  print $result;
   
 }
 

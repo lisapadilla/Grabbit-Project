@@ -37,39 +37,5 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
     });
   });
 
-	var options = { 
-	        success:       showResponse,
-	        url:           Drupal.settings.basePath+"yfrog/upload",
-	    }; 
-		$('#yfrog-form').submit(function() { 
-		        // inside event callbacks 'this' is the DOM element so we first 
-		        // wrap it in a jQuery object and then invoke ajaxSubmit 
-		        $(this).ajaxSubmit(options); 
 
-		        // !!! Important !!! 
-		        // always return false to prevent standard browser submit and page navigation 
-		        return false; 
-		    });
 };
-
-function showResponse(responseText, statusText)  { 
- 
-  switch(responseText){
-  case '1001':
-    alert("Invalid twitter username or password");
-  break;
-  case '1002':
-    alert("Image not found");
-  break;
-  case '1003':
-    alert("Invalid image type");
-  break;
-  case '1004':
-    alert("Image larger than 4MB");
-  break;
-  default:
-    var valor = $("#edit-status").val();
-    $("#edit-status").val(valor+" "+responseText);
-  break;
-  } 
-}

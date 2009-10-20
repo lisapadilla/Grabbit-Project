@@ -22,18 +22,32 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 		case 1:
           $blocks['title'] = 'Search Content';
           $blocks['content'] = drupal_get_form('search_form');
-          
+          	
           break;
 		case 2:
 		  if(module_exists('grabbit_uploads')){
-		    $blocks['content'] = '<div class="panels-update-form_file" style="display:none">
-			             <div class="panels-update-wraper_file">
-			             <form id="yfrog-form" action="html-echo.php" method="post"> 
-						    <input type="file" size="10" id="media" class="form-file" name="media"/>
-						     
-						    <input type="submit" value="Upload" /> 
-						</form>
-			             </div></div>';
+			drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/uploads.js', $type = 'module');
+			if(grabbit_uploads_get_uid($user->uid)){
+				$blocks['content'] = '<div class="panels-update-form_file" style="display:none">
+				             <div class="panels-update-wraper_file" id="files-upload-grabb">
+				             <form id="yfrog-form" action="#" method="post"> 
+				                
+							    <input type="file" size="10" id="media" class="form-file" name="media"/>
+							    <input type="submit" value="Upload" /> 
+							</form>
+				             </div></div>';
+			}else{
+			  	$blocks['content'] = '<div class="panels-update-form_file" style="display:none">
+				             <div class="panels-update-wraper_file" id="files-upload-grabb">
+				             <form id="new-twitaccount-form" action="#" method="post"> 
+							  <span class="description">You need to type your twitter\'s user name and password for image-uploads</span>  
+							  <input type="textfield" onClick="this.value=\'\'" value="twitter username" name="username" id="pic-username"/>
+	                          <input type="password" onClick="this.value=\'\'" value="password" name="password" id="pic-password"/>
+							  <input type="submit" value="Save" /> 
+							</form>
+				             </div></div>';	
+			}
+		    
 		  }
           $blocks['content'] .= '<div class="panels-update-form">
 		             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>

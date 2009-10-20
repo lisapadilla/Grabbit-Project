@@ -86,9 +86,11 @@ function facebook_grabbit_update_form($form_state){
 	
 	if ($user->uid >0){
 		$data = '<div class="user-data">
+		           <div class="user-data-wraper">
 		           <div class="picture">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 		           <div class="user-name">'.$user->name.'</div>
 		           <div class="user-name">'.friendlist_api_db_statuses('count', $user->uid, NULL, NULL, 'TW_BOTH').' <span class="user-name-friends">friends</span></div>
+		           </div>
 		         </div>';	
 	}
 	
