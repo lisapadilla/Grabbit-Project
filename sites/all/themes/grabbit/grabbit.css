@@ -979,9 +979,11 @@
     float: left;
     display: block;
     background: #e9ecef url(images/udata_bot.gif) bottom no-repeat;
+    margin-right: 22px;
   }
   #facebook-grabbit-update-form .user-data-wraper{
     background: url(images/udata_top.gif) top no-repeat;
+    padding: 10px 13px;
   }
   #facebook-grabbit-update-form .picture{
     width: 48px;
@@ -997,7 +999,7 @@
   }
   #edit-status-wrapper{
     display: block;
-    width: 387px;
+    width: 468px;
     float: left;
   }
   #facebook-grabbit-update-form .form-item{
@@ -1006,9 +1008,9 @@
   }
   #edit-status-wrapper textarea{
     display: block;
-    width: 367px;
-    height: 90px;
-    background: url(images/various/up_txtarea.gif) 0 0 no-repeat;
+    width: 468px;
+    height: 80px;
+    background: url(images/bg_textarea.gif) 0 0 no-repeat;
     border: none;
     overflow: hidden;
   }
