@@ -183,6 +183,7 @@
 
   #content-inner
   {
+    padding: 0px 24px 20px 23px;
   }
 
   #mission /* The mission statement of the site (displayed on homepage) */
@@ -1049,7 +1050,10 @@
     overflow:hidden;
   }
   #block-friend_search-2{
-    width: 100%;
+    background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
+  }
+  #block-friend_search-2 .block-inner{
+    background: transparent url(images/updp_top.gif) 0 0 no-repeat;
   }
   #content-top{
     width: 192px;
