@@ -1066,6 +1066,7 @@
     padding: 0px;
     float: left;
     overflow: hidden;
+    clear: left;
   }
   #panel-0{
     width: 368px;
