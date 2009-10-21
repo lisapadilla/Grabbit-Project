@@ -1062,10 +1062,9 @@
     background: transparent url(images/updp_top.gif) 0 0 no-repeat;
   }
   #content-top{
-    width: 192px;
-    padding: 20px 20px 20px 30px;
+    width: 255px;
+    padding: 0px;
     float: left;
-    clear: left;
     overflow: hidden;
   }
   #panel-0{
@@ -1695,6 +1694,9 @@ a.truncate_hide{
 .user-panels .panel-grabbit{
 	width:302px;
 	float:left;
+}
+.panels-controllers{
+  display: none;
 }
 
 /*
