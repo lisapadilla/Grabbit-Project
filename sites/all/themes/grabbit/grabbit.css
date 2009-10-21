@@ -962,7 +962,7 @@
   }
   /* Update form styles */
   #content-form{
-    background: #FFCA00;
+    clear: both;
   }
   .panels-update-wraper{
     padding: 9px;
@@ -1698,6 +1698,7 @@ a.truncate_hide{
 .panels-controllers{
   display: none;
 }
+.user
 
 /*
 	New search-text-box design for the whole site
