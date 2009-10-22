@@ -1130,10 +1130,11 @@
   .facebook-post .facebook-post-body, .facebook-post .facebook-attachment{
     width: 270px;
     float: left;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 14px;
+    line-height: 17px;
     margin-bottom: 10px;
     display: block;
+    color: #000000;
   }
 #panel-1 .facebook-post .facebook-post-body, #panel-1 .facebook-post .facebook-attachment,
 .user-panels .panel-grabbit .facebook-post .facebook-post-body, .user-panels .panel-grabbit .facebook-post .facebook-attachment{
