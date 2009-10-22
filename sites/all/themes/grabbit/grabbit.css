@@ -1400,6 +1400,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   line-height: 23px;
   margin-bottom: 0px;
   padding: 12px 0px 0px 18px;
+  font-weight: normal;
 }
 #panel-1 .panel-title h3, .user-panels .panel-grabbit .panel-title h3{
   font-size: 20px;
