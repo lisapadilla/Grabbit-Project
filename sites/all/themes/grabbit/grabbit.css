@@ -1108,13 +1108,12 @@
     padding-right: 5px;
   }
   #panel-0 .twitter-message-stream a.twitter-name-link{
-    color: #0073CF;
+    color: #385691;
     font-weight: bold;
-    font-size: 12px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: 15px;
     display: block;
     width: 140px;
-    padding-left: 15px;
     float: left;
     margin-bottom: 10px;
   }
@@ -1128,13 +1127,6 @@
     padding-left: 15px;
     float: left;
     margin-bottom: 10px;
-  }
-  
-  .facebook-post .facebook-post-header a.facebook-story-name{
-    background: url(images/various/facebook_ico_sml.gif) 0 1px no-repeat;
-  }
-  .twitter-message-stream a.twitter-name-link{
-    background: url(images/various/twitter_ico_sml.gif) 0 1px no-repeat;
   }
   .facebook-post .facebook-post-body, .facebook-post .facebook-attachment{
     width: 270px;
