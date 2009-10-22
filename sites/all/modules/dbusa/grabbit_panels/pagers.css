@@ -1,1 +1,450 @@
+#page, .no-sidebars #content{
+	height: auto;
+}
+
+.panels-pager a{
+	width:5px; 
+	height:5px; 
+	margin:2px; 
+	float:left; 
+    border:1px #CCCCCC solid;
+    text-indent: 3000em;
+}
+
+.facebook-post .facebook-post-header .facebook-story-pic {
+	margin-right: 8px;
+}
+
+.facebook-post .facebook-post-header a.facebook-story-name {	
+	position: relative !important;
+	top: -3px !important;
+}
+
+.facebook-post .facebook-post-header .img {
+	float: left;
+}
+
+.facebook-post .facebook-post-header .facebook-post-body {
+	float: left;
+	width: 230px !important;
+	position: relative;
+	top: 3px;
+	font-size: 11px;
+}
+
+.facebook-post .facebook-post-header .facebook-post-body .content-truncated .facebook-attachment {
+	float: left;
+	width: 230px !important;
+	font-size: 11px;
+}
+
+.twitter-message-stream .twitter-body{
+	float: left;
+	width: 230px !important;
+	position: relative;
+	top: -18px;
+	font-size: 11px !important;
+}
+
+.facebook-post .facebook-post-header .facebook-post-comments{
+	margin-left: 58px;
+}
+
+.user-panel .facebook-post .facebook-post-header .facebook-post-comments{
+	width: 242px;
+}
+
+.facebook-post .facebook-comments {
+	margin-bottom: 1px !important;
+}
+
+.panel-wraper .facebook-post-comments .facebook-comments{
+	background-color: #E6E6E6;
+	padding: 5px;
+}
+
+#panel-0 .panel-wraper div div .facebook-comments{
+	padding: 5px !important;
+}
+
+.facebook-post .facebook-comment-link {
+	font-size: 10px !important;
+	position: relative;
+	top: -3px;
+}
+
+.facebook-post .facebook-comments .facebook-date{
+	font-size: 9px !important;
+	margin-left:36px !important;
+	margin-top:0 !important;
+	position:relative !important;
+	top: 0px !important;
+}
+
+.facebook-post .facebook-image-comment {
+	margin-right: 5px !important;
+}
+
+.panel-grabbit .facebook-post .facebook-comment-form {
+	margin-left: 58px;
+}
+
+.panel-grabbit .facebook-post .facebook-comment-form {
+	margin-left: 58px;
+}
+
+.user-panel .facebook-post .facebook-comment-form{
+	margin-left: 0px;
+}
+
+.facebook-post .facebook-comment-form .facebook-form .form-text{
+	width: 159px;
+	margin-top: 10px;
+}
+
+#myForm .form-text-content {
+	width: 159px;
+}
+
+.facebook-post .facebook-comment-text{
+	width: 190px !important;
+	font-size: 10px !important;
+	position: relative;
+	top: -2px;
+	line-height: 13px !important;
+}
+
+.facebook-post .facebook-post-header .facebook-post-body .facebook-date, .twitter-message-stream .twitter-body .twitter-date{
+	margin-top: 4px !important;
+}
+
+.twitter-message-stream a.twitter-name-link {
+	position: relative;
+	top: -12px;	
+	color: #007DC3;
+}
+
+.panels-pager a.activeSlide{
+    background:#CCCCCC;
+}
+
+.user-panels .panel-grabbit .panel-title h3{
+	font-size:14px;
+}
+#panel-0 {
+	width: 334px !important;
+	margin-right: 25px !important;
+	height: auto;
+}
+
+#panel-0 .panel-title{
+	background: transparent url(img/bg_main_top.gif) no-repeat scroll left bottom !important;
+}
+
+#panel-0 .panel-wraper div{
+	padding: 10px 15px !important;
+}
+
+#panel-0 .panel-wraper div div{
+	padding: 0px !important;
+}
+
+/*#panel-0 .margin-top{
+	margin-top:5px;
+}*/
+
+#content-area .panel-controllers{
+	margin-top: -10px;
+}
+
+#panel-0 .panel-wraper{
+  background: url(img/bg_main_mid.gif) 0 0 repeat-y !important;
+  padding: 0px 5px 10px 5px;
+  width: 324px;
+}
+
+.facebook-with-target{
+	width: 150px !important;
+	position: relative;
+	top: 3px;
+}
+
+#panel-0 .panel-controller{
+	background:transparent url(img/p0_more.gif) no-repeat scroll 0 0 !important;
+	height: 29px !important;
+}
+
+.panel-wraper .facebook-post .facebook-comment-delete{
+	font-size: 10px;
+	float: right;
+}
+
+.facebook-post-body * {
+	font-size: 11px !important;
+}
+
+.node-stream-news .item-body .content-body, .node-stream-news .item-body .news-comments, .node-stream-news .item-body .news-comment-submit{
+	font-size: 11px !important;
+}
+
+.panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+	background: url(img/bg_left_top.jpg) no-repeat scroll left bottom !important;
+}
+
+#content-area .user-panels{
+	width: 332px !important;
+	float: left;
+}
+
+.panel-grabbit {
+	width: 332px !important;
+}
+
+.panel-grabbit .panel-wraper, .user-panels .panel-grabbit .panel-wraper {
+	background:transparent url(img/bg_left_mid.gif) repeat-y scroll 0 0 !important;
+}
+
+.panel-grabbit .panel-controller, .user-panels .panel-grabbit .panel-controller {
+	background: url(img/p1_more.jpg) no-repeat scroll 0 0 !important;
+	height: 27px !important;
+}
+
+.user-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+	padding-bottom: 28px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body {
+	width: 236px !important;
+	line-height: 15px;
+}
+
+.user-panel .panel-wraper .node-stream-news .item-body {
+	width: 240px;
+}
+
+.user-panel .panel-wraper .node-stream-deal .item-body {
+	width: 240px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body .links_stream{
+	width: 90px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-blogs .item-body {
+	width: 236px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-blogs .item-body .links_stream{
+	width: 90px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-deal .item-body .content-body{
+	font-size: 11px;
+	line-height: 15px;
+}
+
+.panel-grabbit .panel-wraper .node-stream-deal .item-body .links_stream{
+	width: 106px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-deal .item-body h2{
+	width: 100px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body{
+	width: 200px;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body .links_stream{
+	width: 106px !important;
+}
+
+.user-panel .panel-wraper .node-stream-news .item-body h2{
+	width: 130px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-news .item-body h2{
+	width: 130px !important;
+}
+
+.panel-grabbit .panel-wraper .node-stream-blogs .item-body .links_stream{
+	width: 106px !important;
+}
+
+.panel-grabbit .node-stream-news .item-body, .panel-grabbit .node-stream-blogs .item-body, .panel-grabbit .node-stream-deal .item-body, .user-panels .panel-grabbit .node-stream-news .item-body, .user-panels .panel-grabbit .node-stream-blogs .item-body, .user-panels .panel-grabbit .node-stream-deal .item-body {
+	width: 215px;
+}
+
+/*#panel-0 .panel-grabbit .panel-title, .user-panels .panel-grabbit .panel-title {
+	width: 334px !important;
+}*/
+
+.user-panel .panel-title, .user-panels .panel-grabbit .panel-title {
+	width: 334px !important;
+}
+
+.user-panel .facebook-with-target a {
+color:#0073CF;
+font-size:12px;
+font-weight:bold;
+line-height:13px;
+margin-bottom:10px;
+padding-left:15px;
+}
+
+.user-panel .twitter-name-link{
+	margin-top: 11px;
+}
+
+.user-panel .twitter-message-stream{
+	padding-bottom: 0px;
+}
+
+.user-panel .node-stream-news .item-body{
+	
+}
+
+#panel-0 .node-stream-deal .item-body{
+	width: 236px !important;
+}
+
+.user-panel .panel-title .controller-top{
+	background: #CCCCCC url(img/paneluser_title_left.gif) no-repeat left center;
+	width: 332px;
+	height: 20px;
+}
+
+.user-panel .panel-title .controller-top a.panel-gear{
+	background: #CCCCCC url(img/paneluser_title_right.png) no-repeat right center;
+	display: block;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+
+.user-panel .panel-title .controller-top h3.title{
+	font-size: 13px !important;
+	color: #666666 !important;
+	margin-left: 10px;
+	position: relative;
+	top: -1px;
+}
+
+.user-panel .panel-title .controller-top .panel-filters{
+	font-size: 10px;
+	color: #666666;
+	position: relative;
+	top: -3px;
+	left: 25px;
+}
+
+.user-panel .panel-title .controller-top .add-new-panel{
+	font-size: 10px;
+	color: #FFFFFF;
+	position: relative;
+	top: 2px;
+	font-weight: bold;
+	float: right;
+	left: 20px;
+}
+
+.panels-controllers {
+	position: relative;
+	float: left;
+	height: 27px;
+	width: 332px;
+}
+
+.panels-controllers a.move-left {
+	background: transparent url(img/paneluser_move_left.png) no-repeat scroll 0 0;
+	width: 16px;
+	height: 15px;
+	overflow: hidden;
+	display: block;
+	position: absolute;
+	left: -18px;
+	top: 29px;
+}
+
+.panels-controllers a.move-right {
+	background: transparent url(img/paneluser_move_right.png) no-repeat scroll 0 0;
+	width: 16px;
+	height: 15px;
+	overflow: hidden;
+	position: absolute;
+	left: 335px;
+	top: 29px;
+}
+
+.panels-controllers .panels-pager{
+	float: left;
+}
+
+.panels-controllers .panels-pager a{
+	float: left;
+	margin-top: 10px;
+}
+
+.panel-grabbit .panel-title{
+	margin-top: 28px;
+	padding-bottom: 20px !important;
+}
+
+.user-panel .panel-title{
+	margin-top: 0px;
+}
+
+#content-area {
+	padding: 0px !important;
+}
+
+.panel-wraper .panel-closer{
+	background: transparent url(img/paneluser_close.gif) no-repeat right top;
+	position: absolute;
+	left: 310px;
+	top: 38px;
+	z-index: 100;
+	width: 13px;
+	height: 13px;
+}
+
+#panel-0 .node-stream-news h2, #panel-0 .node-stream-blogs h2, #panel-0 .node-stream-deal h2 {
+	width: 130px !important;
+}
+
+#panel-1 .node-stream-news .item-body, #panel-1 .node-stream-blogs .item-body, #panel-1 .node-stream-deal .item-body, .user-panels .panel-grabbit .node-stream-news .item-body, .user-panels .panel-grabbit .node-stream-blogs .item-body, .user-panels .panel-grabbit .node-stream-deal .item-body {
+	width: 236px !important;
+}
+
+.panel-most-visited .panel-title{
+	background:transparent url(img/bg_left_top_mvisited.jpg) no-repeat scroll left bottom !important;
+}
+
+.item-body .content-body {
+	width: 234px !important;
+}
+
+.item-body .news-comments{
+	margin-top: 10px;
+}
+
+.item-body .news-comments .news-comment-picture img{
+	height: 30px;
+	width: 30px;
+	overflow: hidden;
+}
+
+.meta .content-body {
+	font-size: 11px !important;
+}
+
+.news-comment-content{
+	font-size: 11px !important;
+}
+
+.facebook-with-target {
+	color: #0073CF;
+	font-size: 12px;
+	font-weight: bold;
+}
 
