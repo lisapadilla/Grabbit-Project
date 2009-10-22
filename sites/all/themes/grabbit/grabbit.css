@@ -1712,16 +1712,7 @@ a.truncate_hide{
 */
 
 #search-block-form .form-text{
-	position: relative;
-	left: -3px;
-	background:transparent url(images/various/search_background_new.gif) no-repeat scroll left center;
-	height: 31px;
-	border: 0px;
-	float: left;
-	width: 150px;
-	color: #333333;
-	padding-left: 10px;
-	padding-top: 20px;
+
 }
 
 #search-block-form .form-submit{
