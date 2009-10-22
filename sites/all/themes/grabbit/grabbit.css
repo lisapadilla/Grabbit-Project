@@ -1314,7 +1314,10 @@ a.facebook-makecomment-link, a.comment-news{
   float: right;
   text-indent: 3000em;
   overflow: hidden;
-  margin-left: 10px;
+  margin-left: 5px;
+}
+.odd a.facebook-makecomment-link, .odd a.comment-news, .odd a.twit-reply{
+  background: url(images/rep_ico_gr.gif) 0 0 no-repeat;
 }
 .url-deal a{
   display: block;
