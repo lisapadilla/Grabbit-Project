@@ -1352,6 +1352,9 @@ a.trash-facebook, a.trash-twitter, a.trash-item{
   overflow: hidden;
   margin-left: 5px;
 }
+.odd a.trash-facebook, .odd a.trash-twitter, .odd a.trash-item{
+  background: url(images/trash_ico_gr.gif) 0 0 no-repeat;
+}
 .view-my-feeds a.flag{
   display: inline-block;
   width: auto;
