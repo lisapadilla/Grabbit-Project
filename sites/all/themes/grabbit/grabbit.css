@@ -1152,11 +1152,12 @@
     display: block;
   }
   #panel-0 .twitter-message-stream .twitter-body{
-    width: 270px;
+    width: 280px;
     float: left;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 14px;
+    line-height: 17px;
     display: block;
+    color: #000000;
   }
   .facebook-post-body a,
   .facebook-attachment a,
