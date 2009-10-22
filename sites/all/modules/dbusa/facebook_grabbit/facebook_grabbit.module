@@ -436,7 +436,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 		$fav_value='Remove from favorites';
 		$fav_style='facebook_favorite-remove';
 	}
-	print_r($post);
+	
 	// Output for wall and status update.
 	$output = '
 	<div class="facebook-post clearfix '.$post->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
