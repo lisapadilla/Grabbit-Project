@@ -1236,19 +1236,18 @@
 }
 #block-views-friends-block_1 .block-inner{
   background: url(images/sidebar_top.gif) 0 0 no-repeat;
+  padding: 12px 15px 12px 17px;
 }
-#block-views-friends-block_1 .views-row,
-#block-views-suggested_friends-block_1 .views-row{
-  list-style: none;
+#block-views-friends-block_1 .views-row{
   float: left;
   display: block;
-  width: 24px;
-  height: 24px;
-  margin: 5px 0px 0px 5px;
+  width: 50px;
+  height: 50px;
+  margin: 0px 5px 5px 0px;
 }
-#block-views-friends-block_1 .views-row-first,
-#block-views-suggested_friends-block_1 .views-row-first{
-  margin: 5px 0px 0px 0px;
+#block-views-friends-block_1 .views-row img{
+  width: 50px;
+  height: 50px;
 }
 #block-search-0{
   padding-top: 20px;
