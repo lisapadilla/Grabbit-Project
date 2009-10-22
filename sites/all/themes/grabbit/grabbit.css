@@ -1374,7 +1374,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   display: block;
   width: 11px;
   height: 11px;
-  background: url(images/various/ref_ico.gif) 0 0 no-repeat;
+  background: url(images/ref_ico.gif) 0 0 no-repeat;
   float: right;
   text-indent: 3000em;
   overflow: hidden;
