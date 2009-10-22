@@ -521,6 +521,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	}
 	
 	// Output for aplication updates
+	print_r($post);
 	$output = '<div class="facebook-post clearfix '.$post->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
 	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
