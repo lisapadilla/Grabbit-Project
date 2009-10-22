@@ -439,7 +439,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	
 	// Output for wall and status update.
 	$output = '
-	<div class="facebook-post clearfix" id="fb_story_'.$post->field_post_id[0]['value'].'">
+	<div class="facebook-post clearfix '.$node->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
 	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
@@ -521,7 +521,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	}
 	
 	// Output for aplication updates
-	$output = '<div class="facebook-post clearfix" id="fb_story_'.$post->field_post_id[0]['value'].'">
+	$output = '<div class="facebook-post clearfix '.$node->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
 	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
@@ -748,11 +748,12 @@ function facebook_grabbit_private_view_panel($param){
 	if(is_array($twitface)){
 			ksort($twitface);
 			$result = array_reverse($twitface);
+			$rowx='even';
 			foreach($result as $entry){
 					if($entry['value']->nid){
 						
 						$node=node_load($entry['value']->nid,NULL,TRUE);
-						
+						$node->rowx=$rowx;
 						switch($node->type){
 							case 'facebook':
 							    $actor=array('name'=>$node->field_user_name[0]['value'],
@@ -800,6 +801,12 @@ function facebook_grabbit_private_view_panel($param){
 							  $output .= _news_theme($comments,$node);
 							break;
 						}
+						
+					  if($rowx=='even'){
+						$rowx='odd';
+					  }else{
+						$rowx='even';
+					  }
 						 
 					}
 			}
@@ -1061,7 +1068,7 @@ function theme_twitter_message($node){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 	$screen_name=str_replace('http://www.twitter.com/','',$node->field_twitter_url[0]['value']);
-	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix"><div class="twitter-reply">
+	$output = '<div id="twitter-post-'.rand(0,1000).'" class="twitter-message-stream clearfix '.$node->rowx.'"><div class="twitter-reply">
 	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$node->nid.'">TR</a>
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$screen_name.'">Reply</a>';
 
@@ -1268,7 +1275,7 @@ function _news_theme($comments,$node){
 	  $submitted ='<p>Source: <a title="View original article" target="_blank" href="'.$node->feedapi_node->url.'">'.$rss->title.'</a></p>';
 	}
 	$node->teaser = strip_tags($node->teaser);
-	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element" id="node-'.$node->nid.'">
+	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element '.$node->rowx.'" id="node-'.$node->nid.'">
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
@@ -1326,7 +1333,7 @@ function theme_gmail_message($comments,$node){
 	
 	$node->body =substr(strip_tags($node->body),0,150); 
 	
-	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element" id="node-'.$node->nid.'">
+	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element '.$node->rowx.'" id="node-'.$node->nid.'">
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
@@ -1384,7 +1391,7 @@ function theme_imap_message($comments,$node){
 	
 	$node->body =substr(strip_tags($node->body),0,150); 
 	
-	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element" id="node-'.$node->nid.'">
+	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element '.$node->rowx.'" id="node-'.$node->nid.'">
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
