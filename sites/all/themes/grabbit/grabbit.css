@@ -1394,10 +1394,12 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 	font-size: 11px;
 }
 #panel-0 .panel-title h3{
-  font-size: 20px;
-  color: #333333;
-  line-height: 21px;
+  display: block;
+  font-size: 22px;
+  color: #FFFFFF;
+  line-height: 23px;
   margin-bottom: 0px;
+  padding: 12px 0px 0px 18px;
 }
 #panel-1 .panel-title h3, .user-panels .panel-grabbit .panel-title h3{
   font-size: 20px;
@@ -1409,6 +1411,8 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   display: block;
 }
 #panel-0 .panel-title{
+  height: 37px;
+  background: url(images/mp_top.gif) 0 0 no-repeat;
 }
 #panel-1 .panel-title, .user-panels .panel-grabbit .panel-title{
   padding-bottom: 23px;
