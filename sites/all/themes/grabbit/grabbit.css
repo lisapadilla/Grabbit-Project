@@ -1265,6 +1265,7 @@
   margin: 0px;
   background: url(images/search_tf.gif) 0 0 no-repeat;
   display: block;
+  border: none;
 }
 #search-block-form .form-submit{
   display: block;
