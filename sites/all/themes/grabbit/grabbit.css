@@ -1339,6 +1339,9 @@ a.twitter_favorite, a.flag-action, a.facebook_favorite{
   overflow: hidden;
   margin-left: 5px;
 }
+.odd a.twitter_favorite, .odd a.flag-action, .odd a.facebook_favorite{
+  background: url(images/star_ico_gr.gif) 0 0 no-repeat;
+}
 a.trash-facebook, a.trash-twitter, a.trash-item{
 	display: block;
   width: 8px;
