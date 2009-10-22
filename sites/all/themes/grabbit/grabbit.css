@@ -1018,17 +1018,18 @@
     display: block;
     border: none;
     text-indent: -999px;
-    float: left;
-    width: 77px;
-    height: 32px;
-    background: url(images/various/up_submit.gif);
-    clear: right;
+    width: 46px;
+    height: 19px;
+    background: url(images/send_bt.gif);
     padding: 0px;
-    margin: 10px 150px 10px 0px;
+    margin: 0px;
     cursor: pointer;
     overflow: hidden;
     font-size: 0px;
     line-height: 1000px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
   }
   .grippie{
     display: none;
@@ -1057,6 +1058,8 @@
   }
   #block-friend_search-2{
     background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
+    height: 123px;
+    position: relative;
   }
   #block-friend_search-2 .block-inner{
     background: transparent url(images/updp_top.gif) 0 0 no-repeat;
