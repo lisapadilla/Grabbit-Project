@@ -1378,7 +1378,10 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   float: right;
   text-indent: 3000em;
   overflow: hidden;
-  margin-left: 10px;
+  margin-left: 5px;
+}
+.odd a.retweet, .odd a.grabb-that, .odd a.retweet-facebook{
+  background: url(images/ref_ico_gr.gif) 0 0 no-repeat;
 }
 .section-user #content-area
 {
