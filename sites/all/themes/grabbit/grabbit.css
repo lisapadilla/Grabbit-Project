@@ -1711,6 +1711,9 @@ a.truncate_hide{
 .user-panels{
   display: none;
 }
+.panel-grabbit .odd{
+  background: #e6eaed;
+}
 
 /*
 	New search-text-box design for the whole site
