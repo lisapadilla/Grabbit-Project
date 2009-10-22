@@ -1231,6 +1231,12 @@
   display: inline-block;
   width: 100%;
 }
+#block-views-suggested_friends-block_1{
+  background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
+}
+#block-views-suggested_friends-block_1 .block-inner{
+  background: url(images/sidebar_top.gif) 0 0 no-repeat;
+}
 #block-views-friends-block_1 .views-row,
 #block-views-suggested_friends-block_1 .views-row{
   list-style: none;
