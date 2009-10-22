@@ -1249,7 +1249,8 @@
   height: 50px;
 }
 #block-search-0{
-  padding-top: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
 }
 #block-search-0 label{
   display: none;
