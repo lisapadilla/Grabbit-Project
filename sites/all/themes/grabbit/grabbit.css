@@ -1269,11 +1269,11 @@
 #search-block-form .form-submit{
   display: block;
   float: left;
-  width: 25px;
-  height: 25px;
+  width: 65px;
+  height: 32px;
   padding: 0px;
   margin: 0px;
-  background: url(images/various/search_btn.gif) 0 0 no-repeat;
+  background: url(images/search_bt.gif) 0 0 no-repeat;
   text-indent: -3000em;
   border: none;
   cursor: pointer;
