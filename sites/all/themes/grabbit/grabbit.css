@@ -1724,13 +1724,7 @@ a.truncate_hide{
 }
 
 #search-block-form .form-submit{
-	position: relative;
-	top: 10px;
-	left: -3px;
-	height: 31px;
-	width: 32px;
-	background:transparent url(images/various/search_btn_new.gif) no-repeat scroll left center; 
-	float: left;
+
 }
 
 .block-search{
