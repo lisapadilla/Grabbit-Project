@@ -1409,15 +1409,12 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   display: block;
 }
 #panel-0 .panel-title{
-  padding-bottom: 23px;
-  background: url(images/various/bg_main_top.gif) bottom left no-repeat;
 }
 #panel-1 .panel-title, .user-panels .panel-grabbit .panel-title{
   padding-bottom: 23px;
   background: url(images/various/bg_left_top.gif) bottom left no-repeat;
 }
 #panel-0 .panel-wraper{
-  background: url(images/various/bg_main_mid.gif) 0 0 repeat-y;
   padding: 0px 5px 10px 5px;
 }
 #panel-1 .panel-wraper, .user-panels .panel-grabbit .panel-wraper{
@@ -1426,7 +1423,6 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 }
 #panel-0 .panel-controller{
   height: 26px;
-  background: url(images/various/p0_more.gif) 0 0 no-repeat;
   text-align: center;
 }
 #panel-1 .panel-controller, .user-panels .panel-grabbit .panel-controller{
