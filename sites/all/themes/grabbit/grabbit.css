@@ -963,6 +963,7 @@
   /* Update form styles */
   #content-form{
     clear: both;
+    margin-bottom: 20px;
   }
   .panels-update-wraper{
     padding: 9px;
@@ -1740,7 +1741,6 @@ a.truncate_hide{
 }
 
 .block-search{
-	padding-top: 8px !important;
 }
 
 #edit-contacts-wrapper{
