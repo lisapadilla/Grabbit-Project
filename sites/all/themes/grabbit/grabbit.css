@@ -1224,6 +1224,7 @@
   line-height: 23px;
   display: block;
   margin-bottom: 10px;
+  font-weight: normal;
 }
 #block-views-friends-block_1{
   display: inline-block;
@@ -1250,19 +1251,20 @@
 #block-search-0{
   padding-top: 20px;
 }
+#block-search-0 label{
+  display: none;
+}
 #block-search-0 h2{
   display: none;
 }
 #edit-search-block-form-1{
-  width: 166px;
-  height: 23px;
-  border-top: 1px solid #B3B3B3;
-  border-left: 1px solid #B3B3B3;
-  border-bottom: 1px solid #B3B3B3;
-  border-right: none;
+  width: 192px;
+  height: 32px;
   float: left;
   padding: 0px;
   margin: 0px;
+  background: url(images/search_tf.gif) 0 0 no-repeat;
+  display: block;
 }
 #search-block-form .form-submit{
   display: block;
