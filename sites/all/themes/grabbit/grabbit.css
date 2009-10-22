@@ -1069,9 +1069,10 @@
     clear: left;
   }
   #panel-0{
-    width: 368px;
+    width: 473px;
     float: left;
-    margin-right: 19px;
+    overflow: hidden;
+    background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
   }
   #panel-1{
     width: 302px;
@@ -1706,7 +1707,9 @@ a.truncate_hide{
 .panels-controllers{
   display: none;
 }
-.user
+.user-panels{
+  display: none;
+}
 
 /*
 	New search-text-box design for the whole site
