@@ -1088,7 +1088,6 @@
   .node-stream-deal
   {
     padding: 10px;
-    background: url(images/various/separator.gif) bottom repeat-x;
   }
   .facebook-post .facebook-post-header a.facebook-story-pic,
   .twitter-message-stream .twitter-image{
@@ -1422,9 +1421,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   padding-bottom: 23px;
   background: url(images/various/bg_left_top.gif) bottom left no-repeat;
 }
-#panel-0 .panel-wraper{
-  padding: 0px 5px 10px 5px;
-}
+
 #panel-1 .panel-wraper, .user-panels .panel-grabbit .panel-wraper{
   background: url(images/various/bg_left_mid.gif) 0 0 repeat-y;
   padding: 0px 5px 10px 5px;
