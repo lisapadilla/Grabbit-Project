@@ -25,7 +25,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
           	
           break;
 		case 2:
-		  if(module_exists('grabbit_uploads')){
+		/*  if(module_exists('grabbit_uploads')){
 			drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/uploads.js', $type = 'module');
 			if(grabbit_uploads_get_uid($user->uid)){
 				$blocks['content'] = '<div class="panels-update-form_file" style="display:none">
@@ -36,7 +36,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 							    <input type="submit" value="Upload" /> 
 							</form>
 				             </div></div>';
-			}else{
+			}else{*/
 			  	$blocks['content'] = '<div class="panels-update-form_file" style="display:none">
 				             <div class="panels-update-wraper_file" id="files-upload-grabb">
 				             <form id="new-twitaccount-form" action="#" method="post"> 
@@ -46,7 +46,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 							  <input type="submit" value="Save" /> 
 							</form>
 				             </div></div>';	
-			}
+			/*}*/
 		    
 		  }
           $blocks['content'] .= '<div class="panels-update-form">
