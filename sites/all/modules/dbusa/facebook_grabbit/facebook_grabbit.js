@@ -1074,7 +1074,7 @@ $.fn.cycle.createPagerAnchor = function(i, el, $p, els, opts) {
 	if ($.isFunction(opts.pagerAnchorBuilder))
 		a = opts.pagerAnchorBuilder(i,el);
 	else
-		a = '<a href="#" title="'+stitle.html()+'">'+(i+1)+'</a>';
+		a = '<a href="#" title="'+stitle.html()+'">'+stitle.html()+'</a>';
 		
 	if (!a)
 		return;
