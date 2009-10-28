@@ -64,17 +64,17 @@ function grabbit_panels_get_panels(){
 	if($user->uid>0){
 		ini_set("memory_limit","128M");
 		set_time_limit(128);
-	//	if($fuser = facebook_grabbit_get_fid($user->uid))
-		 // facebook_grabbit_update_facebook($user);
+		if($fuser = facebook_grabbit_get_fid($user->uid))
+		  facebook_grabbit_update_facebook($user);
 	
-	//	if($twitter_account = oauth_twitter_get_uid($user->uid))
-		 // facebook_grabbit_update_twitter($user);
+		if($twitter_account = oauth_twitter_get_uid($user->uid))
+		  facebook_grabbit_update_twitter($user);
 		
-	//	if($gmail_user = grabbit_gmail_get($user->uid))
-		 // grabbit_gmail_crear($user->uid);
+		if($gmail_user = grabbit_gmail_get($user->uid))
+		  grabbit_gmail_crear($user->uid);
 		
-	//	if($imap_user = grabbit_imap_get($user->uid))
-		 // grabbit_imap_crear($user->uid);
+		if($imap_user = grabbit_imap_get($user->uid))
+		  grabbit_imap_crear($user->uid);
 	  
 	}
 
