@@ -64,17 +64,17 @@ function grabbit_panels_get_panels(){
 	if($user->uid>0){
 		ini_set("memory_limit","128M");
 		set_time_limit(128);
-		if($fuser = facebook_grabbit_get_fid($user->uid))
-		  facebook_grabbit_update_facebook($user);
+	//	if($fuser = facebook_grabbit_get_fid($user->uid))
+		 // facebook_grabbit_update_facebook($user);
 	
-		if($twitter_account = oauth_twitter_get_uid($user->uid))
-		  facebook_grabbit_update_twitter($user);
+	//	if($twitter_account = oauth_twitter_get_uid($user->uid))
+		 // facebook_grabbit_update_twitter($user);
 		
-		if($gmail_user = grabbit_gmail_get($user->uid))
-		  grabbit_gmail_crear($user->uid);
+	//	if($gmail_user = grabbit_gmail_get($user->uid))
+		 // grabbit_gmail_crear($user->uid);
 		
-		if($imap_user = grabbit_imap_get($user->uid))
-		  grabbit_imap_crear($user->uid);
+	//	if($imap_user = grabbit_imap_get($user->uid))
+		 // grabbit_imap_crear($user->uid);
 	  
 	}
 
@@ -88,13 +88,13 @@ function grabbit_panels_get_panels(){
 	
 	if ($user->uid > 0){
 		$unique=0;
-		$output .= theme_panels($panel_1,0,"Main Stream");
+		
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div class="user-panels">';
-		           		           
+		           </div><div class="panel-grabbit suser-panels">';
+		$output .= theme_panels($panel_1,0,"Main Stream");           		           
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
 		if($total_u=db_affected_rows($all_panels)){
 			if($total_u==1)
@@ -460,15 +460,15 @@ function theme_panels($private_view,$id,$name,$unique=0){
     if(!$name)
       $name="Panel ".$id;
 
-	if($id>0 && $user->uid != 0){
+	if($user->uid != 0){
 		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">
 	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
-	               
-		$output .= l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';	
+	          
+		  $output .= l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
 	
-		$output .= '</div>
+			$output .= '</div>
 	             <div class="panel-wraper">
 	             		'.$clooser.'
 	             		'.$private_view.'</div>

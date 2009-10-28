@@ -1074,15 +1074,11 @@
     overflow: hidden;
     clear: left;
   }
-  #panel-0{
+  .panel-grabbit{
     width: 473px;
     float: left;
     overflow: hidden;
     background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
-  }
-  #panel-1{
-    width: 302px;
-    float:left;
   }
   .facebook-post,
   .twitter-message-stream,
@@ -1108,7 +1104,7 @@
     margin-bottom: 10px;
     padding-right: 5px;
   }
-  #panel-0 .twitter-message-stream a.twitter-name-link{
+  .panel-grabbit .twitter-message-stream a.twitter-name-link{
     color: #385691;
     font-weight: bold;
     font-size: 14px;
@@ -1154,7 +1150,7 @@
     line-height: 15px;
     display: block;
   }
-  #panel-0 .twitter-message-stream .twitter-body{
+  .panel-grabbit .twitter-message-stream .twitter-body{
     width: 280px;
     float: left;
     font-size: 14px;
@@ -1403,7 +1399,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 	color: #333333;
 	font-size: 11px;
 }
-#panel-0 .panel-title h3{
+.panel-grabbit .panel-title h3{
   display: block;
   font-size: 22px;
   color: #FFFFFF;
@@ -1421,7 +1417,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   float: left;
   display: block;
 }
-#panel-0 .panel-title{
+.panel-grabbit .panel-title{
   height: 37px;
   background: url(images/mp_top.gif) 0 0 no-repeat;
 }
@@ -1434,7 +1430,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   background: url(images/various/bg_left_mid.gif) 0 0 repeat-y;
   padding: 0px 5px 10px 5px;
 }
-#panel-0 .panel-controller{
+.panel-grabbit .panel-controller{
   height: 26px;
   text-align: center;
 }
@@ -1715,7 +1711,7 @@ a.truncate_hide{
 	float:left;
 }
 .panels-controllers{
-  display: none;
+  display: block;
 }
 .user-panels{
   display: none;

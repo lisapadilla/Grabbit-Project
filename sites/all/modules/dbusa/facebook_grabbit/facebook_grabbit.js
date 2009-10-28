@@ -1,7 +1,7 @@
 function display_panel(panel,panel_element){
 
 	// PANEL VARIABLES
-	var stories_at_first_p1 = 4;
+	var stories_at_first_p1 = 8;
 	var current_panel_1 = panel_element;
 	var panel_id = panel;
 
@@ -26,7 +26,7 @@ function display_panel(panel,panel_element){
 	$('#'+panel_id).append('<div class="panel-controller"></a><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
 
 }
-
+var panels_heights=new Array();
 function display_items(panel){
 	stories_per_slide_p1=4;
     panel_id=panel.attr('id');
@@ -55,34 +55,50 @@ function display_items(panel){
 
 function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
 	var height = $("#"+slideElement.id).height()+100;
-	$(".user-panels").height(height);
+	$(".suser-panels").height(height);
 }
 
 function fixtheheightMore(element){
 	var height = $(".panel-wraper",element).height()+$(".panel-title",element).height()+$(".panel-controller",element).height()+100;
 	element.height(height);
-	$(".user-panels").height(height);
+	$(".suser-panels").height(height);
+	panels_heights[element.attr('id')]=height;
 }
-
+function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardFlag){
+	if(panels_heights[nextSlideElement.id]){
+		var height = panels_heights[nextSlideElement.id];
+		$("#"+nextSlideElement.id).height(height);
+		$(".suser-panels").height(height);
+	}else{
+	  	var height = $("#"+nextSlideElement.id).height();
+		$(".suser-panels").height(height);	
+	}
+}
 $(document).ready(function() {
 
-    $(".panel-grabbit").each(function(elemento){
-	    var panel_aid=$(this).attr('id');
+   $(".suser-panels .user-panel").each(function(elemento,n){
+ 	    var panel_aid=$(this).attr('id');
 		var current_panel_1 = $('#'+panel_aid+' .panel-wraper div:first');
 		display_panel(panel_aid,current_panel_1);
     });
 
-	$('.user-panels').cycle({
+	$('.suser-panels').cycle({
 	    fx:      'scrollHorz',
 	    next:    '.move-right',
 	    prev:    '.move-left',
 	    pager: '.panels-pager',
 	    timeout:  0,
+	    after: fixtheheightAfter,
 	    prevNextClick: fixtheheight
 	});
 	
+	
+	
+	var height = $("#panel-0").height();
+	$(".suser-panels").height(height);
+	
 	$('.main-stream-next').click(function(){
-        panel=$(this).parents(".panel-grabbit");
+        panel=$(this).parents(".user-panel");
         display_items(panel);
         fixtheheightMore(panel);
 	});
@@ -1074,7 +1090,7 @@ $.fn.cycle.createPagerAnchor = function(i, el, $p, els, opts) {
 	if ($.isFunction(opts.pagerAnchorBuilder))
 		a = opts.pagerAnchorBuilder(i,el);
 	else
-		a = '<a href="#" title="'+stitle.html()+'">'+stitle.html()+'</a>';
+		a = '<a href="#" title="'+stitle.html()+'">'+stitle.html()+' | </a>';
 		
 	if (!a)
 		return;
