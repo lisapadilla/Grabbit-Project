@@ -1,0 +1,48 @@
+<?php
+// $Id: grabbit_crons.install,v 1.1.2.2 2009/06/24 05:53:49 Exp $
+
+/**
+ * @file
+ * Grabbit Cron condiguration install file.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function grabbit_crons_install() {
+  drupal_install_schema('grabbit_crons');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function grabbit_crons_uninstall() {
+  drupal_uninstall_schema('grabbit_crons');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function grabbit_crons_schema() {
+  $schema = array();
+$schema['grabbit_crons'] = array(
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'size' => 'normal',
+        'not null' => TRUE,
+        'disp-width' => '10',
+      ),
+      'user' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'lastime' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+      )
+    ),
+    'primary key' => array('uid'),
+  );
+  return $schema;
+}

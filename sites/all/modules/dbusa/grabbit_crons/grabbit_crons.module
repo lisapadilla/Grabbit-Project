@@ -1,0 +1,42 @@
+<?
+
+function grabbit_crons_cron() {
+  	ini_set("memory_limit","128M");
+	set_time_limit(128);
+	
+	$update=_get_last_nid();
+	
+	$result = db_query("SELECT uid from {users} where status > 0 AND uid>%d LIMIT 20",$last_nid);
+	if(db_affected_rows($result)){
+	  	while($user = db_fetch_object($result)){
+			if($fuser = facebook_grabbit_get_fid($user->uid))
+			  facebook_grabbit_update_facebook($user);
+
+			if($twitter_account = oauth_twitter_get_uid($user->uid))
+			  facebook_grabbit_update_twitter($user);
+
+			if($gmail_user = grabbit_gmail_get($user->uid))
+			  grabbit_gmail_crear($user->uid);
+
+			if($imap_user = grabbit_imap_get($user->uid))
+			  grabbit_imap_crear($user->uid);
+
+			_save_last_nid($user->uid);
+			watchdog("grabbit", "Cron for user ".$user->uid." has finished");
+		}
+	}else{
+	  $clear=db_query("DELETE from {grabbit_crons}");
+	}
+	
+}
+
+function _get_last_nid(){
+	$result = db_query("SELECT * from {grabbit_crons}");
+	$last = db_fetch_object($result);
+	return $last->uid;
+}
+
+function _save_last_nid($uid){
+	$clear= db_query("DELETE from {grabbit_crons}");
+	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d", $uid);
+}
