@@ -1489,11 +1489,20 @@ function facebook_grabbit_update_facebook($user){
 	  $facebook->set_user($suser, $session_key);
 	  if($timing = grabbit_users_get($user->uid,'facebook_timing')) // get the last time the api was called and retrieve from it
 	    {
-	      $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
-										           'viewer_id'=>$suser,    
-										           'limit'=>"15",
-										           'start_time'=>$timing->extra));		      
-		
+		  if($timing->extra>time()-86400){
+		    $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+											       'viewer_id'=>$suser,    
+											       'limit'=>"15"));		      
+				
+		  }else{
+		    $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
+											           'viewer_id'=>$suser,    
+											           'limit'=>"15",
+											           'start_time'=>$timing->extra));		      
+				
+		  }
+		  
+	      
 	   }
 	  else{
 	    $stream = $facebook->api_client->call_method('facebook.Stream.get', array('session_key' => $session_key,
