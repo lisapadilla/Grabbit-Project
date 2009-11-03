@@ -64,7 +64,7 @@ function grabbit_panels_get_panels(){
 	if($user->uid>0){
 		ini_set("memory_limit","128M");
 		set_time_limit(128);
-	/*	if($fuser = facebook_grabbit_get_fid($user->uid))
+		if($fuser = facebook_grabbit_get_fid($user->uid))
 		  facebook_grabbit_update_facebook($user);
 	
 		if($twitter_account = oauth_twitter_get_uid($user->uid))
@@ -75,7 +75,7 @@ function grabbit_panels_get_panels(){
 		
 		if($imap_user = grabbit_imap_get($user->uid))
 		  grabbit_imap_crear($user->uid);
-	  */
+	  
 	}
 
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
