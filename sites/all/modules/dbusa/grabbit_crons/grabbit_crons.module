@@ -1,33 +1,80 @@
 <?
 
 function grabbit_crons_cron() {
-  	ini_set("memory_limit","128M");
+  	ini_set("memory_limit","148M");
 	set_time_limit(128);
+	$now = time();
 	
-	$update=_get_last_nid();
+	$last_nid=_get_last_nid();
 	
-	$result = db_query("SELECT uid from {users} where status > 0 AND uid>%d LIMIT 20",$last_nid);
+	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 20",$last_nid);
+	
 	if(db_affected_rows($result)){
 	  	while($user = db_fetch_object($result)){
-			if($fuser = facebook_grabbit_get_fid($user->uid))
-			  facebook_grabbit_update_facebook($user);
+		if(grabbit_crons_cron_time()):
+	
+			if($fuser = facebook_grabbit_get_fid($user->uid)){
+				if (!grabbit_crons_cron_time()){
+			      break;
+			    }else{
+				  facebook_grabbit_update_facebook($user);
+			    }
+            }
 
-			if($twitter_account = oauth_twitter_get_uid($user->uid))
-			  facebook_grabbit_update_twitter($user);
+			if($twitter_account = oauth_twitter_get_uid($user->uid)){
+			  	if (!grabbit_crons_cron_time()){
+			      break;
+			    }else{
+			      facebook_grabbit_update_twitter($user);
+			    }
+			}
 
-			if($gmail_user = grabbit_gmail_get($user->uid))
-			  grabbit_gmail_crear($user->uid);
+			if($gmail_user = grabbit_gmail_get($user->uid)){
+				if (!grabbit_crons_cron_time()){
+			      break;
+			    }else{  
+			      grabbit_gmail_crear($user->uid);
+			    }
+			}
 
-			if($imap_user = grabbit_imap_get($user->uid))
-			  grabbit_imap_crear($user->uid);
-
+			if($imap_user = grabbit_imap_get($user->uid)){
+			  	if (!grabbit_crons_cron_time()){
+			      break;
+			    }else{
+			      grabbit_imap_crear($user->uid);
+			    }
+			}
+            
 			_save_last_nid($user->uid);
-			watchdog("grabbit", "Cron for user ".$user->uid." has finished");
+			$last_one=$user->uid;
+		  endif;
 		}
 	}else{
 	  $clear=db_query("DELETE from {grabbit_crons}");
 	}
+	watchdog("grabbit", "Last cron for ".$last_one." has finished");
 	
+}
+
+
+/**
+ * Check for time limits in cron processing.
+ *
+ * @return
+ *   Number of seconds left, zero if none.
+ */
+function grabbit_crons_cron_time() {
+  static $time_limit;
+  if (!$time_limit) {
+    $time_limit = time() + ini_get('max_execution_time');
+    // However, check for left time, maybe some other cron processing already occured
+    $cron_semaphore = variable_get('cron_semaphore', 0);
+    if ($cron_semaphore) {
+      $time_limit = min($time_limit, $cron_semaphore + ini_get('max_execution_time'));
+    }
+    timer_start('grabbit_cron');
+  }
+  return max($time_limit - time(), 0);
 }
 
 function _get_last_nid(){
