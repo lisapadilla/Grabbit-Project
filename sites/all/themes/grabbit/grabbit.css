@@ -1420,9 +1420,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   display: block;
 }
 
-.panel-grabbit .panel-title{
-  /* height: 37px;
-  background: url(images/mp_top.gif) 0 0 no-repeat; */
+.panel-grabbit .panel-title h3{
   display: none;
 }
 .panels-controllers{
