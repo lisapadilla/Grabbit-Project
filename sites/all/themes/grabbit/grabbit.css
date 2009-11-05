@@ -1748,3 +1748,12 @@ a.truncate_hide{
 #panels-pager{
   padding: 10px 24px;
 }
+#panels-pager a{
+  display: block;
+  width: 108px;
+  padding: 5px 0px 0px 0px;
+  height: 15px;
+  color: #555b6e;
+  float: left;
+  text-align: center;
+}
