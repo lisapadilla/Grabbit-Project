@@ -1745,3 +1745,6 @@ a.truncate_hide{
 	float:left;
 	width:100px;
 }
+#panels-pager{
+  padding: 10px 24px;
+}
