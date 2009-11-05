@@ -1103,6 +1103,8 @@
     line-height: 15px;
     margin-bottom: 10px;
     padding-right: 5px;
+    display: block;
+    width: 440px;
   }
   .panel-grabbit .twitter-message-stream a.twitter-name-link{
     color: #385691;
@@ -1110,7 +1112,7 @@
     font-size: 14px;
     line-height: 15px;
     display: block;
-    width: 540px;
+    width: 440px;
     float: left;
     margin-bottom: 10px;
   }
