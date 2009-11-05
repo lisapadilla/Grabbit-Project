@@ -1417,7 +1417,13 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   float: left;
   display: block;
 }
+
 .panel-grabbit .panel-title{
+  /* height: 37px;
+  background: url(images/mp_top.gif) 0 0 no-repeat; */
+  display: none;
+}
+.panels-controllers{
   height: 37px;
   background: url(images/mp_top.gif) 0 0 no-repeat;
 }
