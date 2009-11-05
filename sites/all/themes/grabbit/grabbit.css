@@ -1756,4 +1756,10 @@ a.truncate_hide{
   color: #555b6e;
   float: left;
   text-align: center;
+  font-size: 12px;
+  line-height: 13px;
+}
+#panels-pager a.activeSlide{
+  color: #FFFFFF;
+  background: url(images/pan_sel.gif) 0 0 no-repeat; 
 }
