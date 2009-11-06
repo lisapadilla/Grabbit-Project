@@ -119,6 +119,7 @@ function grabbit_crons_delete_nodes(){
 	    //$result = db_query($sql, $node_types);
 	    $result = db_query('SELECT * FROM {grabbit_panels} WHERE uid=8');
 	    while ($row = db_fetch_object($result)) {
+		print_r($row);
 	  //    node_delete($row->nid);
 	      $count++;
 	      if($count>=1){
