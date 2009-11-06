@@ -1,5 +1,19 @@
 <?
 
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_crons_menu() {
+  $items['app/delete'] = array( 
+    'title' => 'Delete Old Nodes', 
+    'page callback' => 'grabbit_crons_delete_nodes', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
+  return $items;
+}
+
 function grabbit_crons_cron() {
   	ini_set("memory_limit","348M");
 	ini_set('max_execution_time', 500);
@@ -87,4 +101,26 @@ function _get_last_nid(){
 function _save_last_nid($uid){
 	$clear= db_query("DELETE from {grabbit_crons}");
 	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d", $uid);
+}
+
+function grabbit_crons_delete_nodes(){
+	ini_set("memory_limit","348M");
+	ini_set('max_execution_time', 500);
+	$node_types = array(
+	  'facebook', //update this string with the type of node you want to delete
+	  'twitter',
+	  'gmail',
+	  'IMAP' //update this string with the type of node you want to delete and add any more lines you might need
+	);
+    $count = 0;
+    $starttime = mktime()-20*3600*24; 
+	
+	$sql = 'SELECT nid FROM {node} WHERE type IN ('. implode(', ', array_fill(0, count($node_types), "'%s'")). ') AND created < '.$starttime.' LIMIT 500';
+	    $result = db_query($sql, $node_types);
+	    while ($row = db_fetch_object($result)) {
+	      node_delete($row->nid);
+	      $count++;
+	    }
+	watchdog("grabbit", "FROM: ".date('d, M',$starttime));
+	watchdog("grabbit", "Nodes erased: ".$count);
 }
