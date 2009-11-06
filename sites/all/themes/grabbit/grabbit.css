@@ -1075,7 +1075,7 @@
     clear: left;
   }
   .panel-grabbit{
-    width: 473px;
+    width: 626px;
     float: left;
     overflow: hidden;
     background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
@@ -1103,6 +1103,8 @@
     line-height: 15px;
     margin-bottom: 10px;
     padding-right: 5px;
+    display: block;
+    width: 440px;
   }
   .panel-grabbit .twitter-message-stream a.twitter-name-link{
     color: #385691;
@@ -1110,7 +1112,7 @@
     font-size: 14px;
     line-height: 15px;
     display: block;
-    width: 140px;
+    width: 440px;
     float: left;
     margin-bottom: 10px;
   }
@@ -1417,9 +1419,24 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   float: left;
   display: block;
 }
-.panel-grabbit .panel-title{
+.panel-title{
+  padding: 5px 0px;
+}
+.panel-grabbit .panel-title h3,
+.panel-grabbit .panel-filters{
+  display: none;
+}
+.panels-controllers{
   height: 37px;
   background: url(images/mp_top.gif) 0 0 no-repeat;
+}
+a.add-new-panel{
+  float: right;
+  font-size: 12px;
+  line-height: 13px;
+  color: #555e6b;
+  margin: 5px 5px 0px 0px;
+  font-weight: bold;
 }
 #panel-1 .panel-title, .user-panels .panel-grabbit .panel-title{
   padding-bottom: 23px;
@@ -1684,7 +1701,7 @@ a.truncate_hide{
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
 #panel-0 .node-stream-deal .item-body{
-  width: 395px;
+  width: 547px;
   float: left;
 }
 
@@ -1738,4 +1755,22 @@ a.truncate_hide{
 #edit-contacts-wrapper{
 	float:left;
 	width:100px;
+}
+#panels-pager{
+  padding: 10px 24px;
+}
+#panels-pager a{
+  display: block;
+  width: 108px;
+  padding: 5px 0px 0px 0px;
+  height: 15px;
+  color: #555b6e;
+  float: left;
+  text-align: center;
+  font-size: 12px;
+  line-height: 13px;
+}
+#panels-pager a.activeSlide{
+  color: #FFFFFF;
+  background: url(images/pan_sel.gif) 0 0 no-repeat; 
 }
