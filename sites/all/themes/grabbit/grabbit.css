@@ -1419,8 +1419,11 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   float: left;
   display: block;
 }
-
-.panel-grabbit .panel-title h3{
+.panel-title{
+  padding: 5px 0px;
+}
+.panel-grabbit .panel-title h3,
+.panel-grabbit .panel-filters{
   display: none;
 }
 .panels-controllers{
