@@ -115,17 +115,11 @@ function grabbit_crons_delete_nodes(){
     $count = 0;
     $starttime = mktime()-20*3600*24; 
 	
-    //$sql = 'SELECT nid FROM {node} WHERE type IN ('. implode(', ', array_fill(0, count($node_types), "'%s'")). ') AND created < '.$starttime.' LIMIT 500';
-	    //$result = db_query($sql, $node_types);
-	    $result = db_query('SELECT * FROM {grabbit_panels} WHERE uid=1');
+    $sql = 'SELECT nid FROM {node} WHERE type IN ('. implode(', ', array_fill(0, count($node_types), "'%s'")). ') AND created < '.$starttime.' LIMIT 500';
+	    $result = db_query($sql, $node_types);
 	    while ($row = db_fetch_object($result)) {
-		print_r($row);
-	  //    node_delete($row->nid);
+	      node_delete($row->nid);
 	      $count++;
-	      if($count==1){
-	        $result = db_query('DELETE FROM {grabbit_panels} WHERE pan='.$row->pan);
-	        watchdog("grabbit", "DELET: ".$row->pan);
-          }
 	    }
 	watchdog("grabbit", "FROM: ".date('d, M',$starttime));
 	watchdog("grabbit", "Nodes erased: ".$count);
