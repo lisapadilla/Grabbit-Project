@@ -1430,6 +1430,13 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   height: 37px;
   background: url(images/mp_top.gif) 0 0 no-repeat;
 }
+a.add-new-panel{
+  float: right;
+  font-size: 12px;
+  line-height: 13px;
+  color: #555e6b;
+  margin: 0px 5px 0px 0px;
+}
 #panel-1 .panel-title, .user-panels .panel-grabbit .panel-title{
   padding-bottom: 23px;
   background: url(images/various/bg_left_top.gif) bottom left no-repeat;
