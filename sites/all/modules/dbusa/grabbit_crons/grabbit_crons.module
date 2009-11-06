@@ -121,7 +121,9 @@ function grabbit_crons_delete_nodes(){
 	    while ($row = db_fetch_object($result)) {
 	  //    node_delete($row->nid);
 	      $count++;
+	print_r($row);
 	      if($count>=1){
+		
 	        $result = db_query('DELETE FROM {grabbit_panels} WHERE pan='.$row->pan);
 	watchdog("grabbit", "DELET: ".$row->pan);
       }
