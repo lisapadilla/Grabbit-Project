@@ -115,7 +115,7 @@ function grabbit_crons_delete_nodes(){
     $count = 0;
     $starttime = mktime()-20*3600*24; 
 	
-    $sql = 'SELECT nid FROM {node} WHERE type IN ('. implode(', ', array_fill(0, count($node_types), "'%s'")). ') AND created < '.$starttime.' LIMIT 500';
+    $sql = 'SELECT nid FROM {node} WHERE type IN ('. implode(', ', array_fill(0, count($node_types), "'%s'")). ') AND created < '.$starttime.' LIMIT 1500';
 	    $result = db_query($sql, $node_types);
 	    while ($row = db_fetch_object($result)) {
 	      node_delete($row->nid);
