@@ -1,0 +1,156 @@
+/*
+ * SWFUpload jQuery Plugin v1.0.0
+ *
+ * Copyright (c) 2009 Adam Royle
+ * Licensed under the MIT license.
+ *
+ */
+
+(function($){
+	
+	var defaultHandlers = ['swfupload_loaded_handler','file_queued_handler','file_queue_error_handler','file_dialog_start_handler','file_dialog_complete_handler','upload_start_handler','upload_progress_handler','upload_error_handler','upload_success_handler','upload_complete_handler','queue_complete_handler'];
+	var additionalHandlers = [];
+	
+	$.fn.swfupload = function(){
+		var args = $.makeArray(arguments);
+		return this.each(function(){
+			var swfu;
+			if (args.length == 1 && typeof(args[0]) == 'object') {
+				swfu = $(this).data('__swfu');
+				if (!swfu) {
+					var settings = args[0];
+					var $magicUploadControl = $(this);
+					var handlers = [];
+					$.merge(handlers, defaultHandlers);
+					$.merge(handlers, additionalHandlers);
+					$.each(handlers, function(i, v){
+						var eventName = v.replace(/_handler$/, '').replace(/_([a-z])/g, function(){ return arguments[1].toUpperCase(); });
+						settings[v] = function() {
+							var event = $.Event(eventName);
+							$magicUploadControl.trigger(event, $.makeArray(arguments));
+							return !event.isDefaultPrevented();
+						};
+					});
+					$(this).data('__swfu', new SWFUpload(settings));
+				}
+			} else if (args.length > 0 && typeof(args[0]) == 'string') {
+				var methodName = args.shift();
+				swfu = $(this).data('__swfu');
+				if (swfu && swfu[methodName]) {
+					swfu[methodName].apply(swfu, args);
+				}
+			}
+		});
+	};
+	
+	$.swfupload = {
+		additionalHandlers: function() {
+			if (arguments.length === 0) {
+				return additionalHandlers.slice();
+			} else {
+				$(arguments).each(function(i, v){
+					$.merge(additionalHandlers, $.makeArray(v));
+				});
+			}
+		},
+		defaultHandlers: function() {
+			return defaultHandlers.slice();
+		},
+		getInstance: function(el) {
+			return $(el).data('__swfu');
+		}
+	};
+	
+})(jQuery);
+
+function file_to_tinymce(urlcomplete){
+        
+		myurl = encodeURIComponent(urlcomplete);
+		$.getJSON("http://json-tinyurl.appspot.com/?url=" + myurl + "&callback=?", 
+	        function(data)
+	        { 
+				
+				$("#edit-status").val($("#edit-status").val()+data.tinyurl+' ');
+				var scroll = $("#edit-status");
+				$("#edit-status").focus();
+				$('#edit-RT').val(1);
+				pageTracker._trackPageview(myurl);
+	        }
+	    );
+}
+
+Drupal.behaviors.frontpage = function(){
+	
+ $('#swfupload-control').swfupload({  
+         upload_url: Drupal.settings.basePath+"yfrog/upload",  
+         file_post_name: 'files',  
+         file_size_limit : "1024",  
+         file_types : "*.jpg;*.png;*.gif;*.mov;*.flv",  
+         file_types_description : "Image files",  
+         file_upload_limit : 10,  
+         flash_url : Drupal.settings.basePath+"sites/all/themes/grabbit/js/swfupload/swfupload.swf",  
+         button_image_url : Drupal.settings.basePath+'sites/all/themes/grabbit/js/swfupload/wdp_buttons_upload_114x299.png',  
+         button_width : 79,  
+         button_height : 22,  
+         button_placeholder : $('#button')[0],  
+         debug: false
+     })
+         .bind('fileQueued', function(event, file){  
+             var listitem='<li id="'+file.id+'" >'+  
+                 'File: <em>'+file.name+'</em> ('+Math.round(file.size/1024)+' KB) <span class="progressvalue" ></span>'+  
+                 '<div class="progressbar" ><div class="progress" ></div></div>'+  
+                 '<p class="status" >Pending</p>'+  
+                 '<span class="cancel" >&nbsp;</span>'+  
+                 '</li>';  
+             $('#log').append(listitem);  
+             $('li#'+file.id+' .cancel').bind('click', function(){ //Remove from queue on cancel click  
+                 var swfu = $.swfupload.getInstance('#swfupload-control');  
+                 swfu.cancelUpload(file.id);  
+                 $('li#'+file.id).slideUp('fast');  
+             });  
+             // start the upload since it's queued  
+             $(this).swfupload('startUpload'); 
+         }) 
+         .bind('fileQueueError', function(event, file, errorCode, message){ 
+             alert('Oop! Size of the file '+file.name+' is greater than the limit!'); 
+         }) 
+         .bind('fileDialogComplete', function(event, numFilesSelected, numFilesQueued){ 
+              
+         }) 
+         .bind('uploadStart', function(event, file){ 
+             $('#log li#'+file.id).find('p.status').text('Uploading...'); 
+             $('#log li#'+file.id).find('span.progressvalue').text('0%'); 
+             $('#log li#'+file.id).find('span.cancel').hide(); 
+         }) 
+         .bind('uploadProgress', function(event, file, bytesLoaded){ 
+             //Show Progress 
+             var percentage=Math.round((bytesLoaded/file.size)*100); 
+             $('#log li#'+file.id).find('div.progress').css('width', percentage+'%'); 
+             $('#log li#'+file.id).find('span.progressvalue').text(percentage+'%'); 
+         }) 
+         .bind('uploadSuccess', function(event, file, serverData){ 
+             var item=$('#log li#'+file.id);  
+             item.find('div.progress').css('width', '100%'); 
+             item.find('span.progressvalue').text('100%');
+             if(serverData!=0){
+	           	var pathtofile="http://daniloblackusa.net"+serverData; 
+	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
+	             file_to_tinymce(pathtofile);
+	             $("#log li").hide(); 
+	             $(".panels-update-form_file").slideToggle("fast");
+             }else{
+	           alert("Oops! there was a problem uploading your file, please try again!");
+	           $("#log li").hide();
+             }
+             
+         }) 
+         .bind('uploadComplete', function(event, file){ 
+             // upload has completed, try the next one in the queue 
+             $(this).swfupload('startUpload');  
+         })
+
+      $(".upload_button_expand a").click(function(element){
+	     $(".panels-update-form_file").slideToggle("fast");
+	     return false;
+       });
+}
