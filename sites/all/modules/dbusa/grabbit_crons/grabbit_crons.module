@@ -165,8 +165,7 @@ function grabbit_crons_emails_pull() {
 			}
             
 			_save_last_nid_emails($user->uid);
-			$last_one=$user->uid;
-			watchdog("grabbit", "termino un usuario");
+			watchdog("grabbit", "termino un usuario ".$user->name);
 		  endif;
 		}
 	}else{
