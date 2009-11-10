@@ -250,7 +250,7 @@ function grabbit_imap_crear($user=1){
 	
 	foreach($tot as $i)
 	{
-		
+		watchdog("grabbit", "guardando mail de ".$user->name);
 	    $head=$obj->getHeaders($i);  // Get Header Info Return Array Of Headers **Array Keys are (subject,to,toOth,toNameOth,from,fromName)
 	
 	    if(strtotime($head['date'])>strtotime($time)){
