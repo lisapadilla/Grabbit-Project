@@ -45,7 +45,7 @@ function grabbit_crons_cron() {
 			    }
 			}
 
-			if($gmail_user = grabbit_gmail_get($user->uid)){
+		/*	if($gmail_user = grabbit_gmail_get($user->uid)){
 				if (!grabbit_crons_cron_time()){
 			      break;
 			    }else{  
@@ -60,13 +60,13 @@ function grabbit_crons_cron() {
 			      grabbit_imap_crear($user->uid);
 			    }
 			}
-            
+          */  
 			_save_last_nid($user->uid);
 			$last_one=$user->uid;
 		  endif;
 		}
 	}else{
-	  $clear=db_query("DELETE from {grabbit_crons}");
+	  $clear=db_query("DELETE from {grabbit_crons} WHERE lastime='CRON'");
 	}
 	watchdog("grabbit", "Last cron for ".$last_one." has finished");
 	
@@ -94,14 +94,14 @@ function grabbit_crons_cron_time() {
 }
 
 function _get_last_nid(){
-	$result = db_query("SELECT * from {grabbit_crons}");
+	$result = db_query("SELECT * from {grabbit_crons} WHERE lastime='CRON'");
 	$last = db_fetch_object($result);
 	return $last->uid;
 }
 
 function _save_last_nid($uid){
-	$clear= db_query("DELETE from {grabbit_crons}");
-	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d", $uid);
+	$clear= db_query("DELETE from {grabbit_crons} WHERE lastime='CRON'");
+	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d, lastime='CRON'", $uid);
 }
 
 function grabbit_crons_delete_nodes(){
@@ -124,4 +124,69 @@ function grabbit_crons_delete_nodes(){
 	    }
 	watchdog("grabbit", "FROM: ".date('d, M',$starttime));
 	watchdog("grabbit", "Nodes erased: ".$count);
+}
+
+function grabbit_crons_emails_pull() {
+  	ini_set("memory_limit","348M");
+	ini_set('max_execution_time', 500);
+	watchdog("grabbit", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
+	$now = time();
+	
+	$last_nid=_get_last_nid_emails();
+	
+	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
+	
+	if(db_affected_rows($result)){
+	  	while($user = db_fetch_object($result)){
+		if(grabbit_crons_cron_time_emails()):
+
+			if($gmail_user = grabbit_gmail_get($user->uid)){
+				if (!grabbit_crons_cron_time_emails()){
+			      break;
+			    }else{  
+			      grabbit_gmail_crear($user->uid);
+			    }
+			}
+
+			if($imap_user = grabbit_imap_get($user->uid)){
+			  	if (!grabbit_crons_cron_time_emails()){
+			      break;
+			    }else{
+			      grabbit_imap_crear($user->uid);
+			    }
+			}
+            
+			_save_last_nid_emails($user->uid);
+			$last_one=$user->uid;
+		  endif;
+		}
+	}else{
+	  $clear=db_query("DELETE from {grabbit_crons} where lastime='EMAILS'");
+	}
+	watchdog("grabbit", "Last Email for ".$last_one." has finished");
+	
+}
+
+
+/**
+ * Check for time limits in emails processing.
+ *
+ * @return
+ *   Number of seconds left, zero if none.
+ */
+function grabbit_crons_cron_time_emails() {
+  $time_limit = time() + ini_get('max_execution_time');
+  return max($time_limit - time(), 0);
+}
+
+
+function _get_last_nid_emails(){
+	$result = db_query("SELECT * from {grabbit_crons} WHERE lastime='EMAILS'");
+	$last = db_fetch_object($result);
+	return $last->uid;
+}
+
+function _save_last_nid_emails($uid){
+	$clear= db_query("DELETE from {grabbit_crons} where uid=%d AND lastime='EMAILS'");
+	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d, lastime='EMAILS'", $uid);
 }
