@@ -185,10 +185,11 @@ function grabbit_crons_emails_pull() {
  *   Number of seconds left, zero if none.
  */
 function grabbit_crons_cron_time_emails() {
-  $time_limite = time() + ini_get('max_execution_time');
-print $time_limite."  -  ".time()."<br>";
-print max($time_limite - time(), 0)."<- <br>";
-  return max($time_limite - time(), 0);
+  static $time_limite;
+  if (!$time_limite) {
+    $time_limit = time() + ini_get('max_execution_time');
+  }
+  return max($time_limit - time(), 0);
 }
 
 
