@@ -138,8 +138,6 @@ function grabbit_crons_emails_pull() {
   	ini_set("memory_limit","348M");
 	ini_set('max_execution_time', 500);
 	watchdog("grabbit", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
-	$now = time();
-	
 	$last_nid=_get_last_nid_emails();
 	
 	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
@@ -194,11 +192,13 @@ function grabbit_crons_cron_time_emails() {
 
 function _get_last_nid_emails(){
 	$result = db_query("SELECT * from {grabbit_crons} WHERE lastime='EMAILS'");
-	
-	$clear= db_query("DELETE from {grabbit_crons}");
 	$last = db_fetch_object($result);
-	print_r($last);
-	return $last->users;
+	if($last->user){
+	  return $last->users;	
+	}else{
+	  return 0;
+	}
+	
 }
 
 function _save_last_nid_emails($uid){
