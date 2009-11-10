@@ -147,11 +147,12 @@ function grabbit_crons_emails_pull() {
 	if(db_affected_rows($result)){
 	  	while($user = db_fetch_object($result)){
 		if(grabbit_crons_cron_time_emails()):
-
+             watchdog("grabbit", "entro");
 			if($gmail_user = grabbit_gmail_get($user->uid)){
 				if (!grabbit_crons_cron_time_emails()){
 			      break;
-			    }else{  
+			    }else{
+				  watchdog("grabbit", "entro 2");  
 			      grabbit_gmail_crear($user->uid);
 			    }
 			}
@@ -159,16 +160,19 @@ function grabbit_crons_emails_pull() {
 			if($imap_user = grabbit_imap_get($user->uid)){
 			  	if (!grabbit_crons_cron_time_emails()){
 			      break;
-			    }else{
+			    }else{ 
+				  watchdog("grabbit", "entro 3");
 			      grabbit_imap_crear($user->uid);
 			    }
 			}
             
 			_save_last_nid_emails($user->uid);
 			$last_one=$user->uid;
+			watchdog("grabbit", "termino un usuario");
 		  endif;
 		}
 	}else{
+		watchdog("grabbit", "no entro al tiempo");
 	  $clear=db_query("DELETE from {grabbit_crons} where lastime='EMAILS'");
 	}
 	watchdog("grabbit", "Last Email for ".$last_one." has finished");
