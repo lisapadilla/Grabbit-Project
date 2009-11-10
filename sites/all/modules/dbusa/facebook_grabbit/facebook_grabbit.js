@@ -295,10 +295,11 @@ $(document).ready(function() {
 	$(".twitter_favorite, .twitter_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
 	  var tag = $(this);
+	  var nid= $(this).attr("nid");
 	  
 	  if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
-	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{id:id,type:"twitter"},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{id:id,type:"twitter",nid:nid},function(data){
 	      //Successfully added to favorites
 	      //Testing if it works
 				if (data){
@@ -311,7 +312,7 @@ $(document).ready(function() {
 	  }
 	  else{ //Remove from favorites
 	  tag.text("Removing from favorites...");
-	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{id:id,type:"twitter"},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{id:id,type:"twitter",nid:nid},function(data){
 	      //Successfully removed from favorites
 	      //Testing if it works
 				if (data){
@@ -377,10 +378,11 @@ $(document).ready(function() {
 	$(".facebook_favorite, .facebook_favorite-remove").click(function () {
 	  var id = $(this).attr("id"); //post_id
 	  var tag = $(this);
+	  var nid= $(this).attr("nid");
 	 
 	  if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
-	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{id:id,type:"facebook"},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{id:id,type:"facebook",nid:nid},function(data){
 	      //Successfully added to favorites
 	      //Testing if it works
 				if (data){
@@ -393,7 +395,7 @@ $(document).ready(function() {
 	  }
 	  else{ //Remove from favorites
 	  tag.text("Removing from favorites...");
-	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{id:id,type:"facebook"},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{id:id,type:"facebook",nid:nid},function(data){
 	      //Successfully removed from favorites
 	      //Testing if it works
 				if (data){

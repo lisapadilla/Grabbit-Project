@@ -443,7 +443,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
-	<a id="'.$post->field_post_id[0]['value'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
+	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
 	<span class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</span>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
@@ -526,7 +526,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
-	<a id="'.$post->field_post_id[0]['value'].'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
+	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a><div class="facebook-post-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
@@ -1074,10 +1074,10 @@ function theme_twitter_message($node){
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$screen_name.'">Reply</a>';
 
     if (grabbit_favorites_get('twitter',$node->field_twitter_post_id[0]['value'])){
-		$output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
+		$output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" nid="'.$node->nid.'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
 	  }
 	  else{ //true
-	    $output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a></div>';
+	    $output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" nid="'.$node->nid.'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a></div>';
 	  }
 
 	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
