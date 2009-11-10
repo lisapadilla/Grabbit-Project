@@ -194,8 +194,7 @@ function grabbit_search_custom_form(&$form_state){
 	  '#type' => 'fieldset',
 	  '#title' => t('Advanced Search'),
 	  '#weight' => 5,
-	  '#collapsible' => TRUE,
-	  '#collapsed' => FALSE,
+	  '#collapsible' => TRUE
 	);
 	
 	$form['detailed']['details'] = array(
