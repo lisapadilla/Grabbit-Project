@@ -1496,8 +1496,6 @@ li.panel-gear{
   float: right;
   width: 35px;
   height: 20px;
-  overflow: hidden;
-  text-indent: 3000em;
   background: url(images/various/engrane.gif) 0 0 no-repeat;
 }
 a.panel-filters{
