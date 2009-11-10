@@ -464,7 +464,7 @@ function theme_panels($private_view,$id,$name,$unique=0){
 	             <div class="panel-title clearfix">
 	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
 	      if($name!='Main Stream')
-		    $output .= "<ul><li>".l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE))'
+		    $output .= "<ul><li>".l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
 		                    <li>'.$clooser.'</li></ul>';
 		
            $output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
