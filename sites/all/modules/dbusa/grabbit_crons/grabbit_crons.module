@@ -142,7 +142,7 @@ function grabbit_crons_emails_pull() {
 	
 	$last_nid=_get_last_nid_emails();
 	
-	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
+	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",1);
 	
 	if(db_affected_rows($result)){
 	  	while($user = db_fetch_object($result)){
