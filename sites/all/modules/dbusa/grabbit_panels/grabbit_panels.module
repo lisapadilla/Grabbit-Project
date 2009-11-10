@@ -137,8 +137,14 @@ function grabbit_panels_edit_panels(){
 		print $output;	
 	}
 	else{
-		$output = drupal_get_form("grabbit_panels_source_create_form",$panel);
-		print $output;
+		global $user;
+		$panels = grabbit_panels_get_all_panels($user->uid);
+		if(db_afected_rows($panels)>=4){
+		  $output = "We are sorry. Grabbit is still on Beta and your account can only have 4 streams. We will increase this number in the future!";	
+		}else{
+		  $output = drupal_get_form("grabbit_panels_source_create_form",$panel);
+		  print $output;
+		}
 	}
 }
 
