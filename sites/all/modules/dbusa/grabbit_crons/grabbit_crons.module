@@ -187,9 +187,9 @@ function grabbit_crons_emails_pull() {
 function grabbit_crons_cron_time_emails() {
   static $time_limite;
   if (!$time_limite) {
-    $time_limit = time() + ini_get('max_execution_time');
+    $time_limite = time() + ini_get('max_execution_time');
   }
-  return max($time_limit - time(), 0);
+  return max($time_limite - time(), 0);
 }
 
 
