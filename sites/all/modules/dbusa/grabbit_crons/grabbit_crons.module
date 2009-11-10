@@ -201,6 +201,6 @@ function _get_last_nid_emails(){
 
 function _save_last_nid_emails($uid){
 	$random = 8282;
-	$clear= db_query("DELETE from {grabbit_crons} where users=%d AND lastime='EMAILS'");
+	$clear= db_query("DELETE from {grabbit_crons} where lastime='EMAILS'");
 	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d, users=%d, lastime='EMAILS'", $random, $uid);
 }
