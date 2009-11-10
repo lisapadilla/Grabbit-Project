@@ -195,10 +195,11 @@ function grabbit_crons_cron_time_emails() {
 function _get_last_nid_emails(){
 	$result = db_query("SELECT * from {grabbit_crons} WHERE lastime='EMAILS'");
 	$last = db_fetch_object($result);
-	return $last->uid;
+	return $last->users;
 }
 
 function _save_last_nid_emails($uid){
-	$clear= db_query("DELETE from {grabbit_crons} where uid=%d AND lastime='EMAILS'");
-	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d, lastime='EMAILS'", $uid);
+	$random = 8282;
+	$clear= db_query("DELETE from {grabbit_crons} where users=%d AND lastime='EMAILS'");
+	$result = db_query("INSERT INTO {grabbit_crons} SET uid=%d, users=%d, lastime='EMAILS'", $random, $uid);
 }
