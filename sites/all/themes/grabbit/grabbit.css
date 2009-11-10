@@ -1578,6 +1578,9 @@ a.panel-filters{
 }
 .node-stream-news h2,
 .node-stream-blogs h2{
+  display: block;
+  width: 530px;
+  line-height: 15px;
 }
 .node-stream-deal h2{
   width: 130px;
