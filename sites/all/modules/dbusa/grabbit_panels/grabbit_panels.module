@@ -65,7 +65,7 @@ function grabbit_panels_user($op, &$edit, &$account, $category = NULL) {
     case 'categories':
       return array(
         array(
-          'name' => 'myfeeds',
+          'name' => 'add_rss',
           'title' => 'Add RSS',
           'weight' => 3,
         ),
