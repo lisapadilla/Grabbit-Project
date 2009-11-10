@@ -195,6 +195,7 @@ function grabbit_crons_cron_time_emails() {
 function _get_last_nid_emails(){
 	$result = db_query("SELECT * from {grabbit_crons} WHERE lastime='EMAILS'");
 	$last = db_fetch_object($result);
+	print_r($last);
 	return $last->users;
 }
 
