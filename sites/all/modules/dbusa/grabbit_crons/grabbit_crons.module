@@ -71,6 +71,7 @@ function grabbit_crons_cron() {
 			_save_last_nid($user->uid);
 			$last_one=$user->uid;
 		  endif;
+		  watchdog("grabbit", "running for user ".$user->name);
 		}
 	}else{
 	  $clear=db_query("DELETE from {grabbit_crons} WHERE lastime='CRON'");
