@@ -137,8 +137,8 @@ function grabbit_crons_delete_nodes(){
 }
 
 function grabbit_crons_emails_pull() {
-  	ini_set("memory_limit","348M");
-	ini_set('max_execution_time', 500);
+  	ini_set("memory_limit","448M");
+	ini_set('max_execution_time', 800);
 	watchdog("grabbit", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
 	$last_nid=_get_last_nid_emails();
 	
