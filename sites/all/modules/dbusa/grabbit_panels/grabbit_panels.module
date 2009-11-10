@@ -454,7 +454,7 @@ function theme_panels($private_view,$id,$name,$unique=0){
 	
     global $user;
 
-      $clooser='<a href="javascript:void(0)" panelid="'.$id.'" class="panel-closer"></a>';
+      $clooser='<a href="javascript:void(0)" panelid="'.$id.'" class="panel-closer">Delete</a>';
 
     if(!$name)
       $name="Panel ".$id;
