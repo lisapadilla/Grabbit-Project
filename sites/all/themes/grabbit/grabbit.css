@@ -975,6 +975,21 @@
     line-height: 12px;
     position: relative;
   }
+.upload_button_expand a, .panels-update-form_file{
+    color: #666666;
+    font-size: 10px;
+    line-height: 12px;
+    position: relative;
+	
+}
+.upload_button_expand a{
+    color: #666666;
+    margin-left:15px;
+	
+}
+.panels-update-form_file{
+ 	margin-left:10px;
+}
   #facebook-grabbit-update-form .user-data{
     width: 247px;
     float: left;
@@ -1061,7 +1076,7 @@
   }
   #block-friend_search-2{
     background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
-    height: 123px;
+    display:block;
     position: relative;
   }
   #block-friend_search-2 .block-inner{
@@ -1074,12 +1089,23 @@
     overflow: hidden;
     clear: left;
   }
-  .panel-grabbit{
+  .panel-grabbit, #files-container{
     width: 626px;
     float: left;
     overflow: hidden;
     background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
   }
+  #files-container-inner{
+    padding:15px;
+    height:450px;	
+  }
+  
+  .page-display-file #content{
+	height:600px;
+}
+.page-display-file #content .swftools{
+	margin-left:85px;
+}
   .facebook-post,
   .twitter-message-stream,
   .node-stream-news,
@@ -1426,7 +1452,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 .panel-grabbit .panel-filters{
   display: none;
 }
-.panels-controllers{
+.panels-controllers, #files-container-header{
   height: 37px;
   background: url(images/mp_top.gif) 0 0 no-repeat;
 }
@@ -1465,13 +1491,11 @@ a.add-new-panel{
   color: #999999;
   margin: 0px;
 }
-a.panel-gear{
+li.panel-gear{
   display: block;
   float: right;
-  width: 35px;
+  width: 55px;
   height: 20px;
-  overflow: hidden;
-  text-indent: 3000em;
   background: url(images/various/engrane.gif) 0 0 no-repeat;
 }
 a.panel-filters{
@@ -1773,4 +1797,75 @@ a.truncate_hide{
 #panels-pager a.activeSlide{
   color: #FFFFFF;
   background: url(images/pan_sel.gif) 0 0 no-repeat; 
+}
+#swfupload-control p{ margin:10px 5px; font-size:0.9em; }  
+#log{ margin:0; padding:0; width:500px;}  
+#log li{ list-style-position:inside; margin:2px; border:1px solid #ccc; padding:10px; font-size:12px;  
+     font-family:Arial, Helvetica, sans-serif; color:#333; background:#fff; position:relative;}  
+#log li .progressbar{ border:1px solid #333; height:5px; background:#fff; }  
+#log li .progress{ background:#999; width:0%; height:5px; }  
+#log li p{ margin:0; line-height:18px; }  
+#log li.success{ border:1px solid #339933; background:#ccf9b9; }  
+#log li span.cancel{ position:absolute; top:5px; rightright:5px; width:20px; height:20px;  
+  background:url('js/swfupload/cancel.png') no-repeat; cursor:pointer; }
+.upload_button_expand{
+	display:inline-block;
+}
+
+ul.dropdown,
+ul.dropdown li,
+ul.dropdown ul {
+ list-style: none;
+ margin: 0;
+ padding: 0;
+}
+
+ul.dropdown {
+ position: relative;
+ z-index: 597;
+ float: right;
+}
+
+ul.dropdown li {
+ float: right;
+ line-height: 1.3em;
+ vertical-align: middle;
+ zoom: 1;
+}
+
+ul.dropdown li.hover,
+ul.dropdown li:hover {
+ position: relative;
+ z-index: 599;
+ cursor: default;
+}
+
+ul.dropdown ul {
+ visibility: hidden;
+ position: absolute;
+ top: 100%;
+ left: 0;
+ z-index: 598;
+ width: 100%;
+ background:#EFEFEF;
+}
+
+ul.dropdown ul li {
+ float: none;
+}
+
+ul.dropdown ul ul {
+ top: 1px;
+ left: 99%;
+}
+
+ul.dropdown a{
+	color:#555E6B;
+	font-size:12px;
+	font-weight:bold;
+	line-height:13px;
+}
+
+ul.dropdown li:hover > ul {
+ visibility: visible;
 }

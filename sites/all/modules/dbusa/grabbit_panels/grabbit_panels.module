@@ -69,13 +69,13 @@ function grabbit_panels_get_panels(){
 	
 		if($twitter_account = oauth_twitter_get_uid($user->uid))
 		  facebook_grabbit_update_twitter($user);
-		
-		if($gmail_user = grabbit_gmail_get($user->uid))
+		// EMAILS NO BECAUSE OUR SERVER MELTS DOWN
+	/*	if($gmail_user = grabbit_gmail_get($user->uid))
 		  grabbit_gmail_crear($user->uid);
 		
 		if($imap_user = grabbit_imap_get($user->uid))
 		  grabbit_imap_crear($user->uid);
-	  
+	  */
 	}
 
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
@@ -454,8 +454,7 @@ function theme_panels($private_view,$id,$name,$unique=0){
 	
     global $user;
 
-    if($unique!=1)
-      $clooser='<a href="javascript:void(0)" panelid="'.$id.'" class="panel-closer"></a>';
+      $clooser='<a href="javascript:void(0)" panelid="'.$id.'" class="panel-closer">Delete</a>';
 
     if(!$name)
       $name="Panel ".$id;
@@ -464,13 +463,14 @@ function theme_panels($private_view,$id,$name,$unique=0){
 		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'">
 	             <div class="panel-title clearfix">
 	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
-	          
-		  $output .= l('<span>Edit Source</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox panel-gear'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
-                '.l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
+	      if($name!='Main Stream')
+		    $output .= "<ul class='dropdown'><li class='dir panel-gear'><ul><li>".l('<span>Edit</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
+		                    </li><li>'.$clooser.'</li></ul></li></ul>';
+		
+           $output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
 	
 			$output .= '</div>
 	             <div class="panel-wraper">
-	             		'.$clooser.'
 	             		'.$private_view.'</div>
 	           </div>';
 	           

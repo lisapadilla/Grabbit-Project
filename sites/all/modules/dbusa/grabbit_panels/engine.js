@@ -13,11 +13,11 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
 		  $('.move-left').click();
 		  $('#panel-'+panel).remove();
 		  $('.panels-pager').empty();
-		  $('.user-panels').cycle('stop');
-		  ct = $('.user-panels').children().size();
+		  $('.suser-panels').cycle('stop');
+		  ct = $('.suser-panels').children().size();
 				
 		  if (ct>1){
-		    $('.user-panels').cycle({
+		    $('.suser-panels').cycle({
 			  fx:      'scrollHorz',
 			  next:    '.move-right',
 		      prev:    '.move-left',
@@ -26,7 +26,7 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
 		      prevNextClick: fixtheheight
 		    });	
 		  }else{
-			$('.user-panels div').show();
+			$('.suser-panels div').show();
 			$('.panel-closer').hide();
 		  }
 		}else{

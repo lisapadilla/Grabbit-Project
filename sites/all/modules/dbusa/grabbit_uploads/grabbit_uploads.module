@@ -28,10 +28,40 @@ function grabbit_uploads_menu()
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK
   ); 
+  $items['display/file'] = array( 
+    'page callback' => 'grabbit_uploads_display_file', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
 
   return $items;
 }
 
+function grabbit_uploads_display_file(){
+	$error="Oops! we could not find the file, check the URL and try again!";
+	if ($_GET['file_id']){
+		$result = db_query('SELECT * FROM {files} WHERE fid = %d', $_GET['file_id']);
+		if (db_affected_rows($result)){
+			$file=db_fetch_object($result);
+			$ext = substr($file->filename, strrpos($file->filename, '.') + 1);
+			switch($ext){
+				case "mov":
+				case "flv":
+				  $output = swf($file->filepath, array('params' => array('width' => '430', 'height'=>'400')));
+				break;
+				default:
+				  $output = theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '');
+				break;
+			}
+			return $output;
+		}else{
+			return $error;
+		}
+	 
+	}else{
+		return $error;
+	}
+}
 
 class twitpic
 {
@@ -104,24 +134,217 @@ class twitpic
 
 function grabbit_uploads_file_form_getit(){
 	
-	  $file=$_FILES['media'];
-	  $postfields = array();
+	// Code for Session Cookie workaround
+		if (isset($_POST["PHPSESSID"])) {
+			session_id($_POST["PHPSESSID"]);
+		} else if (isset($_GET["PHPSESSID"])) {
+			session_id($_GET["PHPSESSID"]);
+		}
 
-	  $postfields['username'] = 'ivanfuyivara';
-	  $postfields['password'] = "internet";
-	  $postfields['media'] = "@$file[tmp_name]";
+		session_start();
 
-	  $t=new twitpic($postfields,true);
-	  $t->post();
-	  
-	   $xml = new SimpleXMLElement($t->result);
-	
-       if(findAttribute($xml, 'stat')!='fail'){
-	     print $xml->mediaurl;
-       }else{
-	     print findAttribute($xml->err, 'code');
-       }
+	// Check post_max_size (http://us3.php.net/manual/en/features.file-upload.php#73762)
+		$POST_MAX_SIZE = ini_get('post_max_size');
+		$unit = strtoupper(substr($POST_MAX_SIZE, -1));
+		$multiplier = ($unit == 'M' ? 1048576 : ($unit == 'K' ? 1024 : ($unit == 'G' ? 1073741824 : 1)));
 
+		if ((int)$_SERVER['CONTENT_LENGTH'] > $multiplier*(int)$POST_MAX_SIZE && $POST_MAX_SIZE) {
+			exit(0);
+		}
+
+	// Settings
+		$save_path = base_path() . "sites/default/files/uploads/";	// The path were we will save the file (getcwd() may not be reliable and should be tested in your environment)
+		$upload_name = "files";
+		$max_file_size_in_bytes = 2147483647;				// 2GB in bytes
+		$extension_whitelist = array("jpg", "gif", "png","flv","mov");	// Allowed file extensions
+		$valid_chars_regex = '.A-Z0-9_ !@#$%^&()+={}\[\]\',~`-';				// Characters allowed in the file name (in a Regular Expression format)
+
+	// Other variables	
+		$MAX_FILENAME_LENGTH = 260;
+		$file_name = "";
+		$file_extension = "";
+		$uploadErrors = array(
+	        0=>"There is no error, the file uploaded with success",
+	        1=>"The uploaded file exceeds the upload_max_filesize directive in php.ini",
+	        2=>"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form",
+	        3=>"The uploaded file was only partially uploaded",
+	        4=>"No file was uploaded",
+	        6=>"Missing a temporary folder"
+		);
+
+
+	// Validate the upload
+		if (!isset($_FILES[$upload_name])) {
+			exit(0);
+		} else if (isset($_FILES[$upload_name]["error"]) && $_FILES[$upload_name]["error"] != 0) {
+			exit(0);
+		} else if (!isset($_FILES[$upload_name]["tmp_name"]) || !@is_uploaded_file($_FILES[$upload_name]["tmp_name"])) {
+			exit(0);
+		} else if (!isset($_FILES[$upload_name]['name'])) {
+			
+			exit(0);
+		}
+
+	// Validate the file size (Warning: the largest files supported by this code is 2GB)
+		$file_size = @filesize($_FILES[$upload_name]["tmp_name"]);
+		if (!$file_size || $file_size > $max_file_size_in_bytes) {
+			HandleError("File exceeds the maximum allowed size");
+			exit(0);
+		}
+
+		if ($file_size <= 0) {
+			HandleError("File size outside allowed lower bound");
+			exit(0);
+		}
+
+
+	// Validate file name (for our purposes we'll just remove invalid characters)
+		$file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', "", basename($_FILES[$upload_name]['name']));
+		if (strlen($file_name) == 0 || strlen($file_name) > $MAX_FILENAME_LENGTH) {
+			HandleError("Invalid file name");
+			exit(0);
+		}
+
+	// Validate file extension
+		$path_info = pathinfo($_FILES[$upload_name]['name']);
+		$file_extension = $path_info["extension"];
+		$is_valid_extension = false;
+		foreach ($extension_whitelist as $extension) {
+			if ($file_extension == $extension) {
+				$is_valid_extension = true;
+				break;
+			}
+		}
+		if (!$is_valid_extension) {
+			HandleError("Invalid file extension");
+			exit(0);
+		}
+
+	// Validate file contents (extension and mime-type can't be trusted)
+		/*
+			Validating the file contents is OS and web server configuration dependant.  Also, it may not be reliable.
+			See the comments on this page: http://us2.php.net/fileinfo
+
+			Also see http://72.14.253.104/search?q=cache:3YGZfcnKDrYJ:www.scanit.be/uploads/php-file-upload.pdf+php+file+command&hl=en&ct=clnk&cd=8&gl=us&client=firefox-a
+			 which describes how a PHP script can be embedded within a GIF image file.
+
+			Therefore, no sample code will be provided here.  Research the issue, decide how much security is
+			 needed, and implement a solution that meets the needs.
+		*/
+
+
+	// Process the file
+		/*
+			At this point we are ready to process the valid file. This sample code shows how to save the file. Other tasks
+			 could be done such as creating an entry in a database or generating a thumbnail.
+
+			Depending on your server OS and needs you may need to set the Security Permissions on the file after it has
+			been saved.
+		*/
+		$dir = variable_get('file_directory_path', '')."/uploads";
+		if ($file = custom_upload('files', array(), $dir, false)) {
+		print base_path()."display/file?file_id=".$file->fid;
+		}else{
+		exit(0);
+		}
+		/*if (!@move_uploaded_file($_FILES[$upload_name]["tmp_name"], $save_path.$file_name)) {
+			print_r($save_path.$file_name);
+			exit(0);
+		}
+*/
+	// Return output to the browser (only supported by SWFUpload for Flash Player 9)
+
+		exit(0);
+
+
+
+}
+
+function custom_upload($source, $validators = array(), $dest = FALSE, $replace = FILE_EXISTS_RENAME) {
+  global $user;
+  static $upload_cache;
+
+  // Add in our check of the the file name length.
+  $validators['file_validate_name_length'] = array();
+
+  // If a file was uploaded, process it.
+  if (isset($_FILES['files'])) {
+    // Check for file upload errors and return FALSE if a
+    // lower level system error occurred.
+
+    // Begin building file object.
+    $file = new stdClass();
+    $file->filename = file_munge_filename(trim(basename($_FILES['files']['name']), '.'), $extensions);
+    $file->filepath = $_FILES['files']['tmp_name'];
+    $file->filemime = file_get_mimetype($file->filename);
+
+    // If the destination is not provided, or is not writable, then use the
+    // temporary directory.
+    if (empty($dest) || file_check_path($dest) === FALSE) {
+      $dest = file_directory_temp();
+    }
+
+    $file->source = $source;
+    $file->destination = file_destination(file_create_path($dest .'/'. $file->filename), $replace);
+    $file->filesize = $_FILES['files']['size'];
+
+    // Call the validation functions.
+    $errors = array();
+    foreach ($validators as $function => $args) {
+      array_unshift($args, $file);
+      // Make sure $file is passed around by reference.
+      $args[0] = &$file;
+      $errors = array_merge($errors, call_user_func_array($function, $args));
+    }
+
+    // Rename potentially executable files, to help prevent exploits.
+    if (preg_match('/\.(php|pl|py|cgi|asp|js)$/i', $file->filename) && (substr($file->filename, -4) != '.txt')) {      
+      $file->filemime = 'text/plain';
+      $file->filepath .= '.txt';
+      $file->filename .= '.txt';
+      // As the file may be named example.php.txt, we need to munge again to
+      // convert to example.php_.txt, then create the correct destination.
+      $file->filename = file_munge_filename($file->filename, $extensions);
+      $file->destination = file_destination(file_create_path($dest .'/'. $file->filename), $replace);
+    }
+
+
+    // Check for validation errors.
+    if (!empty($errors)) {
+      $message = t('The selected file %name could not be uploaded.', array('%name' => $file->filename));
+      if (count($errors) > 1) {
+        $message .= '<ul><li>'. implode('</li><li>', $errors) .'</li></ul>';
+      }
+      else {
+        $message .= ' '. array_pop($errors);
+      }
+      return 0;
+    }
+
+    // Move uploaded files from PHP's upload_tmp_dir to Drupal's temporary directory.
+    // This overcomes open_basedir restrictions for future file operations.
+    $file->filepath = $file->destination;
+    if (!move_uploaded_file($_FILES['files']['tmp_name'], $file->filepath)) {
+      return 0;
+    }
+
+    // If we made it this far it's safe to record this file in the database.
+    $file->uid = $user->uid;
+    $file->status = FILE_STATUS_PERMANENT;
+    $file->timestamp = time();
+    drupal_write_record('files', $file);
+
+    // Add file to the cache.
+    $upload_cache[$source] = $file;
+    return $file;
+  }
+  return 0;
+}
+
+
+function HandleError($message) {
+//	header("HTTP/1.1 500 Internal Server Error");
+	echo $message;
 }
 
 function findAttribute($object, $attribute) {
