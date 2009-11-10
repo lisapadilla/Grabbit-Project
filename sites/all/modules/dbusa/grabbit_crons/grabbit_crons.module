@@ -157,8 +157,8 @@ function grabbit_crons_emails_pull() {
 
 			if($imap_user = grabbit_imap_get($user->uid)){
 			  	if (!grabbit_crons_cron_time_emails()){
-			watchdog("grabbit", "no hay tiempo para usuario ".$user->name);     
-			 break;
+			      watchdog("grabbit", "no hay tiempo para usuario ".$user->name);     
+			      break;
 			    }else{ 
 				  watchdog("grabbit", "el usuario tiene imap ".$user->name);
 			      grabbit_imap_crear($user->uid);
@@ -186,6 +186,7 @@ function grabbit_crons_emails_pull() {
  */
 function grabbit_crons_cron_time_emails() {
   $time_limit = time() + ini_get('max_execution_time');
+print $time_limit;
   return max($time_limit - time(), 0);
 }
 
