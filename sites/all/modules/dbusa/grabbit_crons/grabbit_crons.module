@@ -38,6 +38,7 @@ function grabbit_crons_cron() {
 	
 			if($fuser = facebook_grabbit_get_fid($user->uid)){
 				if (!grabbit_crons_cron_time()){
+				  watchdog("grabbit", "NO HAY TIEMPO PARA ".$user->name);
 			      break;
 			    }else{
 				  facebook_grabbit_update_facebook($user);
@@ -46,6 +47,7 @@ function grabbit_crons_cron() {
 
 			if($twitter_account = oauth_twitter_get_uid($user->uid)){
 			  	if (!grabbit_crons_cron_time()){
+				  watchdog("grabbit", "NO HAY TIEMPO PARA ".$user->name);
 			      break;
 			    }else{
 			      facebook_grabbit_update_twitter($user);
