@@ -385,10 +385,10 @@ class receiveMail
         function connect() //Connect To the Mail Box
         {
 	
-							watchdog("grabbit", "IMAP timeout 1:  ".imap_timeout(IMAP_OPENTIMEOUT));
-							watchdog("grabbit", "IMAP timeout 2:  ".imap_timeout(IMAP_READTIMEOUT));
-							watchdog("grabbit", "IMAP timeout 3:  ".imap_timeout(IMAP_WRITETIMEOUT));
-							watchdog("grabbit", "IMAP timeout 4:  ".imap_timeout(IMAP_CLOSETIMEOUT));
+							imap_timeout(IMAP_OPENTIMEOUT);
+							imap_timeout(IMAP_READTIMEOUT);
+							imap_timeout(IMAP_WRITETIMEOUT);
+							imap_timeout(IMAP_CLOSETIMEOUT);
                 $this->marubox=@imap_open(
 	              $this->server,
 	              $this->username,
