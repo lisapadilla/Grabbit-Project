@@ -213,6 +213,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['submit'] = array(
 	  '#type' => 'submit',
+	  '#weight' => 6,
 	  '#value' => t('Search'),
 	); 
 	

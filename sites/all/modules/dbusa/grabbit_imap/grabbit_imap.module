@@ -25,17 +25,35 @@ function grabbit_imap_menu () {
     'access arguments' => array('access content')
   );
 
-  $items['user/%user/add_imap'] = array(
-   'title' => 'Add SMTP Account',
+  $items['user/%user_category/edit/add_imap'] = array(
+   'title' => 'IMAP',
    'description' => t('Add Your IMAP Email account to Grabbit'),
    'page callback' => 'grabbit_imap_add',
+   	'page arguments' => array(1),
    'access arguments' => array('access content'),
-   'type' => MENU_LOCAL_TASK,
+   'load arguments' => array('%map', '%index'),
+   'weight' => 12,
+    'type' => MENU_LOCAL_TASK,
   );
 
   return $items;
 }
 
+/**
+ * Implementation of hook_user().
+ */
+function grabbit_imap_user($op, &$edit, &$account, $category = NULL) {
+  switch ($op) {
+    case 'categories':
+      return array(
+        array(
+          'name' => 'add_imap',
+          'title' => 'IMAP account',
+          'weight' => 3,
+        ),
+      );
+  }
+}
 
 function grabbit_imap_add(){
 	global $user;

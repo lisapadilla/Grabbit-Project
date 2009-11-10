@@ -27,7 +27,7 @@ function oauth_twitter_menu()
   );
 
   $items['user/%user_category/edit/twitterapp'] = array(
-    'title' => 'Twitter account',
+    'title' => 'Twitter',
     'page callback' => 'oauth_twitter_account',
     'page arguments' => array(1),
     'access arguments' => array('access content'),

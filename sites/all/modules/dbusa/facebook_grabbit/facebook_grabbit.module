@@ -35,7 +35,7 @@ function facebook_grabbit_menu () {
   );
 
   $items['user/%user_category/edit/facebook'] = array(
-    'title' => 'Facebook account',
+    'title' => 'Facebook',
     'page callback' => 'grabbit_facebook_account',
     'page arguments' => array(1),
     'access arguments' => array('access content'),

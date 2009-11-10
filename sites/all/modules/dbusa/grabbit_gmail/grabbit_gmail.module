@@ -25,16 +25,36 @@ function grabbit_gmail_menu () {
     'access arguments' => array('access content')
   );
 
-  $items['user/%user/add_gmail'] = array(
-   'title' => 'Add Gmail Account',
+  $items['user/%user_category/edit/add_gmail'] = array(
+   'title' => 'Gmail',
    'description' => t('Add Your Gmail account to Grabbit'),
    'page callback' => 'grabbit_gmail_add',
    'access arguments' => array('access content'),
+   'page arguments' => array(1),
+   'load arguments' => array('%map', '%index'),
+   'weight' => 11,
    'type' => MENU_LOCAL_TASK,
   );
 
   return $items;
 }
+
+/**
+ * Implementation of hook_user().
+ */
+function grabbit_gmail_user($op, &$edit, &$account, $category = NULL) {
+  switch ($op) {
+    case 'categories':
+      return array(
+        array(
+          'name' => 'add_gmail',
+          'title' => 'Gmail account',
+          'weight' => 3,
+        ),
+      );
+  }
+}
+
 
 
 function grabbit_gmail_open(){
