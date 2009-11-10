@@ -145,15 +145,14 @@ function grabbit_crons_emails_pull() {
 	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
 	
 	if(db_affected_rows($result)){
-		print_r(db_affected_rows($result));
 	  	while($user = db_fetch_object($result)){
 		if(grabbit_crons_cron_time_emails()):
-             watchdog("grabbit", "entro");
+             watchdog("grabbit", "PROCESANDO USUARIO ".$user->name);
 			if($gmail_user = grabbit_gmail_get($user->uid)){
 				if (!grabbit_crons_cron_time_emails()){
 			      break;
 			    }else{
-				  watchdog("grabbit", "entro 2");  
+				  watchdog("grabbit", "el usuario tiene gmail: ".$user->name);  
 			      grabbit_gmail_crear($user->uid);
 			    }
 			}
@@ -162,7 +161,7 @@ function grabbit_crons_emails_pull() {
 			  	if (!grabbit_crons_cron_time_emails()){
 			      break;
 			    }else{ 
-				  watchdog("grabbit", "entro 3");
+				  watchdog("grabbit", "el usuario tiene imap ".$user->name);
 			      grabbit_imap_crear($user->uid);
 			    }
 			}
