@@ -1827,7 +1827,7 @@ ul.dropdown {
 }
 
 ul.dropdown li {
- float: left;
+ float: right;
  line-height: 1.3em;
  vertical-align: middle;
  zoom: 1;
@@ -1859,7 +1859,7 @@ ul.dropdown ul ul {
  left: 99%;
 }
 
-ul.dropdown ul li a{
+ul.dropdown a{
 	color:#555E6B;
 	font-size:12px;
 	font-weight:bold;
