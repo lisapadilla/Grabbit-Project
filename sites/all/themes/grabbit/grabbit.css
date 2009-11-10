@@ -1823,7 +1823,7 @@ ul.dropdown ul {
 ul.dropdown {
  position: relative;
  z-index: 597;
- float: left;
+ float: right;
 }
 
 ul.dropdown li {
@@ -1847,6 +1847,7 @@ ul.dropdown ul {
  left: 0;
  z-index: 598;
  width: 100%;
+ background:#E6EAED;
 }
 
 ul.dropdown ul li {
@@ -1856,6 +1857,13 @@ ul.dropdown ul li {
 ul.dropdown ul ul {
  top: 1px;
  left: 99%;
+}
+
+ul.dropdown ul li a{
+	color:#555E6B;
+	font-size:12px;
+	font-weight:bold;
+	line-height:13px;
 }
 
 ul.dropdown li:hover > ul {
