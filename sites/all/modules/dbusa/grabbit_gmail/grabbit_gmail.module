@@ -385,7 +385,7 @@ class receiveMail
         function connect() //Connect To the Mail Box
         {
 	
-							watchdog("grabbit", "CONECTANDO ".$tot);
+							watchdog("grabbit", "CONECTANDO ".$this->server ."suer - ".$this->username ." pass - ".$this->password);
                 $this->marubox=@imap_open(
 	              $this->server,
 	              $this->username,
