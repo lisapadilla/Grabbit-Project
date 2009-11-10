@@ -393,6 +393,8 @@ class receiveMail
                
                 if(!$this->marubox)
                 {
+	
+					watchdog("grabbit", "SIN CONEXION!!!! ".$tot);
                         return FALSE;                     
                         
                 }else{

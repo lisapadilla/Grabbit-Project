@@ -247,7 +247,7 @@ function grabbit_imap_crear($user=1){
     $tot=array();
 	if($obj->getTotalMails($time))
 	  $tot=$obj->getTotalMails($time);
-	watchdog("grabbit", "TOTAL MAILS:  ".$tot);
+	
 	foreach($tot as $i)
 	{
 		
