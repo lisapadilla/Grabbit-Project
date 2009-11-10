@@ -228,13 +228,13 @@ function grabbit_imap_get($user){
 
 
 function grabbit_imap_crear($user=1){
-	watchdog("grabbit", "guardando mail de ".$user);
+	
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
 	
 	if($_GET['user'])
 	  $user=$_GET['user'];
     $gmail = grabbit_imap_get($user);
-
+    watchdog("grabbit", "guardando mail de ".$gmail['user'];
     if($gmail['lastime']){
 	  $time=$gmail['lastime'];
     }else{
