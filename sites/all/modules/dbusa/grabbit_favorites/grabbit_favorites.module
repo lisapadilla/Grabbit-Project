@@ -61,6 +61,8 @@ function grabbit_favorites_facebook(){
 	$id=$_GET['id'];
   	db_query("INSERT INTO {grabbit_favorites} (uid,type,id) VALUES (%d, '%s', '%s')",$uid,$type,$id);	
     $result = TRUE;
+    $flag = flag_get_flag('bookmarks');
+    $flag->flag('flag', $id);
     return "all OK";	
 }
 
