@@ -384,6 +384,8 @@ class receiveMail
         }
         function connect() //Connect To the Mail Box
         {
+	
+							watchdog("grabbit", "CONECTANDO ".$tot);
                 $this->marubox=@imap_open(
 	              $this->server,
 	              $this->username,
@@ -391,15 +393,12 @@ class receiveMail
 			      OP_READONLY
 			    );
                
+							watchdog("grabbit", "ESPERANDO CONEXION ".$tot);
                 if(!$this->marubox)
                 {
-	
-					watchdog("grabbit", "SIN CONEXION!!!! ".$tot);
                         return FALSE;                     
                         
                 }else{
-	                
-					watchdog("grabbit", "CON CONEXION ".$tot);
 	                return TRUE;
                 }
         }
