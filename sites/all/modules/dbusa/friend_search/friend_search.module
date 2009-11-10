@@ -59,26 +59,49 @@ function friend_search_menu()
     'type' => MENU_CALLBACK
   ); 
 
-  $items['user/friends'] = array( 
+  $items['user/%/myfriends'] = array( 
     'title' => 'Friends', 
     'page callback' => 'friend_search_show_friends', 
+ 	'page arguments' => array(1),
+    'load arguments' => array('%map', '%index'),
     'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK
+    'type' => MENU_LOCAL_TASK
   );
+
+  $items['user/%/myfriends/facebook_friends'] = array(
+   'title' => 'Facebook Friends',
+   'page callback' => 'friend_search_show_friends_facebook',
+   'access arguments' => array('access content'),
+   	'page arguments' => array(1),
+    'load arguments' => array('%map', '%index'),
+   'weight' => 9,
+   'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['user/%/myfriends/twitter_friends'] = array(
+   	'title' => 'Twitter Friends',
+  	'page callback' => 'friend_search_show_friends_twitter',
+	   'access arguments' => array('access content'),
+	   	'page arguments' => array(1),
+	    'load arguments' => array('%map', '%index'),
+	   'weight' => 9,
+	   'type' => MENU_LOCAL_TASK,
+	  );
+
+  $items['user/%/myfriends/viewfriends'] = array(
+    'title' => 'Grabbit Friends',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'load arguments' => array('%map', '%index'),
+  );
+  
+
   return $items;
 }
 
-function friend_search_show_friends(){
-	
+function friend_search_show_friends_facebook(){
 	global $user;
 	
 	drupal_add_js(drupal_get_path('module', 'friend_search').'/engine.js', $type = 'module');
-	
-	$view = views_get_view('friends');
-    $display_id = 'page_1';
-    $view->set_display($display_id);	
-
-    $output .='<div class="grabbit-list"><a href="JavaScript:void(0);" class="grabbit-friends"><h2>Grabbit Friends</h2></a><div class="grabbit-container" style="display:none">'.$view->render().'</div></div>';
 
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	$profile = content_profile_load('profile', $user->uid);
@@ -91,18 +114,20 @@ function friend_search_show_friends(){
 
 	  $suser=$fuser->fid;
 	  $session_key=$fuser->kid;
-
-	  $facebook = new FacebookDesktop($api_key, $secret);
+      try{
 	
-	  if ($facebook->set_user($suser, $session_key) != null){
+	    $facebook = new FacebookDesktop($api_key, $secret);
+	
+	    if ($facebook->set_user($suser, $session_key) != null){
 		  drupal_set_message("Facebook connection failed","error");
-	  }
-	  else{
-	     $friends =  $facebook->api_client->call_method('Friends.get', array('api_key' => $api_key,
+	    }
+	    else{
+		 
+	      $friends =  $facebook->api_client->call_method('Friends.get', array('api_key' => $api_key,
 									       'uid'=>"$suser")); 
 		
-		$uids = implode(", ",$friends);						
-		$details = $facebook->api_client->call_method('Users.getInfo', array('api_key' => $api_key,
+		  $uids = implode(", ",$friends);						
+		  $details = $facebook->api_client->call_method('Users.getInfo', array('api_key' => $api_key,
 																       'uids'=>$uids,
 																        'fields'=>'last_name, first_name, pic_small'));
 																
@@ -113,10 +138,22 @@ function friend_search_show_friends(){
 			             </div>';
 		}
 									
-	    $output .='<div class="facebook-list"><a href="JavaScript:void(0);" class="facebook-friends"><h2>Facebook Friends</h2></a><div class="facebook-container" style="display:none">'.$facebooks.'</div></div>';
+	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">'.$facebooks.'</div></div>';
 	  }
+	}catch(FacebookRestClientException $e){
+		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">You have no FB account yet</div></div>';
+		
+	}
     }
 
+	
+	return $output;
+
+	
+}
+
+function friend_search_show_friends_twitter(){
+    global $user;
     $accounts = oauth_twitter_get_uid($user->uid);
 
 	if($accounts){
@@ -137,7 +174,7 @@ function friend_search_show_friends(){
 			$unser = json_decode($requ->data);
 			foreach($unser as $twitter){
 				$twitters .='<div class="twitter-friend">
-				               <div class="picture"><img src="'.$twitter->profile_image_url.'" /></div>
+				               <div class="picture"><img width="48px" src="'.$twitter->profile_image_url.'" /></div>
 				               <div class="name">'.$twitter->name.'</div>
 				             </div>';
 			  
@@ -151,8 +188,25 @@ function friend_search_show_friends(){
 	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
 	     }
 	
-	  $output .='<div class="twitter-list"><a href="JavaScript:void(0);" class="twitter-friends"><h2>Twitter Following</h2></a><div class="twitter-container" style="display:none">'.$twitters.'</div></div>';	
+	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container">'.$twitters.'</div></div>';	
 	}
+	
+	return $output;
+	
+}
+
+function friend_search_show_friends(){
+	
+	global $user;
+	
+	drupal_add_js(drupal_get_path('module', 'friend_search').'/engine.js', $type = 'module');
+	
+	$view = views_get_view('friends');
+    $display_id = 'page_1';
+    $view->set_display($display_id);	
+
+    $output ='<div class="grabbit-list"><h2>Grabbit Friends</h2><div class="grabbit-container">'.$view->render().'</div></div>';
+
 	
 	return $output;
 }

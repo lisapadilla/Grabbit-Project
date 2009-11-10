@@ -11,28 +11,27 @@ function grabbit_panels_menu () {
     'access arguments' => array('access content')
   );
 
-  $items['user/%user_category/myfeeds/add_rss'] = array(
+  $items['user/%/myfeeds/add_rss'] = array(
    'title' => 'Add RSS',
    'page callback' => 'grabbit_panels_rss',
    'access arguments' => array('access content'),
-   	'page arguments' => array(1),
     'load arguments' => array('%map', '%index'),
    'weight' => 9,
    'type' => MENU_LOCAL_TASK,
   );
 
-  $items['user/%user_category/myfeeds/import_rss'] = array(
+  $items['user/%/myfeeds/import_rss'] = array(
    	'title' => 'Import OPML',
   	'access arguments' => array('access content'),
     'load arguments' => array('%map', '%index'),
     'weight' => 10,
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('feedapi_import_opml',2),
+    'page arguments' => array('feedapi_import_opml'),
     'file' => 'feedapi.opml.inc',
    'type' => MENU_LOCAL_TASK,
   );
 
-  $items['user/%user_category/myfeeds/viewfeeds'] = array(
+  $items['user/%/myfeeds/viewfeeds'] = array(
     'title' => 'My feeds',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'load arguments' => array('%map', '%index'),
@@ -56,22 +55,6 @@ function grabbit_panels_menu () {
   return $items;
 }
 
-
-/**
- * Implementation of hook_user().
- */
-function grabbit_panels_user($op, &$edit, &$account, $category = NULL) {
-  switch ($op) {
-    case 'categories':
-      return array(
-        array(
-          'name' => 'add_rss',
-          'title' => 'Add RSS',
-          'weight' => 3,
-        ),
-      );
-  }
-}
 
 function grabbit_panels_delete(){
 	global $user;

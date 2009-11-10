@@ -12,18 +12,20 @@
 function dcl_importer_friendlist_menu() {
   $items = array();
 
-  $items['user/%user/find_friends'] = array(
+  $items['user/%/myfriends/find_friends'] = array(
     'title' => 'Find friends',
     'description' => t('Find and invite friends'),
     'page callback' => 'drupal_get_form',
+    'load arguments' => array('%map', '%index'),
     'page arguments' => array('dcl_importer_form'),
     'access callback' => 'dcl_importer_multi_user_access',
     'access arguments' => array('have relationships with friendlist', 'access DCL Importer'),
     'type' => MENU_LOCAL_TASK,
+    'weight' => 14,
   );
-
   return $items;
 }
+
 
 /**
  * Implementation of hook_import_action().
