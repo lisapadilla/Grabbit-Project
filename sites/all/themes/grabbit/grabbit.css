@@ -1588,7 +1588,8 @@ a.panel-filters{
 .node-stream-news .content-body,
 .node-stream-blogs .content-body{
   display: block;
-  clear: both;
+  width: 530px;
+  float: left;
 }
 .node-stream-deal .meta{
   display: inline-block;
