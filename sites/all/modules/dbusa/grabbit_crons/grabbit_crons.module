@@ -12,6 +12,13 @@ function grabbit_crons_menu() {
     'type' => MENU_CALLBACK
   );
 
+  $items['app/pullmails'] = array( 
+    'title' => 'Pull emails from services', 
+    'page callback' => 'grabbit_crons_emails_pull', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
   return $items;
 }
 
