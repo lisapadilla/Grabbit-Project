@@ -1746,6 +1746,8 @@ a.truncate_hide{
 }
 #panels-pager{
   padding: 10px 24px;
+  width:580px;
+  overflow:hidden;
 }
 #panels-pager a{
   display: block;
