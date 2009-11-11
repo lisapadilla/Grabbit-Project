@@ -1890,11 +1890,6 @@ ul.dropdown li:hover ul {
 }
 #block-grabbit_search-0 fieldset legend{
   display: block;
-  width: 255px;
-  padding: 0px;
-}
-#block-grabbit_search-0 fieldset legend a{
-  display: block;
   padding: 0px;
   width: 100%;
   background: url(images/sidebar_top.gif) 0 0 no-repeat;
