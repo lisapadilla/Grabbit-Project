@@ -130,12 +130,17 @@ function friend_search_show_friends_facebook(){
 		  $details = $facebook->api_client->call_method('Users.getInfo', array('api_key' => $api_key,
 																       'uids'=>$uids,
 																        'fields'=>'last_name, first_name, pic_small'));
-																
+		$rowx='odd';	
 		foreach($details as $amigo_facebook){
-			$facebooks .='<div class="facebook-friend">
+			$facebooks .='<div class="facebook-friend '.$rowx.'">
 			               <div class="picture"><img src="'.$amigo_facebook['pic_small'].'" /></div>
 			               <div class="name">'.$amigo_facebook['first_name'].' '.$amigo_facebook['last_name'].'</div>
 			             </div>';
+						if($rowx=='even'){
+							$rowx='odd';
+						}else{
+							$rowx='even';
+						}
 		}
 									
 	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">'.$facebooks.'</div></div>';
@@ -172,11 +177,18 @@ function friend_search_show_friends_twitter(){
 			
 			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
 			$unser = json_decode($requ->data);
+			$rowx="odd";
 			foreach($unser as $twitter){
-				$twitters .='<div class="twitter-friend">
+				$twitters .='<div class="twitter-friend '.$rowx.'">
 				               <div class="picture"><img width="48px" src="'.$twitter->profile_image_url.'" /></div>
 				               <div class="name">'.$twitter->name.'</div>
 				             </div>';
+				
+						if($rowx=='even'){
+							$rowx='odd';
+						}else{
+							$rowx='even';
+						}
 			  
 			}
 	     }
