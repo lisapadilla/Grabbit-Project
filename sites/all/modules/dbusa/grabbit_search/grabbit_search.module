@@ -149,7 +149,7 @@ function grabbit_search_no_results($term){
 
 
 function grabbit_search_custom_results($results,$keyword=NULL){
-	$output = drupal_get_form('grabbit_search_custom_form');
+	//$output = drupal_get_form('grabbit_search_custom_form');
 	
 	$output .='<div class="grabbit-search-results"><span class="title"><h2>'.t('Search results').':</h2></span>
 	           <dl class="search-results node-results">';
