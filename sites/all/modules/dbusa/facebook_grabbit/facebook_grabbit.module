@@ -440,7 +440,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	// Output for wall and status update.
 	$output = '
 	<div class="facebook-post clearfix '.$post->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
-	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
+	<a href="JavaScript:void(0);" class="trash-facebook" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
@@ -523,7 +523,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	// Output for aplication updates
 	
 	$output = '<div class="facebook-post clearfix '.$post->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
-	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
+	<a href="JavaScript:void(0);" class="trash-facebook" item_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
