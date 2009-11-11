@@ -133,14 +133,14 @@ function grabbit_search_custom_page($term=NULL){
 			$output = grabbit_search_no_results($_POST['search']);
 		}
 	}else{
-		$output = drupal_get_form('grabbit_search_custom_form');
+		//$output = drupal_get_form('grabbit_search_custom_form');
 	}
 	
 	return $output;
 }
 
 function grabbit_search_no_results($term){
-	$output = drupal_get_form('grabbit_search_custom_form');
+//	$output = drupal_get_form('grabbit_search_custom_form');
 	
 	$output .='<div class="grabbit-search-empty">'.t('Your search did not match any results, please try again').'</div>';
 	
@@ -149,7 +149,7 @@ function grabbit_search_no_results($term){
 
 
 function grabbit_search_custom_results($results,$keyword=NULL){
-	$output = drupal_get_form('grabbit_search_custom_form');
+	//$output = drupal_get_form('grabbit_search_custom_form');
 	
 	$output .='<div class="grabbit-search-results"><span class="title"><h2>'.t('Search results').':</h2></span>
 	           <dl class="search-results node-results">';
@@ -190,14 +190,7 @@ function grabbit_search_custom_form(&$form_state){
 	$form['#action'] = url('private/results');
 	$form['#redirect'] = FALSE;
 	
-	$form['detailed'] = array(
-	  '#type' => 'fieldset',
-	  '#title' => t('Advanced Search'),
-	  '#weight' => 5,
-	  '#collapsible' => TRUE
-	);
-	
-	$form['detailed']['details'] = array(
+	$form['details'] = array(
 	  '#type' => 'checkboxes',
 	  '#title' => t('Search only in'),
 	  '#options' => array(
@@ -207,8 +200,16 @@ function grabbit_search_custom_form(&$form_state){
 	    'imap' => t('IMAP'),
 	    'RSS' => t('RSS feeds'),
 	  ),
+	   '#prefix'=>'<div class="custom-search-form-collapse">',
+	   '#suffix'=>'</div>',
 	  '#description' => t('You can filter your search by selecting one or more sources. Leave all unchecked to search all.'),
 	);
+	
+	$form['from'] = array(
+	  '#type' => 'item',
+	  '#value' => '<a href="#" class="custom-form-collapser">Advanced</a>',
+	);
+	
 	
 	$form['submit'] = array(
 	  '#type' => 'submit',
