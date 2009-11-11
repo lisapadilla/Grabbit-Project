@@ -98,12 +98,12 @@ function grabbit_panels_get_panels(){
 	if ($user->uid > 0){
 		$unique=0;
 		$mesa=drupal_get_messages();
-		print_r($mesa);
+	
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div></div><div class="panel-grabbit suser-panels">';
+		           </div><div>'.$mesa['status'][0].'</div><div class="panel-grabbit suser-panels">';
 		$output .= theme_panels($panel_1,0,"Main Stream");           		           
 		$all_panels=grabbit_panels_get_all_panels($user->uid);
 		if($total_u=db_affected_rows($all_panels)){
