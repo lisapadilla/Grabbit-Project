@@ -294,7 +294,7 @@
     margin: 0;
     padding: 0;
     float: right;
-    width: 420px;
+    width: 650px;
     height: 19px;
     clear: right;
   }
@@ -883,10 +883,7 @@
     padding: 0px;
   }
   #primary ul.links li a {
-    display: block;
-    height: 19px;
     float: right;
-    overflow: hidden;
     margin-left: 10px;
     color: #FFFFFF;
   }
@@ -1258,14 +1255,14 @@
 }
 #block-views-friends-block_1 .block-inner{
   background: url(images/sidebar_top.gif) 0 0 no-repeat;
-  padding: 12px 15px 12px 17px;
+  padding: 12px 14px 12px 17px;
 }
 #block-views-friends-block_1 .views-row{
   float: left;
   display: block;
   width: 50px;
   height: 50px;
-  margin: 0px 5px 5px 0px;
+  margin: 0px 6px 5px 0px;
 }
 #block-views-friends-block_1 .views-row img{
   width: 50px;
