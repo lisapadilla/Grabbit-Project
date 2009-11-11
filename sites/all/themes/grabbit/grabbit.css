@@ -1880,3 +1880,7 @@ ul.dropdown li:hover ul {
   display: block;
   border: none;
 }
+#block-grabbit_search-0 fieldset{
+  margin-top: 20px;
+  padding: 0px;
+}
