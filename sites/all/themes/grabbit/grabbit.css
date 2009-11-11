@@ -884,8 +884,12 @@
   }
   #primary ul.links li a {
     float: right;
-    margin-left: 10px;
+    margin-left: 15px;
     color: #FFFFFF;
+    font-weight: bold;
+  }
+  #primary ul.links li.active a{
+    color: #291c0e;
   }
   a.active{
     color: #291c0e;
