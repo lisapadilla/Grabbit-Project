@@ -1860,7 +1860,6 @@ ul.dropdown a{
 ul.dropdown li:hover ul {
  visibility: visible;
 }
-#block-grabbit_search-0 h2,
-#block-grabbit_search-0 .content{
+#block-grabbit_search-0 h2{
   display: none;
 }
