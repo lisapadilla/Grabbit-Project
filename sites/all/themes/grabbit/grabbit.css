@@ -1864,3 +1864,10 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #description{
   display: none;
 }
+#block-grabbit_search-0 #edit-search-wrapper{
+  margin: 0px;
+  padding: 0px;
+}
+#block-grabbit_search-0 #edit-search-wrapper label{
+  display: none;
+}
