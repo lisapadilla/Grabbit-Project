@@ -884,11 +884,11 @@ form thead th
 }
 #primary ul.links li a {
   float: right;
-  margin-left: 16px;
+  margin-left: 20px;
   color: #FFFFFF;
 }
 #primary ul.links li.active a{
-  color: #291c0e;
+  color: #000000;
 }
 a.active{
   color: #291c0e;
