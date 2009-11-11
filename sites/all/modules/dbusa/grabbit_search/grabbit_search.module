@@ -133,14 +133,14 @@ function grabbit_search_custom_page($term=NULL){
 			$output = grabbit_search_no_results($_POST['search']);
 		}
 	}else{
-		$output = drupal_get_form('grabbit_search_custom_form');
+		//$output = drupal_get_form('grabbit_search_custom_form');
 	}
 	
 	return $output;
 }
 
 function grabbit_search_no_results($term){
-	$output = drupal_get_form('grabbit_search_custom_form');
+//	$output = drupal_get_form('grabbit_search_custom_form');
 	
 	$output .='<div class="grabbit-search-empty">'.t('Your search did not match any results, please try again').'</div>';
 	
