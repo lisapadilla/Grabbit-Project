@@ -884,11 +884,11 @@ form thead th
 }
 #primary ul.links li a {
   float: right;
-  margin-left: 16px;
+  margin-left: 20px;
   color: #FFFFFF;
 }
 #primary ul.links li.active a{
-  color: #291c0e;
+  color: #000000;
 }
 a.active{
   color: #291c0e;
@@ -1863,6 +1863,22 @@ ul.dropdown li:hover ul {
  visibility: visible;
 }
 #block-grabbit_search-0 h2,
-#block-grabbit_search-0 .content{
+#block-grabbit_search-0 #description{
   display: none;
+}
+#block-grabbit_search-0 #edit-search-wrapper{
+  margin: 0px;
+  padding: 0px;
+}
+#block-grabbit_search-0 #edit-search-wrapper label{
+  display: none;
+}
+#block-grabbit_search-0 #edit-search{
+  width: 255px;
+  height: 32px;
+  padding: 0px;
+  margin: 0px;
+  background: url(images/search_tf_nb.gif) 0 0 no-repeat;
+  display: block;
+  border: none;
 }
