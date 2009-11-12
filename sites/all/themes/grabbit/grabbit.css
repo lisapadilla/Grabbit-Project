@@ -1877,13 +1877,13 @@ ul.dropdown li:hover ul {
   width: 255px;
   height: 32px;
   padding: 0px;
-  margin: 0px;
+  margin: 0px 0px 20px 0px;
   background: url(images/search_tf_nb.gif) 0 0 no-repeat;
   display: block;
   border: none;
 }
 #block-grabbit_search-0{
-  margin: 20px 0px;
+  margin: 0px 0px 20px 0px;
   padding: 0px;
   border: none;
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
