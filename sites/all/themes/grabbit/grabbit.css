@@ -1064,7 +1064,6 @@ a.active{
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
 }
 #content-area .grabbit-list{
-  padding: 10px;
 }
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
@@ -1944,4 +1943,27 @@ ul.dropdown li:hover ul {
 }
 .section-user .tabs .primary{
   display: none;
+}
+.section-user .tabs ul.secondary{
+  background: transparent;
+  border: none;
+}
+.section-user .tabs ul.secondary li{
+  background: transparent;
+  border: none;
+  float: left;
+}
+.section-user .tabs ul.secondary li a{
+  display: block;
+  border: none;
+  width: 100px;
+  height: 15px;
+  padding-top: 5px;
+  line-height: 11px;
+  line-height: 12px;
+  color: #000000;
+}
+.section-user .tabs ul.secondary li.active a{
+  color: #FFFFFF;
+  background: url(images/blk_sel.gif) 0 0 no-repeat;
 }
