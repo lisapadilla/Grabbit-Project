@@ -1068,8 +1068,8 @@ a.active{
 .page-user-me-myfriends #content-area h2{
   display: none;
 }
-#content-area .views-row-even,
-#content-area .even{
+#content-area .views-row-odd,
+#content-area .odd{
   background: #e6eaed;
 }
 #content-area .views-row,
