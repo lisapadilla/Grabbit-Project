@@ -1905,7 +1905,12 @@ ul.dropdown li:hover ul {
   font-size: 12px;
   line-height: 13px;
   background: url(images/ce_switch.gif) right no-repeat;
+  font-weight: bold;
 }
 #block-grabbit_search-0 #collapsable-custom-form{
   padding: 10px;
+  color: #555e6b;
+  font-size: 12px;
+  line-height: 13px;
+  font-weight: normal;
 }
