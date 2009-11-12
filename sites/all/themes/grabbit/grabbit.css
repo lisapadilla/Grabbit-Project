@@ -1877,7 +1877,7 @@ ul.dropdown li:hover ul {
   width: 255px;
   height: 32px;
   padding: 0px;
-  margin: 0px 0px 20px 0px;
+  margin: 0px;
   background: url(images/search_tf_nb.gif) 0 0 no-repeat;
   display: block;
   border: none;
