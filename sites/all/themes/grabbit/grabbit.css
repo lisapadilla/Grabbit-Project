@@ -1065,6 +1065,9 @@ a.active{
 }
 #content-area .grabbit-list{
 }
+#content-area h2{
+  display: none;
+}
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
   display:block;
