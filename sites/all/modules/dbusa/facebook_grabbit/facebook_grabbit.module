@@ -839,10 +839,6 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
 	
 	global $user;
 	
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-
-	
 	global $user_info;
 	
 	//It starts getting parameters from index 1, 0 is the response id
@@ -852,7 +848,7 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
 	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=30;
-
+print_r($view);
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $view_deals = views_get_view('grabbit_private_deals');
