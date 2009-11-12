@@ -78,11 +78,11 @@ function grabbit_panels_get_panels(){
 	if($user->uid>0){
 		ini_set("memory_limit","328M");
 		set_time_limit(328);
-	//	if($fuser = facebook_grabbit_get_fid($user->uid))
-	//	  facebook_grabbit_update_facebook($user);
+		if($fuser = facebook_grabbit_get_fid($user->uid))
+		  facebook_grabbit_update_facebook($user);
 	
-	//	if($twitter_account = oauth_twitter_get_uid($user->uid))
-	//	  facebook_grabbit_update_twitter($user);
+		if($twitter_account = oauth_twitter_get_uid($user->uid))
+		  facebook_grabbit_update_twitter($user);
 		// EMAILS NO BECAUSE OUR SERVER MELTS DOWN
 	/*	if($gmail_user = grabbit_gmail_get($user->uid))
 		  grabbit_gmail_crear($user->uid);
@@ -151,7 +151,7 @@ function grabbit_panels_show_paginate(){
 	$page=$_GET['page'];
 
 	$output = facebook_grabbit_private_view_panel_pagination($pid,$page);
-	return $output;
+	print $output;
 }
 
 function grabbit_panels_edit_panels(){
@@ -490,7 +490,7 @@ function theme_panels($private_view,$id,$name,$unique=0){
       $name="Panel ".$id;
 
 	if($user->uid != 0){
-		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'">
+		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'" pager="0" pid="'.$id.'">
 	             <div class="panel-title clearfix">
 	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
 	      if($name!='Main Stream')

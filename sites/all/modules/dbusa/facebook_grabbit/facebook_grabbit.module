@@ -848,12 +848,12 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
 	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=30;
-print_r($view);
+    $view->pager['current_page']=$pagination;
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=30;
-
+    $view_deals->pager['current_page']=$pagination;
     $trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
@@ -878,6 +878,7 @@ print_r($view);
 		$view_elements = views_get_view('grabbit_public_elements');
 		$view_elements->display['default']->display_options['filters']['uid']['value'][0]=$user->uid;
 		$view_elements->pager['items_per_page']=30;
+		$view_elements->pager['current_page']=$pagination;
 
 		$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='FALSE';
 		$view_elements->display['default']->display_options['filters']['type']['value']['twitter']='FALSE';
