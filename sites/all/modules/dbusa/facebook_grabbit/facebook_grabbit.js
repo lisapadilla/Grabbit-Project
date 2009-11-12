@@ -23,7 +23,7 @@ function display_panel(panel,panel_element){
 		}
 	}
 	
-	$('#'+panel_id).append('<div class="panel-controller"></a><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
+	$('#'+panel_id).append('<div class="panel-controller"><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
 
 }
 var panels_heights=new Array();
@@ -33,6 +33,7 @@ function display_items(panel){
     current_panel=$(".last",panel);
 
 	if (current_panel.next().attr('class') != undefined){
+
 		var scroll_to = current_panel.next();
 		for (var i = 0; i< stories_per_slide_p1; i++){	
 			if (current_panel.next().attr('class') != undefined){
@@ -49,7 +50,22 @@ function display_items(panel){
 		}
 	
 	}else{
-		current_panel.parent().next().html('There\'s no more posts');
+		current_panel.parent().next().html('retrieving data...');
+		pid=panel.attr('pid');
+		pager=parseInt(panel.attr('pager'))+1;
+		$.get(Drupal.settings.basePath+"panels/paginate",{pid:pid,page:pager},function(data){
+				if (data){
+		        panel.attr('pager',pager);		
+				$("#"+panel_id+" .panel-wraper").append(data);
+		        current_panel.parent().next().html('<a class="main-stream-next" href="javascript:void(0)">more</a>');
+		        panel=$("#"+panel_id);
+		        display_items(panel);
+		        fixtheheightMore(panel);																				
+				}else{
+		        current_panel.parent().next().html('You have reached the end of your stream');
+				}
+        });
+		
 	}
 }
 
@@ -97,7 +113,7 @@ $(document).ready(function() {
 	var height = $("#panel-0").height();
 	$(".suser-panels").height(height);
 	
-	$('.main-stream-next').click(function(){
+	$('.main-stream-next').live("click", function(){
         panel=$(this).parents(".user-panel");
         display_items(panel);
         fixtheheightMore(panel);

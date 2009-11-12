@@ -151,8 +151,7 @@ function grabbit_panels_show_paginate(){
 	$page=$_GET['page'];
 
 	$output = facebook_grabbit_private_view_panel_pagination($pid,$page);
-print_r($output);
-	return $output;
+	print $output;
 }
 
 function grabbit_panels_edit_panels(){
@@ -491,7 +490,7 @@ function theme_panels($private_view,$id,$name,$unique=0){
       $name="Panel ".$id;
 
 	if($user->uid != 0){
-		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'">
+		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'" pager="0" pid="'.$id.'">
 	             <div class="panel-title clearfix">
 	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
 	      if($name!='Main Stream')
