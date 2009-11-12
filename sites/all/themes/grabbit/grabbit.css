@@ -1959,11 +1959,16 @@ ul.dropdown li:hover ul {
   width: 100px;
   height: 15px;
   padding-top: 5px;
-  line-height: 11px;
+  
+}
+.section-user .tabs ul.secondary li a span{
   line-height: 12px;
   color: #000000;
 }
 .section-user .tabs ul.secondary li.active a{
-  color: #FFFFFF;
+  
   background: url(images/blk_sel.gif) 0 0 no-repeat;
+}
+.section-user .tabs ul.secondary li.active a span{
+  color: #FFFFFF;
 }
