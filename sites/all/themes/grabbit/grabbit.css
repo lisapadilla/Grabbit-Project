@@ -1967,6 +1967,8 @@ ul.dropdown li:hover ul {
 .section-user .tabs ul.secondary{
   background: transparent;
   border: none;
+  margin: 0px;
+  padding: 10px;
 }
 .section-user .tabs ul.secondary li{
   background: transparent;
