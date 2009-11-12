@@ -1914,3 +1914,6 @@ ul.dropdown li:hover ul {
   line-height: 13px;
   font-weight: normal;
 }
+#block-grabbit_search-0 #collapsable-custom-form label{
+  font-weight: bold;
+}
