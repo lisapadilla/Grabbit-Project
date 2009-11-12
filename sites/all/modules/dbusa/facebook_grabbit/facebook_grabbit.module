@@ -618,12 +618,12 @@ function facebook_grabbit_private_view_panel($param){
     $user_info = _get_current_user_info($params);
 	
 	$view = views_get_view('grabbit_public_stream');
-    $view->pager['items_per_page']=15;
+    $view->pager['items_per_page']=30;
 
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $view_deals = views_get_view('grabbit_private_deals');
-    $view_deals->pager['items_per_page']=15;
+    $view_deals->pager['items_per_page']=30;
 
     $trashes =  grabbit_favorites_get_trash('item');
     
