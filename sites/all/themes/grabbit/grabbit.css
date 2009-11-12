@@ -1957,8 +1957,8 @@ ul.dropdown li:hover ul {
   display: block;
   border: none;
   width: 100px;
-  height: 15px;
-  padding-top: 5px;
+  height: 18px;
+  padding-top: 2px;
   text-align: center;
 }
 .section-user .tabs ul.secondary li a span{
