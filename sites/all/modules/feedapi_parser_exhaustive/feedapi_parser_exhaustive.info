@@ -1,0 +1,15 @@
+; $Id: feedapi_parser_exhaustive.info,v 1.2 2009/04/15 14:29:18 e2thex Exp $
+name = Exhaustive parser
+description = "parsers all elements of a feed, including thier attrabutes. Also parse all elements of the feed itself."
+core = 6.x
+php = 4.0
+package = "FeedAPI Add On"
+dependencies[] = feedapi
+
+
+; Information added by drupal.org packaging script on 2009-05-28
+version = "6.x-1.0-alpha5"
+core = "6.x"
+project = "feedapi_parser_exhaustive"
+datestamp = "1243537538"
+

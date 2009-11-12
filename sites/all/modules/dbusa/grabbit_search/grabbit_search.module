@@ -180,6 +180,7 @@ function grabbit_search_custom_form(&$form_state){
 	    '#value' => t('You can perform a search of your grabbit stream, just type the keyword(s) below'),
 	    '#suffix'=>'</div>'
 		 );	 
+		
 	$form['search'] = array(
 	    '#type' => 'textfield',
 	    '#title' => t('Search'),
@@ -189,6 +190,12 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['#action'] = url('private/results');
 	$form['#redirect'] = FALSE;
+	
+	$form['from'] = array(
+	  '#type' => 'item',
+	  '#value' => '<a href="#" class="custom-form-collapser" id="collapse-custom">Advanced</a>',
+	);
+	
 	
 	$form['details'] = array(
 	  '#type' => 'checkboxes',
@@ -200,16 +207,10 @@ function grabbit_search_custom_form(&$form_state){
 	    'imap' => t('IMAP'),
 	    'RSS' => t('RSS feeds'),
 	  ),
-	   '#prefix'=>'<div class="custom-search-form-collapse">',
+	   '#prefix'=>'<div class="custom-search-form-collapse" id="collapsable-custom-form">',
 	   '#suffix'=>'</div>',
 	  '#description' => t('You can filter your search by selecting one or more sources. Leave all unchecked to search all.'),
 	);
-	
-	$form['from'] = array(
-	  '#type' => 'item',
-	  '#value' => '<a href="#" class="custom-form-collapser">Advanced</a>',
-	);
-	
 	
 	$form['submit'] = array(
 	  '#type' => 'submit',
