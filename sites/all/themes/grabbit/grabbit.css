@@ -1906,3 +1906,6 @@ ul.dropdown li:hover ul {
   line-height: 13px;
   background: url(images/ce_switch.gif) right no-repeat;
 }
+#block-grabbit_search-0 #collapsable-custom-form{
+  padding: 10px;
+}
