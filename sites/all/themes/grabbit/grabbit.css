@@ -1885,7 +1885,7 @@ ul.dropdown li:hover ul {
 }
 #block-grabbit_search-0{
   margin: 0px 0px 20px 0px;
-  padding: 0px;
+  padding: 0px 0px 10px 0px;
   border: none;
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
 }
@@ -1916,4 +1916,14 @@ ul.dropdown li:hover ul {
 }
 #block-grabbit_search-0 #collapsable-custom-form label{
   font-weight: normal;
+}
+#block-grabbit_search-0 #edit-submit-1{
+  display: block;
+  border: none;
+  width: 58px;
+  height: 21px;
+  overflow: hidden;
+  line-height: 1000px;
+  text-indent: 2000px;
+  background: url(images/search_btn.gif) 0 0 no-repeat;
 }
