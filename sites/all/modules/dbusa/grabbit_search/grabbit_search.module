@@ -127,11 +127,17 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 function grabbit_search_custom_page($term=NULL){
 	
 	if($_POST['search']){
-		if($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
+	  
+	  if ( isset($_POST['details']['site']) )
+  	{
+      drupal_goto( 'search/node/'.$_POST['search'] );
+  	}
+  	elseif($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
             $output = grabbit_search_custom_results($result,$_POST['search']);
 		}else{
 			$output = grabbit_search_no_results($_POST['search']);
 		}
+		
 	}else{
 		//$output = drupal_get_form('grabbit_search_custom_form');
 	}
@@ -201,6 +207,7 @@ function grabbit_search_custom_form(&$form_state){
 	  '#type' => 'checkboxes',
 	  '#title' => t('Search only in'),
 	  '#options' => array(
+	    'site' => t('Search entire site'),
 	    'facebook' => t('Facebook'),
 	    'twitter' => t('Twitter'),
 	    'gmail' => t('Gmail'),
