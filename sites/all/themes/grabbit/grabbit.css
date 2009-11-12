@@ -1061,6 +1061,7 @@ a.active{
   font-size: 21px;
   line-height: 22px;
   margin: 0px;
+  background: transparent url(images/mp_top.gif) 0 0 no-repeat;
 }
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
