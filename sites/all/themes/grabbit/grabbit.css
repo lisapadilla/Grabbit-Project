@@ -1895,3 +1895,12 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #elgyro{
   background: url(images/sidebar_top.gif) top no-repeat;
 }
+#block-grabbit_search-0 a#collapse-custom{
+  display: block;
+  color: #555e6b;
+  height: 14px;
+  padding: 1px 0px 0px 0px;
+  height: 13px;
+  font-size: 12px;
+  line-height: 13px;
+}
