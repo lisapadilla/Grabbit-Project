@@ -1071,6 +1071,14 @@ a.active{
 #content-area .views-row-even{
   background: #e6eaed;
 }
+#content-area .views-row{
+  display: inline-block;
+  padding: 10px;
+}
+#content-area .views-row .views-field-field-profile-picture-fid img{
+  float: left;
+  margin: 0px 10px 10px 0px;
+}
 
 
 #block-friend_search-2{
