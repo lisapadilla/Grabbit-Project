@@ -1063,6 +1063,9 @@ a.active{
   margin: 0px;
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
 }
+#content-area .grabbit-list{
+  padding: 10px;
+}
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
   display:block;
