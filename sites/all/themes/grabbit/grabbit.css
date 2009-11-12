@@ -1068,15 +1068,18 @@ a.active{
 #content-area h2{
   display: none;
 }
-#content-area .views-row-even{
+#content-area .views-row-even,
+#content-area .even{
   background: #e6eaed;
 }
-#content-area .views-row{
+#content-area .views-row,
+#content-area .facebook-friend{
   display: inline-block;
   padding: 10px;
   width: 606px;
 }
-#content-area .views-row .views-field-field-profile-picture-fid img{
+#content-area .views-row .views-field-field-profile-picture-fid img,
+#content-area .facebook-friend .picture img{
   float: left;
   margin: 0px 10px 10px 0px;
 }
