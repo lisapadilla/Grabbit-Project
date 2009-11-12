@@ -39,10 +39,10 @@ function grabbit_search_block($op = 'list', $delta = 0, $edit = array()) {
       switch ( $delta )
       {
 		case 0:
-		  drupal_add_js("$('#collapse-custom').click(function(){ 
+		  drupal_add_js("$('#collapse-custom').click(function(){
 			               $('#collapsable-custom-form').slideToggle();
-			               return false; 
-			             });", 'inline', 'header');
+			               return FALSE; 
+			             });", 'inline');
 		
           $blocks['title'] = 'Search your stream';
           $blocks['content'] = drupal_get_form('grabbit_search_custom_form');
