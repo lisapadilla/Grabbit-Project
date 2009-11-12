@@ -1052,6 +1052,7 @@ a.active{
   float: right;
   padding: 0px;
   overflow:hidden;
+  background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
 }
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
@@ -1072,7 +1073,6 @@ a.active{
   width: 626px;
   float: left;
   overflow: hidden;
-  background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
 }
 #files-container-inner{
   padding:15px;
@@ -1928,6 +1928,7 @@ ul.dropdown li:hover ul {
   text-indent: 2000px;
   background: url(images/search_btn.gif) 0 0 no-repeat;
   margin-left: 188px;
+  cursor: pointer;
 }
 .section-user .tabs .primary{
   display: none;
