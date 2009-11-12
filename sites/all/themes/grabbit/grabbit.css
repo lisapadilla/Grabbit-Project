@@ -1052,7 +1052,36 @@ a.active{
   float: right;
   padding: 0px;
   overflow:hidden;
+  background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
 }
+#content-area h1{
+  display: block;
+  padding: 10px;
+  color: #000000;
+  font-size: 21px;
+  line-height: 22px;
+  margin: 0px;
+  background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
+}
+#content-area .grabbit-list{
+}
+#content-area h2{
+  display: none;
+}
+#content-area .views-row-even{
+  background: #e6eaed;
+}
+#content-area .views-row{
+  display: inline-block;
+  padding: 10px;
+  width: 606px;
+}
+#content-area .views-row .views-field-field-profile-picture-fid img{
+  float: left;
+  margin: 0px 10px 10px 0px;
+}
+
+
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
   display:block;
@@ -1072,7 +1101,6 @@ a.active{
   width: 626px;
   float: left;
   overflow: hidden;
-  background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
 }
 #files-container-inner{
   padding:15px;
@@ -1885,7 +1913,7 @@ ul.dropdown li:hover ul {
 }
 #block-grabbit_search-0{
   margin: 0px 0px 20px 0px;
-  padding: 0px;
+  padding: 0px 0px 10px 0px;
   border: none;
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
 }
@@ -1916,4 +1944,50 @@ ul.dropdown li:hover ul {
 }
 #block-grabbit_search-0 #collapsable-custom-form label{
   font-weight: normal;
+}
+#block-grabbit_search-0 #edit-submit-1,
+#block-grabbit_search-0 #edit-submit-2{
+  display: block;
+  border: none;
+  width: 58px;
+  height: 21px;
+  overflow: hidden;
+  line-height: 1000px;
+  text-indent: 2000px;
+  background: url(images/search_btn.gif) 0 0 no-repeat;
+  margin-left: 188px;
+  cursor: pointer;
+}
+.section-user .tabs .primary{
+  display: none;
+}
+.section-user .tabs ul.secondary{
+  background: transparent;
+  border: none;
+}
+.section-user .tabs ul.secondary li{
+  background: transparent;
+  border: none;
+  float: left;
+}
+.section-user .tabs ul.secondary li a{
+  display: block;
+  border: none;
+  width: 100px;
+  height: 19px;
+  padding-top: 1px;
+  text-align: center;
+}
+.section-user .tabs ul.secondary li a span{
+  font-size: 11px;
+  line-height: 12px;
+  color: #000000;
+}
+.section-user .tabs ul.secondary li.active a{
+  
+  background: url(images/blk_sel.gif) 0 0 no-repeat;
+}
+.section-user .tabs ul.secondary li.active a span{
+  font-size: 11px;
+  color: #FFFFFF;
 }
