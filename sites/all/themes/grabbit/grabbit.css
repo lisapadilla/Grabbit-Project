@@ -1929,6 +1929,6 @@ ul.dropdown li:hover ul {
   background: url(images/search_btn.gif) 0 0 no-repeat;
   margin-left: 188px;
 }
-.tabs .primary{
+.section-user .tabs .primary{
   display: none;
 }
