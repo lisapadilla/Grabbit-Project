@@ -1959,9 +1959,10 @@ ul.dropdown li:hover ul {
   width: 100px;
   height: 15px;
   padding-top: 5px;
-  
+  text-align: center;
 }
 .section-user .tabs ul.secondary li a span{
+  font-size: 11px;
   line-height: 12px;
   color: #000000;
 }
@@ -1970,5 +1971,6 @@ ul.dropdown li:hover ul {
   background: url(images/blk_sel.gif) 0 0 no-repeat;
 }
 .section-user .tabs ul.secondary li.active a span{
+  font-size: 11px;
   color: #FFFFFF;
 }
