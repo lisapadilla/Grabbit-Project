@@ -39,7 +39,7 @@ function grabbit_search_block($op = 'list', $delta = 0, $edit = array()) {
       switch ( $delta )
       {
 		case 0:
-		  drupal_add_js("$('#collapse-custom').click(function{ 
+		  drupal_add_js("$('#collapse-custom').click(function(){ 
 			               $('#collapsable-custom-form').slideToggle();
 			               return false; 
 			             });", 'inline', 'header');
