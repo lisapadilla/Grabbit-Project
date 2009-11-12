@@ -11,6 +11,11 @@ function grabbit_panels_menu () {
     'access arguments' => array('access content')
   );
 
+  $items['panels/paginate'] = array( 
+    'page callback' => 'grabbit_panels_show_paginate', 
+    'access arguments' => array('access content')
+  );
+
   $items['user/%/myfeeds/add_rss'] = array(
    'title' => 'Add RSS',
    'page callback' => 'grabbit_panels_rss',
@@ -137,6 +142,14 @@ function grabbit_panels_get_panels(){
 	    $output .= theme_panels($panel_2,1,"Most Visited");
 	}
 	
+	return $output;
+}
+
+// show the next set of the panel (pagination)
+function grabbit_panels_show_paginate(){
+	$pid=$_GET['pid'];
+	$page=$_GET['page'];
+	$output = facebook_grabbit_private_view_panel_pagination($pid,$page);
 	return $output;
 }
 
