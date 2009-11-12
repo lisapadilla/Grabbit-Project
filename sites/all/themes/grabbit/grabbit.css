@@ -1867,7 +1867,7 @@ ul.dropdown li:hover ul {
   display: none;
 }
 #block-grabbit_search-0 #edit-search-wrapper{
-  margin: 0px;
+  margin: 0px 0px 10px 0px;
   padding: 0px;
 }
 #block-grabbit_search-0 #edit-search-wrapper label{
@@ -1883,11 +1883,11 @@ ul.dropdown li:hover ul {
   border: none;
 }
 #block-grabbit_search-0{
-  margin-top: 20px;
+  margin: 20px 0px;
   padding: 0px;
   border: none;
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
 }
 #block-grabbit_search-0 .form-item{
-  margin-top: 10px;
+  margin: 0px;
 }
