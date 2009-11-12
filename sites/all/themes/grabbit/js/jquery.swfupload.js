@@ -153,4 +153,9 @@ Drupal.behaviors.frontpage = function(){
 	     $(".panels-update-form_file").slideToggle("fast");
 	     return false;
        });
+
+     	$('#collapse-custom').click(function(){
+			               $('#collapsable-custom-form').slideToggle();
+			               return false; 
+			             });
 }

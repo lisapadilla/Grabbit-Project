@@ -212,7 +212,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 										       'uid'=>"$suser",
 										       'status_includes_verb'=>TRUE,
 										       'status'=>$form_state['values']['status'])); 
-		  drupal_set_message('You have changed your facebook status');
+		  $fb_status_ch=TRUE;
 		  //add to statistics
 		  grabbit_statistics_post_entry($user->uid,'facebook');
 		  $statistics=TRUE;
@@ -237,6 +237,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 				//add to statistics
 				grabbit_statistics_post_entry($user->uid,'twitter');
 			}
+			$tw_status_ch=TRUE;
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
@@ -256,7 +257,18 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	global $user;
 	if($_POST['RT'])
 	  grabbit_statistics_post_entry($user->uid,'RT');
-	
+
+	if($tw_status_ch || $fb_status_ch){
+	  if($tw_status_ch && $fb_status_ch){
+	    drupal_set_message('You have changed your facebook and twitter status');	
+	  }else{
+		if($tw_status_ch){
+		  drupal_set_message('You have changed your twitter status');
+		}else{
+		  drupal_set_message('You have changed your facebook status');
+		}
+	  }
+	}
 }
 
 /**
@@ -440,12 +452,12 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	// Output for wall and status update.
 	$output = '
 	<div class="facebook-post clearfix '.$post->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
-	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
+	<a href="JavaScript:void(0);" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
-	<span class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>-'.$target.'</span>
+	<span class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</span>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">'.$msg_formatted.'</div><span class="facebook-date">on '.format_date($post->created).'</span>
@@ -523,12 +535,12 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	// Output for aplication updates
 	
 	$output = '<div class="facebook-post clearfix '.$post->rowx.'" id="fb_story_'.$post->field_post_id[0]['value'].'">
-	<a href="JavaScript:void(0);" class="trash-item" item_id="'.$post->nid.'">TR</a>
+	<a href="JavaScript:void(0);" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
-	<a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a><div class="facebook-post-body">
+	<a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'<div class="facebook-post-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">';
 	if($msg_formatted){
