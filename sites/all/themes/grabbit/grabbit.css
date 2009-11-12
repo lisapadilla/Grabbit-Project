@@ -1054,6 +1054,14 @@ a.active{
   overflow:hidden;
   background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
 }
+#content-area h1{
+  display: block;
+  padding: 10px;
+  color: #000000;
+  font-size: 21px;
+  line-height: 22px;
+  margin: 0px;
+}
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
   display:block;
