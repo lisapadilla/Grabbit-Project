@@ -1073,7 +1073,7 @@ a.active{
   background: #e6eaed;
 }
 #content-area .views-row,
-#content-area .facebook-friend
+#content-area .facebook-friend,
 #content-area .twitter-friend{
   display: inline-block;
   padding: 10px;
