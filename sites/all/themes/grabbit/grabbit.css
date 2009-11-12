@@ -1917,7 +1917,8 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #collapsable-custom-form label{
   font-weight: normal;
 }
-#block-grabbit_search-0 #edit-submit-1{
+#block-grabbit_search-0 #edit-submit-1,
+#block-grabbit_search-0 #edit-submit-2{
   display: block;
   border: none;
   width: 58px;
