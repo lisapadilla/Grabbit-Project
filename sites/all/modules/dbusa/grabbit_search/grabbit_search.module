@@ -39,6 +39,8 @@ function grabbit_search_block($op = 'list', $delta = 0, $edit = array()) {
       switch ( $delta )
       {
 		case 0:
+		  drupal_add_js("$('#collapse-custom').click(function{ $('#collapsable-custom-form').slideToggle(); });", 'inline', 'header');
+		  drupal_add_js($data = NULL, $type = 'module', $scope = 'header', $defer = FALSE, $cache = TRUE, $preprocess = TRUE);
           $blocks['title'] = 'Search your stream';
           $blocks['content'] = drupal_get_form('grabbit_search_custom_form');
           break;
@@ -193,7 +195,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['from'] = array(
 	  '#type' => 'item',
-	  '#value' => '<a href="#" class="custom-form-collapser">Advanced</a>',
+	  '#value' => '<a href="#" class="custom-form-collapser" id="collapse-custom">Advanced</a>',
 	);
 	
 	
@@ -207,7 +209,7 @@ function grabbit_search_custom_form(&$form_state){
 	    'imap' => t('IMAP'),
 	    'RSS' => t('RSS feeds'),
 	  ),
-	   '#prefix'=>'<div class="custom-search-form-collapse">',
+	   '#prefix'=>'<div class="custom-search-form-collapse" id="collapsable-custom-form">',
 	   '#suffix'=>'</div>',
 	  '#description' => t('You can filter your search by selecting one or more sources. Leave all unchecked to search all.'),
 	);
