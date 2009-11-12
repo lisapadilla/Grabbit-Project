@@ -1869,28 +1869,27 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #edit-search-wrapper{
   margin: 0px;
   padding: 0px;
+  border-bottom: 10px solid #8b939f;
 }
 #block-grabbit_search-0 #edit-search-wrapper label{
   display: none;
 }
 #block-grabbit_search-0 #edit-search{
   width: 255px;
-  height: 32px;
+  height: 31px;
   padding: 0px;
   margin: 0px;
   background: url(images/search_tf_nb.gif) 0 0 no-repeat;
   display: block;
   border: none;
 }
-#block-grabbit_search-0 fieldset{
-  margin-top: 20px;
+#block-grabbit_search-0{
+  margin: 0px 0px 20px 0px;
   padding: 0px;
   border: none;
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
 }
-#block-grabbit_search-0 fieldset legend{
-  display: block;
-  padding: 0px;
-  width: 100%;
-  background: url(images/sidebar_top.gif) 0 0 no-repeat;
+#block-grabbit_search-0 .form-item{
+  margin: 0px;
+  background: url(images/sidebar_top.gif) top no-repeat;
 }
