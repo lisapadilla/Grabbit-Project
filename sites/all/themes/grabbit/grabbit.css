@@ -1903,4 +1903,5 @@ ul.dropdown li:hover ul {
   height: 13px;
   font-size: 12px;
   line-height: 13px;
+  background: url(images/ce_switch.gif) right no-repeat;
 }
