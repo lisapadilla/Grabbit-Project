@@ -1065,7 +1065,7 @@ a.active{
 }
 #content-area .grabbit-list{
 }
-#content-area h2{
+.page-user-me-myfriends #content-area h2{
   display: none;
 }
 #content-area .views-row-even,
