@@ -149,9 +149,9 @@ function grabbit_panels_get_panels(){
 function grabbit_panels_show_paginate(){
 	$pid=$_GET['pid'];
 	$page=$_GET['page'];
-	print_r($pid);
-	print_r($page);
+
 	$output = facebook_grabbit_private_view_panel_pagination($pid,$page);
+print_r($output);
 	return $output;
 }
 
