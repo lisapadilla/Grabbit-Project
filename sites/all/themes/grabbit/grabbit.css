@@ -1972,6 +1972,8 @@ ul.dropdown li:hover ul {
   background: transparent;
   border: none;
   float: left;
+  padding: 0px;
+  margin: 0px;
 }
 .section-user .tabs ul.secondary li a{
   display: block;
