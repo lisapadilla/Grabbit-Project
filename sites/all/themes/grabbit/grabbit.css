@@ -1074,6 +1074,7 @@ a.active{
   line-height: 23px;
   margin: 0px;
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
+  font-weight: normal;
 }
 #content-area .grabbit-list{
 }
