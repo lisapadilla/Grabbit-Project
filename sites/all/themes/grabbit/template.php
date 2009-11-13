@@ -166,14 +166,41 @@ function grabbit_preprocess_block(&$vars, $hook) {
 // */
 
 function grabbit_preprocess_search_results(&$variables) {
-  /*$variables['search_results'] = '';
-  foreach ($variables['results'] as $result) {
-    $variables['search_results'] .= theme('search_result', $result, $variables['type']);
-  }
-  $variables['pager'] = theme('pager', NULL, 10, 0);
-  // Provide alternate search results template.
-  $variables['template_files'][] = 'search-results-'. $variables['type'];*/
-  print_r($variables);
-print "nooooooooo";
+print_r($variables);
+exit; 
+ if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
 
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+    
+    foreach($variables['results'] as $result){
+	  $node=$result['node'];
+	
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                                       'value'=>$node);
+    }
+
+    if(count($twitface)){
+	  $resultados = facebook_grabbit_theme_results($twitface);
+    }else{
+	  $resultados = '<div class="no-results">Your search did not match any results</div>';
+    }
+	
+		$output .='<div class="panels-controllers">
+		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
+		           <a href="JavaScript:void(0);" class="move-left"></a>
+		           <a href="JavaScript:void(0);" class="move-right"></a>
+		           </div><div class="panel-grabbit suser-panels">
+		           <div class="panel-favorites">';
+		$output .=$resultados;
+	
+		$output .='</div></div>';
+
+    $variables['search_results']=$output;
+  }
 }
