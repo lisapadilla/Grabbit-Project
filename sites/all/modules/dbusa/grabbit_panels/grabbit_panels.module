@@ -186,7 +186,7 @@ function grabbit_panels_get_panels(){
 		while($panel = db_fetch_object($all_panels)){
 		  	$settings=grabbit_panels_get_uid(53,$panel->pid);
 			$panel_settings=unserialize($settings->config);
-		    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
+		    $panel_2 = facebook_grabbit_private_view_panel_public_panels($panel->pid);	
 		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 		}      		           
 		$output .='</div>';	
