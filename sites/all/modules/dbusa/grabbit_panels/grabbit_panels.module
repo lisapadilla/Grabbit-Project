@@ -542,14 +542,19 @@ function grabbit_panels_rss(){
 function grabbit_panels_form_alter($form,$form_state,$form_id){
 	if($form_id=='feed_node_form'){
 		unset($form['body_field']);
-		
-		$form['feedapi']['feedapi_panel'] = array(
-	        '#type' => 'checkbox',
-	        '#title' => t('Create a panel from this RSS feed'),
-	        '#description' => t('Let grabbit create a stream for you containing the items from this RSS feed. You can delete/edit that stream latter.'),
-	        '#default_value' => 1
-	      );
-	    $form['#validate'][] = 'grabbit_panels_node_validate';
+		global $user;
+		$panels = grabbit_panels_get_all_panels($user->uid);
+		if(db_affected_rows($panels)>=4){
+		 	
+		}else{
+		 	$form['feedapi']['feedapi_panel'] = array(
+		        '#type' => 'checkbox',
+		        '#title' => t('Create a panel from this RSS feed'),
+		        '#description' => t('Let grabbit create a stream for you containing the items from this RSS feed. You can delete/edit that stream latter.'),
+		        '#default_value' => 1
+		      );
+		    $form['#validate'][] = 'grabbit_panels_node_validate';
+		}
 		
 	}
 }
