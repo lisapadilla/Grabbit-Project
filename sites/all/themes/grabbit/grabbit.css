@@ -2016,7 +2016,8 @@ ul.dropdown li:hover ul {
 #node-form,
 .facebook-details,
 #feedapi-import-opml,
-#user-login{
+#user-login,
+#invite-form{
   padding: 10px;
   color: #555e6b;
 }
