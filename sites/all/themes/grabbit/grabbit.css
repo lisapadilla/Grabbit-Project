@@ -2001,7 +2001,8 @@ ul.dropdown li:hover ul {
   font-size: 11px;
   color: #FFFFFF;
 }
-#dcl-importer-form{
+#dcl-importer-form,
+.profile{
   padding: 10px;
   color: #555e6b;
 }
