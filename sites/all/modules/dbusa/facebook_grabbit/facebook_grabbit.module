@@ -668,7 +668,7 @@ function facebook_grabbit_private_view_panel($param){
 			$view_elements->display['default']->display_options['filters']['type']['value']['imap']='imap';
 		}
 
-		if(!$GET['favorites'] && $param!='favorite'){
+		if(!$GET['favorites']){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		$view_elements->execute();
@@ -1873,4 +1873,77 @@ function facebook_grabbit_update_twitter($user){
         drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
      }
 
+}
+
+function facebook_grabbit_theme_results($twitface){
+	
+	if(is_array($twitface)){
+			ksort($twitface);
+			$result = array_reverse($twitface);
+			$rowx='even';
+			foreach($result as $entry){
+					if($entry['value']->nid){
+
+						$node=node_load($entry['value']->nid,NULL,TRUE);
+						$node->rowx=$rowx;
+						switch($node->type){
+							case 'facebook':
+							    $actor=array('name'=>$node->field_user_name[0]['value'],
+								             'url'=>$node->field_user_url[0]['value'],
+								             'pic_square'=>$node->field_user_picture[0]['value']
+								             );
+								$commenta=array();
+								$actors=array();
+								if($node->field_comments[0]['value']){
+									$profiles=unserialize($node->field_comments[0]['value']);
+									$commenta=$profiles['comments'];	
+									$actors=$profiles['profiles'];
+								}
+
+								if(!$node->field_attachment[0]['value']){ //STATUS UPDATE
+									$target='';
+									if($node->field_target[0]['value'])
+									  $target=$node->field_target[0]['value'];
+
+									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta);
+									$comments=array();
+									}else{
+										$target='';
+										if($node->field_target[0]['value'])
+										  $target=$node->field_target[0]['value'];
+
+										$output .= prepeare_standar_update($node,$actor,$target,$actors,$commenta);
+										$comments=array();
+									}
+
+							break;
+							case 'twitter':
+							  $output .=theme_twitter_message($node);
+							break;
+							case 'gmail':
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= theme_gmail_message($comments,$node);
+							break;
+							case 'imap':
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= theme_imap_message($comments,$node);
+							break;
+							default:
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= _news_theme($comments,$node);
+							break;
+						}
+
+					  if($rowx=='even'){
+						$rowx='odd';
+					  }else{
+						$rowx='even';
+					  }
+
+					}
+			}
+
+		}
+		
+		return $output;
 }

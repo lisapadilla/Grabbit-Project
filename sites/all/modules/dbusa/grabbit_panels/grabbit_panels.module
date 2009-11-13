@@ -66,29 +66,34 @@ function grabbit_panels_menu () {
 }
 
 function grabbit_panels_get_favorites(){
+	global $user;
+	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
 	
-	if ($user->uid > 0){
-		$mesa=drupal_get_messages();
+	$mesa=drupal_get_messages();
+	$view = views_get_view('flag_bookmarks_tab');
+	$view->set_arguments(array($user->uid));	
+	$view->execute();
+	foreach($view->result as $node){
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+    
+	$resultados = facebook_grabbit_theme_results($twitface);
 	
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
 		           </div><div class="messages-status-updates">'.$mesa['status'][0].'</div><div class="panel-grabbit suser-panels">';
-		$output .= theme_panels($panel_1,0,"Main Stream");           		           
-			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
-					
-			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
-	
+		$output .=$resultados;
 	
 		$output .='</div>';
 	    
-	}
 	
 	return $output;
 }
@@ -150,7 +155,6 @@ function grabbit_panels_get_panels(){
 			while($panel = db_fetch_object($all_panels)){
 			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
 				$panel_settings=unserialize($settings->config);
-				print_r($panel_settings);
 			    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
 			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 			}	
