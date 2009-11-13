@@ -165,7 +165,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	
-	foreach($nid = db_fetch_object($results)){
+	while($nid = db_fetch_object($results)){
 	  $node=node_load($nid->nid);
 	  
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
