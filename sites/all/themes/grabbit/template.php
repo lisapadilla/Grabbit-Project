@@ -180,7 +180,7 @@ function grabbit_preprocess_search_results(&$variables) {
     foreach($variables['results'] as $result){
 	  $node=$result['node'];
 	
-	  $twitface[$node->node_created]=array('time'=>$node->created,
+	  $twitface[$node->created]=array('time'=>$node->created,
 	                                       'value'=>$node);
     }
 
