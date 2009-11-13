@@ -155,25 +155,35 @@ function grabbit_search_no_results($term){
 
 
 function grabbit_search_custom_results($results,$keyword=NULL){
-	//$output = drupal_get_form('grabbit_search_custom_form');
 	
-	$output .='<div class="grabbit-search-results"><span class="title"><h2>'.t('Search results').':</h2></span>
-	           <dl class="search-results node-results">';
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
+	
+	foreach($nid = db_fetch_object($results)){
+	  $node=node_load($nid->nid);
+	  
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                                       'value'=>$node);
+    }
 
-	while($nid = db_fetch_object($results)){
-		
-		$node=node_load($nid->nid);
-		$body =substr(strip_tags($node->body),0,250);
-		if($node->field_text[0]['value'])
-		  $body =substr(strip_tags($node->field_text[0]['value']),0,250);
-		  $body = str_ireplace($keyword, '<span class="highlight_word">'.$keyword.'</span>', $body);
-		  $output .= '<br><dt class="title">'.l($node->title,"node/".$node->nid).'</dt><dd>
-		      <p class="search-snippet">'.$body.'... <br></p>
-		      <p class="search-info"><br>'.$node->type.' - '.format_date($node->created).'</p>
-		  </dd>';
-	}
+	$resultados = facebook_grabbit_theme_results($twitface);
 	
-	$output .='</dl></div>';
+		$output .='<div class="panels-controllers">
+		           <div id="panels-pager" class="panels-pager"></div>
+		           <a href="JavaScript:void(0);" class="move-left"></a>
+		           <a href="JavaScript:void(0);" class="move-right"></a>
+		           </div><div class="messages-status-updates">'.$mesa['status'][0].'</div><div class="panel-grabbit suser-panels">
+		           <div class="panel-favorites">';
+		$output .=$resultados;
+	
+		$output .='</div></div>';
+	    
 	
 	return $output;
 }
