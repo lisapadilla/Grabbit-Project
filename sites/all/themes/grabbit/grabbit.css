@@ -1965,7 +1965,8 @@ ul.dropdown li:hover ul {
   margin-left: 188px;
   cursor: pointer;
 }
-.section-user .tabs .primary{
+.section-user .tabs .primary,
+.page-users-admin ul.primary{
   display: none;
 }
 .section-user .tabs ul.secondary
