@@ -1006,11 +1006,12 @@ a.active{
 #edit-status-wrapper textarea,
 #edit-status-1{
   display: block;
-  width: 468px;
-  height: 80px;
+  width: 458px;
+  height: 70px;
   background: url(images/bg_textarea.gif) 0 0 no-repeat;
   border: none;
   overflow: hidden;
+  padding: 10px 0px 0px 10px;
 }
 #facebook-grabbit-update-form .form-submit{
   display: block;
