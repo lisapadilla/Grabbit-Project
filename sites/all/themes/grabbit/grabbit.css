@@ -2195,3 +2195,6 @@ div.messages, div.status, div.warning, div.error{
 .section-search #content-area #search-form, .section-search #content-area h2.title{
 	display:none;
 }
+.section-search #content-area .search-results{
+	margin:0px;
+}
