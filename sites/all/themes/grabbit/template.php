@@ -166,7 +166,9 @@ function grabbit_preprocess_block(&$vars, $hook) {
 // */
 
 function grabbit_preprocess_search_results(&$variables) {
-  if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
+print_r($variables);
+exit; 
+ if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
 
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
