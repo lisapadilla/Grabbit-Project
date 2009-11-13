@@ -1506,9 +1506,10 @@ function _news_theme($comments,$node){
 	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
 
 	}else{
+		 $rss=node_load(reset($node->feedapi_node->feed_nids));
+		
 	  if(!$node->field_image_inline[0]['value']){
-	    $rss=node_load(reset($node->feedapi_node->feed_nids));
-		  if($source_image = facebook_grabbit_get_images($node->body)){
+	   	  if($source_image = facebook_grabbit_get_images($node->body)){
 			 $image = '<span class="image-deal"><img width="48" height="48" title="'.$node->title.'" alt="'.$node->title.'" src="'.$source_image.'"/></span>'; 
 		    }else{
 			  if($rss->field_rss_logo[0]['filepath']){
