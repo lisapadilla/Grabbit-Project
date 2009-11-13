@@ -1983,9 +1983,9 @@ ul.dropdown li:hover ul {
 }
 */
 #block-grabbit_search-0 #edit-search{
-  width: 170px;
-  height: 20px;
-  padding: 12px 0px 0px 20px;
+  width: 160px;
+  height: 23px;
+  padding: 9px 0px 0px 30px;
   float: left;
   margin: 0px;
   background: url(images/search_tf.gif) 0 0 no-repeat;
