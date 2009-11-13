@@ -1065,6 +1065,8 @@ a.active{
 }
 #content-area .grabbit-list{
 }
+.page-user-me-myfriends-facebook-friends #content-area h2,
+.page-user-me-myfriends-twitter-friends #content-area h2,
 .page-user-me-myfriends #content-area h2{
   display: none;
 }
@@ -1964,44 +1966,76 @@ ul.dropdown li:hover ul {
   margin-left: 188px;
   cursor: pointer;
 }
-.section-user .tabs .primary{
+.section-user .tabs .primary,
+.page-users-admin ul.primary{
   display: none;
 }
-.section-user .tabs ul.secondary{
+.section-user .tabs ul.secondary,
+.page-invite ul.primary{
   background: transparent;
   border: none;
   margin: 0px;
   padding: 10px;
 }
-.section-user .tabs ul.secondary li{
+.page-invite ul.primary{
+  border: none;
+}
+.section-user .tabs ul.secondary li,
+.page-invite ul.primary li{
   background: transparent;
   border: none;
   float: left;
   padding: 0px;
   margin: 0px;
 }
-.section-user .tabs ul.secondary li a{
+.section-user .tabs ul.secondary li a,
+.page-invite ul.primary li a{
   display: block;
   border: none;
   width: 100px;
   height: 19px;
-  padding-top: 1px;
+  padding: 1px 0px 0px 0px;
   text-align: center;
 }
-.section-user .tabs ul.secondary li a span{
+.page-invite ul.primary li a,
+.page-invite ul.primary li a:hover{
+  background: transparent;
+}
+.page-invite ul.primary li a{
+  margin: 0px;
+}
+.section-user .tabs ul.secondary li a span,
+.page-invite ul.primary li a span{
   font-size: 11px;
   line-height: 12px;
   color: #000000;
 }
-.section-user .tabs ul.secondary li.active a{
+.section-user .tabs ul.secondary li.active a,
+.page-invite ul.primary li.active a{
   
   background: url(images/blk_sel.gif) 0 0 no-repeat;
 }
-.section-user .tabs ul.secondary li.active a span{
+.section-user .tabs ul.secondary li.active a span,
+.page-invite ul.primary li.active a span{
   font-size: 11px;
   color: #FFFFFF;
 }
-#dcl-importer-form{
+#dcl-importer-form,
+.profile,
+#node-form,
+.facebook-details,
+#feedapi-import-opml,
+#user-login,
+#invite-form{
   padding: 10px;
   color: #555e6b;
+}
+.profile h3{
+  border: none;
+}
+.profile .odd{
+  background: transparent;
+}
+.profile #content-profile-display-profile{
+  border: none;
 }
