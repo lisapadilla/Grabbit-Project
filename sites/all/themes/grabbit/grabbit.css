@@ -1904,7 +1904,6 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #edit-search-wrapper{
   margin: 0px;
   padding: 0px;
-  border-bottom: 10px solid #8b939f;
   display: inline-block;
   width: 190px;
   float: left;
@@ -1923,6 +1922,10 @@ ul.dropdown li:hover ul {
   border: none;
 }
 */
+#collapsable-custom-form{
+  border-top: 10px solid #8b939f;
+}
+
 #block-grabbit_search-0{
   margin: 0px 0px 20px 0px;
   padding: 0px 0px 10px 0px;
@@ -1999,7 +2002,6 @@ ul.dropdown li:hover ul {
   overflow: hidden;
   font-size: 0px;
   line-height: 1000px;
-  border-bottom: 10px solid #8b939f;
 }
 .section-user .tabs .primary,
 .page-users-admin ul.primary{
