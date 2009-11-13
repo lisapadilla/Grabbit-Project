@@ -1065,21 +1065,23 @@ a.active{
 }
 #content-area .grabbit-list{
 }
-#content-area h2{
+.page-user-me-myfriends #content-area h2{
   display: none;
 }
-#content-area .views-row-even,
-#content-area .even{
+#content-area .views-row-odd,
+#content-area .odd{
   background: #e6eaed;
 }
 #content-area .views-row,
-#content-area .facebook-friend{
+#content-area .facebook-friend,
+#content-area .twitter-friend{
   display: inline-block;
   padding: 10px;
   width: 606px;
 }
 #content-area .views-row .views-field-field-profile-picture-fid img,
-#content-area .facebook-friend .picture img{
+#content-area .facebook-friend .picture img,
+#content-area .twitter-friend .picture img{
   float: left;
   margin: 0px 10px 10px 0px;
 }
@@ -1949,7 +1951,8 @@ ul.dropdown li:hover ul {
   font-weight: normal;
 }
 #block-grabbit_search-0 #edit-submit-1,
-#block-grabbit_search-0 #edit-submit-2{
+#block-grabbit_search-0 #edit-submit-2,
+#block-grabbit_search-0 #edit-submit{
   display: block;
   border: none;
   width: 58px;
@@ -1997,4 +2000,8 @@ ul.dropdown li:hover ul {
 .section-user .tabs ul.secondary li.active a span{
   font-size: 11px;
   color: #FFFFFF;
+}
+#dcl-importer-form{
+  padding: 10px;
+  color: #555e6b;
 }
