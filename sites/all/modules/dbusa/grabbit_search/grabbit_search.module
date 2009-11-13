@@ -181,7 +181,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div class="messages-status-updates">'.$mesa['status'][0].'</div><div class="panel-grabbit suser-panels">
+		           </div><div class="panel-grabbit suser-panels">
 		           <div class="panel-favorites">';
 		$output .=$resultados;
 	
