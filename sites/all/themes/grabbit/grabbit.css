@@ -1982,7 +1982,6 @@ ul.dropdown li:hover ul {
   background: url(images/search_tf.gif) 0 0 no-repeat;
   display: block;
   border: none;
-  border-bottom: 10px solid #8b939f;
 }
 #block-grabbit_search-0 #edit-submit,
 #block-grabbit_search-0 #edit-submit-1,
@@ -2000,6 +1999,7 @@ ul.dropdown li:hover ul {
   overflow: hidden;
   font-size: 0px;
   line-height: 1000px;
+  border-bottom: 10px solid #8b939f;
 }
 .section-user .tabs .primary,
 .page-users-admin ul.primary{
