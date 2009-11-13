@@ -96,10 +96,11 @@ function grabbit_panels_get_favorites(){
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div class="messages-status-updates">'.$mesa['status'][0].'</div><div class="panel-grabbit suser-panels">';
+		           </div><div class="messages-status-updates">'.$mesa['status'][0].'</div><div class="panel-grabbit suser-panels">
+		           <div class="panel-favorites">';
 		$output .=$resultados;
 	
-		$output .='</div>';
+		$output .='</div></div>';
 	    
 	
 	return $output;
