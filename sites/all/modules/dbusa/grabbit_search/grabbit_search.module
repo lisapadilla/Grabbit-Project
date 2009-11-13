@@ -105,7 +105,7 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 		$types="'facebook', 'gmail', 'imap', 'twitter', 'feed', 'news', 'blogs'";
 	}
 
-	$result = db_query("SELECT node.nid AS nid
+	$result = db_query("SELECT node.nid AS nid, node.created as node_created
 	 FROM node node 
 	 INNER JOIN users users ON node.uid = users.uid
 	 LEFT JOIN content_type_gmail node_data_field_from ON node.vid = node_data_field_from.vid
@@ -165,8 +165,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	
-	while($nid = db_fetch_object($results)){
-	  $node=node_load($nid->nid);
+	while($node = db_fetch_object($results)){
 	  
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                                       'value'=>$node);
