@@ -1787,7 +1787,7 @@ a.truncate_hide{
 #panels-pager a{
   display: block;
   width: 108px;
-  padding: 5px 0px 0px 0px;
+  padding: 4px 0px 0px 0px;
   height: 15px;
   color: #555b6e;
   float: left;
