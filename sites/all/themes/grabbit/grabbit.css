@@ -1721,15 +1721,18 @@ a.truncate_show{
 	margin-top:10px;
 	background: url(images/more.gif) 0 0 no-repeat;
 	padding: 0px;
+	margin-left: 530px;
 }
 a.truncate_hide{
 	display:block;
-	color:#0073CF;
-	font-weight:bold;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
 	margin-top:10px;
-	font-size:12px;
-	background: url(images/various/less.gif) 0 0 no-repeat;
-	padding-left:10px;
+	background: url(images/less.gif) 0 0 no-repeat;
+	padding: 0px;
+	margin-left: 530px;
 }
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
