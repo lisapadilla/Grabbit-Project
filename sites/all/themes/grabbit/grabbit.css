@@ -1983,14 +1983,17 @@ ul.dropdown li:hover ul {
 }
 */
 #block-grabbit_search-0 #edit-search{
-  width: 190px;
-  height: 32px;
+  width: 170px;
+  height: 20px;
+  padding: 12px 0px 0px 20px;
   float: left;
-  padding: 0px;
   margin: 0px;
   background: url(images/search_tf.gif) 0 0 no-repeat;
   display: block;
   border: none;
+  color: #555e6b;
+  font-size: 12px;
+  line-height: 13px;
 }
 #block-grabbit_search-0 #edit-submit,
 #block-grabbit_search-0 #edit-submit-1,
