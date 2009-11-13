@@ -990,12 +990,23 @@ a.active{
   float: left;
 }
 #facebook-grabbit-update-form .user-name{
-  width: 100px;
+  width: 158px;
   float: left;
   color: #000000;
   font-size: 14px;
   line-height: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+}
+#facebook-grabbit-update-form .user-friends{
+  width: 158px;
+  float: left;
+  color: #000000;
+  font-size: 14px;
+  line-height: 15px;
+  margin-bottom: 5px;
+}
+#facebook-grabbit-update-form .user-friends .numbers{
+  color: #385691
 }
 #edit-status-wrapper,
 #edit-status-1-wrapper{
