@@ -2191,7 +2191,7 @@ div.messages, div.status, div.warning, div.error{
   background: none;
   border: none;
 }
-.section-search h1.title, .section-search .tabs
-.section-search #search-form, .section-search h2.title{
+.section-search #content-area h1.title, .section-search #content-area .tabs
+.section-search #content-area #search-form, .section-search #content-area h2.title{
 	display:none;
 }
