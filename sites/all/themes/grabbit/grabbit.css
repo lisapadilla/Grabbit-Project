@@ -1714,12 +1714,13 @@ a.panel-filters{
 }
 a.truncate_show{
 	display:block;
-	color:#0073CF;
-	font-weight:bold;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
 	margin-top:10px;
-	font-size:12px;
-	background: url(images/various/more.gif) 0 0 no-repeat;
-	padding-left:10px;
+	background: url(images/more.gif) 0 0 no-repeat;
+	padding: 0px;
 }
 a.truncate_hide{
 	display:block;
