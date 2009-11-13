@@ -1992,6 +1992,10 @@ ul.dropdown li:hover ul {
   padding-top: 1px;
   text-align: center;
 }
+.page-invite ul.primary li a{
+  margin: 0px;
+  padding: 0px;
+}
 .section-user .tabs ul.secondary li a span,
 .page-invite ul.primary li a span{
   font-size: 11px;
