@@ -557,9 +557,9 @@ function theme_panels($private_view,$id,$name,$unique=0){
 	           
 	}else{
 		if ($name == 'Most Visited'){
-			$output = '<div class="panel-grabbit panel-most-visited" id="panel-'.$id.'">';
+			$output = '<div class="panel-grabbit panel-most-visited user-panel" id="panel-'.$id.'">';
 		}else{
-			$output = '<div class="panel-grabbit" id="panel-'.$id.'">';
+			$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'">';
 		}
 		$output .= ' <div class="panel-title clearfix">
 	               <h3 class="title">'.$name.'</h3>';
