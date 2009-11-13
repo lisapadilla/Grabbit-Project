@@ -174,17 +174,30 @@ function grabbit_panels_get_panels(){
 	    
 	}
 	else{
-
-		if(arg(2)){
-			$panel_term = facebook_grabbit_private_view_panel_term(arg(2));
-			$term = taxonomy_get_term(arg(2));
-			$output .= theme_panels($panel_term,0,$term->name);
-		}else{
-			$output .= theme_panels($panel_1,0,"My Main Stream");
-		}
 		
-		$panel_2 = facebook_grabbit_private_view_panel(0);	
-	    $output .= theme_panels($panel_2,1,"Most Visited");
+		$output .='<div class="panels-controllers">
+		           <div id="panels-pager" class="panels-pager"></div>
+		           <a href="JavaScript:void(0);" class="move-left"></a>
+		           <a href="JavaScript:void(0);" class="move-right"></a>
+		           </div><div class="messages-status-updates">'.$mesa['status'][0].'</div><div class="panel-grabbit suser-panels">';
+		$output .= theme_panels($panel_1,0,"Public Stream");           		           
+		$all_panels=grabbit_panels_get_all_panels($user->uid);
+		if($total_u=db_affected_rows($all_panels)){
+			if($total_u==1)
+			  $unique=1;
+			
+			while($panel = db_fetch_object($all_panels)){
+			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
+				$panel_settings=unserialize($settings->config);
+			    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
+			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
+			}	
+		}else{
+			$panel_2 = facebook_grabbit_private_view_panel(1);
+			$output .= theme_panels($panel_2,1,"Filtered Stream");
+		}
+		$output .='</div>';
+		
 	}
 	
 	return $output;
