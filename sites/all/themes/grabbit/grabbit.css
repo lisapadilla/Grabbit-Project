@@ -1989,12 +1989,11 @@ ul.dropdown li:hover ul {
   border: none;
   width: 100px;
   height: 19px;
-  padding-top: 1px;
+  padding: 1px 0px 0px 0px;
   text-align: center;
 }
 .page-invite ul.primary li a{
   margin: 0px;
-  padding: 0px;
 }
 .section-user .tabs ul.secondary li a span,
 .page-invite ul.primary li a span{
