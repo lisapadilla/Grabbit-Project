@@ -997,16 +997,17 @@ a.active{
   line-height: 15px;
   margin-bottom: 10px;
 }
+#facebook-grabbit-update-form .form-item{
+  margin: 0px;
+  padding: 0px;
+}
 #edit-status-wrapper{
   display: block;
   width: 468px;
   float: left;
   margin-right: 10px;
 }
-#facebook-grabbit-update-form .form-item{
-  margin: 0px;
-  padding: 0px;
-}
+
 #edit-status-wrapper textarea,
 #edit-status-1{
   display: block;
