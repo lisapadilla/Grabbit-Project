@@ -148,6 +148,8 @@ function grabbit_panels_get_panels(){
 	if ($user->uid > 0){
 		$unique=0;
 		$mesa=drupal_get_messages();
+	     if($user->uid==1)
+	       $mesa['status'][0]='You have changed your facebook and twitter status';
 	
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
