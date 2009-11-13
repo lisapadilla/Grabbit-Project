@@ -668,7 +668,7 @@ function facebook_grabbit_private_view_panel($param){
 			$view_elements->display['default']->display_options['filters']['type']['value']['imap']='imap';
 		}
 
-		if(!$GET['favorites']){
+		if(!$GET['favorites'] && $param!='favorite'){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		$view_elements->execute();
