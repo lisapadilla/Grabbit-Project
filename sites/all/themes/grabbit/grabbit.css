@@ -1017,6 +1017,12 @@ a.active{
   padding: 10px 0px 0px 10px;
   color: #555e6b;
 }
+#edit-status-wrapper textarea,
+.block-grabbit_search .form-text
+{
+	outline: none;
+	resize: none;
+}
 #facebook-grabbit-update-form .form-submit{
   display: block;
   border: none;
