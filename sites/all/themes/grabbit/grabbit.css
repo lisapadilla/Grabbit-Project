@@ -1448,7 +1448,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
   padding: 12px 0px 0px 18px;
   font-weight: normal;
 }
-#panel-1 .panel-title h3, .user-panels .panel-grabbit .panel-title h3{
+.user-panels .panel-grabbit .panel-title h3{
   font-size: 20px;
   color: #999999;
   line-height: 21px;
@@ -1476,7 +1476,7 @@ a.add-new-panel{
   margin: 5px 5px 0px 0px;
   font-weight: bold;
 }
-#panel-1 .panel-title, .user-panels .panel-grabbit .panel-title{
+.user-panels .panel-grabbit .panel-title{
   padding-bottom: 23px;
   background: url(images/various/bg_left_top.gif) bottom left no-repeat;
 }
