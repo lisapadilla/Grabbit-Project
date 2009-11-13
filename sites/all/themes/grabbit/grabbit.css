@@ -2115,6 +2115,7 @@ ul.dropdown li:hover ul {
 #footer
 {
 	margin-bottom: 30px;
+	margin-top: 20px;
 	background: url(images/footerbg.gif) no-repeat 0 bottom;
 }
 #footer-links a
