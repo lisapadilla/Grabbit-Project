@@ -963,11 +963,14 @@ a.active{
   position: relative;
 }
 .upload_button_expand a{
-  color: #666666;
+  color: #555E6B;
+  font-size: 12px;
+  line-height: 13px;
+  font-weight: bold;
   margin-left:15px;
 }
 .panels-update-form_file{
- 	margin-left:10px;
+ 	margin-left: 267px;
 }
 #facebook-grabbit-update-form .user-data{
   width: 247px;
@@ -1853,7 +1856,8 @@ a.truncate_hide{
   background:url('js/swfupload/cancel.png') no-repeat; cursor:pointer; 
 }
 .upload_button_expand{
-	display:inline-block;
+	margin-left: 254px;
+	margin-top: -1px;
 }
 ul.dropdown,
 ul.dropdown li,
