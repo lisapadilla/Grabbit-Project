@@ -1975,6 +1975,9 @@ ul.dropdown li:hover ul {
   margin: 0px;
   padding: 10px;
 }
+.page-invite ul.primary{
+  border: none;
+}
 .section-user .tabs ul.secondary li,
 .page-invite ul.primary li{
   background: transparent;
@@ -1991,6 +1994,10 @@ ul.dropdown li:hover ul {
   height: 19px;
   padding: 1px 0px 0px 0px;
   text-align: center;
+}
+.page-invite ul.primary li a,
+.page-invite ul.primary li a:hover{
+  background: transparent;
 }
 .page-invite ul.primary li a{
   margin: 0px;
