@@ -200,13 +200,14 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['from'] = array(
 	  '#type' => 'item',
+	  '#weight' => 8,
 	  '#value' => '<div id="elgyro"><a href="#" class="custom-form-collapser" id="collapse-custom">Advanced</a></div>',
 	);
 	
 	
 	$form['details'] = array(
 	  '#type' => 'checkboxes',
-	  '#weight' => 8,
+	  '#weight' => 9,
 	  '#title' => t('Search only in'),
 	  '#options' => array(
 	    'site' => t('Search entire site'),
