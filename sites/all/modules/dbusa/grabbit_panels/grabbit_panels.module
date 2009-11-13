@@ -79,12 +79,12 @@ function grabbit_panels_get_favorites(){
 	$view->set_arguments(array($user->uid));	
 	$view->pager['items_per_page']=30;
 	$view->execute();
-	print_r($view->result);
+	
 	foreach($view->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
-    
+    print_r($twitface);
 	$resultados = facebook_grabbit_theme_results($twitface);
 	
 		$output .='<div class="panels-controllers">
