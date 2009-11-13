@@ -963,7 +963,10 @@ a.active{
   position: relative;
 }
 .upload_button_expand a{
-  color: #666666;
+  color: #555E6B;
+  font-size: 12px;
+  line-height: 13px;
+  font-weight: bold;
   margin-left:15px;
 }
 .panels-update-form_file{
