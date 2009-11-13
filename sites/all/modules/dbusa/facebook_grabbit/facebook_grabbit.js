@@ -391,7 +391,7 @@ $(document).ready(function() {
 	  
 	});
 	
-	$(".facebook_favorite, .facebook_favorite-remove").click(function () {
+	$(".facebook_favorite, .facebook_favorite-remove").live('click',function () {
 	  var id = $(this).attr("id"); //post_id
 	  var tag = $(this);
 	  var nid= $(this).attr("nid");
