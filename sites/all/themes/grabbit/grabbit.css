@@ -1012,6 +1012,7 @@ a.active{
   border: none;
   overflow: hidden;
   padding: 10px 0px 0px 10px;
+  color: #555e6b;
 }
 #facebook-grabbit-update-form .form-submit{
   display: block;
