@@ -184,6 +184,7 @@ function grabbit_preprocess_search_results(&$variables) {
 	                                       'value'=>$node);
     }
 
+
     if(count($twitface)){
 	  $resultados = facebook_grabbit_theme_results($twitface);
     }else{
