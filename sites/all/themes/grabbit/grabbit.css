@@ -1939,6 +1939,7 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #elgyro{
   background: url(images/sidebar_top.gif) top no-repeat;
   padding: 10px;
+  clear: both;
 }
 #block-grabbit_search-0 a#collapse-custom{
   display: block;
