@@ -1506,6 +1506,7 @@ function _news_theme($comments,$node){
 	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
 
 	}else{
+		if(is_array($node->feedapi_node->feed_nids))
 		 $rss=node_load(reset($node->feedapi_node->feed_nids));
 		
 	  if(!$node->field_image_inline[0]['value']){
