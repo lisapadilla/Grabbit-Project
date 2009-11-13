@@ -2111,3 +2111,27 @@ ul.dropdown li:hover ul {
 .page-favorites-display #content-area h1.title{
 	display:none;
 }
+
+#footer
+{
+	margin-bottom: 30px;
+	background: url(images/footerbg.gif) no-repeat 0 bottom;
+}
+#footer-links a
+{
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+}
+#footer-links .first a
+{
+	color: #333333;
+}
+#footer-links
+{
+	margin-left: 300px;
+	height: 40px;
+	padding-top: 4px;
+	padding-left: 48px;
+	background: url(images/conejillo.gif) no-repeat;
+}
