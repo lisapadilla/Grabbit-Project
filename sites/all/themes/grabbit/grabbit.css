@@ -1158,9 +1158,15 @@ a.active{
   float: left;
   overflow: hidden;
   margin-right: 10px;
+  display: block;
+}
+.facebook-post .facebook-post-header a.facebook-story-pic{
   height: 70px;
   background: url(images/fb_ico.gif) bottom left no-repeat;
-  display: block;
+}
+.twitter-message-stream .twitter-image{
+  height: 70px;
+  background: url(images/ftwit_ico.png) bottom left no-repeat;
 }
 .facebook-post .facebook-post-header a.facebook-story-name
 {
