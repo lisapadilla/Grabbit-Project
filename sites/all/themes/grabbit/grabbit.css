@@ -997,7 +997,8 @@ a.active{
   line-height: 15px;
   margin-bottom: 10px;
 }
-#edit-status-wrapper{
+#edit-status-wrapper,
+#edit-status-1-wrapper{
   display: block;
   width: 478px;
   float: left;
