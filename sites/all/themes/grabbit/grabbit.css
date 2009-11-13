@@ -2012,3 +2012,6 @@ ul.dropdown li:hover ul {
 .profile .odd{
   background: transparent;
 }
+.profile #content-profile-display-profile{
+  border: none;
+}
