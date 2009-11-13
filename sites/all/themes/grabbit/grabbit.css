@@ -1158,6 +1158,9 @@ a.active{
   float: left;
   overflow: hidden;
   margin-right: 10px;
+  height: 75px;
+  background: url(images/fb_ico.gif) bottom no-repeat;
+  display: block;
 }
 .facebook-post .facebook-post-header a.facebook-story-name
 {
@@ -2175,8 +2178,4 @@ ul.dropdown li:hover ul {
   margin-bottom: 0px;
   font-weight: bold;
   padding: 5px 10px;
-}
-.facebook-user-pic{
-  height: 75px;
-  background: url(images/fb_ico.gif) bottom no-repeat;
 }
