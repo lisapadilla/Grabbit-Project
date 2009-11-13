@@ -561,7 +561,7 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 		
 		if($node->type=='feed'){
 			
-			$elements = array();
+		/*	$elements = array();
 			  if ($merged_item = _feedapi_mapper_get_items_merged($node)) {
 			    $merged_item = _feedapi_mapper_simplify_raw($merged_item, $node->feed->parsers);
 			  }
@@ -581,7 +581,7 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 			$target_field='a:2:{i:0;s:7:"content";i:1;s:18:"field_image_inline";}';
 			
 			feedapi_mapper_add_mapping($node->nid,$elements[$image],$target_field);
-			
+		*/	
 			   $flag = flag_get_flag('myfeeds') or die('no flag defined');
 			   $flag->flag('flag', $node->nid);
 			
