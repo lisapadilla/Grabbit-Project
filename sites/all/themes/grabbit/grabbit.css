@@ -2012,8 +2012,7 @@ ul.dropdown li:hover ul {
   font-size: 0px;
   line-height: 1000px;
 }
-.section-user .tabs .primary,
-.page-users-admin ul.primary{
+.section-user .tabs .primary{
   display: none;
 }
 .section-user .tabs ul.secondary,
