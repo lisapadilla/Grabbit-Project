@@ -1001,6 +1001,7 @@ a.active{
   display: block;
   width: 468px;
   float: left;
+  margin-right: 10px;
 }
 #facebook-grabbit-update-form .form-item{
   margin: 0px;
