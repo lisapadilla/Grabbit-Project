@@ -2096,8 +2096,8 @@ ul.dropdown li:hover ul {
 .profile #content-profile-display-profile{
   border: none;
 }
-#facebook-grabbit-update-form .form-item #edit-twitter-wrapper,
-#facebook-grabbit-update-form .form-item #edit-facebook-wrapper,
-#facebook-grabbit-update-form .form-item #edit-contacts-wrapper{ 
-	margin-left:5px;
+#edit-twitter-wrapper,
+#edit-facebook-wrapper,
+#edit-contacts-wrapper{
+	padding-left:5px;
 }
