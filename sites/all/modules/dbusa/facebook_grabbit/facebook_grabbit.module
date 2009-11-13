@@ -837,19 +837,6 @@ function facebook_grabbit_private_view_panel($param){
  */
 function facebook_grabbit_private_view_panel_public_panels($param){
 	
-	$user->uid=53;
-	
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-
-	
-	global $user_info;
-	
-	//It starts getting parameters from index 1, 0 is the response id
-	//prepeare_status_update & prepeare_standar_update request 'name' at index 1, if it's needed to get more params, leave 'name' as first
-	$params = array('name','pic_square','profile_url');
-    $user_info = _get_current_user_info($params);
-	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=30;
 
@@ -861,7 +848,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
     $trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
-		if($result = grabbit_panels_get_uid($user->uid,$param)){
+		if($result = grabbit_panels_get_uid(53,$param)){
 			$GET = unserialize($result->config);
 			$tags= unserialize($result->filters);
 			if($tags['tags']){
@@ -880,7 +867,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
     if($user->uid>0){
 	  	//get FB,TW and soon GMAIL
 		$view_elements = views_get_view('grabbit_public_elements');
-		$view_elements->display['default']->display_options['filters']['uid']['value'][0]=$user->uid;
+		$view_elements->display['default']->display_options['filters']['uid']['value'][0]=53;
 		$view_elements->pager['items_per_page']=30;
 
 		$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='FALSE';
@@ -972,7 +959,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
     }
 
     // prepeare the deals view according to the user's tags
-	$deals_profile = content_profile_load('profile', $user->uid);
+	$deals_profile = content_profile_load('profile', 53);
 	if (count($deals_profile->taxonomy)){
 	  foreach ($deals_profile->taxonomy as $term){
 	    $d_tags[] = $term->tid;
