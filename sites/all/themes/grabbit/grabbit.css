@@ -1968,20 +1968,23 @@ ul.dropdown li:hover ul {
 .section-user .tabs .primary{
   display: none;
 }
-.section-user .tabs ul.secondary{
+.section-user .tabs ul.secondary
+.page-invite ul.primary{
   background: transparent;
   border: none;
   margin: 0px;
   padding: 10px;
 }
-.section-user .tabs ul.secondary li{
+.section-user .tabs ul.secondary li,
+.page-invite ul.primary li{
   background: transparent;
   border: none;
   float: left;
   padding: 0px;
   margin: 0px;
 }
-.section-user .tabs ul.secondary li a{
+.section-user .tabs ul.secondary li a,
+.page-invite ul.primary li a{
   display: block;
   border: none;
   width: 100px;
@@ -1989,16 +1992,19 @@ ul.dropdown li:hover ul {
   padding-top: 1px;
   text-align: center;
 }
-.section-user .tabs ul.secondary li a span{
+.section-user .tabs ul.secondary li a span,
+.page-invite ul.primary li a span{
   font-size: 11px;
   line-height: 12px;
   color: #000000;
 }
-.section-user .tabs ul.secondary li.active a{
+.section-user .tabs ul.secondary li.active a,
+.page-invite ul.primary li.active a{
   
   background: url(images/blk_sel.gif) 0 0 no-repeat;
 }
-.section-user .tabs ul.secondary li.active a span{
+.section-user .tabs ul.secondary li.active a span,
+.page-invite ul.primary li.active a span{
   font-size: 11px;
   color: #FFFFFF;
 }
