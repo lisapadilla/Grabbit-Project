@@ -191,7 +191,8 @@ function grabbit_search_custom_form(&$form_state){
 	    '#type' => 'textfield',
 	    '#title' => t('Search'),
 	    '#required' => TRUE,
-	    '#size' => 20
+	    '#size' => 20,
+	    '#weight' => 6
 	  );
 	
 	$form['#action'] = url('private/results');
@@ -205,6 +206,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['details'] = array(
 	  '#type' => 'checkboxes',
+	  '#weight' => 8,
 	  '#title' => t('Search only in'),
 	  '#options' => array(
 	    'site' => t('Search entire site'),
@@ -221,7 +223,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['submit'] = array(
 	  '#type' => 'submit',
-	  '#weight' => 6,
+	  '#weight' => 7,
 	  '#value' => t('Search'),
 	); 
 	
