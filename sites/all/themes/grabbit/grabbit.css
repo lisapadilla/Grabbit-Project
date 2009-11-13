@@ -1159,7 +1159,7 @@ a.active{
   overflow: hidden;
   margin-right: 10px;
   height: 75px;
-  background: url(images/fb_ico.gif) bottom no-repeat;
+  background: url(images/fb_ico.gif) bottom left no-repeat;
   display: block;
 }
 .facebook-post .facebook-post-header a.facebook-story-name
