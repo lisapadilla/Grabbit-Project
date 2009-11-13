@@ -999,7 +999,7 @@ a.active{
 }
 #edit-status-wrapper{
   display: block;
-  width: 468px;
+  width: 478px;
   float: left;
 }
 #facebook-grabbit-update-form .form-item{
@@ -1016,6 +1016,12 @@ a.active{
   overflow: hidden;
   padding: 10px 0px 0px 10px;
   color: #555e6b;
+}
+#edit-status-wrapper textarea,
+.block-grabbit_search .form-text
+{
+	outline: none;
+	resize: none;
 }
 #facebook-grabbit-update-form .form-submit{
   display: block;
@@ -1063,9 +1069,9 @@ a.active{
 #content-area h1{
   display: block;
   padding: 10px;
-  color: #000000;
-  font-size: 21px;
-  line-height: 22px;
+  color: #385691;
+  font-size: 22px;
+  line-height: 23px;
   margin: 0px;
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
 }
@@ -2110,4 +2116,29 @@ ul.dropdown li:hover ul {
 .page-private-results #content-area h1.title,
 .page-favorites-display #content-area h1.title{
 	display:none;
+}
+
+#footer
+{
+	margin-bottom: 30px;
+	margin-top: 20px;
+	background: url(images/footerbg.gif) no-repeat 0 bottom;
+}
+#footer-links a
+{
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 12px;
+}
+#footer-links .first a
+{
+	color: #333333;
+}
+#footer-links
+{
+	margin-left: 300px;
+	height: 40px;
+	padding-top: 4px;
+	padding-left: 48px;
+	background: url(images/conejillo.gif) no-repeat;
 }
