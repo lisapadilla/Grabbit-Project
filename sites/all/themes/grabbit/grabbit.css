@@ -2143,3 +2143,11 @@ ul.dropdown li:hover ul {
 	padding-left: 48px;
 	background: url(images/conejillo.gif) no-repeat;
 }
+.messages-status-updates{
+  background: #A9CB02;
+  color: #000000;
+  font-size: 12px;
+  line-height: 13px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
