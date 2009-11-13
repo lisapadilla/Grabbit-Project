@@ -1970,7 +1970,7 @@ ul.dropdown li:hover ul {
 .page-users-admin ul.primary{
   display: none;
 }
-.section-user .tabs ul.secondary
+.section-user .tabs ul.secondary,
 .page-invite ul.primary{
   background: transparent;
   border: none;
