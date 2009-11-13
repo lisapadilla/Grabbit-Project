@@ -86,7 +86,7 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 		$("#"+nextSlideElement.id).height(height);
 		$(".suser-panels").height(height);
 	}else{
-	  	var height = $("#"+nextSlideElement.id).height();
+	  	var height = $("#"+nextSlideElement.id).height()+20;
 		$(".suser-panels").height(height);	
 	}
 }
