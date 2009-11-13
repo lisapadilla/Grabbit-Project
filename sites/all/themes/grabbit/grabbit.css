@@ -1756,6 +1756,7 @@ a.truncate_show{
 	background: url(images/more.gif) 0 0 no-repeat;
 	padding: 0px;
 	margin-left: 530px;
+	clear: both;
 }
 a.truncate_hide{
 	display:block;
@@ -1767,6 +1768,7 @@ a.truncate_hide{
 	background: url(images/less.gif) 0 0 no-repeat;
 	padding: 0px;
 	margin-left: 530px;
+	clear: both;
 }
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
