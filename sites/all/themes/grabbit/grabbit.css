@@ -1907,6 +1907,7 @@ ul.dropdown li:hover ul {
   display: inline-block;
   width: 190px;
   float: left;
+  height: 32px;
 }
 #block-grabbit_search-0 #edit-search-wrapper label{
   display: none;
