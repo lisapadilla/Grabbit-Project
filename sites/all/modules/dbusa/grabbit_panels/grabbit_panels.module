@@ -58,6 +58,7 @@ function grabbit_panels_menu () {
   );
 
   $items['favorites/display'] = array( 
+  'title'=>'Favorites',
   'page callback' => 'grabbit_panels_get_favorites', 
   'access arguments' => array('access content')
   );
@@ -81,7 +82,7 @@ function grabbit_panels_get_favorites(){
 	$view->execute();
 	
 	foreach($view->result as $node){
-	  print_r($node);
+	  
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                                       'value'=>$node);
     }
