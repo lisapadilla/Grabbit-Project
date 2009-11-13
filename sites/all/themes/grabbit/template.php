@@ -166,8 +166,7 @@ function grabbit_preprocess_block(&$vars, $hook) {
 // */
 
 function grabbit_preprocess_search_results(&$variables) {
-print_r($variables);
-exit; 
+
  if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
 
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
@@ -181,7 +180,7 @@ exit;
     foreach($variables['results'] as $result){
 	  $node=$result['node'];
 	
-	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	  $twitface[$node->node_created]=array('time'=>$node->created,
 	                                       'value'=>$node);
     }
 
