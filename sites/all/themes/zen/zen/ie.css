@@ -152,3 +152,8 @@
 #content-area{
   margin-top: 30px;
 }
+#block-grabbit_search-0 .form-item{
+  clear: both;
+  display: block;
+  position: relative;
+}
