@@ -2113,3 +2113,7 @@ ul.dropdown li:hover ul {
 .page-favorites-display .node-stream-blogs, .page-private-results .node-stream-blogs{
 	display:block;
 }
+.page-private-results #content-area h1.title,
+.page-favorites-display #content-area h1.title{
+	display:none;
+}
