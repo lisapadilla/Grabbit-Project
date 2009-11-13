@@ -2177,6 +2177,6 @@ ul.dropdown li:hover ul {
   padding: 5px 10px;
 }
 .facebook-user-pic{
-  padding-bottom: 25px;
+  height: 75px;
   background: url(images/fb_ico.gif) bottom no-repeat;
 }
