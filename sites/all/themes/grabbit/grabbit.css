@@ -2105,3 +2105,8 @@ ul.dropdown li:hover ul {
 #edit-contacts-wrapper{
 	padding-left:5px;
 }
+
+.page-favorites-display .facebook-post, .page-favorites-display .twitter-message-stream, .page-favorites-display .node-stream-news, 
+.page-favorites-display .node-stream-deal, .page-favorites-display .node-stream-blogs{
+	display:block;
+}
