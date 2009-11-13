@@ -1415,13 +1415,23 @@ a.trash-facebook, a.trash-twitter, a.trash-item{
 }
 a.twitter_favorite-remove, a.unflag-action, a.facebook_favorite-remove{
   display: block;
-  width: 12px;
-  height: 12px;
+  width: 9px;
+  height: 11px;
   float: right;
-  background: url(images/various/favorites_ico.gif) 0 0 no-repeat;
+  background: url(images/star_red_w.gif) 0 0 no-repeat;
   text-indent: 3000em;
   overflow: hidden;
-  margin-left: 10px;
+  margin-left: 5px;
+}
+.odd a.twitter_favorite-remove, .odd a.unflag-action, .odd a.facebook_favorite-remove{
+  display: block;
+  width: 9px;
+  height: 11px;
+  float: right;
+  background: url(images/star_red_g.gif) 0 0 no-repeat;
+  text-indent: 3000em;
+  overflow: hidden;
+  margin-left: 5px;
 }
 a.retweet, a.grabb-that, a.retweet-facebook{
   display: block;
