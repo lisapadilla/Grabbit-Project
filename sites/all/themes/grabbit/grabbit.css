@@ -2006,7 +2006,8 @@ ul.dropdown li:hover ul {
 .profile,
 #node-form,
 .facebook-details,
-#feedapi-import-opml{
+#feedapi-import-opml,
+#user-login{
   padding: 10px;
   color: #555e6b;
 }
