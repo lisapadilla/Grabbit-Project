@@ -2006,3 +2006,9 @@ ul.dropdown li:hover ul {
   padding: 10px;
   color: #555e6b;
 }
+.profile h3{
+  border: none;
+}
+.profile .odd{
+  background: transparent;
+}
