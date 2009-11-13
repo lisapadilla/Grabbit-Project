@@ -119,7 +119,7 @@ $(document).ready(function() {
         fixtheheightMore(panel);
 	});
 	
-	$(".facebook-makecomment-link").click(function () {
+	$(".facebook-makecomment-link").live('click',function () {
 		var input1 = $(this).parent();
 		var input = $("#myForm",input1).children("input").prev();
 		$("#myForm",input1).slideToggle("medium",function(){
@@ -128,7 +128,7 @@ $(document).ready(function() {
 		
 	});
 	
-	$('.comment-news').click(function(){
+	$('.comment-news').live('click',function(){
 		var space = $(this).parents('.stream-item-element');
 		var text_input = $('.form-text-content',space);
 		text_input.attr('value','');
@@ -160,7 +160,7 @@ $(document).ready(function() {
 	});
 
 	// When user submits a comment in facebook
-	$(".facebook_comment_submit").click(function () {
+	$(".facebook_comment_submit").live('click',function () {
 		var tag = $(this);
 		var post_id = $(this).attr("id");
 		var comment = $(this).prev("input").attr("value");
@@ -242,7 +242,7 @@ $(document).ready(function() {
 	});
 	
 	
-	$(".twit-reply").click(function () {
+	$(".twit-reply").live('click',function () {
 	  var to = $(this).attr("id")+" "; 
 	  $("#edit-status").val(to);
 	  var scroll = $("#edit-status");
@@ -250,7 +250,7 @@ $(document).ready(function() {
 	  $("#edit-status").focus();
 	});
 		
-	$('.retweet').click(function (event){
+	$('.retweet').live('click',function (event){
 	  var container = $(this).parents().filter('.twitter-message-stream');	
 	  var message = $('.twitter-body-contains',container);
 	  var to = $('.twit-reply',container).attr('id');
@@ -262,7 +262,7 @@ $(document).ready(function() {
 	  $("#edit-status").focus();
 	});
 	
-	$('.retweet-facebook').click(function (event){
+	$('.retweet-facebook').live('click',function (event){
 	  var container = $(this).parents().filter('.facebook-post');	
 	  var message = $('.retweet-hide',container);
 	  var to = $('.facebook-story-name',container).attr('title');
@@ -274,7 +274,7 @@ $(document).ready(function() {
 	  $("#edit-status").focus();
 	});
 	
-	$(".url-deal a").click(function (element){
+	$(".url-deal a").live('click',function (element){
 		
 		d_deal=$(this).attr('href');
 		d_price=$(this).attr('price');
@@ -288,7 +288,7 @@ $(document).ready(function() {
         });
 	});
 	
-	$(".grabb-that").click(function (ev) {
+	$(".grabb-that").live('click',function (ev) {
 		ev.preventDefault();
 		urlcomplete = $(this).attr('href');
 		myurl = encodeURIComponent(urlcomplete);
@@ -308,7 +308,7 @@ $(document).ready(function() {
 	  
 	});	
 	
-	$(".twitter_favorite, .twitter_favorite-remove").click(function () {
+	$(".twitter_favorite, .twitter_favorite-remove").live('click',function () {
 	  var id = $(this).attr("id"); //post_id
 	  var tag = $(this);
 	  var nid= $(this).attr("nid");
@@ -341,7 +341,7 @@ $(document).ready(function() {
 	  }  		  
 	});
 	
-	$(".trash-facebook").click(function () {
+	$(".trash-facebook").live('click',function () {
 	  var id = $(this).attr("face_id"); //post_id
 	  var trashElement = $(this);
 	  $.get(Drupal.settings.basePath+"trash/save/facebook",{id:id,type:"item"},function(data){
@@ -357,7 +357,7 @@ $(document).ready(function() {
 	  
 	});
 	
-	$(".trash-twitter").click(function () {
+	$(".trash-twitter").live('click',function () {
 	  var id = $(this).attr("tweet_id"); //post_id
 	  var trashElement = $(this);
 	
@@ -374,7 +374,7 @@ $(document).ready(function() {
 	  
 	});
 	
-	$(".trash-item").click(function () {
+	$(".trash-item").live('click',function () {
 	  var id = $(this).attr("item_id"); //post_id
 	  var trashElement = $(this);
 	
@@ -391,7 +391,7 @@ $(document).ready(function() {
 	  
 	});
 	
-	$(".facebook_favorite, .facebook_favorite-remove").click(function () {
+	$(".facebook_favorite, .facebook_favorite-remove").live('click',function () {
 	  var id = $(this).attr("id"); //post_id
 	  var tag = $(this);
 	  var nid= $(this).attr("nid");
