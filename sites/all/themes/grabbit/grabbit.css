@@ -2019,17 +2019,20 @@ ul.dropdown li:hover ul {
   display: none;
 }
 .section-user .tabs ul.secondary,
-.page-invite ul.primary{
+.page-invite ul.primary,
+.page-invite-import ul.primary{
   background: transparent;
   border: none;
   margin: 0px;
   padding: 10px;
 }
-.page-invite ul.primary{
+.page-invite ul.primary,
+.page-invite-import ul.primary{
   border: none;
 }
 .section-user .tabs ul.secondary li,
-.page-invite ul.primary li{
+.page-invite ul.primary li,
+.page-invite-import ul.primary li{
   background: transparent;
   border: none;
   float: left;
@@ -2037,7 +2040,8 @@ ul.dropdown li:hover ul {
   margin: 0px;
 }
 .section-user .tabs ul.secondary li a,
-.page-invite ul.primary li a{
+.page-invite ul.primary li a,
+.page-invite-import ul.primary li a{
   display: block;
   border: none;
   width: 100px;
@@ -2046,25 +2050,30 @@ ul.dropdown li:hover ul {
   text-align: center;
 }
 .page-invite ul.primary li a,
-.page-invite ul.primary li a:hover{
+.page-invite ul.primary li a:hover,
+.page-invite-import ul.primary li a,
+.page-invite-import ul.primary li a:hover{
   background: transparent;
 }
-.page-invite ul.primary li a{
+.page-invite ul.primary li a,
+.page-invite-import ul.primary li a{
   margin: 0px;
 }
 .section-user .tabs ul.secondary li a span,
-.page-invite ul.primary li a span{
+.page-invite ul.primary li a span,
+.page-invite-import ul.primary li a span{
   font-size: 11px;
   line-height: 12px;
   color: #000000;
 }
 .section-user .tabs ul.secondary li.active a,
-.page-invite ul.primary li.active a{
-  
+.page-invite ul.primary li.active a,
+.page-invite-import ul.primary li.active a{
   background: url(images/blk_sel.gif) 0 0 no-repeat;
 }
 .section-user .tabs ul.secondary li.active a span,
-.page-invite ul.primary li.active a span{
+.page-invite ul.primary li.active a span,
+.page-invite-import ul.primary li.active a span{
   font-size: 11px;
   color: #FFFFFF;
 }
