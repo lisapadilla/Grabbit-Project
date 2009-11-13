@@ -1909,6 +1909,7 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #edit-search-wrapper label{
   display: none;
 }
+/*
 #block-grabbit_search-0 #edit-search{
   width: 255px;
   height: 31px;
@@ -1918,6 +1919,7 @@ ul.dropdown li:hover ul {
   display: block;
   border: none;
 }
+*/
 #block-grabbit_search-0{
   margin: 0px 0px 20px 0px;
   padding: 0px 0px 10px 0px;
@@ -1952,6 +1954,7 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #collapsable-custom-form label{
   font-weight: normal;
 }
+/*
 #block-grabbit_search-0 #edit-submit-1,
 #block-grabbit_search-0 #edit-submit-2,
 #block-grabbit_search-0 #edit-submit{
@@ -1965,6 +1968,34 @@ ul.dropdown li:hover ul {
   background: url(images/search_btn.gif) 0 0 no-repeat;
   margin-left: 188px;
   cursor: pointer;
+}
+*/
+#block-grabbit_search-0 #edit-search{
+  width: 190px;
+  height: 32px;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  background: url(images/search_tf.gif) 0 0 no-repeat;
+  display: block;
+  border: none;
+}
+#block-grabbit_search-0 #edit-submit,
+#block-grabbit_search-0 #edit-submit-1,
+#block-grabbit_search-0 #edit-submit-2{
+  display: block;
+  float: left;
+  width: 65px;
+  height: 32px;
+  padding: 0px;
+  margin: 0px;
+  background: url(images/search_bt.gif) 0 0 no-repeat;
+  text-indent: -3000em;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-size: 0px;
+  line-height: 1000px;
 }
 .section-user .tabs .primary,
 .page-users-admin ul.primary{
