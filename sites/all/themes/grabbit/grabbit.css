@@ -1481,7 +1481,7 @@ a.add-new-panel{
   background: url(images/various/bg_left_top.gif) bottom left no-repeat;
 }
 
-#panel-1 .panel-wraper, .user-panels .panel-grabbit .panel-wraper{
+.user-panels .panel-grabbit .panel-wraper{
   background: url(images/various/bg_left_mid.gif) 0 0 repeat-y;
   padding: 0px 5px 10px 5px;
 }
@@ -1489,7 +1489,7 @@ a.add-new-panel{
   height: 26px;
   text-align: center;
 }
-#panel-1 .panel-controller, .user-panels .panel-grabbit .panel-controller{
+.user-panels .panel-grabbit .panel-controller{
   height: 26px;
   background: url(images/various/p1_more.gif) 0 0 no-repeat;
   text-align: center;
