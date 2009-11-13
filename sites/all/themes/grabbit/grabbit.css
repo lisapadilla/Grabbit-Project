@@ -2106,7 +2106,10 @@ ul.dropdown li:hover ul {
 	padding-left:5px;
 }
 
-.page-favorites-display .facebook-post, .page-favorites-display .twitter-message-stream, .page-favorites-display .node-stream-news, 
-.page-favorites-display .node-stream-deal, .page-favorites-display .node-stream-blogs{
+.page-favorites-display .facebook-post, .page-private-results .facebook-post,
+.page-favorites-display .twitter-message-stream, .page-private-results .twitter-message-stream,
+.page-favorites-display .node-stream-news, .page-private-results .node-stream-news, 
+.page-favorites-display .node-stream-deal, .page-private-results .node-stream-deal,
+.page-favorites-display .node-stream-blogs, .page-private-results .node-stream-blogs{
 	display:block;
 }
