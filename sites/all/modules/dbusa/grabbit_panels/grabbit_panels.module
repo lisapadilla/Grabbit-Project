@@ -77,6 +77,7 @@ function grabbit_panels_get_favorites(){
 	$mesa=drupal_get_messages();
 	$view = views_get_view('flag_bookmarks_tab');
 	$view->set_arguments(array($user->uid));	
+	$view->pager['items_per_page']=30;
 	$view->execute();
 	foreach($view->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
