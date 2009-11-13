@@ -2039,3 +2039,8 @@ ul.dropdown li:hover ul {
 .profile #content-profile-display-profile{
   border: none;
 }
+#edit-twitter-wrapper,
+#edit-facebook-wrapper,
+#edit-contacts-wrapper{
+	margin-left:5px;
+}
