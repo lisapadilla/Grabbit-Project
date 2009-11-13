@@ -243,3 +243,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	return $form;
 }
+
+function grabbit_search_preprocess_search_results(&$variables) {
+  print_r($variables);
+}
