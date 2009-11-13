@@ -179,11 +179,13 @@ function grabbit_preprocess_search_results(&$variables) {
     
     foreach($variables['results'] as $result){
 	  $node=$result['node'];
-	  if($node->type!='feed')
+	  if($node->type!='feed' && $node->type!='profile'){
 	  $twitface[$node->created]=array('time'=>$node->created,
 	                                       'value'=>$node);
+	  }else{
+	    $profiles[$node->title]=$node;	
+	  }
     }
-
 
     if(count($twitface)){
 	  $resultados = facebook_grabbit_theme_results($twitface);
