@@ -1003,13 +1003,16 @@ a.active{
   margin: 0px;
   padding: 0px;
 }
-#edit-status-wrapper textarea{
+#edit-status-wrapper textarea,
+#edit-status-1{
   display: block;
-  width: 468px;
-  height: 80px;
+  width: 458px;
+  height: 70px;
   background: url(images/bg_textarea.gif) 0 0 no-repeat;
   border: none;
   overflow: hidden;
+  padding: 10px 0px 0px 10px;
+  color: #555e6b;
 }
 #facebook-grabbit-update-form .form-submit{
   display: block;
@@ -1065,18 +1068,25 @@ a.active{
 }
 #content-area .grabbit-list{
 }
-#content-area h2{
+.page-user-me-myfriends-facebook-friends #content-area h2,
+.page-user-me-myfriends-twitter-friends #content-area h2,
+.page-user-me-myfriends #content-area h2{
   display: none;
 }
-#content-area .views-row-even{
+#content-area .views-row-odd,
+#content-area .odd{
   background: #e6eaed;
 }
-#content-area .views-row{
+#content-area .views-row,
+#content-area .facebook-friend,
+#content-area .twitter-friend{
   display: inline-block;
   padding: 10px;
   width: 606px;
 }
-#content-area .views-row .views-field-field-profile-picture-fid img{
+#content-area .views-row .views-field-field-profile-picture-fid img,
+#content-area .facebook-friend .picture img,
+#content-area .twitter-friend .picture img{
   float: left;
   margin: 0px 10px 10px 0px;
 }
@@ -1706,21 +1716,25 @@ a.panel-filters{
 }
 a.truncate_show{
 	display:block;
-	color:#0073CF;
-	font-weight:bold;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
 	margin-top:10px;
-	font-size:12px;
-	background: url(images/various/more.gif) 0 0 no-repeat;
-	padding-left:10px;
+	background: url(images/more.gif) 0 0 no-repeat;
+	padding: 0px;
+	margin-left: 530px;
 }
 a.truncate_hide{
 	display:block;
-	color:#0073CF;
-	font-weight:bold;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
 	margin-top:10px;
-	font-size:12px;
-	background: url(images/various/less.gif) 0 0 no-repeat;
-	padding-left:10px;
+	background: url(images/less.gif) 0 0 no-repeat;
+	padding: 0px;
+	margin-left: 530px;
 }
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
@@ -1780,7 +1794,7 @@ a.truncate_hide{
 #panels-pager a{
   display: block;
   width: 108px;
-  padding: 5px 0px 0px 0px;
+  padding: 4px 0px 0px 0px;
   height: 15px;
   color: #555b6e;
   float: left;
@@ -1898,11 +1912,15 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #edit-search-wrapper{
   margin: 0px;
   padding: 0px;
-  border-bottom: 10px solid #8b939f;
+  display: inline-block;
+  width: 190px;
+  float: left;
+  height: 32px;
 }
 #block-grabbit_search-0 #edit-search-wrapper label{
   display: none;
 }
+/*
 #block-grabbit_search-0 #edit-search{
   width: 255px;
   height: 31px;
@@ -1912,6 +1930,9 @@ ul.dropdown li:hover ul {
   display: block;
   border: none;
 }
+*/
+
+
 #block-grabbit_search-0{
   margin: 0px 0px 20px 0px;
   padding: 0px 0px 10px 0px;
@@ -1924,6 +1945,8 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #elgyro{
   background: url(images/sidebar_top.gif) top no-repeat;
   padding: 10px;
+  clear: both;
+  border-top: 10px solid #8b939f;
 }
 #block-grabbit_search-0 a#collapse-custom{
   display: block;
@@ -1946,8 +1969,10 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #collapsable-custom-form label{
   font-weight: normal;
 }
+/*
 #block-grabbit_search-0 #edit-submit-1,
-#block-grabbit_search-0 #edit-submit-2{
+#block-grabbit_search-0 #edit-submit-2,
+#block-grabbit_search-0 #edit-submit{
   display: block;
   border: none;
   width: 58px;
@@ -1959,36 +1984,121 @@ ul.dropdown li:hover ul {
   margin-left: 188px;
   cursor: pointer;
 }
-.section-user .tabs .primary{
+*/
+#block-grabbit_search-0 #edit-search{
+  width: 160px;
+  height: 21px;
+  padding: 11px 0px 0px 30px;
+  float: left;
+  margin: 0px;
+  background: url(images/search_tf.gif) 0 0 no-repeat;
+  display: block;
+  border: none;
+  color: #555e6b;
+  font-size: 12px;
+  line-height: 13px;
+}
+#block-grabbit_search-0 #edit-submit,
+#block-grabbit_search-0 #edit-submit-1,
+#block-grabbit_search-0 #edit-submit-2{
+  display: block;
+  float: left;
+  width: 65px;
+  height: 32px;
+  padding: 0px;
+  margin: 0px;
+  background: url(images/search_bt.gif) 0 0 no-repeat;
+  text-indent: -3000em;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  font-size: 0px;
+  line-height: 1000px;
+}
+.section-user .tabs .primary,
+.page-users-admin ul.primary{
   display: none;
 }
-.section-user .tabs ul.secondary{
+.section-user .tabs ul.secondary,
+.page-invite ul.primary,
+.page-invite-import ul.primary{
   background: transparent;
   border: none;
+  margin: 0px;
+  padding: 10px;
 }
-.section-user .tabs ul.secondary li{
+.page-invite ul.primary,
+.page-invite-import ul.primary{
+  border: none;
+}
+.section-user .tabs ul.secondary li,
+.page-invite ul.primary li,
+.page-invite-import ul.primary li{
   background: transparent;
   border: none;
   float: left;
+  padding: 0px;
+  margin: 0px;
 }
-.section-user .tabs ul.secondary li a{
+.section-user .tabs ul.secondary li a,
+.page-invite ul.primary li a,
+.page-invite-import ul.primary li a{
   display: block;
   border: none;
   width: 100px;
   height: 19px;
-  padding-top: 1px;
+  padding: 1px 0px 0px 0px;
   text-align: center;
 }
-.section-user .tabs ul.secondary li a span{
+.page-invite ul.primary li a,
+.page-invite ul.primary li a:hover,
+.page-invite-import ul.primary li a,
+.page-invite-import ul.primary li a:hover{
+  background: transparent;
+}
+.page-invite ul.primary li a,
+.page-invite-import ul.primary li a{
+  margin: 0px;
+}
+.section-user .tabs ul.secondary li a span,
+.page-invite ul.primary li a span,
+.page-invite-import ul.primary li a span{
   font-size: 11px;
   line-height: 12px;
   color: #000000;
 }
-.section-user .tabs ul.secondary li.active a{
-  
+.section-user .tabs ul.secondary li.active a,
+.page-invite ul.primary li.active a,
+.page-invite-import ul.primary li.active a{
   background: url(images/blk_sel.gif) 0 0 no-repeat;
 }
-.section-user .tabs ul.secondary li.active a span{
+.section-user .tabs ul.secondary li.active a span,
+.page-invite ul.primary li.active a span,
+.page-invite-import ul.primary li.active a span{
   font-size: 11px;
   color: #FFFFFF;
+}
+#dcl-importer-form,
+.profile,
+#node-form,
+.facebook-details,
+#feedapi-import-opml,
+#user-login,
+#invite-form{
+  padding: 10px;
+  color: #555e6b;
+}
+.profile h3{
+  border: none;
+}
+.profile .odd{
+  background: transparent;
+}
+.profile #content-profile-display-profile{
+  border: none;
+}
+#edit-twitter-wrapper,
+#edit-facebook-wrapper,
+#edit-contacts-wrapper{
+	padding-left:5px;
 }

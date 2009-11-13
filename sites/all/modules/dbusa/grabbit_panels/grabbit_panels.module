@@ -78,11 +78,11 @@ function grabbit_panels_get_panels(){
 	if($user->uid>0){
 		ini_set("memory_limit","328M");
 		set_time_limit(328);
-	//	if($fuser = facebook_grabbit_get_fid($user->uid))
-	//	  facebook_grabbit_update_facebook($user);
+		if($fuser = facebook_grabbit_get_fid($user->uid))
+		  facebook_grabbit_update_facebook($user);
 	
-	//	if($twitter_account = oauth_twitter_get_uid($user->uid))
-	//	  facebook_grabbit_update_twitter($user);
+		if($twitter_account = oauth_twitter_get_uid($user->uid))
+		  facebook_grabbit_update_twitter($user);
 		// EMAILS NO BECAUSE OUR SERVER MELTS DOWN
 	/*	if($gmail_user = grabbit_gmail_get($user->uid))
 		  grabbit_gmail_crear($user->uid);
@@ -542,14 +542,19 @@ function grabbit_panels_rss(){
 function grabbit_panels_form_alter($form,$form_state,$form_id){
 	if($form_id=='feed_node_form'){
 		unset($form['body_field']);
-		
-		$form['feedapi']['feedapi_panel'] = array(
-	        '#type' => 'checkbox',
-	        '#title' => t('Create a panel from this RSS feed'),
-	        '#description' => t('Let grabbit create a stream for you containing the items from this RSS feed. You can delete/edit that stream latter.'),
-	        '#default_value' => 1
-	      );
-	    $form['#validate'][] = 'grabbit_panels_node_validate';
+		global $user;
+		$panels = grabbit_panels_get_all_panels($user->uid);
+		if(db_affected_rows($panels)>=4){
+		 	
+		}else{
+		 	$form['feedapi']['feedapi_panel'] = array(
+		        '#type' => 'checkbox',
+		        '#title' => t('Create a panel from this RSS feed'),
+		        '#description' => t('Let grabbit create a stream for you containing the items from this RSS feed. You can delete/edit that stream latter.'),
+		        '#default_value' => 1
+		      );
+		    $form['#validate'][] = 'grabbit_panels_node_validate';
+		}
 		
 	}
 }
@@ -559,6 +564,28 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 	if($op == 'insert'){
 		
 		if($node->type=='feed'){
+			
+			$elements = array();
+			  if ($merged_item = _feedapi_mapper_get_items_merged($node)) {
+			    $merged_item = _feedapi_mapper_simplify_raw($merged_item, $node->feed->parsers);
+			  }
+			
+			while (count($merged_item)) {
+			    $path = array();
+			    $path = _feedapi_mapper_next_element_path($merged_item, $path, TRUE);
+				
+			    if ($path == FALSE) {
+			      break;
+			    }
+			    $elements[implode('->', $path)] = serialize($path);
+			    if((in_array('media:content',$path) || in_array('media:thumbnail',$path)) && in_array('@url',$path))
+			     $image=implode('->', $path);
+			  }
+			
+			$target_field='a:2:{i:0;s:7:"content";i:1;s:18:"field_image_inline";}';
+			if($image)
+			  feedapi_mapper_add_mapping($node->nid,$elements[$image],$target_field);
+			
 			   $flag = flag_get_flag('myfeeds') or die('no flag defined');
 			   $flag->flag('flag', $node->nid);
 			
