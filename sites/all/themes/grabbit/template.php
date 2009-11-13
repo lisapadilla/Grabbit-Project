@@ -164,3 +164,16 @@ function grabbit_preprocess_block(&$vars, $hook) {
   $vars['sample_variable'] = t('Lorem ipsum.');
 }
 // */
+
+function grabbit_preprocess_search_results(&$variables) {
+  /*$variables['search_results'] = '';
+  foreach ($variables['results'] as $result) {
+    $variables['search_results'] .= theme('search_result', $result, $variables['type']);
+  }
+  $variables['pager'] = theme('pager', NULL, 10, 0);
+  // Provide alternate search results template.
+  $variables['template_files'][] = 'search-results-'. $variables['type'];*/
+  print_r($variables);
+print "nooooooooo";
+
+}
