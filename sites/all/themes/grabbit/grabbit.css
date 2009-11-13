@@ -2004,7 +2004,9 @@ ul.dropdown li:hover ul {
 }
 #dcl-importer-form,
 .profile,
-#node-form{
+#node-form,
+.facebook-details,
+#feedapi-import-opml{
   padding: 10px;
   color: #555e6b;
 }
