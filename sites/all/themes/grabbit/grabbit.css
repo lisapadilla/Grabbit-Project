@@ -1745,18 +1745,12 @@ a.truncate_hide{
   width: 547px;
   float: left;
 }
-#panel-1 .node-stream-news .item-body,
-#panel-1 .node-stream-blogs .item-body,
-#panel-1 .node-stream-deal .item-body,
 .user-panels .panel-grabbit .node-stream-news .item-body,
 .user-panels .panel-grabbit .node-stream-blogs .item-body,
 .user-panels .panel-grabbit .node-stream-deal .item-body{
   width: 210px;
   float: left;
 }
-#panel-1 .node-stream-news .item-body .content-body,
-#panel-1 .node-stream-blogs .item-body .content-body,
-#panel-1 .node-stream-deal .item-body .content-body,
 .user-panels .panel-grabbit .node-stream-news .item-body .content-body,
 .user-panels .panel-grabbit .node-stream-blogs .item-body .content-body,
 .user-panels .panel-grabbit .node-stream-deal .item-body .content-body{
