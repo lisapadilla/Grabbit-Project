@@ -171,7 +171,11 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 	                                       'value'=>$node);
     }
 
-	$resultados = facebook_grabbit_theme_results($twitface);
+    if(count($twitface)){
+	  $resultados = facebook_grabbit_theme_results($twitface);
+    }else{
+	  $resultados = '<div class="no-results">Your search for <span class="keyword">'.$keyword.'</span> did not match any results</div>';
+    }
 	
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
@@ -182,7 +186,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 		$output .=$resultados;
 	
 		$output .='</div></div>';
-	    
+
 	
 	return $output;
 }
