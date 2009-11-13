@@ -26,8 +26,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
           break;
 		case 2:
           $blocks['content'] = '<div class="panels-update-form">
-		             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form').'</div>
-		           </div>';
+		             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form');
 		
           $blocks['content'] .= '<div class="upload_button_expand"><a href="#">&raquo; Upload file</a></div>
                                  <div class="panels-update-form_file" style="display:none">
@@ -37,7 +36,8 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 							       <p id="queuestatus" ></p>  
 							       <ol id="log"></ol>  
 							     </div>
-				               </div>';	
+				               </div></div>
+       		           </div>';	
 		
           break;
       }
