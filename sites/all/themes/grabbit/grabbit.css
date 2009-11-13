@@ -2003,7 +2003,8 @@ ul.dropdown li:hover ul {
   color: #FFFFFF;
 }
 #dcl-importer-form,
-.profile{
+.profile,
+.standard{
   padding: 10px;
   color: #555e6b;
 }
