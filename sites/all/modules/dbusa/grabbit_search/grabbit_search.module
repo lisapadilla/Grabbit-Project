@@ -132,7 +132,7 @@ function grabbit_search_custom_page($term=NULL){
   	{
       drupal_goto( 'search/node/'.$_POST['search'] );
   	}elseif(isset($_POST['details']['profiles'])){
-	  drupal_goto( 'search/node/'.$_POST['search'].'/profiles');
+	  drupal_goto( 'search/user/'.$_POST['search']);
     }elseif($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
             $output = grabbit_search_custom_results($result,$_POST['search']);
 		}else{
