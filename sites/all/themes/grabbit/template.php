@@ -182,12 +182,12 @@ function grabbit_preprocess_search_results(&$variables) {
 	  if($node->type!='feed' && $node->type!='profile'){
 	  $twitface[$node->created]=array('time'=>$node->created,
 	                                       'value'=>$node);
-	  }else{
-	    $profiles[$node->title]=$node;	
 	  }
     }
     if(arg(1)=='user'){
-	print_r($variables['results']);
+	    foreach($variables['results'] as $usuario){
+	      $profiles[$usuario->title]=$usuario;	
+	    }
 	  	if(count($profiles)){
 		  $resultados = grabbit_search_theme_users($profiles);
 	    }else{
