@@ -187,6 +187,7 @@ function grabbit_preprocess_search_results(&$variables) {
 	  }
     }
     if(arg(1)=='user'){
+	print_r($variables['results']);
 	  	if(count($profiles)){
 		  $resultados = grabbit_search_theme_users($profiles);
 	    }else{
