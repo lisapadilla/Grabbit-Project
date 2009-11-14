@@ -186,23 +186,41 @@ function grabbit_preprocess_search_results(&$variables) {
 	    $profiles[$node->title]=$node;	
 	  }
     }
+    if(isset($_GET['profiles'])){
+	  	if(count($profiles)){
+		  $resultados = grabbit_search_theme_users($profiles);
+	    }else{
+		  $resultados = '<div class="no-results">Your search did not match any results</div>';
+	    }
 
-    if(count($twitface)){
-	  $resultados = facebook_grabbit_theme_results($twitface);
+
+		$output ='<div class="view view-friends view-id-friends view-display-id-page_1 view-dom-id-1">
+		      <div class="view-content">';
+		  
+		  $output .= $resultados;
+		
+		$output .='</div>
+		</div>';
+	
     }else{
-	  $resultados = '<div class="no-results">Your search did not match any results</div>';
-    }
-	
-		$output .='<div class="panels-controllers">
-		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
-		           <a href="JavaScript:void(0);" class="move-left"></a>
-		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div class="panel-grabbit suser-panels">
-		           <div class="panel-favorites">';
-		$output .=$resultados;
-	
-		$output .='</div></div>';
+	  	if(count($twitface)){
+		  $resultados = facebook_grabbit_theme_results($twitface);
+	    }else{
+		  $resultados = '<div class="no-results">Your search did not match any results</div>';
+	    }
 
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-favorites">';
+			$output .=$resultados;
+
+			$output .='</div></div>';
+	
+    }
+    
     $variables['search_results']=$output;
   }
 }
