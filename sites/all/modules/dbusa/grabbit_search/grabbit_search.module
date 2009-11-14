@@ -225,7 +225,6 @@ function grabbit_search_custom_form(&$form_state){
 	  '#title' => t('Search only in'),
 	  '#options' => array(
 	    'site' => t('Search entire site'),
-	    'profiles'=>t('Search users'),
 	    'facebook' => t('Facebook'),
 	    'twitter' => t('Twitter'),
 	    'gmail' => t('Gmail'),
