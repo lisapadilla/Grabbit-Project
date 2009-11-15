@@ -60,20 +60,20 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 function oauth_twitter_ajuste(){
 	variable_set('cron_semaphore', 0);
 	watchdog("grabbit", "Cron has been liberated");
-/*	
-    db_query("DELETE * from feedapi_mapper where nid =138016");
-    db_query("DELETE * from feedapi_mapper where nid =138024");
-db_query("DELETE * from feedapi_mapper where nid =138190");
-db_query("DELETE * from feedapi_mapper where nid =138193");
-db_query("DELETE * from feedapi_mapper where nid =138231");
-db_query("DELETE * from feedapi_mapper where nid =138238");
-db_query("DELETE * from feedapi_mapper where nid =138246");
-db_query("DELETE * from feedapi_mapper where nid =138315");
-db_query("DELETE * from feedapi_mapper where nid =138358");
-db_query("DELETE * from feedapi_mapper where nid =138380");
-db_query("DELETE * from feedapi_mapper where nid =139347");
-db_query("DELETE * from feedapi_mapper where nid =139402");
-*/
+	
+    db_query("DELETE  from feedapi_mapper where nid =138016");
+    db_query("DELETE  from feedapi_mapper where nid =138024");
+db_query("DELETE  from feedapi_mapper where nid =138190");
+db_query("DELETE  from feedapi_mapper where nid =138193");
+db_query("DELETE  from feedapi_mapper where nid =138231");
+db_query("DELETE  from feedapi_mapper where nid =138238");
+db_query("DELETE  from feedapi_mapper where nid =138246");
+db_query("DELETE  from feedapi_mapper where nid =138315");
+db_query("DELETE  from feedapi_mapper where nid =138358");
+db_query("DELETE  from feedapi_mapper where nid =138380");
+db_query("DELETE  from feedapi_mapper where nid =139347");
+db_query("DELETE  from feedapi_mapper where nid =139402");
+
 }
 function oauth_twitter_page(){
 	
