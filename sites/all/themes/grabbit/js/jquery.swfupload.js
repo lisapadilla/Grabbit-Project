@@ -133,6 +133,7 @@ Drupal.behaviors.frontpage = function(){
              item.find('div.progress').css('width', '100%'); 
              item.find('span.progressvalue').text('100%');
              if(serverData!=0){
+	alert(document.domain);
 	           	var pathtofile="http://daniloblackusa.net"+serverData; 
 	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
 	             file_to_tinymce(pathtofile);
