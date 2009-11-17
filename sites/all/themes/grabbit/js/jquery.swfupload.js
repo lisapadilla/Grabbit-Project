@@ -135,7 +135,7 @@ Drupal.behaviors.frontpage = function(){
              if(serverData!=0){
 	           	var pathtofile=document.domain+serverData; 
 	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
-	 encoded=encodeURIComponent(pathtofile);            
+	 encoded=decodeURIComponent(pathtofile);            
 	 alert(encoded);
 	             file_to_tinymce(pathtofile);
 	             $("#log li").hide(); 
