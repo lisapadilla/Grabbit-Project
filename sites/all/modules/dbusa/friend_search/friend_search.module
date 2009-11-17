@@ -145,7 +145,7 @@ function friend_search_show_friends_facebook(){
 									
 	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">'.$facebooks.'</div></div>';
 	  }
-	}catch(FacebookRestClientExceptions $e){
+	}catch($e){
 		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">You have no FB account yet</div></div>';
 		
 	}
