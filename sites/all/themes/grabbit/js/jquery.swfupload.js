@@ -135,6 +135,7 @@ Drupal.behaviors.frontpage = function(){
              if(serverData!=0){
 	           	var pathtofile=encodeURIComponent(document.domain+serverData); 
 	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
+	             alert(pathtofile);
 	             file_to_tinymce(pathtofile);
 	             $("#log li").hide(); 
 	             $(".panels-update-form_file").slideToggle("fast");
