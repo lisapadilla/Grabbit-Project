@@ -424,6 +424,11 @@ $(document).ready(function() {
 	  }  		  
 	});
 	
+	$(".truncate_show")live("click", function(){
+		
+		alert("check");
+		
+	});
 	
 });
 
