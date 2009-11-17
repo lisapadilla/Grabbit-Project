@@ -110,7 +110,7 @@ function friend_search_show_friends_facebook(){
 		
 	  include_once("facebook/facebook.php");
 	  include_once("facebook/facebook_desktop.php");
-	  include("facebook/config.php");
+	  include_once("facebook/config.php");
 
 	  $suser=$fuser->fid;
 	  $session_key=$fuser->kid;
