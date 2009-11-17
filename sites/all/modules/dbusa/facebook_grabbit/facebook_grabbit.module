@@ -75,9 +75,9 @@ function facebook_grabbit_user($op, &$edit, &$account, $category = NULL) {
 
 function facebook_grabbit_update_form($form_state){
 
-	require_once("facebook/facebook.php");
-	require_once("facebook/facebook_desktop.php");
-	include("facebook/config.php");
+	include_once("facebook/facebook.php");
+	include_once("facebook/facebook_desktop.php");
+	include_once("facebook/config.php");
 	
 	global $user;
 	
