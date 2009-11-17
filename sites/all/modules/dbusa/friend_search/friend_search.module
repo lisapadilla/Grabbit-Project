@@ -108,9 +108,9 @@ function friend_search_show_friends_facebook(){
 	
 	if ($fuser){
 		
-	  require_once("../facebook_grabbit/facebook/facebook.php");
-	  require_once("../facebook_grabbit/facebook/facebook_desktop.php");
-	  include("../facebook_grabbit/facebook/config.php");
+	  require_once(drupal_get_path('facebook_grabbit', $module_name)."/facebook/facebook.php");
+	  require_once(drupal_get_path('facebook_grabbit', $module_name)."/facebook/facebook_desktop.php");
+	  include(drupal_get_path('facebook_grabbit', $module_name)."/facebook/config.php");
 
 	  $suser=$fuser->fid;
 	  $session_key=$fuser->kid;
