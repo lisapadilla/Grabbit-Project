@@ -108,6 +108,9 @@ function friend_search_show_friends_facebook(){
 	
 	if ($fuser){
 		
+	  require_once("../facebook_grabbit/facebook/facebook.php");
+	  require_once("../facebook_grabbit/facebook/facebook_desktop.php");
+	  include("../facebook_grabbit/facebook/config.php");
 
 	  $suser=$fuser->fid;
 	  $session_key=$fuser->kid;
