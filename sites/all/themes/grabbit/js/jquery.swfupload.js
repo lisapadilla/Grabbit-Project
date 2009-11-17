@@ -137,6 +137,7 @@ Drupal.behaviors.frontpage = function(){
 	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
 	             encoded=decodeURIComponent(pathtofile);            
 	             file_to_tinymce(encoded);
+	alert(encoded);
 	             $("#log li").hide(); 
 	             $(".panels-update-form_file").slideToggle("fast");
              }else{
