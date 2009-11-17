@@ -108,9 +108,6 @@ function friend_search_show_friends_facebook(){
 	
 	if ($fuser){
 		
-	  require_once("facebook/facebook.php");
-	  require_once("facebook/facebook_desktop.php");
-	  include("facebook/config.php");
 
 	  $suser=$fuser->fid;
 	  $session_key=$fuser->kid;
@@ -147,7 +144,6 @@ function friend_search_show_friends_facebook(){
 	  }
 	}catch(FacebookRestClientException $e){
 		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">You have no FB account yet</div></div>';
-		
 	}
     }
 
