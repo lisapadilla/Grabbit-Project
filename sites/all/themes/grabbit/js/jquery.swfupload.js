@@ -80,7 +80,8 @@ function file_to_tinymce(urlcomplete){
 }
 
 Drupal.behaviors.frontpage = function(){
-	
+	alert("start");
+	alert(document.domain);
  $('#swfupload-control').swfupload({  
          upload_url: Drupal.settings.basePath+"yfrog/upload",  
          file_post_name: 'files',  
@@ -133,7 +134,6 @@ Drupal.behaviors.frontpage = function(){
              item.find('div.progress').css('width', '100%'); 
              item.find('span.progressvalue').text('100%');
              if(serverData!=0){
-	alert(document.domain);
 	           	var pathtofile="http://daniloblackusa.net"+serverData; 
 	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
 	             file_to_tinymce(pathtofile);
