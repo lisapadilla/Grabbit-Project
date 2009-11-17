@@ -108,7 +108,7 @@ function friend_search_show_friends_facebook(){
 	
 	if ($fuser){
 		
-	  //require_once("facebook/facebook.php");
+	  require_once("facebook/facebook.php");
 	  require_once("facebook/facebook_desktop.php");
 	  //include("facebook/config.php");
 
