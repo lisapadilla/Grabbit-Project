@@ -80,8 +80,9 @@ global $user;
 	    <?php endif; ?>
 	  <?php } ?>
 		<? if ($node->type == "profile"){
+			$link_friend = friendlist_ui_get_link('add', $node->uid, 'friends');
 			?>
-				<p><a href="/grabbit/friendlist/add/<?=$node->uid?>/1?destination=user/<?=$node->uid?>">Add to Friends</a></p>
+			<p><?=$link_fiend;?></p>
 			<?
 		}?>
     </div>
