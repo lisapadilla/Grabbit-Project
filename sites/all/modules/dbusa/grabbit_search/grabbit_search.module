@@ -223,7 +223,7 @@ function grabbit_search_custom_form(&$form_state){
 		'#type'=>'checkbox',
 		'#title' => t('Search entire site'),
 		'#weight'=>8,
-		
+		'#prefix'=>'<div class="custom-search-form-collapse" id="collapsable-custom-form">'
 		);
 	
 	$form['details'] = array(
@@ -237,7 +237,6 @@ function grabbit_search_custom_form(&$form_state){
 	    'imap' => t('IMAP'),
 	    'RSS' => t('RSS feeds'),
 	  ),
-	   '#prefix'=>'<div class="custom-search-form-collapse" id="collapsable-custom-form">',
 	   '#suffix'=>'</div>',
 	  '#description' => t('You can filter your search by selecting one or more sources. Leave all unchecked to search all.'),
 	);
