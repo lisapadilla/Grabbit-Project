@@ -2208,3 +2208,6 @@ div.messages, div.status, div.warning, div.error{
 .front .panel-controller{
   background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;	
 }
+#TB_closeAjaxWindow{
+	font-family:Helvetica,Tahoma,sans-serif;
+}
