@@ -1090,7 +1090,7 @@ a.active{
 }
 .node-type-news  #content-area h1{
   display: block;
-  padding: 10px 70px 0px 70px;
+  padding: 30px 70px 0px 70px;
   color: #6E7887;
   font-size: 20px;
   line-height: 21px;
@@ -2140,7 +2140,7 @@ ul.dropdown li:hover ul {
 }
 .node-type-news .node-news,
 .node-type-news #comments{
-  padding: 10px 70px;
+  padding: 10px 70px 30px 70px;
   color: #555e6b;
   font-size: 12px;
   line-height: 15px;
@@ -2154,8 +2154,20 @@ ul.dropdown li:hover ul {
 .node-news ul.links{
   padding-top: 20px;
   display: block;
+  font-size: 10px;
+  line-height: 13px;
 }
-.node-news .links li a{
+.submited-by{
+  font-size: 10px;
+  line-height: 13px;
+  padding-top: 10px;
+  display: block;
+}
+.node-news .links li{
+  padding: 0px 10px 0px 0px;
+}
+.node-news .links li a,
+.submited-by a{
   font-size: 10px;
   line-height: 13px;
   color: #0073CF;
