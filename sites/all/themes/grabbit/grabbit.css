@@ -2152,10 +2152,11 @@ ul.dropdown li:hover ul {
   line-height: 15px;
 }
 .node-news ul.links{
-  margin-top: 20px;
+  padding-top: 20px;
+  display: block;
 }
 .node-news .links li a{
-  font-size: 12px;
+  font-size: 10px;
   line-height: 13px;
   color: #0073CF;
   font-weight: bold;
