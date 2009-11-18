@@ -2140,7 +2140,7 @@ ul.dropdown li:hover ul {
 .node-type-news .node-news,
 .node-type-news #comments{
   padding: 10px 70px;
-  
+  color: #555e6b;
 }
 .profile h3{
   border: none;
