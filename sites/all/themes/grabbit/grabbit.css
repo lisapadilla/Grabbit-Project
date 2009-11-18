@@ -2217,3 +2217,8 @@ div.messages, div.status, div.warning, div.error{
 #primary ul.links li.menu-6134 a{
 	color:#E9ECEF;
 }
+
+#primary ul.links li.menu-1691 a,
+#primary ul.links li.menu-6775 a{
+	margin-left:15px;
+}
