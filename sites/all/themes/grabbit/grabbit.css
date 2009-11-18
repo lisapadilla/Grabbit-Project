@@ -2286,3 +2286,7 @@ div.messages, div.status, div.warning, div.error{
 	line-height:13px;
 	padding:10px;
 }
+.page-user-me-myfriends .views-field-action-link-requestee{
+	float:right;
+	margin-right:20px;
+}
