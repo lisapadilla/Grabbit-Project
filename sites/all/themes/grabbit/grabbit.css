@@ -2124,8 +2124,8 @@ ul.dropdown li:hover ul {
 #feedapi-import-opml,
 #user-login,
 #invite-form,
-#node-type-news .node-news,
-#node-type-news #comments{
+.node-type-news .node-news,
+.node-type-news #comments{
   padding: 10px;
   color: #555e6b;
 }
