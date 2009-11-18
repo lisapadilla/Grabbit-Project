@@ -2163,6 +2163,9 @@ ul.dropdown li:hover ul {
   padding-top: 10px;
   display: block;
 }
+.node-news .links li{
+  padding: 0px;
+}
 .node-news .links li a,
 .submited-by a{
   font-size: 10px;
