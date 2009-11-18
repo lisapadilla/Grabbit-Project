@@ -2141,6 +2141,15 @@ ul.dropdown li:hover ul {
 .node-type-news #comments{
   padding: 10px 70px;
   color: #555e6b;
+  font-size: 12px;
+  line-height: 15px;
+}
+.links li a{
+  font-size: 12px;
+  line-height: 13px;
+  color: #0073CF;
+  font-weight: bold;
+  margin-bottom: 0px;
 }
 .profile h3{
   border: none;
