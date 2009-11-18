@@ -2260,3 +2260,11 @@ div.messages, div.status, div.warning, div.error{
 #user-profile-form{
 	padding:10px;
 }
+
+#edit-onlysite-wrapper{
+	color:#555E6B;
+	font-size:12px;
+	font-weight:normal;
+	line-height:13px;
+	padding:10px;
+}
