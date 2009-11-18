@@ -502,7 +502,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
 	      }
 	      if($media['type'] =="video"){
-		    $attachment .='<span class="facebook-attach-video"><br>
+		    $attachment .='<span class="facebook-attach-video" style="height:200px"><br>
 		                   '.swf($media['video']['source_url'], array('params' => array('width' => '230', 'height'=>'200'),'flashvars'=>array('image'=>$media['src']))).'
 		                   </span>';
 	      }
