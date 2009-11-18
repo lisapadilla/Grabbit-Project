@@ -2254,3 +2254,6 @@ div.messages, div.status, div.warning, div.error{
 #primary ul.links li.menu-6775 a{
 	margin-left:15px;
 }
+#user-profile-form{
+	padding:10px;
+}
