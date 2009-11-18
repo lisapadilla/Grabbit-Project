@@ -102,7 +102,7 @@ function grabbit_gmail_add(){
 	
 	if($account){
 		
-	  $output ='<div class="node-stream-gmail node-stream-news clearfix stream-item-element even">
+	  $output ='<div class="node-stream-gmail node-stream-news clearfix stream-item-element even" style="display:block">
 			             <div class="meta">
 							<span class="image-deal"><img width="48" height="48" src="'.base_path().'sites/all/themes/grabbit/images/various/gmail.jpg" /></span>
 							<div class="item-body">
