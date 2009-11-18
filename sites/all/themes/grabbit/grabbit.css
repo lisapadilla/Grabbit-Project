@@ -2123,7 +2123,9 @@ ul.dropdown li:hover ul {
 .facebook-details,
 #feedapi-import-opml,
 #user-login,
-#invite-form{
+#invite-form,
+#node-type-news .node-news,
+#node-type-news #comments{
   padding: 10px;
   color: #555e6b;
 }
