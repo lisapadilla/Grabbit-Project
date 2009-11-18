@@ -2144,6 +2144,12 @@ ul.dropdown li:hover ul {
   font-size: 12px;
   line-height: 15px;
 }
+.node-type-news .node-news a{
+  color: #0073CF;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
+}
 .links li a{
   font-size: 12px;
   line-height: 13px;
