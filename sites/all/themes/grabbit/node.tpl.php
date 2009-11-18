@@ -75,6 +75,9 @@
         
       </div>
       <?php }else{ ?>
+	    <?php if ($node->field_image_inline):?>
+		  <div class="image-inline-rss"><?=$node->field_image_inline[0]['value'];?></div>
+		<? endif; ?>
         <?php print $content; ?>
         <?php if ($submitted): ?>
           <p><span class="submited-by"><?php print $submitted; ?></span></p>
