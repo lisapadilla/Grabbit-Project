@@ -76,6 +76,8 @@ jQuery.fn.truncate = function( max, settings ) {
                     });
                     return false;
                 });
+                panel=$(this).parents(".user-panel");
+		        fixtheheightMore(panel);
                 return false;
             });
         }

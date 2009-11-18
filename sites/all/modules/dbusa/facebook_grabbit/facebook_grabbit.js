@@ -70,12 +70,12 @@ function display_items(panel){
 }
 
 function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
-	var height = $("#"+slideElement.id).height()+100;
+	var height = $("#"+slideElement.id).height()+200;
 	$(".suser-panels").height(height);
 }
 
 function fixtheheightMore(element){
-	var height = $(".panel-wraper",element).height()+$(".panel-title",element).height()+$(".panel-controller",element).height()+10;
+	var height = $(".panel-wraper",element).height()+$(".panel-title",element).height()+$(".panel-controller",element).height()+200;
 	element.height(height);
 	$(".suser-panels").height(height);
 	panels_heights[element.attr('id')]=height;
@@ -86,7 +86,7 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 		$("#"+nextSlideElement.id).height(height);
 		$(".suser-panels").height(height);
 	}else{
-	  	var height = $("#"+nextSlideElement.id).height()+20;
+	  	var height = $("#"+nextSlideElement.id).height()+200;
 		$(".suser-panels").height(height);	
 	}
 }
@@ -423,7 +423,6 @@ $(document).ready(function() {
 	    });		    
 	  }  		  
 	});
-	
 	
 });
 
