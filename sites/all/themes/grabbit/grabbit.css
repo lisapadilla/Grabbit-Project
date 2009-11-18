@@ -2151,12 +2151,17 @@ ul.dropdown li:hover ul {
   font-weight: bold;
   line-height: 15px;
 }
-.node-news ul.links,
-.submited-by{
+.node-news ul.links{
   padding-top: 20px;
   display: block;
   font-size: 10px;
   line-height: 13px;
+}
+.submited-by{
+  font-size: 10px;
+  line-height: 13px;
+  padding-top: 10px;
+  display: block;
 }
 .node-news .links li a,
 .submited-by a{
