@@ -1088,6 +1088,16 @@ a.active{
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
   font-weight: normal;
 }
+.node-type-news  #content-area h1{
+  display: block;
+  padding: 10px 70px 0px 70px;
+  color: #6E7887;
+  font-size: 20px;
+  line-height: 21px;
+  margin: 0px;
+  background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
+  font-weight: normal;
+}
 #content-area .grabbit-list{
 }
 .page-user-me-myfriends-facebook-friends #content-area h2,
@@ -2123,11 +2133,14 @@ ul.dropdown li:hover ul {
 .facebook-details,
 #feedapi-import-opml,
 #user-login,
-#invite-form,
-.node-type-news .node-news,
-.node-type-news #comments{
+#invite-form{
   padding: 10px;
   color: #555e6b;
+}
+.node-type-news .node-news,
+.node-type-news #comments{
+  padding: 10px 70px;
+  
 }
 .profile h3{
   border: none;
