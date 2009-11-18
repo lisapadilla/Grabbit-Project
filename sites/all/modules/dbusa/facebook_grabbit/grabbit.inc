@@ -22,8 +22,8 @@ function grabbit_facebook_account($account){
 		
 		  $output='<div id="fb_story_000000000" class="facebook-post clearfix even" style="display: block;">
 			<div class="facebook-post-header">
-			  <span class="facebook-user-pic"><img width="48" src="'.$user_details[0]['pic_square'].'" alt="'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'" class="facebook-image-s" target="_blank"/></span>
-			  <span class="facebook-user-name">'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'</span>
+			  <a class="facebook-story-pic" href="#"><span class="facebook-user-pic"><img width="48" src="'.$user_details[0]['pic_square'].'" alt="'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'" class="facebook-image-s" target="_blank"/></span></a>
+			  <a class="facebook-story-name" href="#"><span class="facebook-user-name">'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'</span></a>
 			<div class="facebook-post-body">
 			  <div class="facebook-post-inside-body">You have a facebook account with grabbit</div>
 			</div>
