@@ -101,9 +101,20 @@ function grabbit_gmail_add(){
 	$account = grabbit_gmail_get($user->uid);
 	
 	if($account){
-	  $output = "You have a Gmail account in Grabbit.<br>
-	             If you want to add a new account you must first delete this one<br>
-	             <div class='gmail-account-details'>".$account['user']." - ".l('Delete','gmail/delete/account')."</div>";	
+		
+	  $output ='<div class="node-stream-gmail node-stream-news clearfix stream-item-element even" style="display:block">
+			             <div class="meta">
+							<span class="image-deal"><img width="48" height="48" src="'.base_path().'sites/all/themes/grabbit/images/various/gmail.jpg" /></span>
+							<div class="item-body">
+							  <h2><a href="#">'.$account['user']." - ".l('Delete','gmail/delete/account').'</a></h2>
+							  <div class="content-body">
+							     You have a Gmail account in Grabbit.
+							     If you want to add a new account you must first delete this one.
+							  </div>
+							</div>
+						 </div>
+					</div>';
+						
 	}else{
 	  $output = drupal_get_form('grabbit_gmail_add_form');	
 	}

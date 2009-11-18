@@ -128,7 +128,7 @@ function grabbit_search_custom_page($term=NULL){
 	
 	if($_POST['search']){
 	  
-	  if ( isset($_POST['details']['site']) )
+	  if ( isset($_POST['onlysite'])  )
   	{
       drupal_goto( 'search/node/'.$_POST['search'] );
   	}elseif(isset($_POST['details']['profiles'])){
@@ -219,13 +219,18 @@ function grabbit_search_custom_form(&$form_state){
 	  '#value' => '<div id="elgyro"><a href="#" class="custom-form-collapser" id="collapse-custom">Advanced</a></div>',
 	);
 	
+	$form['onlysite']=array(
+		'#type'=>'checkbox',
+		'#title' => t('Search entire site'),
+		'#weight'=>8,
+		
+		);
 	
 	$form['details'] = array(
 	  '#type' => 'checkboxes',
 	  '#weight' => 9,
 	  '#title' => t('Search only in'),
 	  '#options' => array(
-	    'site' => t('Search entire site'),
 	    'facebook' => t('Facebook'),
 	    'twitter' => t('Twitter'),
 	    'gmail' => t('Gmail'),

@@ -120,9 +120,9 @@ function oauth_twitter_account(){
 	              </div>
 		          <a class="twitter-name-link" href="#">'.$twitterInfo->screen_name.'</a>
 		          <div class="twitter-body">
-		            <div class="twitter-body-contains"></div>
+		            <div class="twitter-body-contains">You have a twitter account with grabbit</div>
 		          </div>
-				</div>'
+				</div>';
 	
     }else{
 	  	$output ='<div class="twitter-message-stream clearfix even" id="twitter-post-00000" style="display: block;">
@@ -132,7 +132,7 @@ function oauth_twitter_account(){
 			          <div class="twitter-body">
 			            <div class="twitter-body-contains"><a href="' . $twitterObj->getAuthorizationUrl() . '">Click here to install the Grabbit.net app for Twitter</a></div>
 			          </div>
-					</div>'
+					</div>';
     }
 
 	return $output;
