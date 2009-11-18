@@ -108,7 +108,7 @@ $(document).ready(function() {
 	    prevNextClick: fixtheheight
 	});
 	
-	
+	$('.suser-panels').height($('.suser-panels').height()+500);
 	
 	var height = $("#panel-0").height();
 	$(".suser-panels").height(height);
