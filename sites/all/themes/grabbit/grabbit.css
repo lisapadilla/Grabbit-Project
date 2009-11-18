@@ -1088,6 +1088,16 @@ a.active{
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
   font-weight: normal;
 }
+.node-type-news  #content-area h1{
+  display: block;
+  padding: 10px 70px 0px 70px;
+  color: #6E7887;
+  font-size: 20px;
+  line-height: 21px;
+  margin: 0px;
+  background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
+  font-weight: normal;
+}
 #content-area .grabbit-list{
 }
 .page-user-me-myfriends-facebook-friends #content-area h2,
@@ -2053,7 +2063,9 @@ ul.dropdown li:hover ul {
   line-height: 1000px;
 }
 .section-user .tabs .primary,
-.section-users .tabs .primary{
+.section-users .tabs .primary,
+.node-type-news .tabs .primary
+{
   display: none;
 }
 .section-user .tabs ul.secondary,
@@ -2124,6 +2136,26 @@ ul.dropdown li:hover ul {
 #invite-form{
   padding: 10px;
   color: #555e6b;
+}
+.node-type-news .node-news,
+.node-type-news #comments{
+  padding: 10px 70px;
+  color: #555e6b;
+  font-size: 12px;
+  line-height: 15px;
+}
+.node-type-news .node-news a{
+  color: #0073CF;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 15px;
+}
+.links li a{
+  font-size: 12px;
+  line-height: 13px;
+  color: #0073CF;
+  font-weight: bold;
+  margin-bottom: 0px;
 }
 .profile h3{
   border: none;
