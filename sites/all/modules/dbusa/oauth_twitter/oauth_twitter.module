@@ -113,10 +113,26 @@ function oauth_twitter_account(){
 	  $twitterObj->setToken($token['token'], $token['secret']);
 	  $twitterInfo= $twitterObj->get_accountVerify_credentials();
 	  $twitterInfo->response;
-  	  $output = 'Your current Twitter account for grabbit is: <span class="user-twitter">'.$twitterInfo->screen_name.'</span>
-                 <span class="user-pic-twitter"><img src="'.$twitterInfo->profile_image_url.'"></span>';
+	
+	  $output ='<div class="twitter-message-stream clearfix even" id="twitter-post-00000" style="display: block;">
+	              <div class="listable"><span class="twitter-image">
+	                 <img width="48" src="'.$twitterInfo->profile_image_url.'"/>
+	              </div>
+		          <a class="twitter-name-link" href="#">'.$twitterInfo->screen_name.'</a>
+		          <div class="twitter-body">
+		            <div class="twitter-body-contains"></div>
+		          </div>
+				</div>'
+	
     }else{
-      $output = '<a href="' . $twitterObj->getAuthorizationUrl() . '">Click here to install the Grabbit.net app for Twitter</a>';
+	  	$output ='<div class="twitter-message-stream clearfix even" id="twitter-post-00000" style="display: block;">
+		              <div class="listable"><span class="twitter-image">
+		                 
+		              </div>
+			          <div class="twitter-body">
+			            <div class="twitter-body-contains"><a href="' . $twitterObj->getAuthorizationUrl() . '">Click here to install the Grabbit.net app for Twitter</a></div>
+			          </div>
+					</div>'
     }
 
 	return $output;
