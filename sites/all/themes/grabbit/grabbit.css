@@ -1090,7 +1090,7 @@ a.active{
 }
 .node-type-news  #content-area h1{
   display: block;
-  padding: 30px 70px 0px 70px;
+  padding: 30px 70px 20px 70px;
   color: #6E7887;
   font-size: 20px;
   line-height: 21px;
