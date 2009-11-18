@@ -77,7 +77,7 @@
       <?php }else{ ?>
         <?php print $content; ?>
         <?php if ($submitted): ?>
-          <p><?php print $submitted; ?></p>
+          <p><span class="submited-by"><?php print $submitted; ?></span></p>
         <?php endif; ?>
         <?php if ($links): ?>
 	      <div class="links">
