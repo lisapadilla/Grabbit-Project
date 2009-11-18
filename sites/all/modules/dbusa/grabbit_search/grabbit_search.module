@@ -149,9 +149,8 @@ function grabbit_search_custom_page($term=NULL){
 function grabbit_search_no_results($term){
 //	$output = drupal_get_form('grabbit_search_custom_form');
 	
-	$output .='<div id="panels-pager" class="panels-pager"><a title="Search Results" href="#">Search Results</a>
-	</div>
-	<div class="grabbit-search-empty">'.t('Your search did not match any results, please try again').'</div>';
+	$output .='<div id="panels-pager" class="panels-pager"><a title="Search Results" href="#">Search Results</a></div>
+	<div class="grabbit-search-empty">'.t('Your search for '.$term.'did not match any results, please try again').'</div>';
 	
 	return $output;
 }
