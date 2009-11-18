@@ -2053,7 +2053,9 @@ ul.dropdown li:hover ul {
   line-height: 1000px;
 }
 .section-user .tabs .primary,
-.section-users .tabs .primary{
+.section-users .tabs .primary,
+.node-type-news .tabs .primary
+{
   display: none;
 }
 .section-user .tabs ul.secondary,
