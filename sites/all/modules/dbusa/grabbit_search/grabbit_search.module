@@ -223,7 +223,7 @@ function grabbit_search_custom_form(&$form_state){
 		'#type'=>'checkbox',
 		'#title' => t('Search entire site'),
 		'#weight'=>8,
-		
+		'#default_value'=>1
 		);
 	
 	$form['details'] = array(
