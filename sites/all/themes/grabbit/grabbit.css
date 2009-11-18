@@ -2151,7 +2151,7 @@ ul.dropdown li:hover ul {
   line-height: 15px;
 }
 .node-news ul.links{
-  padding-top: 20px;
+  margin-top: 20px;
 }
 .node-news .links li a{
   font-size: 12px;
