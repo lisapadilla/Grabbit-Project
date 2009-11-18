@@ -131,8 +131,9 @@ function grabbit_search_custom_page($term=NULL){
 	  if ( isset($_POST['details']['site']) )
   	{
       drupal_goto( 'search/node/'.$_POST['search'] );
-  	}
-  	elseif($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
+  	}elseif(isset($_POST['details']['profiles'])){
+	  drupal_goto( 'search/user/'.$_POST['search']);
+    }elseif($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
             $output = grabbit_search_custom_results($result,$_POST['search']);
 		}else{
 			$output = grabbit_search_no_results($_POST['search']);
@@ -148,7 +149,8 @@ function grabbit_search_custom_page($term=NULL){
 function grabbit_search_no_results($term){
 //	$output = drupal_get_form('grabbit_search_custom_form');
 	
-	$output .='<div class="grabbit-search-empty">'.t('Your search did not match any results, please try again').'</div>';
+	$output .='<div class="panels-controllers"><div id="panels-pager" class="panels-pager"><a title="Search Results" href="#">Search Results</a></div></div>
+	<div class="messages-status-updates">'.t('Your search for <strong>'.$term.'</strong> did not match any results, please try again').'</div>';
 	
 	return $output;
 }
@@ -242,4 +244,34 @@ function grabbit_search_custom_form(&$form_state){
 	); 
 	
 	return $form;
+}
+
+function grabbit_search_theme_users($profiles){
+	$rox='odd';
+	foreach ($profiles as $profile){
+		$fuser=user_load($profile->user);
+      $output .='<div class="views-row views-row-1 views-row-'.$rox.'">
+         <div class="views-row">
+  
+  <div class="views-field-field-profile-picture-fid">
+           <span class="field-content"><a href="'.base_path().'user/'.$profile->user.'">'.theme('imagecache').'</a></span>
+  </div>
+
+  <span class="views-field-name">
+    <span class="field-content">'.l($fuser->name,'users/'.$fuser->name).'</span>
+  </span>
+
+  <div class="views-field-last-update-time">
+    <span class="field-content"/>
+  </div>
+
+  <div class="views-field-action-link-requestee">
+    <span class="field-content"><div class="friendlist-user-links"><a title="Remove from friends" class="friendlist_ui_TW_BOTH_delete" href="/grabbit/friendlist/delete/4/1?destination=user%2Fme%2Fmyfriends">Remove from friends</a></div></span>
+  </div>
+
+</div>  </div>';
+
+  }
+
+  return $output;
 }

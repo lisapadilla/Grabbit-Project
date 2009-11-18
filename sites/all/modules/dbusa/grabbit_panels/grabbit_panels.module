@@ -548,12 +548,14 @@ function theme_panels($private_view,$id,$name,$unique=0){
 		$output = '<div class="panel-grabbit user-panel" id="panel-'.$id.'" pager="0" pid="'.$id.'">
 	             <div class="panel-title clearfix">
 	               <div class="controller-top"> <h3 class="title">'.$name.'</h3>';
-	      if($name!='Main Stream')
+	      if($name!='Main Stream'){
 		    $output .= "<ul class='dropdown'><li class='dir panel-gear'><ul><li>".l('<span>Edit</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
 		                    </li><li>'.$clooser.'</li></ul></li></ul>';
-		
-           $output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
-	
+						$output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;|</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
+		   }else{
+			    $output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
+		    }
+           
 			$output .= '</div>
 	             <div class="panel-wraper">
 	             		'.$private_view.'</div>

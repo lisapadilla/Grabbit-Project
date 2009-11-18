@@ -133,9 +133,10 @@ Drupal.behaviors.frontpage = function(){
              item.find('div.progress').css('width', '100%'); 
              item.find('span.progressvalue').text('100%');
              if(serverData!=0){
-	           	var pathtofile="http://daniloblackusa.net"+serverData; 
+	           	var pathtofile="http://"+document.domain+serverData; 
 	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
-	             file_to_tinymce(pathtofile);
+	             encoded=decodeURIComponent(pathtofile);            
+	             file_to_tinymce(encoded);
 	             $("#log li").hide(); 
 	             $(".panels-update-form_file").slideToggle("fast");
              }else{

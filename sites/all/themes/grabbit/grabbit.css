@@ -2193,3 +2193,34 @@ div.messages, div.status, div.warning, div.error{
   background: none;
   border: none;
 }
+.section-search #content-area h1.title, .section-search #content-area .tabs,
+.section-search #content-area #search-form, .section-search #content-area h2.title{
+	display:none;
+}
+.section-search #content-area .search-results{
+	margin:0px;
+}
+.front #content-area{
+	background:transparent;
+}
+.front #content-area .views-row-even, .front #content-area .even,
+.front .panel-title{
+	background:#FFFFFF;
+}
+.front .panel-controller{
+  background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;	
+}
+#TB_closeAjaxWindow{
+	font-family:Helvetica,Tahoma,sans-serif;
+}
+
+#primary ul.links li.menu-1691 a,
+#primary ul.links li.menu-1861 a,
+#primary ul.links li.menu-6134 a{
+	color:#E9ECEF;
+}
+
+#primary ul.links li.menu-1691 a,
+#primary ul.links li.menu-6775 a{
+	margin-left:15px;
+}

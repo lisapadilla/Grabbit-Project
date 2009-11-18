@@ -65,6 +65,7 @@ function feedapi_mapper_nodeapi(&$node, $op, $teaser, $page) {
   switch ($op) {
     case 'prepare':
       if (isset($node->feedapi) && $node->feedapi->feed_item) {
+        drupal_set_message('comenzando nodo: '.$node->nid);
         _feedapi_mapper_map($node);
       }
       break;

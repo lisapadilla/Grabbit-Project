@@ -19,13 +19,28 @@ function grabbit_facebook_account($account){
 		try{
 		  
 		  $user_details = $facebook->api_client->users_getInfo($suser, 'last_name, first_name, pic_square '); 
-
-		  $output = '<div class="facebook-details">You have a facebook account with grabbit:
-		            <div class="facebook-details-name">'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'</div>
-		            <div class="facebook-details-pic"><img src="'.$user_details[0]['pic_square'].'" /></div>
-		           </div>';
+		
+		  $output='<div id="fb_story_000000000" class="facebook-post clearfix even" style="display: block;">
+			<div class="facebook-post-header">
+			  <a class="facebook-story-pic" href="#"><span class="facebook-user-pic"><img width="48" src="'.$user_details[0]['pic_square'].'" alt="'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'" class="facebook-image-s" target="_blank"/></span></a>
+			  <a class="facebook-story-name" href="#"><span class="facebook-user-name">'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'</span></a>
+			<div class="facebook-post-body">
+			  <div class="facebook-post-inside-body">You have a facebook account with grabbit</div>
+			</div>
+			</div>
+			</div>';
+			
 		}catch(FacebookRestClientException $e){
-		  $output ="There was a problem with your current facebook account. Please try to ".l('re-install','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank')))." it (remember that you first need to delete the application from your facebook account.)";
+			
+			$output='<div id="fb_story_000000000" class="facebook-post clearfix even" style="display: block;">
+				<div class="facebook-post-header">
+				  
+				<div class="facebook-post-body">
+				  <div class="facebook-post-inside-body">There was a problem with your current facebook account. Please try to '.l('re-install','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))).' it (remember that you first need to delete the application from your facebook account.)</div>
+				</div>
+				</div>
+				</div>';
+			
 		}
 	}else{
 		
