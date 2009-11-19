@@ -32,6 +32,7 @@ function dcl_importer_friendlist_menu() {
  */
 function dcl_importer_friendlist_import_action($op, $a2, $a3 = NULL) {
 	print_r($a2);
+	print "CCCCCHHHHHEEEEEEEEKKKK";
   if ($op == 'contact_actions' && user_access('have relationships with friendlist')) {
     $actions = array();
     foreach ($a2 as $uid) {
