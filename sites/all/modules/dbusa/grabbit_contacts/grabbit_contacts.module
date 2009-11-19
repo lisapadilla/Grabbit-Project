@@ -24,7 +24,7 @@ function grabbit_contacts_menu () {
  */
 function grabbit_contacts_import_action($op, $a2, $a3 = NULL) {
 	
-  print_r($a3);
+  print_r($a2);
 }
 
 
