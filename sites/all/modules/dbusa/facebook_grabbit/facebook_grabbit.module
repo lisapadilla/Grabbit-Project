@@ -84,6 +84,8 @@ function facebook_grabbit_update_form($form_state){
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	$profile = content_profile_load('profile', $user->uid);
 	
+	$calcas = friendlist_api_db_statuses('select', $user->uid, NULL, 1, 'TW_BOTH');
+	print_r($calcas);
 	if ($user->uid >0){
 		$data = '<div class="user-data">
 		           <div class="user-data-wraper">
