@@ -26,7 +26,11 @@ function grabbit_contacts_add($edit,$nombre){
 
 function grabbit_contacts_have_contacts($user){
 	$result = db_query("SELECT * from {grabbit_contacts} where uid=%d",$user);
-	
+
+foreach($results = db_fetch_object($result)){
+	print_r($result);
+}
+
 	if (db_affected_rows($result)){
 		return TRUE;
 	}else{
