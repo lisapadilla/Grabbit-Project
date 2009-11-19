@@ -90,12 +90,13 @@ function grabbit_contacts_list(){
 	    $filter_args = $_GET['filter'];
 	    $output .= drupal_get_form('invite_admin_details_filter_form', $account, $_GET['filter']);
 	  }
-	  $sql  = "SELECT i.email, i.invitee AS uid, u.name, i.created, i.expiry, i.joined, i.canceled, c.name AS names, c.mail FROM {invite} i LEFT JOIN {users} u ON (u.uid = i.invitee AND u.uid <> 0) LEFT JOIN {grabbit_contacts} c ON c.mail=i.email WHERE i.uid = %d". $filter;
+	  $sql  = "SELECT  i.email, i.invitee AS uid, u.name, i.created, i.expiry, i.joined, i.canceled, c.name AS names, c.mail FROM {invite} i LEFT JOIN {users} u ON (u.uid = i.invitee AND u.uid <> 0) LEFT JOIN {grabbit_contacts} c ON c.mail=i.email WHERE i.uid = %d". $filter;
 	  $sql .= tablesort_sql($header);
 	  $result = pager_query($sql, 50, 0, NULL, $account, $filter_args);
 	  $rows = array();
 
 	  while ($row = db_fetch_object($result)) {
+		print_r($row);
 	    $cells = array();
 	    $cells[] = check_plain($row->email);
 	    $cells[] = $row->names;
