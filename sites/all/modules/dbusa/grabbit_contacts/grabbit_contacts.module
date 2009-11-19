@@ -19,6 +19,15 @@ function grabbit_contacts_menu () {
   return $items;
 }
 
+/**
+ * Implementation of hook_import_action().
+ */
+function grabbit_contacts_import_action($op, $a2, $a3 = NULL) {
+	
+  print_r($op);
+}
+
+
 
 function grabbit_contacts_add($edit,$nombre){
   $result = db_query("INSERT INTO {grabbit_contacts} (uid, mail, name) VALUES (%d, '%s', '%s')", $edit->inviter->uid, $edit->email, $nombre);
