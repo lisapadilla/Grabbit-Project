@@ -52,7 +52,7 @@ function grabbit_contacts_mail($key, &$message, $params) {
     $message['body'][] = t("The user ".$params['user']." has updated his/her status on grabbit, 
                             you received this notification because you are a grabbit contact, 
 
-                            Join Grabbit http://daniloblackusa.net/grabbit/use to receive this notifications on grabbit.net!.
+                            Join Grabbit http://grabbit.biz/user to receive this notifications on grabbit.net!.
 
                             ".$params['message']);
   break;
