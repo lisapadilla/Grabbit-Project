@@ -62,7 +62,8 @@ function grabbit_contacts_mail($key, &$message, $params) {
 
 
 function grabbit_contacts_list(){
-	$account = arg(1);
+	global $user;
+	$account = $user->uid;
 	$now = time();
 	  $status_sort = '';
 	  if (isset($_GET['order']) && $_GET['order'] == t('Status')) {
