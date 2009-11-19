@@ -30,6 +30,10 @@ function grabbit_contacts_import_action($op, $a2, $a3 = NULL) {
 	  }
     }	
   }
+
+print_r($op);
+print_r($a2);
+
 }
 
 
