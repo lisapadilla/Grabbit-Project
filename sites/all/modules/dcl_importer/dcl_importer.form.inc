@@ -113,6 +113,7 @@ function dcl_importer_advanced_form($form_state) {
  *   2. Load all of the contacts and run the submit callback on them.
  */
 function dcl_importer_form_submit($form, &$form_state) {
+	print_r($form);
   $button = $form_state['clicked_button']['#dcl_button'];
   if ($button == 'provider') {
     $engine = dcl_importer_api_get_engine($form_state['values']['provider']);
