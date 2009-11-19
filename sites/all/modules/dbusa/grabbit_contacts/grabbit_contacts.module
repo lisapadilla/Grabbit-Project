@@ -23,16 +23,7 @@ function grabbit_contacts_menu () {
  * Implementation of hook_import_action().
  */
 function grabbit_contacts_import_action($op, $a2, $a3 = NULL) {
-  if($op=='contact_actions'){
-    if(!is_numeric($a2[0])){
-	  foreach($a2 as $contact){
-	    print $contact." . ";	
-	  }
-    }	
-  }
 
-print_r($op);
-print_r($a2);
 
 }
 
