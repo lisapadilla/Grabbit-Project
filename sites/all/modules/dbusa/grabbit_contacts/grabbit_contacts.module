@@ -23,8 +23,7 @@ function grabbit_contacts_menu () {
  * Implementation of hook_import_action().
  */
 function grabbit_contacts_import_action($op, $a2, $a3 = NULL) {
-	
-  print_r($a2);
+  print_r($op);
 }
 
 
