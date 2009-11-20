@@ -30,7 +30,7 @@ function grabbit_crons_cron() {
 	
 	$last_nid=_get_last_nid();
 	
-	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 20",$last_nid);
+	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
 	
 	if(db_affected_rows($result)){
 	  	while($user = db_fetch_object($result)){
@@ -38,7 +38,7 @@ function grabbit_crons_cron() {
 	
 			if($fuser = facebook_grabbit_get_fid($user->uid)){
 				if (!grabbit_crons_cron_time()){
-				  watchdog("grabbit CRON", "NO HAY TIEMPO PARA ".$user->name);
+				  //watchdog("grabbit CRON", "NO HAY TIEMPO PARA ".$user->name);
 			      break;
 			    }else{
 				  facebook_grabbit_update_facebook($user);
@@ -47,7 +47,7 @@ function grabbit_crons_cron() {
 
 			if($twitter_account = oauth_twitter_get_uid($user->uid)){
 			  	if (!grabbit_crons_cron_time()){
-				  watchdog("grabbit CRON", "NO HAY TIEMPO PARA ".$user->name);
+				  //watchdog("grabbit CRON", "NO HAY TIEMPO PARA ".$user->name);
 			      break;
 			    }else{
 			      facebook_grabbit_update_twitter($user);
@@ -73,7 +73,7 @@ function grabbit_crons_cron() {
 			_save_last_nid($user->uid);
 			$last_one=$user->uid;
 		  endif;
-		  watchdog("grabbit", "running for user ".$user->name);
+		 // watchdog("grabbit", "running for user ".$user->name);
 		}
 	}else{
 	  $clear=db_query("DELETE from {grabbit_crons} WHERE lastime='CRON'");
@@ -139,7 +139,7 @@ function grabbit_crons_delete_nodes(){
 function grabbit_crons_emails_pull() {
   	ini_set("memory_limit","448M");
 	ini_set('max_execution_time', 800);
-	watchdog("grabbit EMAIL", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
+	watchdog("email", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
 	$last_nid=_get_last_nid_emails();
 	
 	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
@@ -147,7 +147,7 @@ function grabbit_crons_emails_pull() {
 	if(db_affected_rows($result)){
 	  	while($user = db_fetch_object($result)){
 		if(grabbit_crons_cron_time_emails()):
-             watchdog("grabbit EMAIL", "PROCESANDO USUARIO ".$user->name);
+             watchdog("email", "PROCESANDO USUARIO ".$user->name);
 			if($gmail_user = grabbit_gmail_get($user->uid)){
 				if (!grabbit_crons_cron_time_emails()){
 			      break;
@@ -159,7 +159,7 @@ function grabbit_crons_emails_pull() {
 
 			if($imap_user = grabbit_imap_get($user->uid)){
 			  	if (!grabbit_crons_cron_time_emails()){
-			      watchdog("grabbit EMAIL", "no hay tiempo para usuario ".$user->name);     
+			      watchdog("email", "no hay tiempo para usuario ".$user->name);     
 			      break;
 			    }else{ 
 				  //watchdog("grabbit", "el usuario tiene imap ".$user->name);
@@ -168,14 +168,14 @@ function grabbit_crons_emails_pull() {
 			}
             
 			_save_last_nid_emails($user->uid);
-			watchdog("grabbit EMAIL", "termino un usuario ".$user->name);
+			watchdog("email", "finished for ".$user->name);
 		  endif;
 		}
 	}else{
 		//watchdog("grabbit", "no entro al tiempo");
 	  $clear=db_query("DELETE from {grabbit_crons} where lastime='EMAILS'");
 	}
-	watchdog("grabbit EMAIL", "Last Email for ".$user->name." has finished");
+	watchdog("email", "Last Email for ".$user->name." has finished");
 	
 }
 
