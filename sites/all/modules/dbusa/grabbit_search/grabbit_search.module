@@ -220,16 +220,11 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['onlystream']=array(
 		'#type'=>'checkbox',
-		'#title' => t('Search my stream'),
+		'#title' => 'Search my stream <a href="#" class="custom-form-collapser" id="collapse-custom"></a>',
 		'#weight'=>7,
 		'#default_value'=>1
 		);
 	
-	$form['from'] = array(
-	  '#type' => 'item',
-	  '#weight' => 7,
-	  '#value' => '<div id="elgyro-2"><a href="#" class="custom-form-collapser" id="collapse-custom">Advanced</a></div>',
-	);
 	
 	$form['#action'] = url('private/results');
 	$form['#redirect'] = FALSE;
@@ -246,7 +241,7 @@ function grabbit_search_custom_form(&$form_state){
 	  '#type' => 'checkboxes',
 	  '#weight' => 9,
 	  '#default_value' => array('facebook','gmail','twitter','imap','RSS'),
-	  '#title' => t('Search only in'),
+	  '#title' => t('Only in'),
 	  '#options' => array(
 	    'facebook' => t('Facebook'),
 	    'twitter' => t('Twitter'),
