@@ -1311,6 +1311,7 @@ a.active{
 }
 #block-views-friends-block_1{
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
+  padding-bottom:10px;
 }
 #block-views-friends-block_1 .block-inner{
   background: url(images/sidebar_top.gif) 0 0 no-repeat;
