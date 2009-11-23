@@ -113,9 +113,17 @@ function grabbit_preprocess(&$vars, $hook) {
  * @param $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-/* -- Delete this line if you want to use this function
 function grabbit_preprocess_page(&$vars, $hook) {
-  $vars['sample_variable'] = t('Lorem ipsum.');
+	if(arg(0)=='search'){
+	  	$pos = strpos($vars['content'],'blue smurf');
+
+		if($pos === false) {
+		 // string needle NOT found in haystack
+		}
+		else {
+		  $vars['content']='	<h1 class="title">Search your Stream</h1><div class="panels-controllers"><div class="panels-pager" id="panels-pager"><a href="#" title="Search Results">Search Results</a></div></div><div class="messages-status-updates">Your search for <strong>sfsdfg</strong> did not match any results, please try again</div>';
+		}
+	}
 }
 // */
 
@@ -221,7 +229,6 @@ function grabbit_preprocess_search_results(&$variables) {
 			$output .='</div></div>';
 	
     }
-    
     $variables['search_results']=$output;
   }
 }
