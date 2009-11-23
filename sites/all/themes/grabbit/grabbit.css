@@ -1961,7 +1961,7 @@ ul.dropdown li:hover ul {
   margin: 0px;
   padding: 0px;
   display: inline-block;
-  width: 190px;
+  width: 187px;
   float: left;
   height: 32px;
 }
@@ -1992,7 +1992,7 @@ ul.dropdown li:hover ul {
 }
 #block-grabbit_search-0 #elgyro{
   background: url(images/sidebar_top.gif) top no-repeat;
-  padding: 10px;
+  padding-top: 5px;
   clear: both;
   border-top: 10px solid #8b939f;
 }
@@ -2000,12 +2000,24 @@ ul.dropdown li:hover ul {
   display: block;
   color: #555e6b;
   height: 14px;
-  padding: 1px 0px 0px 0px;
+  margin-right:10px;
+padding:5px 0 0 10px;
   height: 13px;
   font-size: 12px;
   line-height: 13px;
-  background: url(images/ce_switch.gif) right no-repeat;
+  background: url(images/more.gif) right no-repeat;
   font-weight: bold;
+margin-left:158px;
+padding:5px 0 0 10px;
+width:80px;
+}
+#edit-onlystream-wrapper{
+	display: block;
+	  color: #555e6b;
+	  margin-right:10px;
+	padding:5px 0 0 8px;
+	  font-size: 12px;
+	  line-height: 13px;
 }
 #block-grabbit_search-0 #collapsable-custom-form{
   padding: 10px;
@@ -2034,8 +2046,8 @@ ul.dropdown li:hover ul {
 }
 */
 #block-grabbit_search-0 #edit-search{
-  width: 160px;
-  height: 21px;
+  width: 157px;
+  height: 25px;
   padding: 11px 0px 0px 30px;
   float: left;
   margin: 0px;
@@ -2051,8 +2063,8 @@ ul.dropdown li:hover ul {
 #block-grabbit_search-0 #edit-submit-2{
   display: block;
   float: left;
-  width: 65px;
-  height: 32px;
+  width: 68px;
+  height: 36px;
   padding: 0px;
   margin: 0px;
   background: url(images/search_bt.gif) 0 0 no-repeat;
@@ -2284,7 +2296,7 @@ div.messages, div.status, div.warning, div.error{
 	font-size:12px;
 	font-weight:normal;
 	line-height:13px;
-	padding:10px;
+	padding:5px 0 0 1px;
 }
 .page-user-me-myfriends .views-field-action-link-requestee{
 	float:right;

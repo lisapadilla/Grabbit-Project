@@ -201,34 +201,51 @@ function grabbit_search_custom_form(&$form_state){
 	    '#value' => t('You can perform a search of your grabbit stream, just type the keyword(s) below'),
 	    '#suffix'=>'</div>'
 		 );	 
+	
 		
 	$form['search'] = array(
 	    '#type' => 'textfield',
 	    '#title' => t('Search'),
 	    '#required' => TRUE,
 	    '#size' => 20,
-	    '#weight' => 6
+	    '#weight' => 5
 	  );
+	
+	$form['submit'] = array(
+	  '#type' => 'submit',
+	  '#weight' => 6,
+	  '#value' => t('Search')
+	);
+	
+	
+	$form['onlystream']=array(
+		'#type'=>'checkbox',
+		'#title' => t('Search my stream'),
+		'#weight'=>7,
+		'#default_value'=>1
+		);
+	
+	$form['from'] = array(
+	  '#type' => 'item',
+	  '#weight' => 7,
+	  '#value' => '<div id="elgyro-2"><a href="#" class="custom-form-collapser" id="collapse-custom">Advanced</a></div>',
+	);
 	
 	$form['#action'] = url('private/results');
 	$form['#redirect'] = FALSE;
 	
-	$form['from'] = array(
-	  '#type' => 'item',
-	  '#weight' => 8,
-	  '#value' => '<div id="elgyro"><a href="#" class="custom-form-collapser" id="collapse-custom">Advanced</a></div>',
-	);
-	
 	$form['onlysite']=array(
 		'#type'=>'checkbox',
 		'#title' => t('Search entire site'),
-		'#weight'=>8,
-		'#default_value'=>1
+		'#weight'=>10,
+		'#default_value'=>0,
+		'#suffix'=>'</div>'
 		);
 	
 	$form['details'] = array(
 	  '#type' => 'checkboxes',
 	  '#weight' => 9,
+	  '#default_value' => array('facebook','gmail','twitter','imap','RSS'),
 	  '#title' => t('Search only in'),
 	  '#options' => array(
 	    'facebook' => t('Facebook'),
@@ -237,16 +254,11 @@ function grabbit_search_custom_form(&$form_state){
 	    'imap' => t('IMAP'),
 	    'RSS' => t('RSS feeds'),
 	  ),
-	   '#prefix'=>'<div class="custom-search-form-collapse" id="collapsable-custom-form">',
-	   '#suffix'=>'</div>',
+	   '#prefix'=>'<div class="custom-search-form-collapse" style="display:none;" id="collapsable-custom-form">',
 	  '#description' => t('You can filter your search by selecting one or more sources. Leave all unchecked to search all.'),
 	);
 	
-	$form['submit'] = array(
-	  '#type' => 'submit',
-	  '#weight' => 7,
-	  '#value' => t('Search'),
-	); 
+	
 	
 	return $form;
 }
