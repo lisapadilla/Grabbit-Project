@@ -108,8 +108,6 @@ $(document).ready(function() {
 	    prevNextClick: fixtheheight
 	});
 	
-	$('.suser-panels').height($('.suser-panels').height()+500);
-	
 	var height = $("#panel-0").height();
 	$(".suser-panels").height(height);
 	
@@ -138,6 +136,8 @@ $(document).ready(function() {
 			text_input.focus();
 		});
 	});
+	
+	$('.suser-panels').height($('.suser-panels').height()+500);
 	
 	$('.news-comment-submit-button').click(function(){
 		// Save comment
