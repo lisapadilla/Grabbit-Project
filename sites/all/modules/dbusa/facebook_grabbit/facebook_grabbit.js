@@ -138,7 +138,7 @@ $(document).ready(function() {
 	});
 	
 	$('.suser-panels').height($('.suser-panels').height()+500);
-	
+	alert($('.suser-panels').height());
 	$('.news-comment-submit-button').click(function(){
 		// Save comment
 		
