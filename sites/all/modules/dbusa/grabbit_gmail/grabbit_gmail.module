@@ -50,10 +50,6 @@ function grabbit_gmail_reply_message(){
 	$message = node_load($nid);
 	$reply_to = $message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
-	
-	
-    tinySendMail($gmail['user'],"ifuyivara@daniloblackusa.com","Sent with tinySendMail",
-        "This function does pretty well for a little fella!  What do you think?");
        
     $ret=tinySendMail($gmail['user'],"ifuyivara@daniloblackusa.com","Sent with tinySendMail",
         "This function does pretty well for a little fella!  What do you think?",
