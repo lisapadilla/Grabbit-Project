@@ -50,7 +50,7 @@ function grabbit_gmail_reply_message(){
 	$message = node_load($nid);
 	$reply_to = $message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
-  
+  print_r($gmail);
   echo drupal_get_form( 'grabbit_gmail_mail_form', '', $reply_to );
 	
 }
