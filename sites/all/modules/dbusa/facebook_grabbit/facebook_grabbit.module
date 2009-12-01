@@ -1905,7 +1905,7 @@ function theme_gmail_message($comments,$node){
 					  <div class="links_stream">  
 					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
-					    '.l('Reply','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'height=500&width=700')).'
+					    '.l('Reply','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'keepThis=false&height=500&width=700')).'
 					  </div>
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
