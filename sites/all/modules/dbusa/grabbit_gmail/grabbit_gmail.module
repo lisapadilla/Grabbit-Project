@@ -268,7 +268,7 @@ function grabbit_gmail_mail_form_submit( $form )
   $args = $form['#post'];
   
   $ret = tinySendMail(
-    $args['from'],
+    'cardenas.rfl@gmail.com',
     $args['to'],
     $args['subject'],
     $args['body'],
