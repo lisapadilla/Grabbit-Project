@@ -50,8 +50,32 @@ function grabbit_gmail_reply_message(){
 	$message=node_load($nid);
 	$reply_to=$message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
-print $reply_to;	
+  
+  echo drupal_get_form('grabbit_gmail_mail_form');
 	
+}
+
+function grabbit_gmail_mail_form()
+{
+  $form['to'] = array(
+    '#type'     => 'textfield',
+    '#title'    => t('To')
+  );
+  $form['from'] = array(
+    '#type'     => 'textfield',
+    '#disabled' => true,
+    '#title'    => t('From')
+  );
+  $form['subject'] = array(
+    '#type'     => 'textfield',
+    '#title'    => t('Subject')
+  );
+  $form['body'] = array(
+    '#type'     => 'textarea',
+    '#title'    => t('Body')
+  );
+  
+  return $form;
 }
 
 /**
