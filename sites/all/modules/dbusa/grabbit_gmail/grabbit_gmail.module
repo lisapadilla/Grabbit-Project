@@ -279,7 +279,6 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
 function grabbit_gmail_mail_form_submit( $form )
 {
   print_r($form['#post']);
->>>>>>> 8b8d35c61879adf69b29ff6a3de1f5dd7d666672
 }
 
 /**
