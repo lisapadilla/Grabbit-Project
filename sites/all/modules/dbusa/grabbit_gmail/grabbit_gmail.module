@@ -50,17 +50,8 @@ function grabbit_gmail_reply_message(){
 	$message = node_load($nid);
 	$reply_to = $message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
-       
-    $ret=tinySendMail($gmail['user'],"ifuyivara@daniloblackusa.com","Sent with tinySendMail",
-        "This function does pretty well for a little fella!  What do you think?",
-        "imap.googlemail.com",993,"google.com");
-    if(!$ret)
-    {
-        print("Oh, pshaw!  It didn't work!<br>");
-    }
   
- // echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to );
-	
+  echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to );
 }
 
 function tinySendMail($sender,$receiver,$subject,$message
@@ -274,7 +265,21 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
 
 function grabbit_gmail_mail_form_submit( $form )
 {
-  print_r($form['#post']);
+  $args = $form['#post'];
+  
+  $ret = tinySendMail(
+    $args['from'],
+    $args['to'],
+    $args['subject'],
+    $args['body'],
+    "imap.googlemail.com",
+    993,
+    "google.com"
+  );
+  if(!$ret)
+  {
+      print("Oh, pshaw!  It didn't work!<br>");
+  }
 }
 
 /**
