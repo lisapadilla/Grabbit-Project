@@ -78,7 +78,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
   );
   $form['submit'] = array(
     '#type'           => 'submit',
-    '#title'          => t('Send')
+    '#value'          => t('Send')
   );
   $form['#submit'][] = 'grabbit_gmail_mail_form_submit';
   
@@ -87,7 +87,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
 
 function grabbit_gmail_mail_form_submit( $form )
 {
-  print_r($form);
+  print_r($form['#post']);
 }
 
 /**
