@@ -44,25 +44,6 @@ function grabbit_gmail_menu () {
   return $items;
 }
 
-function grabbit_gmail_reply_message(){
-	global $user;
-	$nid = arg(2);
-	$message = node_load($nid);
-	$reply_to = $message->field_from_add[0]['value'];
-	$gmail = grabbit_gmail_get($user->uid);
-       
-    $ret=tinySendMail($gmail['user'],"ifuyivara@daniloblackusa.com","Sent with tinySendMail",
-        "This function does pretty well for a little fella!  What do you think?",
-        "imap.googlemail.com",993,"google.com");
-    if(!$ret)
-    {
-        print("Oh, pshaw!  It didn't work!<br>");
-    }
-  
- // echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to );
-	
-}
-
 function tinySendMail($sender,$receiver,$subject,$message
     ,$rcvsmtp=0,$rcvport=25,$sndhost=0
     ,$usePHPmailFunc=0,$usePHPimapFunc=0,$trySock=0,$tryAll=1,$verbose=0,$vboseloc=0){
@@ -242,6 +223,16 @@ function infoPrint($verbose,$msg,$loc,$showloc)
     }
 }
 
+function grabbit_gmail_reply_message(){
+	global $user;
+	$nid = arg(2);
+	$message = node_load($nid);
+	$reply_to = $message->field_from_add[0]['value'];
+	$gmail = grabbit_gmail_get($user->uid);
+  
+  echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to );
+}
+
 function grabbit_gmail_mail_form( &$form_state, $from, $to )
 {
   $form['to'] = array(
@@ -250,9 +241,8 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
     '#title'          => t('To')
   );
   $form['from'] = array(
-    '#type'           => 'textfield',
-    '#default_value'  => $from,
-    '#disabled'       => true,
+    '#type'           => 'item',
+    '#value'          => $from,
     '#title'          => t('From')
   );
   $form['subject'] = array(
@@ -274,7 +264,22 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
 
 function grabbit_gmail_mail_form_submit( $form )
 {
-  print_r($form['#post']);
+  $args = $form['#post'];
+  $gmail = grabbit_gmail_get($user->uid);
+  
+  $ret = tinySendMail(
+    $gmail['user'],
+    $args['to'],
+    $args['subject'],
+    $args['body'],
+    "imap.googlemail.com",
+    993,
+    "google.com"
+  );
+  if(!$ret)
+  {
+      print("Oh, pshaw!  It didn't work!<br>");
+  }
 }
 
 /**
