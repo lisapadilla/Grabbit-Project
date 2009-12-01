@@ -240,7 +240,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
     '#default_value'  => $to,
     '#title'          => t('To')
   );
-  $form['from'] = array(
+  $form['dssd'] = array(
     '#type'           => 'textfield',
     '#value'          => $from,
     '#disabled'       => true,
