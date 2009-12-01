@@ -76,8 +76,18 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
     '#type'           => 'textarea',
     '#title'          => t('Body')
   );
+  $form['submit'] = array(
+    '#type'           => 'submit',
+    '#title'          => t('Send')
+  );
+  $form['#submit'][] = 'grabbit_gmail_mail_form_submit';
   
   return $form;
+}
+
+function grabbit_gmail_mail_form_submit( $form )
+{
+  print_r($form);
 }
 
 /**
