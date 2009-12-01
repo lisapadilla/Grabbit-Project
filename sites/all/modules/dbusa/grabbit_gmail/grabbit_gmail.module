@@ -45,11 +45,13 @@ function grabbit_gmail_menu () {
 }
 
 function grabbit_gmail_reply_message(){
-	$nid=$_GET['nid'];
+	global $user;
+	$nid=arg(2);
 	$message=node_load($nid);
 	$reply_to=$message->field_from_add[0]['value'];
+	$gmail = grabbit_gmail_get($user->uid);
+print $reply_to;	
 	
-	print $reply_to;
 }
 
 /**
