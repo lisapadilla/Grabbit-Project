@@ -46,191 +46,50 @@ function grabbit_gmail_menu () {
 
 function grabbit_gmail_reply_message(){
 	global $user;
-	$nid=arg(2);
-	$message=node_load($nid);
-	$reply_to=$message->field_from_add[0]['value'];
+	$nid = arg(2);
+	$message = node_load($nid);
+	$reply_to = $message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
-print $reply_to;	
+  
+  echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to );
 	
 }
 
-function tinySendMail($sender,$receiver,$subject,$message
-    ,$rcvsmtp=0,$rcvport=25,$sndhost=0
-    ,$usePHPmailFunc=0,$usePHPimapFunc=0,$trySock=0,$tryAll=1,$verbose=0,$vboseloc=0){
 
-    if(!$sndhost)$sndhost=php_uname('n');
-    if(!$rcvsmtp)$rcvsmtp="mail.".substr(strstr($receiver,"@"),1);
-    if($tryAll)$usePHPmailFunc=$usePHPimapFunc=$trySock=1;
-    if($usePHPmailFunc || $usePHPimapFunc)
-    {
-        ini_set("SMTP",$rcvsmtp);
-        $addtlHdr="From: $sender";
-    }
-    $ret=0;
-    if($usePHPmailFunc)
-    {
-        infoPrint($verbose,"trying mail()",__LINE__,$vboseloc);
-        $ret=mail($receiver,$subject,$message,$addtlHdr);
-    }
-    if(!$ret && $usePHPmailFunc)
-    {
-        infoPrint($verbose,"trying imap_mail()",__LINE__,$vboseloc);
-        $ret=imap_mail($receiver,$subject,$message,$addtlHdr);
-    }
-    if($ret || !$trySock)
-    {
-        infoPrint($verbose,"ret: $ret<br>tryAll: $tryAll",__LINE__,$vboseloc);
-        infoPrint($verbose,__FILE__."::".__FUNCTION__.": Finishing: returning: $ret",__LINE__,$vboseloc);
-        return($ret);
-    }
-    infoPrint($verbose,"trying tinySockMail()",__LINE__,$vboseloc);
-    return(tinySockMail($sender,$receiver,$subject,$message
-        ,$rcvsmtp,$rcvport,$sndhost,$verbose,$vboseloc));
+function grabbit_gmail_mail_form( &$form_state, $from, $to )
+{
+  $form['to'] = array(
+    '#type'           => 'textfield',
+    '#default_value'  => $to,
+    '#title'          => t('To')
+  );
+  $form['from'] = array(
+    '#type'           => 'textfield',
+    '#default_value'  => $from,
+    '#disabled'       => true,
+    '#title'          => t('From')
+  );
+  $form['subject'] = array(
+    '#type'           => 'textfield',
+    '#title'          => t('Subject')
+  );
+  $form['body'] = array(
+    '#type'           => 'textarea',
+    '#title'          => t('Body')
+  );
+  $form['submit'] = array(
+    '#type'           => 'submit',
+    '#value'          => t('Send')
+  );
+  $form['#submit'][] = 'grabbit_gmail_mail_form_submit';
+  
+  return $form;
 }
 
-function tinySockMail($sender,$receiver,$subject,$message
-    ,$rcvsmtp=0,$rcvport=25,$sndhost=0,$verbose=0,$vboseloc=0)
+function grabbit_gmail_mail_form_submit( $form )
 {
-    infoPrint($verbose,__FILE__."::".__FUNCTION__.": Starting",__LINE__,$vboseloc);
-    /* RFC2821 says 1000 including CRLF, so this should be compliant */
-    $textLineLimit=990;
-    $mailState_open=0;
-    $mailState_ehlo=1;
-    $mailState_rcpt=2;
-    $mailState_data=3;
-    $mailState_send=4;
-    $mailState_quit=5;
-    $mailState_return=6;
-    $curMailState=$mailState_open;
-    infoPrint($verbose,"fsockopen($rcvsmtp,$rcvport,\$errno,\$errstr)",__LINE__,$vboseloc);
-    if(!($fp=fsockopen($rcvsmtp,$rcvport,$errno,$errstr)))
-    {
-        infoPrint($verbose,"Could not open a socket to $rcvsmtp on port $rcvport",__LINE__,$vboseloc);
-        infoPrint($verbose,"Error#: $errno: $errstr",__LINE__,$vboseloc);
-        infoPrint($verbose,__FILE__."::".__FUNCTION__.": Finishing: returning: 0",__LINE__,$vboseloc);
-        return(0);
-    }
-    infoPrint($verbose,"Opened connection to $rcvsmtp:$rcvport",__LINE__,$vboseloc);
-    $returncode=1;
-    while($curMailState != $mailState_return)
-    {
-        $ret=fgets($fp);
-        $cod=substr($ret,0,3);
-        if($curMailState == $mailState_ehlo)
-        { /* drain the pipe of all EHLO informational lines */
-            if($cod == 250)
-            {
-                $ret=fgets($fp);
-                $contChar=substr($ret,3,1);
-                infoPrint($verbose,"ret: $ret",__LINE__,$vboseloc);
-                while($contChar == "-")
-                {
-                    infoPrint($verbose,"ret: $ret",__LINE__,$vboseloc);
-                    $ret=fgets($fp);
-                    $contChar=substr($ret,3,1);
-                }
-            }
-        }
-        infoPrint($verbose,"ret: $ret",__LINE__,$vboseloc);
-        infoPrint($verbose,"cod: $cod",__LINE__,$vboseloc);
-        switch($cod)
-        {
-            case 220:
-                switch($curMailState)
-                {
-                    case $mailState_open:
-                        $snd="EHLO $sndhost\r\n";
-                        $curMailState=$mailState_ehlo;
-                        break;
-                    default:
-                        $snd="QUIT\r\n";
-                        $returncode=0;
-                        $curMailState=$mailState_return;
-                }
-                break;
-            case 250:
-                switch($curMailState)
-                {
-                    case $mailState_ehlo:
-                        $snd="MAIL FROM:<$sender>\r\n";
-                        $curMailState=$mailState_rcpt;
-                        break;
-                    case $mailState_rcpt:
-                        $snd="RCPT TO:<$receiver>\r\n";
-                        $curMailState=$mailState_data;
-                        break;
-                    case $mailState_data:
-                        $snd="DATA\r\n";
-                        $curMailState=$mailState_send;
-                        break;
-                    case $mailState_quit:
-                        $snd="QUIT\r\n";
-                        $curMailState=$mailState_return;
-                        break;
-                    default:
-                        $snd="QUIT\r\n";
-                        $returncode=0;
-                        $curMailState=$mailState_return;
-                }
-                break;
-            case 354:
-                switch($curMailState)
-                {
-                    case $mailState_send;
-                        $snd="From: $sender\n";
-                        $snd.="To: $receiver\n";
-                        $snd.="Subject: $subject\n";
-                        $snd.="Date: ".date('r')."\n";
-                        $snd.="Message-ID: <".
-                            date('YmdHis').":".
-                            php_uname('n').":".
-                            getmypid().
-                            ":$sender>\n\n";
-                        $snd.=wordwrap($message,$textLineLimit,"\n",1);
-                        $sndArray=explode("\n",$snd);
-                        $numLines=count($sndArray);
-                        infoPrint($verbose,"Sending header and message lines",__LINE__,$vboseloc);
-                        for($i=0; $i < $numLines; $i++)
-                        {
-                            if($verbose)print((($i+1)%10)." ");
-                            fputs($fp,$sndArray[$i]."\r\n");
-                        }
-                        if($verbose)print("\r\n<br>");
-                        infoPrint($verbose,"Done",__LINE__,$vboseloc);
-                        $snd="\r\n.\r\n";
-                        $curMailState=$mailState_quit;
-                        break;
-                    default:
-                        $snd="QUIT\r\n";
-                        $returncode=0;
-                        $curMailState=$mailState_return;
-                }
-                break;
-            default:
-                $snd="QUIT\r\n";
-                $returncode=0;
-                $curMailState=$mailState_return;
-        }
-        infoPrint($verbose,"snd: $snd",__LINE__,$vboseloc);
-        fputs($fp,$snd);
-    }
-    $ret=fgets($fp);
-    infoPrint($verbose,"ret: $ret",__LINE__,$vboseloc);
-    fclose($fp);
-    infoPrint($verbose,__FILE__."::".__FUNCTION__.": Finishing: returning: $returncode",__LINE__,$vboseloc);
-    return($returncode);
-}
-
-
-/* Print informational messages if the $verbose argument is non-zero
-*/
-function infoPrint($verbose,$msg,$loc,$showloc)
-{
-    if($verbose)
-    {
-        if($showloc)$locStr=$loc.": "; else $locStr="";
-        print($locStr.htmlentities(addslashes($msg))."\r\n<br>");
-    }
+  print_r($form['#post']);
+>>>>>>> 8b8d35c61879adf69b29ff6a3de1f5dd7d666672
 }
 
 /**
