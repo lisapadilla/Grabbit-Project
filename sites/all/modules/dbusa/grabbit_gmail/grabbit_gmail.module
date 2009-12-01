@@ -25,6 +25,11 @@ function grabbit_gmail_menu () {
     'access arguments' => array('access content')
   );
 
+  $items['gmail/reply'] = array( 
+    'page callback' => 'grabbit_gmail_reply_message', 
+    'access arguments' => array('access content')
+  );
+
   $items['user/%user_category/edit/add_gmail'] = array(
    'title' => 'Gmail',
    'description' => t('Add Your Gmail account to Grabbit'),
@@ -37,6 +42,14 @@ function grabbit_gmail_menu () {
   );
 
   return $items;
+}
+
+function grabbit_gmail_reply_message(){
+	$nid=$_GET['nid'];
+	$message=node_load($nid);
+	$reply_to=$message->field_from_add[0]['value'];
+	
+	print $reply_to;
 }
 
 /**
