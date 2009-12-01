@@ -242,7 +242,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
   );
   $form['from'] = array(
     '#type'           => 'item',
-    '#default_value'  => $from,
+    '#value'          => $from,
     '#title'          => t('From')
   );
   $form['subject'] = array(
