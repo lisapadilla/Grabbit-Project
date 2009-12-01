@@ -241,7 +241,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
     '#title'          => t('To')
   );
   $form['from'] = array(
-    '#type'           => 'textfield',
+    '#type'           => 'item',
     '#value'          => $from,
     '#title'          => t('From')
   );
@@ -265,9 +265,10 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
 function grabbit_gmail_mail_form_submit( $form )
 {
   $args = $form['#post'];
-  print_r($args);/*
+  $gmail = grabbit_gmail_get($user->uid);
+  
   $ret = tinySendMail(
-    'cardenas.rfl@gmail.com',
+    $gmail['user'],
     $args['to'],
     $args['subject'],
     $args['body'],
@@ -278,7 +279,7 @@ function grabbit_gmail_mail_form_submit( $form )
   if(!$ret)
   {
       print("Oh, pshaw!  It didn't work!<br>");
-  }*/
+  }
 }
 
 /**
