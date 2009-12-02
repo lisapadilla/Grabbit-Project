@@ -2318,7 +2318,7 @@ div.messages, div.status, div.warning, div.error{
 	float:right;
 	margin-right:20px;
 }
- 
+
 .tooltip-deal .tooltip{
 	background-color:#F5F5B5;
 	border:1px solid #DECA7E;
@@ -2330,4 +2330,14 @@ div.messages, div.status, div.warning, div.error{
 	text-align:center;
 	position:absolute;
 	z-index:5;
+}
+.tooltip-deal{
+	background:transparent url(images/ref_ico.gif) no-repeat scroll 0 0;
+	display:block;
+	float:right;
+	height:11px;
+	margin-left:5px;
+	overflow:hidden;
+	text-indent:3000em;
+	width:11px;
 }
