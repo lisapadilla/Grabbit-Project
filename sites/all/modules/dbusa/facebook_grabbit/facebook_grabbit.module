@@ -741,6 +741,7 @@ function facebook_grabbit_private_view_panel($param){
     // prepeare the deals view according to the user's tags
 	$deals_profile = content_profile_load('profile', $user->uid);
 	if (count($deals_profile->taxonomy)){
+		print_r($deals_profile->taxonomy);
 	  foreach ($deals_profile->taxonomy as $term){
 	    $d_tags[] = $term->tid;
 	  }
