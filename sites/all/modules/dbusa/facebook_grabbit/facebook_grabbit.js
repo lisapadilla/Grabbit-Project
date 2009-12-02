@@ -96,7 +96,7 @@ $(document).ready(function() {
 	focus:true,
 	persistent:true,
 	onBeforeShow: function(){
-		this.getParent().text('yolocmbie');
+		alert(this.text());
 	}
 	
    });
