@@ -92,7 +92,7 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 $(document).ready(function() {
 
-   $('.tooltip-deal').each(function(1){
+   $('.tooltip-deal').each(function(i){
 	 var contents=$('.tooltip_deal',$(this)).html();
 	  alert(contents);
      $(this).simpletip({
