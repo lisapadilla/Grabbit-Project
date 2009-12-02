@@ -2326,6 +2326,6 @@ div.messages, div.status, div.warning, div.error{
 	font-size:12px;
 	line-height:18px;
 	padding:10px 13px;
-	position:absolute;
-	text-align:center; 
+	text-align:center;
+	z-index:2;  
 }
