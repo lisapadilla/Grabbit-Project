@@ -94,7 +94,10 @@ $(document).ready(function() {
 
    $('.tooltip-deal').simpletip({
 	focus:true,
-	persistent:true
+	persistent:true,
+	onBeforeShow: function(){
+		this.getParent().text('yolocmbie');
+	}
 	
    });
 
