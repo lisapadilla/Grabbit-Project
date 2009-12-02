@@ -2337,3 +2337,8 @@ div.messages, div.status, div.warning, div.error{
 	margin-left:5px;
 	width:10px;
 }
+.tooltip-deal .tooltip{
+	height:auto;
+	margin-left:0px;
+	width:auto;
+}
