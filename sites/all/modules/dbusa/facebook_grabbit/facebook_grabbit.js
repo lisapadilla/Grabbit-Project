@@ -95,7 +95,7 @@ $(document).ready(function() {
    $('.tooltip-deal').each(function(i){
 	 var contents=$('.tooltip_deal',$(this)).html();
      $(this).simpletip({
-	   	focus:true,
+		persistent:true,
 		fixed:true,
 		position:["0","-100"],
 	    content: contents
