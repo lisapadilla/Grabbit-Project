@@ -1151,7 +1151,7 @@ function facebook_grabbit_private_view_panel_public($param){
  * Creates users pannel PAGINATION()
  */
 function facebook_grabbit_private_view_panel_pagination($param,$pagination){
-	
+	print "aki es";
 	global $user;
 	
 	global $user_info;
