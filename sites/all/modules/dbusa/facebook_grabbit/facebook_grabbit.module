@@ -1855,6 +1855,7 @@ function _news_theme($comments,$node,$matches=NULL){
 					  <div class="links_stream">  
 					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    '.$deal.'
+					    '.$deal_matches.'
 					    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
 					    <a href="javascript:void(0)" class="comment-news">Comment</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
