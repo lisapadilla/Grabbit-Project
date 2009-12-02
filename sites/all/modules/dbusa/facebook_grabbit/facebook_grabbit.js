@@ -96,7 +96,8 @@ $(document).ready(function() {
 	focus:true,
 	persistent:true,
 	onBeforeShow: function(){
-		alert(this.text());
+		alert("check");
+		alert($(this).html());
 	}
 	
    });
