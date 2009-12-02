@@ -2328,7 +2328,6 @@ div.messages, div.status, div.warning, div.error{
 	line-height:18px;
 	padding:10px 13px;
 	text-align:center;
-	position:absolute;
 	z-index:5;
 }
 .tooltip-deal{
@@ -2337,7 +2336,6 @@ div.messages, div.status, div.warning, div.error{
 	float:right;
 	height:11px;
 	margin-left:5px;
-	overflow:hidden;
 	text-indent:3000em;
 	width:11px;
 }
