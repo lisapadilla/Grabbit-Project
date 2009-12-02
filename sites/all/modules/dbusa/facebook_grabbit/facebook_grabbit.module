@@ -810,7 +810,10 @@ function facebook_grabbit_private_view_panel($param){
 							  $output .= theme_imap_message($comments,$node);
 							break;
 							default:
-							print_r($node);
+							  if($node->type=='deal'){
+							    print_r($node->taxonomy);
+							    print_r($deals_profile->taxonomy);	
+							  }
 							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 							  $output .= _news_theme($comments,$node);
 							break;
