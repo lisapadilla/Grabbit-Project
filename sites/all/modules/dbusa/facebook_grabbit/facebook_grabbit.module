@@ -1826,8 +1826,8 @@ function _news_theme($comments,$node,$matches=NULL){
 	     $why[]=$match->name;	
 	   }
 	   $text_why=implode(',', $why);
-	   $deal_matches= '<span class="matches"><a href="JavaScript:void(0);" title="Why do I see this?" class="tooltip-deal">Why</a>
-	                     <div class="tooltip_deal fixed persistent" style="display:none;">'.$text_why.'</div>
+	   $deal_matches= '<span class="matches"><a href="JavaScript:void(0);" title="Why do I see this?" class="tooltip-deal">Why
+	                     <div class="tooltip_deal fixed persistent" style="display:none;">'.$text_why.'</div></a>
 	                   </span>';
 	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
 
