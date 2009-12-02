@@ -95,6 +95,7 @@ $(document).ready(function() {
    $('.tooltip-deal').simpletip({
 	content: "Probando el tip",
 	focus:true,
+	persistent:true,
 	fixed:false
 	
    });
