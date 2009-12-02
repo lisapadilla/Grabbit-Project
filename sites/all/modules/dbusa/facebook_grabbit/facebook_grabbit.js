@@ -94,7 +94,6 @@ $(document).ready(function() {
 
    $('.tooltip-deal').each(function(i){
 	 var contents=$('.tooltip_deal',$(this)).html();
-	  alert(contents);
      $(this).simpletip({
 	   	focus:true,
 		persistent:true,
