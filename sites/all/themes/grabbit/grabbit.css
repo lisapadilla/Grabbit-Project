@@ -2326,6 +2326,9 @@ div.messages, div.status, div.warning, div.error{
 	margin-left:5px;
 	width:10px;
 }
+.matches{
+	position:absolute;
+}
 .tooltip-deal .tooltip{
 	background-color:#F5F5B5;
 	border:1px solid #DECA7E;
