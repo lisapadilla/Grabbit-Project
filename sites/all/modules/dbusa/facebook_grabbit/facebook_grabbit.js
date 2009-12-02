@@ -98,7 +98,7 @@ $(document).ready(function() {
 	   	focus:true,
 		persistent:true,
 		fixed:true,
-		position:'left',
+		position:["0","-100"],
 	    content: contents
      });	
   	
