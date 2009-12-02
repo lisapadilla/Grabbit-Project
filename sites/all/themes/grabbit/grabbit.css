@@ -2329,3 +2329,13 @@ div.messages, div.status, div.warning, div.error{
 	text-align:center;
 	z-index:2;  
 }
+.tooltip-deal{
+	background:transparent url(images/rep_ico.gif) no-repeat scroll 0 0;
+	display:block;
+	float:right;
+	height:11px;
+	margin-left:5px;
+	overflow:hidden;
+	text-indent:3000em;
+	width:10px;
+}
