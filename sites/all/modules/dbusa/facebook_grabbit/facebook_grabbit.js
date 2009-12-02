@@ -92,6 +92,12 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 $(document).ready(function() {
 
+   $('.tooltip-deal').simpletip({
+	content: "Probando el tip";
+	fixed:false;
+	
+   });
+
    $(".suser-panels .user-panel").each(function(elemento,n){
  	    var panel_aid=$(this).attr('id');
 		var current_panel_1 = $('#'+panel_aid+' .panel-wraper div:first');

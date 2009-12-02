@@ -605,9 +605,10 @@ function facebook_grabbit_add_favorite_twitter(){
 function facebook_grabbit_private_view_panel($param){
 	
 	global $user;
-	
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery.simpletip-1.3.1.min.js', $type = 'module');	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+   
 
 	
 	global $user_info;
@@ -1825,7 +1826,9 @@ function _news_theme($comments,$node,$matches=NULL){
 	     $why[]=$match->name;	
 	   }
 	   $text_why=implode(',', $why);
-	   $deal_matches= '<span class="matches"><a href="JavaScript:void(0);" title="'.$text_why.'" class="tooltip-deal">Why do I seethis?</a></span>';
+	   $deal_matches= '<span class="matches"><a href="JavaScript:void(0);" title="Why do I see this?" class="tooltip-deal">Why</a>
+	                     <div class="tooltip fixed persistent">'.$text_why.'</div>
+	                   </span>';
 	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
 
 	}else{

@@ -2318,3 +2318,16 @@ div.messages, div.status, div.warning, div.error{
 	float:right;
 	margin-right:20px;
 }
+.tooltip_deal{
+	background-color:#F5F5B5;
+	border:1px solid #DECA7E;
+	color:#303030;
+	font-family:sans-serif;
+	font-size:12px;
+	line-height:18px;
+	padding:10px 13px;
+	position:absolute;
+	text-align:center;
+	z-index:2; 
+	display: none; 
+}
