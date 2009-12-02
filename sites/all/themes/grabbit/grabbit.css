@@ -2335,7 +2335,5 @@ div.messages, div.status, div.warning, div.error{
 	float:right;
 	height:11px;
 	margin-left:5px;
-	overflow:hidden;
-	text-indent:3000em;
 	width:10px;
 }
