@@ -603,7 +603,7 @@ function facebook_grabbit_add_favorite_twitter(){
  * Creates users pannel()
  */
 function facebook_grabbit_private_view_panel($param){
-	
+	print "aki";
 	global $user;
 	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
