@@ -92,14 +92,15 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 $(document).ready(function() {
 
-   $('.tooltip-deal').simpletip({
-	focus:true,
-	persistent:true,
-	onBeforeShow: function(){
-		alert("check");
-		alert($(this).html());
-	}
-	
+   $('.tooltip-deal').each(function(1){
+	 var contents=$('.tooltip_deal',this).html();
+	  alert(contents);
+     $(this).simpletip({
+	   	focus:true,
+		persistent:true,
+	    content: contents
+     });	
+  	
    });
 
    $(".suser-panels .user-panel").each(function(elemento,n){
