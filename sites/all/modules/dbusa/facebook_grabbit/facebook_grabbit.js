@@ -94,10 +94,11 @@ $(document).ready(function() {
 
    $('.tooltip-deal').each(function(i){
 	 var contents=$('.tooltip_deal',$(this)).html();
+	 var pos = $(this).position();
      $(this).simpletip({
 	   	fixed:true,
 	    persistent:true,
-	    position:[185,30],
+	    position:[pos.left+100,pos.top+30],
 	    content: contents
      });	
   	
