@@ -2344,3 +2344,10 @@ div.messages, div.status, div.warning, div.error{
 .tooltip-deal .tooltip{
 	text-indent:0em;
 }
+
+.tooltip-deal .tooltip a{
+	color:#0073CF;
+	font-size:12px;
+	font-weight:bold;
+	line-height:13px;
+}
