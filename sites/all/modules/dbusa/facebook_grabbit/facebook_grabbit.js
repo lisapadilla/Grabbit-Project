@@ -431,6 +431,7 @@ $(document).ready(function() {
      $(this).simpletip({
 	   	fixed:true,
 	    persistent:true,
+	    focus:true,
 	    position:[-355,0],
 	    content: contents
      });
