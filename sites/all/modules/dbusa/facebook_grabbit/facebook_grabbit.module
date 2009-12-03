@@ -812,7 +812,10 @@ function facebook_grabbit_private_view_panel($param){
 							break;
 							default:
 							  if($node->type=='deal'){
-							    $matches=array_intersect_key($node->taxonomy,$deals_profile->taxonomy);	
+								if(is_array($node->taxonomy) && is_array($deals_profile->taxonomy)){
+								  $matches=array_intersect_key($node->taxonomy,$deals_profile->taxonomy);	
+								}
+							    	
 							  }
 							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 							  $output .= _news_theme($comments,$node,$matches);
