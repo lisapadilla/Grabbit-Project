@@ -2327,8 +2327,9 @@ div.messages, div.status, div.warning, div.error{
 	font-size:12px;
 	line-height:18px;
 	padding:10px 13px;
-	text-align:center;
 	z-index:5;
+	position:absolute;
+	width:350;
 }
 .tooltip-deal{
 	background:transparent url(images/ref_ico.gif) no-repeat scroll 0 0;
