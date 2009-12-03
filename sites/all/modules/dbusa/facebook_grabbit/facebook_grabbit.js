@@ -92,17 +92,6 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 $(document).ready(function() {
 
-   $('.tooltip-deal').each(function(i){
-	 var contents=$('.tooltip_deal',$(this)).html();
-     $(this).simpletip({
-		persistent:true,
-		fixed:true,
-		position:["0","-100"],
-	    content: contents
-     });	
-  	
-   });
-
    $(".suser-panels .user-panel").each(function(elemento,n){
  	    var panel_aid=$(this).attr('id');
 		var current_panel_1 = $('#'+panel_aid+' .panel-wraper div:first');
@@ -434,6 +423,17 @@ $(document).ready(function() {
 	    });		    
 	  }  		  
 	});
+	
+	$('.tooltip-deal').each(function(i){
+	 var contents=$('.tooltip_deal',$(this)).html();
+     $(this).simpletip({
+		persistent:true,
+		fixed:true,
+		position:["0","-100"],
+	    content: contents
+     });	
+
+   });
 	
 });
 
