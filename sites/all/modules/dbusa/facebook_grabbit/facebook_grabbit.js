@@ -428,7 +428,7 @@ $(document).ready(function() {
    $('.tooltip-deal').each(function(i){
 	 var contents=$('.tooltip_deal',$(this)).html();
 	 var pos = $(this).position();
-	alert($(this).parent('.stream-item-element').html());
+	alert($(this).parent().html());
 	
      $(this).simpletip({
 	   	fixed:true,
