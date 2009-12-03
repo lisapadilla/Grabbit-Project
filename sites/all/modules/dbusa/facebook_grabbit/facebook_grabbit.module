@@ -1825,14 +1825,15 @@ function _news_theme($comments,$node,$matches=NULL){
 	if($node->type=="deal"){
 	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 	  $deal = '<span class="url-deal"><a price="'.$node->field_price[0]['value'].'" href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
-	  if($matches){ 
+	  if(is_array($matches)){ 
 	    foreach($matches as $match){
 	      $why[]=$match->name;	
 	     }
+	    $text_why=implode(', ', $why);
 	   }
 	   $text_link=l('Edit tags','user/me/edit/profile');
 	   $text_explain='This deal matches your following tags:<br>';
-	   $text_why=implode(', ', $why);
+	   
 	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
