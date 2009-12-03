@@ -1807,7 +1807,7 @@ function facebook_grabbit_tags_form(){
 	return $form;
 }
 
-function _news_theme($comments,$node,$matches=array()){
+function _news_theme($comments,$node,$matches=NULL){
 	
 	$comments_output = '<div class="news-comments">';
 	
@@ -1825,8 +1825,10 @@ function _news_theme($comments,$node,$matches=array()){
 	if($node->type=="deal"){
 	  $image = '<span class="image-deal">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</span>';
 	  $deal = '<span class="url-deal"><a price="'.$node->field_price[0]['value'].'" href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
-	   foreach($matches as $match){
-	     $why[]=$match->name;	
+	  if($matches){ 
+	    foreach($matches as $match){
+	      $why[]=$match->name;	
+	     }
 	   }
 	   $text_link=l('Edit tags','user/me/edit/profile');
 	   $text_explain='This deal matches your following tags:<br>';
