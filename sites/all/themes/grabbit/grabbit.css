@@ -2329,7 +2329,7 @@ div.messages, div.status, div.warning, div.error{
 	padding:10px 13px;
 	z-index:5;
 	position:absolute;
-	width:350;
+	width:350px;
 }
 .tooltip-deal{
 	background:transparent url(images/ref_ico.gif) no-repeat scroll 0 0;
