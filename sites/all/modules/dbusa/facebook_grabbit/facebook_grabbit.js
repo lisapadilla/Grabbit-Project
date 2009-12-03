@@ -98,7 +98,7 @@ $(document).ready(function() {
      $(this).simpletip({
 	   	fixed:true,
 	    persistent:true,
-	    position:[pos.left+100,pos.top+30],
+	    position:[pos.left+200,pos.top+130],
 	    content: contents
      });	
   	
