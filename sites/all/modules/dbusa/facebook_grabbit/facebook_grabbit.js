@@ -94,7 +94,7 @@ $(document).ready(function() {
 
    $('.tooltip-deal').each(function(i){
 	 var contents=$('.tooltip_deal',$(this)).html();
-	 var pos = $('.tooltip-deal',$(this)).position();
+	 var pos = $(this).position();
 	alert(pos.left);
 	alert(pos.top);
      $(this).simpletip({
