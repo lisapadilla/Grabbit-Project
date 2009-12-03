@@ -1826,7 +1826,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	     $why[]=$match->name;	
 	   }
 	   $text_link=l('Edit tags','user/me/edit/profile');
-	   $text_explain='You are watching this deal because you have the following tags in your profile activity:<br>';
+	   $text_explain='This deal matches your following tags:<br>';
 	   $text_why=implode(',', $why);
 	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
 	   $deal_matches= '<span class="matches">
