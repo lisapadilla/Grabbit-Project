@@ -92,20 +92,6 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 $(document).ready(function() {
 
-   $('.tooltip-deal').each(function(i){
-	 var contents=$('.tooltip_deal',$(this)).html();
-	 var pos = $(this).position();
-	 var offset = $(this).offset();
-	 alert(offset.left);
-	 alert(offset.top);
-     $(this).simpletip({
-	   	fixed:true,
-	    persistent:true,
-	    position:[pos.left+190,pos.top+100],
-	    content: contents
-     });	
-  	
-   });
 
    $(".suser-panels .user-panel").each(function(elemento,n){
  	    var panel_aid=$(this).attr('id');
@@ -438,7 +424,21 @@ $(document).ready(function() {
 	    });		    
 	  }  		  
 	});
-	
+
+   $('.tooltip-deal').each(function(i){
+	 var contents=$('.tooltip_deal',$(this)).html();
+	 var pos = $(this).position();
+	 var offset = $(this).offset();
+	 alert(offset.left);
+	 alert(offset.top);
+     $(this).simpletip({
+	   	fixed:true,
+	    persistent:true,
+	    position:[pos.left+190,pos.top+100],
+	    content: contents
+     });	
+
+   });	
 });
 
 
