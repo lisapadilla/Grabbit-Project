@@ -1828,7 +1828,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	   $text_link='Edit';
 	   $text_explain='You are watching this deal because you have the following tags in your profile activity:<br>';
 	   $text_why=implode(',', $why);
-	   $text_total=$text_explain.$text_why.$text_link;
+	   $text_total='<a href="#">theme</a>';//$text_explain.$text_why.$text_link;
 	   $deal_matches= '<span class="matches"><a href="JavaScript:void(0);" title="Why do I see this?" class="tooltip-deal">Why
 	                     <div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div></a>
 	                   </span>';
