@@ -1807,7 +1807,7 @@ function facebook_grabbit_tags_form(){
 	return $form;
 }
 
-function _news_theme($comments,$node,$matches=NULL){
+function _news_theme($comments,$node,$matches=array()){
 	
 	$comments_output = '<div class="news-comments">';
 	
