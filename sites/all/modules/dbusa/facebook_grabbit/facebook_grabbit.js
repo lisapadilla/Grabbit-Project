@@ -427,16 +427,18 @@ $(document).ready(function() {
 
    $('.tooltip-deal').each(function(i){
 	 var contents=$('.tooltip_deal',$(this)).html();
-	 var pos = $($(this).parents('.node-stream-deal')).position();
+	 var pos = $(this).position();
+	alert("left :"+pos.left+"  top: "+pos.top);
 	
      $(this).simpletip({
 	   	fixed:true,
 	    persistent:true,
 	    position:[pos.left,pos.top],
 	    content: contents
-     });	
+     });
 
-   });	
+   });
+
 });
 
 
