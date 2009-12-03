@@ -2340,3 +2340,6 @@ div.messages, div.status, div.warning, div.error{
 	text-indent:3000em;
 	width:11px;
 }
+.tooltip-deal .tooltip{
+	text-indent:0em;
+}
