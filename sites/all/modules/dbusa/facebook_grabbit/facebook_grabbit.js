@@ -96,6 +96,7 @@ $(document).ready(function() {
 	 var contents=$('.tooltip_deal',$(this)).html();
      $(this).simpletip({
 	   	fixed:true,
+	    persistent:true,
 	    position:[100,730],
 	    content: contents
      });	
