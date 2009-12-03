@@ -2330,7 +2330,6 @@ div.messages, div.status, div.warning, div.error{
 	z-index:5;
 	position:relative;
 	width:350px;
-	cursor:pointer;
 }
 .tooltip-deal{
 	background:transparent url(images/ref_ico.gif) no-repeat scroll 0 0;
@@ -2340,6 +2339,7 @@ div.messages, div.status, div.warning, div.error{
 	margin-left:5px;
 	text-indent:3000em;
 	width:11px;
+	cursor:pointer;
 }
 .tooltip-deal .tooltip{
 	text-indent:0em;
