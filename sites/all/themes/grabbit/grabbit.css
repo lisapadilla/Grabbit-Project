@@ -2328,7 +2328,7 @@ div.messages, div.status, div.warning, div.error{
 	line-height:18px;
 	padding:10px 13px;
 	z-index:5;
-	position:absolute;
+	position:relative;
 	width:350px;
 }
 .tooltip-deal{
