@@ -428,7 +428,7 @@ $(document).ready(function() {
 	 var contents=$('.tooltip_deal',$(this)).html();
      $(this).simpletip({
 		persistent:true,
-		fixed:true,
+		fixed:false,
 		position:["0","-100"],
 	    content: contents
      });	
