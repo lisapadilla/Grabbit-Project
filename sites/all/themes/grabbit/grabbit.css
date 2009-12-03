@@ -2340,5 +2340,5 @@ div.messages, div.status, div.warning, div.error{
 	width:11px;
 }
 .panel-grabbit{
-	position:absolute;
+	position:relative;
 }
