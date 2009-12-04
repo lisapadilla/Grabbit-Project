@@ -1174,7 +1174,8 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $view_deals = views_get_view('grabbit_private_deals');
-    $view_deals->pager['items_per_page']=100;
+    $view_deals->pager['items_per_page']=30;
+    $view_deals->pager['current_page']=$pagination;
     $trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
@@ -1282,13 +1283,11 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	
 	$view->execute();
-print_r($view->result);
+
     foreach($view->result as $node){
-	  if(!in_array($node->nid,$trashes)){
-	  
+	  if(!in_array($node->nid,$trashes))
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
-	  }
     }
 
     // prepeare the deals view according to the user's tags
