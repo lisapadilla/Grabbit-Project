@@ -753,8 +753,8 @@ function facebook_grabbit_private_view_panel($param){
     $first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
     $last_item_element = end($twitface);//get the last element of the current view of items
 
-    $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('CCYY-MM-DD HH:MM:SS',$last_item_element['time']);
-    $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('CCYY-MM-DD HH:MM:SS',$first_item_element['time']);
+    $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
+    $view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s',$first_item_element['time']);
 
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
