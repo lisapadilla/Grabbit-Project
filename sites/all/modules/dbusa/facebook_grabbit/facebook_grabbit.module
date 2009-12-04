@@ -1169,8 +1169,7 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
     $user_info = _get_current_user_info($params);
 	
 	$view = views_get_view('grabbit_public_stream');
-    $view->pager['items_per_page']=30;
-    $view->pager['current_page']=$pagination;
+    $view->pager['items_per_page']=100;
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $view_deals = views_get_view('grabbit_private_deals');
@@ -1300,10 +1299,10 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
 	}else{
 		$deals_tags = 'all';	
 	}
-	print_r($deals_tags);
+	
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
-print_r($view_deals->result);
+
     foreach($view_deals->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
