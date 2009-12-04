@@ -623,9 +623,6 @@ function facebook_grabbit_private_view_panel($param){
 
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
-    $view_deals = views_get_view('grabbit_private_deals');
-    $view_deals->pager['items_per_page']=30;
-
     $trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
@@ -750,13 +747,15 @@ function facebook_grabbit_private_view_panel($param){
 		$deals_tags = 'all';	
 	}
 	
+	$view_deals = views_get_view('grabbit_private_deals');
+    $view_deals->pager['items_per_page']=30;
+print_r($view_deals);
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
 
     $first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
     $last_item_element = end($twitface);//get the last element of the current view of items
-print_r($first_item_element);
-print_r($last_item_element);
+
     foreach($view_deals->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
