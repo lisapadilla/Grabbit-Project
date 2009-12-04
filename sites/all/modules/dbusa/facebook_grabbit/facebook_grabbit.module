@@ -2302,3 +2302,8 @@ function facebook_grabbit_theme_results($twitface){
 		
 		return $output;
 }
+
+//duplicated area fix
+function facebook_grabbit_form_alter(&$form, $form_state, $form_id){
+	print_r($form);
+}
