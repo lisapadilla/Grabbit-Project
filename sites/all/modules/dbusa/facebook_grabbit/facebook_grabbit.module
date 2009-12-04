@@ -1300,10 +1300,10 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
 	}else{
 		$deals_tags = 'all';	
 	}
-	
+	print_r($deals_tags);
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
-
+print_r($view_deals->result);
     foreach($view_deals->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
