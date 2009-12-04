@@ -759,7 +759,6 @@ function facebook_grabbit_private_view_panel($param){
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
 
-print_r($view_deals);
     foreach($view_deals->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
@@ -1180,8 +1179,6 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
     $view->pager['current_page']=$pagination;
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
-    $view_deals = views_get_view('grabbit_private_deals');
-    $view_deals->pager['items_per_page']=100;
     $trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
@@ -1307,6 +1304,15 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
 		$deals_tags = 'all';	
 	}
 	
+	$view_deals = views_get_view('grabbit_private_deals');
+    $view_deals->pager['items_per_page']=30;
+
+    $first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
+    $last_item_element = end($twitface);//get the last element of the current view of items
+
+    $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
+    $view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s',$first_item_element['time']);
+
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
 
