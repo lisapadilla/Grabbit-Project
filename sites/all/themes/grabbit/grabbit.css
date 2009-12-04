@@ -2344,7 +2344,9 @@ div.messages, div.status, div.warning, div.error{
 .tooltip-deal .tooltip{
 	text-indent:0em;
 }
-
+#edit-teaser-js{
+	display:none;
+}
 .tooltip-deal .tooltip a{
 	color:#0073CF;
 	font-size:12px;
