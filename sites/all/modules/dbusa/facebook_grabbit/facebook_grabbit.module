@@ -1837,7 +1837,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
-	                     Why<div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div>
+	                     <div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div>
 	                    </div>
 	                   </span>';
 	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
