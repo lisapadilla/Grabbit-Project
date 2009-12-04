@@ -2306,5 +2306,6 @@ function facebook_grabbit_theme_results($twitface){
 //duplicated area fix
 function facebook_grabbit_form_alter(&$form, $form_state, $form_id){
 	$form['body_field']['body']['#resizable']=false;
+    if($form_id=='node-form')
 	print_r($form);
 }
