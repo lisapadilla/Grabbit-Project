@@ -753,6 +753,10 @@ function facebook_grabbit_private_view_panel($param){
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
 
+    $first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
+    $last_item_element = end($twitface);//get the last element of the current view of items
+print_r($first_item_element);
+print_r($last_item_element);
     foreach($view_deals->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
@@ -1174,8 +1178,7 @@ function facebook_grabbit_private_view_panel_pagination($param,$pagination){
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $view_deals = views_get_view('grabbit_private_deals');
-    $view_deals->pager['items_per_page']=30;
-    $view_deals->pager['current_page']=$pagination;
+    $view_deals->pager['items_per_page']=100;
     $trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
@@ -1837,7 +1840,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
-	                     <div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div>
+                           <div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div>
 	                    </div>
 	                   </span>';
 	   $submitted ='<p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
