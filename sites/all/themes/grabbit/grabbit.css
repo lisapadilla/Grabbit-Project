@@ -2344,7 +2344,7 @@ div.messages, div.status, div.warning, div.error{
 .tooltip-deal .tooltip{
 	text-indent:0em;
 }
-#edit-teaser-js{
+html.js .resizable-textarea #edit-teaser-js{
 	display:none;
 }
 .tooltip-deal .tooltip a{
