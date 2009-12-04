@@ -65,6 +65,19 @@ function display_items(panel){
 		        current_panel.parent().next().html('You have reached the end of your stream');
 				}
         });
+
+        $('.tooltip-deal').each(function(i){
+			 var contents=$('.tooltip_deal',$(this)).html();
+
+		     $(this).simpletip({
+			   	fixed:true,
+			    persistent:true,
+			    focus:true,
+			    position:[-355,0],
+			    content: contents
+		     });
+
+		   });
 		
 	}
 }
