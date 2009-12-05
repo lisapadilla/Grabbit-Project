@@ -25,6 +25,11 @@ function grabbit_imap_menu () {
     'access arguments' => array('access content')
   );
 
+ $items['imap/reply'] = array( 
+    'page callback' => 'grabbit_imap_reply_message', 
+    'access arguments' => array('access content')
+  );
+
   $items['user/%user_category/edit/add_imap'] = array(
    'title' => 'IMAP',
    'description' => t('Add Your IMAP Email account to Grabbit'),
@@ -52,6 +57,71 @@ function grabbit_imap_user($op, &$edit, &$account, $category = NULL) {
           'weight' => 3,
         ),
       );
+  }
+}
+
+function grabbit_imap_reply_message(){
+	global $user;
+	$nid = arg(2);
+	$message = node_load($nid);
+	$reply_to = $message->field_from_add[0]['value'];
+	$imap = grabbit_imap_get($user->uid);
+  print_r($imap);
+  //echo drupal_get_form( 'grabbit_imap_mail_form', $gmail['user'], $reply_to );
+}
+
+function grabbit_imap_mail_form( &$form_state, $from, $to )
+{
+  $form['to'] = array(
+    '#type'           => 'textfield',
+    '#default_value'  => $to,
+    '#title'          => t('To')
+  );
+  $form['from'] = array(
+    '#type'           => 'item',
+    '#value'          => $from,
+    '#title'          => t('From')
+  );
+  $form['subject'] = array(
+    '#type'           => 'textfield',
+    '#title'          => t('Subject')
+  );
+  $form['body'] = array(
+    '#type'           => 'textarea',
+    '#title'          => t('Body')
+  );
+  $form['submit'] = array(
+    '#type'           => 'submit',
+    '#value'          => t('Send')
+  );
+  $form['#submit'][] = 'grabbit_gmail_mail_form_submit';
+  
+  return $form;
+}
+
+function grabbit_imap_mail_form_submit( $form )
+{
+  global $user;
+  
+  $args = $form['#post'];
+  $imap = grabbit_imap_get($user->uid);
+  
+  $ret = tinySendMail(
+    $gmail['user'],
+    $args['to'],
+    $args['subject'],
+    $args['body'],
+    "imap.googlemail.com",
+    993,
+    "google.com"
+  );
+  if(!$ret)
+  {
+      print("Oh, pshaw!  It didn't work!<br>");
+  }
+  else
+  {
+    echo 'Your message has been sent.';
   }
 }
 
