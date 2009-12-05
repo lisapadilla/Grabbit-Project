@@ -66,8 +66,8 @@ function grabbit_imap_reply_message(){
 	$message = node_load($nid);
 	$reply_to = $message->field_from_add[0]['value'];
 	$imap = grabbit_imap_get($user->uid);
-  print_r($imap);
-  //echo drupal_get_form( 'grabbit_imap_mail_form', $gmail['user'], $reply_to );
+  
+  echo drupal_get_form( 'grabbit_imap_mail_form', $gmail['user'], $reply_to );
 }
 
 function grabbit_imap_mail_form( &$form_state, $from, $to )
@@ -111,9 +111,8 @@ function grabbit_imap_mail_form_submit( $form )
     $args['to'],
     $args['subject'],
     $args['body'],
-    "imap.googlemail.com",
-    993,
-    "google.com"
+    $imap['server'],
+    $imap['port']
   );
   if(!$ret)
   {
