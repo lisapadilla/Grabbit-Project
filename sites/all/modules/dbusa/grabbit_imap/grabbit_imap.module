@@ -64,7 +64,7 @@ function grabbit_imap_reply_message(){
 	global $user;
 	$nid = arg(2);
 	$message = node_load($nid);
-	$reply_to = $message->field_from_add[0]['value'];
+	$reply_to = $message->field_imap_from_add[0]['value'];
 	$imap = grabbit_imap_get($user->uid);
   
   echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to );
@@ -107,7 +107,7 @@ function grabbit_imap_mail_form_submit( $form )
   $imap = grabbit_imap_get($user->uid);
   
   $ret = tinySendMail(
-    $gmail['user'],
+    $imap['user'],
     $args['to'],
     $args['subject'],
     $args['body'],
