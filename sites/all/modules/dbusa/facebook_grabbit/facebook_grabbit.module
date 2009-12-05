@@ -1836,7 +1836,7 @@ function _news_theme($comments,$node,$matches=NULL){
 						
 	if($node->type=="deal"){
 	
-	  $node_title=l($node->title,$node->field_deal_link[0]['url']);
+	  $node_title=l($node->title,'node/'.$node->nid);
 	
 	  $image = '<span class="image-deal"><a href="'.$node->field_deal_link[0]['url'].'" target="_blank">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</a></span>';
 	  $deal = '<span class="url-deal"><a price="'.$node->field_price[0]['value'].'" href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
