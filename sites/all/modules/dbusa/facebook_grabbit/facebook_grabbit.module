@@ -609,7 +609,7 @@ function facebook_grabbit_private_view_panel($param){
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
    
-
+    $twitface=array();
 	
 	global $user_info;
 	
@@ -751,11 +751,10 @@ function facebook_grabbit_private_view_panel($param){
     $view_deals->pager['items_per_page']=30;
     
 	  	$first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
-	    $last_item_element = end($twitface);//get the last element of the current view of items
     
     
     $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
-    $view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s',$first_item_element['time']);
+    $view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s');
 
     $view_deals->set_arguments(array($deals_tags));	
 	$view_deals->execute();
