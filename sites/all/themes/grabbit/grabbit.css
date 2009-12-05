@@ -1653,7 +1653,8 @@ a.panel-filters{
   line-height: 15px;
 }
 .node-stream-news h2,
-.node-stream-blogs h2{
+.node-stream-blogs h2,
+.node-stream-deal h2{
   display: block;
   width: 530px;
   line-height: 15px;
