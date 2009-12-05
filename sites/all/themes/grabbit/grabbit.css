@@ -1663,7 +1663,8 @@ a.panel-filters{
   width: 130px;
 }
 .node-stream-news .content-body,
-.node-stream-blogs .content-body{
+.node-stream-blogs .content-body,
+.node-stream-deal .content-body{
   display: block;
   width: 530px;
   float: left;
