@@ -1659,18 +1659,12 @@ a.panel-filters{
   width: 530px;
   line-height: 15px;
 }
-.node-stream-deal h2{
-  width: 130px;
-}
 .node-stream-news .content-body,
 .node-stream-blogs .content-body,
 .node-stream-deal .content-body{
   display: block;
   width: 530px;
   float: left;
-}
-.node-stream-deal .meta{
-  display: inline-block;
 }
 .facebook-post .facebook-image-comment
 {
