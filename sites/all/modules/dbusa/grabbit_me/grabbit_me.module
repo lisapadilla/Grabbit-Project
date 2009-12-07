@@ -73,7 +73,7 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
 		  drupal_set_message("Facebook connection failed","error");
 	    }
 	    else{
-		  $user_details = $facebook->api_client->users_getInfo($suser, 'user_name');
+		  $user_details = $facebook->api_client->users_getInfo($suser, 'username');
 		  print_r($facebook);
 		  print_r($user_details); 
 		}
