@@ -94,7 +94,7 @@ function grabbit_imap_mail_form( &$form_state, $from, $to )
     '#type'           => 'submit',
     '#value'          => t('Send')
   );
-  $form['#submit'][] = 'grabbit_gmail_mail_form_submit';
+  $form['#submit'][] = 'grabbit_imap_mail_form_submit';
   
   return $form;
 }
@@ -114,6 +114,7 @@ function grabbit_imap_mail_form_submit( $form )
     $imap['server'],
     $imap['port']
   );
+
   if(!$ret)
   {
       print("Oh, pshaw!  It didn't work!<br>");
