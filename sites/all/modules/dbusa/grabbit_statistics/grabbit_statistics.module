@@ -222,10 +222,6 @@ function grabbit_statistics_save_deal(){
 	return 'allgood';
 }
 
-function grabbit_statistics_num_new($uid, $timestamp = 0) {
-
-    // Use the timestamp to retrieve the number of new comments.
-    $result = db_query('SELECT * FROM {comments} c WHERE timestamp > %d AND c.status = %d AND c.uid = %d',$timestamp, 1, $uid);
-print "ok";
-    return $result;
+function grabbit_statistics_testing_this() {
+print "check this out!";
 }

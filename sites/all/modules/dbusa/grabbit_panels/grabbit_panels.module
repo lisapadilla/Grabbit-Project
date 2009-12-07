@@ -196,7 +196,7 @@ function grabbit_panels_get_panels(){
 		$output .='</div>';	
 		
 	}
-	
+	module_invoke_all('testing_this');
 	return $output;
 }
 
