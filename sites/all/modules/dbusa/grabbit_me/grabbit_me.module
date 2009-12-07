@@ -85,7 +85,8 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
   }
 	
   if($twitter_account = oauth_twitter_get_uid($uid)){
-    	print_r($twitter_account);
+    $secret=unserialize($twitter_account->config);    
+	print_r($secret);
   }
 
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
