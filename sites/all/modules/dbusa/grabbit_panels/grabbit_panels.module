@@ -197,7 +197,7 @@ function grabbit_panels_get_panels(){
 		
 	}
 	
-	grabbit_me_get_mentions($uid,$user_name,$limit=10);
+	grabbit_me_get_mentions($user->uid,$user_name,$limit=10);
 	
 	return $output;
 }
