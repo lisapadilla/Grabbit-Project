@@ -222,6 +222,3 @@ function grabbit_statistics_save_deal(){
 	return 'allgood';
 }
 
-function grabbit_statistics_testing_this($texto) {
-print $texto;
-}
