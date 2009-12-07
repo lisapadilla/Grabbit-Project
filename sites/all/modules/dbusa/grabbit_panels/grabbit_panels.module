@@ -196,7 +196,6 @@ function grabbit_panels_get_panels(){
 		$output .='</div>';	
 		
 	}
-	grabbit_me_get_statuses($user->uid,$limit=10);
 	
 	return $output;
 }

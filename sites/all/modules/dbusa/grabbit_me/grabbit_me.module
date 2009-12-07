@@ -16,6 +16,33 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 	
 }
 
+//Implementation of hook_grabbit_facebook_comment
+function grabbit_me_grabbit_facebook_comment($nid,$uid,$comment){
+	
+  $extra_array=array();
+  $extra_array['nid']=$nid;
+  $extra_array['type']='facebook';
+  $extra_array['comment']=$comment;
+
+  $extra=serialize($extra_array);
+
+  db_query("INSERT INTO {grabbit_me} (uid,type,extra) VALUES (%d,'comment','%s')",$uid,$extra);
+
+}
+
+//Implementation of hook_grabbit_nodes_comment
+function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
+	$extra_array=array();
+	  $extra_array['nid']=$nid;
+	  $extra_array['type']='node';
+	  $extra_array['comment']=$comment;
+
+	  $extra=serialize($extra_array);
+
+	  db_query("INSERT INTO {grabbit_me} (uid,type,extra) VALUES (%d,'comment','%s')",$uid,$extra);
+	
+}
+
 function grabbit_me_get_statuses($uid,$limit=10){
 	
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
