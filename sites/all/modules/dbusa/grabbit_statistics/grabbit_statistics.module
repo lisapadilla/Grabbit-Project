@@ -57,6 +57,11 @@ function grabbit_statistics_statistics(){
 
 function grabbit_statistics_members_and_friends(){
 	
+	$testing=grabbit_statistics_num_new(1, $timestamp = 0);
+	while($test=db_fetch_object($testing)){
+		print_r($test);
+	}
+	
 	$result = db_query("SELECT * from {users} where uid>0");
 
     $header = array(t('User'), 
@@ -215,4 +220,14 @@ function grabbit_statistics_save_deal(){
 	grabbit_statistics_deals_entry($user->uid,$deal,$price);
 	
 	return 'allgood';
+}
+
+function grabbit_statistics_num_new($uid, $timestamp = 0) {
+
+    $timestamp = ($timestamp > NODE_NEW_LIMIT ? $timestamp : NODE_NEW_LIMIT);
+
+    // Use the timestamp to retrieve the number of new comments.
+    $result = db_query('SELECT * FROM {comments} c WHERE timestamp > %d AND c.status = %d AND c.uid = %d',$timestamp, 1, $uid);
+
+    return $result;
 }
