@@ -224,10 +224,8 @@ function grabbit_statistics_save_deal(){
 
 function grabbit_statistics_num_new($uid, $timestamp = 0) {
 
-    $timestamp = ($timestamp > NODE_NEW_LIMIT ? $timestamp : NODE_NEW_LIMIT);
-
     // Use the timestamp to retrieve the number of new comments.
     $result = db_query('SELECT * FROM {comments} c WHERE timestamp > %d AND c.status = %d AND c.uid = %d',$timestamp, 1, $uid);
-
+print "ok";
     return $result;
 }
