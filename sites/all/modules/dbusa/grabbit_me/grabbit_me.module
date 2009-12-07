@@ -1,0 +1,27 @@
+<?
+
+//Implementation of hook_grabbit_status_update
+//$status the text of the status
+function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,$uid){
+
+  $extra_array=array();
+  $extra_array['twitter']=$tw_status_ch;
+  $extra_array['facebook']=$fb_status_ch;
+
+  $extra_array['status']=$status;
+
+  $extra=serialize($extra_array);
+
+  db_query("INSERT INTO {grabbit_me} (uid,type,extra) VALUES (%d,'status','%s')",$uid,$extra);
+	
+}
+
+function grabbit_me_get_statuses($uid,$limit=10){
+	
+  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
+
+  while($updates=db_fetch_object($result)){
+    print_r($updates);	
+  }
+	
+}
