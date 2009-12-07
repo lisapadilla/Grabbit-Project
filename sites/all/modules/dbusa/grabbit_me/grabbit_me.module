@@ -87,7 +87,8 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
   if($twitter_account = oauth_twitter_get_uid($uid)){
 	$secret=unserialize($twitter_account->config);
     $user_id=substr($secret['token'], 0, strpos($secret['token'], "-"));    
-	print_r($user_id);
+	$response = drupal_goto('http://twitter.com/users/show/'.$user_id.'.json');
+	print_r($response);
   }
 
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
