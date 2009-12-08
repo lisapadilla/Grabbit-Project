@@ -56,15 +56,15 @@ function grabbit_me_show_activity_rendered(){
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 
     $statuses = grabbit_me_get_statuses($user->uid);
+    $profile = content_profile_load('profile', $user->uid);
 
     while($status = db_fetch_object($statuses)){
-	  $node=unserialize($status->extra);
-	  $twitface[$node->created]=array('time'=>$node->created,
-	                                       'value'=>$node);
+	  $profile=unserialize($status->extra);
 	  
+      $resultados .= grabbit_me_theme_my_activity($item,$profile);
+
     }
 	
- $resultados=grabbit_me_theme_my_activity($item,$user);
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
@@ -79,16 +79,17 @@ function grabbit_me_show_activity_rendered(){
   return $output;	
 }
 
-function grabbit_me_theme_my_activity($item,$user){
-	$return = '<div id="activity_story_" class="facebook-post clearfix odd" style="display: block;">
-		<a face_id="347262" class="trash-facebook" href="JavaScript:void(0);">TR</a>
-		<a class="retweet-facebook" href="JavaScript:void(0);">RT</a>
-		<a class="facebook-makecomment-link" href="javascript:void(0);">Post a comment</a>
-		<a href="javascript:void(0)" class="facebook_favorite" nid="347262" id="859545633_359324140633">Add to favorites</a>
-		<div class="facebook-post-header"><a href="http://www.facebook.com/profile.php?id=859545633" class="facebook-story-pic" title="Anabel Martínez" target="_blank"><span class="facebook-user-pic"><img width="48" src="http://profile.ak.fbcdn.net/v224/1555/69/q859545633_4724.jpg" alt="Anabel Martínez" class="facebook-image-s" target="_blank"/></span></a>
-		<a href="http://www.facebook.com/profile.php?id=859545633" class="facebook-story-name" title="Anabel Martínez" target="_blank"><span class="facebook-user-name">Anabel Martínez</span></a><div class="facebook-post-body">
-		<div style="display: none;" class="retweet-hide"></div>
-		<div class="content-truncated"><div class="truncate_less"><div class="facebook-post-inside-body">La fiesta es en casa de Tania Lanz, la entrada es por el jardin y la alberca, del lado del fraccionamiento Ixlolve, la casa esta entre</div>...<a class="truncate_show" href="#">more</a></div></div><span class="facebook-date">on Tue, 12/08/2009 - 14:30</span></div>
+function grabbit_me_theme_my_activity($item,$profile){
+	
+	$return = '<div class="facebook-post clearfix odd" style="display: block;">
+		<div class="facebook-post-header"><span class="facebook-user-pic">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</span>
+		 <a href="#" class="facebook-story-name"><span class="facebook-user-name">'.$profile->title.'</span></a>
+		  <div class="facebook-post-body">
+		    <div class="content-truncated"><div class="facebook-post-inside-body">'.$item['status'].'</div>
+		      <span class="facebook-date">on Tue, 12/08/2009 - 14:30</span>
+		    </div>
+	      </div>
+	
 	    </div></div>';
 		
 	return $return;
