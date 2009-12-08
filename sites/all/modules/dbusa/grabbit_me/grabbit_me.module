@@ -45,8 +45,63 @@ function grabbit_me_show_activity(){
 function grabbit_me_show_activity_rendered(){
 	global $user;
 	
-	return "this is your activity";
+	if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
+
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+
+    $statuses = grabbit_me_get_statuses($user->uid);
+
+    while($status = db_fetch_object($statuses)){
+	  $node=unserialize($status->extra);
+	  $twitface[$node->created]=array('time'=>$node->created,
+	                                       'value'=>$node);
+	  
+    }
 	
+ $resultados=grabbit_me_theme_my_activity($items,$user);
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-favorites">';
+			$output .=$resultados;
+
+			$output .='</div></div>';
+
+  return $output;	
+}
+
+function grabbit_me_theme_my_activity($item,$user){
+	$return = '<div id="activity_story_" class="facebook-post clearfix odd" style="display: block;">
+		<a face_id="347262" class="trash-facebook" href="JavaScript:void(0);">TR</a>
+		<a class="retweet-facebook" href="JavaScript:void(0);">RT</a>
+		<a class="facebook-makecomment-link" href="javascript:void(0);">Post a comment</a>
+		<a href="javascript:void(0)" class="facebook_favorite" nid="347262" id="859545633_359324140633">Add to favorites</a>
+		<div class="facebook-post-header"><a href="http://www.facebook.com/profile.php?id=859545633" class="facebook-story-pic" title="Anabel Martínez" target="_blank"><span class="facebook-user-pic"><img width="48" src="http://profile.ak.fbcdn.net/v224/1555/69/q859545633_4724.jpg" alt="Anabel Martínez" class="facebook-image-s" target="_blank"/></span></a>
+		<a href="http://www.facebook.com/profile.php?id=859545633" class="facebook-story-name" title="Anabel Martínez" target="_blank"><span class="facebook-user-name">Anabel Martínez</span></a><div class="facebook-post-body">
+		<div style="display: none;" class="retweet-hide">La fiesta es en casa de Tania Lanz, la entrada es por el jardin y la alberca, del lado del fraccionamiento Ixlolve, la casa esta entre el asilo de ancianos y la PGR, entran en la esquina donde hay un servifresco...
+
+	Para mayor información y detalle al tel de Lety 981.126.07.16 y no se permiten PAREJAS a la fiesta ok... jajaja
+
+	CIAO.... =)</div>
+		<div class="content-truncated"><div class="truncate_less"><div class="facebook-post-inside-body">La fiesta es en casa de Tania Lanz, la entrada es por el jardin y la alberca, del lado del fraccionamiento Ixlolve, la casa esta entre</div>...<a class="truncate_show" href="#">more</a></div></div><span class="facebook-date">on Tue, 12/08/2009 - 14:30</span></div>
+		<div class="facebook-post-comments clearfix"/>
+		<div class="facebook-comment-form">
+		<div class="facebook-form">
+			<form style="display: none;" id="myForm">
+				<input type="textfield" required="true" maxlength="255" size="30" class="form-text" id="comment"/>
+				<input type="button" onclick="javascript:void(0)" value="Comment" class="facebook_comment_submit" id="859545633_359324140633" nid="347262"/>
+			</form>
+		</div></div></div></div>';
+		
+	return $return;
 }
 
 //Implementation of hook_grabbit_status_update
@@ -96,9 +151,7 @@ function grabbit_me_get_statuses($uid,$limit=10){
 	
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
 
-  while($updates=db_fetch_object($result)){
-    print_r($updates);	
-  }
+  return $result;
 	
 }
 
