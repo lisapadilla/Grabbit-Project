@@ -21,7 +21,7 @@ function grabbit_me_show_activity(){
 	print "<br><br>Comments: <br><br>";
 	grabbit_me_get_comments($user->uid);
 	print "<br><br> Mentions: <br><br>";
-	grabbit_me_get_mentions();
+	grabbit_me_get_mentions($user->uid,$user->name);
 	print "<br><br> Number of friends: ".grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH');
 	print "<br><br>Friends added today: ".grabbit_statistics_post_get_friends_today($user->uid);
 	print "<br><br>";
