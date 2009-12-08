@@ -18,7 +18,7 @@ function grabbit_me_menu() {
    'access arguments' => array('access content'),
    	'page arguments' => array(1),
     'load arguments' => array('%map', '%index'),
-   'weight' => 13,
+   'weight' => 23,
    'type' => MENU_LOCAL_TASK,
   );
 
