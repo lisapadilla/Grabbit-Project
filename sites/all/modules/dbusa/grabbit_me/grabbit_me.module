@@ -57,11 +57,15 @@ function grabbit_me_show_activity_rendered(){
 
     $statuses = grabbit_me_get_statuses($user->uid);
     $profile = content_profile_load('profile', $user->uid);
-
+    $nod='odd';
     while($status = db_fetch_object($statuses)){
 	  $item=unserialize($status->extra);
-      $resultados .= grabbit_me_theme_my_activity($item,$profile);
-
+      $resultados .= grabbit_me_theme_my_activity($nod,$item,$profile);
+      if($nod=='odd'){
+	    $nod='even';
+      }else{
+	    $nod='odd';
+      }
     }
 	
 			$output .='<div class="panels-controllers">
@@ -78,10 +82,10 @@ function grabbit_me_show_activity_rendered(){
   return $output;	
 }
 
-function grabbit_me_theme_my_activity($item,$profile){
+function grabbit_me_theme_my_activity($nod,$item,$profile){
 	
-	$return = '<div class="facebook-post clearfix odd" style="display: block;">
-		<div class="facebook-post-header"><span class="facebook-user-pic">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</span>
+	$return = '<div class="facebook-post clearfix '.$nod.'" style="display: block;">
+		<div class="facebook-post-header"><a href="#"><span class="facebook-user-pic">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</span></a>
 		 <a href="#" class="facebook-story-name"><span class="facebook-user-name">'.$profile->title.'</span></a>
 		  <div class="facebook-post-body">
 		    <div class="content-truncated"><div class="facebook-post-inside-body">'.$item['status'].'</div>
