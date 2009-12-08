@@ -84,17 +84,17 @@ function grabbit_me_show_activity_rendered(){
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
 	
-	$return = '<div class="facebook-post clearfix '.$nod.'" style="display: block;">
-		<div class="facebook-post-header"><a href="#"><span class="facebook-user-pic">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</span></a>
-		 <a href="#" class="facebook-story-name"><span class="facebook-user-name">'.$profile->title.'</span></a>
-		  <div class="facebook-post-body">
-		    <div class="content-truncated"><div class="facebook-post-inside-body">'.$item['status'].'</div>
-		      <span class="facebook-date">on Tue, 12/08/2009 - 14:30</span>
-		    </div>
-	      </div>
+	$resutrn = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
+	  <div class="listable">
+	    <span class="twitter-image">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</span>
+	  </div>
+	  <a target="_blank" class="twitter-name-link" href="#">'.$profile->title.'</a>
+	  <div class="twitter-body">
+	    <div class="twitter-body-contains">'.$item['status'].'</div> 
+	    <span class="twitter-date">on Tue, 12/08/2009 - 14:28</span>
+	  </div>
+	</div>';
 	
-	    </div></div>';
-		
 	return $return;
 }
 
