@@ -64,7 +64,7 @@ function grabbit_me_show_activity_rendered(){
 	  
     }
 	
- $resultados=grabbit_me_theme_my_activity($items,$user);
+ $resultados=grabbit_me_theme_my_activity($item,$user);
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
@@ -74,6 +74,7 @@ function grabbit_me_show_activity_rendered(){
 			$output .=$resultados;
 
 			$output .='</div></div>';
+	}
 
   return $output;	
 }
@@ -86,20 +87,9 @@ function grabbit_me_theme_my_activity($item,$user){
 		<a href="javascript:void(0)" class="facebook_favorite" nid="347262" id="859545633_359324140633">Add to favorites</a>
 		<div class="facebook-post-header"><a href="http://www.facebook.com/profile.php?id=859545633" class="facebook-story-pic" title="Anabel Martínez" target="_blank"><span class="facebook-user-pic"><img width="48" src="http://profile.ak.fbcdn.net/v224/1555/69/q859545633_4724.jpg" alt="Anabel Martínez" class="facebook-image-s" target="_blank"/></span></a>
 		<a href="http://www.facebook.com/profile.php?id=859545633" class="facebook-story-name" title="Anabel Martínez" target="_blank"><span class="facebook-user-name">Anabel Martínez</span></a><div class="facebook-post-body">
-		<div style="display: none;" class="retweet-hide">La fiesta es en casa de Tania Lanz, la entrada es por el jardin y la alberca, del lado del fraccionamiento Ixlolve, la casa esta entre el asilo de ancianos y la PGR, entran en la esquina donde hay un servifresco...
-
-	Para mayor información y detalle al tel de Lety 981.126.07.16 y no se permiten PAREJAS a la fiesta ok... jajaja
-
-	CIAO.... =)</div>
+		<div style="display: none;" class="retweet-hide"></div>
 		<div class="content-truncated"><div class="truncate_less"><div class="facebook-post-inside-body">La fiesta es en casa de Tania Lanz, la entrada es por el jardin y la alberca, del lado del fraccionamiento Ixlolve, la casa esta entre</div>...<a class="truncate_show" href="#">more</a></div></div><span class="facebook-date">on Tue, 12/08/2009 - 14:30</span></div>
-		<div class="facebook-post-comments clearfix"/>
-		<div class="facebook-comment-form">
-		<div class="facebook-form">
-			<form style="display: none;" id="myForm">
-				<input type="textfield" required="true" maxlength="255" size="30" class="form-text" id="comment"/>
-				<input type="button" onclick="javascript:void(0)" value="Comment" class="facebook_comment_submit" id="859545633_359324140633" nid="347262"/>
-			</form>
-		</div></div></div></div>';
+	    </div></div>';
 		
 	return $return;
 }
