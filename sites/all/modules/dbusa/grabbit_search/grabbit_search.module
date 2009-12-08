@@ -194,7 +194,9 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 }
 
 function grabbit_search_custom_form(&$form_state){
- 
+  global $user;
+  if($user->uid!=0): 
+
 	$form['counter'] = array(
 	    '#type' => 'item',
 	    '#prefix'=>'<div id="description">',
@@ -253,7 +255,44 @@ function grabbit_search_custom_form(&$form_state){
 	  '#description' => t('You can filter your search by selecting one or more sources. Leave all unchecked to search all.'),
 	);
 	
+	else:
 	
+	$form['counter'] = array(
+	    '#type' => 'item',
+	    '#prefix'=>'<div id="description">',
+	    '#value' => t('You can perform a search of your grabbit stream, just type the keyword(s) below'),
+	    '#suffix'=>'</div>'
+		 );	 
+	
+		
+	$form['search'] = array(
+	    '#type' => 'textfield',
+	    '#title' => t('Search'),
+	    '#required' => TRUE,
+	    '#size' => 20,
+	    '#weight' => 5
+	  );
+	
+	$form['submit'] = array(
+	  '#type' => 'submit',
+	  '#weight' => 6,
+	  '#value' => t('Search')
+	);
+	
+	
+	$form['onlysite']=array(
+		'#type'=>'checkbox',
+		'#title' => 'Search site <a href="#" class="custom-form-collapser" id="collapse-custom"></a>',
+		'#weight'=>7,
+		'#default_value'=>1
+		);
+	
+	
+	$form['#action'] = url('private/results');
+	$form['#redirect'] = FALSE;
+	
+	
+	endif;
 	
 	return $form;
 }

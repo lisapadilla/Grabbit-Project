@@ -104,6 +104,8 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
 
 }
 
+//to get all your friends--> grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH')
+
 function grabbit_me_db_statuses($op, $requester, $requestee, $rtid, $status) {
 
   $requester = friendlist_api_user_into_uid($requester);
