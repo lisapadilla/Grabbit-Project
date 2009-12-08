@@ -1,5 +1,33 @@
 <?
 
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_me_menu() {
+
+  $items['me/activity'] = array( 
+    'page callback' => 'grabbit_me_show_activity', 
+    'access arguments' => array('access content')
+  );
+
+  return $items;
+}
+
+function grabbit_me_show_activity(){
+	global $user;
+	
+	print "Statuses: <br><br>";
+	grabbit_me_get_statuses($user->uid);
+	print "<br><br>Comments: <br><br>";
+	grabbit_me_get_comments($user->uid);
+	print "<br><br> Mentions: <br><br>";
+	grabbit_me_get_mentions();
+	print "<br><br> Number of friends: ".grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH');
+	print "<br><br>Friends added today: ".grabbit_statistics_post_get_friends_today($user->uid);
+	print_r($user);
+	
+}
+
 //Implementation of hook_grabbit_status_update
 //$status the text of the status
 function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,$uid){
@@ -46,6 +74,16 @@ function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
 function grabbit_me_get_statuses($uid,$limit=10){
 	
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
+
+  while($updates=db_fetch_object($result)){
+    print_r($updates);	
+  }
+	
+}
+
+function grabbit_me_get_comments($uid,$limit=10){
+	
+  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='node' LIMIT %d",$uid,$limit);
 
   while($updates=db_fetch_object($result)){
     print_r($updates);	
