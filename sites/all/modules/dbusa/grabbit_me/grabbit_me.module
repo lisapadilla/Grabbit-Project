@@ -90,6 +90,7 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
 	$response = drupal_http_request('http://twitter.com/users/show/'.$user_id.'.json');
 	
 	$user_twitter=json_decode($response->data);
+	print_r($user_twitter);
     print_r($user_twitter->screen_name);
   }
 
