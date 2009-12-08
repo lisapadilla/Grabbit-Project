@@ -84,7 +84,7 @@ function grabbit_me_show_activity_rendered(){
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
 	
-	$resutrn = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
+	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
 	    <span class="twitter-image">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</span>
 	  </div>
