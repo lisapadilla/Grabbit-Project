@@ -103,3 +103,51 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
   }
 
 }
+
+function grabbit_me_db_statuses($op, $requester, $requestee, $rtid, $status) {
+
+  $requester = friendlist_api_user_into_uid($requester);
+  $requestee = friendlist_api_user_into_uid($requestee);
+
+  if ($requester !== NULL) {
+    $cond  .= ' AND fs.requester_id = %d ';
+    $parm[] = $requester;
+  }
+
+  if ($requestee !== NULL) {
+    $cond  .= ' AND fs.requestee_id = %d ';
+    $parm[] = $requestee;
+  }
+
+  if ($rtid !== NULL) {
+    $cond  .= ' AND fs.rtid = %d ';
+    $parm[] = $rtid;
+  }
+
+  if ($status != NULL) {
+
+    if (is_array($status)) {
+
+      // Turn the conditions into a query.
+      foreach ($status as $status_value) {
+        $cond_status[] = "fs.status LIKE '%s'";
+        $parm[] = $status_value;
+      }
+      $cond .= 'AND ('. implode(' OR ', $cond_status) .')' ;
+
+    }
+    else {
+      $cond  .= " AND fs.status LIKE '%s' ";
+      $parm[] = $status;
+    }
+  }
+
+  if ($op == 'count') {
+    $query = "SELECT COUNT(*) FROM {friendlist_statuses} fs JOIN {users} u WHERE u.uid=fs.requestee_id AND u.status = 1 AND 1 = 1 $cond";
+    return db_result(db_query($query, $parm));
+  }
+  else {
+    $query = "SELECT * FROM {friendlist_statuses} fs WHERE 1 = 1 $cond";
+    return db_query($query, $parm);
+  }
+}
