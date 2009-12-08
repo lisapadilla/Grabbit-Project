@@ -10,6 +10,18 @@ function grabbit_me_menu() {
     'access arguments' => array('access content')
   );
 
+  
+  $items['user/%/myfriends/activity'] = array(
+   'title' => 'My Activity',
+   'description' => t('Watch your activity.'),
+   'page callback' => 'grabbit_me_show_activity_rendered',
+   'access arguments' => array('access content'),
+   	'page arguments' => array(1),
+    'load arguments' => array('%map', '%index'),
+   'weight' => 13,
+   'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
 }
 
@@ -26,6 +38,14 @@ function grabbit_me_show_activity(){
 	print "<br><br>Friends added today: ".grabbit_statistics_post_get_friends_today($user->uid);
 	print "<br><br>";
 	print_r($user);
+	
+}
+
+
+function grabbit_me_show_activity_rendered(){
+	global $user;
+	
+	print "this is your activity";
 	
 }
 
