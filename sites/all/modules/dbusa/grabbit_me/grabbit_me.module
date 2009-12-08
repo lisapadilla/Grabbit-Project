@@ -45,7 +45,7 @@ function grabbit_me_show_activity(){
 function grabbit_me_show_activity_rendered(){
 	global $user;
 	
-	print "this is your activity";
+	return "this is your activity";
 	
 }
 
