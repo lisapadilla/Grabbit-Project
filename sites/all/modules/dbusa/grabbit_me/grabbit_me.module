@@ -59,8 +59,7 @@ function grabbit_me_show_activity_rendered(){
     $profile = content_profile_load('profile', $user->uid);
 
     while($status = db_fetch_object($statuses)){
-	  $profile=unserialize($status->extra);
-	  
+	  $item=unserialize($status->extra);
       $resultados .= grabbit_me_theme_my_activity($item,$profile);
 
     }
