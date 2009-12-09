@@ -202,7 +202,7 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
   if($fuser = facebook_grabbit_get_fid($uid)){
 	  $first_facebook=grabbit_me_get_cache_data($uid,'facebook');
 	  if(!$first_facebook || $first_facebook=='NONE'){
-	    
+	    print "noexiste fb";
 	      $module_name='facebook_grabbit';
 		  require_once(drupal_get_path('module', $module_name)."/facebook/facebook.php");
 		  require_once(drupal_get_path('module', $module_name)."/facebook/facebook_desktop.php");
@@ -234,6 +234,7 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
   if($twitter_account = oauth_twitter_get_uid($uid)){
 	$first_twitter=grabbit_me_get_cache_data($uid,'twitter');
 	  if(!$first_twitter || $first_twitter=='NONE'){
+		print "noexiste tw";
 	    $secret=unserialize($twitter_account->config);
 	    $user_id=substr($secret['token'], 0, strpos($secret['token'], "-"));    
 		$response = drupal_http_request('http://twitter.com/users/show/'.$user_id.'.json');
