@@ -57,8 +57,8 @@ function grabbit_me_show_activity_rendered(){
 
     $statuses = grabbit_me_get_statuses($user->uid);
     $profile = content_profile_load('profile', $user->uid);
-    $nod='odd';
-    while($status = db_fetch_object($statuses)){
+    $nod='even';
+    foreach($statuses as $status){
 	  $item=unserialize($status->extra);
       $resultados .= grabbit_me_theme_my_activity($nod,$item,$profile);
       if($nod=='odd'){
@@ -160,7 +160,15 @@ function grabbit_me_get_statuses($uid,$limit=10){
 	
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
 
-  return $result;
+  $array=array();
+  while ($status = db_fetch_object($result)){
+	$data=unserialize($status->extra);
+    $array[$data['time']]=$status;
+  }
+
+  ksort($array);
+
+  return $array;
 	
 }
 
