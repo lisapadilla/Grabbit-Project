@@ -237,9 +237,9 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
     $twitter_name='2343452345356456756';
   }
 
-  $result = db_query("SELECT * FROM {grabbit_me} WHERE type='status' AND extra LIKE '%".$user_name."%' 
+  $result = db_query("SELECT * FROM {grabbit_me} WHERE type='status' AND (extra LIKE '%".$user_name."%' 
                                                                       OR extra LIKE '%".$facebook_name."%' 
-                                                                      OR extra LIKE '%".$twitter_name."%' ORDER BY number DESC LIMIT %d",$limit);
+                                                                      OR extra LIKE '%".$twitter_name."%') ORDER BY number DESC LIMIT %d",$limit);
 
 
   $array=array();
