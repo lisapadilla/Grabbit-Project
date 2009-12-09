@@ -127,7 +127,7 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
   $extra_array=array();
   $extra_array['twitter']=$tw_status_ch;
   $extra_array['facebook']=$fb_status_ch;
-  $extra_array['time']=date();
+  $extra_array['time']=time();
   $extra_array['status']=$status;
 
   $extra=serialize($extra_array);
@@ -142,7 +142,7 @@ function grabbit_me_grabbit_facebook_comment($nid,$uid,$comment){
   $extra_array=array();
   $extra_array['nid']=$nid;
   $extra_array['type']='facebook';
-  $estra_array['time']=date();
+  $estra_array['time']=time();
   $extra_array['comment']=$comment;
 
   $extra=serialize($extra_array);
@@ -156,7 +156,7 @@ function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
 	$extra_array=array();
 	  $extra_array['nid']=$nid;
 	  $extra_array['type']='node';
-	  $extra_array['time']=date();
+	  $extra_array['time']=time();
 	  $extra_array['comment']=$comment;
 
 	  $extra=serialize($extra_array);
@@ -187,6 +187,7 @@ function grabbit_me_get_comments($uid,$limit=10){
 
   $array=array();
   while ($status = db_fetch_object($result)){
+	print_r($status);
 	$data=unserialize($status->extra);
     $array[$data['time']]=$status;
   }
