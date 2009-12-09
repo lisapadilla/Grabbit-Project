@@ -292,7 +292,7 @@ function grabbit_me_show_activity_rendered(){
 						    <h3 class="title">Comments</h3>
 						  </div>
 						</div>
-			           '.$comments.'
+			       z    '.$comments.'
 			           </div>
 			
 			           </div>';
