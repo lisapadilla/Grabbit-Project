@@ -248,7 +248,7 @@ function grabbit_me_show_activity_rendered(){
     // get comments
     $comm = grabbit_me_get_comments($user->uid,$limit=10);
     if (count($comm)){
-	  $mentions = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
     }else{
 	    $nod='even';
 	  	foreach($comm as $comment){
@@ -292,7 +292,7 @@ function grabbit_me_show_activity_rendered(){
 						    <h3 class="title">Comments</h3>
 						  </div>
 						</div>
-			       z    '.$comments.'
+			           '.$comments.'
 			           </div>
 			
 			           </div>';
