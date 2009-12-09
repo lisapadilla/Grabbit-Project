@@ -133,7 +133,7 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 
   $extra=serialize($extra_array);
 
-  db_query("INSERT INTO {grabbit_me} (uid,type,extra) VALUES (%d,'status','%s')",$uid,$extra);
+  db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'status','%s',%d)",$uid,$extra,$extra_array['time']);
 	
 }
 
@@ -148,7 +148,7 @@ function grabbit_me_grabbit_facebook_comment($nid,$uid,$comment){
 
   $extra=serialize($extra_array);
 
-  db_query("INSERT INTO {grabbit_me} (uid,type,extra) VALUES (%d,'comment','%s')",$uid,$extra);
+  db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'comment','%s',%d)",$uid,$extra,$extra_array['time']);
 
 }
 
@@ -162,13 +162,13 @@ function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
 
 	  $extra=serialize($extra_array);
 
-	  db_query("INSERT INTO {grabbit_me} (uid,type,extra) VALUES (%d,'comment','%s')",$uid,$extra);
+	  db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'comment','%s',%d)",$uid,$extra,$extra_array['time']);
 	
 }
 
 function grabbit_me_get_statuses($uid,$limit=10){
 	
-  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' LIMIT %d",$uid,$limit);
+  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %d",$uid,$limit);
 
   $array=array();
   while ($status = db_fetch_object($result)){
@@ -185,7 +185,7 @@ function grabbit_me_get_statuses($uid,$limit=10){
 
 function grabbit_me_get_comments($uid,$limit=10){
 	
-  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='comment' LIMIT %d",$uid,$limit);
+  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='comment' ORDER BY number DESC LIMIT %d",$uid,$limit);
 
   $array=array();
   while ($status = db_fetch_object($result)){
@@ -244,7 +244,7 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
 
   $result = db_query("SELECT * FROM {grabbit_me} WHERE type='status' AND extra LIKE '%".$user_name."%' 
                                                                       OR extra LIKE '%".$facebook_name."%' 
-                                                                      OR extra LIKE '%".$twitter_name."%' LIMIT %d",$limit);
+                                                                      OR extra LIKE '%".$twitter_name."%' ORDER BY number DESC LIMIT %d",$limit);
 
 
   $array=array();
