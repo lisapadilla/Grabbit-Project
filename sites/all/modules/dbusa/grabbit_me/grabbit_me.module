@@ -67,6 +67,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 function grabbit_me_theme_my_activity_comments($rowx,$item){
 	
 	$node=node_load($item['nid'],NULL,TRUE);
+	print_r($node);
 	$node->rowx=$rowx;
 	switch($node->type){
 		case 'facebook':
