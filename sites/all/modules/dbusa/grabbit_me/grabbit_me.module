@@ -142,7 +142,7 @@ function grabbit_me_grabbit_facebook_comment($nid,$uid,$comment){
   $extra_array=array();
   $extra_array['nid']=$nid;
   $extra_array['type']='facebook';
-  $estra_array['time']=time();
+  $extra_array['time']=time();
   $extra_array['comment']=$comment;
 
   $extra=serialize($extra_array);
