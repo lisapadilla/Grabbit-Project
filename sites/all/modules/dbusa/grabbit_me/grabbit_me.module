@@ -97,14 +97,21 @@ function grabbit_me_show_activity_rendered(){
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
 	
+	if($item['facebook'])
+	  $social_networks .='<span class="from-facebook"><img src="'.base_path().path_to_theme().'/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
+
+	if($item['twitter'])
+	  $social_networks .='<span class="from-twitter"> <img src="'.base_path().path_to_theme().'/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
+	
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
 	    <span class="twitter-image">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</span>
+	    '.$social_networks.'
 	  </div>
 	  <a target="_blank" class="twitter-name-link" href="#">'.$profile->title.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$item['status'].'</div> 
-	    <span class="twitter-date">on Tue, 12/08/2009 - 14:28</span>
+	    <span class="twitter-date">'.format_date($item['time']).'</span>
 	  </div>
 	</div>';
 	
