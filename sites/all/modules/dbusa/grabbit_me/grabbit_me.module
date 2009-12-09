@@ -173,6 +173,7 @@ function grabbit_me_get_statuses($uid,$limit=10){
   $array=array();
   while ($status = db_fetch_object($result)){
 	$data=unserialize($status->extra);
+	print_r($data);
     $array[$data['time']]=$status;
   }
 
