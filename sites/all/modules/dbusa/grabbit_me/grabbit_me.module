@@ -76,13 +76,18 @@ function grabbit_me_show_activity_rendered(){
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
-						    <h3 class="title">Main Stream</h3>
+						    <h3 class="title">Last Updates</h3>
 						  </div>
 						</div>';
 			$output .=$resultados;
 
 			$output .='</div>
-			           <div class="panel-grabbit user-panel" id="panel-1">
+			           <div class="panel-grabbit user-panel" id="panel-mentions">
+			             <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Mentions</h3>
+						  </div>
+						</div>
 			           '.$resultados.'
 			           </div></div>';
 	}
