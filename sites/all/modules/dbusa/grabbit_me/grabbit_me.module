@@ -168,7 +168,7 @@ function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
 
 function grabbit_me_get_statuses($uid,$limit=10){
 	
-  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %d",$uid,$limit);
+  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %d",$uid,$limit);
 
   $array=array();
   while ($status = db_fetch_object($result)){
