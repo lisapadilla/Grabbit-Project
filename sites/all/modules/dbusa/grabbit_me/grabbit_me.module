@@ -249,7 +249,8 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
   $array=array();
   while ($status = db_fetch_object($result)){
     $data=unserialize($status->extra);
-    $array[$data['time']]=$status;
+    if($data['time'])
+      $array[$data['time']]=$status;
   }
 
   ksort($array);
@@ -294,6 +295,7 @@ function grabbit_me_show_activity_rendered(){
 	    $nod='even';
 	  	foreach($ment as $m_status){
 		  $item=unserialize($m_status->extra);
+		print_r($item)
 	      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
 	      if($nod=='odd'){
 		    $nod='even';
