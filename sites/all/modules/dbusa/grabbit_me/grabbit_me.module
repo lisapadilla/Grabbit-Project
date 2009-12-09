@@ -55,18 +55,38 @@ function grabbit_me_show_activity_rendered(){
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 
+    // get statuses
     $statuses = grabbit_me_get_statuses($user->uid);
     $profile = content_profile_load('profile', $user->uid);
     $nod='even';
     foreach($statuses as $status){
 	  $item=unserialize($status->extra);
-      $resultados .= grabbit_me_theme_my_activity($nod,$item,$profile);
+      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
       if($nod=='odd'){
 	    $nod='even';
       }else{
 	    $nod='odd';
       }
     }
+    // end statuses
+
+    // get mentions
+    $ment = grabbit_me_get_mentions($user->uid,$user->name);
+    if (count($ment)){
+	  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
+    }else{
+	    $nod='even';
+	  	foreach($ment as $m_status){
+		  $item=unserialize($m_status->extra);
+	      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	      if($nod=='odd'){
+		    $nod='even';
+	      }else{
+		    $nod='odd';
+	      }
+	    } 
+    }
+    // end mentions
 	
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
@@ -79,7 +99,7 @@ function grabbit_me_show_activity_rendered(){
 						    <h3 class="title">Last Updates</h3>
 						  </div>
 						</div>';
-			$output .=$resultados;
+			$output .=$updates;
 
 			$output .='</div>
 			           <div class="panel-grabbit user-panel" id="panel-mentions">
@@ -88,7 +108,7 @@ function grabbit_me_show_activity_rendered(){
 						    <h3 class="title">Mentions</h3>
 						  </div>
 						</div>
-			           '.$resultados.'
+			           '.$mentions.'
 			           </div></div>';
 	}
 
@@ -234,9 +254,16 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
                                                                       OR extra LIKE '%".$facebook_name."%' 
                                                                       OR extra LIKE '%".$twitter_name."%' LIMIT %d",$limit);
 
-  while($updates=db_fetch_object($result)){
-	   print_r($updates);	
+
+  $array=array();
+  while ($status = db_fetch_object($result)){
+    $data=unserialize($status->extra);
+    $array[$data['time']]=$status;
   }
+
+  ksort($array);
+
+  return $array;
 
 }
 
