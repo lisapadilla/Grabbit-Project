@@ -2347,3 +2347,6 @@ div.messages, div.status, div.warning, div.error{
 	font-weight:bold;
 	line-height:13px;
 }
+.facebook-post.display, .twitter-message-stream.display, .node-stream-news.display, .node-stream-deal.display, .node-stream-blogs.display{
+	display:block;
+}

@@ -67,7 +67,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 function grabbit_me_theme_my_activity_comments($rowx,$item){
 	
 	$node=node_load($item['nid'],NULL,TRUE);
-	print_r($node);
+	
 	$node->rowx=$rowx;
 	switch($node->type){
 		case 'facebook':
@@ -309,14 +309,14 @@ function grabbit_me_show_activity_rendered(){
     if (!count($comm)){
 	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
     }else{
-	    $nod='even';
+	    $nod='even display';
 	  	foreach($comm as $comment){
 		  $item=unserialize($comment->extra);
 	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
-	      if($nod=='odd'){
-		    $nod='even';
+	      if($nod=='odd display'){
+		    $nod='even display';
 	      }else{
-		    $nod='odd';
+		    $nod='odd display';
 	      }
 	    } 
     }
