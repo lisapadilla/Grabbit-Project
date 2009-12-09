@@ -189,8 +189,8 @@ function grabbit_me_get_comments($uid,$limit=10){
   while ($status = db_fetch_object($result)){
 	
 	$data=unserialize($status->extra);
-	print_r($data);
-    $array[$data['time']]=$status;
+	if($data['time'])
+      $array[$data['time']]=$status;
   }
 
   ksort($array);
@@ -287,7 +287,7 @@ function grabbit_me_show_activity_rendered(){
 
     // get mentions
     $ment = grabbit_me_get_mentions($user->uid,$user->name);
-    if (count($ment)){
+    if (!count($ment)){
 	  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
     }else{
 	    $nod='even';
@@ -305,7 +305,7 @@ function grabbit_me_show_activity_rendered(){
 
     // get comments
     $comm = grabbit_me_get_comments($user->uid,$limit=10);
-    if (count($comm)){
+    if (!count($comm)){
 	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
     }else{
 	    $nod='even';
