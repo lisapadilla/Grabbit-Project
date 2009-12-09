@@ -41,80 +41,6 @@ function grabbit_me_show_activity(){
 	
 }
 
-
-function grabbit_me_show_activity_rendered(){
-	global $user;
-	
-	if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
-
-	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
-	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-
-    // get statuses
-    $statuses = grabbit_me_get_statuses($user->uid);
-    $profile = content_profile_load('profile', $user->uid);
-    $nod='even';
-    foreach($statuses as $status){
-	  $item=unserialize($status->extra);
-      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
-      if($nod=='odd'){
-	    $nod='even';
-      }else{
-	    $nod='odd';
-      }
-    }
-    // end statuses
-
-    // get mentions
-    $ment = grabbit_me_get_mentions($user->uid,$user->name);
-    if (count($ment)){
-	  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
-    }else{
-	    $nod='even';
-	  	foreach($ment as $m_status){
-		  $item=unserialize($m_status->extra);
-	      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
-	      if($nod=='odd'){
-		    $nod='even';
-	      }else{
-		    $nod='odd';
-	      }
-	    } 
-    }
-    // end mentions
-	
-			$output .='<div class="panels-controllers">
-			           <div id="panels-pager" class="panels-pager"></div>
-			           <a href="JavaScript:void(0);" class="move-left"></a>
-			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
-			           <div class="panel-grabbit user-panel" id="panel-activity">
-			            <div class="panel-title clearfix">
-						  <div class="controller-top"> 
-						    <h3 class="title">Last Updates</h3>
-						  </div>
-						</div>';
-			$output .=$updates;
-
-			$output .='</div>
-			           <div class="panel-grabbit user-panel" id="panel-mentions">
-			             <div class="panel-title clearfix">
-						  <div class="controller-top"> 
-						    <h3 class="title">Mentions</h3>
-						  </div>
-						</div>
-			           '.$mentions.'
-			           </div></div>';
-	}
-
-  return $output;	
-}
-
 function grabbit_me_theme_my_activity($nod,$item,$profile){
 	
 	if($item['facebook'])
@@ -203,9 +129,15 @@ function grabbit_me_get_comments($uid,$limit=10){
 	
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='comment' LIMIT %d",$uid,$limit);
 
-  while($updates=db_fetch_object($result)){
-    print_r($updates);	
+  $array=array();
+  while ($status = db_fetch_object($result)){
+	$data=unserialize($status->extra);
+    $array[$data['time']]=$status;
   }
+
+  ksort($array);
+
+  return $array;
 	
 }
 
@@ -265,6 +197,108 @@ function grabbit_me_get_mentions($uid,$user_name,$limit=10){
 
   return $array;
 
+}
+
+function grabbit_me_show_activity_rendered(){
+	global $user;
+	
+	if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
+
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+
+    // get statuses
+    $statuses = grabbit_me_get_statuses($user->uid);
+    $profile = content_profile_load('profile', $user->uid);
+    $nod='even';
+    foreach($statuses as $status){
+	  $item=unserialize($status->extra);
+      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
+      if($nod=='odd'){
+	    $nod='even';
+      }else{
+	    $nod='odd';
+      }
+    }
+    // end statuses
+
+    // get mentions
+    $ment = grabbit_me_get_mentions($user->uid,$user->name);
+    if (count($ment)){
+	  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
+    }else{
+	    $nod='even';
+	  	foreach($ment as $m_status){
+		  $item=unserialize($m_status->extra);
+	      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	      if($nod=='odd'){
+		    $nod='even';
+	      }else{
+		    $nod='odd';
+	      }
+	    } 
+    }
+    // end mentions
+
+    // get comments
+    $comm = grabbit_me_get_comments($user->uid,$limit=10);
+    if (count($comm)){
+	  $mentions = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+    }else{
+	    $nod='even';
+	  	foreach($comm as $comment){
+		  $item=unserialize($comment->extra);
+	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item,$profile);
+	      if($nod=='odd'){
+		    $nod='even';
+	      }else{
+		    $nod='odd';
+	      }
+	    } 
+    }
+    // end comments
+	
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Last Updates</h3>
+						  </div>
+						</div>';
+			$output .=$updates;
+
+			$output .='</div>
+			           <div class="panel-grabbit user-panel" id="panel-mentions">
+			             <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Mentions</h3>
+						  </div>
+						</div>
+			           '.$mentions.'
+			           </div>
+			
+			           <div class="panel-grabbit user-panel" id="panel-comments">
+			             <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Comments</h3>
+						  </div>
+						</div>
+			           '.$comments.'
+			           </div>
+			
+			           </div>';
+	}
+
+  return $output;	
 }
 
 //to get all your friends--> grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH')
