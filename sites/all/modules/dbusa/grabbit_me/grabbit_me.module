@@ -64,6 +64,62 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	return $return;
 }
 
+function grabbit_me_theme_my_activity_comments($rowx,$item){
+	
+	$node=node_load($item['nid'],NULL,TRUE);
+	$node->rowx=$rowx;
+	switch($node->type){
+		case 'facebook':
+		    $actor=array('name'=>$node->field_user_name[0]['value'],
+			             'url'=>$node->field_user_url[0]['value'],
+			             'pic_square'=>$node->field_user_picture[0]['value']
+			             );
+			$commenta=array();
+			$actors=array();
+			if($node->field_comments[0]['value']){
+				$profiles=unserialize($node->field_comments[0]['value']);
+				$commenta=$profiles['comments'];	
+				$actors=$profiles['profiles'];
+			}
+			
+			if(!$node->field_attachment[0]['value']){ //STATUS UPDATE
+				$target='';
+				if($node->field_target[0]['value'])
+				  $target=$node->field_target[0]['value'];
+                     
+				$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta);
+				$comments=array();
+				}else{
+					$target='';
+					if($node->field_target[0]['value'])
+					  $target=$node->field_target[0]['value'];
+
+					$output .= prepeare_standar_update($node,$actor,$target,$actors,$commenta);
+					$comments=array();
+				}
+		
+		break;
+		case 'twitter':
+		  $output .=theme_twitter_message($node);
+		break;
+		case 'gmail':
+		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+		  $output .= theme_gmail_message($comments,$node);
+		break;
+		case 'imap':
+		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+		  $output .= theme_imap_message($comments,$node);
+		break;
+		default:
+		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+		  $output .= _news_theme($comments,$node);
+		break;
+	}
+	
+	return $output;
+}
+
+
 //Implementation of hook_grabbit_status_update
 //$status the text of the status
 function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,$uid){
@@ -253,7 +309,7 @@ function grabbit_me_show_activity_rendered(){
 	    $nod='even';
 	  	foreach($comm as $comment){
 		  $item=unserialize($comment->extra);
-	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item,$profile);
+	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
 	      if($nod=='odd'){
 		    $nod='even';
 	      }else{
