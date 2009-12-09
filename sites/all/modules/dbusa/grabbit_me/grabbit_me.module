@@ -187,8 +187,9 @@ function grabbit_me_get_comments($uid,$limit=10){
 
   $array=array();
   while ($status = db_fetch_object($result)){
-	print_r($status);
+	
 	$data=unserialize($status->extra);
+	print_r($data);
     $array[$data['time']]=$status;
   }
 
