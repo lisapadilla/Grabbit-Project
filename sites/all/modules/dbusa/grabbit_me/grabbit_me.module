@@ -268,12 +268,12 @@ print "<br>";
 function grabbit_me_save_cache_data($uid,$type,$name='NULL'){
 	if($name!='NULL'){
 	  variable_set('me_user_'.$uid.'_'.$type, $name);
-	print $uid." - ".$type." - Valor: ".$name;
 	}
 }
 
 function grabbit_me_get_cache_data($uid,$type){
-	variable_get('me_user_'.$uid.'_'.$type, 'NONE');
+	$variable = variable_get('me_user_'.$uid.'_'.$type, 'NONE');
+	return $variable;
 }
 
 function grabbit_me_show_activity_rendered(){
