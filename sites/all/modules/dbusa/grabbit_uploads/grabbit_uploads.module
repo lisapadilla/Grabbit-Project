@@ -159,7 +159,7 @@ function grabbit_uploads_file_form_getit(){
 		$max_file_size_in_bytes = 2147483647;				// 2GB in bytes
 		$extension_whitelist = array("jpg", "gif", "png","flv","mov");	// Allowed file extensions
 		$valid_chars_regex = '.A-Z0-9_ !@#$%^&()+={}\[\]\',~`-';				// Characters allowed in the file name (in a Regular Expression format)
-print_r($user);
+
 	// Other variables	
 		$MAX_FILENAME_LENGTH = 260;
 		$file_name = "";
@@ -172,7 +172,7 @@ print_r($user);
 	        4=>"No file was uploaded",
 	        6=>"Missing a temporary folder"
 		);
-
+print_r($user);
 
 	// Validate the upload
 		if (!isset($_FILES[$upload_name])) {
