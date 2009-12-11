@@ -99,7 +99,7 @@ function _thickbox_doheader() {
     'close' => t('Close'),
     'next' => t('Next >'),
     'prev' => t('< Prev'),
-    'esc_key' => t('or Esc Key'),
+    'esc_key' => t(' '),
     'next_close' => t('Next / Close on last'),
     'image_count' => t('Image !current of !total')
   );
