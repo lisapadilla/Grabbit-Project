@@ -102,6 +102,29 @@ function grabbit_me_theme_feeds($nod,$item){
 	return $return;
 }
 
+function grabbit_me_theme_friends($nod,$item,$profile,$items){
+	
+	
+	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
+	  <div class="listable">
+	    ';
+	if(){
+	  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend').'</span>';
+	}else{
+	  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'sites/all/themes/grabbit/images/default/default_profile.jpg', 'Friend').'</span>';
+	}
+	$return .='</div>
+	  <a target="_blank" class="twitter-name-link" href="#">'.$item->name.'</a>
+	  <div class="twitter-body">
+	    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'</div> 
+	    <span class="twitter-date">friend added on '.format_date($items->last_update_time).'</span>
+	  </div>
+	</div>';
+	
+	return $return;
+}
+
+
 function grabbit_me_theme_my_activity_comments($rowx,$item){
 	
 	$node=node_load($item['nid'],NULL,TRUE);
@@ -277,10 +300,13 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	      $output .= grabbit_me_theme_my_activity($nod,$item,$profile);
 	  break;
 	  case 'feed':
-	    $node=node_load($element->nid);
-	    $output .= grabbit_me_theme_feeds($nod,$node);
+	      $node=node_load($element->nid);
+	      $output .= grabbit_me_theme_feeds($nod,$node);
 	  break;
 	  case 'friend':
+	      $user=user_load($element->requestee_id);
+	      $profile_user = content_profile_load('profile', $element->requestee_id);
+	      $output .= grabbit_me_theme_friends($nod,$user,$profile_user,$element);
 	  break;
     }
 
@@ -517,12 +543,7 @@ function grabbit_me_show_activity_rendered(){
 function grabbit_me_show_activity_rendered_all(){
 	global $user;
 	
-	
-    // get statuses
     $updates = grabbit_me_get_statuses_all($user->uid);
-
-    // end statuses
-
     
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
