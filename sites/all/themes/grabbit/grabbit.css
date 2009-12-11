@@ -2432,6 +2432,11 @@ div.messages, div.status, div.warning, div.error{
 	background-color: #E6EAED;
 	padding: 15px 0;
 }
+.block-grabbit_me .user-tags-block .selected
+{
+	padding: 15px;
+	background-color: #E6EAED;
+}
 .block-grabbit_me .user-tags-block div
 {
 	padding: 15px;
