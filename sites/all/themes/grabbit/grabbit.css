@@ -2406,14 +2406,19 @@ div.messages, div.status, div.warning, div.error{
 
 .block-grabbit_me
 {
-	background-color: #FFFFFF;
 	margin-bottom: 20px;
+	color: #666666;
+	font-size: 12px;
+	background: #FFFFFF url(images/my_blockbtn.png) no-repeat 0 bottom;
 }
 .block-grabbit_me .content .main-info
 {
 	background-color: #E6EAED;
-	color: #666666;
-	font-size: 12px;
+	padding: 15px;
+}
+.block-grabbit_me .content .other-info
+{
+	padding: 15px;
 }
 .block-grabbit_me .content .main-info .blue
 {
@@ -2431,5 +2436,5 @@ div.messages, div.status, div.warning, div.error{
 	background: url(images/my_blocktop.png) no-repeat;
 	color: #385491;
 	font-weight: normal;
-	padding: 9px 12px;
+	padding: 9px 15px;
 }
