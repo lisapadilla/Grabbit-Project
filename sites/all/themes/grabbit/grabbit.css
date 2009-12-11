@@ -2379,6 +2379,7 @@ div.messages, div.status, div.warning, div.error{
 	background: url(images/thickbox_close.png) no-repeat;
 	width: 56px;
 	height: 18px;
+	display: block;
 }
 #TB_ajaxContent .body-wrap
 {
