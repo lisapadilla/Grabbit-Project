@@ -2437,6 +2437,11 @@ div.messages, div.status, div.warning, div.error{
 	padding: 15px;
 	padding-bottom: 0px;
 }
+.block-grabbit_me .content .main-info .image
+{
+	float: left;
+	margin-right: 15px;
+}
 .block-grabbit_me .content .main-info
 {
 	background-color: #E6EAED;
@@ -2457,6 +2462,7 @@ div.messages, div.status, div.warning, div.error{
 	color: #385391;
 	font-weight: bold;
 	font-size: 14px;
+	line-height: 16px;
 }
 .block-grabbit_me h2
 {
