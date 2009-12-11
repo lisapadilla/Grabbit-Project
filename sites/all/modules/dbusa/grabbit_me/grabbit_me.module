@@ -393,7 +393,7 @@ function grabbit_me_show_activity_rendered(){
 
 			
 			$output .='</div>';
-	}
+	
 
   return $output;	
 }
