@@ -217,28 +217,27 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 
   while ($status = db_fetch_object($result)){
 	$super_array[$status->number]=$status;
-	$super_array[$status->number]['type']='status';
+	$super_array[$status->number]->type='status';
   }
 
   $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d AND status='TW_BOTH' ORDER BY last_update_time DESC LIMIT %d",$uid,$limit);
   
   while ($status = db_fetch_object($result)){
 	$super_array[$status->last_update_time]=$status;
-	$super_array[$status->last_update_time]['type']='friend';
+	$super_array[$status->last_update_time]->type='friend';
   }
 
   $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='comment' ORDER BY number DESC LIMIT %d",$uid,$limit);
 
   while ($status = db_fetch_object($result)){
 	$super_array[$status->number]=$status;
-	$super_array[$status->number]['type']='comment';
+	$super_array[$status->number]->type='comment';
   }
 
   $result = db_query("SELECT * FROM {node} WHERE uid=%d AND type='feed' ORDER BY created DESC LIMIT %d",$uid,$limit);
 
   while ($status = db_fetch_object($result)){
 	$super_array[$status->created]=$status;
-	$super_array[$status->created]['type']='feed';
   }
   ksort($super_array);
   print_r($super_array);
