@@ -2372,6 +2372,13 @@ div.messages, div.status, div.warning, div.error{
 	margin-left: 20px;
 	padding: 10px 0;
 }
+#TB_closeWindowButton
+{
+	color: transparent;
+	background: url(images/thickbox_close.png) no-repeat;
+	width: 56px;
+	height: 18px;
+}
 #TB_ajaxContent .body-wrap
 {
 	background-color: #FFFFFF;
