@@ -2497,3 +2497,6 @@ div.messages, div.status, div.warning, div.error{
 	font-weight:bold;
 	line-height:13px;
 }
+.section-activity .panels-controllers{
+	display:none;
+}
