@@ -334,6 +334,7 @@ function grabbit_panels_source_form($form,$panel_id){
 	$form['panel_name'] = array(
 	    '#type'=> 'textfield',
 		'#title' => t('Panel Name'),
+		'#size'=>12,
 		'#default_value' => $panels['panel_name']
 	    );  
 
@@ -431,6 +432,7 @@ function grabbit_panels_source_create_form($form,$panel_id){
 	$form['panel_name'] = array(
 	    '#type'=> 'textfield',
 		'#title' => t('Panel Name'),
+		'#size'=>12,
 		'#default_value' => $panels['panel_name']
 	    );  
 
