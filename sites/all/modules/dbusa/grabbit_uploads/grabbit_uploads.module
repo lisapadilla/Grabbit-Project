@@ -152,7 +152,7 @@ function grabbit_uploads_file_form_getit(){
 		if ((int)$_SERVER['CONTENT_LENGTH'] > $multiplier*(int)$POST_MAX_SIZE && $POST_MAX_SIZE) {
 			exit(0);
 		}
-
+print_r($user);
 	// Settings
 		$save_path = base_path() . "sites/default/files/uploads/";	// The path were we will save the file (getcwd() may not be reliable and should be tested in your environment)
 		$upload_name = "files";
@@ -173,7 +173,7 @@ function grabbit_uploads_file_form_getit(){
 	        6=>"Missing a temporary folder"
 		);
 
-print_r($user);
+
 	// Validate the upload
 		if (!isset($_FILES[$upload_name])) {
 			exit(0);
