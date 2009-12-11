@@ -2432,6 +2432,15 @@ div.messages, div.status, div.warning, div.error{
 	background-color: #E6EAED;
 	padding: 15px 0;
 }
+.block-grabbit_me .edit-panel a
+{
+	display: block;
+	width: 18px;
+	height: 22px;
+	background: url(images/me_settings.gif) no-repeat;
+	text-indent: -999em;
+	overflow: hidden;
+}
 .block-grabbit_me .user-tags-block .selected
 {
 	padding: 15px;
