@@ -73,8 +73,6 @@ function file_to_tinymce(urlcomplete){
 				$("#edit-status").val($("#edit-status").val()+data.tinyurl+' ');
 				var scroll = $("#edit-status");
 				$("#edit-status").focus();
-				$('#edit-RT').val(1);
-				pageTracker._trackPageview(myurl);
 	        }
 	    );
 }
@@ -139,7 +137,7 @@ Drupal.behaviors.frontpage = function(){
 	             file_to_tinymce(encoded);
 	             $("#log li").hide(); 
 	             $(".panels-update-form_file").slideToggle("fast");
-	             
+	             $("#edit-media").val(1);
              }else{
 	           alert("Oops! there was a problem uploading your file, please try again!");
 	           $("#log li").hide();
