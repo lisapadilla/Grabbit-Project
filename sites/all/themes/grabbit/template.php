@@ -159,8 +159,8 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				  $output = theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '');
 				break;
 			}
-			print_r($file);
 			$vars['file_media']= $output;
+			print_r($output);
 		}else{
 			$error;
 		}
