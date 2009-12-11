@@ -654,7 +654,7 @@ function grabbit_me_show_activity_rendered_all(){
 }
 
 
-function grabbit_me_show_activity_rendered_friends(){
+function grabbit_me_show_activity_friends(){
 	global $user;
 	
     $updates = grabbit_me_get_statuses_friends($user->uid);
@@ -680,7 +680,7 @@ function grabbit_me_show_activity_rendered_friends(){
 }
 
 
-function grabbit_me_show_activity_rendered_rss(){
+function grabbit_me_show_activity_rss(){
 	global $user;
 	
     $updates = grabbit_me_get_statuses_rss($user->uid);
