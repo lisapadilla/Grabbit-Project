@@ -134,6 +134,7 @@ class twitpic
 
 function grabbit_uploads_file_form_getit(){
     global $user;	
+print_r($user);
 	// Code for Session Cookie workaround
 	/*	if (isset($_POST["PHPSESSID"])) {
 			session_id($_POST["PHPSESSID"]);
