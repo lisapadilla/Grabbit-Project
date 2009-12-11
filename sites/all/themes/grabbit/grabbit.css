@@ -2411,12 +2411,25 @@ div.messages, div.status, div.warning, div.error{
 	font-size: 12px;
 	line-height: 14px;
 	background: #FFFFFF url(images/my_blockbtn.png) no-repeat 0 bottom;
+	padding-bottom: 15px;
 }
 .block-grabbit_me h3
 {
 	color: #385491;
 	font-size: 12px;
 	display: inline;
+}
+#block-grabbit_me-2 .user-tags-block div
+{
+	padding: 0 15px;
+}
+#block-grabbit_me-2 .user-tags-block h3
+{
+	color: #666666;
+}
+#block-grabbit_me-2 .user-tags-block
+{
+	background-color: #E6EAED;
 }
 .block-grabbit_me .user-tags-block div
 {
@@ -2431,6 +2444,7 @@ div.messages, div.status, div.warning, div.error{
 .block-grabbit_me .content .other-info
 {
 	padding: 15px;
+	padding-bottom: 0px;
 }
 .block-grabbit_me .content .main-info .blue
 {
