@@ -80,7 +80,7 @@
 		<? endif; ?>
 		  <?php if($file_media): ?>
 			<div class="file-media">
-			<?php pint $file_media; ?>
+			<?php print $file_media; ?>
 			</div>
 		  <?php endif; ?>
         <?php print $content; ?>

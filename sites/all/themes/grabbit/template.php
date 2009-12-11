@@ -160,7 +160,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				break;
 			}
 			$vars['file_media']= $output;
-			print_r($output);
+			
 		}else{
 			$error;
 		}
