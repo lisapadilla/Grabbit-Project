@@ -78,6 +78,11 @@
 	    <?php if ($node->field_image_inline[0]['value']):?>
 		  <span class="image-inline-rss"><img src="<?=$node->field_image_inline[0]['value'];?>" /></span>
 		<? endif; ?>
+		  <?php if($file_media): ?>
+			<div class="file-media">
+			<?php pint $file_media; ?>
+			</div>
+		  <?php endif; ?>
         <?php print $content; ?>
         <?php if ($submitted): ?>
           <p><span class="submited-by"><?php print $submitted; ?></span></p>
