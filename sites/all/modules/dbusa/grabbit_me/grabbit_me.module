@@ -18,6 +18,12 @@ function grabbit_me_menu() {
    'weight' => 1
   );
 
+  $items['activity/updates/status'] = array(
+   'title' => 'Status updates',
+   'weight' => 1,
+   'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
   $items['activity/updates/mentions'] = array(
    'title' => 'Mentions',
    'description' => t('Watch your activity.'),
