@@ -10,11 +10,6 @@ function grabbit_me_menu() {
     'access arguments' => array('access content')
   );
 
-  $items['activity/me'] = array(
-   'title' => 'Me',
-   'type' => MENU_NORMAL_ITEM
-  );
-  
   $items['activity/me/updates'] = array(
    'title' => 'Updates',
    'description' => t('Watch your activity.'),
