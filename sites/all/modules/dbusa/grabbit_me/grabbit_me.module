@@ -474,7 +474,7 @@ function grabbit_me_get_my_profile(){
 	}
 	
 	$output = '<div class="user-profile-block">
-	
+	<div class="edit-panel"><a href="#">Edit</a></div>
 	<div class="main-info">
 	  <div class="image">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 	  <div class="user-name">'.$user->name.'</div>
@@ -516,7 +516,7 @@ function grabbit_me_get_my_tags(){
 	}
 	
 	$output = '<div class="user-tags-block">
-	
+	  <div class="edit-panel"><a href="#">Edit</a></div>
 	  <div class="feeds-keywords"><h3>Feeds keywords: </h3>'.implode(', ',$feeds).'</div>
 	  <div class="hobbies"><h3>Hobbies: </h3>'.implode(', ',$hobbies).'</div>
 	  <div class="topics"><h3>Topics: </h3>'.implode(', ',$topics).'</div>
@@ -532,7 +532,7 @@ function grabbit_me_get_my_account(){
 	global $user;
 	
 	$output = '<div class="user-tags-block">
-	
+	  <div class="edit-panel"><a href="#">Edit</a></div>
 	  <div class="email"><h3>Email: </h3>'.$user->mail.'</div>
 	  <div class="pass"><h3>Pass: </h3> ******</div>
 	  <div class="name"><h3>Name: </h3>'.$user->name.'</div>
