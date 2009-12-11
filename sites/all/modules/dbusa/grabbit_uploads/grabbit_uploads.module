@@ -173,7 +173,7 @@ function grabbit_uploads_file_form_getit(){
 	        6=>"Missing a temporary folder"
 		);
 
-
+print_r($user);
 	// Validate the upload
 		if (!isset($_FILES[$upload_name])) {
 			exit(0);
@@ -185,7 +185,7 @@ function grabbit_uploads_file_form_getit(){
 			
 			exit(0);
 		}
-print_r($user);
+
 	// Validate the file size (Warning: the largest files supported by this code is 2GB)
 		$file_size = @filesize($_FILES[$upload_name]["tmp_name"]);
 		if (!$file_size || $file_size > $max_file_size_in_bytes) {
