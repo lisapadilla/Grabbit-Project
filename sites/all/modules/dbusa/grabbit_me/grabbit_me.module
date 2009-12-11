@@ -495,7 +495,7 @@ function grabbit_me_get_my_profile(){
 	
 	$output = '<div class="edit-panel"><a href="#">Edit</a></div><div class="user-profile-block">
 	<div class="main-info">
-	  <div class="image">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
+	  <div class="image">'.theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 	  <div class="user-name">'.$user->name.'</div>
 	  <div class="friends">Friends: <span class="blue">'.grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH').'</span></div>
 	  <div class="post">Posts: <span class="blue">'.grabbit_statistics_post_get_total($user->uid,'all').'</span></div>
