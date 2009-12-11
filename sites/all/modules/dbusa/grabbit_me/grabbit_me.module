@@ -10,25 +10,36 @@ function grabbit_me_menu() {
     'access arguments' => array('access content')
   );
 
-  $items['activity/updates'] = array(
+  $items['activity/me'] = array(
+   'title' => 'Me',
+   'access arguments' => array('access content'),
+   'type' => MENU_NORMAL_ITEM
+  );
+  
+  $items['activity/me/updates'] = array(
    'title' => 'Updates',
+   'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_rendered',
    'access arguments' => array('access content'),
+   'type' => MENU_DEFAULT_LOCAL_TASK,
+   'weight' => 1
   );
 
-  $items['activity/updates/mentions'] = array(
+  $items['activity/me/mentions'] = array(
    'title' => 'Mentions',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_mentions',
    'access arguments' => array('access content'),
+   'weight' => 2,
    'type' => MENU_LOCAL_TASK,
   );
 
-  $items['activity/updates/comments'] = array(
+  $items['activity/me/comments'] = array(
    'title' => 'Comments',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_comments',
    'access arguments' => array('access content'),
+   'weight' => 3,
    'type' => MENU_LOCAL_TASK,
   );
 
@@ -365,7 +376,8 @@ function grabbit_me_show_activity_mentions(){
 
 function grabbit_me_show_activity_rendered(){
 	global $user;
-	/*
+	
+	
     // get statuses
     $statuses = grabbit_me_get_statuses($user->uid);
     $profile = content_profile_load('profile', $user->uid);
@@ -402,8 +414,7 @@ function grabbit_me_show_activity_rendered(){
 
 			
 			$output .='</div>';
-	*/
-	$output='test';
+	
 
   return $output;	
 }
