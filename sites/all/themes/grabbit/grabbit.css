@@ -2441,6 +2441,12 @@ div.messages, div.status, div.warning, div.error{
 	text-indent: -999em;
 	overflow: hidden;
 }
+.block-grabbit_me .edit-panel
+{
+	float: right;
+	margin-top: -31px;
+	margin-right: 10px;
+}
 .block-grabbit_me .user-tags-block .selected
 {
 	padding: 15px;
