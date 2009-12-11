@@ -11,14 +11,36 @@ function grabbit_me_menu() {
   );
 
   
-  $items['user/%/activity'] = array(
-   'title' => 'My Activity',
+  $items['activity/%/updates'] = array(
+   'title' => 'Updates',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_rendered',
    'access arguments' => array('access content'),
    	'page arguments' => array(1),
     'load arguments' => array('%map', '%index'),
+   'weight' => 22,
+   'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['activity/%/mentions'] = array(
+   'title' => 'Mentions',
+   'description' => t('Watch your activity.'),
+   'page callback' => 'grabbit_me_show_activity_mentions',
+   'access arguments' => array('access content'),
+   	'page arguments' => array(1),
+    'load arguments' => array('%map', '%index'),
    'weight' => 23,
+   'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['activity/%/comments'] = array(
+   'title' => 'Comments',
+   'description' => t('Watch your activity.'),
+   'page callback' => 'grabbit_me_show_activity_comments',
+   'access arguments' => array('access content'),
+   	'page arguments' => array(1),
+    'load arguments' => array('%map', '%index'),
+   'weight' => 24,
    'type' => MENU_LOCAL_TASK,
   );
 
@@ -270,19 +292,69 @@ function grabbit_me_get_cache_data($uid,$type){
 	return $variable;
 }
 
+// get mentions
+$ment = grabbit_me_get_mentions($user->uid,$user->name);
+if (!count($ment)){
+  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
+}else{
+    $nod='even';
+  	foreach($ment as $m_status){
+	  $item=unserialize($m_status->extra);
+	
+      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
+      if($nod=='odd'){
+	    $nod='even';
+      }else{
+	    $nod='odd';
+      }
+    } 
+}
+// end mentions
+
+// get comments
+$comm = grabbit_me_get_comments($user->uid,$limit=10);
+if (!count($comm)){
+  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+}else{
+    $nod='even display';
+  	foreach($comm as $comment){
+	  $item=unserialize($comment->extra);
+      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
+      if($nod=='odd display'){
+	    $nod='even display';
+      }else{
+	    $nod='odd display';
+      }
+    } 
+}
+// end comments
+
+function grabbit_me_show_activity_mentions(){
+	$output .='</div>
+	           <div class="panel-grabbit user-panel" id="panel-mentions">
+	             <div class="panel-title clearfix">
+				  <div class="controller-top"> 
+				    <h3 class="title">Mentions</h3>
+				  </div>
+				</div>
+	           '.$mentions.'
+	           </div>
+	
+	           <div class="panel-grabbit user-panel" id="panel-comments">
+	             <div class="panel-title clearfix">
+				  <div class="controller-top"> 
+				    <h3 class="title">Comments</h3>
+				  </div>
+				</div>
+	           '.$comments.'
+	           </div>'
+	
+}
+
 function grabbit_me_show_activity_rendered(){
 	global $user;
 	
-	if(module_exists('facebook_grabbit') && module_exists('grabbit_panels') && module_exists('grabbit_uploads')){
-
-	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
-	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
-    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-
+	
     // get statuses
     $statuses = grabbit_me_get_statuses($user->uid);
     $profile = content_profile_load('profile', $user->uid);
@@ -303,43 +375,7 @@ function grabbit_me_show_activity_rendered(){
     } 
     // end statuses
 
-    // get mentions
-    $ment = grabbit_me_get_mentions($user->uid,$user->name);
-    if (!count($ment)){
-	  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
-    }else{
-	    $nod='even';
-	  	foreach($ment as $m_status){
-		  $item=unserialize($m_status->extra);
-		
-	      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
-	      if($nod=='odd'){
-		    $nod='even';
-	      }else{
-		    $nod='odd';
-	      }
-	    } 
-    }
-    // end mentions
-
-    // get comments
-    $comm = grabbit_me_get_comments($user->uid,$limit=10);
-    if (!count($comm)){
-	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
-    }else{
-	    $nod='even display';
-	  	foreach($comm as $comment){
-		  $item=unserialize($comment->extra);
-	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
-	      if($nod=='odd display'){
-		    $nod='even display';
-	      }else{
-		    $nod='odd display';
-	      }
-	    } 
-    }
-    // end comments
-	
+    
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
@@ -353,26 +389,8 @@ function grabbit_me_show_activity_rendered(){
 						</div>';
 			$output .=$updates;
 
-			$output .='</div>
-			           <div class="panel-grabbit user-panel" id="panel-mentions">
-			             <div class="panel-title clearfix">
-						  <div class="controller-top"> 
-						    <h3 class="title">Mentions</h3>
-						  </div>
-						</div>
-			           '.$mentions.'
-			           </div>
 			
-			           <div class="panel-grabbit user-panel" id="panel-comments">
-			             <div class="panel-title clearfix">
-						  <div class="controller-top"> 
-						    <h3 class="title">Comments</h3>
-						  </div>
-						</div>
-			           '.$comments.'
-			           </div>
-			
-			           </div>';
+			$output .='</div>';
 	}
 
   return $output;	
@@ -473,8 +491,7 @@ function grabbit_me_get_my_profile(){
 		$webs = $website['value'].'<br>';
 	}
 	
-	$output = '<div class="user-profile-block">
-	<div class="edit-panel"><a href="#">Edit</a></div>
+	$output = '<div class="edit-panel"><a href="#">Edit</a></div><div class="user-profile-block">
 	<div class="main-info">
 	  <div class="image">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 	  <div class="user-name">'.$user->name.'</div>
@@ -515,8 +532,9 @@ function grabbit_me_get_my_tags(){
 		$feeds[]=$feed->name;
 	}
 	
-	$output = '<div class="user-tags-block">
-	  <div class="edit-panel"><a href="#">Edit</a></div>
+	$output = '<div class="edit-panel"><a href="#">Edit</a></div>
+	<div class="user-tags-block">
+	  
 	  <div class="feeds-keywords"><h3>Feeds keywords: </h3>'.implode(', ',$feeds).'</div>
 	  <div class="hobbies"><h3>Hobbies: </h3>'.implode(', ',$hobbies).'</div>
 	  <div class="topics"><h3>Topics: </h3>'.implode(', ',$topics).'</div>
@@ -531,8 +549,9 @@ function grabbit_me_get_my_tags(){
 function grabbit_me_get_my_account(){
 	global $user;
 	
-	$output = '<div class="user-tags-block">
-	  <div class="edit-panel"><a href="#">Edit</a></div>
+	$output = '<div class="edit-panel"><a href="#">Edit</a></div>
+	<div class="user-tags-block">
+	  
 	  <div class="email"><h3>Email: </h3>'.$user->mail.'</div>
 	  <div class="pass"><h3>Pass: </h3> ******</div>
 	  <div class="name"><h3>Name: </h3>'.$user->name.'</div>
