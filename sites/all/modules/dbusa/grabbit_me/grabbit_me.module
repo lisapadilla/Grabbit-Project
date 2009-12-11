@@ -210,11 +210,14 @@ function grabbit_me_get_statuses($uid,$limit=10){
 }
 
 function grabbit_me_get_statuses_all($uid,$limit=10){
-	/*
+
   $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %d",$uid,$limit);
-*/
-  $result = db_query("SELECT m.extra, f.status FROM {grabbit_me} m
-	                  LEFT JOIN {friendlist_statuses} f ON f.requester_id=m.uid LIMIT 30");
+
+  while ($status = db_fetch_object($result)){
+	print_r($status);
+  }
+
+  $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d LIMIT %d",$uid,$limit);
   $array=array();
   while ($status = db_fetch_object($result)){
 	print_r($status);
