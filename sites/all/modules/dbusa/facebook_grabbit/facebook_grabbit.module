@@ -275,7 +275,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	}
 	
 	//making a hook for others modules to use
-	module_invoke_all('grabbit_status_update',$form_state['values']['status'], $tw_status_ch, $fb_status_ch,$user->uid,$form_state['values']['media']);
+	module_invoke_all('grabbit_status_update',$form_state['values']['status'], $tw_status_ch, $fb_status_ch,$user->uid,$_POST['media']);
 }
 
 /**
