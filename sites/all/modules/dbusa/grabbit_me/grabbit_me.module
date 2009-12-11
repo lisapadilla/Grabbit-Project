@@ -292,28 +292,50 @@ function grabbit_me_get_cache_data($uid,$type){
 	return $variable;
 }
 
+function grabbit_me_show_activity_comments(){
+	global $user;
+	
+	// get comments
+	$comm = grabbit_me_get_comments($user->uid,$limit=10);
+	if (!count($comm)){
+	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+	}else{
+	    $nod='even display';
+	  	foreach($comm as $comment){
+		  $item=unserialize($comment->extra);
+	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
+	      if($nod=='odd display'){
+		    $nod='even display';
+	      }else{
+		    $nod='odd display';
+	      }
+	    } 
+	}
+	// end comments
+	
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Comments</h3>
+						  </div>
+						</div>';
+			$output .=$comments;
 
+			
+			$output .='</div>';
+
+   return $output;
+	
+}
 
 function grabbit_me_show_activity_mentions(){
-	$output .='</div>
-	           <div class="panel-grabbit user-panel" id="panel-mentions">
-	             <div class="panel-title clearfix">
-				  <div class="controller-top"> 
-				    <h3 class="title">Mentions</h3>
-				  </div>
-				</div>
-	           '.$mentions.'
-	           </div>
-	
-	           <div class="panel-grabbit user-panel" id="panel-comments">
-	             <div class="panel-title clearfix">
-				  <div class="controller-top"> 
-				    <h3 class="title">Comments</h3>
-				  </div>
-				</div>
-	           '.$comments.'
-	           </div>';
-	
+     global $user;
+
 		// get mentions
 		$ment = grabbit_me_get_mentions($user->uid,$user->name);
 		if (!count($ment)){
@@ -333,23 +355,23 @@ function grabbit_me_show_activity_mentions(){
 		}
 		// end mentions
 
-		// get comments
-		$comm = grabbit_me_get_comments($user->uid,$limit=10);
-		if (!count($comm)){
-		  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
-		}else{
-		    $nod='even display';
-		  	foreach($comm as $comment){
-			  $item=unserialize($comment->extra);
-		      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
-		      if($nod=='odd display'){
-			    $nod='even display';
-		      }else{
-			    $nod='odd display';
-		      }
-		    } 
-		}
-		// end comments
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Mentions</h3>
+						  </div>
+						</div>';
+			$output .=$mentions;
+
+			
+			$output .='</div>';
+
+   return $output;
 	
 }
 
