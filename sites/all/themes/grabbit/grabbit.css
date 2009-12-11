@@ -2491,3 +2491,9 @@ div.messages, div.status, div.warning, div.error{
 	font-weight: normal;
 	padding: 9px 15px;
 }
+.twitter-message-stream .twitter-date .blue{
+	color:#0073CF;
+	font-size:12px;
+	font-weight:bold;
+	line-height:13px;
+}

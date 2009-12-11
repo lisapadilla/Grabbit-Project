@@ -95,7 +95,7 @@ function grabbit_me_theme_feeds($nod,$item){
 	  <a target="_blank" class="twitter-name-link" href="#">'.$item->title.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$item->body.'</div> 
-	    <span class="twitter-date">added on '.format_date($item->created).'</span>
+	    <span class="twitter-date"><span class="blue">feed added</span> on '.format_date($item->created).'</span>
 	  </div>
 	</div>';
 	
@@ -117,7 +117,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	  <a target="_blank" class="twitter-name-link" href="#">'.$item->name.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'</div> 
-	    <span class="twitter-date">friend added on '.format_date($items->last_update_time).'</span>
+	    <span class="twitter-date"><span class="blue">friend added</span> on '.format_date($items->last_update_time).'</span>
 	  </div>
 	</div>';
 	
