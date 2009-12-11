@@ -133,16 +133,16 @@ class twitpic
 
 
 function grabbit_uploads_file_form_getit(){
-	global $user;
+    global $user;	
 	// Code for Session Cookie workaround
-		if (isset($_POST["PHPSESSID"])) {
+	/*	if (isset($_POST["PHPSESSID"])) {
 			session_id($_POST["PHPSESSID"]);
 		} else if (isset($_GET["PHPSESSID"])) {
 			session_id($_GET["PHPSESSID"]);
 		}
 
 		session_start();
-
+*/
 	// Check post_max_size (http://us3.php.net/manual/en/features.file-upload.php#73762)
 		$POST_MAX_SIZE = ini_get('post_max_size');
 		$unit = strtoupper(substr($POST_MAX_SIZE, -1));
