@@ -77,7 +77,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	  <a target="_blank" class="twitter-name-link" href="#">'.$profile->title.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$item['status'].'</div> 
-	    <span class="twitter-date">'.format_date($item['time']).'</span>
+	    <span class="twitter-date">on '.format_date($item['time']).'</span>
 	  </div>
 	</div>';
 	
@@ -282,7 +282,7 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
   }
   ksort($super_array);
   $reverse = array_reverse($super_array);
-  $total = array_slice($super_array,0,20);
+  $total = array_slice($reverse,0,15);
 
   $nod='even display';
 
