@@ -217,7 +217,7 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	print_r($status);
   }
 
-  $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d LIMIT %d",$uid,$limit);
+  $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d AND status='TW_BOTH' LIMIT %d",$uid,$limit);
   $array=array();
   while ($status = db_fetch_object($result)){
 	print_r($status);
