@@ -2409,7 +2409,19 @@ div.messages, div.status, div.warning, div.error{
 	margin-bottom: 20px;
 	color: #666666;
 	font-size: 12px;
+	line-height: 14px;
 	background: #FFFFFF url(images/my_blockbtn.png) no-repeat 0 bottom;
+}
+.block-grabbit_me h3
+{
+	color: #385491;
+	font-size: 12px;
+	display: inline;
+}
+.block-grabbit_me .user-tags-block div
+{
+	padding: 15px;
+	padding-bottom: 0px;
 }
 .block-grabbit_me .content .main-info
 {
