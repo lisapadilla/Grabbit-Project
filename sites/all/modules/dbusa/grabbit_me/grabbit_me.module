@@ -89,13 +89,13 @@ function grabbit_me_theme_feeds($nod,$item){
 	
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
-	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
+	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', 'sites/default/files/imagefield_default_images/blue-rss-button.png', 'RSS').'
 	    </span>
 	  </div>
-	  <a target="_blank" class="twitter-name-link" href="#">'.$node->title.'</a>
+	  <a target="_blank" class="twitter-name-link" href="#">'.$item->title.'</a>
 	  <div class="twitter-body">
-	    <div class="twitter-body-contains">'.$item['status'].'</div> 
-	    <span class="twitter-date">'.format_date($item['time']).'</span>
+	    <div class="twitter-body-contains">'.$item->body.'</div> 
+	    <span class="twitter-date">added on '.format_date($item->created).'</span>
 	  </div>
 	</div>';
 	
@@ -278,7 +278,7 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	  break;
 	  case 'feed':
 	    $node=node_load($element->nid);
-	    print_r($node);
+	    $output .= grabbit_me_theme_feeds($nod,$node);
 	  break;
 	  case 'friend':
 	  break;
