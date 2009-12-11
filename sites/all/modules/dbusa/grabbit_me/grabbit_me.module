@@ -84,6 +84,24 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	return $return;
 }
 
+function grabbit_me_theme_feeds($nod,$item){
+	
+	
+	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
+	  <div class="listable">
+	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
+	    </span>
+	  </div>
+	  <a target="_blank" class="twitter-name-link" href="#">'.$node->title.'</a>
+	  <div class="twitter-body">
+	    <div class="twitter-body-contains">'.$item['status'].'</div> 
+	    <span class="twitter-date">'.format_date($item['time']).'</span>
+	  </div>
+	</div>';
+	
+	return $return;
+}
+
 function grabbit_me_theme_my_activity_comments($rowx,$item){
 	
 	$node=node_load($item['nid'],NULL,TRUE);
@@ -241,8 +259,39 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
   }
   ksort($super_array);
   $reverse = array_reverse($super_array);
-  $total = array_slice($reverse,0,10);
-  print_r($total);
+  $total = array_slice($super_array,0,20);
+
+  $nod='even display';
+
+  $profile = content_profile_load('profile', $uid);
+
+  foreach($total as $element){
+
+    switch($element->type){
+	  case 'comment':
+		  $item=unserialize($element->extra);
+	      $output .= grabbit_me_theme_my_activity_comments($nod,$item);
+	  break;
+	  case 'status':
+	      $item=unserialize($element->extra);
+	      $output .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	  break;
+	  case 'feed':
+	    print_r($element);
+	  break;
+	  case 'friend':
+	  break;
+    }
+
+  	 if($nod=='odd display'){
+	    $nod='even display';
+      }else{
+	    $nod='odd display';
+      }
+	
+  }
+
+  return $output;
 
 }
 
