@@ -490,6 +490,8 @@ function grabbit_me_get_my_profile(){
 	</div>
 	</div>';
 	
+	return $output;
+	
 }
 
 function grabbit_me_get_my_tags(){
@@ -522,6 +524,8 @@ function grabbit_me_get_my_tags(){
 	
 	</div>';
 	
+	return $output;
+	
 }
 
 function grabbit_me_get_my_account(){
@@ -535,4 +539,6 @@ function grabbit_me_get_my_account(){
 	  <div class="timezone"><h3>Timezone: </h3>'.$user->timezone.'</div>
 	
 	</div>';
+	
+	return $output;
 }
