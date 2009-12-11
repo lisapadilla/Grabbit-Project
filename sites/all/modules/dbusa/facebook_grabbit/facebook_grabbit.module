@@ -1961,7 +1961,7 @@ function theme_gmail_message($comments,$node){
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
 					    <div class="content-not-truncated">'.$node->body.'
-					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=710')).'
+					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=740')).'
 					  </div>
 					    <span class="submitted">'.$submitted.'</span>	
 					  </div>
@@ -2020,7 +2020,7 @@ function theme_imap_message($comments,$node){
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
 					    <div class="content-not-truncated">'.$node->body.'
-					    '.l('more','imap/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=710')).'
+					    '.l('more','imap/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=740')).'
 					  </div>
 					    <span class="submitted">'.$submitted.'</span>	
 					  </div>
