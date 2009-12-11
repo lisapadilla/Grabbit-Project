@@ -490,6 +490,8 @@ function grabbit_me_get_my_profile(){
 	</div>
 	</div>';
 	
+	return $output;
+	
 }
 
 function grabbit_me_get_my_tags(){
@@ -510,7 +512,7 @@ function grabbit_me_get_my_tags(){
 		unset($profile->taxonomy[$interest['value']]);
 	}
 	foreach($profile->taxonomy as $feed){
-		$fees[]=$feed->name;
+		$feeds[]=$feed->name;
 	}
 	
 	$output = '<div class="user-tags-block">
@@ -521,6 +523,8 @@ function grabbit_me_get_my_tags(){
 	  <div class="interests"><h3>Interests: </h3>'.implode(', ',$interests).'</div>
 	
 	</div>';
+	
+	return $output;
 	
 }
 
@@ -535,4 +539,6 @@ function grabbit_me_get_my_account(){
 	  <div class="timezone"><h3>Timezone: </h3>'.$user->timezone.'</div>
 	
 	</div>';
+	
+	return $output;
 }
