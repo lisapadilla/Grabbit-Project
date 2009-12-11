@@ -292,42 +292,7 @@ function grabbit_me_get_cache_data($uid,$type){
 	return $variable;
 }
 
-// get mentions
-$ment = grabbit_me_get_mentions($user->uid,$user->name);
-if (!count($ment)){
-  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
-}else{
-    $nod='even';
-  	foreach($ment as $m_status){
-	  $item=unserialize($m_status->extra);
-	
-      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
-      if($nod=='odd'){
-	    $nod='even';
-      }else{
-	    $nod='odd';
-      }
-    } 
-}
-// end mentions
 
-// get comments
-$comm = grabbit_me_get_comments($user->uid,$limit=10);
-if (!count($comm)){
-  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
-}else{
-    $nod='even display';
-  	foreach($comm as $comment){
-	  $item=unserialize($comment->extra);
-      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
-      if($nod=='odd display'){
-	    $nod='even display';
-      }else{
-	    $nod='odd display';
-      }
-    } 
-}
-// end comments
 
 function grabbit_me_show_activity_mentions(){
 	$output .='</div>
@@ -347,7 +312,44 @@ function grabbit_me_show_activity_mentions(){
 				  </div>
 				</div>
 	           '.$comments.'
-	           </div>'
+	           </div>';
+	
+		// get mentions
+		$ment = grabbit_me_get_mentions($user->uid,$user->name);
+		if (!count($ment)){
+		  $mentions = '<div class="messages-status-updates">You have no mentions in grabbit yet</div>';
+		}else{
+		    $nod='even';
+		  	foreach($ment as $m_status){
+			  $item=unserialize($m_status->extra);
+
+		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
+		      if($nod=='odd'){
+			    $nod='even';
+		      }else{
+			    $nod='odd';
+		      }
+		    } 
+		}
+		// end mentions
+
+		// get comments
+		$comm = grabbit_me_get_comments($user->uid,$limit=10);
+		if (!count($comm)){
+		  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+		}else{
+		    $nod='even display';
+		  	foreach($comm as $comment){
+			  $item=unserialize($comment->extra);
+		      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
+		      if($nod=='odd display'){
+			    $nod='even display';
+		      }else{
+			    $nod='odd display';
+		      }
+		    } 
+		}
+		// end comments
 	
 }
 
