@@ -131,7 +131,7 @@ Drupal.behaviors.frontpage = function(){
              item.find('div.progress').css('width', '100%'); 
              item.find('span.progressvalue').text('100%');
              if(serverData!=0){
-	           	var pathtofile="http://"+document.domain+serverData; 
+	           	var pathtofile="http://"+document.domain+"/node/"serverData; 
 	             item.addClass('success').find('p.status').html('Done!!! | '+pathtofile);
 	             encoded=decodeURIComponent(pathtofile);            
 	             file_to_tinymce(encoded);

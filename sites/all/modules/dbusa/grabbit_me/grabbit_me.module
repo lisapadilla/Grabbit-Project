@@ -136,14 +136,9 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
   db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'status','%s',%d)",$uid,$extra,$extra_array['time']);
 
   if($media){
-		$node = new stdClass();
-		  $node->title = 'Media - '.$uid;
-		  $node->created = time();
-		  $node->type = 'media';
-		  $node->status = 1;
-		  $node->uid = $uid;
-		  $node->body = $status;
-		  $node->field_media[0]['value'] = $media;
+		$node = node_load($media);
+		$node->body=$status;
+		$node->status=1;
 		node_save($node);
   }
 	
