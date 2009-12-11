@@ -365,8 +365,7 @@ function grabbit_me_show_activity_mentions(){
 
 function grabbit_me_show_activity_rendered(){
 	global $user;
-	
-	
+	/*
     // get statuses
     $statuses = grabbit_me_get_statuses($user->uid);
     $profile = content_profile_load('profile', $user->uid);
@@ -403,7 +402,8 @@ function grabbit_me_show_activity_rendered(){
 
 			
 			$output .='</div>';
-	
+	*/
+	$output='test';
 
   return $output;	
 }
