@@ -2413,6 +2413,18 @@ div.messages, div.status, div.warning, div.error{
 {
 	background-color: #E6EAED;
 	color: #666666;
+	font-size: 12px;
+}
+.block-grabbit_me .content .main-info .blue
+{
+	font-weight: bold;
+	color: #3399CC;
+}
+.block-grabbit_me .content .main-info .user-name
+{
+	color: #385391;
+	font-weight: bold;
+	font-size: 14px;
 }
 .block-grabbit_me h2
 {
