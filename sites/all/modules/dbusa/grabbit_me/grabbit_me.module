@@ -510,7 +510,7 @@ function grabbit_me_get_my_tags(){
 		unset($profile->taxonomy[$interest['value']]);
 	}
 	foreach($profile->taxonomy as $feed){
-		$fees[]=$feed->name;
+		$feeds[]=$feed->name;
 	}
 	
 	$output = '<div class="user-tags-block">
