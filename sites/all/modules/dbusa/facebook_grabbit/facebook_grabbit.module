@@ -169,6 +169,10 @@ function facebook_grabbit_update_form($form_state){
 		$form['RT'] = array(
 			    '#type' => 'hidden',
 			    '#value' => 0 );
+			
+		$form['media'] = array(
+			    '#type' => 'hidden',
+			    '#value' => 0 );
 		
 		$form['counter'] = array(
 		    '#type' => 'item',
@@ -271,7 +275,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	}
 	
 	//making a hook for others modules to use
-	module_invoke_all('grabbit_status_update',$form_state['values']['status'], $tw_status_ch, $fb_status_ch,$user->uid);
+	module_invoke_all('grabbit_status_update',$form_state['values']['status'], $tw_status_ch, $fb_status_ch,$user->uid,$form_state['values']['save_pic']);
 }
 
 /**
