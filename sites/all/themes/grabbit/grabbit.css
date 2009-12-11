@@ -2360,6 +2360,7 @@ div.messages, div.status, div.warning, div.error{
 #TB_title
 {
 	background: transparent url(images/mail_top.png) no-repeat;
+	height: 35px;
 }
 #TB_ajaxContent .gmail-wrap
 {
@@ -2369,6 +2370,7 @@ div.messages, div.status, div.warning, div.error{
 {
 	width: 600px;
 	margin-left: 20px;
+	padding: 10px 0;
 }
 #TB_ajaxContent .body-wrap
 {
@@ -2384,4 +2386,8 @@ div.messages, div.status, div.warning, div.error{
 {
 	background-color: #FFFFFF;
 	padding: 0;
+}
+#grabbit-panels-source-form
+{
+	padding-left: 15px;
 }
