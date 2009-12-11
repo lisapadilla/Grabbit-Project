@@ -108,7 +108,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
 	    ';
-	if(){
+	if($profile->field_profile_picture[0]['filepath']){
 	  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend').'</span>';
 	}else{
 	  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'sites/all/themes/grabbit/images/default/default_profile.jpg', 'Friend').'</span>';
