@@ -50,6 +50,24 @@ function grabbit_me_menu() {
    'type' => MENU_LOCAL_TASK,
   );
 
+  $items['activity/updates/friends'] = array(
+   'title' => 'Added friends',
+   'description' => t('Watch your activity.'),
+   'page callback' => 'grabbit_me_show_activity_friends',
+   'access arguments' => array('access content'),
+   'weight' => 5,
+   'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['activity/updates/rss'] = array(
+   'title' => 'Added RSS',
+   'description' => t('Watch your activity.'),
+   'page callback' => 'grabbit_me_show_activity_rss',
+   'access arguments' => array('access content'),
+   'weight' => 6,
+   'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
 }
 
@@ -322,6 +340,76 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 
 }
 
+function grabbit_me_get_statuses_friends($uid,$limit=10){
+
+  $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d AND status='TW_BOTH' ORDER BY last_update_time DESC LIMIT %d",$uid,$limit);
+  
+  while ($status = db_fetch_object($result)){
+	$super_array[$status->last_update_time]=$status;
+	$super_array[$status->last_update_time]->type='friend';
+  }
+
+  ksort($super_array);
+  $reverse = array_reverse($super_array);
+  $total = array_slice($reverse,0,15);
+
+  $nod='even display';
+
+  $profile = content_profile_load('profile', $uid);
+
+  foreach($total as $element){
+
+	      $user=user_load($element->requestee_id);
+	      $profile_user = content_profile_load('profile', $element->requestee_id);
+	      $output .= grabbit_me_theme_friends($nod,$user,$profile_user,$element);
+
+  	 if($nod=='odd display'){
+	    $nod='even display';
+      }else{
+	    $nod='odd display';
+      }
+	
+  }
+
+  return $output;
+
+}
+
+function grabbit_me_get_statuses_rss($uid,$limit=10){
+
+  $super_array=array();
+
+  $result = db_query("SELECT * FROM {node} WHERE uid=%d AND type='feed' ORDER BY created DESC LIMIT %d",$uid,$limit);
+
+  while ($status = db_fetch_object($result)){
+	$super_array[$status->created]=$status;
+  }
+  ksort($super_array);
+  $reverse = array_reverse($super_array);
+  $total = array_slice($reverse,0,15);
+
+  $nod='even display';
+
+  $profile = content_profile_load('profile', $uid);
+
+  foreach($total as $element){
+
+	      $node=node_load($element->nid);
+	      $output .= grabbit_me_theme_feeds($nod,$node);
+
+  	 if($nod=='odd display'){
+	    $nod='even display';
+      }else{
+	    $nod='odd display';
+      }
+	
+  }
+
+  return $output;
+
+}
+
+
 
 function grabbit_me_get_comments($uid,$limit=10){
 	
@@ -544,6 +632,58 @@ function grabbit_me_show_activity_rendered_all(){
 	global $user;
 	
     $updates = grabbit_me_get_statuses_all($user->uid);
+    
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Last Updates</h3>
+						  </div>
+						</div>';
+			$output .=$updates;
+
+			
+			$output .='</div>';
+	
+
+  return $output;	
+}
+
+
+function grabbit_me_show_activity_rendered_friends(){
+	global $user;
+	
+    $updates = grabbit_me_get_statuses_friends($user->uid);
+    
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Last Updates</h3>
+						  </div>
+						</div>';
+			$output .=$updates;
+
+			
+			$output .='</div>';
+	
+
+  return $output;	
+}
+
+
+function grabbit_me_show_activity_rendered_rss(){
+	global $user;
+	
+    $updates = grabbit_me_get_statuses_rss($user->uid);
     
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
