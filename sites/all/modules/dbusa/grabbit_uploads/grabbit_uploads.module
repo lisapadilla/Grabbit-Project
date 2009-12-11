@@ -172,7 +172,7 @@ function grabbit_uploads_file_form_getit(){
 	        4=>"No file was uploaded",
 	        6=>"Missing a temporary folder"
 		);
-print_r($user);
+
 
 	// Validate the upload
 		if (!isset($_FILES[$upload_name])) {
