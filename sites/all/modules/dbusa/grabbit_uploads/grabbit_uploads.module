@@ -133,7 +133,7 @@ class twitpic
 
 
 function grabbit_uploads_file_form_getit(){
-	
+	global $user;
 	// Code for Session Cookie workaround
 		if (isset($_POST["PHPSESSID"])) {
 			session_id($_POST["PHPSESSID"]);
@@ -243,7 +243,6 @@ function grabbit_uploads_file_form_getit(){
 		*/
 		$dir = variable_get('file_directory_path', '')."/uploads";
 		if ($file = custom_upload('files', array(), $dir, false)) {
-		global $user;
 				$node = new stdClass();
 				  $node->title = 'Media - '.$user->name." - ".$file->fid;
 				  $node->created = time();
