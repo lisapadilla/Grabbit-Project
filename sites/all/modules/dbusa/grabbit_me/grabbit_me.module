@@ -213,7 +213,9 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	/*
   $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %d",$uid,$limit);
 */
-  $result = db_query("SELECT * FROM friendlist_statuses WHERE requester_id =1 AND STATUS = 'TW_BOTH' LIMIT 30");
+  $result = db_query("SELECT * FROM {friendlist_statuses} f, {grabbit_me} m 
+	                  WHERE f.requester_id =1 AND f.status='TW_BOTH' AND f.requester_id=m.uid 
+	                  ORDER BY f.last_update_time, m.number LIMIT 30");
   $array=array();
   while ($status = db_fetch_object($result)){
 	print_r($status);
