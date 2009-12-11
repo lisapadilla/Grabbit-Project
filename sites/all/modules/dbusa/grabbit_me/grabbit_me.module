@@ -277,7 +277,8 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	      $output .= grabbit_me_theme_my_activity($nod,$item,$profile);
 	  break;
 	  case 'feed':
-	    print_r($element);
+	    $node=node_load($element->nid);
+	    print_r($node);
 	  break;
 	  case 'friend':
 	  break;
