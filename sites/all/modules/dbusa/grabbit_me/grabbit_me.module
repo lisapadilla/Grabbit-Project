@@ -137,6 +137,7 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 
   if($media){
 		$node = node_load($media);
+		print_r($node);
 		$node->body=$status;
 		$node->status=1;
 		$node->uid=$uid;
