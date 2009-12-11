@@ -145,7 +145,7 @@ function tb_show(caption, url, imageGroup) { //function called when the user cli
         }
         // End Resizing
 
-        TB_WIDTH = imageWidth < 320 ? 350 : imageWidth + 30;
+        TB_WIDTH = imageWidth < 320 ? 350 : imageWidth + 0;
         TB_HEIGHT = imageHeight + 60;
         $('#TB_window').append('<a href="" id="TB_ImageOff" title="' + settings.next_close + '"><img id="TB_Image" src="' + url + '" width="' + imageWidth + '" height="' + imageHeight + '" alt="' + caption + '" /></a><div id="TB_caption">' + caption + '<div id="TB_secondLine">' + TB_imageCount + TB_PrevHTML + TB_NextHTML + '</div></div><div id="TB_closeWindow"><a href="#" id="TB_closeWindowButton" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div>');
         $('#TB_closeWindowButton').click(tb_remove);
@@ -218,9 +218,9 @@ function tb_show(caption, url, imageGroup) { //function called when the user cli
       var queryString = url.replace(/^[^\?]+\??/,'');
       var params = tb_parseQuery( queryString );
 
-      TB_WIDTH = (params['width']*1) + 30 || 630; //defaults to 630 if no paramaters were added to URL
+      TB_WIDTH = (params['width']*1) + 0 || 630; //defaults to 630 if no paramaters were added to URL
       TB_HEIGHT = (params['height']*1) + 40 || 440; //defaults to 440 if no paramaters were added to URL
-      ajaxContentW = TB_WIDTH - 30;
+      ajaxContentW = TB_WIDTH - 0;
       ajaxContentH = TB_HEIGHT - 45;
 
       if (url.indexOf('TB_iframe') != -1) { // either iframe or ajax window

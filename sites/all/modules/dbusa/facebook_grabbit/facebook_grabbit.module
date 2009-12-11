@@ -1956,7 +1956,7 @@ function theme_gmail_message($comments,$node){
 					  <div class="links_stream">  
 					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
-					    '.l('Reply','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=710')).'
+					    '.l('Reply','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
 					  </div>
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
@@ -2015,7 +2015,7 @@ function theme_imap_message($comments,$node){
 					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    <a href="javascript:void(0)" class="comment-news">Comment</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
-					    '.l('Reply','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=710')).'
+					    '.l('Reply','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
 					  </div>
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
