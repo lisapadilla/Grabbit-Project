@@ -2374,7 +2374,8 @@ div.messages, div.status, div.warning, div.error{
 }
 #TB_closeWindowButton
 {
-	color: transparent;
+	text-indent: -999em;
+	overflow: hidden;
 	background: url(images/thickbox_close.png) no-repeat;
 	width: 56px;
 	height: 18px;
