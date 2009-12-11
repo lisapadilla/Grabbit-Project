@@ -234,16 +234,23 @@ function theme_imap_mail($node){
 		}
 	}
 	
-	$output = '<div class="imap-body">
-	<span class="imap-header"><strong>Subject: </strong></span><span class="imap-header-contains">'.$node->title.'</span><br>
-	<span class="imap-header"><strong>From: </strong></span><span class="imap-header-contains">'.$node->field_from[0]['value'].'</span><br>
-	<span class="imap-header"><strong>Date: </strong></span><span class="imap-header-contains">'.format_date($node->created).'</span><br><br>
-	<div class="imap-email">
-	'.$node->body.'
+	$output = '<div class="gmail-body">
+	<div class="gmail-wrap">
+	 <div class="gmail-wrap-of-the-wrap">
+	  <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
+	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
+	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
+	 </div>
 	</div>
-	<div class="imap-atachments">
-	'.$attachments.'
+	<div class="body-wrap">
+	 <div class="gmail-email">
+	  '.$node->body.'
+	 </div>
+	 <div class="gmail-atachments">
+	  '.$attachments.'
+	 </div>
 	</div>
+	<div class="bottom-fond">&nbsp;</div>
 	</div>';
 	
 	return $output;
