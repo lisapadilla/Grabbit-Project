@@ -11,35 +11,29 @@ function grabbit_me_menu() {
   );
 
   
-  $items['activity/%/updates'] = array(
+  $items['activity/me/updates'] = array(
    'title' => 'Updates',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_rendered',
    'access arguments' => array('access content'),
-   	'page arguments' => array(1),
-    'load arguments' => array('%map', '%index'),
    'weight' => 22,
    'type' => MENU_LOCAL_TASK,
   );
 
-  $items['activity/%/mentions'] = array(
+  $items['activity/me/mentions'] = array(
    'title' => 'Mentions',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_mentions',
    'access arguments' => array('access content'),
-   	'page arguments' => array(1),
-    'load arguments' => array('%map', '%index'),
    'weight' => 23,
    'type' => MENU_LOCAL_TASK,
   );
 
-  $items['activity/%/comments'] = array(
+  $items['activity/me/comments'] = array(
    'title' => 'Comments',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_comments',
    'access arguments' => array('access content'),
-   	'page arguments' => array(1),
-    'load arguments' => array('%map', '%index'),
    'weight' => 24,
    'type' => MENU_LOCAL_TASK,
   );
