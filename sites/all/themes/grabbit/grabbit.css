@@ -2351,3 +2351,17 @@ div.messages, div.status, div.warning, div.error{
 .facebook-post.display, .twitter-message-stream.display, .node-stream-news.display, .node-stream-deal.display, .node-stream-blogs.display{
 	display:block;
 }
+
+#TB_window
+{
+	border: none;
+	background: transparent;
+}
+#TB_title
+{
+	background: transparent url(images/mail_top.png) no-repeat;
+}
+#TB_ajaxContent
+{
+	background-color: #FFFFFF;
+}
