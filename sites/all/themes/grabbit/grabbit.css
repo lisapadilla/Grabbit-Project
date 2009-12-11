@@ -2403,3 +2403,14 @@ div.messages, div.status, div.warning, div.error{
 {
 	padding-left: 15px;
 }
+
+.block-grabbit_me
+{
+	background-color: #FFFFFF;
+}
+.block-grabbit_me h2
+{
+	background: url(images/my_blocktop.png) no-repeat;
+	color: #385491;
+	font-weight: normal;
+}
