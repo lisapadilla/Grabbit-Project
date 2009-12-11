@@ -141,6 +141,33 @@ function grabbit_preprocess_node(&$vars, $hook) {
     $vars['links_stream'] = flag_create_link('bookmarks', $vars['nid']);	
     $vars['comment_link'] = l("Comment","node/".$vars['nid'],array('query'=>'#comments'));
   }
+
+  if($vars['node']->type=='media'){
+	print_r($vars['node']);
+    $error="Oops! we could not find the file, check the URL and try again!";
+	if ($vars['node']->field_media[0]['value']){
+		$result = db_query('SELECT * FROM {files} WHERE fid = %d', $vars['node']->field_media[0]['value']);
+		if (db_affected_rows($result)){
+			$file=db_fetch_object($result);
+			$ext = substr($file->filename, strrpos($file->filename, '.') + 1);
+			switch($ext){
+				case "mov":
+				case "flv":
+				  $output = swf($file->filepath, array('params' => array('width' => '430', 'height'=>'400')));
+				break;
+				default:
+				  $output = theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '');
+				break;
+			}
+			$vars['file_media']= $output;
+		}else{
+			$error;
+		}
+
+	}else{
+		$error;
+	}	
+  }
   
 }
 // */
