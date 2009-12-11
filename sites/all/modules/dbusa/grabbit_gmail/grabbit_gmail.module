@@ -333,7 +333,7 @@ function theme_gmail_mail($node){
 	 <div class="gmail-wrap-of-the-wrap">
 	  <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
 	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
-	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
+	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span>
 	 </div>
 	</div>
 	<div class="body-wrap">
