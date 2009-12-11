@@ -134,7 +134,9 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
   $extra=serialize($extra_array);
 
   db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'status','%s',%d)",$uid,$extra,$extra_array['time']);
-
+print_r($status);
+print_r(" - ");
+print_r($media);
   if($media){
 		$node = node_load($media);
 		print_r($node);
