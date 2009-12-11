@@ -143,9 +143,10 @@ function grabbit_preprocess_node(&$vars, $hook) {
   }
 
   if($vars['node']->type=='media'){
-	print_r($vars['node']);
+	
     $error="Oops! we could not find the file, check the URL and try again!";
 	if ($vars['node']->field_media[0]['value']){
+		print $vars['node']->field_media[0]['value'];
 		$result = db_query('SELECT * FROM {files} WHERE fid = %d', $vars['node']->field_media[0]['value']);
 		if (db_affected_rows($result)){
 			$file=db_fetch_object($result);
