@@ -137,7 +137,7 @@ Drupal.behaviors.frontpage = function(){
 	             file_to_tinymce(encoded);
 	             $("#log li").hide(); 
 	             $(".panels-update-form_file").slideToggle("fast");
-	             $("#edit-media").val(1);
+	             $("#edit-media").val(serverData);
              }else{
 	           alert("Oops! there was a problem uploading your file, please try again!");
 	           $("#log li").hide();
