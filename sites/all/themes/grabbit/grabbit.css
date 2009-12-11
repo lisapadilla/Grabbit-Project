@@ -2407,10 +2407,17 @@ div.messages, div.status, div.warning, div.error{
 .block-grabbit_me
 {
 	background-color: #FFFFFF;
+	margin-bottom: 20px;
+}
+.block-grabbit_me .content .main-info
+{
+	background-color: #E6EAED;
+	color: #666666;
 }
 .block-grabbit_me h2
 {
 	background: url(images/my_blocktop.png) no-repeat;
 	color: #385491;
 	font-weight: normal;
+	padding: 9px 12px;
 }
