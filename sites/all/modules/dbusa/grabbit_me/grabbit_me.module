@@ -11,7 +11,7 @@ function grabbit_me_menu() {
   );
 
   
-  $items['user/%/myfriends/activity'] = array(
+  $items['user/%/activity'] = array(
    'title' => 'My Activity',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_rendered',
