@@ -13,15 +13,23 @@ function grabbit_me_menu() {
   $items['activity/updates'] = array(
    'title' => 'Updates',
    'description' => t('Watch your activity.'),
-   'page callback' => 'grabbit_me_show_activity_rendered',
+   'page callback' => 'grabbit_me_show_activity_rendered_all',
    'access arguments' => array('access content'),
-   'weight' => 1
+  );
+
+  $items['activity/updates/all'] = array(
+   'title' => 'All',
+   'weight' => 1,
+   'type' => MENU_DEFAULT_LOCAL_TASK,
   );
 
   $items['activity/updates/status'] = array(
    'title' => 'Status updates',
-   'weight' => 1,
-   'type' => MENU_DEFAULT_LOCAL_TASK,
+   'description' => t('Watch your activity.'),
+   'page callback' => 'grabbit_me_show_activity_rendered',
+   'access arguments' => array('access content'),
+   'weight' => 2,
+   'type' => MENU_LOCAL_TASK,
   );
 
   $items['activity/updates/mentions'] = array(
@@ -29,7 +37,7 @@ function grabbit_me_menu() {
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_mentions',
    'access arguments' => array('access content'),
-   'weight' => 2,
+   'weight' => 3,
    'type' => MENU_LOCAL_TASK,
   );
 
@@ -38,7 +46,7 @@ function grabbit_me_menu() {
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_comments',
    'access arguments' => array('access content'),
-   'weight' => 3,
+   'weight' => 4,
    'type' => MENU_LOCAL_TASK,
   );
 
@@ -200,6 +208,19 @@ function grabbit_me_get_statuses($uid,$limit=10){
   return $array;
 	
 }
+
+function grabbit_me_get_statuses_all($uid,$limit=10){
+	/*
+  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %d",$uid,$limit);
+*/
+  $result = db_query("SELECT * FROM friendlist_statuses WHERE requester_id =1 AND STATUS = 'TW_BOTH' LIMIT 30");
+  $array=array();
+  while ($status = db_fetch_object($result)){
+	print_r($status);
+  }
+
+}
+
 
 function grabbit_me_get_comments($uid,$limit=10){
 	
@@ -379,6 +400,51 @@ function grabbit_me_show_activity_rendered(){
 	
     // get statuses
     $statuses = grabbit_me_get_statuses($user->uid);
+    $profile = content_profile_load('profile', $user->uid);
+    $nod='even';
+    if(!count($statuses)){
+	  $updates = '<div class="messages-status-updates">You have no status updates in grabbit yet</div>';
+    }else{
+	  	foreach($statuses as $status){
+		  $item=unserialize($status->extra);
+	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	      if($nod=='odd'){
+		    $nod='even';
+	      }else{
+		    $nod='odd';
+	      }
+	    }
+	
+    } 
+    // end statuses
+
+    
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Last Updates</h3>
+						  </div>
+						</div>';
+			$output .=$updates;
+
+			
+			$output .='</div>';
+	
+
+  return $output;	
+}
+
+function grabbit_me_show_activity_rendered_all(){
+	global $user;
+	
+	
+    // get statuses
+    $statuses = grabbit_me_get_statuses_all($user->uid);
     $profile = content_profile_load('profile', $user->uid);
     $nod='even';
     if(!count($statuses)){
