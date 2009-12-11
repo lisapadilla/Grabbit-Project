@@ -17,7 +17,7 @@ function grabbit_me_menu() {
    'page callback' => 'grabbit_me_show_activity_rendered',
    'access arguments' => array('access content'),
    'weight' => 22,
-   'type' => MENU_LOCAL_TASK,
+   'type' => MENU_DEFAULT_LOCAL_TASK,
   );
 
   $items['activity/me/mentions'] = array(
