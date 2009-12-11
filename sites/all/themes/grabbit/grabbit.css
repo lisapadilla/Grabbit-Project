@@ -2361,7 +2361,23 @@ div.messages, div.status, div.warning, div.error{
 {
 	background: transparent url(images/mail_top.png) no-repeat;
 }
+#TB_ajaxContent .gmail-wrap
+{
+	background-color: #E6EAED;
+}
+#TB_ajaxContent .body-wrap
+{
+	padding: 0;
+	margin-left: 20px;
+	width: 600px;
+	background-color: #FFFFFF;
+}
+#TB_ajaxContent .bottom-fond
+{
+	background: url(images/mail_btn.png) no-repeat 0 bottom;
+}
 #TB_ajaxContent
 {
-	background-color: #FFFFFF;
+	background-color: transparent;
+	padding: 0;
 }
