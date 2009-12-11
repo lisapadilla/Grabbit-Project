@@ -241,8 +241,8 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
   }
   ksort($super_array);
   array_reverse($super_array);
-  array_slice($super_array,0,10);
-  print_r($super_array);
+  $total = array_slice($super_array,0,10);
+  print_r($total);
 
 }
 
