@@ -329,15 +329,20 @@ function theme_gmail_mail($node){
 	}
 	
 	$output = '<div class="gmail-body">
-	<span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
-	<span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
-	<span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
-	<div class="gmail-email">
-	'.$node->body.'
+	<div class="gmail-wrap">
+	 <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
+	 <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
+	 <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br><br>
 	</div>
-	<div class="gmail-atachments">
-	'.$attachments.'
+	<div class="body-wrap">
+	 <div class="gmail-email">
+	  '.$node->body.'
+	 </div>
+	 <div class="gmail-atachments">
+	  '.$attachments.'
+	 </div>
 	</div>
+	<div class="bottom-fond">&nbsp;</div>
 	</div>';
 	
 	return $output;
