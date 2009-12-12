@@ -2139,7 +2139,8 @@ margin-top:5px;
 }
 .section-user .tabs ul.secondary li a span,
 .page-invite ul.primary li a span,
-.page-invite-import ul.primary li a span{
+.page-invite-import ul.primary li a span,
+.section-activity ul.primary li a span{
   font-size: 11px;
   line-height: 12px;
   color: #000000;
@@ -2152,7 +2153,8 @@ margin-top:5px;
 }
 .section-user .tabs ul.secondary li.active a span,
 .page-invite ul.primary li.active a span,
-.page-invite-import ul.primary li.active a span{
+.page-invite-import ul.primary li.active a span,
+.section-activity ul.primary li.active a span{
   font-size: 11px;
   color: #FFFFFF;
 }
