@@ -2107,6 +2107,7 @@ margin-top:5px;
   border: none;
 }
 .section-user .tabs ul.secondary li,
+.section-activity ul.primary li,
 .page-invite ul.primary li,
 .page-invite-import ul.primary li{
   background: transparent;
@@ -2117,6 +2118,7 @@ margin-top:5px;
 }
 .section-user .tabs ul.secondary li a,
 .page-invite ul.primary li a,
+.section-activity ul.primary li a,
 .page-invite-import ul.primary li a{
   display: block;
   border: none;
@@ -2144,7 +2146,8 @@ margin-top:5px;
 }
 .section-user .tabs ul.secondary li.active a,
 .page-invite ul.primary li.active a,
-.page-invite-import ul.primary li.active a{
+.page-invite-import ul.primary li.active a,
+.section-activity ul.primary li.active a{
   background: url(images/blk_sel.gif) 0 0 no-repeat;
 }
 .section-user .tabs ul.secondary li.active a span,

@@ -11,7 +11,7 @@ function grabbit_me_menu() {
   );
 
   $items['activity/updates'] = array(
-   'title' => 'Updates',
+   'title' => 'Activity',
    'description' => t('Watch your activity.'),
    'page callback' => 'grabbit_me_show_activity_rendered_all',
    'access arguments' => array('access content'),
