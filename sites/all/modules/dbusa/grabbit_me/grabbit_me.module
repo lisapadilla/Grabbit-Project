@@ -825,7 +825,11 @@ function grabbit_me_get_my_profile(){
 
 function grabbit_me_get_my_tags(){
 	global $user;
-	
+
+    $feeds=array();
+    $hobbies=array();
+    $topics=array();
+    $interests=array();	
 	$profile = content_profile_load('profile', $user->uid);
     
     if($profile->field_profile_hobbies):	
