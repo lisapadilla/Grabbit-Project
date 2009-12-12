@@ -800,7 +800,7 @@ function grabbit_me_get_my_profile(){
 		$webs = $website['value'].'<br>';
 	}
 	
-	$output = '<div class="edit-panel"><a href="#">Edit</a></div><div class="user-profile-block">
+	$output = '<div class="edit-panel">'.l('edit','user/me/edit/profile').'</div><div class="user-profile-block">
 	<div class="main-info clear-block">
 	  <div class="image">'.theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 	  <div class="user-name">'.$user->name.'</div>
@@ -841,7 +841,7 @@ function grabbit_me_get_my_tags(){
 		$feeds[]=$feed->name;
 	}
 	
-	$output = '<div class="edit-panel"><a href="#">Edit</a></div>
+	$output = '<div class="edit-panel">'.l('edit','user/me/edit/profile').'</div>
 	<div class="user-tags-block">
 	  
 	  <div class="feeds-keywords selected"><h3>Feeds keywords: </h3>'.implode(', ',$feeds).'</div>
@@ -858,7 +858,7 @@ function grabbit_me_get_my_tags(){
 function grabbit_me_get_my_account(){
 	global $user;
 	
-	$output = '<div class="edit-panel"><a href="#">Edit</a></div>
+	$output = '<div class="edit-panel">'.l('edit','user/me/edit').'</div>
 	<div class="user-tags-block">
 	  
 	  <div class="email"><h3>Email: </h3>'.$user->mail.'</div>
