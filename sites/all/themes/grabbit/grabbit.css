@@ -2109,7 +2109,8 @@ margin-top:5px;
 .section-user .tabs ul.secondary li,
 .section-activity ul.primary li,
 .page-invite ul.primary li,
-.page-invite-import ul.primary li{
+.page-invite-import ul.primary li,
+.section-activity ul.primary li{
   background: transparent;
   border: none;
   float: left;
@@ -2119,7 +2120,8 @@ margin-top:5px;
 .section-user .tabs ul.secondary li a,
 .page-invite ul.primary li a,
 .section-activity ul.primary li a,
-.page-invite-import ul.primary li a{
+.page-invite-import ul.primary li a,
+.section-activity ul.primary li a{
   display: block;
   border: none;
   width: 100px;
@@ -2130,11 +2132,13 @@ margin-top:5px;
 .page-invite ul.primary li a,
 .page-invite ul.primary li a:hover,
 .page-invite-import ul.primary li a,
-.page-invite-import ul.primary li a:hover{
+.page-invite-import ul.primary li a:hover,
+.section-activity ul.primary li a{
   background: transparent;
 }
 .page-invite ul.primary li a,
-.page-invite-import ul.primary li a{
+.page-invite-import ul.primary li a,
+.section-activity ul.primary li a{
   margin: 0px;
 }
 .section-user .tabs ul.secondary li a span,
