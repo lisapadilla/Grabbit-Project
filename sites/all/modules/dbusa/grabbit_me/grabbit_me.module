@@ -795,10 +795,12 @@ function grabbit_me_get_my_profile(){
 	global $user;
 	
 	$profile = content_profile_load('profile', $user->uid);
-	
-	foreach($profile->field_profile_websites as $website){
-		$webs = $website['value'].'<br>';
+	if($profile->field_profile_websites){
+	  	foreach($profile->field_profile_websites as $website){
+			$webs = $website['value'].'<br>';
+		}	
 	}
+	
 	
 	$output = '<div class="edit-panel">'.l('edit','user/me/edit/profile').'</div><div class="user-profile-block">
 	<div class="main-info clear-block">
@@ -825,22 +827,30 @@ function grabbit_me_get_my_tags(){
 	global $user;
 	
 	$profile = content_profile_load('profile', $user->uid);
-	
+    
+    if($profile->field_profile_hobbies):	
 	foreach($profile->field_profile_hobbies as $hobbie){
 		$hobbies[]=$profile->taxonomy[$hobbie['value']]->name;
 		unset($profile->taxonomy[$hobbie['value']]);
 	}
+	endif;
+	if($profile->field_profile_topics):
 	foreach($profile->field_profile_topics as $topic){
 		$topics[]=$profile->taxonomy[$topic['value']]->name;
 		unset($profile->taxonomy[$topic['value']]);
 	}
+	endif;
+	if($profile->field_profile_interests):
 	foreach($profile->field_profile_interests as $interest){
 		$interests[]=$profile->taxonomy[$interest['value']]->name;
 		unset($profile->taxonomy[$interest['value']]);
 	}
+	endif;
+	if($profile->taxonomy):
 	foreach($profile->taxonomy as $feed){
 		$feeds[]=$feed->name;
 	}
+	endif;
 	
 	$output = '<div class="edit-panel">'.l('edit','user/me/edit/profile').'</div>
 	<div class="user-tags-block">
