@@ -806,6 +806,7 @@ function grabbit_me_get_my_profile(){
 	  <div class="user-name">'.$user->name.'</div>
 	  <div class="friends">Friends: <span class="blue">'.grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH').'</span></div>
 	  <div class="post">Posts: <span class="blue">'.grabbit_statistics_post_get_total($user->uid,'all').'</span></div>
+	  <div class="req">Request: <span class="blue">'.grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_1_TO_2_P').'</div></div>
 	</div>
 	
 	<div class="other-info">
@@ -848,6 +849,7 @@ function grabbit_me_get_my_tags(){
 	  <div class="hobbies"><h3>Hobbies: </h3>'.implode(', ',$hobbies).'</div>
 	  <div class="topics"><h3>Topics: </h3>'.implode(', ',$topics).'</div>
 	  <div class="interests"><h3>Interests: </h3>'.implode(', ',$interests).'</div>
+	 
 	
 	</div>';
 	
