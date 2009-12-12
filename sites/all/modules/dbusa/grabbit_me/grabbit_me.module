@@ -132,7 +132,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'sites/all/themes/grabbit/images/default/default_profile.jpg', 'Friend').'</span>';
 	}
 	$return .='</div>
-	  <a target="_blank" class="twitter-name-link" href="#">'.$item->name.'</a>
+	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$item->name.'">'.$item->name.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'</div> 
 	    <span class="twitter-date"><span class="blue">friend added</span> on '.format_date($items->last_update_time).'</span>
