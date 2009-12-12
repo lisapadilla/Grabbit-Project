@@ -2103,7 +2103,8 @@ margin-top:5px;
   padding: 10px;
 }
 .page-invite ul.primary,
-.page-invite-import ul.primary{
+.page-invite-import ul.primary,
+.section-activity ul.primary{
   border: none;
 }
 .section-user .tabs ul.secondary li,
