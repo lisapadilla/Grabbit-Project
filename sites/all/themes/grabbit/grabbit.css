@@ -2511,3 +2511,31 @@ div.messages, div.status, div.warning, div.error{
 .section-activity .panels-controllers{
 	display:none;
 }
+
+.navbar .block{
+	background:transparent none repeat scroll 0 0;
+	border:medium none;
+	margin:0;
+	padding:10px;
+}
+
+.navbar .menu li{
+	background:transparent none repeat scroll 0 0;
+	border:medium none;
+	float:left;
+	margin:0;
+	padding:0;
+}
+
+.navbar .menu li a{
+	border:medium none;
+	display:block;
+	height:19px;
+	padding:1px 0 0;
+	text-align:center;
+	width:100px;
+}
+
+.navbar .menu li a.active{
+	background:transparent url(images/blk_sel.gif) no-repeat scroll 0 0;
+}
