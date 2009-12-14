@@ -2534,6 +2534,9 @@ div.messages, div.status, div.warning, div.error{
 	padding:1px 0 0;
 	text-align:center;
 	width:100px;
+	color:#000000;
+	font-size:11px;
+	line-height:12px;
 }
 
 .navbar .menu li a.active{
