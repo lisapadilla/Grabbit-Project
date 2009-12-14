@@ -2542,4 +2542,6 @@ div.messages, div.status, div.warning, div.error{
 
 .navbar .menu li a.active{
 	background:transparent url(images/blk_sel.gif) no-repeat scroll 0 0;
+	color:#FFFFFF;
+	font-size:11px;
 }
