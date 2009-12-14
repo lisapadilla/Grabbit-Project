@@ -187,6 +187,9 @@ global $user;
           <?php if ($tabs): ?>
             <div class="tabs"><?php print $tabs; ?></div>
           <?php endif; ?>
+          <?php if($navbar): ?>
+	        <div class="navbar"><?php print $navbar; ?></div>
+	      <?php endif; ?>
           <?php print $content; ?>
         </div>
 
@@ -201,16 +204,6 @@ global $user;
         <?php endif; ?>
 
       </div></div> <!-- /#content-inner, /#content -->
-
-      <?php if ($search_box || $primary_links || $secondary_links || $navbar): ?>
-        <div id="navbar"><div id="navbar-inner" class="clear-block region region-navbar">
-
-          <a name="navigation" id="navigation"></a>
-
-          <?php print $navbar; ?>
-
-        </div></div> <!-- /#navbar-inner, /#navbar -->
-      <?php endif; ?>
 
       <?php if ($left): ?>
         <div id="sidebar-left"><div id="sidebar-left-inner" class="region region-left">
