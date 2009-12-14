@@ -2512,7 +2512,7 @@ div.messages, div.status, div.warning, div.error{
 	display:none;
 }
 
-.navbar .block{
+#content-area .navbar .block{
 	background:transparent none repeat scroll 0 0;
 	border:medium none;
 	margin:0;
