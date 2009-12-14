@@ -2538,10 +2538,16 @@ div.messages, div.status, div.warning, div.error{
 	color:#000000;
 	font-size:11px;
 	line-height:12px;
+	padding-top:4px;
 }
 
 .navbar .menu li a.active{
 	background:transparent url(images/blk_sel.gif) no-repeat scroll 0 0;
 	color:#FFFFFF;
 	font-size:11px;
+	padding-top:4px;
+}
+
+.tabs{
+	display:none;
 }
