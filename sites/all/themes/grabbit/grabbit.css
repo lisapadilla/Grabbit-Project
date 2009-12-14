@@ -2519,6 +2519,12 @@ div.messages, div.status, div.warning, div.error{
 	padding:10px;
 }
 
+.navbar .menu{
+	display:inline-block;
+	margin:0;
+	padding:0;
+}
+
 .navbar .menu li{
 	background:transparent none repeat scroll 0 0;
 	border:medium none;
