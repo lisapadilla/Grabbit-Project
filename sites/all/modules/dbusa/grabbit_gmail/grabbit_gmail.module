@@ -330,6 +330,7 @@ function theme_gmail_mail($node){
 	
 	$output = '<div class="gmail-body">
 	<div class="gmail-wrap">
+	<div class="reply">'.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'))).'</div>
 	 <div class="gmail-wrap-of-the-wrap">
 	  <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
 	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
