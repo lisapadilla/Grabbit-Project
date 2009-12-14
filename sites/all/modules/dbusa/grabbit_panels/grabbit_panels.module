@@ -12,7 +12,7 @@ function grabbit_panels_menu () {
     'page callback' => 'grabbit_panels_edit_panels', 
     'access arguments' => array('access content')
   );
-queonda wye
+
   $items['panels/paginate'] = array( 
     'page callback' => 'grabbit_panels_show_paginate', 
     'access arguments' => array('access content')
