@@ -142,6 +142,7 @@ function invite_menu() {
     'file' => 'invite_admin.inc',
   );
 
+
   // Frontend menu items
   $items['invite'] = array(
     'title' => 'Invite a friend',
