@@ -179,9 +179,13 @@ function friend_search_show_friends_twitter(){
 			$unser = json_decode($requ->data);
 			$rowx="odd";
 			foreach($unser as $twitter){
+				
+				print_r($twitter);
+				
 				$twitters .='<div class="twitter-friend '.$rowx.'">
 				               <div class="picture"><img width="48px" src="'.$twitter->profile_image_url.'" /></div>
 				               <div class="name">'.$twitter->name.'</div>
+				               <div class="invite">'.$invite.'</div>
 				             </div>';
 				
 						if($rowx=='even'){
