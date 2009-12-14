@@ -1954,15 +1954,17 @@ function theme_gmail_message($comments,$node){
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
+					  <div class="email-controllers">
+					    '.l('Reply This','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
+					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=740')).'
+					  </div>
 					  <div class="links_stream">  
 					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
-					    '.l('Reply This','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
 					  </div>
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
 					    <div class="content-not-truncated">'.$node->body.'
-					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=740')).'
 					  </div>
 					    <span class="submitted">'.$submitted.'</span>	
 					  </div>
@@ -2012,16 +2014,20 @@ function theme_imap_message($comments,$node){
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
+					<div class="email-controllers">
+					'.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
+					 '.l('more','imap/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=740')).'
+					</div>
 					  <div class="links_stream">  
 					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    <a href="javascript:void(0)" class="comment-news">Comment</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
-					    '.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
+					    
 					  </div>
 					  <h2>'.l($node->title,'node/'.$node->nid).'</h2>
 					  <div class="content-body">
 					    <div class="content-not-truncated">'.$node->body.'
-					    '.l('more','imap/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'height=500&width=740')).'
+					   
 					  </div>
 					    <span class="submitted">'.$submitted.'</span>	
 					  </div>
