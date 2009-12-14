@@ -180,6 +180,10 @@ function friend_search_show_friends_twitter(){
 			$rowx="odd";
 			foreach($unser as $twitter){
 				
+				if(module_exists('grabbit_invites')){
+					$invite=l('Invite to grabbit','grabbit/invite/twitter/'.$twitter->id, array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=300&width=740'));
+				}
+				
 				$twitters .='<div class="twitter-friend '.$rowx.'">
 				               <div class="picture"><img width="48px" src="'.$twitter->profile_image_url.'" /></div>
 				               <div class="name">'.$twitter->name.'</div>
