@@ -1,0 +1,46 @@
+<?
+
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_invites_menu()
+{
+  $items['grabbit/invite/twitter'] = array( 
+    'title' => 'Invite Twitter', 
+    'page callback' => 'grabbit_invites_twitter', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  ); 
+
+  $items['grabbit/invite/facebook'] = array( 
+    'title' => 'Invite Facebook', 
+    'page callback' => 'grabbit_invites_facebook', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
+ return $items;
+
+}
+
+function grabbit_invites_twitter(){
+	$id=arg(3);
+	
+	if($id){
+		
+		print "Invite using direct message";
+		
+	}
+	
+}
+
+function grabbit_invites_facebook(){
+	$id=arg(3);
+	
+	if($id){
+		
+		print "Invite using direct message";
+		
+	}
+	
+}

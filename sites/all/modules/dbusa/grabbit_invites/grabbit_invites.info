@@ -1,0 +1,9 @@
+;$Id$
+name = "Grabbit Invites"
+description = "Displays the Grabbit Invites."
+package = "Danilo Black USA"
+version = 6.x-1.5-dev
+core = 6.x
+php = 5.2
+dependencies[] = facebook_grabbit
+dependencies[] = grabbit_statistics

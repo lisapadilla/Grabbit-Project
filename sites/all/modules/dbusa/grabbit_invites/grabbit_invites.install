@@ -1,0 +1,50 @@
+<?php
+// $Id: grabbit_me.install,v 1.1.2.2 2009/06/24 05:53:49 Exp $
+
+/**
+ * @file
+ * Grabbit invites configuration install file.
+ */
+
+
+function grabbit_invites_install() {
+  drupal_install_schema('grabbit_invites');
+}
+
+
+function grabbit_invites_uninstall() {
+  drupal_uninstall_schema('grabbit_invites');
+}
+
+
+function grabbit_invites_schema() {
+  $schema = array();
+$schema['grabbit_invites'] = array(
+   	'fields' => array(
+     'faid' => array('type' => 'serial', 
+                      'unsigned' => TRUE, 
+                      'not null' => TRUE
+     ),
+     'uid' => array(
+       'type' => 'int',
+       'size' => 'normal',
+       'not null' => TRUE,
+       'disp-width' => '100',
+     ),
+     'type' => array(
+       'type' => 'text',
+       'not null' => FALSE,
+     ),
+     'number' => array(
+       'type' => 'text',
+       'not null' => FALSE,
+     ),
+     'extra' => array(
+       'type' => 'text',
+       'not null' => FALSE,
+     )
+   ),
+   'primary key' => array('faid'),
+ );
+  return $schema;
+}
