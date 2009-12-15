@@ -133,7 +133,7 @@ function friend_search_show_friends_facebook(){
 																        'fields'=>'last_name, first_name, pic_small'));
 		$rowx='odd';	
 		foreach($details as $amigo_facebook){
-			
+			print_r($amigo_facebook);
 			if(module_exists('grabbit_invites')){
 				$invite=l('Invite to grabbit','grabbit/invite/facebook/'.$amigo_facebook['id']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=400&width=740'));
 			}
