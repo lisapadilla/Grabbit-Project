@@ -57,7 +57,7 @@ function grabbit_invites_facebook(){
 	
 	$fuser = facebook_grabbit_get_fid($user->uid);
 	
-	if ($fuser){
+	if ($fuser && arg(3) && arg(4)){
 	  $module_name='facebook_grabbit';
 	  require_once(drupal_get_path('module', $module_name)."/facebook/facebook.php");
 	  require_once(drupal_get_path('module', $module_name)."/facebook/facebook_desktop.php");
@@ -73,25 +73,37 @@ function grabbit_invites_facebook(){
 		  drupal_set_message("Facebook connection failed","error");
 	    }
 	    else{
-		 
+		/*
+		 	$invite = grabbit_invites_send_invite(arg(4),'Invite to join grabbit','Join grabbit');
+			$template = t(_invite_get_mail_template());
+			$tokens = _invite_token_types($invite);
+			$message = token_replace_multiple($template, $tokens);
+		 */
 	     $testing = $facebook->api_client->call_method('facebook.notifications.send', array('api_key' => $api_key,
-									       'to_ids'=>'100000114639239',
-									       'notification'=>' Hey! you can join grabbit '));
+									       'to_ids'=>arg(3),
+									       'notification'=>'probando'));
 									
-									print_r($testing); 
-									
+		print_r($testing);
+		 									
 	    }
 	  }catch(FacebookRestClientException $e){
-		
+		print "error";
 	  }
     }
 	
-	$id=arg(3);
-	
-	if($id){
-		
-		print "Invite using direct message";
-		
-	}
-	
+}
+
+function grabbit_invites_send_invite($user,$subject,$message){
+	$code = invite_generate_code();
+    $invite = _invite_substitutions(array(
+      'email' => $user,
+      'code'  => $code,
+      'resent'  => 0,
+      'data'  => array('subject' => $subject, 'message' => $message),
+    ));
+
+    invite_save($invite);
+
+    return $invite;
+
 }
