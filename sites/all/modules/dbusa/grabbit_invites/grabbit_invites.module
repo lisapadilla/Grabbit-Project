@@ -86,7 +86,7 @@ function grabbit_invites_facebook(){
 			$tokens = _invite_token_types($invite);
 			$message = token_replace_multiple($template, $tokens);
 		 
-	     $testing = $facebook->api_client->notifications_sendEmail(arg(4),"test","check");
+	     $testing = $facebook->api_client->notifications_sendEmail(array(arg(4)),"test","check");
 									
 		print_r($testing);
 		print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation."; 									
