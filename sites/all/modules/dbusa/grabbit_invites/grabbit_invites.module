@@ -75,10 +75,9 @@ function grabbit_invites_facebook(){
 	    else{
 		 
 	     $testing = $facebook->api_client->call_method('Notifications.send', array('api_key' => $api_key,
-									       'to_ids'=>'100000114639239',
+									       'to_ids'=>array('100000114639239'),
 									       'notification'=>'probando en el facebook')); 
 									
-									print_r($facebook);
 	    }
 	  }catch(FacebookRestClientException $e){
 		
