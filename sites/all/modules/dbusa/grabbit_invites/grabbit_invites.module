@@ -86,13 +86,17 @@ function grabbit_invites_facebook(){
 			$tokens = _invite_token_types($invite);
 			$message = token_replace_multiple($template, $tokens);
 		 
-	     $testing = $facebook->api_client->notifications_sendEmail(array(arg(4)),"test","check");
+	     $testing = $facebook->api_client->call_method('facebook.notifications.send', array('api_key' => $api_key,
+									       'to_ids'=>arg(3),
+									       'notification'=>$message,
+									        'type'=>'app_to_user',
+									));
 									
 		print_r($testing);
 		print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation."; 									
 	    }
 	  }catch(FacebookRestClientException $e){
-		print $e;
+		print "error";
 	  }
     }
 	
