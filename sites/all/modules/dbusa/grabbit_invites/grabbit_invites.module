@@ -94,7 +94,8 @@ function grabbit_invites_facebook(){
 									
 		print_r($testing);
 		print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation."; 									
-	    }
+	print_r($friends);    
+	}
 	  }catch(FacebookRestClientException $e){
 		print "error";
 	  }
