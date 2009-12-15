@@ -64,10 +64,9 @@ function grabbit_imap_reply_message(){
 	global $user;
 	$nid = arg(2);
 	$message = node_load($nid);
-	print_r($message);
 	$reply_to = $message->field_imap_from_add[0]['value'];
 	$imap = grabbit_imap_get($user->uid);
-  
+  print_r($reply_to);
   echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to );
 }
 
