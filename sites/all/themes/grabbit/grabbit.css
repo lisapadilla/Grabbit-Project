@@ -2399,16 +2399,16 @@ div.messages, div.status, div.warning, div.error{
 {
 	background-color: #FFFFFF;
 }
-#TB_ajaxContent .gmail-attachments a
+#TB_ajaxContent .gmail-atachments a
 {
 	color: #385491;
 	text-decoration: underline;
 }
-#TB_ajaxContent .gmail-attachments
+#TB_ajaxContent .gmail-atachments
 {
-	background-color:#FFFFFF;
 	border-bottom: 1px solid #E6EAED;
 	padding: 4px 20px;
+	background: #FFFFFF url(images/clip.gif) no-repeat 5px center;
 }
 #TB_ajaxContent .body-wrap .gmail-email
 {
