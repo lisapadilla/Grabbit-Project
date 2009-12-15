@@ -82,7 +82,7 @@ function grabbit_invites_facebook(){
 	    else{
 		
 		 	$invite = grabbit_invites_send_invite(arg(4),'Invite to join grabbit','Join grabbit');
-			$template = t(_invite_get_mail_template());
+			$template = t(_grabbit_invites_get_mail());
 			$tokens = _invite_token_types($invite);
 			$message = token_replace_multiple($template, $tokens);
 		 
@@ -125,4 +125,9 @@ function _grabbit_invites_get_mail() {
   $template = t("Your friend, [inviter-raw], has invited you to join [site-name] at [join-link]");
 
   return $template;
+}
+
+function grabbit_invites_get_invited($name){
+	$result = db_query("SELECT * FROM {invite} WHERE email = '%s'",$name);
+	return db_afected_rows($result);
 }
