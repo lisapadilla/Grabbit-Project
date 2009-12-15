@@ -24,12 +24,28 @@ function grabbit_invites_menu()
 }
 
 function grabbit_invites_twitter(){
-	$id=arg(3);
 	
-	if($id){
+	global $user;
+    $accounts = oauth_twitter_get_uid($user->uid);
+
+	if($accounts){
+		$module_name='oauth_twitter';
+		include_once drupal_get_path('module', $module_name).'/includes/EpiCurl.php';
+		include_once drupal_get_path('module', $module_name).'/includes/EpiOAuth.php';
+		include_once drupal_get_path('module', $module_name).'/includes/EpiTwitter.php';
+		include drupal_get_path('module', $module_name).'/includes/secret.php';
 		
-		print "Invite using direct message";
+		$token = unserialize($accounts->config);
+		  $twitterObj->setToken($token['token'], $token['secret']);
+		  $userInfo = $twitterObj->post_direct_messagesNew('testing this stuff');
+		print_r($userInfo);
 		
+		$id=arg(3);
+
+		if($id){
+
+		}
+	
 	}
 	
 }
