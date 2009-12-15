@@ -2407,7 +2407,7 @@ div.messages, div.status, div.warning, div.error{
 #TB_ajaxContent .gmail-atachments
 {
 	border-bottom: 1px solid #E6EAED;
-	padding: 4px 20px;
+	padding: 5px 20px;
 	background: #FFFFFF url(images/clip.gif) no-repeat 5px center;
 }
 #TB_ajaxContent .body-wrap .gmail-email
