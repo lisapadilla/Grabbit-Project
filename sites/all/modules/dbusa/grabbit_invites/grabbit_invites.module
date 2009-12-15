@@ -43,7 +43,7 @@ function grabbit_invites_twitter(){
 				$token = unserialize($accounts->config);
 				$twitterObj->setToken($token['token'], $token['secret']);
 
-				$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' this is a direct message from grabbit'));
+			//	$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' this is a direct message from grabbit'));
 
 		}
 	
@@ -52,6 +52,39 @@ function grabbit_invites_twitter(){
 }
 
 function grabbit_invites_facebook(){
+	
+	global $user;
+	
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	
+	if ($fuser){
+	  $module_name='facebook_grabbit';
+	  require_once(drupal_get_path('module', $module_name)."/facebook/facebook.php");
+	  require_once(drupal_get_path('module', $module_name)."/facebook/facebook_desktop.php");
+	  include(drupal_get_path('module', $module_name)."/facebook/config.php");
+
+	  $suser=$fuser->fid;
+	  $session_key=$fuser->kid;
+      try{
+	
+	    $facebook = new FacebookDesktop($api_key, $secret);
+	
+	    if ($facebook->set_user($suser, $session_key) != null){
+		  drupal_set_message("Facebook connection failed","error");
+	    }
+	    else{
+		 
+	     $testing = $facebook->api_client->call_method('Notifications.send', array('api_key' => $api_key,
+									       'to_ids'=>'100000114639239',
+									       'notification'=>'probando en el facebook')); 
+									
+									print_r($testing);
+	    }
+	  }catch(FacebookRestClientException $e){
+		
+	  }
+    }
+	
 	$id=arg(3);
 	
 	if($id){
