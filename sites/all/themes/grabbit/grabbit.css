@@ -2366,18 +2366,18 @@ div.messages, div.status, div.warning, div.error{
 #TB_window
 {
 	border: none;
-	background: transparent;
+	background: #FFFFFF;
 }
 #TB_title
 {
 	background: #8B939F;
 	height: 35px;
 }
-#TB_ajaxContent .gmail-wrap
+#TB_iframeContent .gmail-wrap
 {
 	background-color: #E6EAED;
 }
-#TB_ajaxContent .gmail-wrap .gmail-wrap-of-the-wrap
+#TB_iframeContent .gmail-wrap .gmail-wrap-of-the-wrap
 {
 	width: 600px;
 	margin-left: 20px;
@@ -2395,11 +2395,11 @@ div.messages, div.status, div.warning, div.error{
 	height: 18px;
 	display: block;
 }
-#TB_ajaxContent .body-wrap
+#TB_iframeContent .body-wrap
 {
 	background-color: #FFFFFF;
 }
-#TB_ajaxContent .body-wrap .gmail-email
+#TB_iframeContent .body-wrap .gmail-email
 {
 	padding: 0;
 	margin-left: 20px;
