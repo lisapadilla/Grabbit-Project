@@ -2416,7 +2416,7 @@ div.messages, div.status, div.warning, div.error{
 }
 .node-stream-gmail .email-controllers .reply_mail
 {
-	background: url(images/reply.gif) no-repeat;
+	background: url(images/reply.png) no-repeat;
 	width: 27px;
 	height: 21px;
 	display: block;
