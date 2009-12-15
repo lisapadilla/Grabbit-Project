@@ -42,8 +42,14 @@ function grabbit_invites_twitter(){
 				$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 				$token = unserialize($accounts->config);
 				$twitterObj->setToken($token['token'], $token['secret']);
+				
+				$invite = grabbit_invites_send_invite($id,'Invite to join grabbit','Join grabbit');
+				$template = t(_grabbit_invites_get_mail());
+				$tokens = _invite_token_types($invite);
+				$message = token_replace_multiple($template, $tokens);
+			
 
-			//	$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' this is a direct message from grabbit'));
+				$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' '));
 
 		}
 	
@@ -84,7 +90,7 @@ function grabbit_invites_facebook(){
 									       'notification'=>$message));
 									
 		print_r($testing);
-		 									
+		print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation."; 									
 	    }
 	  }catch(FacebookRestClientException $e){
 		print "error";
@@ -106,4 +112,16 @@ function grabbit_invites_send_invite($user,$subject,$message){
 
     return $invite;
 
+}
+
+/**
+ * Returns the configured or default e-mail template.
+ *
+ * @return
+ *   The localized e-mail body.
+ */
+function _grabbit_invites_get_mail() {
+  $template = t("Your friend, [inviter-raw], has invited you to join [site-name] at [join-link]");
+
+  return $template;
 }

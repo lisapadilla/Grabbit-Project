@@ -185,7 +185,7 @@ function friend_search_show_friends_twitter(){
 			$unser = json_decode($requ->data);
 			$rowx="odd";
 			foreach($unser as $twitter){
-				print_r($twitter);
+				
 				if(module_exists('grabbit_invites')){
 					$invite=l('Invite to grabbit','grabbit/invite/twitter/'.$twitter->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=400&width=740'));
 				}
