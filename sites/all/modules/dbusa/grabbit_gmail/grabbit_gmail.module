@@ -322,7 +322,7 @@ function theme_gmail_mail($node){
 	$attach=unserialize($node->field_gmail_attachment[0]['value']);
 	if(is_array($attach)){
 		$num=2;
-		$attachments='Attachment: ';
+		$attachments='Attachments: ';
 		foreach ($attach as $key=>$value){
 			$attachments .='<a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a>';
 			$num++;
@@ -333,7 +333,7 @@ function theme_gmail_mail($node){
 	<div class="gmail-wrap">
 	 <div class="gmail-wrap-of-the-wrap">
 	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
-	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span>
+	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br>
 	  <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
 	  <div class="reply">'.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'))).'</div>
 	 </div>
