@@ -2405,6 +2405,15 @@ div.messages, div.status, div.warning, div.error{
 	margin-left: 20px;
 	width: 600px;
 }
+.node-stream-gmail .email-controllers .more_mail
+{
+	background: url(images/reply.gif) no-repeat;
+	width: 27px;
+	height: 21px;
+	display: block;
+	overflow: hidden;
+	text-indent: -999em;
+}
 #TB_ajaxContent
 {
 	background-color: #FFFFFF;
