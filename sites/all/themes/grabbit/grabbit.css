@@ -2407,6 +2407,7 @@ div.messages, div.status, div.warning, div.error{
 #TB_ajaxContent .gmail-wrap-of-the-wrap .reply
 {
 	float: right;
+	margin-top: -22px;
 }
 #TB_ajaxContent .gmail-wrap-of-the-wrap .reply a
 {
