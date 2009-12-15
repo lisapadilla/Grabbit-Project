@@ -322,9 +322,9 @@ function theme_gmail_mail($node){
 	$attach=unserialize($node->field_gmail_attachment[0]['value']);
 	if(is_array($attach)){
 		$num=2;
-		$attachments='Attachments: ';
+		$attachments='<strong>Attachments: </strong>';
 		foreach ($attach as $key=>$value){
-			$attachments .='<a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a>';
+			$attachments .='<a href="'.base_path().'gmail/get/file/'.$node->field_msgno[0]['value'].'/'.$value.'/gmail/'.$num.'">'.$value.'</a> ';
 			$num++;
 		}
 	}
