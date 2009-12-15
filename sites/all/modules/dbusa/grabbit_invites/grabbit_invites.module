@@ -80,7 +80,7 @@ function grabbit_invites_facebook(){
 			$message = token_replace_multiple($template, $tokens);
 		 */
 	     $testing = $facebook->api_client->call_method('facebook.notifications.send', array('api_key' => $api_key,
-									       'to_ids'=>arg(3),
+									       'to_ids'=>'515469464',
 									       'notification'=>'probando'));
 									
 									print_r($testing);
