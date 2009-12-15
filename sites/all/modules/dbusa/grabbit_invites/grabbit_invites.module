@@ -83,7 +83,7 @@ function grabbit_invites_facebook(){
 									       'to_ids'=>'515469464',
 									       'notification'=>'probando'));
 									
-									print_r($facebook);
+									print_r($testing);
 		 									
 	    }
 	  }catch(FacebookRestClientException $e){
