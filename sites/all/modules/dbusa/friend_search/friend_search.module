@@ -137,6 +137,8 @@ function friend_search_show_friends_facebook(){
 			if(module_exists('grabbit_invites')){
 				if(!grabbit_invites_get_invited($amigo_facebook['first_name'].'_'.$amigo_facebook['last_name'])){
 		          $invite=l('Invite to grabbit','grabbit/invite/facebook/'.$amigo_facebook['uid']."/".$amigo_facebook['first_name']."_".$amigo_facebook['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=400&width=740'));			
+				}else{
+				  	$invite=l('Invite to grabbit','grabbit/invite/facebook/'.$amigo_facebook['uid']."/".$amigo_facebook['first_name']."_".$amigo_facebook['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=400&width=740'));			
 				}
 			}
 			

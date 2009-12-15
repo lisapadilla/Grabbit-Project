@@ -230,7 +230,7 @@ function tb_show(caption, url, imageGroup) { //function called when the user cli
       else { // not an iframe, ajax
         if ($('#TB_window').css('display') != 'block') {
           if (params['modal'] != 'true') { //ajax no modal
-            $('#TB_window').append('<div id="TB_title"><div id="TB_ajaxWindowTitle">' + caption + '</div><div id="TB_closeAjaxWindow"><a href="#" id="TB_closeWindowButton" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div></div><div id="TB_ajaxContent" style="width:' + ajaxContentW + 'px;height:' + ajaxContentH + 'px"></div>');
+            $('#TB_window').append('<div id="TB_title"><div id="TB_ajaxWindowTitle">' + caption + '</div><div id="TB_closeAjaxWindow"><a href="#" id="TB_closeWindowButton" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div></div><div id="TB_ajaxContent" style="width:100%;height:' + ajaxContentH + 'px"></div>');
             window.setTimeout("tb_focusFirstFormElement()", 1000);
           }
           else { //ajax modal
