@@ -1967,7 +1967,7 @@ function theme_gmail_message($comments,$node){
 					  </div>
 					  <div class="email-controllers">
 					    '.l('Reply This','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
-					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
+					    '.l('more','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'KeepThis=true&height=500&width=740')).'
 					  </div>
 					
 					 '.$comments_output.'
