@@ -29,20 +29,21 @@ function grabbit_invites_twitter(){
     $accounts = oauth_twitter_get_uid($user->uid);
 
 	if($accounts){
-		$module_name='oauth_twitter';
-		include_once drupal_get_path('module', $module_name).'/includes/EpiCurl.php';
-		include_once drupal_get_path('module', $module_name).'/includes/EpiOAuth.php';
-		include_once drupal_get_path('module', $module_name).'/includes/EpiTwitter.php';
-		include drupal_get_path('module', $module_name).'/includes/secret.php';
-		
-		 $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-		$token = unserialize($accounts->config);
-		  $twitterObj->setToken($token['token'], $token['secret']);
-		
-		$twitterObj->post_statusesUpdate(array('status' =>'D rafaelcr Check 3'));
 		$id=arg(3);
 
 		if($id){
+			
+				$module_name='oauth_twitter';
+				include_once drupal_get_path('module', $module_name).'/includes/EpiCurl.php';
+				include_once drupal_get_path('module', $module_name).'/includes/EpiOAuth.php';
+				include_once drupal_get_path('module', $module_name).'/includes/EpiTwitter.php';
+				include drupal_get_path('module', $module_name).'/includes/secret.php';
+
+				$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+				$token = unserialize($accounts->config);
+				$twitterObj->setToken($token['token'], $token['secret']);
+
+				$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' this is a direct message from grabbit'));
 
 		}
 	
