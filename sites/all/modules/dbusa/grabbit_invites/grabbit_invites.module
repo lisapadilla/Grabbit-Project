@@ -129,5 +129,6 @@ function _grabbit_invites_get_mail() {
 
 function grabbit_invites_get_invited($name){
 	$result = db_query("SELECT * FROM {invite} WHERE email = '%s'",$name);
+	print_r(db_affected_rows($result));
 	return db_affected_rows($result);
 }
