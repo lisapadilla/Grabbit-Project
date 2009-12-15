@@ -2399,18 +2399,32 @@ div.messages, div.status, div.warning, div.error{
 {
 	background-color: #FFFFFF;
 }
+#TB_ajaxContent .gmail-attachments a
+{
+	color: #385491;
+	text-decoration: underline;
+}
+#TB_ajaxContent .gmail-attachments
+{
+	background-color:#FFFFFF;
+	border-bottom: 1px solid #E6EAED;
+	padding: 4px 20px;
+}
 #TB_ajaxContent .body-wrap .gmail-email
 {
 	padding: 0;
 	margin-left: 20px;
+	margin-top: 10px;
 	width: 600px;
 }
+.node-stream-imap .email-controllers,
 .node-stream-gmail .email-controllers
 {
 	margin-top: -21px;
 	position: relative;
 	float: right;
 }
+.node-stream-imap .email-controllers .more_mail,
 .node-stream-gmail .email-controllers .more_mail
 {
 	background: url(images/more.gif) no-repeat;
@@ -2421,6 +2435,7 @@ div.messages, div.status, div.warning, div.error{
 	text-indent: -999em;
 	float: left;
 }
+.node-stream-imap .email-controllers .reply_mail,
 .node-stream-gmail .email-controllers .reply_mail
 {
 	background: url(images/reply.png) no-repeat;
