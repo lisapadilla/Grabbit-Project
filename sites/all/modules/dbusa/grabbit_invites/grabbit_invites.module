@@ -38,9 +38,8 @@ function grabbit_invites_twitter(){
 		 $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 		$token = unserialize($accounts->config);
 		  $twitterObj->setToken($token['token'], $token['secret']);
-		  $userInfo = $twitterObj->post_direct_messagesNew('14914572','testing this stuff');
-		print_r($userInfo);
 		
+		$twitterObj->post_statusesUpdate(array('status' =>'D rafaelcr Check 3'));
 		$id=arg(3);
 
 		if($id){
