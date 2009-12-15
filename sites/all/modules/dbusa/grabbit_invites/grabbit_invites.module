@@ -75,7 +75,7 @@ function grabbit_invites_facebook(){
 	    else{
 		
 		 	$invite = grabbit_invites_send_invite(arg(4),'Invite to join grabbit','Join grabbit');
-			$template = t(_grabbit_invite_get_mail_template());
+			$template = t(_invite_get_mail_template());
 			$tokens = _invite_token_types($invite);
 			$message = token_replace_multiple($template, $tokens);
 		 
@@ -105,20 +105,4 @@ function grabbit_invites_send_invite($user,$subject,$message){
 
     return $invite;
 
-}
-
-/**
- * Returns the facebook invite template.
- *
- * @return
- *   The template.
- */
-function _grabbit_invite_get_mail_template() {
-  $template = t("Your friend, [inviter-raw], has invited you to join [site-name] at [site-url].
-
-To become a member of [site-name], click the link or paste it into the address bar of your browser.
-
-<a href='[join-link]'>[join-link]</a> ");
-
-  return $template;
 }
