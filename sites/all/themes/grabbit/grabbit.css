@@ -2405,14 +2405,21 @@ div.messages, div.status, div.warning, div.error{
 	margin-left: 20px;
 	width: 600px;
 }
+.node-stream-gmail .email-controllers
+{
+	margin-top: -21px;
+	position: relative;
+	float: right;
+}
 .node-stream-gmail .email-controllers .more_mail
 {
 	background: url(images/more.gif) no-repeat;
-	width: 27px;
-	height: 21px;
+	width: 15px;
+	height: 15px;
 	display: block;
 	overflow: hidden;
 	text-indent: -999em;
+	float: left;
 }
 .node-stream-gmail .email-controllers .reply_mail
 {
@@ -2422,6 +2429,8 @@ div.messages, div.status, div.warning, div.error{
 	display: block;
 	overflow: hidden;
 	text-indent: -999em;
+	float: left;
+	margin-right: 7px;
 }
 #TB_ajaxContent
 {
