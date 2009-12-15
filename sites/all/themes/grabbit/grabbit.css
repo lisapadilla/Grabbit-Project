@@ -2370,7 +2370,7 @@ div.messages, div.status, div.warning, div.error{
 }
 #TB_title
 {
-	background: transparent url(images/mail_top.png) no-repeat;
+	background: #8B939F;
 	height: 35px;
 }
 #TB_ajaxContent .gmail-wrap
