@@ -63,6 +63,7 @@ function grabbit_imap_user($op, &$edit, &$account, $category = NULL) {
 function grabbit_imap_reply_message(){
 	global $user;
 	$nid = arg(2);
+	print_r($nid);
 	$message = node_load($nid);
 	$reply_to = $message->field_imap_from_add[0]['value'];
 	$imap = grabbit_imap_get($user->uid);
