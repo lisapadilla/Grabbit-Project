@@ -189,7 +189,7 @@ function friend_search_show_friends_twitter(){
 			foreach($unser as $twitter){
 				
 				if(module_exists('grabbit_invites')){
-					if(!grabbit_invites_get_invited($twitter->name)){
+					if(!grabbit_invites_get_invited($twitter->screen_name)){
 					  $invite=l('Invite to grabbit','grabbit/invite/twitter/'.$twitter->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=400&width=740'));
 					}
 				}
