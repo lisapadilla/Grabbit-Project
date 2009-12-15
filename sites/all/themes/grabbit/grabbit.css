@@ -2404,6 +2404,19 @@ div.messages, div.status, div.warning, div.error{
 	color: #385491;
 	text-decoration: underline;
 }
+#TB_ajaxContent .gmail-wrap-of-the-wrap .reply
+{
+	float: right;
+}
+#TB_ajaxContent .gmail-wrap-of-the-wrap .reply a
+{
+	background: url(images/reply_inside.gif) no-repeat;
+	display: block;
+	width: 15px;
+	height: 21px;
+	overflow: hidden;
+	text-indent: -999em;
+}
 #TB_ajaxContent .gmail-atachments
 {
 	border-bottom: 1px solid #E6EAED;
