@@ -35,6 +35,7 @@ function grabbit_invites_twitter(){
 		include_once drupal_get_path('module', $module_name).'/includes/EpiTwitter.php';
 		include drupal_get_path('module', $module_name).'/includes/secret.php';
 		
+		 $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 		$token = unserialize($accounts->config);
 		  $twitterObj->setToken($token['token'], $token['secret']);
 		  $userInfo = $twitterObj->post_direct_messagesNew('testing this stuff');
