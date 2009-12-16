@@ -139,6 +139,10 @@ function _grabbit_invites_get_mail() {
 
 function grabbit_invites_get_invited($name){
 	$result = db_query("SELECT * FROM {invite} WHERE email = '%s' AND canceled=0",$name);
-	
+	if($name=='Jorge_Grabbit'){
+		while($pedro=db_fetch_object($result)){
+			print_r($pedro);
+		}
+	}
 	return db_affected_rows($result);
 }
