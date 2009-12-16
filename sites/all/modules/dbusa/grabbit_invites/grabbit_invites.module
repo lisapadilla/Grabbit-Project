@@ -91,6 +91,7 @@ function grabbit_invites_facebook(){
 										       'notification'=>$message,
 										));	
 			if($testing){
+				invite_save($invite);
 				print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation."; 
 			}else{
 				print "You have no invitations left for FACEBOOK today, pleace come back tomorrow";
@@ -114,8 +115,6 @@ function grabbit_invites_send_invite($user,$subject,$message){
       'resent'  => 0,
       'data'  => array('subject' => $subject, 'message' => $message),
     ));
-
-    invite_save($invite);
 
     return $invite;
 
