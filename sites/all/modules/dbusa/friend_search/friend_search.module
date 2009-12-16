@@ -69,6 +69,15 @@ function friend_search_menu()
     'type' => MENU_LOCAL_TASK
   );
 
+  $items['user/%/myfriends/grabbit_friends'] = array( 
+    'title' => 'Grabbit Friends', 
+    'page callback' => 'friend_search_show_friends_grabbit', 
+ 	'page arguments' => array(1),
+    'load arguments' => array('%map', '%index'),
+    'access arguments' => array('access content'),
+    'type' => MENU_LOCAL_TASK
+  );
+
   $items['user/%/myfriends/facebook_friends'] = array(
    'title' => 'Facebook Friends',
    'page callback' => 'friend_search_show_friends_facebook',
@@ -228,6 +237,28 @@ function friend_search_show_friends_twitter(){
 }
 
 function friend_search_show_friends(){
+	
+	global $user;
+	
+	drupal_add_js(drupal_get_path('module', 'friend_search').'/engine.js', $type = 'module');
+
+    $friends=array();	
+	$view = views_get_view('friends');
+    $view->set_display($display_id);
+    $view->execute();
+
+	foreach($view->result as $friend){
+	  print_r($friend);
+	}	
+
+    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">'
+
+    $output .='</div></div>';
+	
+	return $output;
+}
+
+function friend_search_show_friends_grabbit(){
 	
 	global $user;
 	
