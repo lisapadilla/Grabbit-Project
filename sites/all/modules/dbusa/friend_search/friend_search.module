@@ -378,7 +378,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  }
 	  elseif($friend->screen_name){ //if its twitter friend
 		$name=$friend->screen_name;
-		$picture='<img src="'.$friend->profile_image_url.'" />';
+		$picture='<img width="48px" src="'.$friend->profile_image_url.'" />';
 		if(module_exists('grabbit_invites')){
 			if(!grabbit_invites_get_invited($friend->screen_name)){
 			  $link=l('Invite to grabbit','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
