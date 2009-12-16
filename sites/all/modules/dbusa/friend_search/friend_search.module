@@ -332,11 +332,14 @@ function friend_search_show_friends(){
 	
 	//get facebook friends
 	$facebook=friend_search_get_friends_facebook();
-	print_r($facebook);
+	foreach ($facebook as $facebook_friend){
+	  $friends[$facebook_friend['first_name'].$facebook_friend['last_name'].' f']=$facebook_friend;
+	}
 	//end facebook friends
 	
 	//get twitter friends
 	$twitter=friend_search_get_friends_twitter();
+	print_r($twitter);
 	//endf teitter friends
 	
     $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">';
