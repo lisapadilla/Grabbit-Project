@@ -2379,6 +2379,13 @@ div.messages, div.status, div.warning, div.error{
 #grabbit-gmail-mail-form #edit-body
 {
 	width: 554px;
+	height: 250px;
+}
+#grabbit-gmail-mail-form .form-submit
+{
+	background: url(images/send_inside.gif) no-repeat;
+	width: 47px;
+	height: 19px;
 }
 #grabbit-gmail-mail-form #edit-body-wrapper
 {
