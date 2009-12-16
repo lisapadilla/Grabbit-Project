@@ -236,12 +236,14 @@ function grabbit_gmail_reply_message(){
 function grabbit_gmail_mail_form( &$form_state, $from, $to )
 {
   $form['to'] = array(
-    '#type'           => 'textfield',
-    '#default_value'  => $to,
+    '#type'           => 'item',
+    '#prefix'         => '<div class="reply-head">',
+    '#value'          => $to,
     '#title'          => t('To')
   );
   $form['from'] = array(
     '#type'           => 'item',
+    '#suffix'         => '</div>',
     '#value'          => $from,
     '#title'          => t('From')
   );
@@ -250,8 +252,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
     '#title'          => t('Subject')
   );
   $form['body'] = array(
-    '#type'           => 'textarea',
-    '#title'          => t('Body')
+    '#type'           => 'textarea'
   );
   $form['submit'] = array(
     '#type'           => 'submit',
