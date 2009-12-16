@@ -2362,7 +2362,19 @@ div.messages, div.status, div.warning, div.error{
 .facebook-post.display, .twitter-message-stream.display, .node-stream-news.display, .node-stream-deal.display, .node-stream-blogs.display{
 	display:block;
 }
-
+#grabbit-gmail-mail-form .reply-head
+{
+	background-color: #E6EAED;
+	padding: 15px;
+}
+#grabbit-gmail-mail-form .form-item
+{
+	margin: 0;
+}
+#grabbit-gmail-mail-form .form-item label
+{
+	display: inline;
+}
 #TB_window
 {
 	border: none;
