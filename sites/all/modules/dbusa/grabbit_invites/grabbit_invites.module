@@ -86,16 +86,13 @@ function grabbit_invites_facebook(){
 			$tokens = _invite_token_types($invite);
 			$message = token_replace_multiple($template, $tokens);
 		
-			$notifications= $facebook->api_client->call_method('facebook.admin.getAllocation', array('api_key' => $api_key,
-										   'integration_point_name'=>'notifications_per_day',
-											));
-			if($notifications>0){
 				$testing = $facebook->api_client->call_method('facebook.notifications.send', array('api_key' => $api_key,
 										       'to_ids'=>arg(3),
 										       'notification'=>$message,
 										));	
-				$left=$notifications-1;
-				print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation. You have ".$left." invites left for today"; 
+			if($testing){
+				invite_save($invite);
+				print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation."; 
 			}else{
 				print "You have no invitations left for FACEBOOK today, pleace come back tomorrow";
 			}
@@ -118,8 +115,6 @@ function grabbit_invites_send_invite($user,$subject,$message){
       'resent'  => 0,
       'data'  => array('subject' => $subject, 'message' => $message),
     ));
-
-    invite_save($invite);
 
     return $invite;
 
