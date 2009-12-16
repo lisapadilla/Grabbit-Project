@@ -251,7 +251,7 @@ function friend_search_show_friends(){
 	  print_r($friend);
 	}	
 
-    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">'
+    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">';
 
     $output .='</div></div>';
 	
