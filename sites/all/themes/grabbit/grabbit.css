@@ -2644,3 +2644,6 @@ div.messages, div.status, div.warning, div.error{
 	font-size:11px;
 	padding-top:4px;
 }
+.user-friends a{
+	color:#317CF9;
+}
