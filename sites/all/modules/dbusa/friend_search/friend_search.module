@@ -176,6 +176,81 @@ function friend_search_show_friends_facebook(){
 	
 }
 
+function friend_search_get_friends_facebook(){
+	global $user;
+
+	$fuser = facebook_grabbit_get_fid($user->uid);
+	$profile = content_profile_load('profile', $user->uid);
+	
+	if ($fuser){
+		$module_name='facebook_grabbit';
+	  require_once(drupal_get_path('module', $module_name)."/facebook/facebook.php");
+	  require_once(drupal_get_path('module', $module_name)."/facebook/facebook_desktop.php");
+	  include(drupal_get_path('module', $module_name)."/facebook/config.php");
+
+	  $suser=$fuser->fid;
+	  $session_key=$fuser->kid;
+      try{
+	
+	    $facebook = new FacebookDesktop($api_key, $secret);
+	
+	    if ($facebook->set_user($suser, $session_key) != null){
+		  drupal_set_message("Facebook connection failed","error");
+	    }
+	    else{
+		 
+	      $friends =  $facebook->api_client->call_method('Friends.get', array('api_key' => $api_key,
+									       'uid'=>"$suser")); 
+		
+		  $uids = implode(", ",$friends);						
+		  $details = $facebook->api_client->call_method('Users.getInfo', array('api_key' => $api_key,
+																       'uids'=>$uids,
+																        'fields'=>'last_name, first_name, pic_small'));
+	     return $details;
+	   }
+	  }
+	  catch(FacebookRestClientException $e){
+	  }
+    }
+	
+}
+
+
+function friend_search_get_friends_twitter(){
+    global $user;
+    $accounts = oauth_twitter_get_uid($user->uid);
+
+	if($accounts){
+		include_once 'includes/EpiCurl.php';
+		include_once 'includes/EpiOAuth.php';
+		include_once 'includes/EpiTwitter.php';
+		include 'includes/secret.php';
+
+		try{
+        	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+			$twitter_account = oauth_twitter_get_uid($user->uid);
+			$token = unserialize($twitter_account->config);
+			$twitterObj->setToken($token['token'], $token['secret']);
+			 $twitterInfo2= $twitterObj->get_accountVerify_credentials();  
+			 $twit_id = $twitterInfo2->screen_name;
+			
+			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
+			$unser = json_decode($requ->data);
+			
+			return $unser;
+	     }
+	     catch(EpiOAuthBadRequestException $e){  
+	        drupal_set_message("Connection error Twitter","error");
+	     }catch(EpiOAuthUnauthorizedException $e){  
+	        drupal_set_message("Error in Twitter","error");
+	     }catch(EpiOAuthException $e){  
+	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+	     }
+	
+	}
+	
+}
+
 function friend_search_show_friends_twitter(){
     global $user;
     $accounts = oauth_twitter_get_uid($user->uid);
@@ -242,7 +317,9 @@ function friend_search_show_friends(){
 	
 	drupal_add_js(drupal_get_path('module', 'friend_search').'/engine.js', $type = 'module');
 
-    $friends=array();	
+    $friends=array();
+
+    // get grabbit friends	
 	$view = views_get_view('friends');
     $view->set_display($display_id);
     $view->execute();
@@ -251,9 +328,17 @@ function friend_search_show_friends(){
 	  $friend_object = content_profile_load('profile', $friend->users_friendlist_relations_1_uid);
 	  $friends[$friend->users_friendlist_relations_1_name . ' g']=$friend_object;
 	}
+	// end grabbit friends
 	
-	print_r($friends);	
-
+	//get facebook friends
+	$facebook=friend_search_get_friends_facebook();
+	print_r($facebook);
+	//end facebook friends
+	
+	//get twitter friends
+	$twitter=friend_search_get_friends_twitter();
+	//endf teitter friends
+	
     $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">';
 
     $output .='</div></div>';
