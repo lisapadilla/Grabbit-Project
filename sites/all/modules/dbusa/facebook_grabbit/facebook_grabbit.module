@@ -91,7 +91,7 @@ function facebook_grabbit_update_form($form_state){
 		           <div class="picture">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 		           <div class="user-name">'.$user->name.'</div>
 		           <div class="user-friends"><span class="numbers">'.friendlist_api_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH').'</span> <span class="user-name-friends">friends</span>
-		           <br><span class="numbers">'.friendlist_api_db_statuses('count',NULL,$user->uid, 1, 'TW_1_TO_2_P').'</span> <span class="user-name-friends">requests</span>
+		           <br><span class="numbers">'.l(friendlist_api_db_statuses('count',NULL,$user->uid, 1, 'TW_1_TO_2_P'),'user/me/myfriends/received').'</span> <span class="user-name-friends">requests</span>
 		           </div>
 		           </div>
 		         </div>';	
