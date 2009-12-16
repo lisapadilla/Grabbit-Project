@@ -227,6 +227,7 @@ function grabbit_gmail_reply_message(){
 	global $user;
 	$nid = arg(2);
 	$message = node_load($nid);
+	print_r($message->title);
 	$reply_to = $message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
   
