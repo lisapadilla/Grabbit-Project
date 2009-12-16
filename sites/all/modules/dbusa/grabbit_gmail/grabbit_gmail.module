@@ -249,6 +249,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
   );
   $form['subject'] = array(
     '#type'           => 'textfield',
+    '#prefix'         => '<div class="reply-body">',
     '#title'          => t('Subject')
   );
   $form['body'] = array(
@@ -256,6 +257,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
   );
   $form['submit'] = array(
     '#type'           => 'submit',
+    '#suffix'         => '</div>',
     '#value'          => t('Send')
   );
   $form['#submit'][] = 'grabbit_gmail_mail_form_submit';

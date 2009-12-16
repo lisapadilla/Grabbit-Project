@@ -2365,7 +2365,11 @@ div.messages, div.status, div.warning, div.error{
 #grabbit-gmail-mail-form .reply-head
 {
 	background-color: #E6EAED;
-	padding: 15px;
+	padding: 5px 15px;
+}
+#grabbit-gmail-mail-form .reply-body
+{
+	padding: 5px 15px;
 }
 #grabbit-gmail-mail-form .form-item
 {
