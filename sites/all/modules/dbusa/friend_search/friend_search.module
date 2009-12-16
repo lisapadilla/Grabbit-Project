@@ -248,8 +248,11 @@ function friend_search_show_friends(){
     $view->execute();
 
 	foreach($view->result as $friend){
-	  print_r($friend);
-	}	
+	  $friend_object = content_profile_load('profile', $friend->users_friendlist_relations_1_uid);
+	  $friends[$friend->users_friendlist_relations_1_name . ' g']=$friend_object
+	}
+	
+	print_r($friends);	
 
     $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">';
 
