@@ -345,11 +345,80 @@ function friend_search_show_friends(){
 	//endf teitter friends
 	
 	ksort($friends);
-	print_r($friends);
 	
     $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">';
+    $row='views-row-odd';
+    foreach($friends as $friend){
+	  $output .= friend_search_theme_a_friend($friend,$row);
+	  	if($row=='views-row-odd'){
+			$row='views-row-even';
+		}else{
+			$row='views-row-odd';
+		}
+    }
 
     $output .='</div></div>';
+	
+	return $output;
+}
+
+function friend_search_theme_a_friend($friend,$row){
+	
+	if(is_array($friend)){ //if its facebook friend
+		if(module_exists('grabbit_invites')){
+			if(!grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
+	          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
+			}else{
+			  	$link='Invite is pending';			
+			}
+		}
+		$name=$friend['first_name']." ".$friend['last_name'];
+		$picture = '<img src="'.$friend['pic_small'].'" />';
+		$social .='<span class="from-facebook"><img src="'.base_path().path_to_theme().'/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
+	  }
+	  elseif($friend->screen_name){ //if its twitter friend
+		$name=$friend->screen_name;
+		$picture='<img src="'.$friend->profile_image_url.'" />';
+		if(module_exists('grabbit_invites')){
+			if(!grabbit_invites_get_invited($friend->screen_name)){
+			  $link=l('Invite to grabbit','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
+			}else{
+				$link='Invite is pending';
+			}
+		}
+		$social='<span class="from-twitter"> <img src="'.base_path().path_to_theme().'/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
+	  }
+	  elseif($friend->nid){ //if its grabbit friend
+	    $picture=l(theme('imagecache', 'friend_thumbnail', $friend->field_profile_picture[0]['filepath'], $friend->name),'users/'.$friend->name,array('html'=>TRUE));
+		$name=l($friend->name,'users/'.$friend->name);
+		$link='<div class="friendlist-user-links">'. l('Remove from friends', '/grabbit/friendlist/delete/'.$friend->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</div>';
+		$social='Grabbit';	
+	  }
+	
+	
+	$output = '<div class="views-row views-row-1 '.$row.'">
+	    <div class="views-row">
+
+	  <div class="views-field-field-profile-picture-fid">
+	    <span class="field-content">'.$picture.'</span>
+	  </div>
+
+	  <span class="views-field-name">
+	    <span class="field-content">'.$name.'</span>
+	  </span>
+
+	  <div class="views-field-last-update-time">
+	    <span class="field-content"/>
+	  </div>
+
+	  <div class="views-field-action-link-requestee">
+	    <span class="field-content">'.$link.'</span>
+	  </div>
+
+	  <div class="views-field-action-socital-networks">
+	    <span class="field-content">'.$social.'</span>
+	  </div>
+	</div>  </div>';
 	
 	return $output;
 }
