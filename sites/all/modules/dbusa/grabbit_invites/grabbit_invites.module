@@ -149,7 +149,7 @@ function grabbit_invites_get_invited($name){
 }
 
 function grabbit_invites_check_facebook_user($facebook){
-	print_r($facebook);
+
 	$result=db_query("SELECT * FROM {facebook_grabbit} WHERE fid=%d",$facebook['uid']);
 	
 	while($face_user=db_fetch_object($result)){
