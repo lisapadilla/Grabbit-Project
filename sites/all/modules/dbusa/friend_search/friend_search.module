@@ -367,16 +367,21 @@ function friend_search_theme_a_friend($friend,$row){
 	if(is_array($friend)){ //if its facebook friend
 		if(module_exists('grabbit_invites')){
 			$suser=grabbit_invites_check_facebook_user($friend);
-			
-			if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
-	          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
+			if($suser!=0){
+				$link=$suser['joined'];
+				$link .="<br>".$suser['friend'];
 			}else{
-				if($invited=1){
-				  $link='Invite is pending';	
-				}elseif($invited=2){
-				  $link='Joined grabbit';
-				}			
+			  	if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
+		          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
+				}else{
+					if($invited=1){
+					  $link='Invite is pending';	
+					}elseif($invited=2){
+					  $link='Joined grabbit';
+					}			
+				}	
 			}
+			
 		}
 		$name=$friend['first_name']." ".$friend['last_name'];
 		$picture = '<img src="'.$friend['pic_small'].'" />';
