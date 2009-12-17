@@ -2379,6 +2379,16 @@ div.messages, div.status, div.warning, div.error{
 #grabbit-gmail-mail-form #edit-body
 {
 	width: 554px;
+	height: 250px;
+}
+#grabbit-gmail-mail-form .form-submit
+{
+	background: url(images/send_inside.gif) no-repeat;
+	width: 47px;
+	height: 19px;
+	border: none;
+	margin-left: 572px;
+	margin-top: 10px;
 }
 #grabbit-gmail-mail-form #edit-body-wrapper
 {
@@ -2484,8 +2494,8 @@ div.messages, div.status, div.warning, div.error{
 .node-stream-gmail .email-controllers .reply_mail
 {
 	background: url(images/reply.png) no-repeat;
-	width: 27px;
-	height: 21px;
+	width: 40px;
+	height: 15px;
 	display: block;
 	overflow: hidden;
 	text-indent: -999em;

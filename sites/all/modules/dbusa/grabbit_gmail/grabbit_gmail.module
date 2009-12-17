@@ -230,10 +230,10 @@ function grabbit_gmail_reply_message(){
 	$reply_to = $message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
   
-  echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to );
+  echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to, $message->title );
 }
 
-function grabbit_gmail_mail_form( &$form_state, $from, $to )
+function grabbit_gmail_mail_form( &$form_state, $from, $to, $title )
 {
   $form['to'] = array(
     '#type'           => 'item',
@@ -250,6 +250,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
   $form['subject'] = array(
     '#type'           => 'textfield',
     '#prefix'         => '<div class="reply-body">',
+    '#value'          => 'Re: '.$title,
     '#title'          => t('Subject')
   );
   $form['body'] = array(
@@ -258,7 +259,7 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to )
   $form['submit'] = array(
     '#type'           => 'submit',
     '#suffix'         => '</div>',
-    '#value'          => t('Send')
+    '#value'          => ''
   );
   $form['#submit'][] = 'grabbit_gmail_mail_form_submit';
   
