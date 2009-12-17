@@ -366,6 +366,8 @@ function friend_search_theme_a_friend($friend,$row){
 	
 	if(is_array($friend)){ //if its facebook friend
 		if(module_exists('grabbit_invites')){
+			$suser=grabbit_invites_check_facebook_user($friend);
+			print "theming a friend";
 			if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
 	          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
 			}else{
@@ -384,6 +386,7 @@ function friend_search_theme_a_friend($friend,$row){
 		$name=$friend->screen_name;
 		$picture='<img width="48px" src="'.$friend->profile_image_url.'" />';
 		if(module_exists('grabbit_invites')){
+			
 			if(!$invited=grabbit_invites_get_invited($friend->screen_name)){
 			  $link=l('Invite to grabbit','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
 			}else{
