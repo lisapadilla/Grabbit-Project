@@ -407,7 +407,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  elseif($friend->nid){ //if its grabbit friend
 	    $picture=l(theme('imagecache', 'friend_thumbnail', $friend->field_profile_picture[0]['filepath'], $friend->name),'users/'.$friend->name,array('html'=>TRUE));
 		$name=l($friend->name,'users/'.$friend->name);
-		$link='<div class="friendlist-user-links">'. l('Remove from friends', '/grabbit/friendlist/delete/'.$friend->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</div>';
+		$link='<div class="friendlist-user-links">'. l('Remove from friends', 'friendlist/delete/'.$friend->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</div>';
 		$social='Grabbit';	
 	  }
 	
