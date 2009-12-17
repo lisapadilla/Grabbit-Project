@@ -369,7 +369,7 @@ function friend_search_theme_a_friend($friend,$row){
 			$suser=grabbit_invites_check_facebook_user($friend);
 			if($suser!=0){
 				$link=$suser['joined'];
-				$link .="<br>".$suser['friend'];
+				$link .="<br>".$suser['friends'];
 			}else{
 			  	if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
 		          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
