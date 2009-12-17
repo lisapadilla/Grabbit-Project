@@ -168,7 +168,7 @@ function grabbit_invites_check_facebook_user($facebook){
 		    $friends='He requested you to be friends in grabbit!';
 		  break;	
 		  default:
-	        $friends='Request friend!';
+	        $friends=l('Send friend request!', '/grabbit/friendlist/add/'.$amigo->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends'));
 		  break;
 		  }
 	    }
