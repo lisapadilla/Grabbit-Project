@@ -156,7 +156,7 @@ function grabbit_invites_check_facebook_user($facebook){
 		$amigo=user_load(array('uid'=>$face_user->uid));
 	    if($amigo->status==1){
 		  $status = friendlist_api_relation_status_calculate($user->uid, $amigo->uid, 1);
-		  print_r($amigo);
+		  
 		  switch($status){
 		  case 'TW_BOTH':
 		    $friends='You are grabbit friends!';

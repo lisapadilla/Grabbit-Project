@@ -318,12 +318,12 @@ function friend_search_show_friends(){
 	drupal_add_js(drupal_get_path('module', 'friend_search').'/engine.js', $type = 'module');
 
     $friends=array();
-   $display_id = 'page_1';
+    $display_id = 'page_1';
     // get grabbit friends	
 	$view = views_get_view('friends');
     $view->set_display($display_id);
     $view->execute();
-
+print_r($view);
 	foreach($view->result as $friend){
 	  $friend_object = content_profile_load('profile', $friend->users_friendlist_relations_1_uid);
 	  $friends[$friend->users_friendlist_relations_1_name . ' g']=$friend_object;
