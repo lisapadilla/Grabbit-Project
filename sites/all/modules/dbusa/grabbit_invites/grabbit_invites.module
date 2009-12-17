@@ -152,6 +152,7 @@ function grabbit_invites_check_facebook_user($facebook){
 	$result=db_query("SELECT uid FROM facebook_grabbit WHERE fid=%d",$facebook['uid']);
 	
 	while($face_user=db_fetch_object($result)){
+		print_r($face_user);
 		$amigo=user_load(array('uid'=>$face_user->uid));
 	    print_r($amigo);
 	}
