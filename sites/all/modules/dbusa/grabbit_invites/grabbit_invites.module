@@ -149,14 +149,19 @@ function grabbit_invites_get_invited($name){
 }
 
 function grabbit_invites_check_facebook_user($facebook){
-
+    global $user;
 	$result=db_query("SELECT * FROM {facebook_grabbit} WHERE fid=%d",$facebook['uid']);
 	
 	while($face_user=db_fetch_object($result)){
-		print_r($face_user);
 		$amigo=user_load(array('uid'=>$face_user->uid));
-	    print_r($amigo);
+	    if($amigo->status==1){
+		  $status = friendlist_api_relation_status_calculate($user->uid, $amigo->uid, 'TW_BOTH');
+		  print_r($amigo);
+		  print_r($status);
+	    }
 	}
+	
+	return 0;
 	
 }
 
