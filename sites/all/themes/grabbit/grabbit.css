@@ -2676,6 +2676,10 @@ div.messages, div.status, div.warning, div.error{
 	padding: 0;
 	font-weight: bold;
 }
+#content-area .tabs li
+{
+	margin-right: 2px;
+}
 #content-area .tabs a.active
 {
 	background: url(images/tab_active_bg.png) no-repeat;
