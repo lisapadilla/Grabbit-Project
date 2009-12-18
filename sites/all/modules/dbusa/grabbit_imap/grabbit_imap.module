@@ -130,7 +130,7 @@ function grabbit_imap_reply_message(){
 
 function grabbit_imap_mail_form( &$form_state, $from, $to )
 {
-  $form['to'] = array(
+/*  $form['to'] = array(
     '#type'           => 'textfield',
     '#default_value'  => $to,
     '#title'          => t('To')
@@ -145,12 +145,37 @@ function grabbit_imap_mail_form( &$form_state, $from, $to )
     '#title'          => t('Subject')
   );
   $form['body'] = array(
-    '#type'           => 'textarea',
-    '#title'          => t('Body')
+    '#type'           => 'textarea'
   );
   $form['submit'] = array(
     '#type'           => 'submit',
     '#value'          => t('Send')
+  );*/
+  $form['to'] = array(
+    '#type'           => 'item',
+    '#prefix'         => '<div class="reply-head">',
+    '#value'          => $to,
+    '#title'          => t('To')
+  );
+  $form['from'] = array(
+    '#type'           => 'item',
+    '#suffix'         => '</div>',
+    '#value'          => $from,
+    '#title'          => t('From')
+  );
+  $form['subject'] = array(
+    '#type'           => 'textfield',
+    '#prefix'         => '<div class="reply-body">',
+    '#value'          => 'Re: '.$title,
+    '#title'          => t('Subject')
+  );
+  $form['body'] = array(
+    '#type'           => 'textarea'
+  );
+  $form['submit'] = array(
+    '#type'           => 'submit',
+    '#suffix'         => '</div>',
+    '#value'          => ''
   );
   $form['#submit'][] = 'grabbit_imap_mail_form_submit';
   
