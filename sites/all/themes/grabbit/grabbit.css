@@ -2681,6 +2681,10 @@ div.tabs
 {
 	margin-right: 2px;
 }
+#content-area .tabs li a
+{
+	border: none;
+}
 #content-area .tabs a.active
 {
 	background: url(images/tab_active_bg.png) no-repeat;
