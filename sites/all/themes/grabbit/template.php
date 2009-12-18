@@ -116,6 +116,7 @@ function grabbit_preprocess(&$vars, $hook) {
 function grabbit_preprocess_page(&$vars, $hook) {
 	
 	$array_users=explode('/',$_GET['q']);
+	print_r($array_users);
 	if($array_users[0]=='users' || (arg(0)=='user' && arg(1)=='me' && !arg(2))){
 		$vars['body_classes'] .=' profile-display';
 	}
