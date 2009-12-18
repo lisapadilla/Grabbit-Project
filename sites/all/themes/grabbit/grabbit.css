@@ -2108,7 +2108,7 @@ margin-top:5px;
 .section-activity ul.primary{
   border: none;
 }
-.section-user .tabs ul.secondary li,
+#content-area .tabs ul li,
 .section-activity ul.primary li,
 .page-invite ul.primary li,
 .page-invite-import ul.primary li,
@@ -2119,11 +2119,12 @@ margin-top:5px;
   padding: 0px;
   margin: 0px;
 }
-.section-user .tabs ul.secondary li a,
+#content-area .tabs ul li a,
 .page-invite ul.primary li a,
 .section-activity ul.primary li a,
 .page-invite-import ul.primary li a,
-.section-activity ul.primary li a{
+.section-activity ul.primary li a
+{
   display: block;
   border: none;
   width: 100px;
