@@ -2667,4 +2667,12 @@ div.messages, div.status, div.warning, div.error{
 .tabs
 {
 	background-image: url(images/tabs_bg.gif);
+	padding-top: 5px;
+	padding-left: 10px;
+}
+.tabs ul.tabs
+{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
 }
