@@ -2710,6 +2710,7 @@ div.tabs
 {
 	font-size: 11px;
 	margin-right: 2px;
+	padding-top: 1px;
 }
 
 #content-area div.tabs
