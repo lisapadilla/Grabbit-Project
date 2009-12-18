@@ -2728,9 +2728,20 @@ div.tabs
 {
 	display: none;
 }
+.page-user-me #content-area dl.user-member
+{
+	display: none;
+}
 .page-user-me #content-area h3.username
 {
 	display: block;
+	margin-left: 106px;
+	font-size: 18px;
+	color: #385391;
+}
+.page-user-me .field-field-profile-picture
+{
+	margin-top: -23px;
 }
 .page-user-me #content-area .odd
 {
