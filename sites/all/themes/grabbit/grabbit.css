@@ -2702,6 +2702,10 @@ div.tabs
 {
 	color: #FFFFFF;
 }
+#content-area .tabs ul
+{
+	border: none;
+}
 
 #content-area div.tabs
 {
