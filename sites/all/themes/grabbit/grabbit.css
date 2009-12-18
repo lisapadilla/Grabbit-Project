@@ -2663,3 +2663,8 @@ div.messages, div.status, div.warning, div.error{
 .user-friends a{
 	color:#317CF9;
 }
+
+.tabs
+{
+	background-image: url(images/tabs_bg.gif);
+}
