@@ -2744,11 +2744,15 @@ div.tabs
 	float: left;
 	margin-left: 111px;
 	width: 122px;
+	font-size: 12px;
+	color: #385591;
 }
 .page-user-me .field-items
 {
 	float: left;
 	width: 309px;
+	font-size: 12px;
+	color: #666666;
 }
 .page-user-me .field
 {
@@ -2759,6 +2763,10 @@ div.tabs
 {
 	margin-top: -23px;
 	padding: 0;
+}
+.page-user-me .links
+{
+	display: none;
 }
 .page-user-me .field-field-profile-picture .field-items
 {
