@@ -2774,7 +2774,7 @@ div.tabs
 	float: left;
 	padding: 0;
 }
-.profile-display .links
+.profile-display #content-area .links
 {
 	display: none;
 }
