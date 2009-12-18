@@ -6,7 +6,7 @@
  */
 function grabbit_tabs_menu_alter( &$items )
 {
-  print_r($items);
-  
+  //print_r($items);
+  $items['user/%/myfriends']['type'] = MENU_CALLBACK;
 
 }
