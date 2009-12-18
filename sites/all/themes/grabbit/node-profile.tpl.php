@@ -72,6 +72,7 @@ global $user;
 	    <?php endif; ?>
       </div>
       <?php }else{ ?>
+        <h3><?=$user->name?></h3>
         <?php print $content; ?>
         <?php if ($links): ?>
 	      <div class="links">
