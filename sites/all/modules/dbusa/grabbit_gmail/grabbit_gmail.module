@@ -330,8 +330,7 @@ function grabbit_gmail_mail_form_submit( $form )
   global $user;
   
   $args = $form['#post'];
-print_r($form);
-exit;
+  $args['to']=$form['to']['#value'];
   $gmail = grabbit_gmail_get($user->uid);
   
   $ret = tinySendMail(
