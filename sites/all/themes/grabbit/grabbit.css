@@ -2735,6 +2735,7 @@ div.tabs
 .page-user-me #content-area h3.username
 {
 	display: block;
+	float: left;
 	margin-left: 111px;
 	font-size: 18px;
 	color: #385391;
@@ -2744,11 +2745,23 @@ div.tabs
 	float: left;
 	margin-left: 111px;
 	width: 122px;
+	font-size: 12px;
+	line-height: 13px;
+	color: #385591;
 }
 .page-user-me .field-items
 {
 	float: left;
 	width: 309px;
+	font-size: 12px;
+	line-height: 13px;
+	color: #666666;
+}
+.page-user-me .content-profile-display
+{
+	margin: 0;
+	margin-bottom: 15px;
+	padding: 0;
 }
 .page-user-me .field
 {
@@ -2758,7 +2771,12 @@ div.tabs
 .page-user-me .field-field-profile-picture
 {
 	margin-top: -23px;
+	float: left;
 	padding: 0;
+}
+.page-user-me .links
+{
+	display: none;
 }
 .page-user-me .field-field-profile-picture .field-items
 {
