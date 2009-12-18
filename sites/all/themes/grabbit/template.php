@@ -114,10 +114,10 @@ function grabbit_preprocess(&$vars, $hook) {
  *   The name of the template being rendered ("page" in this case.)
  */
 function grabbit_preprocess_page(&$vars, $hook) {
-	print_r(arg(0));
+	
 	if(arg(0)=='users' || (arg(0)=='user' && arg(1)=='me' && !arg(2))){
-		$vars['body_classes_array'][]='profile-display';
-		print_r($vars);
+		$vars['body_classes'] .=' profile-display';
+		
 	}
 	if(arg(0)=='search'){
 	  	$pos = strpos($vars['content'],'blue smurf');
