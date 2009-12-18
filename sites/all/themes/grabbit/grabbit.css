@@ -2735,9 +2735,20 @@ div.tabs
 .page-user-me #content-area h3.username
 {
 	display: block;
-	margin-left: 106px;
+	margin-left: 111px;
 	font-size: 18px;
 	color: #385391;
+}
+.page-user-me .field-label
+{
+	float: left;
+	margin-left: 111px;
+	width: 122px;
+}
+.page-user-me .field-items
+{
+	float: left;
+	width: 309px;
 }
 .page-user-me .field-field-profile-picture
 {
