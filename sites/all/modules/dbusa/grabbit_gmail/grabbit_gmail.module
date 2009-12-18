@@ -229,7 +229,50 @@ function grabbit_gmail_reply_message(){
 	$message = node_load($nid);
 	$reply_to = $message->field_from_add[0]['value'];
 	$gmail = grabbit_gmail_get($user->uid);
-  
+  print '<style>
+         #grabbit-gmail-mail-form .reply-head
+		{
+			background-color: #E6EAED;
+			padding: 10px 15px;
+		}
+		#grabbit-gmail-mail-form .reply-body
+		{
+			padding: 10px 15px;
+		}
+		#grabbit-gmail-mail-form #edit-subject
+		{
+			margin-left: 10px;
+			width: 550px;
+		}
+		#grabbit-gmail-mail-form #edit-body
+		{
+			width: 554px;
+			height: 250px;
+		}
+		#grabbit-gmail-mail-form .form-submit
+		{
+			background: url(images/send_inside.gif) no-repeat;
+			width: 47px;
+			height: 19px;
+			border: none;
+			margin-left: 572px;
+			margin-top: 10px;
+		}
+		#grabbit-gmail-mail-form #edit-body-wrapper
+		{
+			margin-left: 62px;
+			margin-top: 10px;
+		}
+		#grabbit-gmail-mail-form .form-item
+		{
+			margin: 0;
+		}
+		#grabbit-gmail-mail-form .form-item label
+		{
+			display: inline;
+		}
+</style>';
+
   echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to, $message->title );
 }
 
