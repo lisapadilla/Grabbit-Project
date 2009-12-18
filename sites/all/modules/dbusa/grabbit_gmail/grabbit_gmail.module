@@ -251,7 +251,7 @@ function grabbit_gmail_reply_message(){
 		}
 		#grabbit-gmail-mail-form .form-submit
 		{
-			background: url(images/send_inside.gif) no-repeat;
+			background: url('.path_to_theme().'/images/send_inside.gif) no-repeat;
 			width: 47px;
 			height: 19px;
 			border: none;
@@ -279,6 +279,10 @@ function grabbit_gmail_reply_message(){
 			font-variant:normal;
 			font-weight:normal;
 			line-height:normal;
+		}
+		body{
+			margin:0;
+			padding:0;
 		}
 </style><div class="gmail-body">';
 
