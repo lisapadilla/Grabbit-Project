@@ -66,7 +66,66 @@ function grabbit_imap_reply_message(){
 	$message = node_load($nid);
 	$reply_to = $message->field_imap_from_add[0]['value'];
 	$imap = grabbit_imap_get($user->uid);
+	print '<style>
+	         #grabbit-gmail-mail-form .reply-head
+			{
+				background-color: #E6EAED;
+				padding: 10px 15px;
+			}
+			#grabbit-gmail-mail-form .reply-body
+			{
+				padding: 10px 15px;
+			}
+			#grabbit-gmail-mail-form #edit-subject
+			{
+				margin-left: 10px;
+				width: 550px;
+			}
+			#grabbit-gmail-mail-form #edit-body
+			{
+				width: 554px;
+				height: 250px;
+			}
+			#grabbit-gmail-mail-form .form-submit
+			{
+				background: url('.base_path().path_to_theme().'/images/send_inside.gif) no-repeat;
+				width: 47px;
+				height: 19px;
+				border: none;
+				margin-left: 572px;
+				margin-top: 10px;
+			}
+			#grabbit-gmail-mail-form #edit-body-wrapper
+			{
+				margin-left: 62px;
+				margin-top: 10px;
+			}
+			#grabbit-gmail-mail-form .form-item
+			{
+				margin: 0;
+			}
+			#grabbit-gmail-mail-form .form-item label
+			{
+				display: inline;
+				font-weight:bold;
+			}
+			.gmail-body{
+				font-family:"Lucida Grande",Verdana,Arial,sans-serif;
+				font-size:12px;
+				font-size-adjust:none;
+				font-style:normal;
+				font-variant:normal;
+				font-weight:normal;
+				line-height:normal;
+			}
+			body{
+				margin:0;
+				padding:0;
+			}
+	</style><div class="gmail-body">';
+	
   echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to );
+  print "</div>";
 }
 
 function grabbit_imap_mail_form( &$form_state, $from, $to )
@@ -120,7 +179,7 @@ function grabbit_imap_mail_form_submit( $form )
   }
   else
   {
-    //echo 'Your message has been sent.';
+    echo 'Your IMAP message has been sent.';
   }
 }
 
@@ -234,7 +293,16 @@ function theme_imap_mail($node){
 		}
 	}
 	
-	$output = '<div class="gmail-body">
+	$output = '
+		<script>
+
+		function cerrar_ventana(){
+			$("#TB_ajaxContent").hide();
+			$("#TB_title").hide();
+		}
+
+		</script>
+	<div class="gmail-body">
 	<div class="gmail-wrap">
 	 
 	 <div class="gmail-wrap-of-the-wrap">
@@ -242,7 +310,7 @@ function theme_imap_mail($node){
 	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
 	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br>
 	  <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
-	  <div class="reply">'.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'),'query'=>'KeepThis=true&height=500&width=710')).'</div>
+	  <div class="reply">'.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail','onclick'=>'JavaScript:cerrar_ventana();'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=710')).'</div>
 	 </div>
 	 <div class="gmail-atachments">
 	  '.$attachments.'

@@ -2029,7 +2029,7 @@ function theme_imap_message($comments,$node){
 					    <span class="submitted">'.$submitted.'</span>	
 					  </div>
 					  <div class="email-controllers">
-					    '.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'),'query'=>'KeepThis=true&height=500&width=740')).'
+					    '.l('Reply This','imap/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=740')).'
 					    '.l('more','imap/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'KeepThis=true&height=500&width=740')).'
 					  </div>
 					
