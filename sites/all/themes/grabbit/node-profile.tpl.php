@@ -54,7 +54,7 @@ global $user;
       <?php if ($submitted): ?>
       <?php print $picture; ?>
       <?php endif; ?>
-      <h3 class="username"><?=$user->name?></h3>
+      <h3 class="username"><?=$node->name?></h3>
       <?php if (!$page && $title){ ?>
       <div class="content-floated-left">
 	    <h2><a href="<?php print $node_url; ?>" title="<?php print $title; ?>"><?php print $title; ?></a></h2>
