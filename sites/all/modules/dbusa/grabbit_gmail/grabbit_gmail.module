@@ -251,7 +251,7 @@ function grabbit_gmail_reply_message(){
 		}
 		#grabbit-gmail-mail-form .form-submit
 		{
-			background: url('.path_to_theme().'/images/send_inside.gif) no-repeat;
+			background: url('.base_path().path_to_theme().'/images/send_inside.gif) no-repeat;
 			width: 47px;
 			height: 19px;
 			border: none;
