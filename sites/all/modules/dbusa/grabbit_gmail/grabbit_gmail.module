@@ -392,7 +392,12 @@ function theme_gmail_mail($node){
 		}
 	}
 	
-	$output = '<div class="gmail-body">
+	$output = '
+	<script>
+	
+	
+	</script>
+	<div class="gmail-body">
 	<div class="gmail-wrap">
 	 <div class="gmail-wrap-of-the-wrap">
 	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
