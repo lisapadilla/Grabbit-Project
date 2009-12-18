@@ -2088,13 +2088,13 @@ margin-top:5px;
   font-size: 0px;
   line-height: 1000px;
 }
-.node-type-media .tabs .primary,
+/*.node-type-media .tabs .primary,
 .section-user .tabs .primary,
 .section-users .tabs .primary,
 .node-type-news .tabs .primary
 {
   display: none;
-}
+}*/
 .section-user .tabs ul.secondary,
 .page-invite ul.primary,
 .page-invite-import ul.primary{
@@ -2665,7 +2665,7 @@ div.messages, div.status, div.warning, div.error{
 	color:#317CF9;
 }
 
-.tabs
+div.tabs
 {
 	background-image: url(images/tabs_bg.gif);
 	padding-top: 10px;
@@ -2696,4 +2696,13 @@ div.messages, div.status, div.warning, div.error{
 #content-area .tabs a .tab
 {
 	color: #FFFFFF;
+}
+
+#content-area div.tabs
+{
+	display: none;
+}
+.page-activity-updates #content-area div.tabs
+{
+	display: block;
 }
