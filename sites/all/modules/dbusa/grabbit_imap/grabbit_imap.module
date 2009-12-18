@@ -124,11 +124,11 @@ function grabbit_imap_reply_message(){
 			}
 	</style><div class="gmail-body">';
 	
-  echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to );
+  echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to , $message->title);
   print "</div>";
 }
 
-function grabbit_imap_mail_form( &$form_state, $from, $to )
+function grabbit_imap_mail_form( &$form_state, $from, $to, $title )
 {
 /*  $form['to'] = array(
     '#type'           => 'textfield',
