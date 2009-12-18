@@ -2724,10 +2724,7 @@ div.tabs
 	display: block;
 }
 
-.page-user-me #content-area h3
-{
-	display: none;
-}
+
 .page-user-me #content-area .odd
 {
 	background-color: transparent;
