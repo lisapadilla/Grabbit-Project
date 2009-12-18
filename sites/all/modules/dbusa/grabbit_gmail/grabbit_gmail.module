@@ -339,7 +339,7 @@ function theme_gmail_mail($node){
 	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
 	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br>
 	  <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
-	  <div class="reply">'.l('Reply This','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'))).'</div>
+	  <div class="reply">'.l('Reply This','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail'),'query'=>'KeepThis=true&height=500&width=740')).'</div>
 	 </div>
 	 <div class="gmail-atachments">
 	  '.$attachments.'
