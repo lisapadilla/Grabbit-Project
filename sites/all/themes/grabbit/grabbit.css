@@ -2754,6 +2754,15 @@ div.tabs
 {
 	margin-top: -23px;
 }
+.page-user-me .field
+{
+	margin-bottom: 10px;
+}
+.page-user-me .field-field-profile-picture .field-items
+{
+	float: none;
+	width: 100%;
+}
 .page-user-me #content-area .odd
 {
 	background-color: transparent;
