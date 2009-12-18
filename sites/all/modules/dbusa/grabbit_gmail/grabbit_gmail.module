@@ -330,7 +330,7 @@ function grabbit_gmail_mail_form_submit( $form )
   global $user;
   
   $args = $form['#post'];
-print_r($args);
+print_r($form);
 exit;
   $gmail = grabbit_gmail_get($user->uid);
   
