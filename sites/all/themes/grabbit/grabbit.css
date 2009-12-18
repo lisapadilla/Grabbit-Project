@@ -2709,7 +2709,7 @@ div.tabs
 #content-area .tabs ul li a
 {
 	font-size: 11px;
-	margin: 0;
+	margin-right: 2px;
 }
 
 #content-area div.tabs
