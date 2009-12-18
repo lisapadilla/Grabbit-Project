@@ -2745,6 +2745,7 @@ div.tabs
 	margin-left: 111px;
 	width: 122px;
 	font-size: 12px;
+	line-height: 13px;
 	color: #385591;
 }
 .page-user-me .field-items
@@ -2752,7 +2753,13 @@ div.tabs
 	float: left;
 	width: 309px;
 	font-size: 12px;
+	line-height: 13px;
 	color: #666666;
+}
+.page-user-me .content-profile-display
+{
+	margin: 0;
+	padding: 0;
 }
 .page-user-me .field
 {
