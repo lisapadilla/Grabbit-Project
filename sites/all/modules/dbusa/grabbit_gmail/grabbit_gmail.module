@@ -405,7 +405,7 @@ function theme_gmail_mail($node){
 	<div class="gmail-body">
 	<div class="gmail-wrap">
 	 <div class="gmail-wrap-of-the-wrap">
-	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].'</span><br>
+	  <span class="gmail-header"><strong>From: </strong></span><span class="gmail-header-contains">'.$node->field_from[0]['value'].' ('.$node->field_from_add[0]['value'].')</span><br>
 	  <span class="gmail-header"><strong>Date: </strong></span><span class="gmail-header-contains">'.format_date($node->created).'</span><br>
 	  <span class="gmail-header"><strong>Subject: </strong></span><span class="gmail-header-contains">'.$node->title.'</span><br>
 	  <div class="reply">'.l('Reply This','gmail/reply/'.$node->nid,array('attributes'=>array('class'=>'thickbox reply_mail','onclick'=>'JavaScript:cerrar_ventana();'),'query'=>'KeepThis=true&TB_iframe=true&height=500&width=650')).'</div>
