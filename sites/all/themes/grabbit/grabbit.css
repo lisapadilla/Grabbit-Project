@@ -2750,13 +2750,15 @@ div.tabs
 	float: left;
 	width: 309px;
 }
+.page-user-me .field
+{
+	clear: both;
+	padding-top: 10px;
+}
 .page-user-me .field-field-profile-picture
 {
 	margin-top: -23px;
-}
-.page-user-me .field
-{
-	margin-bottom: 10px;
+	padding: 0;
 }
 .page-user-me .field-field-profile-picture .field-items
 {
