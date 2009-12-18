@@ -2676,7 +2676,8 @@ div.messages, div.status, div.warning, div.error{
 	padding: 0;
 	font-weight: bold;
 }
-.tabs a.active
+#content-area .tabs a.active
 {
 	background: url(images/tab_active_bg.png) no-repeat;
+	color: #666666;
 }
