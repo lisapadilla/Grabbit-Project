@@ -397,6 +397,7 @@ function theme_gmail_mail($node){
 	
 	function cerrar_ventana(){
 		$("#TB_ajaxContent").hide();
+		$("#TB_title").hide();
 	}
 	
 	</script>
