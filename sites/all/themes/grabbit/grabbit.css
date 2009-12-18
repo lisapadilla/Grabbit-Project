@@ -2620,6 +2620,7 @@ div.messages, div.status, div.warning, div.error{
 	border:medium none;
 	margin:0;
 	padding:10px;
+	padding-bottom: 0;
 }
 
 .navbar .menu{
