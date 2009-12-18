@@ -130,27 +130,6 @@ function grabbit_imap_reply_message(){
 
 function grabbit_imap_mail_form( &$form_state, $from, $to, $title )
 {
-/*  $form['to'] = array(
-    '#type'           => 'textfield',
-    '#default_value'  => $to,
-    '#title'          => t('To')
-  );
-  $form['from'] = array(
-    '#type'           => 'item',
-    '#value'          => $from,
-    '#title'          => t('From')
-  );
-  $form['subject'] = array(
-    '#type'           => 'textfield',
-    '#title'          => t('Subject')
-  );
-  $form['body'] = array(
-    '#type'           => 'textarea'
-  );
-  $form['submit'] = array(
-    '#type'           => 'submit',
-    '#value'          => t('Send')
-  );*/
   $form['to'] = array(
     '#type'           => 'item',
     '#prefix'         => '<div class="reply-head">',
@@ -187,6 +166,7 @@ function grabbit_imap_mail_form_submit( $form )
   global $user;
   
   $args = $form['#post'];
+  $args['to']=$form['to']['#value'];
   $imap = grabbit_imap_get($user->uid);
   
   $ret = tinySendMail(
