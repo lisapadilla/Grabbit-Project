@@ -124,33 +124,37 @@ function grabbit_imap_reply_message(){
 			}
 	</style><div class="gmail-body">';
 	
-  echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to );
+  echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to , $message->title);
   print "</div>";
 }
 
-function grabbit_imap_mail_form( &$form_state, $from, $to )
+function grabbit_imap_mail_form( &$form_state, $from, $to, $title )
 {
   $form['to'] = array(
-    '#type'           => 'textfield',
-    '#default_value'  => $to,
+    '#type'           => 'item',
+    '#prefix'         => '<div class="reply-head">',
+    '#value'          => $to,
     '#title'          => t('To')
   );
   $form['from'] = array(
     '#type'           => 'item',
+    '#suffix'         => '</div>',
     '#value'          => $from,
     '#title'          => t('From')
   );
   $form['subject'] = array(
     '#type'           => 'textfield',
+    '#prefix'         => '<div class="reply-body">',
+    '#value'          => 'Re: '.$title,
     '#title'          => t('Subject')
   );
   $form['body'] = array(
-    '#type'           => 'textarea',
-    '#title'          => t('Body')
+    '#type'           => 'textarea'
   );
   $form['submit'] = array(
     '#type'           => 'submit',
-    '#value'          => t('Send')
+    '#suffix'         => '</div>',
+    '#value'          => ''
   );
   $form['#submit'][] = 'grabbit_imap_mail_form_submit';
   
@@ -162,6 +166,7 @@ function grabbit_imap_mail_form_submit( $form )
   global $user;
   
   $args = $form['#post'];
+  $args['to']=$form['to']['#value'];
   $imap = grabbit_imap_get($user->uid);
   
   $ret = tinySendMail(
