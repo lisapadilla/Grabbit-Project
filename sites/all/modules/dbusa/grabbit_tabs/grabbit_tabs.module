@@ -7,14 +7,6 @@
 function grabbit_tabs_menu_alter( &$items )
 {
   //print_r($items);
-  //echo 'shit';
-  //$items['algo/bookmarks'] = $items['user/me/bookmarks'];
-  //unset( $items['user/me/bookmarks'] );
-  
-  $items['friends/%/all'] = $items['user/%/myfriends'];
-  //unset($items['user/%/myfriends']);
-  $items['friends/%/all/facebook'] = $items['user/%/myfriends/facebook_friends'];
-  //unset($items['user/%/myfriends/facebook_friends']);
-  //print_r($items);
+  $items['user/%/myfriends']['type'] = MENU_CALLBACK;
 
 }

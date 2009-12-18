@@ -2702,6 +2702,16 @@ div.tabs
 {
 	color: #FFFFFF;
 }
+#content-area .tabs ul
+{
+	border: none;
+}
+#content-area .tabs ul li a
+{
+	font-size: 11px;
+	margin-right: 2px;
+	padding-top: 1px;
+}
 
 #content-area div.tabs
 {
