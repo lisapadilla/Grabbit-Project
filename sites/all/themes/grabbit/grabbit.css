@@ -2620,6 +2620,7 @@ div.messages, div.status, div.warning, div.error{
 	border:medium none;
 	margin:0;
 	padding:10px;
+	padding-bottom: 0;
 }
 
 .navbar .menu{
@@ -2662,4 +2663,37 @@ div.messages, div.status, div.warning, div.error{
 }
 .user-friends a{
 	color:#317CF9;
+}
+
+.tabs
+{
+	background-image: url(images/tabs_bg.gif);
+	padding-top: 10px;
+	padding-left: 10px;
+}
+.tabs ul.tabs
+{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+#content-area .tabs li
+{
+	margin-right: 2px;
+}
+#content-area .tabs a.active
+{
+	background: url(images/tab_active_bg.png) no-repeat;
+}
+#content-area .tabs a.active .tab
+{
+	color: #666666;
+}
+#content-area .tabs a
+{
+	background: url(images/tab_bg.png) no-repeat;
+}
+#content-area .tabs a .tab
+{
+	color: #FFFFFF;
 }
