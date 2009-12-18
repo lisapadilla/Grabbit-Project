@@ -2679,5 +2679,16 @@ div.messages, div.status, div.warning, div.error{
 #content-area .tabs a.active
 {
 	background: url(images/tab_active_bg.png) no-repeat;
+}
+#content-area .tabs a.active .tab
+{
 	color: #666666;
+}
+#content-area .tabs a
+{
+	background: url(images/tab_bg.png) no-repeat;
+}
+#content-area .tabs a .tab
+{
+	color: #FFFFFF;
 }
