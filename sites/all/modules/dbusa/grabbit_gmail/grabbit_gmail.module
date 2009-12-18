@@ -284,7 +284,7 @@ function grabbit_gmail_mail_form_submit( $form )
   );
   if(!$ret)
   {
-      print("Oh, pshaw!  It didn't work!<br>");
+    print("Oh, pshaw!  It didn't work!<br>");
   }
   else
   {
