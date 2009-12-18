@@ -2706,6 +2706,11 @@ div.tabs
 {
 	border: none;
 }
+#content-area .tabs ul li a
+{
+	font-size: 11px;
+	margin: 0;
+}
 
 #content-area div.tabs
 {
