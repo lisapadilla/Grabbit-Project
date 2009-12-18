@@ -67,26 +67,26 @@ function grabbit_imap_reply_message(){
 	$reply_to = $message->field_imap_from_add[0]['value'];
 	$imap = grabbit_imap_get($user->uid);
 	print '<style>
-	         #grabbit-gmail-mail-form .reply-head
+	         #grabbit-imap-mail-form .reply-head
 			{
 				background-color: #E6EAED;
 				padding: 10px 15px;
 			}
-			#grabbit-gmail-mail-form .reply-body
+			#grabbit-imap-mail-form .reply-body
 			{
 				padding: 10px 15px;
 			}
-			#grabbit-gmail-mail-form #edit-subject
+			#grabbit-imap-mail-form #edit-subject
 			{
 				margin-left: 10px;
 				width: 550px;
 			}
-			#grabbit-gmail-mail-form #edit-body
+			#grabbit-imap-mail-form #edit-body
 			{
 				width: 554px;
 				height: 250px;
 			}
-			#grabbit-gmail-mail-form .form-submit
+			#grabbit-imap-mail-form .form-submit
 			{
 				background: url('.base_path().path_to_theme().'/images/send_inside.gif) no-repeat;
 				width: 47px;
@@ -95,16 +95,16 @@ function grabbit_imap_reply_message(){
 				margin-left: 572px;
 				margin-top: 10px;
 			}
-			#grabbit-gmail-mail-form #edit-body-wrapper
+			#grabbit-imap-mail-form #edit-body-wrapper
 			{
 				margin-left: 62px;
 				margin-top: 10px;
 			}
-			#grabbit-gmail-mail-form .form-item
+			#grabbit-imap-mail-form .form-item
 			{
 				margin: 0;
 			}
-			#grabbit-gmail-mail-form .form-item label
+			#grabbit-imap-mail-form .form-item label
 			{
 				display: inline;
 				font-weight:bold;
