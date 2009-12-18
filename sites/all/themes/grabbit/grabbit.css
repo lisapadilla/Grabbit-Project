@@ -2735,6 +2735,7 @@ div.tabs
 .page-user-me #content-area h3.username
 {
 	display: block;
+	float: left;
 	margin-left: 111px;
 	font-size: 18px;
 	color: #385391;
@@ -2759,6 +2760,7 @@ div.tabs
 .page-user-me .content-profile-display
 {
 	margin: 0;
+	margin-bottom: 15px;
 	padding: 0;
 }
 .page-user-me .field
@@ -2769,6 +2771,7 @@ div.tabs
 .page-user-me .field-field-profile-picture
 {
 	margin-top: -23px;
+	float: left;
 	padding: 0;
 }
 .page-user-me .links
