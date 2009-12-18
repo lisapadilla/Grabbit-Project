@@ -2128,7 +2128,7 @@ margin-top:5px;
   display: block;
   border: none;
   width: 100px;
-  height: 19px;
+  height: 16px;
   padding: 1px 0px 0px 0px;
   text-align: center;
 }
@@ -2710,7 +2710,7 @@ div.tabs
 {
 	font-size: 11px;
 	margin-right: 2px;
-	padding-top: 1px;
+	padding-top: 4px;
 }
 
 #content-area div.tabs
