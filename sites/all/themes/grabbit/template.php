@@ -116,6 +116,7 @@ function grabbit_preprocess(&$vars, $hook) {
 function grabbit_preprocess_page(&$vars, $hook) {
 	if(arg(0)=='users' || (arg(0)=='user' && arg(1)=='me' && !arg(2))){
 		$vars['body_classes_array'][]='profile-display';
+		print_r($vars);
 	}
 	if(arg(0)=='search'){
 	  	$pos = strpos($vars['content'],'blue smurf');
