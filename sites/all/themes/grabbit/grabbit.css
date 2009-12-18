@@ -2724,15 +2724,15 @@ div.tabs
 	display: block;
 }
 
-.page-user-me #content-area h3
+.profile-display #content-area h3
 {
 	display: none;
 }
-.page-user-me #content-area dl.user-member
+.profile-display #content-area dl.user-member
 {
 	display: none;
 }
-.page-user-me #content-area h3.username
+.profile-display #content-area h3.username
 {
 	display: block;
 	float: left;
@@ -2740,7 +2740,7 @@ div.tabs
 	font-size: 18px;
 	color: #385391;
 }
-.page-user-me .field-label
+.profile-display .field-label
 {
 	float: left;
 	margin-left: 111px;
@@ -2749,7 +2749,7 @@ div.tabs
 	line-height: 13px;
 	color: #385591;
 }
-.page-user-me .field-items
+.profile-display .field-items
 {
 	float: left;
 	width: 309px;
@@ -2757,33 +2757,33 @@ div.tabs
 	line-height: 13px;
 	color: #666666;
 }
-.page-user-me .content-profile-display
+.profile-display .content-profile-display
 {
 	margin: 0;
 	margin-bottom: 15px;
 	padding: 0;
 }
-.page-user-me .field
+.profile-display .field
 {
 	clear: both;
 	padding-top: 10px;
 }
-.page-user-me .field-field-profile-picture
+.profile-display .field-field-profile-picture
 {
 	margin-top: -23px;
 	float: left;
 	padding: 0;
 }
-.page-user-me .links
+.profile-display .links
 {
 	display: none;
 }
-.page-user-me .field-field-profile-picture .field-items
+.profile-display .field-field-profile-picture .field-items
 {
 	float: none;
 	width: 100%;
 }
-.page-user-me #content-area .odd
+.profile-display #content-area .odd
 {
 	background-color: transparent;
 }
