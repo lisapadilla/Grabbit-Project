@@ -2787,3 +2787,7 @@ div.tabs
 {
 	background-color: transparent;
 }
+.profile-display .profile dt
+{
+	clear: both;
+}
