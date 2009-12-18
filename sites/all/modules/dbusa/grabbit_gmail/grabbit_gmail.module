@@ -270,6 +270,7 @@ function grabbit_gmail_reply_message(){
 		#grabbit-gmail-mail-form .form-item label
 		{
 			display: inline;
+			font-weight:bold;
 		}
 		.gmail-body{
 			font-family:"Lucida Grande",Verdana,Arial,sans-serif;
