@@ -2472,6 +2472,12 @@ div.messages, div.status, div.warning, div.error{
 	margin-top: 10px;
 	width: 600px;
 }
+.node-stream-imap .submitted .from,
+.node-stream-gmail .submitted .from
+{
+	color: #3399FF;
+	font-weight: bold;
+}
 .node-stream-imap .email-controllers,
 .node-stream-gmail .email-controllers
 {
