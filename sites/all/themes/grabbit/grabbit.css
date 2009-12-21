@@ -2801,4 +2801,6 @@ div.tabs
 	overflow-x:hidden;
 	overflow-y:scroll;
 	height:650px;
+	background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
+	padding-bottom:20px;
 }
