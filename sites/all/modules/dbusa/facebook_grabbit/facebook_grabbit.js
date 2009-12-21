@@ -31,7 +31,7 @@ function display_items(panel){
 	stories_per_slide_p1=4;
     panel_id=panel.attr('id');
     current_panel=$(".last",panel);
-
+/*
 	if (current_panel.next().attr('class') != undefined){
 
 		var scroll_to = current_panel.next();
@@ -50,7 +50,7 @@ function display_items(panel){
 		}
 	
 	}else{
-		current_panel.parent().next().html('retrieving data...');
+*/		current_panel.parent().next().html('retrieving data...');
 		pid=panel.attr('pid');
 		pager=parseInt(panel.attr('pager'))+1;
 		$.get(Drupal.settings.basePath+"panels/paginate",{pid:pid,page:pager},function(data){
@@ -79,7 +79,7 @@ function display_items(panel){
 
 		   });
 		
-	}
+	//}
 }
 
 function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
