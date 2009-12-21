@@ -2429,8 +2429,7 @@ div.messages, div.status, div.warning, div.error{
 {
 	font-size: 0px;
 	line-height: 1000px;
-	margin-top: 3px;
-	margin-right: 7px;
+	margin-top: 2px;
 	overflow: hidden;
 	background: url(images/thickbox_close.png) no-repeat;
 	width: 56px;
