@@ -243,7 +243,7 @@ function grabbit_gmail_reply_message(){
 		{
 			width: 620px;
 		}
-		.gmail-header-contains .to-mail
+		#grabbit-gmail-mail-form .to-mail
     {
     	color: #999999;
     	display: inline;
