@@ -254,11 +254,11 @@ function grabbit_gmail_reply_message(){
 			width: 47px;
 			height: 19px;
 			border: none;
-			margin-right: 58px
+			margin-right: 58px;
 			float: right;
 			margin-top: 10px;
 		}
-		.edit-subject-wrapper label
+		#edit-subject-wrapper label
 		{
 		  display:block;
       float:left;
