@@ -2461,7 +2461,7 @@ div.messages, div.status, div.warning, div.error{
 }
 #TB_ajaxContent .gmail-wrap-of-the-wrap .reply a
 {
-	background: url(images/reply_inside.gif) no-repeat;
+	background: url(images/reply.png) no-repeat;
 	display: block;
 	width: 40px;
 	height: 15px;
