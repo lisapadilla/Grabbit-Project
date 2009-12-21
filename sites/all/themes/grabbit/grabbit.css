@@ -1078,7 +1078,6 @@ a.active{
   padding: 0px;
   overflow:hidden;
   background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
-  padding-bottom:20px;
 }
 #content-area h1{
   display: block;
@@ -2289,6 +2288,9 @@ div.messages, div.status, div.warning, div.error{
 .section-search #content-area .search-results{
 	margin:0px;
 }
+.front #content-area{
+	background:transparent;
+}
 .front #content-area .views-row-even, .front #content-area .even,
 .front .panel-title{
 	background:#FFFFFF;
@@ -2407,6 +2409,7 @@ div.messages, div.status, div.warning, div.error{
 	border: none;
 	background: #FFFFFF;
 	border-bottom: 35px solid #8B939F;
+	font-family: Helvetica, Arial, Geneva, sans-serif;
 }
 #TB_title
 {
@@ -2430,7 +2433,7 @@ div.messages, div.status, div.warning, div.error{
 	margin-top: 2px;
 	overflow: hidden;
 	background: url(images/thickbox_close.png) no-repeat;
-	width: 56px;
+	width: 57px;
 	height: 18px;
 	display: block;
 }
