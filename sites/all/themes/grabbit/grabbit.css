@@ -1293,7 +1293,7 @@ a.active{
   display: block;
 }
 .facebook-post, .twitter-message-stream, .node-stream-news, .node-stream-deal, .node-stream-blogs{
-	display:none;
+	display:block;
 }
 #block-views-friends-block_1,
 #block-views-suggested_friends-block_1
@@ -2792,6 +2792,11 @@ div.tabs
 	clear: both;
 }
 #panel-activity{
+	overflow-x:hidden;
+	overflow-y:scroll;
+	height:650px;
+}
+.user-panel{
 	overflow-x:hidden;
 	overflow-y:scroll;
 	height:650px;

@@ -31,7 +31,7 @@ function display_items(panel){
 	stories_per_slide_p1=4;
     panel_id=panel.attr('id');
     current_panel=$(".last",panel);
-
+/*
 	if (current_panel.next().attr('class') != undefined){
 
 		var scroll_to = current_panel.next();
@@ -50,7 +50,7 @@ function display_items(panel){
 		}
 	
 	}else{
-		current_panel.parent().next().html('retrieving data...');
+*/		current_panel.parent().next().html('retrieving data...');
 		pid=panel.attr('pid');
 		pager=parseInt(panel.attr('pager'))+1;
 		$.get(Drupal.settings.basePath+"panels/paginate",{pid:pid,page:pager},function(data){
@@ -79,28 +79,28 @@ function display_items(panel){
 
 		   });
 		
-	}
+	//}
 }
 
 function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
 	var height = $("#"+slideElement.id).height()+200;
-	$(".suser-panels").height(height);
+//	$(".suser-panels").height(height);
 }
 
 function fixtheheightMore(element){
 	var height = $(".panel-wraper",element).height()+$(".panel-title",element).height()+$(".panel-controller",element).height()+200;
-	element.height(height);
-	$(".suser-panels").height(height);
+//	element.height(height);
+//	$(".suser-panels").height(height);
 	panels_heights[element.attr('id')]=height;
 }
 function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardFlag){
 	if(panels_heights[nextSlideElement.id]){
 		var height = panels_heights[nextSlideElement.id];
-		$("#"+nextSlideElement.id).height(height);
-		$(".suser-panels").height(height);
+//		$("#"+nextSlideElement.id).height(height);
+//		$(".suser-panels").height(height);
 	}else{
 	  	var height = $("#"+nextSlideElement.id).height()+200;
-		$(".suser-panels").height(height);	
+//		$(".suser-panels").height(height);	
 	}
 }
 $(document).ready(function() {
