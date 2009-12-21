@@ -243,6 +243,10 @@ function grabbit_gmail_reply_message(){
 		{
 			width: 620px;
 		}
+		.gmail-header-contains .to-mail
+    {
+    	color: #999999;
+    }
 		#grabbit-gmail-mail-form #edit-body
 		{
 			width: 620px;
