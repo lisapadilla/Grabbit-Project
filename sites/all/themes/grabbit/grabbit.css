@@ -2420,10 +2420,15 @@ div.messages, div.status, div.warning, div.error{
 {
 	background-color: #E6EAED;
 }
+#TB_ajaxContent .gmail-header-contains .to-mail
+{
+	color: #999999;
+}
 #TB_ajaxContent .gmail-wrap .gmail-wrap-of-the-wrap
 {
 	width: 600px;
 	margin-left: 20px;
+	margin-right: 20px;
 	padding: 10px 0;
 }
 #TB_closeWindowButton
@@ -2433,9 +2438,13 @@ div.messages, div.status, div.warning, div.error{
 	margin-top: 2px;
 	overflow: hidden;
 	background: url(images/thickbox_close.png) no-repeat;
-	width: 57px;
+	width: 59px;
 	height: 18px;
 	display: block;
+}
+#TB_iframeContent
+{
+	margin: 0;
 }
 #TB_ajaxContent .body-wrap
 {
