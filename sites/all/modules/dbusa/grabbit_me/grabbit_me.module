@@ -802,6 +802,20 @@ function grabbit_me_get_my_profile(){
 		}	
 	}
 	
+	if($user->uid>0){
+		if($fuser = facebook_grabbit_get_fid($user->uid))
+		  $services = drupal_get_path('module', 'grabbit_me').'/profile_fb.png';
+	
+		if($twitter_account = oauth_twitter_get_uid($user->uid))
+		  $services .= drupal_get_path('module', 'grabbit_me').'/profile_tw.png';
+	
+		if($gmail_user = grabbit_gmail_get($user->uid))
+		  $services .= drupal_get_path('module', 'grabbit_me').'/profile_gm.png';
+		
+		if($imap_user = grabbit_imap_get($user->uid))
+		  $services .= drupal_get_path('module', 'grabbit_me').'/profile_rss.png';
+	  
+	}
 	
 	$output = '<div class="edit-panel">'.l('edit','user/me/edit/profile').'</div><div class="user-profile-block">
 	<div class="main-info clear-block">
@@ -810,6 +824,7 @@ function grabbit_me_get_my_profile(){
 	  <div class="friends">Friends: <span class="blue">'.grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH').'</span></div>
 	  <div class="post">Posts: <span class="blue">'.grabbit_statistics_post_get_total($user->uid,'all').'</span></div>
 	  <div class="req">Request: <span class="blue">'.grabbit_me_db_statuses('count',NULL,$user->uid, 1, 'TW_1_TO_2_P').'</span></div>
+	  <div class="resources">'.$services.'</div>
 	</div>
 	
 	<div class="other-info">
