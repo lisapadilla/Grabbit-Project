@@ -59,7 +59,7 @@ function display_items(panel){
 				$("#"+panel_id+" .panel-wraper").append(data);
 		        current_panel.parent().next().html('<a class="main-stream-next" href="javascript:void(0)">more</a>');
 		        panel=$("#"+panel_id);
-		        display_items(panel);
+		        //display_items(panel);
 		        fixtheheightMore(panel);																				
 				}else{
 		        current_panel.parent().next().html('You have reached the end of your stream');
