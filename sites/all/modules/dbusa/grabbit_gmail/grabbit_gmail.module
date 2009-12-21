@@ -241,11 +241,11 @@ function grabbit_gmail_reply_message(){
 		}
 		#grabbit-gmail-mail-form #edit-subject
 		{
-			width: 590px;
+			width: 620px;
 		}
 		#grabbit-gmail-mail-form #edit-body
 		{
-			width: 590px;
+			width: 620px;
 			height: 250px;
 		}
 		#grabbit-gmail-mail-form .form-submit
