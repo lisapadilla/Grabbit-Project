@@ -13,7 +13,7 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user/track/navigation']['type'] = MENU_CALLBACK;
   $items['user/%user_category/edit2']=$items['user/%user_category/edit'];
   $items['user/%user_category/edit2']['title'] = "Prueba";
-  $items['user/%user_category/edit2']['type'] = MENU_CALLBACK;
+  
   $items['user/%user_category/edit']['page_callback'] = 'content_profile_page_edit';
 
 }
