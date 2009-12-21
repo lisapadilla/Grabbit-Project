@@ -2426,7 +2426,6 @@ div.messages, div.status, div.warning, div.error{
 }
 #TB_ajaxContent .gmail-wrap .gmail-wrap-of-the-wrap
 {
-	width: 600px;
 	margin-left: 20px;
 	margin-right: 20px;
 	padding: 10px 0;
@@ -2727,7 +2726,7 @@ div.tabs
 	display: none;
 }
 .page-user-me-edit #content-area div.tabs,
-.section-activity #content-area div.tabs,
+.page-activity-updates #content-area div.tabs,
 .page-user-me #content-area div.tabs
 {
 	display: block;
