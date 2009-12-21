@@ -11,13 +11,13 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user/invites']['type'] = MENU_CALLBACK;
   $items['user/%user/contact']['type'] = MENU_CALLBACK;
   $items['user/%user/track/navigation']['type'] = MENU_CALLBACK;
-  $items['user/%user_category/edit/pro']=$items['user/%user_category/edit'];
-  $items['user/%user_category/edit/pro']['title'] = "Prueba";
-  $items['user/%user_category/edit/pro']['page callback']='content_profile_page_edit';
-  $user = $items['user/%user_category/edit/pro']['page arguments'][0];
-  $items['user/%user_category/edit/pro']['page arguments'][0]='profile';
-  $items['user/%user_category/edit/pro']['page arguments'][0]=$user;
-  unset($items['user/%user_category/edit/pro']['file']);
+  $items['user/%user_category/editpro']=$items['user/%user_category/edit'];
+  $items['user/%user_category/editpro']['title'] = "Prueba";
+  $items['user/%user_category/editpro']['page callback']='content_profile_page_edit';
+  $user = $items['user/%user_category/editpro']['page arguments'][0];
+  $items['user/%user_category/editpro']['page arguments'][0]='profile';
+  $items['user/%user_category/editpro']['page arguments'][0]=$user;
+  unset($items['user/%user_category/editpro']['file']);
 
 print_r($items);
 
