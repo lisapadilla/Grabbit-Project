@@ -248,6 +248,10 @@ function grabbit_gmail_reply_message(){
     	color: #999999;
     	display: inline;
     }
+    .frost-div div
+    {
+      display: inline;
+    }
 		#grabbit-gmail-mail-form #edit-body
 		{
 			width: 620px;
