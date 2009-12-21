@@ -241,12 +241,11 @@ function grabbit_gmail_reply_message(){
 		}
 		#grabbit-gmail-mail-form #edit-subject
 		{
-			margin-left: 10px;
-			width: 550px;
+			width: 530px;
 		}
 		#grabbit-gmail-mail-form #edit-body
 		{
-			width: 554px;
+			width: 530px;
 			height: 250px;
 		}
 		#grabbit-gmail-mail-form .form-submit
@@ -255,12 +254,19 @@ function grabbit_gmail_reply_message(){
 			width: 47px;
 			height: 19px;
 			border: none;
-			margin-left: 572px;
+			margin-right: 58px
+			float: right;
 			margin-top: 10px;
+		}
+		.edit-subject-wrapper label
+		{
+		  display:block;
+      float:left;
+      width:52px;
 		}
 		#grabbit-gmail-mail-form #edit-body-wrapper
 		{
-			margin-left: 62px;
+			margin-left: 60px;
 			margin-top: 10px;
 		}
 		#grabbit-gmail-mail-form .form-item
