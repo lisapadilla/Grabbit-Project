@@ -2791,7 +2791,7 @@ div.tabs
 {
 	clear: both;
 }
-.panel-activity{
+#panel-activity{
 	overflow-x:hidden;
 	overflow-y:scroll;
 }
