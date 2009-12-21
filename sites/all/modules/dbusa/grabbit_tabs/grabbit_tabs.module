@@ -13,7 +13,6 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user/track/navigation']['type'] = MENU_CALLBACK;
   $items['user/%user/edit']['type'] = MENU_CALLBACK;
 
-  $items['user/%user/edit/profile']=array();
   $items['user/%user/edit/profile']['title']='Edit';
   $items['user/%user/edit/profile']['type']=136;
   $items['user/%user/edit/profile']['module']='user';
