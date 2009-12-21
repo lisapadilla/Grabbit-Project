@@ -15,6 +15,5 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user_category/edit2']['title'] = "Prueba";
   unset($items['user/%user_category/edit/profile']['tab_parent']);
 
-print_r($items);
 
 }
