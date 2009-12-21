@@ -151,7 +151,7 @@ $(document).ready(function() {
 		});
 	});
 	
-	$('.suser-panels').height($('.suser-panels').height()+200);
+	$('.suser-panels').height($('.suser-panels').height());
 	
 	$('.news-comment-submit-button').click(function(){
 		// Save comment
