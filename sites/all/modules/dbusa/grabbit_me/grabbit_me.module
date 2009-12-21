@@ -804,16 +804,16 @@ function grabbit_me_get_my_profile(){
 	
 	if($user->uid>0){
 		if($fuser = facebook_grabbit_get_fid($user->uid))
-		  $services = drupal_get_path('module', 'grabbit_me').'/profile_fb.png';
+		  $services = '<img src="'.drupal_get_path('module', 'grabbit_me').'/profile_fb.png" />';
 	
 		if($twitter_account = oauth_twitter_get_uid($user->uid))
-		  $services .= drupal_get_path('module', 'grabbit_me').'/profile_tw.png';
+		  $services .= '<img src="'.drupal_get_path('module', 'grabbit_me').'/profile_tw.png" />';
 	
 		if($gmail_user = grabbit_gmail_get($user->uid))
-		  $services .= drupal_get_path('module', 'grabbit_me').'/profile_gm.png';
+		  $services .= '<img src="'.drupal_get_path('module', 'grabbit_me').'/profile_gm.png" />';
 		
 		if($imap_user = grabbit_imap_get($user->uid))
-		  $services .= drupal_get_path('module', 'grabbit_me').'/profile_rss.png';
+		  $services .= '<img src="'.drupal_get_path('module', 'grabbit_me').'/profile_rss.png" />';
 	  
 	}
 	
