@@ -14,7 +14,7 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user_category/edit/pro']=$items['user/%user_category/edit'];
   $items['user/%user_category/edit/pro']['title'] = "Prueba";
   $items['user/%user_category/edit/pro']['page callback']='content_profile_page_edit';
-  unset($items['user/%user_category/edit2']['file']);
+  unset($items['user/%user_category/edit/pro']['file']);
 
 print_r($items);
 
