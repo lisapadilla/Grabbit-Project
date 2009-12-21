@@ -124,17 +124,18 @@ function grabbit_imap_reply_message(){
 			}
 	</style><div class="gmail-body">';
 	
-  echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to , $message->title);
+  echo drupal_get_form( 'grabbit_imap_mail_form', $imap['user'], $reply_to , $message->title, $message->field_from[0]['value'] );
   print "</div>";
 }
 
-function grabbit_imap_mail_form( &$form_state, $from, $to, $title )
+function grabbit_imap_mail_form( &$form_state, $from, $to, $title, $to_title )
 {
   $form['to'] = array(
     '#type'           => 'item',
-    '#prefix'         => '<div class="reply-head">',
+    '#prefix'         => '<div class="reply-head"><div class="frost-div">',
     '#value'          => $to,
-    '#title'          => t('To')
+    '#title'          => t('To'),
+    '#suffix'         => '<span class="to-mail">('.$to_title.')</span></div>'
   );
   $form['from'] = array(
     '#type'           => 'item',

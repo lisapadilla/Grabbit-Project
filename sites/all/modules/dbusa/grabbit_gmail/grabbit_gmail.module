@@ -307,10 +307,10 @@ function grabbit_gmail_mail_form( &$form_state, $from, $to, $title, $to_title)
 {
   $form['to'] = array(
     '#type'           => 'item',
-    '#prefix'         => '<div class="reply-head">',
+    '#prefix'         => '<div class="reply-head"><div class="frost-div">',
     '#value'          => $to,
     '#title'          => t('To'),
-    '#suffix'         => '<span class="to-mail">('.$to_title.')</span>'
+    '#suffix'         => '<span class="to-mail">('.$to_title.')</span></div>'
   );
   $form['from'] = array(
     '#type'           => 'item',
