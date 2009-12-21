@@ -12,4 +12,7 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user/contact']['type'] = MENU_CALLBACK;
   $items['user/%user/track/navigation']['type'] = MENU_CALLBACK;
   $items['user/%user/edit']['type'] = MENU_CALLBACK;
+
+print_r($items);
+
 }
