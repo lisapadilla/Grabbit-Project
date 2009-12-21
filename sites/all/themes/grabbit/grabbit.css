@@ -2791,3 +2791,8 @@ div.tabs
 {
 	clear: both;
 }
+#panel-activity{
+	overflow-x:hidden;
+	overflow-y:scroll;
+	height:650px;
+}
