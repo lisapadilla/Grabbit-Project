@@ -113,7 +113,6 @@ $(document).ready(function() {
     });
 
 	$('.suser-panels').cycle({
-	    fx:      'scrollHorz',
 	    next:    '.move-right',
 	    prev:    '.move-left',
 	    pager: '.panels-pager',
