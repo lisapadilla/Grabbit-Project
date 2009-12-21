@@ -246,6 +246,7 @@ function grabbit_gmail_reply_message(){
 		.gmail-header-contains .to-mail
     {
     	color: #999999;
+    	display: inline;
     }
 		#grabbit-gmail-mail-form #edit-body
 		{
