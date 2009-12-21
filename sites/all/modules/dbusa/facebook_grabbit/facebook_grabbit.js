@@ -89,18 +89,18 @@ function fixtheheight(isNext, zeroBasedSlideIndex, slideElement){
 
 function fixtheheightMore(element){
 	var height = $(".panel-wraper",element).height()+$(".panel-title",element).height()+$(".panel-controller",element).height()+200;
-	element.height(height);
-	$(".suser-panels").height(height);
+//	element.height(height);
+//	$(".suser-panels").height(height);
 	panels_heights[element.attr('id')]=height;
 }
 function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardFlag){
 	if(panels_heights[nextSlideElement.id]){
 		var height = panels_heights[nextSlideElement.id];
-		$("#"+nextSlideElement.id).height(height);
-		$(".suser-panels").height(height);
+//		$("#"+nextSlideElement.id).height(height);
+//		$(".suser-panels").height(height);
 	}else{
 	  	var height = $("#"+nextSlideElement.id).height()+200;
-		$(".suser-panels").height(height);	
+//		$(".suser-panels").height(height);	
 	}
 }
 $(document).ready(function() {
