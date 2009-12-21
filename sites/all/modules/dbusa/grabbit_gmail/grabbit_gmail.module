@@ -258,7 +258,7 @@ function grabbit_gmail_reply_message(){
 			float: right;
 			margin-top: 10px;
 		}
-		.edit-subject-wrapper label
+		#edit-subject-wrapper label
 		{
 		  display:block;
       float:left;
