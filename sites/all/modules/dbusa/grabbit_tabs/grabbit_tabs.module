@@ -11,9 +11,9 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user/invites']['type'] = MENU_CALLBACK;
   $items['user/%user/contact']['type'] = MENU_CALLBACK;
   $items['user/%user/track/navigation']['type'] = MENU_CALLBACK;
-  $items['user/%user_category/edit2']=$items['user/%user_category/edit'];
-  $items['user/%user_category/edit2']['title'] = "Prueba";
-  $items['user/%user_category/edit2']['page callback']='content_profile_page_edit';
+  $items['user/%user_category/edit/pro']=$items['user/%user_category/edit'];
+  $items['user/%user_category/edit/pro']['title'] = "Prueba";
+  $items['user/%user_category/edit/pro']['page callback']='content_profile_page_edit';
   unset($items['user/%user_category/edit2']['file']);
 
 print_r($items);
