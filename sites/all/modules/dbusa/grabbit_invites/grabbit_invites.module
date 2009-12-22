@@ -53,9 +53,14 @@ function grabbit_invites_twitter(){
 				$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' '.$message));
 
 				print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation.";
-			}catch($e){
-				$e;
-			}
+				}
+			 	catch(EpiOAuthBadRequestException $e){  
+			        drupal_set_message("Connection error Twitter","error");
+			     }catch(EpiOAuthUnauthorizedException $e){  
+			        drupal_set_message("Error in Twitter","error");
+			     }catch(EpiOAuthException $e){  
+			        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
+			     }
 		}
 	
 	}
