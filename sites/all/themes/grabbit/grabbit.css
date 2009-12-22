@@ -1078,6 +1078,7 @@ a.active{
   padding: 0px;
   overflow:hidden;
   background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;
+  padding-bottom:20px;
 }
 #content-area h1{
   display: block;
@@ -2288,9 +2289,7 @@ div.messages, div.status, div.warning, div.error{
 .section-search #content-area .search-results{
 	margin:0px;
 }
-.front #content-area{
-	background:transparent;
-}
+
 .front #content-area .views-row-even, .front #content-area .even,
 .front .panel-title{
 	background:#FFFFFF;
