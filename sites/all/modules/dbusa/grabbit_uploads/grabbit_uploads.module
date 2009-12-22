@@ -246,10 +246,11 @@ function grabbit_uploads_file_form_getit(){
 		
 		if ($file = custom_upload('files', array(), $dir, false)) {
 				$node = new stdClass();
-				  $node->title = 'Media - '.$file->fid;
+				  $node->title = $user->name.' - '.$file->fid;
 				  $node->created = time();
 				  $node->type = 'media';
 				  $node->status = 0;
+				  $node->comments = 1;
 				  $node->uid = $user->uid;
 				  $node->field_media[0]['value'] = $file->fid;
 				node_save($node);

@@ -38,7 +38,8 @@ function grabbit_invites_twitter(){
 				include_once drupal_get_path('module', $module_name).'/includes/EpiOAuth.php';
 				include_once drupal_get_path('module', $module_name).'/includes/EpiTwitter.php';
 				include drupal_get_path('module', $module_name).'/includes/secret.php';
-
+				
+             try{
 				$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 				$token = unserialize($accounts->config);
 				$twitterObj->setToken($token['token'], $token['secret']);
@@ -52,6 +53,9 @@ function grabbit_invites_twitter(){
 				$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' '.$message));
 
 				print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation.";
+			}catch($e){
+				$e;
+			}
 		}
 	
 	}
