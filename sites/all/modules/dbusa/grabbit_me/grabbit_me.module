@@ -903,7 +903,7 @@ function grabbit_me_get_my_account(){
 	return $output;
 }
 
-function grabbit_me_user ($op){
+function grabbit_me_user($op){
 
     if ($op == "login"){
         drupal_goto('user/me');
