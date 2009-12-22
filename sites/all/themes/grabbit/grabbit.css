@@ -2725,7 +2725,7 @@ div.tabs
 	display: none;
 }
 .page-user-me-edit #content-area div.tabs,
-.page-activity-updates #content-area div.tabs,
+.section-activity #content-area div.tabs,
 .page-user-me #content-area div.tabs
 {
 	display: block;
