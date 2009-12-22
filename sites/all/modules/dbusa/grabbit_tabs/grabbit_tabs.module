@@ -21,7 +21,7 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user_category/editpro']['access arguments'][1]=$user;
   $items['user/%user_category/editpro']['access callback']='content_profile_page_access';
 */
-  $items['user/%user/track/navigation']['title']='Edit';
+  $items['user/%user_category/editpro']['title']='Edit';
   $items['user/%user_category/edit']['type'] = MENU_CALLBACK;
   unset($items['user/%user_category/editpro']['tab_parent']);
 
