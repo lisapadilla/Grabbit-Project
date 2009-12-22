@@ -17,6 +17,8 @@ function grabbit_tabs_menu_alter( &$items )
   $user = $items['user/%user_category/editpro']['page arguments'][0];
   $items['user/%user_category/editpro']['page arguments'][0]='profile';
   $items['user/%user_category/editpro']['page arguments'][1]=$user;
+  $items['user/%user_category/editpro']['access arguments'][0]='profile';
+  $items['user/%user_category/editpro']['access arguments'][1]=$user;
 
 
   unset($items['user/%user_category/editpro']['file']);
