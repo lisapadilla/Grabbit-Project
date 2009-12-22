@@ -25,6 +25,5 @@ function grabbit_tabs_menu_alter( &$items )
   $items['user/%user_category/edit']['type'] = MENU_CALLBACK;
   unset($items['user/%user_category/editpro']['tab_parent']);
 
-print_r($items);
 
 }
