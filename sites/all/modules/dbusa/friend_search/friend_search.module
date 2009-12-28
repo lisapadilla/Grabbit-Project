@@ -143,7 +143,7 @@ function friend_search_show_friends_facebook(){
 		$rowx='odd';	
 		foreach($details as $amigo_facebook){
 			
-			friend_search_theme_a_friend($amigo_facebook,$rowx);
+			$facebooks .=friend_search_theme_a_friend($amigo_facebook,$rowx);
 			
 						if($rowx=='even'){
 							$rowx='odd';
