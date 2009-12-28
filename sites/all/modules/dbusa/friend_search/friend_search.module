@@ -344,7 +344,7 @@ function friend_search_contact_list(){
 			
 	}
 	
-    $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container">'.$contacters.'</div></div>';
+    $output .='<div class="twitter-list"><div class="twitter-container">'.$contacters.'</div></div>';
 
 	return $output;
 }
