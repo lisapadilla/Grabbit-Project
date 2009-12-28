@@ -422,7 +422,7 @@ function friend_search_theme_a_friend($friend,$row){
 		$picture='<img src="'.base_path().path_to_theme().'/images/default/default_profile.jpg" width="38px" />';
 		$name=$friend->email;
 		if($friend->joined){
-			$link='Joined Grabbit!';
+			$link='Joined Grabbit!<br>';
 			$link .=$friend->friends;
 		}else{
 			$link='Invite is pending';
