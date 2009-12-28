@@ -290,7 +290,7 @@ function friend_search_show_friends_twitter(){
 			
 			$rowx="odd";
 			foreach($unser as $twitter){
-		        
+		            $twitter=parseArrayToObject($twitter);
 		       		$twitters .=friend_search_theme_a_friend($twitter,$rowx);
 
 								if($rowx=='even'){
