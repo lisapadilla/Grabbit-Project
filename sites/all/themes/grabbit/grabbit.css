@@ -2329,6 +2329,11 @@ div.messages, div.status, div.warning, div.error{
 	float:right;
 	margin-right:20px;
 }
+.page-user-me-myfriends-twitter-friends .twitter-friend .invite
+{
+	float: right;
+	margin-right: 10px;
+}
 
 .tooltip-deal .tooltip{
 	background-color:#F5F5B5;
