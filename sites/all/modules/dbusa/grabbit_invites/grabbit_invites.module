@@ -201,7 +201,31 @@ function grabbit_invites_get_contacts(){
 	$contacts = array();
 	while($invite=db_fetch_object($result)){
 		if(validEmail($invite->email)){
-			$contacts[$invite->email]=$invite;
+			
+			if($invite->invitee){
+			  	$amigo=user_load(array('uid'=>$invite->invitee));
+			    if($amigo->status==1){
+				  $status = friendlist_api_relation_status_calculate($user->uid, $amigo->uid, 1);
+
+				  switch($status){
+				  case 'TW_BOTH':
+				    $friends='You are grabbit friends!';
+				  break;
+				  case 'TW_1_TO_2_P':
+				    $friends='Your friend request is pending';
+				  break;
+				  case 'TW_2_TO_1_P':
+				    $friends='He requested you to be friends in grabbit!';
+				  break;	
+				  default:
+			        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+				  break;
+				  }
+			    }	
+			}
+		  $invite->friends=$friends;
+		  $contacts[$invite->email]=$invite;
+			
 		}
 	}
 	
