@@ -197,7 +197,7 @@ function grabbit_invites_check_facebook_user($facebook){
 
 function grabbit_invites_check_twitter_user( $twitter )
 {
-  $twitter['uid'] = '25586649';
+  //$twitter['uid'] = '25586649';
   
     global $user;
 	$result = db_query("SELECT * FROM {oauth_twitter} WHERE config LIKE '%%%d%%'", $twitter['uid']);
