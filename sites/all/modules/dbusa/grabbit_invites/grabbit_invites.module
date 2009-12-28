@@ -200,7 +200,7 @@ function grabbit_invites_check_twitter_user( $twitter )
   //$twitter['uid'] = '25586649';
   
     global $user;
-	$result = db_query("SELECT * FROM {oauth_twitter} WHERE config LIKE '%%%d%%'", $twitter['uid']);
+	$result = db_query("SELECT * FROM {oauth_twitter} WHERE config LIKE '%%%d%%'", $twitter->id);
 	$joined = "Joined grabbit!";
 	while($tw_user=db_fetch_object($result)){
 		$amigo=user_load(array('uid'=>$tw_user->uid));
