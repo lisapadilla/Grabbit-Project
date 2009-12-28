@@ -419,7 +419,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  }
 	
 	  elseif($friend->reg_code){ // Its a contact!
-		$picture='<img src="'.base_path().path_to_theme().'/default_profile.jpg" width="38px" />';
+		$picture='<img src="'.base_path().path_to_theme().'/images/default/default_profile.jpg" width="38px" />';
 		$name=$friend->email;
 		if($friend->joined){
 			$link='Joined Grabbit!';
