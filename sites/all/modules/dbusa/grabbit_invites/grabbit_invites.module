@@ -195,7 +195,7 @@ function grabbit_invites_check_facebook_user($facebook){
 	
 }
 
-function grabbit_invites_test(){
+function grabbit_invites_get_contacts(){
 	global $user;
 	$result=db_query("SELECT * FROM {invite} WHERE uid=%d",$user->uid);
 	$contacts = array();
