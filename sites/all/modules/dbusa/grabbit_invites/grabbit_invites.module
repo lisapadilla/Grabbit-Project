@@ -268,10 +268,6 @@ function grabbit_invites_get_contacts(){
 	
 }
 
-function grabbit_invites_check_twitter_user($twitter){
-	
-}
-
 /*
 Validate an email address.
 Provide email address (raw input)
