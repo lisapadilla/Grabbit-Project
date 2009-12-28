@@ -331,7 +331,7 @@ function friend_search_show_friends_twitter(){
 
 function friend_search_contact_list(){
 	$contacts = grabbit_invites_get_contacts();
-	$row='odd';
+	$row='views-row-odd';
 	foreach($contacts as $contact){
 		
 	  	$contacters .= friend_search_theme_a_friend($contact,$row);
@@ -344,7 +344,7 @@ function friend_search_contact_list(){
 			
 	}
 	
-    $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container">'.$contacters.'</div></div>';
+    $output .='<div class="twitter-list"><div class="twitter-container">'.$contacters.'</div></div>';
 
 	return $output;
 }
