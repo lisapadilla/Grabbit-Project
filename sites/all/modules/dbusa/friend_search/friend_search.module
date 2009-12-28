@@ -268,8 +268,12 @@ function friend_search_show_friends_twitter(){
 			 $twitterInfo2= $twitterObj->get_accountVerify_credentials();  
 			 $twit_id = $twitterInfo2->screen_name;
 
-			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
-			$unser = json_decode($requ->data);
+			$twit_id = $twitterInfo2->screen_name;
+
+			$twitterFriends = $twitterObj->get_statusesFriends(array('screen_name' => $twit_id));
+print_r($twitterFriends->response);
+			$unser = $twitterFriends->response;
+			
 			$rowx="odd";
 			foreach($unser as $twitter){
 				
