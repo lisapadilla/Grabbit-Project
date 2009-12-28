@@ -446,7 +446,7 @@ function friend_search_theme_a_friend($friend,$row){
 			$link .=$friend->friends;
 		}else{
 			$link='Invite is pending<br>';
-			$link .= l('Withdraw','invite/withdraw/pending/'.$friend->reg_code);
+			$link .= l('Withdraw','invite/withdraw/pending/'.$friend->reg_code,array('query'=>'destination='.drupal_get_destination()));
 		}
 		$social='Contact';
 	  }
