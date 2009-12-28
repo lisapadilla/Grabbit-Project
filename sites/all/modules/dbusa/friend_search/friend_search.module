@@ -234,12 +234,9 @@ function friend_search_get_friends_twitter(){
 			 $twitterInfo2= $twitterObj->get_accountVerify_credentials();  
 			 $twit_id = $twitterInfo2->screen_name;
 			
-			$twitterUsers= $twitterObj->get_statusesFriends(array('screen_name'=>$twit_id));
-			print_r($twitterUsers);
-			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
-			$unser = json_decode($requ->data);
+			$twitterFriends = $twitterObj->get_statusesFriends(array('screen_name' => $twit_id));
 			
-			return $unser;
+			return $twitterFriends->response;
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
@@ -252,6 +249,20 @@ function friend_search_get_friends_twitter(){
 	}
 	
 }
+
+function parseArrayToObject($array) {
+   $object = new stdClass();
+   if (is_array($array) && count($array) > 0) {
+      foreach ($array as $name=>$value) {
+         $name = strtolower(trim($name));
+         if (!empty($name)) {
+            $object->$name = $value;
+         }
+      }
+   }
+   return $object;
+}
+
 
 function friend_search_show_friends_twitter(){
     global $user;
@@ -271,11 +282,15 @@ function friend_search_show_friends_twitter(){
 			 $twitterInfo2= $twitterObj->get_accountVerify_credentials();  
 			 $twit_id = $twitterInfo2->screen_name;
 
-			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
-			$unser = json_decode($requ->data);
+			$twit_id = $twitterInfo2->screen_name;
+
+			$twitterFriends = $twitterObj->get_statusesFriends(array('screen_name' => $twit_id));
+
+			$unser = $twitterFriends->response;
+			
 			$rowx="odd";
 			foreach($unser as $twitter){
-				
+		        $twitter=parseArrayToObject($twitter);		
 				if(module_exists('grabbit_invites')){
 					if(!grabbit_invites_get_invited($twitter->screen_name)){
 					  $invite=l('Invite to grabbit','grabbit/invite/twitter/'.$twitter->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
@@ -363,6 +378,7 @@ function friend_search_show_friends(){
 	//get twitter friends
 	$twitter=friend_search_get_friends_twitter();
 	foreach ($twitter as $twitter_friend){
+		$twitter_friend=parseArrayToObject($twitter_friend);
 		$friends[$twitter_friend->screen_name ." t"]=$twitter_friend;
 	}
 	//endf teitter friends
