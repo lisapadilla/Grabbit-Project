@@ -52,7 +52,7 @@ function grabbit_invites_twitter(){
 				$twitterObj->setToken($token['token'], $token['secret']);
 				
 				$invite = grabbit_invites_send_invite($id,'Invite to join grabbit','Join grabbit');
-				$template = t(_grabbit_invites_get_mail());
+				$template = t(_grabbit_invites_get_mail_tweet());
 				$tokens = _invite_token_types($invite);
 				$message = token_replace_multiple($template, $tokens);
 			
@@ -144,6 +144,12 @@ function grabbit_invites_send_invite($user,$subject,$message){
  */
 function _grabbit_invites_get_mail() {
   $template = t("Your friend, [inviter-raw], has invited you to join [site-name] at <a href='[join-link]'>[join-link]</a>");
+
+  return $template;
+}
+
+function _grabbit_invites_get_mail_tweet() {
+  $template = t("Hey! join [site-name] at [join-link]");
 
   return $template;
 }
