@@ -143,19 +143,8 @@ function friend_search_show_friends_facebook(){
 		$rowx='odd';	
 		foreach($details as $amigo_facebook){
 			
-			if(module_exists('grabbit_invites')){
-				if(!grabbit_invites_get_invited($amigo_facebook['first_name'].'_'.$amigo_facebook['last_name'])){
-		          $invite=l('Invite to grabbit','grabbit/invite/facebook/'.$amigo_facebook['uid']."/".$amigo_facebook['first_name']."_".$amigo_facebook['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
-				}else{
-				  	$invite='Invite is pending';			
-				}
-			}
+			friend_search_theme_a_friend($amigo_facebook,$rowx)
 			
-			$facebooks .='<div class="facebook-friend '.$rowx.'">
-			               <div class="picture"><img src="'.$amigo_facebook['pic_small'].'" /></div>
-			               <div class="name">'.$amigo_facebook['first_name'].' '.$amigo_facebook['last_name'].'</div>
-			               <div class="invite">'.$invite.'</div>
-			             </div>';
 						if($rowx=='even'){
 							$rowx='odd';
 						}else{
