@@ -151,7 +151,7 @@ function _grabbit_invites_get_mail() {
 function grabbit_invites_get_invited($name){
 	global $user;
 	
-	$result = db_result(db_query("SELECT * FROM {invite} WHERE email = '%s' AND canceled=0 AND uid=%d",$name,$user->uid));
+	$result = db_result(db_query("SELECT reg_code FROM {invite} WHERE email = '%s' AND canceled=0 AND uid=%d",$name,$user->uid));
 
     if(db_affected_rows($result)){
 	  	if($result->joined){

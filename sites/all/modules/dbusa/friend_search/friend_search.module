@@ -403,9 +403,8 @@ function friend_search_theme_a_friend($friend,$row){
 		          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
 				}else{
 					if($invited!=2){
-						print_r($invited);
 					  $link='Invite is pending<br>';
-					  $link .= l('Withdraw','invite/withdraw/pending/'.$invited->reg_code,array('query'=>drupal_get_destination()));	
+					  $link .= l('Withdraw','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()));	
 					}elseif($invited=2){
 					  $link='Joined grabbit';
 					}			
@@ -427,7 +426,7 @@ function friend_search_theme_a_friend($friend,$row){
 			}else{
 				if($invited!=2){
 				  $link='Invite is pending<br>';
-				  $link .= l('Withdraw','invite/withdraw/pending/'.$invited->reg_code,array('query'=>drupal_get_destination()));	
+				  $link .= l('Withdraw','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()));	
 				}elseif($invited=2){
 				  $link='Joined grabbit';
 				}
