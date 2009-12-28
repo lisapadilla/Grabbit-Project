@@ -114,7 +114,7 @@ function grabbit_preprocess(&$vars, $hook) {
  *   The name of the template being rendered ("page" in this case.)
  */
 function grabbit_preprocess_page(&$vars, $hook) {
-print_r(grabbit_invites_check_twitter_user(array()));
+  
     global $user;
 
 	if( (arg(0)=='user' && arg(1)!=$user->uid && !arg(2)) ||(arg(0)=='user' && arg(1)=='me' && !arg(2))){
