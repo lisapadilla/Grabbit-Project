@@ -360,6 +360,7 @@ function friend_search_show_friends(){
 	
 	//get twitter friends
 	$twitter=friend_search_get_friends_twitter();
+	print_r($twitter);
 	foreach ($twitter as $twitter_friend){
 		$friends[$twitter_friend->screen_name ." t"]=$twitter_friend;
 	}
