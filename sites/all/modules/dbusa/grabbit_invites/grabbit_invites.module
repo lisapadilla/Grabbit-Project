@@ -58,7 +58,7 @@ function grabbit_invites_twitter(){
 			
 
 				$twitterObj->post_statusesUpdate(array('status' =>'D '.$id.' '.$message));
-
+                invite_save($invite);
 				print "You have invited this user to join Grabbit, we will notify you after your friend accepts your invitation.";
 				}
 			 	catch(EpiOAuthBadRequestException $e){  
