@@ -19,7 +19,7 @@ function grabbit_invites_menu()
     'type' => MENU_CALLBACK
   );
  
-  $items['test'] = array( 
+  $items['devtest'] = array( 
     'title' => 'Invite Facebook', 
     'page callback' => 'grabbit_invites_test', 
     'access arguments' => array('access content'),
