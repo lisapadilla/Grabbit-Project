@@ -1,24 +1,6 @@
 <?
 //$Id$
 
-/**
- * Implementation of hook_menu()
- */
-function grabbit_contacts_menu () {
-
-  $items['user/%/myfriends/view_contacts'] = array(
-   'title' => 'Contacts',
-   'description' => t('These are the contacts you imported/invited from other networks/emails.'),
-   'page callback' => 'grabbit_contacts_list',
-   'access arguments' => array('access content'),
-   	'page arguments' => array(1),
-    'load arguments' => array('%map', '%index'),
-   'weight' => 13,
-   'type' => MENU_LOCAL_TASK,
-  );
-
-  return $items;
-}
 
 function grabbit_contacts_add($edit,$nombre){
   $result = db_query("INSERT INTO {grabbit_contacts} (uid, mail, name) VALUES (%d, '%s', '%s')", $edit->inviter->uid, $edit->email, $nombre);

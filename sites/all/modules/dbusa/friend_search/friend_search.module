@@ -103,6 +103,17 @@ function friend_search_menu()
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'load arguments' => array('%map', '%index'),
   );
+
+  $items['user/%/myfriends/view_contacts'] = array(
+   'title' => 'Contacts',
+   'description' => t('These are the contacts you imported/invited from other networks/emails.'),
+   'page callback' => 'friend_search_contact_list',
+   'access arguments' => array('access content'),
+   	'page arguments' => array(1),
+    'load arguments' => array('%map', '%index'),
+   'weight' => 13,
+   'type' => MENU_LOCAL_TASK,
+  );
   
 
   return $items;
@@ -298,6 +309,26 @@ function friend_search_show_friends_twitter(){
 	
 	return $output;
 	
+}
+
+function friend_search_contact_list(){
+	$contacts = grabbit_invites_get_contacts();
+	$row='odd';
+	foreach($contacts as $contact){
+		
+	  	$contacters .= friend_search_theme_a_friend($contact,$row);
+		
+		if($row=='views-row-odd'){
+			$row='views-row-even';
+		}else{
+			$row='views-row-odd';
+		}
+			
+	}
+	
+    $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container">'.$contacters.'</div></div>';
+
+	return $output;
 }
 
 function friend_search_show_friends(){
