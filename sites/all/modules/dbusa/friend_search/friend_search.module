@@ -168,6 +168,8 @@ function friend_search_show_friends_facebook(){
 	}catch(FacebookRestClientException $e){
 		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">You have no FB account yet</div></div>';
 	}
+    }else{
+	    $output .='<div class="facebook-list"><div class="facebook-container">You have no FB account yet</div></div>';
     }
 
 	
@@ -314,6 +316,8 @@ function friend_search_show_friends_twitter(){
 	     }
 	
 	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container">'.$twitters.'</div></div>';	
+	}else{
+		$output .='<div class="facebook-list"><div class="facebook-container">You have no Twitter account yet</div></div>';
 	}
 	
 	return $output;
