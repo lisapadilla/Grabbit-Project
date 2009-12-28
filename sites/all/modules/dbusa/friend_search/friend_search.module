@@ -344,6 +344,13 @@ function friend_search_show_friends(){
 	}
 	//endf teitter friends
 	
+	//get contacts
+	$contacts=grabbit_invites_get_contacts();
+	foreach ($contacts as $contact){
+		$friends[$contact->email.' c']=$contact;
+	}
+	//end contacts
+	
 	ksort($friends);
 	
     $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">';
@@ -409,6 +416,17 @@ function friend_search_theme_a_friend($friend,$row){
 		$name=l($friend->name,'users/'.$friend->name);
 		$link='<div class="friendlist-user-links">'. l('Remove from friends', 'friendlist/delete/'.$friend->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</div>';
 		$social='Grabbit';	
+	  }
+	
+	  elseif($friend->reg_code){ // Its a contact!
+		$picture=theme('imagecache', 'friend_thumbnail', base_path().path_to_theme().'default_profile.jpg', $friend->email);
+		$name=$friend->email;
+		if($friend->joined){
+			$link='Joined Grabbit!';
+		}else{
+			$link='Invite is pending';
+		}
+		$social='Contact';
 	  }
 	
 	
