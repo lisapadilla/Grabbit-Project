@@ -250,6 +250,20 @@ function friend_search_get_friends_twitter(){
 	
 }
 
+function parseArrayToObject($array) {
+   $object = new stdClass();
+   if (is_array($array) && count($array) > 0) {
+      foreach ($array as $name=>$value) {
+         $name = strtolower(trim($name));
+         if (!empty($name)) {
+            $object->$name = $value;
+         }
+      }
+   }
+   return $object;
+}
+
+
 function friend_search_show_friends_twitter(){
     global $user;
     $accounts = oauth_twitter_get_uid($user->uid);
@@ -276,7 +290,7 @@ function friend_search_show_friends_twitter(){
 			
 			$rowx="odd";
 			foreach($unser as $twitter){
-		        (object)$twitter;		
+		        $twitter=parseArrayToObject($twitter);		
 				if(module_exists('grabbit_invites')){
 					if(!grabbit_invites_get_invited($twitter->screen_name)){
 					  $invite=l('Invite to grabbit','grabbit/invite/twitter/'.$twitter->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
