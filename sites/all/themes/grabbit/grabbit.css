@@ -2323,7 +2323,8 @@ div.messages, div.status, div.warning, div.error{
 	padding:5px 0 0 1px;
 }
 .page-user-me-myfriends .views-field-action-link-requestee,
-.page-user-me-myfriends-facebook-friends .views-field-action-link-requestee
+.page-user-me-myfriends-facebook-friends .views-field-action-link-requestee,
+.page-user-me-myfriends-view-contacts .views-field-action-link-requestee
 {
 	float:right;
 	margin-right:20px;
