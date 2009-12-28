@@ -211,6 +211,8 @@ function friend_search_get_friends_facebook(){
 	  }
 	  catch(FacebookRestClientException $e){
 	  }
+    }else{
+	  return array();
     }
 	
 }
@@ -246,6 +248,8 @@ function friend_search_get_friends_twitter(){
 	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
 	     }
 	
+	}else{
+		return array();
 	}
 	
 }
