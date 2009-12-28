@@ -290,27 +290,14 @@ function friend_search_show_friends_twitter(){
 			
 			$rowx="odd";
 			foreach($unser as $twitter){
-		        $twitter=parseArrayToObject($twitter);		
-				if(module_exists('grabbit_invites')){
-					if(!grabbit_invites_get_invited($twitter->screen_name)){
-					  $invite=l('Invite to grabbit','grabbit/invite/twitter/'.$twitter->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
-					}else{
-						$invite='Invite is pending';
-						
-					}
-				}
-		
-				$twitters .='<div class="twitter-friend '.$rowx.'">
-				               <div class="picture"><img width="48px" src="'.$twitter->profile_image_url.'" /></div>
-				               <div class="name">'.$twitter->name.'</div>
-				               <div class="invite">'.$invite.'</div>
-				             </div>';
-				
-						if($rowx=='even'){
-							$rowx='odd';
-						}else{
-							$rowx='even';
-						}
+		            $twitter=parseArrayToObject($twitter);
+		       		$twitters .=friend_search_theme_a_friend($twitter,$rowx);
+
+								if($rowx=='even'){
+									$rowx='odd';
+								}else{
+									$rowx='even';
+								}
 			  
 			}
 	     }
@@ -438,16 +425,21 @@ function friend_search_theme_a_friend($friend,$row){
 		$name=$friend->screen_name;
 		$picture='<img width="48px" src="'.$friend->profile_image_url.'" />';
 		if(module_exists('grabbit_invites')){
-			
-			if(!$invited=grabbit_invites_get_invited($friend->screen_name)){
-			  $link=l('Invite to grabbit','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
+			$suser=grabbit_invites_check_twitter_user($friend);
+			if($suser!=0){
+				$link=$suser['joined'];
+				$link .="<br>".$suser['friends'];
 			}else{
+			  if(!$invited=grabbit_invites_get_invited($friend->screen_name)){
+			    $link=l('Invite to grabbit','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
+			  }else{
 				if($invited!=2){
 				  $link='Invite is pending<br>';
 				  $link .= l('Withdraw','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()));	
 				}elseif($invited=2){
 				  $link='Joined grabbit';
 				}
+			  }
 			}
 		}
 		$social='<span class="from-twitter"> <img src="'.base_path().path_to_theme().'/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
