@@ -234,12 +234,9 @@ function friend_search_get_friends_twitter(){
 			 $twitterInfo2= $twitterObj->get_accountVerify_credentials();  
 			 $twit_id = $twitterInfo2->screen_name;
 			
-			$twitterFriends = $twitterObj->get_statusesFriends(array('screen_name' => 'ivanfuyivara'));
-			print_r($twitterFriends->response);
-			$requ = drupal_http_request('http://twitter.com/statuses/friends.json?screen_name='.$twit_id, $headers = array(), $method = 'GET', $data = NULL, $retry = 3);
-			$unser = json_decode($requ->data);
+			$twitterFriends = $twitterObj->get_statusesFriends(array('screen_name' => $twit_id));
 			
-			return $unser;
+			return $twitterFriends->response;
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
