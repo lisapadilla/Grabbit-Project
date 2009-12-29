@@ -230,9 +230,9 @@ function grabbit_search_custom_results_users($results,$keyword=NULL){
 			$return .='</a></div>
 			  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$item->name.'">'.$item->name.'</a>
 			  <div class="twitter-body">
-			    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'<br>
-			    '.$friends.'</div> 
-			    <span class="twitter-date"><span class="blue">member since</span> '.format_date($item->created).'</span>
+			    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'</div> 
+			    <span class="twitter-date"><span class="blue">member since</span> '.format_date($item->created).'</span><br>
+			    '.$friends.'
 			  </div>
 			</div>';
 			
