@@ -125,7 +125,7 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 }
 
 function grabbit_search_perform_users($busqueda,$filters=NULL){
-	print_r($busqueda);
+	
 	$users=db_query("SELECT uid FROM users WHERE name LIKE '%%s%' OR mail LIKE '%%s%' AND status=1",$busqueda,$busqueda);
 	
 	$profiles=db_query("SELECT uid FROM node WHERE title LIKE '%%s%' AND type='profile'",$busqueda);
@@ -134,6 +134,8 @@ function grabbit_search_perform_users($busqueda,$filters=NULL){
 	
 	while($user=db_fetch_object($users)){
 		$results[$user->uid]=$user->uid;
+		print_r($user);
+		print "<br>";
 	}
 	while($profile=db_fetch_object($profiles)){
 		$results[$profile->uid]=$profile->uid;
