@@ -2822,7 +2822,11 @@ div.tabs
 {
 	width: 100%;
 }
-.page-user-me-myfriends-received .views-table tr
+.page-user-me-myfriends-received .views-table thead tr
+{
+	display: none;
+}
+.page-user-me-myfriends-received .views-table tbody tr
 {
 	height: 65px;
 }
