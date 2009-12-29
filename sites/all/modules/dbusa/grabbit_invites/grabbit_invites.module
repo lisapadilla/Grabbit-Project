@@ -176,6 +176,7 @@ function grabbit_invites_check_facebook_user($facebook){
 	$joined="Joined grabbit!";
 	while($face_user=db_fetch_object($result)){
 		$amigo=user_load(array('uid'=>$face_user->uid));
+		$joined=l('Joined grabbit!','users/'.$amigo->name);
 	    if($amigo->status==1){
 		  $status = friendlist_api_relation_status_calculate($user->uid, $amigo->uid, 1);
 		  
@@ -210,6 +211,7 @@ function grabbit_invites_check_twitter_user( $twitter )
 	$joined = "Joined grabbit!";
 	while($tw_user=db_fetch_object($result)){
 		$amigo=user_load(array('uid'=>$tw_user->uid));
+		$joined=l('Joined grabbit!','users/'.$amigo->name);
 	    if($amigo->status==1){
 		  $status = friendlist_api_relation_status_calculate($user->uid, $amigo->uid, 1);
 		  
