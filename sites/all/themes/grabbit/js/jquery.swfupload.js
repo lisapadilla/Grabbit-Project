@@ -171,6 +171,18 @@ Drupal.behaviors.frontpage = function(){
 		  }
 		});
 		
+		$('#edit-users').click(function(){
+			
+		  if($('#edit-onlysite').attr('checked')){
+			$('#edit-onlystream').attr('checked',false);
+			$('#edit-details-facebook').attr('checked',false);
+			$('#edit-details-twitter').attr('checked',false);
+			$('#edit-details-gmail').attr('checked',false);
+			$('#edit-details-imap').attr('checked',false);
+			$('#edit-details-RSS').attr('checked',false);
+		  }
+		});
+		
 		$('#edit-onlystream').click(function(){
 			$('#edit-onlysite').attr('checked',false);
 		});

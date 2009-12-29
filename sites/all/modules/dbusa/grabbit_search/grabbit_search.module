@@ -240,7 +240,7 @@ function grabbit_search_custom_form(&$form_state){
 		
 		$form['users']=array(
 			'#type'=>'checkbox',
-			'#title' => t('Search for users'),
+			'#title' => t('Search only users'),
 			'#weight'=>11,
 			'#default_value'=>0,
 			'#suffix'=>'</div>'
