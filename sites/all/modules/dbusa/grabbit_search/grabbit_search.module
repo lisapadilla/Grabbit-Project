@@ -126,9 +126,9 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 
 function grabbit_search_perform_users($busqueda,$filters=NULL){
 	
-	$users=db_query("SELECT uid FROM users WHERE name LIKE '%$busqueda%' OR mail LIKE '%$busqueda%' AND status=1");
+	$users=db_query("SELECT uid FROM users WHERE name LIKE '%%$busqueda%%' OR mail LIKE '%%$busqueda%%' AND status=1");
 	
-	$profiles=db_query("SELECT uid FROM node WHERE title LIKE '%$busqueda%' AND type='profile'");
+	$profiles=db_query("SELECT uid FROM node WHERE title LIKE '%%$busqueda%%' AND type='profile'");
 	
 	$results=array();
 	
