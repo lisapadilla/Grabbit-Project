@@ -168,6 +168,7 @@ Drupal.behaviors.frontpage = function(){
 			$('#edit-details-gmail').attr('checked',false);
 			$('#edit-details-imap').attr('checked',false);
 			$('#edit-details-RSS').attr('checked',false);
+			$('#edit-users').attr('checked',false);
 		  }
 		});
 		
@@ -180,6 +181,7 @@ Drupal.behaviors.frontpage = function(){
 			$('#edit-details-gmail').attr('checked',false);
 			$('#edit-details-imap').attr('checked',false);
 			$('#edit-details-RSS').attr('checked',false);
+			$('#edit-onlysite').attr('checked',false);
 		  }
 		});
 		
