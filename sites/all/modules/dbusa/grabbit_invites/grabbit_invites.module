@@ -190,7 +190,7 @@ function grabbit_invites_check_facebook_user($facebook){
 		    $friends='He requested you to be friends in grabbit!';
 		  break;	
 		  default:
-	        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+	        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
 		  break;
 		  }
 	    }
@@ -224,7 +224,7 @@ function grabbit_invites_check_twitter_user( $twitter )
 		    $friends='He requested you to be friends in grabbit!';
 		  break;	
 		  default:
-	        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+	        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
 		  break;
 		  }
 	    }
@@ -259,7 +259,7 @@ function grabbit_invites_get_contacts(){
 				    $friends='He requested you to be friends in grabbit!';
 				  break;	
 				  default:
-			        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+			        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
 				  break;
 				  }
 			    }	
