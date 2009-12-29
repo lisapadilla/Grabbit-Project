@@ -124,6 +124,29 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 	}
 }
 
+function grabbit_search_perform_users($busqueda,$filters=NULL){
+	
+	$users=db_query("SELECT uid FROM users WHERE name LIKE '%%s%' OR mail LIKE '%%s%' AND status=1",$busqueda,$busqueda);
+	
+	$profiles=db_query("SELECT uid FROM node WHERE title LIKE '%%s%' AND type='profile'",$busqueda);
+	
+	$results=array();
+	
+	while($user=db_fetch_object($users)){
+		$results[$user->uid]=$user->uid;
+	}
+	while($profile=db_fetch_object($profiles)){
+		$results[$profile->uid]=$profile->uid;
+	}
+	
+	if(count($results)){
+		return $results;
+	}else{
+		return NULL;
+	}
+}
+
+
 function grabbit_search_custom_page($term=NULL){
 	
 	if($_POST['search']){
@@ -133,7 +156,13 @@ function grabbit_search_custom_page($term=NULL){
       drupal_goto( 'search/node/'.$_POST['search'] );
   	}elseif(isset($_POST['details']['profiles'])){
 	  drupal_goto( 'search/user/'.$_POST['search']);
-    }elseif($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
+    }elseif(isset($_POST['users'])){
+	  if($result =grabbit_search_perform_users($_POST['search'])){
+	    $output = grabbit_search_custom_results_users($result,$_POST['search']);	
+	  }else{
+		$output = grabbit_search_no_results($_POST['search']);
+	  }
+	}elseif($result =grabbit_search_perform($_POST['search'],$_POST['details'])){
             $output = grabbit_search_custom_results($result,$_POST['search']);
 		}else{
 			$output = grabbit_search_no_results($_POST['search']);
@@ -155,6 +184,60 @@ function grabbit_search_no_results($term){
 	return $output;
 }
 
+function grabbit_search_custom_results_users($results,$keyword=NULL){
+	
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
+	$nod='even display';
+	
+	foreach($results as $user){
+	  $item=user_load($user);
+	  $profile = content_profile_load('profile', $user);      
+	
+			$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
+			  <div class="listable">
+			    ';
+			if($profile->field_profile_picture[0]['filepath']){
+			  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend').'</span>';
+			}else{
+			  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'sites/all/themes/grabbit/images/default/default_profile.jpg', 'Friend').'</span>';
+			}
+			$return .='</div>
+			  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$item->name.'">'.$item->name.'</a>
+			  <div class="twitter-body">
+			    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'</div> 
+			    <span class="twitter-date"><span class="blue">member since</span> '.format_date($item->created).'</span>
+			  </div>
+			</div>';
+			
+			$resultados .=$return;
+
+	    if($nod=='odd display'){
+		    $nod='even display';
+	      }else{
+		    $nod='odd display';
+	      }
+    }
+	
+		$output .='<div class="panels-controllers">
+		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
+		           <a href="JavaScript:void(0);" class="move-left"></a>
+		           <a href="JavaScript:void(0);" class="move-right"></a>
+		           </div><div class="panel-grabbit suser-panels">
+		           <div class="panel-favorites">';
+		$output .=$resultados;
+	
+		$output .='</div></div>';
+
+	
+	return $output;
+}
 
 function grabbit_search_custom_results($results,$keyword=NULL){
 	
