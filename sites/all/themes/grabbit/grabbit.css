@@ -2833,6 +2833,7 @@ div.tabs
 .page-user-me-myfriends-received .views-table .views-field-action-link-requester
 {
 	padding-right: 20px;
+	text-align: right;
 }
 .page-user-me-myfriends-received .views-table .views-field-picture
 {
