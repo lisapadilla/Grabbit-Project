@@ -206,7 +206,7 @@ function grabbit_search_custom_results_users($results,$keyword=NULL){
 			if($profile->field_profile_picture[0]['filepath']){
 			  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend').'</span>';
 			}else{
-			  $return .='<span class="twitter-image" style="background:none;">'.theme('imagecache', 'sites/all/themes/grabbit/images/default/default_profile.jpg', 'Friend').'</span>';
+			  $return .='<span class="twitter-image" style="background:none;"><img src="'.base_path().path_to_theme().'/images/default/default_profile.jpg" width="38px" /></span>';
 			}
 			$return .='</div>
 			  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$item->name.'">'.$item->name.'</a>
