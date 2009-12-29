@@ -217,7 +217,7 @@ function grabbit_search_custom_results_users($results,$keyword=NULL){
 	        $friends=l('Send friend request!', 'friendlist/add/'.$item->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
 		  break;
 		  }
-	    }
+	    
 	
 			$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 			  <div class="listable"><a target="_blank" href="'.base_path().'users/'.$item->name.'">
