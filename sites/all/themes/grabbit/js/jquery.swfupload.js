@@ -173,7 +173,7 @@ Drupal.behaviors.frontpage = function(){
 		
 		$('#edit-users').click(function(){
 			
-		  if($('#edit-onlysite').attr('checked')){
+		  if($('#edit-users').attr('checked')){
 			$('#edit-onlystream').attr('checked',false);
 			$('#edit-details-facebook').attr('checked',false);
 			$('#edit-details-twitter').attr('checked',false);
