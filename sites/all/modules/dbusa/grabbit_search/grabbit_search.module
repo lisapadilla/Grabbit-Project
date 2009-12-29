@@ -286,6 +286,13 @@ function grabbit_search_custom_form(&$form_state){
 		'#weight'=>7,
 		'#default_value'=>1
 		);
+		
+		$form['users']=array(
+			'#type'=>'checkbox',
+			'#title' => t('Search for users'),
+			'#weight'=>11,
+			'#default_value'=>0
+			);
 	
 	
 	$form['#action'] = url('private/results');
