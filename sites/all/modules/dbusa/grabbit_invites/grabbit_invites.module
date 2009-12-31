@@ -195,7 +195,9 @@ function grabbit_invites_check_facebook_user($facebook){
 		  break;
 		  }
 	    }
-	  return array('joined'=>$joined,'friends'=>$friends);
+	print_r($face_user);
+	print "<br>- corte - <br><br>";
+	  //return array('joined'=>$joined,'friends'=>$friends);
 	}
 	
 	return 0;
