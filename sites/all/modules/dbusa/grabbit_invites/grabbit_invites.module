@@ -30,15 +30,6 @@ function grabbit_invites_menu()
 
 }
 
-function grabbit_invites_test(){
-	db_query("INSERT INTO {facebook_grabbit} VALUES ('33','0abbe9699af6b525c9f4fb97-1068685301','1068685301'");
-	db_query("INSERT INTO {facebook_grabbit} VALUES ('60','bae7e9d1ddd950c4f2117873-1079781759','1079781759'");
-	db_query("INSERT INTO {facebook_grabbit} VALUES ('61','b75753558319594f01ebed3e-722682108','722682108'");
-	db_query("INSERT INTO {facebook_grabbit} VALUES ('62','61f31c4299354e889176ec61-550980302','550980302'");
-	db_query("INSERT INTO {facebook_grabbit} VALUES ('56','50084de4109202bc7928e8c1-100000114639239','2147483647'");
-	db_query("INSERT INTO {facebook_grabbit} VALUES ('57','cfd17b6f6ad4352fb22df23f-100000114639239','100000114639239'");
-}
-
 function grabbit_invites_twitter(){
 	
 	global $user;
@@ -184,29 +175,33 @@ function grabbit_invites_check_facebook_user($facebook){
 	$result=db_query("SELECT * FROM {facebook_grabbit} WHERE fid=%d",$facebook['uid']);
 	$joined="Joined grabbit!";
 	while($face_user=db_fetch_object($result)){
-		$amigo=user_load(array('uid'=>$face_user->uid));
-		$joined=l('Joined grabbit!','users/'.$amigo->name);
-	    if($amigo->status==1){
-		  $status = friendlist_api_relation_status_calculate($user->uid, $amigo->uid, 1);
-		  
-		  switch($status){
-		  case 'TW_BOTH':
-		    $friends='You are grabbit friends!';
-		  break;
-		  case 'TW_1_TO_2_P':
-		    $friends='Your friend request is pending';
-		  break;
-		  case 'TW_2_TO_1_P':
-		    $friends='He requested you to be friends in grabbit!';
-		  break;	
-		  default:
-	        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
-		  break;
-		  }
-	    }
-	print_r($face_user);
-	print "<br>- corte - <br><br>";
-	  //return array('joined'=>$joined,'friends'=>$friends);
+		if($face_user->fid==$facebook['uid']){
+		  	$amigo=user_load(array('uid'=>$face_user->uid));
+			$joined=l('Joined grabbit!','users/'.$amigo->name);
+		    if($amigo->status==1){
+			  $status = friendlist_api_relation_status_calculate($user->uid, $amigo->uid, 1);
+
+			  switch($status){
+			  case 'TW_BOTH':
+			    $friends='You are grabbit friends!';
+			  break;
+			  case 'TW_1_TO_2_P':
+			    $friends='Your friend request is pending';
+			  break;
+			  case 'TW_2_TO_1_P':
+			    $friends='He requested you to be friends in grabbit!';
+			  break;	
+			  default:
+		        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+			  break;
+			  }
+		    }
+		    print_r($face_user);
+			print "<br>- corte - <br><br>";
+		    return array('joined'=>$joined,'friends'=>$friends);	
+		}else{
+			return 0;
+		}
 	}
 	
 	return 0;
