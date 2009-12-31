@@ -2817,3 +2817,29 @@ div.tabs
 	overflow-y:scroll;
 	height:650px;
 }
+
+.page-user-me-myfriends-received .views-table
+{
+	width: 100%;
+}
+.page-user-me-myfriends-received .views-table thead tr
+{
+	display: none;
+}
+.page-user-me-myfriends-received .views-table tbody tr
+{
+	height: 65px;
+}
+.page-user-me-myfriends-received .views-table .views-field-action-link-requester
+{
+	padding-right: 20px;
+	text-align: right;
+}
+.page-user-me-myfriends-received .views-table .views-field-picture
+{
+	padding-left: 15px;
+}
+.page-user-me-myfriends-received .view-friends-manage .view-footer
+{
+	padding-left: 20px;
+}
