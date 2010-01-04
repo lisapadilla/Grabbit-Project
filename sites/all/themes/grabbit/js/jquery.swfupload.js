@@ -83,7 +83,7 @@ Drupal.behaviors.frontpage = function(){
          upload_url: Drupal.settings.basePath+"yfrog/upload",  
          file_post_name: 'files',  
          file_size_limit : "1024",  
-         file_types : "*.jpg;*.png;*.gif;*.mov;*.flv",  
+         file_types : "*.jpg;*.png;*.gif;*.mov;*.flv;*.pdf;*.doc",  
          file_types_description : "Image files",  
          file_upload_limit : 10,  
          flash_url : Drupal.settings.basePath+"sites/all/themes/grabbit/js/swfupload/swfupload.swf",  

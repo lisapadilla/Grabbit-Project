@@ -157,7 +157,7 @@ function grabbit_uploads_file_form_getit(){
 		$save_path = base_path() . "sites/default/files/uploads/";	// The path were we will save the file (getcwd() may not be reliable and should be tested in your environment)
 		$upload_name = "files";
 		$max_file_size_in_bytes = 2147483647;				// 2GB in bytes
-		$extension_whitelist = array("jpg", "gif", "png","flv","mov");	// Allowed file extensions
+		$extension_whitelist = array("jpg", "gif", "png","flv","mov","pdf","doc");	// Allowed file extensions
 		$valid_chars_regex = '.A-Z0-9_ !@#$%^&()+={}\[\]\',~`-';				// Characters allowed in the file name (in a Regular Expression format)
 
 	// Other variables	
