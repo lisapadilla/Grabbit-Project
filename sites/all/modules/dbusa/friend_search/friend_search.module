@@ -404,7 +404,7 @@ function friend_search_show_friends(){
 }
 
 function friend_search_theme_a_friend($friend,$row){
-	
+	$class="not-grabbit";
 	if(is_array($friend)){ //if its facebook friend
 		if(module_exists('grabbit_invites')){
 			$suser=grabbit_invites_check_facebook_user($friend);
@@ -420,6 +420,7 @@ function friend_search_theme_a_friend($friend,$row){
 					  $link .= l('Withdraw','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()));	
 					}elseif($invited=2){
 					  $link='Joined grabbit';
+					  $class="joined-grabbit";
 					}			
 				}	
 			}
@@ -446,6 +447,7 @@ function friend_search_theme_a_friend($friend,$row){
 				  $link .= l('Withdraw','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()));	
 				}elseif($invited=2){
 				  $link='Joined grabbit';
+				  $class="joined-grabbit";
 				}
 			  }
 			}
@@ -456,7 +458,9 @@ function friend_search_theme_a_friend($friend,$row){
 	    $picture=l(theme('imagecache', 'friend_thumbnail', $friend->field_profile_picture[0]['filepath'], $friend->name),'users/'.$friend->name,array('html'=>TRUE));
 		$name=l($friend->name,'users/'.$friend->name);
 		$link='<div class="friendlist-user-links">'. l('Remove from friends', 'friendlist/delete/'.$friend->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</div>';
-		$social='Grabbit';	
+		$social='Grabbit';
+		$class="joined-grabbit";
+			
 	  }
 	
 	  elseif($friend->reg_code){ // Its a contact!
@@ -464,6 +468,7 @@ function friend_search_theme_a_friend($friend,$row){
 		$name=$friend->email;
 		if($friend->joined){
 			$link='Joined Grabbit!<br>';
+			$class="joined-grabbit";
 			$link .=$friend->friends;
 		}else{
 			$link='Invite is pending<br>';
@@ -473,7 +478,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  }
 	
 	
-	$output = '<div class="views-row views-row-1 '.$row.'">
+	$output = '<div class="views-row views-row-1 '.$row.' '.$class.'">
 	    <div class="views-row">
 
 	  <div class="views-field-field-profile-picture-fid">
