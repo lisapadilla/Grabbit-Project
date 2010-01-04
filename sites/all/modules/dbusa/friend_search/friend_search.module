@@ -415,7 +415,8 @@ function friend_search_theme_a_friend($friend,$row){
 				$class="joined-grabbit";
 			}else{
 			  	if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
-		          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
+				  	$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
+					$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";			
 				}else{
 					if($invited!=2){
 					  $link='Invite is pending<br>';
@@ -444,7 +445,8 @@ function friend_search_theme_a_friend($friend,$row){
 				$class="joined-grabbit";
 			}else{
 			  if(!$invited=grabbit_invites_get_invited($friend->screen_name)){
-			    $link=l('Invite to grabbit','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
+				$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
+				$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
 			  }else{
 				if($invited!=2){
 				  $link='Invite is pending<br>';
