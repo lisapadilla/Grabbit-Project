@@ -2329,7 +2329,7 @@ div.messages, div.status, div.warning, div.error{
 {
 	font-size: 11px;
 	color: #999999;
-	margin-right:20px;
+	margin-right:10px;
 }
 .page-user-me-myfriends #content-area .views-field-name a,
 .page-user-me-myfriends-facebook-friends #content-area .views-field-name a,
@@ -2375,9 +2375,13 @@ div.messages, div.status, div.warning, div.error{
 {
 	padding-left: 14px;
 }
-.grabbit-friends
+.views-row .grabbit-friends
 {
 	background: url(images/ic_friends.gif) no-repeat right top;
+}
+.views-row .invite-pending
+{
+	background: url(images/ic_invited.gif) no-repeat right top;
 }
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
