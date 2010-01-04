@@ -503,13 +503,13 @@ function friend_search_theme_a_friend($friend,$row){
 	  <div class="views-field-last-update-time">
 	    <span class="field-content"/>
 	  </div>
+	
+	<div class="views-field-action-socital-networks">
+	    <span class="field-content">'.$social.'</span>
+	  </div>
 
 	  <div class="views-field-action-link-requestee">
 	    <span class="field-content">'.$link.'</span>
-	  </div>
-
-	  <div class="views-field-action-socital-networks">
-	    <span class="field-content">'.$social.'</span>
 	  </div>
 	</div>  </div>';
 	
