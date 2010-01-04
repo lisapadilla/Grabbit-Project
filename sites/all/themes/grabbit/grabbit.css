@@ -2361,12 +2361,23 @@ div.messages, div.status, div.warning, div.error{
 	margin: 0;
 	display: block;
 }
+.page-user-me-myfriends #content-area .not-grabbit .views-field-field-profile-picture-fid img,
+.page-user-me-myfriends-facebook-friends #content-area .not-grabbit .views-field-field-profile-picture-fid img,
+.page-user-me-myfriends-view-contacts #content-area .not-grabbit .views-field-field-profile-picture-fid img,
+.page-user-me-myfriends-twitter-friends #content-area .not-grabbit .views-field-field-profile-picture-fid img
+{
+	margin-right: 14px;
+}
 .page-user-me-myfriends #content-area .not-grabbit,
 .page-user-me-myfriends-facebook-friends #content-area .not-grabbit,
 .page-user-me-myfriends-view-contacts #content-area .not-grabbit,
 .page-user-me-myfriends-twitter-friends #content-area .not-grabbit
 {
 	padding-left: 14px;
+}
+.grabbit-friends
+{
+	background: url(images/ic_friends.gif) no-repeat right top;
 }
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
