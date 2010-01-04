@@ -409,8 +409,9 @@ function friend_search_theme_a_friend($friend,$row){
 		if(module_exists('grabbit_invites')){
 			$suser=grabbit_invites_check_facebook_user($friend);
 			if($suser!=0){
-				$link=$suser['joined'];
-				$link .="<br>".$suser['friends'];
+				$link='<span class="joined-link">'.$suser['joined'].'</span> &raquo; ';
+				$link .="<span class='joined-status'>".$suser['friends'].'</span> &raquo;';
+				$link .="<span class='joined-action'>".$suser['action']."</span>";
 				$class="joined-grabbit";
 			}else{
 			  	if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
@@ -437,8 +438,9 @@ function friend_search_theme_a_friend($friend,$row){
 		if(module_exists('grabbit_invites')){
 			$suser=grabbit_invites_check_twitter_user($friend);
 			if($suser!=0){
-				$link=$suser['joined'];
-				$link .="<br>".$suser['friends'];
+				$link='<span class="joined-link">'.$suser['joined'].'</span> &raquo; ';
+				$link .="<span class='joined-status'>".$suser['friends'].'</span> &raquo;';
+				$link .="<span class='joined-action'>".$suser['action']."</span>";
 				$class="joined-grabbit";
 			}else{
 			  if(!$invited=grabbit_invites_get_invited($friend->screen_name)){
