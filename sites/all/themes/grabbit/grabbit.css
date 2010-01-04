@@ -2368,6 +2368,8 @@ div.messages, div.status, div.warning, div.error{
 {
 	padding: 4px 4px 0 4px;
 	background-color: #CAD2D8;
+	float: left;
+	margin-right: 10px;
 }
 .page-user-me-myfriends #content-area .views-row,
 .page-user-me-myfriends-facebook-friends #content-area .views-row,
