@@ -202,7 +202,13 @@ function grabbit_imap_add(){
 								  <h2><a href="#">'.$account['user']." - ".l('Delete','imap/delete/account').'</a></h2>
 								  <div class="content-body">
 								     You have an IMAP account in Grabbit.
-								     If you want to add a new account you must first delete this one.
+								     If you want to add a new account you must first delete this one.<br><br>
+								     <strong>Your IMAP information:</strong>
+								     <div class="information-imap">
+								       <strong>Account:</strong> <span>'.$account['email'].'</span>
+								       <strong>Server:</strong> <span>'.$account['server'].'</span>
+								       <strong>Port:</strong> <span>'.$account['port'].'</span>
+								     </div>
 								  </div>
 								</div>
 							 </div>
