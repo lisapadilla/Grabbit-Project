@@ -183,7 +183,7 @@ function grabbit_invites_check_facebook_user($facebook){
 
 			  switch($status){
 			  case 'TW_BOTH':
-			    $friends='You are grabbit friends!';
+			    $friends='<strong>You are grabbit friends!</strong>';
 			    $action ='&raquo;';
 			    $action .=$link .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
 			  break;
@@ -225,7 +225,7 @@ function grabbit_invites_check_twitter_user( $twitter )
 		  
 		  switch($status){
 		  case 'TW_BOTH':
-		    $friends='You are grabbit friends!';
+		    $friends='<strong>You are grabbit friends!</strong>';
 		  break;
 		  case 'TW_1_TO_2_P':
 		    $friends='Your friend request is pending';
@@ -262,7 +262,7 @@ function grabbit_invites_get_contacts(){
 
 				  switch($status){
 				  case 'TW_BOTH':
-				    $friends='You are grabbit friends!';
+				    $friends='<strong>You are grabbit friends!</strong>';
 				  break;
 				  case 'TW_1_TO_2_P':
 				    $friends='Your friend request is pending';
