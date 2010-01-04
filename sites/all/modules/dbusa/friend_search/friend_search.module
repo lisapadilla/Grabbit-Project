@@ -515,8 +515,8 @@ function friend_search_theme_a_friend($friend,$row){
 	    <span class="field-content">'.$social.'</span>
 	  </div>
 
-	  <div class="views-field-action-link-requestee">
-	    <span class="field-content '.$link_class.'">'.$link.'</span>
+	  <div class="views-field-action-link-requestee '.$link_class.'">
+	    <span class="field-content">'.$link.'</span>
 	  </div>
 	  </div>';
 	
