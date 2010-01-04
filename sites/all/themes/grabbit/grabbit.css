@@ -2331,10 +2331,10 @@ div.messages, div.status, div.warning, div.error{
 	color: #999999;
 	margin-right:20px;
 }
-#content-area .page-user-me-myfriends .views-field-name a,
-#content-area .page-user-me-myfriends-facebook-friends .views-field-name a,
-#content-area .page-user-me-myfriends-view-contacts .views-field-name a,
-#content-area .page-user-me-myfriends-twitter-friends .views-field-name a
+.page-user-me-myfriends #content-area .views-field-name a,
+.page-user-me-myfriends-facebook-friends #content-area .views-field-name a,
+.page-user-me-myfriends-view-contacts #content-area .views-field-name a,
+.page-user-me-myfriends-twitter-friends #content-area .views-field-name a
 {
 	font-weight: bold;
 	color: #385491;
@@ -2346,8 +2346,18 @@ div.messages, div.status, div.warning, div.error{
 {
 	font-weight: bold;
 	color: #385491;
-	padding-right: 20px;
+}
+.joined-grabbit .views-field-name
+{
+	padding-right: 28px;
 	background: url(images/conejillo2.gif) no-repeat right top;
+}
+.page-user-me-myfriends #content-area .odd,
+.page-user-me-myfriends-facebook-friends #content-area .odd
+.page-user-me-myfriends-view-contacts #content-area .odd
+.page-user-me-myfriends-twitter-friends #content-area .odd
+{
+	background-color: #FFFFFF;
 }
 #content-area .views-field-action-link-requestee .joined-link a
 {
