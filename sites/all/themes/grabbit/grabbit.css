@@ -2342,7 +2342,7 @@ div.messages, div.status, div.warning, div.error{
 .page-user-me-myfriends .views-field-name,
 .page-user-me-myfriends-facebook-friends .views-field-name,
 .page-user-me-myfriends-view-contacts .views-field-name,
-.page-user-me-myfriends-twitter-friends .views-field-name,
+.page-user-me-myfriends-twitter-friends .views-field-name
 {
 	font-weight: bold;
 	color: #385491;
