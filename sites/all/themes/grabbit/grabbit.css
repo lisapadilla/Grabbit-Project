@@ -2353,8 +2353,8 @@ div.messages, div.status, div.warning, div.error{
 	background: url(images/conejillo2.gif) no-repeat right top;
 }
 .page-user-me-myfriends #content-area .odd,
-.page-user-me-myfriends-facebook-friends #content-area .odd
-.page-user-me-myfriends-view-contacts #content-area .odd
+.page-user-me-myfriends-facebook-friends #content-area .odd,
+.page-user-me-myfriends-view-contacts #content-area .odd,
 .page-user-me-myfriends-twitter-friends #content-area .odd
 {
 	background-color: #FFFFFF;
