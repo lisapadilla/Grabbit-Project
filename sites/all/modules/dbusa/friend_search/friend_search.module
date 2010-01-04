@@ -410,16 +410,18 @@ function friend_search_theme_a_friend($friend,$row){
 			$suser=grabbit_invites_check_facebook_user($friend);
 			if($suser!=0){
 				$link='<span class="joined-link">'.$suser['joined'].'</span> &raquo; ';
-				$link .="<span class='joined-status'>".$suser['friends'].'</span> &raquo;';
+				$link .="<span class='joined-status'>".$suser['friends'].'</span>';
 				$link .="<span class='joined-action'>".$suser['action']."</span>";
 				$class="joined-grabbit";
 			}else{
 			  	if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
-		          $link=l('Invite to grabbit','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));			
+				  	$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
+					$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";			
 				}else{
 					if($invited!=2){
-					  $link='Invite is pending<br>';
-					  $link .= l('Withdraw','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()));	
+				 	  $link='<span class="joined-link">Invited</span> &raquo; ';
+					  $link .='<span class="joined-status">Your invitation is pending</span> &raquo; ';
+					  $link .='<span class="joined-action">'.l('cancel invitation...','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()))."</span>";	
 					}elseif($invited=2){
 					  $link='Joined grabbit';
 					  $class="joined-grabbit";
@@ -439,16 +441,18 @@ function friend_search_theme_a_friend($friend,$row){
 			$suser=grabbit_invites_check_twitter_user($friend);
 			if($suser!=0){
 				$link='<span class="joined-link">'.$suser['joined'].'</span> &raquo; ';
-				$link .="<span class='joined-status'>".$suser['friends'].'</span> &raquo;';
+				$link .="<span class='joined-status'>".$suser['friends'].'</span>';
 				$link .="<span class='joined-action'>".$suser['action']."</span>";
 				$class="joined-grabbit";
 			}else{
 			  if(!$invited=grabbit_invites_get_invited($friend->screen_name)){
-			    $link=l('Invite to grabbit','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'));
+				$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
+				$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
 			  }else{
 				if($invited!=2){
-				  $link='Invite is pending<br>';
-				  $link .= l('Withdraw','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()));	
+				  $link='<span class="joined-link">Invited</span> &raquo; ';
+				  $link .='<span class="joined-status">Your invitation is pending</span> &raquo; ';
+				  $link .= '<span class="joined-action">'.l('cancel invitation','invite/withdraw/pending/'.$invited,array('query'=>drupal_get_destination()))."</span>";	
 				}elseif($invited=2){
 				  $link='Joined grabbit';
 				  $class="joined-grabbit";
@@ -461,7 +465,9 @@ function friend_search_theme_a_friend($friend,$row){
 	  elseif($friend->nid){ //if its grabbit friend
 	    $picture=l(theme('imagecache', 'friend_thumbnail', $friend->field_profile_picture[0]['filepath'], $friend->name),'users/'.$friend->name,array('html'=>TRUE));
 		$name=l($friend->name,'users/'.$friend->name);
-		$link='<div class="friendlist-user-links">'. l('Remove from friends', 'friendlist/delete/'.$friend->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</div>';
+		$link='<span class="joined-link">'.l('Joined Grabit!','users/'.$friend->name).'</span> &raquo; ';
+		$link .="<span class='joined-status'><strong>You are Grabbit friends!</strong></span> &raquo; ";
+		$link .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$friend->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
 		$social='Grabbit';
 		$class="joined-grabbit";
 			
@@ -471,12 +477,13 @@ function friend_search_theme_a_friend($friend,$row){
 		$picture='<img src="'.base_path().path_to_theme().'/images/default/default_profile.jpg" width="38px" />';
 		$name=$friend->email;
 		if($friend->joined){
-			$link='Joined Grabbit!<br>';
+			$link='<span class="joined-link">Joined Grabbit!</span> &raquo; ';
 			$class="joined-grabbit";
-			$link .=$friend->friends;
+			$link .="<span class='joined-status'><strong>".$friend->friends."</strong></span>";
 		}else{
-			$link='Invite is pending<br>';
-			$link .= l('Withdraw','invite/withdraw/pending/'.$friend->reg_code,array('query'=>drupal_get_destination()));
+			$link='<span class="joined-link">Invited</span> &raquo; ';
+			$link .='<span class="joined-status">Your invitation is pending</span> &raquo; ';
+			$link .= "<span class='joined-action'>".l('cancel invitation','invite/withdraw/pending/'.$friend->reg_code,array('query'=>drupal_get_destination()))."</span>";
 		}
 		$social='Contact';
 	  }
