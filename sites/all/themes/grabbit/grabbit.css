@@ -2358,6 +2358,8 @@ div.messages, div.status, div.warning, div.error{
 .page-user-me-myfriends-twitter-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid img
 {
 	float: none;
+	margin: 0;
+	padding-bottom: 4px;
 }
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
