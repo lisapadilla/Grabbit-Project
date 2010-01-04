@@ -163,7 +163,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				break;
 				case "doc":
 				case "pdf":
-				  $output = 'Download file: '.$file->filepath;
+				  $output = 'Download file: '.l($file->filename,$file->filepath);
 				break;
 				default:
 				  $output = theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '');
