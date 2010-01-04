@@ -468,9 +468,7 @@ function friend_search_theme_a_friend($friend,$row){
 		$link='<span class="joined-link">'.l('Joined Grabit!','users/'.$friend->name).'</span> &raquo; ';
 		$link .="<span class='joined-status'><strong>You are Grabbit friends!</strong></span> &raquo; ";
 		$link .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$friend->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
-		$social='Grabbit';
-		$class="joined-grabbit";
-			
+		$class="joined-grabbit";			
 	  }
 	
 	  elseif($friend->reg_code){ // Its a contact!
@@ -485,7 +483,7 @@ function friend_search_theme_a_friend($friend,$row){
 			$link .='<span class="joined-status">Your invitation is pending</span> &raquo; ';
 			$link .= "<span class='joined-action'>".l('cancel invitation','invite/withdraw/pending/'.$friend->reg_code,array('query'=>drupal_get_destination()))."</span>";
 		}
-		$social='Contact';
+		$social .='<span class="from-facebook"><img src="'.base_path().path_to_theme().'/images/various/gmail.jpg" alt="Facebook Account" width="15px" /></span>';
 	  }
 	
 	
