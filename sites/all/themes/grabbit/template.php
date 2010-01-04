@@ -161,6 +161,10 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				case "flv":
 				  $output = swf($file->filepath, array('params' => array('width' => '430', 'height'=>'400')));
 				break;
+				case "doc":
+				case "pdf":
+				  $output = 'Download file: '.$file->filepath;
+				break;
 				default:
 				  $output = theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '');
 				break;
