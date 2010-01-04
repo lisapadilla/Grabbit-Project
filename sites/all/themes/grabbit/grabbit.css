@@ -2327,8 +2327,15 @@ div.messages, div.status, div.warning, div.error{
 .page-user-me-myfriends-view-contacts .views-field-action-link-requestee,
 .page-user-me-myfriends-twitter-friends .views-field-action-link-requestee
 {
-	float:right;
+	font-size: 11px;
+	color: #999999;
 	margin-right:20px;
+}
+#content-area .views-field-action-link-requestee a
+{
+	color: #3399FF;
+	text-decoration: underline;
+	font-style: italic;
 }
 .page-user-me-myfriends-twitter-friends .twitter-friend .invite
 {
