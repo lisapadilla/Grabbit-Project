@@ -2359,6 +2359,14 @@ div.messages, div.status, div.warning, div.error{
 {
 	float: none;
 	margin: 0;
+	display: block;
+}
+.page-user-me-myfriends #content-area .not-grabbit,
+.page-user-me-myfriends-facebook-friends #content-area .not-grabbit,
+.page-user-me-myfriends-view-contacts #content-area .not-grabbit,
+.page-user-me-myfriends-twitter-friends #content-area .not-grabbit
+{
+	padding-left: 14px;
 }
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
