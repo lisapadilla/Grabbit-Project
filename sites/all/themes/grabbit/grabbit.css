@@ -2352,10 +2352,17 @@ div.messages, div.status, div.warning, div.error{
 	padding-right: 28px;
 	background: url(images/conejillo2.gif) no-repeat right top;
 }
-.page-user-me-myfriends #content-area .odd,
-.page-user-me-myfriends-facebook-friends #content-area .odd,
-.page-user-me-myfriends-view-contacts #content-area .odd,
-.page-user-me-myfriends-twitter-friends #content-area .odd
+.page-user-me-myfriends #content-area .views-row-odd,
+.page-user-me-myfriends-facebook-friends #content-area .views-row-odd,
+.page-user-me-myfriends-view-contacts #content-area .views-row-odd,
+.page-user-me-myfriends-twitter-friends #content-area .views-row-odd
+{
+	background-color: #FFFFFF;
+}
+.page-user-me-myfriends #content-area .views-row,
+.page-user-me-myfriends-facebook-friends #content-area .views-row,
+.page-user-me-myfriends-view-contacts #content-area .views-row,
+.page-user-me-myfriends-twitter-friends #content-area .views-row
 {
 	background-color: #FFFFFF;
 }
