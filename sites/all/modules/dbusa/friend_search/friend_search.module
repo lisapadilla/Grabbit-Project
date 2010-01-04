@@ -465,7 +465,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  elseif($friend->nid){ //if its grabbit friend
 	    $picture=l(theme('imagecache', 'friend_thumbnail', $friend->field_profile_picture[0]['filepath'], $friend->name),'users/'.$friend->name,array('html'=>TRUE));
 		$name=l($friend->name,'users/'.$friend->name);
-		$link='<span class="joined-link">Joined Grabbit!</span> &raquo; ';
+		$link='<span class="joined-link">'.l('Joined Grabit!','users/'.$friend->name).'</span> &raquo; ';
 		$link .="<span class='joined-status'><strong>You are Grabbit friends!</strong></span> &raquo; ";
 		$link .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$friend->uid.'/'.$user->uid,array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
 		$social='Grabbit';
