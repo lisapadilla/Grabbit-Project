@@ -2359,14 +2359,22 @@ div.messages, div.status, div.warning, div.error{
 {
 	float: none;
 	margin: 0;
-	padding-bottom: 4px;
+}
+.page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
+.page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
+.page-user-me-myfriends-view-contacts #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
+.page-user-me-myfriends-twitter-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content
+{
+	padding: 4px;
+	padding-top: 0;
+	display: block;
 }
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
 .page-user-me-myfriends-view-contacts #content-area .joined-grabbit .views-field-field-profile-picture-fid,
 .page-user-me-myfriends-twitter-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid
 {
-	padding: 4px 4px 0 4px;
+	padding-top: 4px;
 	background-color: #CAD2D8;
 	float: left;
 	margin-right: 10px;
