@@ -43,7 +43,9 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 		
           break;
           case 3:
-            $blocks['content']='<div class="panels-update-wraper">testing</div>';
+            $blocks['content']='<div class="panels-update-wraper">
+                                  <div class="panels-update-wraper">testing</div>
+                                </div>';
           break;
       }
       return $blocks;
