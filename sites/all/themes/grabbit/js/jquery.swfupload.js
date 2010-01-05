@@ -217,9 +217,8 @@ Drupal.behaviors.frontpage = function(){
 		});
 		
 		$('#block-friend_search-3 #edit-pass').click(function(){
-			if($(this).val()=='password'){
-				$(this).val();
-			}
+			$(this).val();
+			
 		});
 		
 }
