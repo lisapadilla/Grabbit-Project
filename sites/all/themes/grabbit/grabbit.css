@@ -2403,6 +2403,19 @@ div.messages, div.status, div.warning, div.error{
 	margin-right: 10px;
 	background: #CAD2D8 url(images/red_top.gif) no-repeat;
 }
+.action-button
+{
+	float: right;
+}
+.action-button a
+{
+	display: block;
+	width: 50px;
+	height: 15px;
+	text-indent: -999em;
+	overflow: hidden;
+	background: url(images/invite_btn.gif) no-repeat;
+}
 .page-user-me-myfriends #content-area .views-row,
 .page-user-me-myfriends-facebook-friends #content-area .views-row,
 .page-user-me-myfriends-view-contacts #content-area .views-row,
