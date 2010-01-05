@@ -3062,3 +3062,8 @@ div.tabs
 	font-weight:bold;
 	display:inline;
 }
+
+#content-area #user-login .description,
+#content-area #user-login .form-required{
+	display:none;
+}
