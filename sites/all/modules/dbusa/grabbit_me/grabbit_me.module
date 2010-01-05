@@ -913,7 +913,11 @@ function grabbit_me_user($op){
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
 	if($form_id=='user_login'){
 		if(arg(0)=='user'){
-			print_r($form);
+			$form['recover']=array(
+				'#type'=>'item',
+				'#value'=>'testeando',
+				'#weight'=>100;
+				);
 		}
 	}
 }
