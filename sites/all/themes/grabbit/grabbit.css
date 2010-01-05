@@ -3071,3 +3071,21 @@ div.tabs
 #content-area #user-login {
 	background-color:#E6EAED;
 }
+
+#content-area #user-login .form-submit{
+	background:transparent url(images/login_bt_front.gif) no-repeat scroll 0 0;
+	border:medium none;
+	cursor:pointer;
+	display:block;
+	float:left;
+	font-size:0;
+	height:20px;
+	width:60px;
+	line-height:1000px;
+	margin:0;
+	overflow:hidden;
+	padding:0;
+	text-indent:-3000em;
+	margin-top:10px;
+	margin-left:85px;
+}
