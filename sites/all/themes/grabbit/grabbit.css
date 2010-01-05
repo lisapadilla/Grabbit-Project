@@ -2974,12 +2974,12 @@ div.tabs
 }
 
 #block-friend_search-3 .join-now{
-  background: #FFFFFF url(images/top_front.gif) bottom no-repeat;
+  background: #FFFFFF url(images/bot_front.gif) bottom no-repeat;
   display:block;
   position: relative;
 }
 #block-friend_search-3 .join-now .join-now-inner{
-	background: transparent url(images/bot_front.gif) 0 0 no-repeat;
+	background: transparent url(images/top_front.gif) 0 0 no-repeat;
 }
 
 #block-friend_search-3 .login-now{
