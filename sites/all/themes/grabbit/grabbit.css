@@ -2996,6 +2996,11 @@ div.tabs
 	display:block;
 	float:left;
 }
+#block-friend_search-3 .join-now .images .rigt{
+	display:block;
+	float:left;
+	padding-left:100px;
+}
 #block-friend_search-3 .join-now .join-now-inner{
 	background: transparent url(images/top_front.gif) 0 0 no-repeat;
 	padding:10px 10px 10px 20px;
