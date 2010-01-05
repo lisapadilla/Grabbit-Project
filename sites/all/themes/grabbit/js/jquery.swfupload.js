@@ -211,14 +211,14 @@ Drupal.behaviors.frontpage = function(){
 		$('#block-friend_search-3 #edit-name').val('username');
 		$('#block-friend_search-3 #edit-pass').val('password');
 		$('#block-friend_search-3 #edit-name').click(function(){
-			if($(this).value()=='username'){
-				$(this).value('');
+			if($(this).val()=='username'){
+				$(this).val('');
 			}
 		});
 		
 		$('#block-friend_search-3 #edit-pass').click(function(){
-			if($(this).value()=='password'){
-				$(this).value();
+			if($(this).val()=='password'){
+				$(this).val();
 			}
 		});
 		
