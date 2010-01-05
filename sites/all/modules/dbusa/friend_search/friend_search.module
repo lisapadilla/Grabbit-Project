@@ -454,7 +454,7 @@ function friend_search_theme_a_friend($friend,$row){
 			
 		}
 		$name=$friend['first_name']." ".$friend['last_name'];
-		$picture = '<img src="'.$friend['pic_small'].'" />';
+		$picture = '<img src="'.$friend['pic_small'].'" width="48px"/>';
 		$social .='<span class="from-facebook"><img src="'.base_path().path_to_theme().'/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
 	  }
 	  elseif($friend->screen_name){ //if its twitter friend
