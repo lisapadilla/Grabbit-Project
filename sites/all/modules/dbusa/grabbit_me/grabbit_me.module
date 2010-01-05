@@ -909,3 +909,11 @@ function grabbit_me_user($op){
         drupal_goto('user/me');
     }
 }
+
+function grabbit_me_form_alter(&$form, $form_state, $form_id){
+	if($form_id=='user_login'){
+		if(arg(0)=='user'){
+			print_r($form);
+		}
+	}
+}
