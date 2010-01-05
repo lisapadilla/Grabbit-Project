@@ -438,7 +438,8 @@ function friend_search_theme_a_friend($friend,$row){
 			  	if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
 				  	$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
 					$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
-					$link_class='no-invite';			
+					$link_class='no-invite';
+					$extra="<span class='action-button'>".l('send invitation...','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";			
 				}else{
 					if($invited!=2){
 				 	  $link='<span class="joined-link">Invited</span> &raquo; ';
@@ -473,6 +474,7 @@ function friend_search_theme_a_friend($friend,$row){
 				$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
 				$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
 				$link_class='no-invite';
+				$extra ="<span class='action-button'>".l('send invitation...','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
 			  }else{
 				if($invited!=2){
 				  $link='<span class="joined-link">Invited</span> &raquo; ';
@@ -518,7 +520,7 @@ function friend_search_theme_a_friend($friend,$row){
 	
 	$output = '<div class="views-row views-row-1 '.$row.' '.$class.'">
 	   
-
+      
 	  <div class="views-field-field-profile-picture-fid">
 	    <span class="field-content">'.$picture.'</span>
 	  </div>
@@ -536,6 +538,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  </div>
 
 	  <div class="views-field-action-link-requestee '.$link_class.'">
+	    '.$extra.'
 	    <span class="field-content">'.$link.'</span>
 	  </div>
 	  </div>';
