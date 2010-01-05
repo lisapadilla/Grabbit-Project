@@ -3055,3 +3055,10 @@ div.tabs
 .page-user-register #user-register{
 	padding:20px;
 }
+
+#content-area #user-login label{
+	color:#3399FF;
+	font-size:14px;
+	font-weight:bold;
+	display:inline;
+}
