@@ -3043,6 +3043,8 @@ div.tabs
 	overflow:hidden;
 	padding:0;
 	text-indent:-3000em;
+	margin-top:10px;
+	margin-left:85px;
 }
 #block-friend_search-3 .login-now .member{
 	color:#FFFFFF;
