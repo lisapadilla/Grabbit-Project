@@ -3052,3 +3052,6 @@ div.tabs
 	font-family:helvetica;
 	font-size:14px;
 }
+.page-user-register #user-register{
+	padding:20px;
+}
