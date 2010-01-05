@@ -2375,11 +2375,11 @@ div.messages, div.status, div.warning, div.error{
 {
 	padding-left: 14px;
 }
-.views-row .grabbit-friends
+.views-field-action-link-requestee.grabbit-friends
 {
 	background: url(images/ic_friends.gif) no-repeat right top;
 }
-.views-row .invite-pending
+.views-field-action-link-requestee.invite-pending
 {
 	background: url(images/ic_invited.gif) no-repeat right top;
 }
