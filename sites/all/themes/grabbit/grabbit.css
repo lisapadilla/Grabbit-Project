@@ -3120,7 +3120,7 @@ div.tabs
 #content-area #user-login .forgot-password a{
 	color:#3399FF;
 }
-.not-logged-in.page-user .error {
+.not-logged-in.page-user .messages.error {
 	font-size:10px;
 	line-height:11px;
 	margin-left:422px;
