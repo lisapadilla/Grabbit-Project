@@ -916,7 +916,7 @@ function grabbit_me_form_alter(&$form, $form_state, $form_id){
 			$form['recover']=array(
 				'#type'=>'item',
 				'#value'=>'Forgot your password? &raquo; '.l('recover','user/password'),
-				'#weight'=>100,
+				'#weight'=>-1,
 				'#prefix'=>'<span class="forgot-password">',
 				'#suffix'=>'</span>'
 				);
