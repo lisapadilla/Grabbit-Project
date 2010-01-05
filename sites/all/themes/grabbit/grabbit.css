@@ -3029,6 +3029,21 @@ div.tabs
 	margin-top:5px;
 	margin-bottom:0px;
 }
+#block-friend_search-3 #user-login #edit-submit-1{
+	background:transparent url(images/login_bt_front.gif) no-repeat scroll 0 0;
+	border:medium none;
+	cursor:pointer;
+	display:block;
+	float:left;
+	font-size:0;
+	height:20px;
+	width:60px;
+	line-height:1000px;
+	margin:0;
+	overflow:hidden;
+	padding:0;
+	text-indent:-3000em;
+}
 #block-friend_search-3 .login-now .member{
 	color:#FFFFFF;
 	font-family:helvetica;
