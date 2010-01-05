@@ -3017,7 +3017,9 @@ div.tabs
 #block-friend_search-3 #user-login label{
 	display:none;
 }
-
+#block-friend_search-3 #user-login .description{
+	display:none;
+}
 #block-friend_search-3 .login-now .member{
 	color:#FFFFFF;
 	font-family:helvetica;
