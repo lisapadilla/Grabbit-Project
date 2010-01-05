@@ -3073,11 +3073,10 @@ div.tabs
 }
 
 #content-area #user-login .form-submit{
-	background:transparent url(images/login_bt_front.gif) no-repeat scroll 0 0;
+	background:transparent url(images/login_bt_not_front.gif) no-repeat scroll 0 0;
 	border:medium none;
 	cursor:pointer;
 	display:block;
-	float:left;
 	font-size:0;
 	height:20px;
 	width:60px;
