@@ -2944,6 +2944,7 @@ div.tabs
   background: transparent url(images/updp_top_front.gif) 0 0 no-repeat;
 }
 #block-friend_search-3 .panels-update-wraper{
+	display:inline-block;
 	width:908px;
 }
 #block-friend_search-3 .welcome{
@@ -2952,10 +2953,33 @@ div.tabs
 	width:240px;
 }
 
+#block-friend_search-3 .welcome .title-welcome{
+	color:#3399FF;
+	display:block;
+	font-family:helvetica;
+	font-size:28px;
+}
+#block-friend_search-3 .welcome .welcome-body{
+	color:#FFFFFF;
+	display:block;
+	font-family:helvetica;
+	font-size:16px;
+	margin-top:10px;
+}
+
 #block-friend_search-3 .join-now{
 	display:block;
 	float:left;
 	width:435px;
+}
+
+#block-friend_search-3 .join-now{
+  background: transparent url(images/top_front.gif) 0 0 no-repeat;
+}
+#block-friend_search-3 .join-now .join-now-inner{
+	background: #FFFFFF url(images/bot_front.gif) bottom no-repeat;
+	  display:block;
+	  position: relative;
 }
 
 #block-friend_search-3 .login-now{

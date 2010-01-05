@@ -49,10 +49,12 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
                                       <span class="welcome-body">The coolest new real-time Web tool for managing all of your social networks, messages, and friends</span>
                                     </div>
                                     <div class="join-now">
+                                     <div class="join-now-inner">
                                       <span class="main-title">Join now!</span> <span class="normal">Let Grabbit help you filter, organize, manage, and use all yout online information!</span>
                                       <div class="images"><span class="left"><img src="'.base_path().'sites/all/themes/grabbit/images/various/logos.jpg" /></span>
                                       <span class="right"><img src="'.base_path().'sites/all/themes/grabbit/images/various/signup.jpg" /></span></div>
-                                    </div>
+                                     </div> 
+                                     </div>
                                     <div class="login-now"><span class="member">Already a member?</span>
                                       '.drupal_get_form('user_login').'
                                     </div>
