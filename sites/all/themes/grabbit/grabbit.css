@@ -2988,9 +2988,12 @@ div.tabs
 	font-family:helvetica;
 	font-size:14px;
 }
+#block-friend_search-3 .join-now .images{
+	margin-top:15px;
+}
 #block-friend_search-3 .join-now .join-now-inner{
 	background: transparent url(images/top_front.gif) 0 0 no-repeat;
-	padding:10px;
+	padding:10px 10px 10px 10px;
 }
 
 #block-friend_search-3 .login-now{
