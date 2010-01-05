@@ -3009,7 +3009,17 @@ div.tabs
 #block-friend_search-3 .login-now{
 	float:left;
 	width:142px;
+	margin-left:20px;
 }
 #block-friend_search-3 #user-login input{
 	width:140px;
+}
+#block-friend_search-3 #user-login label{
+	display:none;
+}
+
+#block-friend_search-3 .login-now .member{
+	color:#FFFFFF;
+	font-family:helvetica;
+	font-size:14px;
 }
