@@ -3052,6 +3052,9 @@ div.tabs
 	font-family:helvetica;
 	font-size:14px;
 }
+#block-friend_search-3 .login-now .forgot-password{
+	display:none;
+}
 .page-user-register #user-register{
 	padding:20px;
 }
