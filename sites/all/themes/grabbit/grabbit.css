@@ -3024,6 +3024,10 @@ div.tabs
 #block-friend_search-3 #user-login{
 	padding:0px;
 }
+#block-friend_search-3 #user-login .form-item{
+	margin-top:5px;
+	margin-bottom:0px;
+}
 #block-friend_search-3 .login-now .member{
 	color:#FFFFFF;
 	font-family:helvetica;
