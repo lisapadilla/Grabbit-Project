@@ -2391,6 +2391,7 @@ div.messages, div.status, div.warning, div.error{
 	padding: 4px;
 	padding-top: 0;
 	display: block;
+	background: url(images/red_btn.gif) no-repeat 0 bottom;
 }
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
@@ -2398,9 +2399,22 @@ div.messages, div.status, div.warning, div.error{
 .page-user-me-myfriends-twitter-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid
 {
 	padding-top: 4px;
-	background-color: #CAD2D8;
 	float: left;
 	margin-right: 10px;
+	background: #CAD2D8 url(images/red_top.gif) no-repeat;
+}
+.action-button
+{
+	float: right;
+}
+.action-button a
+{
+	display: block;
+	width: 50px;
+	height: 15px;
+	text-indent: -999em;
+	overflow: hidden;
+	background: url(images/invite_btn.gif) no-repeat;
 }
 .page-user-me-myfriends #content-area .views-row,
 .page-user-me-myfriends-facebook-friends #content-area .views-row,
