@@ -54,7 +54,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
                                       <span class="right"><img src="'.base_path().path_to_theme().'/images/various/signup.jpg" /></span></div>
                                     </div>
                                     <div class="login-now"><span class="member">Already a member?</span>
-                                      '.drupal_get_form('log_in').'
+                                      '.drupal_get_form('user_login').'
                                     </div>
                                   </div>
                                 </div>';
