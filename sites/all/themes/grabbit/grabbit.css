@@ -3063,7 +3063,10 @@ div.tabs
 	color:#3399FF;
 	font-size:14px;
 	font-weight:bold;
-	display:inline;
+	display:block;
+	float:left;
+	width:80px;
+	
 }
 
 #content-area #user-login .description,
@@ -3095,8 +3098,9 @@ div.tabs
 #content-area #user-login .forgot-password{
 	float:right;
 	font-size:10px;
-	width:150px;
+	width:160px;
 	color:#8B929F;
+	margin-top:25px;
 }
 
 #content-area #user-login .forgot-password a{
