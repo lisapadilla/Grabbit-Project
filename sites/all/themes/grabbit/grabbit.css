@@ -3012,25 +3012,25 @@ div.tabs
 	width:142px;
 	margin-left:20px;
 }
-#block-friend_search-3 #user-login input{
+#block-friend_search-3 .form-item input{
 	width:140px;
 	color:#8B929F;
 }
-#block-friend_search-3 #user-login label{
+#block-friend_search-3 .form-item label{
 	display:none;
 }
-#block-friend_search-3 #user-login .description{
+#block-friend_search-3 .form-item .description{
 	display:none;
 }
 
-#block-friend_search-3 #user-login{
+#block-friend_search-3 form{
 	padding:0px;
 }
-#block-friend_search-3 #user-login .form-item{
+#block-friend_search-3 form .form-item{
 	margin-top:5px;
 	margin-bottom:0px;
 }
-#block-friend_search-3 #user-login #edit-submit-1{
+#block-friend_search-3 .form-item .form-submit{
 	background:transparent url(images/login_bt_front.gif) no-repeat scroll 0 0;
 	border:medium none;
 	cursor:pointer;
