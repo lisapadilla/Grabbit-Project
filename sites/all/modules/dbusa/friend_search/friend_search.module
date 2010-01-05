@@ -44,7 +44,19 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
           break;
           case 3:
             $blocks['content']='<div class="panels-update-wraper">
-                                  <div class="panels-update-wraper">testing</div>
+                                  <div class="panels-update-wraper">
+                                    <div class="welcome"><span class="title-welcome">Welcome!</span>
+                                      <span class="welcome-body">The coolest new real-time Web tool for managing all of your social networks, messages, and friends</span>
+                                    </div>
+                                    <div class="join-now">
+                                      <span class="main-title">Join now!</span> <span class="normal">Let Grabbit help you filter, organize, manage, and use all yout online information!</span>
+                                      <div class="images"><span class="left"><img src="'.base_path().path_to_theme().'/images/various/logos.jpg" /></span>
+                                      <span class="right"><img src="'.base_path().path_to_theme().'/images/various/signin.jpg" /></span></div>
+                                    </div>
+                                    <div class="login-now"><span class="member">Already a member?</span>
+                                      '.drupal_get_form('log_in').'
+                                    </div>
+                                  </div>
                                 </div>';
           break;
       }
