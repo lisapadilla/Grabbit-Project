@@ -2935,3 +2935,33 @@ div.tabs
 {
 	padding-left: 20px;
 }
+#block-friend_search-3{
+  background: #FFFFFF url(images/updp_bot_front.gif) bottom no-repeat;
+  display:block;
+  position: relative;
+}
+#block-friend_search-3 .block-inner{
+  background: transparent url(images/updp_top_front.gif) 0 0 no-repeat;
+}
+#block-friend_search-3 .panels-update-wraper{
+	width:908px;
+}
+#block-friend_search-3 .welcome{
+	display:block;
+	float:left;
+	width:240px;
+}
+
+#block-friend_search-3 .join-now{
+	display:block;
+	float:left;
+	width:435px;
+}
+
+#block-friend_search-3 .member{
+	float:left;
+	width:142px;
+}
+#block-friend_search-3 .member input{
+	width:140px;
+}
