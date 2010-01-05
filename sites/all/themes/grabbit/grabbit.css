@@ -3091,3 +3091,14 @@ div.tabs
 	margin-top:10px;
 	margin-left:365px;
 }
+
+#content-area #user-login .forgot-password{
+	float:right;
+	font-size:10px;
+	width:150px;
+	color:#8B929F;
+}
+
+#content-area #user-login .forgot-password a{
+	color:#3399FF;
+}
