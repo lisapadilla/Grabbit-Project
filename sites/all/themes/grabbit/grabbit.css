@@ -2398,9 +2398,9 @@ div.messages, div.status, div.warning, div.error{
 .page-user-me-myfriends-twitter-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid
 {
 	padding-top: 4px;
-	background-color: #CAD2D8;
 	float: left;
 	margin-right: 10px;
+	background: #CAD2D8 url(images/red_top.gif) no-repeat;
 }
 .page-user-me-myfriends #content-area .views-row,
 .page-user-me-myfriends-facebook-friends #content-area .views-row,
