@@ -2978,6 +2978,16 @@ div.tabs
   display:block;
   position: relative;
 }
+#block-friend_search-3 .join-now .main-title{
+	color:#3399FF;
+	font-family:helvetica;
+	font-size:18px;
+}
+#block-friend_search-3 .join-now .normal{
+	color:#8B929F;
+	font-family:helvetica;
+	font-size:14px;
+}
 #block-friend_search-3 .join-now .join-now-inner{
 	background: transparent url(images/top_front.gif) 0 0 no-repeat;
 	padding:10px;
