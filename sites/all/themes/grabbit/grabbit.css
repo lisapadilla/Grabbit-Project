@@ -2977,6 +2977,7 @@ div.tabs
   background: #FFFFFF url(images/bot_front.gif) bottom no-repeat;
   display:block;
   position: relative;
+  margin-left:20px;
 }
 #block-friend_search-3 .join-now .main-title{
 	color:#3399FF;
