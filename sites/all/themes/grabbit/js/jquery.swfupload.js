@@ -217,7 +217,7 @@ Drupal.behaviors.frontpage = function(){
 		});
 		
 		$('#block-friend_search-3 #edit-pass').click(function(){
-			$(this).val();
+			$(this).val('');
 			
 		});
 		
