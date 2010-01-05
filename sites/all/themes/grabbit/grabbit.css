@@ -2962,6 +2962,6 @@ div.tabs
 	float:left;
 	width:142px;
 }
-#block-friend_search-3 .member input{
+#block-friend_search-3 #user-login input{
 	width:140px;
 }
