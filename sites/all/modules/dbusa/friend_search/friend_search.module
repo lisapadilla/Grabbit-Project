@@ -10,6 +10,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
       $blocks[0]['info'] = t('Friend Search');
       $blocks[1]['info'] = t('Search Content');
       $blocks[2]['info'] = t('Status Form');
+      $blocks[3]['info'] = t('Login homepage');
       return $blocks;
       break;
     case 'view':
@@ -40,6 +41,9 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 				               </div></div>
        		           </div>';	
 		
+          break;
+          case 3:
+            $blocks['content']='<div class="panels-update-wraper">testing</div>';
           break;
       }
       return $blocks;
