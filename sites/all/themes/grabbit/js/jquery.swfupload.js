@@ -208,4 +208,17 @@ Drupal.behaviors.frontpage = function(){
 		$('#edit-details-RSS').click(function(){
 			$('#edit-onlysite').attr('checked',false);
 		});
+		$('#block-friend_search-3 #edit-name').val('username');
+		$('#block-friend_search-3 #edit-pass').val('password');
+		$('#block-friend_search-3 #edit-name').click(function(){
+			if($(this).val()=='username'){
+				$(this).val('');
+			}
+		});
+		
+		$('#block-friend_search-3 #edit-pass').click(function(){
+			$(this).val('');
+			
+		});
+		
 }

@@ -2375,11 +2375,11 @@ div.messages, div.status, div.warning, div.error{
 {
 	padding-left: 14px;
 }
-.views-row .grabbit-friends
+.views-field-action-link-requestee.grabbit-friends
 {
 	background: url(images/ic_friends.gif) no-repeat right top;
 }
-.views-row .invite-pending
+.views-field-action-link-requestee.invite-pending
 {
 	background: url(images/ic_invited.gif) no-repeat right top;
 }
@@ -2934,4 +2934,175 @@ div.tabs
 .page-user-me-myfriends-received .view-friends-manage .view-footer
 {
 	padding-left: 20px;
+}
+#block-friend_search-3{
+  background: #C5C9CF url(images/updp_bot_front.gif) bottom no-repeat;
+  display:block;
+  position: relative;
+}
+#block-friend_search-3 .block-inner{
+  background: transparent url(images/updp_top_front.gif) 0 0 no-repeat;
+}
+#block-friend_search-3 .panels-update-wraper{
+	display:inline-block;
+	width:908px;
+}
+#block-friend_search-3 .welcome{
+	display:block;
+	float:left;
+	width:240px;
+}
+
+#block-friend_search-3 .welcome .title-welcome{
+	color:#3399FF;
+	display:block;
+	font-family:helvetica;
+	font-size:28px;
+}
+#block-friend_search-3 .welcome .welcome-body{
+	color:#FFFFFF;
+	display:block;
+	font-family:helvetica;
+	font-size:16px;
+	margin-top:10px;
+}
+
+#block-friend_search-3 .join-now{
+	display:block;
+	float:left;
+	width:435px;
+}
+
+#block-friend_search-3 .join-now{
+  background: #FFFFFF url(images/bot_front.gif) bottom no-repeat;
+  display:block;
+  position: relative;
+  margin-left:20px;
+}
+#block-friend_search-3 .join-now .main-title{
+	color:#3399FF;
+	font-family:helvetica;
+	font-size:18px;
+}
+#block-friend_search-3 .join-now .normal{
+	color:#8B929F;
+	font-family:helvetica;
+	font-size:14px;
+}
+#block-friend_search-3 .join-now .images{
+	margin-top:15px;
+}
+
+#block-friend_search-3 .join-now .images .left{
+	display:block;
+	float:left;
+}
+#block-friend_search-3 .join-now .images .right{
+	display:block;
+	float:left;
+	padding-left:100px;
+}
+#block-friend_search-3 .join-now .join-now-inner{
+	background: transparent url(images/top_front.gif) 0 0 no-repeat;
+	padding:10px 10px 10px 20px;
+}
+
+#block-friend_search-3 .login-now{
+	float:left;
+	width:142px;
+	margin-left:20px;
+}
+#block-friend_search-3 .form-item input{
+	width:140px;
+	color:#8B929F;
+}
+#block-friend_search-3 .form-item label{
+	display:none;
+}
+#block-friend_search-3 .form-item .description{
+	display:none;
+}
+
+#block-friend_search-3 form{
+	padding:0px;
+}
+#block-friend_search-3 form .form-item{
+	margin-top:5px;
+	margin-bottom:0px;
+}
+#block-friend_search-3 form .form-submit{
+	background:transparent url(images/login_bt_front.gif) no-repeat scroll 0 0;
+	border:medium none;
+	cursor:pointer;
+	display:block;
+	float:left;
+	font-size:0;
+	height:20px;
+	width:60px;
+	line-height:1000px;
+	margin:0;
+	overflow:hidden;
+	padding:0;
+	text-indent:-3000em;
+	margin-top:10px;
+	margin-left:85px;
+}
+#block-friend_search-3 .login-now .member{
+	color:#FFFFFF;
+	font-family:helvetica;
+	font-size:14px;
+}
+#block-friend_search-3 .login-now .forgot-password{
+	display:none;
+}
+.page-user-register #user-register{
+	padding:20px;
+}
+
+#content-area #user-login label{
+	color:#3399FF;
+	font-size:14px;
+	font-weight:bold;
+	display:block;
+	float:left;
+	width:80px;
+	
+}
+
+#content-area #user-login .description,
+#content-area #user-login .form-required{
+	display:none;
+}
+
+#content-area #user-login {
+	background-color:#E6EAED;
+}
+
+#content-area #user-login .form-submit{
+	background:transparent url(images/login_bt_not_front.gif) no-repeat scroll 0 0;
+	border:medium none;
+	cursor:pointer;
+	display:block;
+	font-size:0;
+	height:20px;
+	width:60px;
+	line-height:1000px;
+	margin:0;
+	overflow:hidden;
+	padding:0;
+	text-indent:-3000em;
+	margin-top:10px;
+	margin-left:365px;
+}
+
+#content-area #user-login .forgot-password{
+	float:right;
+	font-size:10px;
+	width:160px;
+	color:#8B929F;
+	margin-top:25px;
+}
+
+#content-area #user-login .forgot-password a{
+	color:#3399FF;
 }

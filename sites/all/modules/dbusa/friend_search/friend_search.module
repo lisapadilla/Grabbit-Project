@@ -10,6 +10,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
       $blocks[0]['info'] = t('Friend Search');
       $blocks[1]['info'] = t('Search Content');
       $blocks[2]['info'] = t('Status Form');
+      $blocks[3]['info'] = t('Login homepage');
       return $blocks;
       break;
     case 'view':
@@ -40,6 +41,25 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 				               </div></div>
        		           </div>';	
 		
+          break;
+          case 3:
+            $blocks['content']='<div class="panels-update-wraper">
+                                  <div class="panels-update-wraper">
+                                    <div class="welcome"><span class="title-welcome">Welcome!</span>
+                                      <span class="welcome-body">The coolest new real-time Web tool for managing all of your social networks, messages, and friends</span>
+                                    </div>
+                                    <div class="join-now">
+                                     <div class="join-now-inner">
+                                      <span class="main-title">Join now!</span> <span class="normal">Let Grabbit help you filter, organize, manage, and use all yout online information!</span>
+                                      <div class="images"><span class="left"><img src="'.base_path().'sites/all/themes/grabbit/images/various/logos.gif" /></span>
+                                      <span class="right"><a href="'.base_path().'user/register"><img src="'.base_path().'sites/all/themes/grabbit/images/various/signup.gif" /></a></span></div>
+                                     </div> 
+                                     </div>
+                                    <div class="login-now"><span class="member">Already a member?</span>
+                                      '.drupal_get_form('user_login').'
+                                    </div>
+                                  </div>
+                                </div>';
           break;
       }
       return $blocks;
@@ -418,7 +438,8 @@ function friend_search_theme_a_friend($friend,$row){
 			  	if(!$invited=grabbit_invites_get_invited($friend['first_name'].'_'.$friend['last_name'])){
 				  	$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
 					$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
-					$link_class='no-invite';			
+					$link_class='no-invite';
+					$extra="<span class='action-button'>".l('send invitation...','grabbit/invite/facebook/'.$friend['uid']."/".$friend['first_name']."_".$friend['last_name']."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";			
 				}else{
 					if($invited!=2){
 				 	  $link='<span class="joined-link">Invited</span> &raquo; ';
@@ -434,7 +455,7 @@ function friend_search_theme_a_friend($friend,$row){
 			
 		}
 		$name=$friend['first_name']." ".$friend['last_name'];
-		$picture = '<img src="'.$friend['pic_small'].'" />';
+		$picture = '<img src="'.$friend['pic_small'].'" width="48px"/>';
 		$social .='<span class="from-facebook"><img src="'.base_path().path_to_theme().'/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
 	  }
 	  elseif($friend->screen_name){ //if its twitter friend
@@ -453,6 +474,7 @@ function friend_search_theme_a_friend($friend,$row){
 				$link='<span class="joined-link">Not a Grabbit member</span> &raquo; ';
 				$link .="<span class='joined-action'>".l('send invitation...','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
 				$link_class='no-invite';
+				$extra ="<span class='action-button'>".l('send invitation...','grabbit/invite/twitter/'.$friend->screen_name."/", array('attributes'=>array('class'=>'thickbox'),'query'=>'KeepThis=true&TB_iframe=true&height=100&width=200'))."</span>";
 			  }else{
 				if($invited!=2){
 				  $link='<span class="joined-link">Invited</span> &raquo; ';
@@ -498,7 +520,7 @@ function friend_search_theme_a_friend($friend,$row){
 	
 	$output = '<div class="views-row views-row-1 '.$row.' '.$class.'">
 	   
-
+      
 	  <div class="views-field-field-profile-picture-fid">
 	    <span class="field-content">'.$picture.'</span>
 	  </div>
@@ -516,6 +538,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  </div>
 
 	  <div class="views-field-action-link-requestee '.$link_class.'">
+	    '.$extra.'
 	    <span class="field-content">'.$link.'</span>
 	  </div>
 	  </div>';
