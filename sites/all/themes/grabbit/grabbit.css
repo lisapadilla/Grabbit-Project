@@ -3067,3 +3067,7 @@ div.tabs
 #content-area #user-login .form-required{
 	display:none;
 }
+
+#content-area #user-login {
+	background-color:#E6EAED;
+}
