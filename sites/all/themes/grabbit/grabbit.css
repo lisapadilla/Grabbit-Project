@@ -2391,6 +2391,7 @@ div.messages, div.status, div.warning, div.error{
 	padding: 4px;
 	padding-top: 0;
 	display: block;
+	background: url(images/red_btn.gif) no-repeat 0 bottom;
 }
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid,
