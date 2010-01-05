@@ -3030,7 +3030,7 @@ div.tabs
 	margin-top:5px;
 	margin-bottom:0px;
 }
-#block-friend_search-3 .form-item .form-submit{
+#block-friend_search-3 form .form-submit{
 	background:transparent url(images/login_bt_front.gif) no-repeat scroll 0 0;
 	border:medium none;
 	cursor:pointer;
