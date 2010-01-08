@@ -6,12 +6,13 @@ Drupal.behaviors.realtime = function(){
 
 function execute_realtime(){
 	
-		$.get(Drupal.settings.basePath+"execute/realtime",{user:"uid",pannel:"elpanel"},function(data){
+		/*$.get(Drupal.settings.basePath+"execute/realtime",{user:"uid",pannel:"elpanel"},function(data){
 	      
 			if (data){
 				alert (data);
 			}else{
 				alert ("There was a problem connecting with the realtime");
 			}
-		}
+		}*/
+		alert("test");
 }
