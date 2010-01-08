@@ -2384,6 +2384,10 @@ div.messages, div.status, div.warning, div.error{
 {
 	background: url(images/ic_invited.gif) no-repeat right top;
 }
+.views-field-action-link-requestee.accept-pending
+{
+	background: url(images/ic_accept.gif) no-repeat right top;
+}
 .page-user-me-myfriends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
 .page-user-me-myfriends-facebook-friends #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
 .page-user-me-myfriends-view-contacts #content-area .joined-grabbit .views-field-field-profile-picture-fid .field-content,
