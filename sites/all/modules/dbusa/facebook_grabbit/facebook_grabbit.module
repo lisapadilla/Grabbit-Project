@@ -191,6 +191,9 @@ function facebook_grabbit_update_form($form_state){
 		);
 	}
 	
+	    //create status form hook
+		module_invoke_all('grabbit_status_form');
+	
 	return $form;
 	
 }
