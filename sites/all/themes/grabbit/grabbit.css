@@ -1599,6 +1599,7 @@ a.panel-filters{
 {
 	float: left;
 	margin-right: 10px;
+	width:48px;
 }
 .node-stream-deal .content-body
 {
@@ -1788,7 +1789,7 @@ a.truncate_show{
 	margin-top:10px;
 	background: url(images/more.gif) 0 0 no-repeat;
 	padding: 0px;
-	margin-left: 530px;
+	margin-left: 520px;
 	clear: both;
 }
 a.truncate_hide{
@@ -1806,7 +1807,7 @@ a.truncate_hide{
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
 #panel-0 .node-stream-deal .item-body{
- 
+  width:530px; 
   float: left;
 }
 .user-panels .panel-grabbit .node-stream-news .item-body,
