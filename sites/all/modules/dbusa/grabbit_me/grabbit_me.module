@@ -770,6 +770,7 @@ function grabbit_me_block($op = 'list', $delta = 0, $edit = array()) {
       break;
     case 'view':
       drupal_add_js(drupal_get_path('module', 'grabbit_me').'/jquery.editable-1.3.3.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'grabbit_me').'/edit_engine.js', $type = 'module');
       switch ( $delta )
       {
 		case 0:
