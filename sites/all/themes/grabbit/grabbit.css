@@ -3133,3 +3133,8 @@ div.tabs
 	position:absolute;
 	width:160px;
 }
+
+.bio textarea{
+	width:230px;
+	height:100px;
+}
