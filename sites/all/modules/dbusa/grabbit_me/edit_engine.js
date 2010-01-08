@@ -1,5 +1,5 @@
 Drupal.behaviors.editables = function(){
 	
-	$(".bio").editable();
+	$(".bio").editable({type:"textarea"});
 	
 }
