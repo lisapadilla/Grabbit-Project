@@ -96,7 +96,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		
-	/*	$view_elements->display['default']->display_options['filters']['nid'] = array(
+		$view_elements->display['default']->display_options['filters']['nid'] = array(
 		                                        'operator'=> '>',
 		                                         'value'  => array(
 		                                                    'value' => $last_nid,
@@ -115,7 +115,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 		                                        'field' => 'nid',
 		                                        'relationship' => 'none'
 		                                        );
-	*/	
+		
 		$view_elements->execute();
 		foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
@@ -124,7 +124,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	    }
 		// end of elements
     }
-	/*
+	
 	$view->display['default']->display_options['filters']['nid'] = array(
 	                                        'operator'=> '>',
 	                                         'value'  => array(
@@ -144,7 +144,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	                                        'field' => 'nid',
 	                                        'relationship' => 'none'
 	                                        );
-      */
+      
 	// Filters of all kind
 	$view->display['default']->display_options['filters']['type']['value']=array();
 	$view->display['default']->display_options['filters']['type']['value']['blogs']='FALSE';
