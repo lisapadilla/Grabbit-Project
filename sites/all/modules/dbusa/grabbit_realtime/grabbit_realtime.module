@@ -18,7 +18,7 @@ function grabbit_realtime_perform(){
 	$pannel = $_GET['pannel'];
 	$last=$_GET['last_nid'];
 	$last_nid=str_replace('node-','',$last);
-
+	print $last_nid;
 	$result=facebook_realtime_private_view_panel_realtime($pannel,1,$last_nid);
 	print $result;
 }
@@ -45,7 +45,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=30;
-print_r($view);
+
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $trashes =  grabbit_favorites_get_trash('item');
@@ -95,10 +95,11 @@ print_r($view);
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		
-		$view_elements->display['default']->display_options['filters']['nid'] = array(
+		$view_elements->display['default']->display_options['filters']['created'] = array(
 		                                        'operator'=> '>',
 		                                         'value'  => array(
-		                                                    'value' => $last_nid,
+		                                                    'type' => 'date',
+		                                                    'value'=>$last_nid,
 		                                                    'min' => '', 
 		                                                    'max' => ''
 		                                                ),
@@ -109,9 +110,9 @@ print_r($view);
 		                                                    'label' =>'' 
 		                                                ),
 
-		                                        'id' => 'nid',
+		                                        'id' => 'created',
 		                                        'table' => 'node',
-		                                        'field' => 'nid',
+		                                        'field' => 'created',
 		                                        'relationship' => 'none'
 		                                        );
 		
@@ -124,10 +125,11 @@ print_r($view);
 		// end of elements
     }
 	
-	$view->display['default']->display_options['filters']['nid'] = array(
+	$view->display['default']->display_options['filters']['created'] = array(
 	                                        'operator'=> '>',
 	                                         'value'  => array(
-	                                                    'value' => $last_nid,
+	                                                    'type' => 'date',
+	                                                    'value'=>$last_nid,
 	                                                    'min' => '', 
 	                                                    'max' => ''
 	                                                ),
@@ -138,9 +140,9 @@ print_r($view);
 	                                                    'label' =>'' 
 	                                                ),
 
-	                                        'id' => 'nid',
+	                                        'id' => 'created',
 	                                        'table' => 'node',
-	                                        'field' => 'nid',
+	                                        'field' => 'created',
 	                                        'relationship' => 'none'
 	                                        );
       
