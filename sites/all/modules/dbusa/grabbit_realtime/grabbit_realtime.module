@@ -17,7 +17,7 @@ function grabbit_realtime_perform(){
 	global $user;
 	$pannel = $_GET['pannel'];
 	$result=facebook_realtime_private_view_panel_realtime($pannel);
-	print_r($result);
+	
 }
 
 //hook grabbit_status_form
@@ -41,6 +41,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
     $user_info = _get_current_user_info($params);
 	
 	$view = views_get_view('grabbit_public_stream');
+	print_r($view);
     $view->pager['items_per_page']=30;
     $view->pager['current_page']=$pagination;
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
