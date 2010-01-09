@@ -9,10 +9,11 @@ function execute_realtime(){
 	
 	$(".suser-panels .user-panel").each(function(){
 		var first = $(".panel-wraper div:first",$(this));
+		var second = $(".panel-wraper",$(this));
 		pid=$(this).attr('pid');
 	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
 			if (data){
-				$(".panel-wraper",$(this)).prepend(data);
+				second.prepend(data);
 			}
 		});
 			
