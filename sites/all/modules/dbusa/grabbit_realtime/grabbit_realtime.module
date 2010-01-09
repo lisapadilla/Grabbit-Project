@@ -45,7 +45,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=30;
-
+print_r($view);
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
     $trashes =  grabbit_favorites_get_trash('item');
