@@ -67,7 +67,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
 	
 */
     $trashes =  grabbit_favorites_get_trash('item');
-    print_r($view);
+   
     if($param>0){
 		if($result = grabbit_panels_get_uid($user->uid,$param)){
 			$GET = unserialize($result->config);
@@ -171,7 +171,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
 	//End filters of all kind
  
 	$view->set_arguments(array($filters[0],$filters[1]));	
-	
+	 print_r($view);
 	$view->execute();
 
     foreach($view->result as $node){
