@@ -19,7 +19,7 @@ function grabbit_realtime_perform(){
 	$last=$_GET['last_nid'];
 	
 	$last_nid=str_replace('node-',$last);
-	print_r($last);
+	print_r($last_nid);
 	$result=facebook_realtime_private_view_panel_realtime($pannel,1,$last_nid);
 	print $result;
 }
