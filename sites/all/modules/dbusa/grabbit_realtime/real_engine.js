@@ -1,6 +1,6 @@
 Drupal.behaviors.realtime = function(){
 	
-	setInterval("execute_realtime()", 3000);
+	setInterval("execute_realtime()", 8000);
 	//setInterval("execute_realtime()", 300000);
 	
 }
