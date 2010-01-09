@@ -25,7 +25,7 @@ function grabbit_realtime_perform(){
 
 //hook grabbit_status_form
 function grabbit_realtime_grabbit_status_form(){
-	if(is_front() || arg(0)=='tream'){
+	if(drupal_is_front_page() || arg(0)=='tream'){
 	  drupal_add_js(drupal_get_path('module', 'grabbit_realtime').'/real_engine.js', $type = 'module');
     }
 }
