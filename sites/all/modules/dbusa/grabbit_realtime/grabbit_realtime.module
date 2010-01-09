@@ -44,28 +44,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
     $view->pager['items_per_page']=30;
     $view->pager['current_page']=$pagination;
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
-/*
-    $view->display['default']->display_options['filters']['nid'] = array(
-	                                        'operator'=> '>',
-	                                         'value'  => array(
-	                                                    'value' => 279436,
-	                                                    'min' => '', 
-	                                                    'max' => ''
-	                                                ),
-	                                          'group' => 0,
-	                                       'exposed' => '', 
-	                                       'expose' => array(
-	                                                    'operator' =>'', 
-	                                                    'label' =>'' 
-	                                                ),
 
-	                                        'id' => 'nid',
-	                                        'table' => 'node',
-	                                        'field' => 'nid',
-	                                        'relationship' => 'none'
-	                                        );
-	
-*/
     $trashes =  grabbit_favorites_get_trash('item');
    
     if($param>0){
@@ -113,6 +92,27 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
 		if(!$GET['favorites']){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
+		
+		$view->display['default']->display_options['filters']['nid'] = array(
+		                                        'operator'=> '>',
+		                                         'value'  => array(
+		                                                    'value' => 279436,
+		                                                    'min' => '', 
+		                                                    'max' => ''
+		                                                ),
+		                                          'group' => 0,
+		                                       'exposed' => '', 
+		                                       'expose' => array(
+		                                                    'operator' =>'', 
+		                                                    'label' =>'' 
+		                                                ),
+
+		                                        'id' => 'nid',
+		                                        'table' => 'node',
+		                                        'field' => 'nid',
+		                                        'relationship' => 'none'
+		                                        );
+		
 		$view_elements->execute();
 		foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
@@ -171,7 +171,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
 	//End filters of all kind
  
 	$view->set_arguments(array($filters[0],$filters[1]));	
-	 print_r($view);
+	 
 	$view->execute();
 
     foreach($view->result as $node){
