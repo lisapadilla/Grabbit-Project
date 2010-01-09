@@ -97,7 +97,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $la
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		
-		$view_elements->display['default']->display_options['filters']['nid'] = array(
+	/*	$view_elements->display['default']->display_options['filters']['nid'] = array(
 		                                        'operator'=> '>',
 		                                         'value'  => array(
 		                                                    'value' => $last_nid,
@@ -116,7 +116,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $la
 		                                        'field' => 'nid',
 		                                        'relationship' => 'none'
 		                                        );
-		
+	*/	
 		$view_elements->execute();
 		foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
