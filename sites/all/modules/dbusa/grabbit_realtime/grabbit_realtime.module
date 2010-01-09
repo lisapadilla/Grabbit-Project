@@ -125,7 +125,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $la
 	    }
 		// end of elements
     }
-	
+	/*
 	$view->display['default']->display_options['filters']['nid'] = array(
 	                                        'operator'=> '>',
 	                                         'value'  => array(
@@ -145,7 +145,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $la
 	                                        'field' => 'nid',
 	                                        'relationship' => 'none'
 	                                        );
-      
+      */
 	// Filters of all kind
 	$view->display['default']->display_options['filters']['type']['value']=array();
 	$view->display['default']->display_options['filters']['type']['value']['blogs']='FALSE';
