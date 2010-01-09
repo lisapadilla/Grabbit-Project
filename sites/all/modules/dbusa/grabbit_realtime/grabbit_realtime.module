@@ -48,7 +48,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
     $view->display['default']->display_options['filters']['nid'] = array(
 	                                        'operator'=> '>',
 	                                         'value'  => array(
-	                                                    'value' => 50000,
+	                                                    'value' => 279436,
 	                                                    'min' => '', 
 	                                                    'max' => ''
 	                                                ),
