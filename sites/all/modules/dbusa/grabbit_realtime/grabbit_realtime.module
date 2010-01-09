@@ -33,7 +33,7 @@ function grabbit_realtime_grabbit_status_form(){
 /**
  * Creates users pannel REALTIME()
  */
-function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $last_nid){
+function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $last_nid=0){
 	
 	global $user;
 	
