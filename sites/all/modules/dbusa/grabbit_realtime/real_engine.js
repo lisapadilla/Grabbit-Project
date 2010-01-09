@@ -1,6 +1,6 @@
 Drupal.behaviors.realtime = function(){
 	
-	setInterval("execute_realtime()", 25000);
+	setInterval("execute_realtime()", 60000);
 	//setInterval("execute_realtime()", 300000);
 	
 }
@@ -8,13 +8,12 @@ Drupal.behaviors.realtime = function(){
 function execute_realtime(){
 	
 	$(".user-panel").each(function(){
-		alert($(this).attr('pid'));
-	/*  	$.get(Drupal.settings.basePath+"execute/realtime",{user:"uid",pannel:i},function(data){
+	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:$(this).attr('pid')},function(data){
 			if (data){
 				alert (data);
 			}
 		});
-		*/	
+			
 	});
 		
 }
