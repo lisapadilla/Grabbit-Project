@@ -16,6 +16,10 @@ function grabbit_realtime_menu() {
 function grabbit_realtime_perform(){
 	global $user;
 	$pannel = $_GET['pannel'];
+	$last=$_GET['last_nid'];
+	
+	$last_nid=str_replace('node-',$last);
+	
 	$result=facebook_realtime_private_view_panel_realtime($pannel);
 	print $result;
 }
@@ -29,7 +33,7 @@ function grabbit_realtime_grabbit_status_form(){
 /**
  * Creates users pannel REALTIME()
  */
-function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
+function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $last_nid){
 	
 	global $user;
 	
@@ -96,7 +100,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
 		$view_elements->display['default']->display_options['filters']['nid'] = array(
 		                                        'operator'=> '>',
 		                                         'value'  => array(
-		                                                    'value' => 279436,
+		                                                    'value' => $last_nid,
 		                                                    'min' => '', 
 		                                                    'max' => ''
 		                                                ),
