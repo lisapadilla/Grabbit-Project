@@ -37,7 +37,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	global $user;
 	
 	global $user_info;
-	
+	$twitface=array();
 	//It starts getting parameters from index 1, 0 is the response id
 	//prepeare_status_update & prepeare_standar_update request 'name' at index 1, if it's needed to get more params, leave 'name' as first
 	$params = array('name','pic_square','profile_url');
