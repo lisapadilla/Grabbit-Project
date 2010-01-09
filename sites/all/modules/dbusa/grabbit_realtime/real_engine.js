@@ -7,7 +7,7 @@ Drupal.behaviors.realtime = function(){
 
 function execute_realtime(){
 	
-	$(".user-panel").each(function(){
+	$(".suser-panels .user-panel").each(function(){
 		first = $(".panel-wraper div:first",$(this));
 		pid=$(this).attr('pid');
 	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
