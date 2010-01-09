@@ -11,7 +11,7 @@ function execute_realtime(){
 		first = $(".panel-wraper div:first",$(this));
 	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:$(this).attr('pid'),last_nid:first.attr('id')},function(data){
 			if (data){
-				alert(data);
+				alert($(this).attr('pid'));
 				$(this).prepend(data);
 			}
 		});
