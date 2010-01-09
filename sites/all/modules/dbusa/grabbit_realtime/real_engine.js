@@ -8,11 +8,11 @@ Drupal.behaviors.realtime = function(){
 function execute_realtime(){
 	
 	$(".suser-panels .user-panel").each(function(){
-		first = $(".panel-wraper div:first",$(this));
+		var first = $(".panel-wraper div:first",$(this));
 		pid=$(this).attr('pid');
 	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
 			if (data){
-				$("#".first.attr('id')).prepend(data);
+				$("#"+first.attr('id')).prepend(data);
 			}
 		});
 			
