@@ -14,7 +14,7 @@ function execute_realtime(){
 	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
 			if (data){
 				second.prepend(
-					$(data).hide().fadeIn('slow');
+					$(data).hide().fadeIn('slow')
 				);
 			}
 		});
