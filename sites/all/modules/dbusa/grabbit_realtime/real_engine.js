@@ -8,7 +8,7 @@ Drupal.behaviors.realtime = function(){
 function execute_realtime(){
 	
 	$(".user-panel").each(function(i){
-	  	$.get(Drupal.settings.basePath+"execute/realtime",{user:"uid",pannel:$(i).attr('pid')},function(data){
+	  	$.get(Drupal.settings.basePath+"execute/realtime",{user:"uid",pannel:i},function(data){
 			if (data){
 				alert (data);
 			}
