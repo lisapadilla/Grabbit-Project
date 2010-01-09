@@ -18,6 +18,7 @@ function grabbit_realtime_perform(){
 	$pannel = $_GET['pannel'];
 	$last=$_GET['last_nid'];
 	$last_nid=str_replace('node-','',$last);
+	$last_nid=date("Y-m-d H:i:s", $last_nid);
 	print $last_nid;
 	$result=facebook_realtime_private_view_panel_realtime($pannel,1,$last_nid);
 	print $result;
@@ -98,7 +99,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 		$view_elements->display['default']->display_options['filters']['created'] = array(
 		                                        'operator'=> '>',
 		                                         'value'  => array(
-		                                                    'type' => 'timestamp',
+		                                                    'type' => 'date',
 		                                                    'value'=>$last_nid,
 		                                                    'min' => '', 
 		                                                    'max' => ''
@@ -128,7 +129,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	$view->display['default']->display_options['filters']['created'] = array(
 	                                        'operator'=> '>',
 	                                         'value'  => array(
-	                                                    'type' => 'timestamp',
+	                                                    'type' => 'date',
 	                                                    'value'=>$last_nid,
 	                                                    'min' => '', 
 	                                                    'max' => ''
