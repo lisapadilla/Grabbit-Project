@@ -44,7 +44,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
     $view->pager['items_per_page']=30;
     $view->pager['current_page']=$pagination;
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
-
+/*
     $view->display['default']->display_options['filters']['nid'] = array(
 	                                        'operator'=> '>',
 	                                         'value'  => array(
@@ -65,7 +65,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1){
 	                                        'relationship' => 'none'
 	                                        );
 	
-
+*/
     $trashes =  grabbit_favorites_get_trash('item');
     print_r($view);
     if($param>0){
