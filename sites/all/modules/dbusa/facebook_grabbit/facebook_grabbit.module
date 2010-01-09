@@ -547,7 +547,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	
 	// Output for aplication updates
 	
-	$output = '<div class="facebook-post clearfix '.$post->rowx.'" id="node-'.$post->ni.'">
+	$output = '<div class="facebook-post clearfix '.$post->rowx.'" id="node-'.$post->nid.'">
 	<a href="JavaScript:void(0);" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
