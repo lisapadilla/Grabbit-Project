@@ -125,6 +125,25 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=1, $la
 		// end of elements
     }
 	
+	$view->display['default']->display_options['filters']['nid'] = array(
+	                                        'operator'=> '>',
+	                                         'value'  => array(
+	                                                    'value' => $last_nid,
+	                                                    'min' => '', 
+	                                                    'max' => ''
+	                                                ),
+	                                          'group' => 0,
+	                                       'exposed' => '', 
+	                                       'expose' => array(
+	                                                    'operator' =>'', 
+	                                                    'label' =>'' 
+	                                                ),
+
+	                                        'id' => 'nid',
+	                                        'table' => 'node',
+	                                        'field' => 'nid',
+	                                        'relationship' => 'none'
+	                                        );
       
 	// Filters of all kind
 	$view->display['default']->display_options['filters']['type']['value']=array();
