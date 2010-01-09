@@ -20,7 +20,24 @@ function grabbit_realtime_perform(){
 	$last_nid=str_replace('node-','',$last);
 
 	$result=facebook_realtime_private_view_panel_realtime($pannel,1,$last_nid);
-	print $result;
+//	print $result;
+	print '<div id="node-434868" class="facebook-post clearfix even">
+		<a face_id="434868" class="trash-facebook" href="JavaScript:void(0);">TR</a>
+		<a class="retweet-facebook" href="JavaScript:void(0);">RT</a>
+		<a class="facebook-makecomment-link" href="javascript:void(0);">Post a comment</a>
+		<a href="javascript:void(0)" class="facebook_favorite" nid="434868" id="697715729_275125035729">Add to favorites</a>
+		<div class="facebook-post-header"><a href="http://www.facebook.com/MiitZiitA" class="facebook-story-pic" title="MiitZiitä Pérez" target="_blank"><span class="facebook-user-pic"><img width="48" src="http://profile.ak.fbcdn.net/v22944/928/38/q697715729_9037.jpg" alt="MiitZiitä Pérez" class="facebook-image-s" target="_blank"/></span></a>
+		<a href="http://www.facebook.com/MiitZiitA" class="facebook-story-name" title="MiitZiitä Pérez" target="_blank"><span class="facebook-user-name">MiitZiitä Pérez</span></a><div class="facebook-post-body">
+		<div style="display: none;" class="retweet-hide"/>
+		<div class="content-truncated"><div class="facebook-attachment"><span class="facebook-attach-title">All my Friends!</span><span class="facebook-attach-link"><a href="http://apps.facebook.com/foto_diaria_primo/pid:2996666237963859880/from:publisher.attachment.own.image"><img width="30" src="http://platform.ak.fbcdn.net/www/app_full_proxy.php?app=162857367075&amp;v=1&amp;size=z&amp;cksum=8283981c41d9950efa5b30119c54ac0f&amp;src=http%3A%2F%2Fhphotos-snc1.fbcdn.net%2Fhs266.snc1%2F9316_160262970729_697715729_4061096_718589_n.jpg"/></a></span></div></div><span class="facebook-date">on Fri, 01/08/2010 - 23:20</span></div>
+		<div class="facebook-post-comments clearfix"/>
+		<div class="facebook-comment-form">
+		<div class="facebook-form">
+			<form style="display: none;" id="myForm">
+				<input type="textfield" required="true" maxlength="255" size="30" class="form-text" id="comment"/>
+				<input type="button" onclick="javascript:void(0)" value="Comment" class="facebook_comment_submit" id="697715729_275125035729" nid="434868"/>
+			</form>
+		</div></div></div></div>';
 }
 
 //hook grabbit_status_form
