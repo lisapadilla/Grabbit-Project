@@ -26,9 +26,9 @@ function grabbit_realtime_perform(){
 //hook grabbit_status_form
 function grabbit_realtime_grabbit_status_form(){
 	global $user;
-	if((drupal_is_front_page() || arg(0)=='tream') && $user->uid==1){
-	  drupal_add_js(drupal_get_path('module', 'grabbit_realtime').'/real_engine.js', $type = 'module');
-    }
+	
+	drupal_add_js(drupal_get_path('module', 'grabbit_realtime').'/real_engine.js', $type = 'module');
+    
 }
 
 /**
