@@ -82,6 +82,8 @@ function grabbit_me_show_activity(){
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
 	
+	$text=get_url_msg_formatted($item['status']);
+	
 	if($item['facebook'])
 	  $social_networks .='<span class="from-facebook"><img src="'.base_path().path_to_theme().'/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
 
@@ -95,7 +97,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	  </div>
 	  <a target="_blank" class="twitter-name-link" href="#">'.$profile->title.'</a>
 	  <div class="twitter-body">
-	    <div class="twitter-body-contains">'.$item['status'].'</div> 
+	    <div class="twitter-body-contains">'.$text.'</div> 
 	    <span class="twitter-date">on '.format_date($item['time']).'</span>
 	  </div>
 	</div>';
