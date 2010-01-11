@@ -128,6 +128,11 @@ function grabbit_preprocess_page(&$vars, $hook) {
 	  $vars['title']=$user->name;
     }
 
+    if(arg(1)=='me' && arg(2)!='myfriends'){
+	  $vars['head_title']='Settings | Grabbit';
+	  $vars['title']='Settings';
+    }
+
 	if( (arg(0)=='user' && arg(1)!=$user->uid && !arg(2)) ||(arg(0)=='user' && arg(1)=='me' && !arg(2))){
 		$vars['body_classes'] .=' profile-display';
 	}
