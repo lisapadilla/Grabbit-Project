@@ -2742,7 +2742,7 @@ div.messages, div.status, div.warning, div.error{
 .section-activity .panels-controllers{
 	display:none;
 }
-
+/*
 #content-area .navbar .block{
 	background:transparent none repeat scroll 0 0;
 	border:medium none;
@@ -2789,11 +2789,13 @@ div.messages, div.status, div.warning, div.error{
 	font-size:11px;
 	padding-top:4px;
 }
+*/
 .user-friends a{
 	color:#317CF9;
 }
 
-div.tabs
+div.tabs,
+div.navbar
 {
 	background-image: url(images/tabs_bg.gif);
 	padding-top: 10px;
