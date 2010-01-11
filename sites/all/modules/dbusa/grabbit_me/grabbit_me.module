@@ -18,7 +18,7 @@ function grabbit_me_menu() {
   );
 
   $items['activity/updates/all'] = array(
-   'title' => 'All',
+   'title' => 'All Activity',
    'weight' => 1,
    'type' => MENU_DEFAULT_LOCAL_TASK,
   );

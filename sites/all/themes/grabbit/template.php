@@ -122,6 +122,11 @@ function grabbit_preprocess_page(&$vars, $hook) {
 	  $vars['head_title']='Login | Grabbit';
 	  $vars['title']='Login';
     }
+    if(arg(0)=='activity'){
+	  drupal_set_title($user->name);
+	  $vars['head_title']=$user->name.' | Grabbit';
+	  $vars['title']=$user->name;
+    }
 
 	if( (arg(0)=='user' && arg(1)!=$user->uid && !arg(2)) ||(arg(0)=='user' && arg(1)=='me' && !arg(2))){
 		$vars['body_classes'] .=' profile-display';
