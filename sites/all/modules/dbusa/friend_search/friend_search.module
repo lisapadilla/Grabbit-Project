@@ -617,9 +617,6 @@ function friend_search_menu_alter(&$items) {
     unset($items['search/user/%menu_tail']); // So the Tab "Users" doesnt appear in the search page
 }
 
-function friend_search_login_submit($form, &$form_state){
-
-
-    $form_state['redirect'] = 'user/login';
-    return;
+function friend_search_form_alter(&$form, $form_state, $form_id){
+	print_r($form);
 }
