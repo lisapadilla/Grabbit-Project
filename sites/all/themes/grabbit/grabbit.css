@@ -3189,6 +3189,7 @@ div.navbar
 	line-height:15px;
 	float:left;
 	width:500px;
+	margin-bottom:10px;
 }
 
 .view-my-feeds .views-field-created{
