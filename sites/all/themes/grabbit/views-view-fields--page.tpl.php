@@ -30,6 +30,6 @@ if(oauth_twitter_get_uid($row->users_friendlist_relations_uid))
   </div>
 </div>
 <?php }else{ 
-	print $output;
+	print $row;
 }
 	?>
