@@ -618,5 +618,5 @@ function friend_search_menu_alter(&$items) {
 }
 
 function friend_search_form_alter(&$form, $form_state, $form_id){
-	print_r($form);
+	print_r($form_id);
 }
