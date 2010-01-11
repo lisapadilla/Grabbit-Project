@@ -622,3 +622,9 @@ function friend_search_form_alter(&$form, $form_state, $form_id){
 	  $form['#redirect']='user/login';
 	}
 }
+
+function friend_search_user($op, &$edit, &$account, $category = NULL){
+	if($op=='login'){
+		drupal_goto('stream/user');
+	}
+}
