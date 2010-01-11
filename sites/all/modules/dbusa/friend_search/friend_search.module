@@ -618,9 +618,8 @@ function friend_search_menu_alter(&$items) {
 }
 
 function friend_search_login_submit($form, &$form_state){
-  global $user;
-  if ($user->uid==0) {
+
+
     $form_state['redirect'] = 'user/login';
     return;
-  }
 }
