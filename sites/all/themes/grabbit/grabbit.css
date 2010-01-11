@@ -2779,9 +2779,7 @@ div.messages, div.status, div.warning, div.error{
 	padding-top:4px;
 }
 
-.navbar .title{
-	display:none;
-}
+
 
 .navbar .menu li a.active{
 	background:transparent url(images/blk_sel.gif) no-repeat scroll 0 0;
@@ -2793,7 +2791,9 @@ div.messages, div.status, div.warning, div.error{
 .user-friends a{
 	color:#317CF9;
 }
-
+.navbar .title{
+	display:none;
+}
 div.tabs,
 div.navbar
 {
