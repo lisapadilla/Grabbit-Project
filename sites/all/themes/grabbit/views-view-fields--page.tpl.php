@@ -4,6 +4,8 @@ if(facebook_grabbit_get_fid($row->users_friendlist_relations_uid))
 
 if(oauth_twitter_get_uid($row->users_friendlist_relations_uid))
   $social_networks .='<span class="from-twitter"> <img src="'.base_path().path_to_theme().'/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
+
+  if ($fields['field_profile_picture_fid']->content){
 ?>
 <div class="views-row">
       
@@ -27,3 +29,7 @@ if(oauth_twitter_get_uid($row->users_friendlist_relations_uid))
     <span class="field-content"><?=$social_networks?></span>
   </div>
 </div>
+<?php }else{ 
+	print $content;
+}
+	?>
