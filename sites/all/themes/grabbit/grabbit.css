@@ -3176,3 +3176,26 @@ div.navbar
 	margin:5px 5px 0 0;
 	display:block;
 }
+.view-my-feeds .views-field-field-rss-logo-fid{
+	float:left;
+	margin-right:10px;
+	width:48px;
+}
+
+.view-my-feeds .views-field-title{
+	color:#385691;
+	font-size:14px;
+	font-weight:bold;
+	line-height:15px;
+	float:left;
+	width:500px;
+}
+
+.view-my-feeds .views-field-created{
+	float:left;
+	width:500px;
+}
+.view-my-feeds .views-field-opswid{
+	float:left;
+	width:500px;
+}
