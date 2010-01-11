@@ -1318,7 +1318,7 @@ function user_login_final_validate($form, &$form_state) {
   if (!$user->uid) {
     form_set_error('name', t('Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password'))));
     watchdog('user', 'Login attempt failed for %user.', array('%user' => $form_state['values']['name']));
-    drupal_goto('user/login');
+    drupal_goto('user');
   }
 }
 
