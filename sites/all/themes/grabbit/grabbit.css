@@ -2832,15 +2832,18 @@ div.navbar
 {
 	background: url(images/tab_bg.png) no-repeat;
 }
-#content-area .tabs a .tab
+#content-area .tabs a .tab,
+.navbar a
 {
 	color: #FFFFFF;
 }
-#content-area .tabs ul
+#content-area .tabs ul,
+.navbar ul
 {
 	border: none;
 }
-#content-area .tabs ul li a
+#content-area .tabs ul li a,
+.navbar ul li a
 {
 	font-size: 11px;
 	margin-right: 2px;
