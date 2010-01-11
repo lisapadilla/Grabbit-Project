@@ -1316,7 +1316,7 @@ function user_login_authenticate_validate($form, &$form_state) {
 function user_login_final_validate($form, &$form_state) {
   global $user;
   if (!$user->uid) {
-    form_set_error('name', t('Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password'))));
+    form_set_error('name', t('Sorry, unrecognized username or password.'));
     watchdog('user', 'Login attempt failed for %user.', array('%user' => $form_state['values']['name']));
     drupal_goto('user');
   }
