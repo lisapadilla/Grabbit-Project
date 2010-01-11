@@ -117,6 +117,11 @@ function grabbit_preprocess_page(&$vars, $hook) {
   
     global $user;
 
+    if(arg(0)=='user' && $user->uid==0){
+	  drupal_set_title('Login');
+	print_r('login');
+    }
+
 	if( (arg(0)=='user' && arg(1)!=$user->uid && !arg(2)) ||(arg(0)=='user' && arg(1)=='me' && !arg(2))){
 		$vars['body_classes'] .=' profile-display';
 	}
