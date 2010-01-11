@@ -2827,7 +2827,8 @@ div.navbar
 {
 	color: #666666;
 }
-#content-area .tabs a
+#content-area .tabs a,
+.navbar a
 {
 	background: url(images/tab_bg.png) no-repeat;
 }
