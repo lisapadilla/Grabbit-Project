@@ -618,5 +618,8 @@ function friend_search_menu_alter(&$items) {
 }
 
 function friend_search_form_alter(&$form, $form_state, $form_id){
-	print_r($form_id);
+	if($form_id=='user_login' && drupal_is_front_page()){
+	  $form['#redirect']='user/login';
+	}
+	print_r($form);
 }
