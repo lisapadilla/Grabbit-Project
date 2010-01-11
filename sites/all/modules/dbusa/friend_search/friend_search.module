@@ -46,11 +46,11 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
             $blocks['content']='<div class="panels-update-wraper">
                                   <div class="panels-update-wraper">
                                     <div class="welcome"><span class="title-welcome">Welcome!</span>
-                                      <span class="welcome-body">The coolest new real-time Web tool for managing all of your social networks, messages, and friends</span>
+                                      <span class="welcome-body">Join grabbit and share everything with everybody you want to know. Want it? Grabbit!</span>
                                     </div>
                                     <div class="join-now">
                                      <div class="join-now-inner">
-                                      <span class="main-title">Join now!</span> <span class="normal">Let Grabbit help you filter, organize, manage, and use all yout online information!</span>
+                                      <span class="main-title">Join now!</span> <span class="normal">Create your account, add Facebook and Twitter updates, mail, news and people.</span>
                                       <div class="images"><span class="left"><img src="'.base_path().'sites/all/themes/grabbit/images/various/logos.gif" /></span>
                                       <span class="right"><a href="'.base_path().'user/register"><img src="'.base_path().'sites/all/themes/grabbit/images/various/signup.gif" /></a></span></div>
                                      </div> 
