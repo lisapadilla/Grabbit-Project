@@ -2850,7 +2850,7 @@ div.navbar
 	padding-top: 4px;
 }
 .navbar ul li{
-	display:block;
+	display:inline;
 	height:16px;
 	padding:1px 0 0;
 	text-align:center;
