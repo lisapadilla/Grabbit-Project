@@ -2849,6 +2849,9 @@ div.navbar
 	margin-right: 2px;
 	padding-top: 4px;
 }
+.navbar ul{
+	display:inline-block;
+}
 .navbar ul li a{
 	float:left;
 	width:100px;
