@@ -2849,7 +2849,13 @@ div.navbar
 	margin-right: 2px;
 	padding-top: 4px;
 }
-
+.navbar ul li{
+	display:block;
+	height:16px;
+	padding:1px 0 0;
+	text-align:center;
+	width:100px;
+}
 #content-area div.tabs
 {
 	display: none;
