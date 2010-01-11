@@ -2801,21 +2801,25 @@ div.navbar
 	padding-top: 10px;
 	padding-left: 10px;
 }
-.tabs ul.tabs
+.tabs ul.tabs,
+.navbar ul.menu
 {
 	margin: 0;
 	padding: 0;
 	font-weight: bold;
 }
-#content-area .tabs li
+#content-area .tabs li,
+.navbar ul li
 {
 	margin-right: 2px;
 }
-#content-area .tabs li a
+#content-area .tabs li a,
+.navbar ul li a
 {
 	border: none;
 }
-#content-area .tabs a.active
+#content-area .tabs a.active,
+.navbar a.active
 {
 	background: url(images/tab_active_bg.png) no-repeat;
 }
