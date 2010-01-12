@@ -1865,13 +1865,13 @@ function _news_theme($comments,$node,$matches=NULL){
 	   $text_link=l('Edit tags','user/me/edit/profile');
 	   $text_explain='This deal matches your following tags:<br>';
 	   
-	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
+	   $text_total=$text_explain.$text_why.'<br>'.$text_link.'<br>'.l('Open Deal','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=500&width=740'));
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
                            <div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div>
 	                    </div>
 	                   </span>';
-	   $submitted ='<p>'.format_date($node->created).l('Open Deal','node/'.$node->nid,array('attributes'=>array('class'=>'thickbox'),'query'=>'height=500&width=740')).'</p>
+	   $submitted ='<p>'.format_date($node->created).'</p>
 	                <p>Submitted by <a title="View user profile." href="'.base_path().'user/'.$node->uid.'">'.$node->name.'</a></p>';
 
 	}else{
