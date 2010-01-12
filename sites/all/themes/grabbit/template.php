@@ -185,7 +185,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				case "ppt":
 				case "xls":
 				case "pdf":
-				  $output = '<div class="download-file-type-'.$ext.'"><span class="">Download: '.l($file->filename,$file->filepath).'</span></div>';
+				  $output = '<span class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></span><div class="download-file-type"><span class="">Download: '.l($file->filename,$file->filepath).'</span></div>';
 				break;
 				default:
 				  $output = theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '');
