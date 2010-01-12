@@ -633,7 +633,7 @@ function friend_search_preprocess_views_view_fields(&$vars) {
     
     if($vars['fields']['field_profile_picture_fid']){
 	  if(!$vars['fields']['field_profile_picture_fid']->content){
-	    $vars['fields']['field_profile_picture_fid']->content=theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg');
+	    $vars['fields']['field_profile_picture_fid']->content='ddss';
 	  }
     }
 
