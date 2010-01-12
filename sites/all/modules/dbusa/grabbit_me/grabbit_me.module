@@ -831,14 +831,14 @@ function grabbit_me_get_my_profile(){
 	  <div class="resources">'.$services.'</div>
 	</div>
 	
-	
 	<div class="other-info">
-	  <div class="bio">'.$profile->field_profile_about[0]['value'].'</div>
-	  <div class="city">'.$profile->field_profile_city[0]['value'].'</div>
-	  <div class="state"> '.$profile->field_profile_state[0]['value'].'</div>
-	  <div class="country">'.$profile->field_profile_country[0]['value'].'</div>
-	  <div class="websites">'.$webs.'</div>
+	  <div class="bio submiter">'.$profile->field_profile_about[0]['value'].'</div>
+	  <div class="city submiter">'.$profile->field_profile_city[0]['value'].'</div>
+	  <div class="state submiter"> '.$profile->field_profile_state[0]['value'].'</div>
+	  <div class="country submiter">'.$profile->field_profile_country[0]['value'].'</div>
+	  <div class="websites submiter">'.$webs.'</div>
 	</div>
+	<div class="submiters">1</div>
 	</div>';
 	
 	return $output;
