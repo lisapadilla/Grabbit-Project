@@ -4,7 +4,7 @@ Drupal.behaviors.editables = function(){
 	$(".other-info .city").editable({submitBy:'none'});
 	$(".other-info .state").editable({submitBy:'none'});
 	$(".other-info .country").editable({submitBy:'none'});
-	$(".other-info .websites").editable({submitBy:'none'});
+	$(".other-info .websites").editable({submitBy:'none',submit:'submit',cancel:'cancel'});
 	
 	$(".edit-me-place").click(function (){
 		
