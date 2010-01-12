@@ -3241,14 +3241,19 @@ div.navbar
 	font-size:12px;
 	font-weight:bold;
 }
-#user-profile-form div{
+#user-profile-form div,
+#user-tags-form div{
 	display:block;
 }
-#user-profile-form textarea{
+#user-profile-form textarea,
+#user-tags-form textarea{
 	font-size:12px;
 	height:100px;
 	width:220px;
 }
-#user-profile-form label{
+#user-profile-form label,
+#user-tags-form label{
 	font-weight:bold;
+	display:block;
+	margin-top:10px;
 }
