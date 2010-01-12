@@ -3241,3 +3241,11 @@ div.navbar
 	font-size:12px;
 	font-weight:bold;
 }
+#user-profile-form div{
+	display:block;
+}
+#user-profile-form textarea{
+	font-size:12px;
+	height:100px;
+	width:220px;
+}
