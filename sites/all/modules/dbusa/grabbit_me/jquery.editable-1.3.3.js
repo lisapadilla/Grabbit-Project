@@ -50,7 +50,7 @@ $.fn.editable = function(options){
 						.one('mouseup',function(){
 							$('.submiter').each(function(i){
 							 // opts.toNonEditable($(this),true);
-							alert($(this).html())	
+							alert($(this.parent()).html())	
 							});
 							
 							
