@@ -1,10 +1,10 @@
 Drupal.behaviors.editables = function(){
 	
 	$(".other-info .bio").editable({type:"textarea"});
-	$(".other-info .city").editable({type:"textfield"});
-	$(".other-info .state").editable({type:"textfield"});
-	$(".other-info .country").editable({type:"textfield"});
-	$(".other-info .websites").editable({type:"textfield"});
+	$(".other-info .city").editable();
+	$(".other-info .state").editable();
+	$(".other-info .country").editable();
+	$(".other-info .websites").editable();
 	
 	$(".edit-me-place").click(function (){
 		
