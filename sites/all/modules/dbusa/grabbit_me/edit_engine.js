@@ -14,10 +14,10 @@ Drupal.behaviors.editables = function(){
 	
 	$("#bio-submit").click(function (){
 		
-		webs=$("#webs").value();
-		country=$("#country").value();
-		state=$("#state").value();
-		city=$("#city").value();
+		webs=$("#webs").val();
+		country=$("#country").val();
+		state=$("#state").val();
+		city=$("#city").val();
 		bio=$("#bio").html();
 		
 		$.get(Drupal.settings.basePath+"ajax/save/bio",{bio:bio,city:city,state:state,country:country,web:webs},function(data){
