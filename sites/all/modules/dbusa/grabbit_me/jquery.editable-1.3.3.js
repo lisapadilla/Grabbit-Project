@@ -45,15 +45,12 @@ $.fn.editable = function(options){
 				 .addClass(opts.editClass);
 		// Submit Event
 		if(opts.submit){
-			$('<button/>').appendTo($(".submitters"))
+			$('<button/>').appendTo($this)
 						.html(opts.submit)
 						.one('mouseup',function(){
-							$('.submiter').each(function(i){
-							 // opts.toNonEditable($(this),true);
-							alert($(this).parent().html())	
-							});
 							
-							
+							//opts.toNonEditable($(this).parent(),true)
+							print($(this).parent().html());
 							});
 		}else
 			$this.one(opts.submitBy,function(){opts.toNonEditable($(this),true)})
