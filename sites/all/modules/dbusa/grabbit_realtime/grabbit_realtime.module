@@ -205,6 +205,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	                              'value'=>$node);
     }
 
+    
     // prepeare the deals view according to the user's tags
 	$deals_profile = content_profile_load('profile', $user->uid);
 	if (count($deals_profile->taxonomy)){
@@ -219,19 +220,22 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	$view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=30;
 
-    $first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
-    $last_item_element = end($twitface);//get the last element of the current view of items
+    if(!count($twitface)){
+	  	$first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
+	    $last_item_element = end($twitface);//get the last element of the current view of items
+	
+	    $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
+	    $view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s',$first_item_element['time']);
 
-    $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
-    $view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s',$first_item_element['time']);
+	    $view_deals->set_arguments(array($deals_tags));	
+		$view_deals->execute();
 
-    $view_deals->set_arguments(array($deals_tags));	
-	$view_deals->execute();
-
-    foreach($view_deals->result as $node){
-	  $twitface[$node->node_created]=array('time'=>$node->node_created,
-	                              'value'=>$node);
+	    foreach($view_deals->result as $node){
+		  $twitface[$node->node_created]=array('time'=>$node->node_created,
+		                              'value'=>$node);
+	    }
     }
+    
     // end of deals view
 	
 	if(is_array($twitface)){
