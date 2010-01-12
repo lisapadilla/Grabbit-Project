@@ -631,8 +631,10 @@ function friend_search_user($op, &$edit, &$account, $category = NULL){
 
 function friend_search_preprocess_views_view_fields(&$vars) {
     $field = 'field_primary_image';
-
-    print $vars['fields']['field_profile_picture_fid']->content; // = theme('imagecache', $imagecache_preset, $default_image['filepath']);
-
+   
+    if($vars['fields']['field_profile_picture_fid']){
+	print $vars['fields']['field_profile_picture_fid']->content
+	print " - <br>";
+}
 
 }
