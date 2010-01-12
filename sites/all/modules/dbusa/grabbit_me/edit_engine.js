@@ -13,22 +13,19 @@ Drupal.behaviors.editables = function(){
 	});
 	
 	$("#bio-submit").click(function (){
-		alert($("#country").val());
+		
 		webs=$("#webs").value();
 		country=$("#country").value();
 		state=$("#state").value();
 		city=$("#city").value();
 		bio=$("#bio").html();
-		/*
+		
 		$.get(Drupal.settings.basePath+"ajax/save/bio",{bio:bio,city:city,state:state,country:country,web:webs},function(data){
 			if (data){
-				second.prepend(
-					$(data).hide().fadeIn(3000)
-				);
+				alert(data);
 			}
 		});
-		*/
-		alert(bio);
+		
 		return false;
 	});
 	
