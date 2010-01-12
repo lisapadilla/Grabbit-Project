@@ -13,7 +13,7 @@ Drupal.behaviors.editables = function(){
 	});
 	
 	$("#bio-submit").click(function (){
-		
+		alert("ping");
 		webs=$("#webs").value();
 		country=$("#country").value();
 		state=$("#state").value();
