@@ -821,7 +821,7 @@ function grabbit_me_get_my_profile(){
 	  
 	}
 	
-	$output = '<div class="edit-panel">'.l('edit','user/me/edit/profile').'</div><div class="user-profile-block">
+	$output = '<div class="edit-panel"><a href="#" class="edit-me-place">Edit</a></div><div class="user-profile-block">
 	<div class="main-info clear-block">
 	  <div class="image">'.theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
 	  <div class="user-name">'.$user->name.'</div>
