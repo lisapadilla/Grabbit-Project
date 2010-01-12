@@ -49,9 +49,9 @@ $.fn.editable = function(options){
 						.html(opts.submit)
 						.one('mouseup',function(){
 							$('.submiter').each(function(i){
-							  alert($(this).html());	
+							  opts.toNonEditable($(this),true);	
 							});
-							//opts.toNonEditable($(selected),true);
+							
 							
 							});
 		}else
