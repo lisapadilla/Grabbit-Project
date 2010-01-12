@@ -3246,7 +3246,7 @@ div.navbar
 	display:block;
 }
 #user-tags-form div{
-	padding:0px 10px 0px;
+	padding:0px;
 }
 #user-profile-form textarea,
 #user-tags-form textarea{
