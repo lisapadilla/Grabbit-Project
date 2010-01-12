@@ -6,4 +6,10 @@ Drupal.behaviors.editables = function(){
 		return false;
 	});
 	
+	$("#bio-cancel").click(function (){
+		$("#bio-no-edit").slideToggle();
+		$("#user-profile-form").slideToggle();
+		return false;
+	});
+	
 }
