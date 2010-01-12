@@ -630,6 +630,7 @@ function friend_search_user($op, &$edit, &$account, $category = NULL){
 }
 
 function friend_search_preprocess_views_view_fields(&$vars) {
+	print_r($vas);
     if($vars['fields']['field_profile_picture_fid']){
 	  if(stristr($vars['fields']['field_profile_picture_fid']->content, '<img') === FALSE){
 	    $vars['fields']['field_profile_picture_fid']->content=l(theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg'),'users/'.$vars['view']->result[0]->users_friendlist_relations_name,array('html'=>TRUE));
