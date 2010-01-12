@@ -1865,7 +1865,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	   $text_link=l('Edit tags','user/me/edit/profile');
 	   $text_explain='This deal matches your following tags:<br>';
 	   
-	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
+	   $text_total=$text_explain.$text_why.'<br>'.$text_link.'<br>'.l('Open Deal','node/'.$node->nid,array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'KeepThis=true&height=500&width=740'));
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
                            <div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div>
