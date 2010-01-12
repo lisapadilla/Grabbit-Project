@@ -637,7 +637,7 @@ function friend_search_preprocess_views_view_fields(&$vars) {
 	print $vars['fields']['field_profile_picture_fid']->content;
 	print " - <br>";
     }else{
-	no hay
+	print "no hay";
 }
 
 }
