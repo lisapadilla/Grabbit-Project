@@ -3245,11 +3245,14 @@ div.navbar
 #user-tags-form div{
 	display:block;
 }
+#user-tags-form div{
+	padding:0px 10px 0px;
+}
 #user-profile-form textarea,
 #user-tags-form textarea{
 	font-size:12px;
 	height:100px;
-	width:220px;
+	width:210px;
 }
 #user-profile-form label,
 #user-tags-form label{
