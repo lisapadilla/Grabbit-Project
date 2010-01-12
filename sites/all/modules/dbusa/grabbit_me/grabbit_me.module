@@ -838,7 +838,7 @@ function grabbit_me_get_my_profile(){
 	  <div class="country submiter">'.$profile->field_profile_country[0]['value'].'</div>
 	  <div class="websites submiter">'.$webs.'</div>
 	</div>
-	<div class="submiters">1</div>
+	<div class="submitters">1</div>
 	</div>';
 	
 	return $output;
