@@ -7,7 +7,7 @@ Drupal.behaviors.editables = function(){
 	$(".other-info .websites").editable({type:"textfield"});
 	
 	$(".edit-me-place").click(function (){
-		$(".other-info .bio").click();
+		
 		$(".other-info .city").click();
 		$(".other-info .state").click();
 		$(".other-info .country").click();
