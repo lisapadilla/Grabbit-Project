@@ -49,7 +49,8 @@ $.fn.editable = function(options){
 						.html(opts.submit)
 						.one('mouseup',function(){
 							$('.submiter').each(function(i){
-							  opts.toNonEditable($(this),true);	
+							 // opts.toNonEditable($(this),true);
+							alert($(this).html())	
 							});
 							
 							
