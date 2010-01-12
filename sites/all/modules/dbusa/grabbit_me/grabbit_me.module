@@ -92,7 +92,7 @@ function grabbit_me_save_bio(){
 	$profile->field_profile_country[0]['value']=$_GET['country'];
 	$profile->field_profile_websites=array();
 	
-	$websites=explode(" "$_GET['web']);
+	$websites=explode(" ",$_GET['web']);
 	foreach($websites as $web){
 		$profile->field_profile_websites[]['value']=$web;
 	}
