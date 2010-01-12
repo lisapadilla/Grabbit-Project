@@ -1,7 +1,8 @@
 Drupal.behaviors.editables = function(){
 	
 	$(".edit-me-place").click(function (){
-		$("#user-profile-form").show();
+		$("#bio-no-edit").slideToggle();
+		$("#user-profile-form").slideToggle();
 		return false;
 	});
 	
