@@ -632,7 +632,7 @@ function friend_search_user($op, &$edit, &$account, $category = NULL){
 function friend_search_preprocess_views_view_fields(&$vars) {
     $field = 'field_primary_image';
 
-print_r($vars);
+    print $vars['fields']['field_profile_picture_fid']->content; // = theme('imagecache', $imagecache_preset, $default_image['filepath']);
 
 
 }
