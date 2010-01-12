@@ -3203,3 +3203,8 @@ div.navbar
 	float:left;
 	width:500px;
 }
+.download-file-type-pdf{
+	background:transparent url(images/logos/pdf.gif) no-repeat scroll right top;
+	height:48px;
+	padding-left:58px;
+}
