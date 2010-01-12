@@ -220,7 +220,7 @@ function facebook_realtime_private_view_panel_realtime($param,$pagination=0, $la
 	$view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=30;
 
-    if(!count($twitface)){
+    if(count($twitface)){
 	  	$first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
 	    $last_item_element = end($twitface);//get the last element of the current view of items
 	
