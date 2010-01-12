@@ -1855,7 +1855,8 @@ function _news_theme($comments,$node,$matches=NULL){
 	  $node_title=l($node->title,'node/'.$node->nid);
 	
 	  $image = '<span class="image-deal"><a href="'.$node->field_deal_link[0]['url'].'" target="_blank">'.theme('imagecache', 'friend_thumbnail', $node->field_deal_creative[0]['filepath'], 'Deal Image').'</a></span>';
-	  $deal = '<span class="url-deal"><a price="'.$node->field_price[0]['value'].'" href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
+	  //$deal = '<span class="url-deal"><a price="'.$node->field_price[0]['value'].'" href="'.$node->field_deal_link[0]['url'].'" title="'.$node->field_deal_link[0]['title'].'" target="_blank">Deal</a></span>';
+	  $deal = '<span class="url-deal">'.l('Open Deal','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=500&width=740')).'</span>'
 	  if(is_array($matches)){ 
 	    foreach($matches as $match){
 	      $why[]=$match->name;	
@@ -1865,7 +1866,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	   $text_link=l('Edit tags','user/me/edit/profile');
 	   $text_explain='This deal matches your following tags:<br>';
 	   
-	   $text_total=$text_explain.$text_why.'<br>'.$text_link.'<br>'.l('Open Deal','gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox'),'query'=>'height=500&width=740'));
+	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
                            <div class="tooltip tooltip_deal fixed persistent" style="display:none;">'.$text_total.'</div>
