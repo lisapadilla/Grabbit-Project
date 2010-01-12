@@ -842,18 +842,30 @@ function grabbit_me_get_my_profile(){
 	</div>
 	<div id="user-profile-form" style="display:none">
 	  <form id="user-profile-ajax-form">
-	    <label>About you:</label>
+	<div class="bio-item">    
+	<label>About you:</label>
 	    <textarea id="bio" name="bio">'.$profile->field_profile_about[0]['value'].'</textarea>
+	</div>
+	<div class="bio-item">
 	<label>City:</label>    
 	<input type="text" value="'.$profile->field_profile_city[0]['value'].'" id="city" name="city"/>
+	</div>
+	<div class="bio-item">
 	<label>State:</label>    
 	<input type="text" value="'.$profile->field_profile_state[0]['value'].'" id="state" name="city"/>
+	</div>
+	<div class="bio-item">
 	<label>Country:</label>    
 	<input type="text" value="'.$profile->field_profile_country[0]['value'].'" id="country" name="country"/>
+	</div>
+	<div class="bio-item">
 	<label>Websites:</label>    
 	<input type="text" value="'.$webs.'" id="webs" name="webs"/>
-	      <button type="button" id="bio-submit">Save</button>
-	        <button type="button" id="bio-cancel">Cancel</button>
+	</div>
+	<div class="bio-item">      
+	<button type="button" id="bio-submit">Save</button>
+	<button type="button" id="bio-cancel">Cancel</button>
+	</div>
 	  </form>
 	</div>
 	
