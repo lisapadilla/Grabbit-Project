@@ -68,8 +68,41 @@ function grabbit_me_menu() {
    'type' => MENU_LOCAL_TASK,
   );
 
+  $items['ajax/save/bio'] = array(
+   'page callback' => 'grabbit_me_save_bio',
+   'access arguments' => array('access content'),
+   );
+
+  $items['ajax/save/tags'] = array(
+   'page callback' => 'grabbit_me_save_tags',
+   'access arguments' => array('access content'),
+   );
+
 
   return $items;
+}
+
+function grabbit_me_save_bio(){
+	global $user;
+	$profile = content_profile_load('profile', $user->uid);
+	
+	$profile->field_profile_about[0]['value']=$_GET['bio'];
+	$profile->field_profile_city[0]['value']=$_GET['city'];
+	$profile->field_profile_state[0]['value']=$_GET['state'];
+	$profile->field_profile_country[0]['value']=$_GET['country'];
+	$profile->field_profile_websites=array();
+	
+	$websites=explode(" "$_GET['web']);
+	foreach($websites as $web){
+		$profile->field_profile_websites[]['value']=$web;
+	}
+	
+	node_save($profile);
+	
+}
+function grabbit_me_save_tags(){
+	global $user;
+	
 }
 
 function grabbit_me_show_activity(){
