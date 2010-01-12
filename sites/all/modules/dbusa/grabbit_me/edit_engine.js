@@ -12,7 +12,7 @@ Drupal.behaviors.editables = function(){
 		return false;
 	});
 	
-	$(".edit-user-tags").click(function (){
+	$("#edit-user-tags").click(function (){
 		$("#tags-info").slideToggle();
 		$("#user-tags-form").slideToggle();
 		return false;
