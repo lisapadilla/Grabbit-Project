@@ -630,14 +630,11 @@ function friend_search_user($op, &$edit, &$account, $category = NULL){
 }
 
 function friend_search_preprocess_views_view_fields(&$vars) {
-    print $vars;
-	exit;
+
     if($vars['fields']['field_profile_picture_fid']){
 	
-	  if(!$vars['fields']['field_profile_picture_fid']->content){
-	    print_r($vars['fields']['field_profile_picture_fid']);
-	print "omsomsoms";
-	  }
+	 print $coun;
+	 $coun++;
     }
 
 }
