@@ -3203,8 +3203,18 @@ div.navbar
 	float:left;
 	width:500px;
 }
+.download-wrapper{
+	width:500px;
+}
+.filetype{
+	float:left;
+	margin-right:10px;
+	width:48px;
+}
 .download-file-type{
+	float:left;
 	height:48px;
 	padding-left:10px;
 	padding-top:20px;
+	width:400px;
 }
