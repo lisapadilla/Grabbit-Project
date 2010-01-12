@@ -33,7 +33,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
           $blocks['content'] .= '<div class="upload_button_expand"><a href="#">&raquo; Upload file</a></div>
                                  <div class="panels-update-form_file" style="display:none">
                                  <div id="swfupload-control">  
-							       <p>Select a file (jpg, png, gif, mov, flv, pdf, doc) having maximum size of 1MB</p>  
+							       <p>Select a file (jpeg, bmp, jpg, png, gif, mov, flv, mp3, pdf, doc, rtf, txt, csv, ppt, xls) having maximum size of 1MB</p>  
 							       <input type="button" id="button" />  
 							       <p id="queuestatus" ></p>  
 							       <ol id="log"></ol>  
