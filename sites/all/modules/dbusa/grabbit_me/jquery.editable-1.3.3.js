@@ -47,11 +47,7 @@ $.fn.editable = function(options){
 		if(opts.submit){
 			$('<button/>').appendTo($this)
 						.html(opts.submit)
-						.one('mouseup',function(){
-							  $('.submiter').each(function(i){
-							     opts.toNonEditable($(this),true);	
-							  });
-							);
+						.one('mouseup',function(){opts.toNonEditable($(this).parent(),true)});
 		}else
 			$this.one(opts.submitBy,function(){opts.toNonEditable($(this),true)})
 				 .children()
