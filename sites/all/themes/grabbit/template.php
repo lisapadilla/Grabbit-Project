@@ -174,12 +174,18 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			$ext = substr($file->filename, strrpos($file->filename, '.') + 1);
 			switch($ext){
 				case "mov":
+				case "mp3":
 				case "flv":
 				  $output = swf($file->filepath, array('params' => array('width' => '430', 'height'=>'400')));
 				break;
 				case "doc":
+				case "rtf":
+				case "txt":
+				case "csv":
+				case "ppt":
+				case "xls":
 				case "pdf":
-				  $output = 'Download file: '.l($file->filename,$file->filepath);
+				  $output = '<div class="download-file-type-'.$ext.'"><span class="">Download: '.l($file->filename,$file->filepath).'</span></div>';
 				break;
 				default:
 				  $output = theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '');
