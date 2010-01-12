@@ -633,8 +633,7 @@ function friend_search_preprocess_views_view_fields(&$vars) {
 
     if($vars['fields']['field_profile_picture_fid']){
 	
-	 print $coun;
-	 $coun++;
+	 print "looop<br>";
     }
 
 }
