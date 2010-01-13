@@ -110,10 +110,14 @@ function grabbit_me_show_activity(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
 	
-	//$profile->tags = array(1 => "probando, nuevos, DINOSAURIOS");
-	//node_save($profile);
-	print_r($profile);
-	
+	// I create a term in a specific vocabulary with the same name as the node
+  $edit = array('name' => 'dinosaurios', 'description' => ' ', 'weight' => "0", 'vid' => 1);
+  taxonomy_save_term($edit);
+  $tid = $edit['tid'];
+
+  // associate node and term
+  $profile->taxonomy[$edit['tid']]=$edit;
+	node_save($profile);
 	//print_r($user);;
 	
 }
