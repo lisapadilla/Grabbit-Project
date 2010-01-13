@@ -124,7 +124,7 @@ function grabbit_me_save_tags(){
 	
 	    $try=taxonomy_get_term_by_name(trim($tag_1));
 	    if($try->vid){
-		  $profile->taxonomy[][$try->tid]=$try->tid;
+		  $profile->taxonomy[]=$try->tid;
 		 // $profile->field_profile_hobbies[][$try->tid]=$try->tid;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
@@ -133,7 +133,7 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    
-		    $profile->taxonomy[][$edit['tid']]=$edit['tid'];
+		    $profile->taxonomy[]=$edit['tid'];
 		   // $profile->field_profile_hobbies[][$edit['tid']]=$edit['tid'];
 	    }
 		
