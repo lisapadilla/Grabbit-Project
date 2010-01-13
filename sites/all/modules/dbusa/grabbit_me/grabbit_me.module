@@ -126,7 +126,7 @@ function grabbit_me_save_tags(){
 	    if($try->vid){
 		  
 		  $profile->taxonomy[$try->vid][$try->tid]=$try;
-		  $profile->field_profile_hobbies[$try->tid]=$try;		  
+		  $profile->field_profile_hobbies[][$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
@@ -135,7 +135,7 @@ function grabbit_me_save_tags(){
 		    // associate node and term
 		    
 		    $profile->taxonomy[1][$edit['tid']]=$edit;
-		    $profile->field_profile_hobbies[$edit['tid']]=$edit;
+		    $profile->field_profile_hobbies[][$edit['tid']]=$edit;
 	    }
 		
     }
@@ -146,7 +146,7 @@ function grabbit_me_save_tags(){
 	    if($try->vid){
 		  $terms['tags'][]=$try;
 		  $profile->taxonomy[$try->vid][$try->tid];
-		  $profile->field_profile_topics[$try->tid]=$try;		  
+		  $profile->field_profile_topics[][$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => $tag_2, 'description' => ' ', 'weight' => "0", 'vid' => 1);
@@ -155,7 +155,7 @@ function grabbit_me_save_tags(){
 		    // associate node and term
 		    $terms['tags'][]=$edit;
 		    $profile->taxonomy[1][$edit['tid']];
-		    $profile->field_profile_topics[$edit['tid']]=$edit;
+		    $profile->field_profile_topics[][$edit['tid']]=$edit;
 	    }
 		
     }
@@ -166,7 +166,7 @@ function grabbit_me_save_tags(){
 	    if($try->vid){
 		  $terms['tags'][]=$try;
 		  $profile->taxonomy[$try->vid][$try->tid];
-		  $profile->field_profile_interests[$try->tid]=$try;		  
+		  $profile->field_profile_interests[][$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => $tag_3, 'description' => ' ', 'weight' => "0", 'vid' => 1);
@@ -176,7 +176,7 @@ function grabbit_me_save_tags(){
 		    $terms['tags'][]=$edit;
 		    $profile->taxonomy[1][$edit['tid']];
 		
-		    $profile->field_profile_interests[$edit['tid']]=$edit;
+		    $profile->field_profile_interests[][$edit['tid']]=$edit;
 	    }
 		
     }
