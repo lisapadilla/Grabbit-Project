@@ -144,6 +144,9 @@ function grabbit_me_save_tags(){
 	    if($try->vid){
 		  $profile->taxonomy[]=$try->tid;		  
 	    }else{
+		  if(is_array($try)){
+		 	$profile->taxonomy[]=$try[0]->tid;
+		  }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
@@ -151,6 +154,7 @@ function grabbit_me_save_tags(){
 		    // associate node and term
 		    
 		    $profile->taxonomy[]=$edit['tid'];
+		  }
 		}
 		
     }
@@ -162,6 +166,10 @@ function grabbit_me_save_tags(){
 		  //$profile->taxonomy[]=$try->tid;
 		  $profile->field_profile_hobbies[]['value']=$try->tid;		  
 	    }else{
+		  if(is_array($try)){
+			$profile->field_profile_hobbies[]['value']=$try[0]->tid;
+		  }
+		  else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
@@ -170,6 +178,7 @@ function grabbit_me_save_tags(){
 		    
 		    //$profile->taxonomy[]=$edit['tid'];
 		    $profile->field_profile_hobbies[]['value']=$edit['tid'];
+		  }
 	    }
 		
     }
@@ -181,6 +190,9 @@ function grabbit_me_save_tags(){
 		  //$profile->taxonomy[]=$try->tid;
 		  $profile->field_profile_topics[]['value']=$try->tid;		  
 	    }else{
+		  if(is_array($try)){
+		 	$profile->field_profile_topics[]['value']=$try[0]->tid;
+		  }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
@@ -189,6 +201,7 @@ function grabbit_me_save_tags(){
 		    
 		    //$profile->taxonomy[]=$edit['tid'];
 		    $profile->field_profile_topics[]['value']=$edit['tid'];
+		  }
 	    }
 		
     }
@@ -200,6 +213,9 @@ function grabbit_me_save_tags(){
 		  //$profile->taxonomy[]=$try->tid;
 		  $profile->field_profile_interests[]['value']=$try->tid;		  
 	    }else{
+		  if(is_array($try)){
+		    $profile->field_profile_interests[]['value']=$try[0]->tid;
+		  }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
@@ -208,6 +224,7 @@ function grabbit_me_save_tags(){
 		    
 		    //$profile->taxonomy[]=$edit['tid'];
 		    $profile->field_profile_interests[]['value']=$edit['tid'];
+		  }
 	    }
 		
     }
