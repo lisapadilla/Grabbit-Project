@@ -112,7 +112,7 @@ function grabbit_me_show_activity(){
 	
 	//$profile->taxonomy['tags'] = array(1 => "probando, nuevos, DINOSAURIOS");
 	//node_save($profile);
-	
+	print_r($profile);
 	//print_r($user);;
 	
 }
