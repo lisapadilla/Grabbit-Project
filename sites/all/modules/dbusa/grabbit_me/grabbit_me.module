@@ -180,6 +180,7 @@ function grabbit_me_save_tags(){
 	    }
 		
     }
+print_r($profile->taxonomy);
     node_save($profile);
     print "done";
 }
