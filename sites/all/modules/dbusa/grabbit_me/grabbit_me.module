@@ -85,18 +85,35 @@ function grabbit_me_menu() {
 function grabbit_me_save_bio(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
-	
-	$profile->field_profile_about[0]['value']=$_GET['bio'];
-	$profile->field_profile_city[0]['value']=$_GET['city'];
-	$profile->field_profile_state[0]['value']=$_GET['state'];
-	$profile->field_profile_country[0]['value']=$_GET['country'];
-	$profile->field_profile_websites=array();
-	$txt = preg_replace('/\r\n|\r/', "\n", $_GET['web']);
-	$websites=explode("\n",$txt);
-	
-	foreach($websites as $web){
-		$profile->field_profile_websites[]['value']=$web;
+	if($profile->nid){
+	  	$profile->field_profile_about[0]['value']=$_GET['bio'];
+		$profile->field_profile_city[0]['value']=$_GET['city'];
+		$profile->field_profile_state[0]['value']=$_GET['state'];
+		$profile->field_profile_country[0]['value']=$_GET['country'];
+		$profile->field_profile_websites=array();
+		$txt = preg_replace('/\r\n|\r/', "\n", $_GET['web']);
+		$websites=explode("\n",$txt);
+
+		foreach($websites as $web){
+			$profile->field_profile_websites[]['value']=$web;
+		}	
+	}else{
+		$profile = new StdClass();
+		$profile->type = 'profile';
+		$profile->uid=$user->uid;
+		$profile->field_profile_about[0]['value']=$_GET['bio'];
+		$profile->field_profile_city[0]['value']=$_GET['city'];
+		$profile->field_profile_state[0]['value']=$_GET['state'];
+		$profile->field_profile_country[0]['value']=$_GET['country'];
+		$profile->field_profile_websites=array();
+		$txt = preg_replace('/\r\n|\r/', "\n", $_GET['web']);
+		$websites=explode("\n",$txt);
+
+		foreach($websites as $web){
+			$profile->field_profile_websites[]['value']=$web;
+		}
 	}
+	
 	
 	node_save($profile);
     print "success";
