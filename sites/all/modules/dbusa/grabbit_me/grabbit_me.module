@@ -119,7 +119,7 @@ function grabbit_me_save_tags(){
 	
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try){
-		  $profile->taxonomy[$try->tid]=$try;
+		  $profile->taxonomy[$try->tid]=$try->tid;
 	    }else{
 	/*	  	// I create a term in a specific vocabulary
 		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
