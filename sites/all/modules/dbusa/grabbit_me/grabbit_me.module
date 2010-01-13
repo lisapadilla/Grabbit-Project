@@ -110,9 +110,9 @@ function grabbit_me_show_activity(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
 	
-	$profile->tags = array(1 => "probando, nuevos, DINOSAURIOS");
-	node_save($profile);
-	//print_r($profile);
+	//$profile->tags = array(1 => "probando, nuevos, DINOSAURIOS");
+	//node_save($profile);
+	print_r($profile);
 	
 	//print_r($user);;
 	
