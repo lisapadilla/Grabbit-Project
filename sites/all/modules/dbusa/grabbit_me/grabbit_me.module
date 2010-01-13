@@ -836,7 +836,7 @@ function grabbit_me_get_my_profile(){
 	$profile = content_profile_load('profile', $user->uid);
 	if($profile->field_profile_websites){
 	  	foreach($profile->field_profile_websites as $website){
-			$webs = $website['value'].'<br>';
+			$webs .= $website['value'].'<br>';
 		}	
 	}
 	
