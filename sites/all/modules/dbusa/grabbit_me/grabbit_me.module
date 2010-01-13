@@ -111,7 +111,7 @@ function grabbit_me_save_tags(){
     $tags1 .=",".$_GET['topics'];
     $tags1 .=",".$_GET['interests'];
 
-    $tags_feeds=$_GET['feeds']);
+    $tags_feeds=$_GET['feeds'];
 
     $profile->taxonomy = array(
 	  'tags' => array(
