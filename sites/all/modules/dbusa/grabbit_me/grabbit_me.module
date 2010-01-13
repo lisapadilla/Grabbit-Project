@@ -133,8 +133,8 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    
-		    $profile->taxonomy[]['value']=$edit['tid'];
-		   // $profile->field_profile_hobbies[][$edit['tid']]=$edit['tid'];
+		    $profile->taxonomy[]=$edit['tid'];
+		    $profile->field_profile_hobbies[]['value']=$edit['tid'];
 	    }
 		
     }
