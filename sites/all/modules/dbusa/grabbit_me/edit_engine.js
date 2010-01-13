@@ -19,8 +19,6 @@ Drupal.behaviors.editables = function(){
 		state=$("#state").val();
 		city=$("#city").val();
 		bio=$("#bio").val();
-		alert(webs);
-		return;
 		$.get(Drupal.settings.basePath+"ajax/save/bio",{bio:bio,city:city,state:state,country:country,web:webs},function(data){
 			if (data){
 				$(".other-info .websites").html(webs);
