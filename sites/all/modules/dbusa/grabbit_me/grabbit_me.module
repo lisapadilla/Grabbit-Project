@@ -1039,7 +1039,7 @@ function grabbit_me_get_my_profile(){
 	</div>
 	<div class="bio-item">
 	<label>Websites (one per line):</label>    
-	<textarea id="webs" name="webs">'.str_replace("<br>","\nl",$webs).'</textarea>
+	<textarea id="webs" name="webs">'.str_replace("<br>","\n",$webs).'</textarea>
 	</div>
 	<div class="bio-item">      
 	<button type="button" id="bio-submit">Save</button>
