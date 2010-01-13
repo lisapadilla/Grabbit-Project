@@ -142,14 +142,14 @@ function grabbit_me_save_tags(){
 
     foreach($total_tags2 as $tag_2){
 	
-	    $try=taxonomy_get_term_by_name($tag_1);
+	    $try=taxonomy_get_term_by_name($tag_2);
 	    if($try->vid){
 		  $terms['tags'][]=$try;
 		  $profile->taxonomy[$try->vid][$try->tid];
 		  $profile->field_profile_topics[$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
+		    $edit = array('name' => $tag_2, 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
 		    $tid = $edit['tid'];
 		    // associate node and term
@@ -162,14 +162,14 @@ function grabbit_me_save_tags(){
 
     foreach($total_tags3 as $tag_3){
 	
-	    $try=taxonomy_get_term_by_name($tag_1);
+	    $try=taxonomy_get_term_by_name($tag_3);
 	    if($try->vid){
 		  $terms['tags'][]=$try;
 		  $profile->taxonomy[$try->vid][$try->tid];
 		  $profile->field_profile_interests[$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
+		    $edit = array('name' => $tag_3, 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
 		    $tid = $edit['tid'];
 		    // associate node and term
