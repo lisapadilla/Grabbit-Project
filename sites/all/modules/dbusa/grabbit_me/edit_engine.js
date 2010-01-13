@@ -27,6 +27,8 @@ Drupal.behaviors.editables = function(){
 				$(".other-info .state").html(state);
 				$(".other-info .city").html(city);
 				$(".other-info .bio").html(bio);
+				$("#bio-no-edit").slideToggle();
+				$("#user-profile-form").slideToggle();
 			}else{
 				alert("Problem connecting with the server, please try to update your settings latter.");
 			}
