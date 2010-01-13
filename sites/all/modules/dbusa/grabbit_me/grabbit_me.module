@@ -109,7 +109,7 @@ function grabbit_me_save_tags(){
 function grabbit_me_show_activity(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
-	
+	/*
 	// I create a term in a specific vocabulary with the same name as the node
   $edit = array('name' => 'dinosaurios', 'description' => ' ', 'weight' => "0", 'vid' => 1);
   taxonomy_save_term($edit);
@@ -119,7 +119,8 @@ function grabbit_me_show_activity(){
   $profile->taxonomy[$edit['tid']]=$edit;
 	node_save($profile);
 	//print_r($user);;
-	
+	*/
+	print_r($profile);
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
