@@ -113,12 +113,29 @@ function grabbit_me_save_tags(){
     $total_tags2=explode(",",$tags2);
     $total_tags3=explode(",",$tags3);
 
-    $tags_feeds=$_GET['feeds'];
+    $tags_feeds=explode(",",$_GET['feeds']);
 
     $profile->taxonomy=array();
     $profile->field_profile_hobbies=array();
     $profile->field_profile_interests=array();
     $profile->field_profile_topics=array();
+
+    foreach($total_tags as $tag_1){
+	
+	    $try=taxonomy_get_term_by_name(trim($tag_1));
+	    if($try->vid){
+		  $profile->taxonomy[]=$try->tid;		  
+	    }else{
+		  	// I create a term in a specific vocabulary
+		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
+		    taxonomy_save_term($edit);
+		    $tid = $edit['tid'];
+		    // associate node and term
+		    
+		    $profile->taxonomy[]=$edit['tid'];
+		}
+		
+    }
 
     foreach($total_tags1 as $tag_1){
 	
