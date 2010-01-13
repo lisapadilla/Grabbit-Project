@@ -121,13 +121,13 @@ function grabbit_me_save_tags(){
 	    if($try->vid){
 		  $profile->taxonomy[$try->vid][$try->tid]=$try;
 	    }else{
-		  	// I create a term in a specific vocabulary
+		/*  	// I create a term in a specific vocabulary
 		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    $profile->taxonomy[1][$edit['tid']]=$edit;
-	    }
+	    */}
 		
     }
 
