@@ -107,9 +107,9 @@ function grabbit_me_save_tags(){
 	
 	$profile->taxonomy=array();
 
-
-	node_save($profile);
 	print_r($profile->taxonomy);
+	node_save($profile);
+
 
 }
 
