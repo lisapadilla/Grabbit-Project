@@ -120,27 +120,26 @@ function grabbit_me_save_tags(){
     $profile->field_profile_interests=array();
     $profile->field_profile_topics=array();
 
-/*    foreach($total_tags1 as $tag_1){
+    foreach($total_tags1 as $tag_1){
 	
-	    $try=taxonomy_get_term_by_name($tag_1);
+	    $try=taxonomy_get_term_by_name(trim($tag_1));
 	    if($try->vid){
-		  
-		  $profile->taxonomy[$try->vid][$try->tid]=$try;
-		  $profile->field_profile_hobbies[][$try->tid]=$try;		  
+		  $profile->taxonomy[][$try->tid];
+		  $profile->field_profile_hobbies[][$try->tid];		  
 	    }else{
 		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
+		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    
-		    $profile->taxonomy[1][$edit['tid']]=$edit;
-		    $profile->field_profile_hobbies[][$edit['tid']]=$edit;
+		    $profile->taxonomy[][$edit['tid']];
+		    $profile->field_profile_hobbies[][$edit['tid']];
 	    }
 		
     }
-*/
-    $profile->taxonomy=array('180007','180319','590','164633');
+
+//    $profile->taxonomy=array('180007','180319','590','164633');
 
     node_save($profile);
     print "done";
