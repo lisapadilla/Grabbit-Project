@@ -86,6 +86,7 @@ function grabbit_me_save_bio(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
 	if($profile->nid){
+		$profile->title=$_GET['name'] ? $_GET['name']: $user->name;
 	  	$profile->field_profile_about[0]['value']=$_GET['bio'];
 		$profile->field_profile_city[0]['value']=$_GET['city'];
 		$profile->field_profile_state[0]['value']=$_GET['state'];
@@ -101,6 +102,7 @@ function grabbit_me_save_bio(){
 		$profile = new StdClass();
 		$profile->type = 'profile';
 		$profile->uid=$user->uid;
+		$profile->title=$_GET['name'] ? $_GET['name']: $user->name;
 		$profile->field_profile_about[0]['value']=$_GET['bio'];
 		$profile->field_profile_city[0]['value']=$_GET['city'];
 		$profile->field_profile_state[0]['value']=$_GET['state'];
@@ -114,8 +116,7 @@ function grabbit_me_save_bio(){
 		}
 	}
 	
-	
-	node_save($profile);
+	@node_save($profile);
     print "success";
 }
 function grabbit_me_save_tags(){
