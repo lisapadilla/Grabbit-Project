@@ -103,9 +103,7 @@ function grabbit_me_save_bio(){
 }
 function grabbit_me_save_tags(){
 	global $user;
-	print_r();
-/*	$profile = content_profile_load('profile', $user->uid);
-	$node=node_load($profile->nid);
+	$profile = content_profile_load('profile', $user->uid);
 	$profile->taxonomy=array();
 	
     $tags1=$_GET['hobbies'];
@@ -114,14 +112,14 @@ function grabbit_me_save_tags(){
 
     $tags_feeds=$_GET['feeds'];
 
-    $node->taxonomy = array(
+    $profile->taxonomy = array(
 	  'tags' => array(
 	         1=>$tags1,
 	         3=>$tags_feeds
 	   )
 	);
 	
-	print_r($node->taxonomy['tags']);
+	print_r($profile->taxonomy['tags']);
 
    /* foreach($total_tags as $tag_1){
 	
@@ -139,7 +137,7 @@ function grabbit_me_save_tags(){
 		
     }
 */
-    node_save($node);
+    node_save($profile);
     print "done";
 }
 
@@ -157,7 +155,7 @@ function grabbit_me_show_activity(){
 	node_save($profile);
 	//print_r($user);;
 	*/
-	print_r($user);
+	print_r($profile);
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
@@ -963,7 +961,9 @@ function grabbit_me_get_my_tags(){
     $topics=array();
     $interests=array();	
 	$profile = content_profile_load('profile', $user->uid);
-    
+
+print_r($profile->taxonomy);    
+
     if($profile->field_profile_hobbies):	
 	foreach($profile->field_profile_hobbies as $hobbie){
 		$hobbies[]=$profile->taxonomy[$hobbie['value']]->name;
