@@ -175,6 +175,7 @@ function grabbit_me_save_tags(){
 		    // associate node and term
 		    $terms['tags'][]=$edit;
 		    $profile->taxonomy[1][$edit['tid']];
+		
 		    $profile->field_profile_interests[$edit['tid']]=$edit;
 	    }
 		
