@@ -127,14 +127,13 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    $profile->taxonomy[1][$edit['tid']]=$edit['tid'];
-		print_r($edit);
 	    }
 		
     }
 
 
 	node_save($profile);
-	print "done";
+	print_r($profile->taxonomy);
 
 }
 
