@@ -125,6 +125,7 @@ function grabbit_me_save_tags(){
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
 		  $terms['tags'][]=$try;
+		  $profile->taxonomy[$try->vid][$try->tid];
 		  $profile->field_profile_hobbies[$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
@@ -133,6 +134,7 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    $terms['tags'][]=$edit;
+		    $profile->taxonomy[1][$edit['tid']];
 		    $profile->field_profile_hobbies[$edit['tid']]=$edit;
 	    }
 		
@@ -143,6 +145,7 @@ function grabbit_me_save_tags(){
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
 		  $terms['tags'][]=$try;
+		  $profile->taxonomy[$try->vid][$try->tid];
 		  $profile->field_profile_topics[$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
@@ -151,6 +154,7 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    $terms['tags'][]=$edit;
+		    $profile->taxonomy[1][$edit['tid']];
 		    $profile->field_profile_topics[$edit['tid']]=$edit;
 	    }
 		
@@ -161,6 +165,7 @@ function grabbit_me_save_tags(){
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
 		  $terms['tags'][]=$try;
+		  $profile->taxonomy[$try->vid][$try->tid];
 		  $profile->field_profile_interests[$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
@@ -169,6 +174,7 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    $terms['tags'][]=$edit;
+		    $profile->taxonomy[1][$edit['tid']];
 		    $profile->field_profile_interests[$edit['tid']]=$edit;
 	    }
 		
