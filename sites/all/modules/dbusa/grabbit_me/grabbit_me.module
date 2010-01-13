@@ -112,7 +112,9 @@ function grabbit_me_save_tags(){
     $total_tags1=explode(",",$tags1);
     $total_tags2=explode(",",$tags2);
     $total_tags3=explode(",",$tags3);
-
+print_r($total_tags1);
+print_r($total_tags2);
+print_r($total_tags3);
     $tags_feeds=$_GET['feeds'];
 
     $profile->taxonomy=array();
