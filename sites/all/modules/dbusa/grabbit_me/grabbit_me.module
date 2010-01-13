@@ -120,7 +120,7 @@ function grabbit_me_save_tags(){
     $profile->field_profile_interests=array();
     $profile->field_profile_topics=array();
 
-    foreach($total_tags1 as $tag_1){
+/*    foreach($total_tags1 as $tag_1){
 	
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
@@ -139,48 +139,9 @@ function grabbit_me_save_tags(){
 	    }
 		
     }
+*/
+    //$profile->taxonomy=array('180007','180319','590','164633');
 
-    foreach($total_tags2 as $tag_2){
-	
-	    $try=taxonomy_get_term_by_name($tag_2);
-	    if($try->vid){
-		  $terms['tags'][]=$try;
-		  $profile->taxonomy[$try->vid][$try->tid];
-		  $profile->field_profile_topics[][$try->tid]=$try;		  
-	    }else{
-		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => $tag_2, 'description' => ' ', 'weight' => "0", 'vid' => 1);
-		    taxonomy_save_term($edit);
-		    $tid = $edit['tid'];
-		    // associate node and term
-		    $terms['tags'][]=$edit;
-		    $profile->taxonomy[1][$edit['tid']];
-		    $profile->field_profile_topics[][$edit['tid']]=$edit;
-	    }
-		
-    }
-
-    foreach($total_tags3 as $tag_3){
-	
-	    $try=taxonomy_get_term_by_name($tag_3);
-	    if($try->vid){
-		  $terms['tags'][]=$try;
-		  $profile->taxonomy[$try->vid][$try->tid];
-		  $profile->field_profile_interests[][$try->tid]=$try;		  
-	    }else{
-		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => $tag_3, 'description' => ' ', 'weight' => "0", 'vid' => 1);
-		    taxonomy_save_term($edit);
-		    $tid = $edit['tid'];
-		    // associate node and term
-		    $terms['tags'][]=$edit;
-		    $profile->taxonomy[1][$edit['tid']];
-		
-		    $profile->field_profile_interests[][$edit['tid']]=$edit;
-	    }
-		
-    }
-print_r($profile->taxonomy);
     node_save($profile);
     print "done";
 }
