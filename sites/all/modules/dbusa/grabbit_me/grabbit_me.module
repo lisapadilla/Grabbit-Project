@@ -119,6 +119,8 @@ function grabbit_me_save_tags(){
 	         3=>$tags_feeds
 	   )
 	);
+	
+	print_r($profile->taxonomy['tags']);
 
    /* foreach($total_tags as $tag_1){
 	
