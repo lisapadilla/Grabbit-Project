@@ -107,25 +107,17 @@ function grabbit_me_save_tags(){
 	$profile->taxonomy=array();
 	
     $tags1=$_GET['hobbies'];
-    $tags1 .=",".$_GET['topics'];
-    $tags1 .=",".$_GET['interests'];
+    $tags2=$_GET['topics'];
+    $tags3=$_GET['interests'];
 
     $tags_feeds=$_GET['feeds'];
 
-    $profile->taxonomy = array(
-	  'tags' => array(
-	         1=>$tags1,
-	         3=>$tags_feeds
-	   )
-	);
-	
-	print_r($profile->taxonomy['tags']);
-
-   /* foreach($total_tags as $tag_1){
+    foreach($total_tags as $tag_1){
 	
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
-		  $terms['tags'][]=$try;		  
+		  $terms['tags'][]=$try;
+		  $profile->field_profile_hobbies[$try->tid]=$try;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
@@ -133,10 +125,47 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    $terms['tags'][]=$edit;
+		    $profile->field_profile_hobbies[$edit['tid']]=$edit;
 	    }
 		
     }
-*/
+
+    foreach($total_tags as $tag_2){
+	
+	    $try=taxonomy_get_term_by_name($tag_1);
+	    if($try->vid){
+		  $terms['tags'][]=$try;
+		  $profile->field_profile_topics[$try->tid]=$try;		  
+	    }else{
+		  	// I create a term in a specific vocabulary
+		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
+		    taxonomy_save_term($edit);
+		    $tid = $edit['tid'];
+		    // associate node and term
+		    $terms['tags'][]=$edit;
+		    $profile->field_profile_topics[$edit['tid']]=$edit;
+	    }
+		
+    }
+
+    foreach($total_tags as $tag_3){
+	
+	    $try=taxonomy_get_term_by_name($tag_1);
+	    if($try->vid){
+		  $terms['tags'][]=$try;
+		  $profile->field_profile_interests[$try->tid]=$try;		  
+	    }else{
+		  	// I create a term in a specific vocabulary
+		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
+		    taxonomy_save_term($edit);
+		    $tid = $edit['tid'];
+		    // associate node and term
+		    $terms['tags'][]=$edit;
+		    $profile->field_profile_interests[$edit['tid']]=$edit;
+	    }
+		
+    }
+
     node_save($profile);
     print "done";
 }
