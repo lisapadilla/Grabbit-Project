@@ -125,7 +125,7 @@ function grabbit_me_save_tags(){
 	    $try=taxonomy_get_term_by_name(trim($tag_1));
 	    if($try->vid){
 		  $profile->taxonomy[]=$try->tid;
-		 // $profile->field_profile_hobbies[][$try->tid]=$try->tid;		  
+		  $profile->field_profile_hobbies[]['value']=$try->tid;		  
 	    }else{
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
@@ -133,15 +133,13 @@ function grabbit_me_save_tags(){
 		    $tid = $edit['tid'];
 		    // associate node and term
 		    
-		    $profile->taxonomy[]=$edit['tid'];
+		    $profile->taxonomy[]['value']=$edit['tid'];
 		   // $profile->field_profile_hobbies[][$edit['tid']]=$edit['tid'];
 	    }
 		
     }
 
-   $profile->taxonomy=array('180007','180319','590','164633');
-
-    @node_save($profile);
+    node_save($profile);
     print "done";
 }
 
