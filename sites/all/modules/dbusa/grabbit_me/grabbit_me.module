@@ -131,21 +131,6 @@ function grabbit_me_save_tags(){
 		
     }
 
-    foreach($total_tags_2 as $tag_2){
-	
-	    $try=taxonomy_get_term_by_name($tag_2);
-	    if($try){
-		  $profile->taxonomy[$try->tid]=$try;
-	    }else{
-		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => $tag_2, 'description' => ' ', 'weight' => "0", 'vid' => 3);
-		    taxonomy_save_term($edit);
-		    $tid = $edit['tid'];
-		    // associate node and term
-		    $profile->taxonomy[$edit['tid']]=$edit;
-	    }
-		
-    }
 
 	node_save($profile);
 	print "end";
