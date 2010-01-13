@@ -58,7 +58,7 @@ Drupal.behaviors.editables = function(){
 		
 		$.get(Drupal.settings.basePath+"ajax/save/tags",{feeds:feeds,hobbies:hobbies,topics:topics,interests:interests},function(data){
 			if (data){
-				
+				alert(data);
 				$("#feeds").html(feeds);
 				$("#hobbies").html(hobbies);
 				$("#topics").html(topics);
