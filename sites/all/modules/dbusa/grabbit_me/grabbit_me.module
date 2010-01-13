@@ -91,19 +91,15 @@ function grabbit_me_save_bio(){
 	$profile->field_profile_state[0]['value']=$_GET['state'];
 	$profile->field_profile_country[0]['value']=$_GET['country'];
 	$profile->field_profile_websites=array();
+	$txt = preg_replace('/\r\n|\r/', "\n", $_GET['web']);
+	$websites=explode("\n",$txt);
 	
-	$websites=explode(" ",$_GET['web']);
 	foreach($websites as $web){
 		$profile->field_profile_websites[]['value']=$web;
 	}
 	
 	node_save($profile);
-	$txt = preg_replace('/\r\n|\r/', "\n", $_GET['web']);
-	$websites=explode("\n",$txt);
-	print_r($_GET['web']);
-	print "<br>";
-	print_r($websites);
-	
+    print "success";
 }
 function grabbit_me_save_tags(){
 	global $user;
