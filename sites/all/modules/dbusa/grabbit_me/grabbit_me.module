@@ -106,30 +106,6 @@ function grabbit_me_save_tags(){
 	$profile = content_profile_load('profile', $user->uid);
 	
 	$profile->taxonomy=array();
-	
-    $tags1=$_GET['hobbies'];
-    $tags1 .=$_GET['topics'];
-    $tags1 .=$_GET['interests'];
-
-    $total_tags_2=explode(",",$_GET['feeds']);
-
-    $total_tags=explode(",",$tags1);
-
-    foreach($total_tags as $tag_1){
-	
-	    $try=taxonomy_get_term_by_name($tag_1);
-	    if($try->vid){
-		  //$profile->taxonomy[$try->vid][$try->tid]=$try;
-	    }else{
-		/*  	// I create a term in a specific vocabulary
-		    $edit = array('name' => $tag_1, 'description' => ' ', 'weight' => "0", 'vid' => 1);
-		    taxonomy_save_term($edit);
-		    $tid = $edit['tid'];
-		    // associate node and term
-		    $profile->taxonomy[1][$edit['tid']]=$edit;
-	    */}
-		
-    }
 
 
 	node_save($profile);
