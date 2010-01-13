@@ -104,7 +104,6 @@ function grabbit_me_save_bio(){
 function grabbit_me_save_tags(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
-	$profile->taxonomy=array();
 	
     $tags1=$_GET['hobbies'];
     $tags2=$_GET['topics'];
@@ -115,6 +114,11 @@ function grabbit_me_save_tags(){
     $total_tags3=explode(",",$tags3);
 
     $tags_feeds=$_GET['feeds'];
+
+    $profile->taxonomy=array();
+    $profile->field_profile_hobbies=array();
+    $profile->field_profile_interests=array();
+    $profile->field_profile_topics=array();
 
     foreach($total_tags1 as $tag_1){
 	
@@ -169,9 +173,6 @@ function grabbit_me_save_tags(){
 	    }
 		
     }
-$profile->field_profile_hobbies=array();
-$profile->field_profile_interests=array();
-$profile->field_profile_topics=array();
     node_save($profile);
     print "done";
 }
