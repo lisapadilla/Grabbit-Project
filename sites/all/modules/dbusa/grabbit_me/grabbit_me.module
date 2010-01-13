@@ -98,7 +98,9 @@ function grabbit_me_save_bio(){
 	}
 	
 	node_save($profile);
-	print "saved";
+	print_r($_GET['web']);
+	print "<br>";
+	print_r($websites);
 	
 }
 function grabbit_me_save_tags(){
