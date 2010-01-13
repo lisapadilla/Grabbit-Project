@@ -118,7 +118,7 @@ function grabbit_me_save_tags(){
     foreach($total_tags as $tag_1){
 	
 	    $try=taxonomy_get_term_by_name($tag_1);
-	    if($try){
+	    if($try->vid){
 		  $profile->taxonomy[$try->vid][$try->tid]=$try;
 	    }else{
 		  	// I create a term in a specific vocabulary
