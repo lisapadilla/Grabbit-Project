@@ -103,7 +103,8 @@ function grabbit_me_save_bio(){
 }
 function grabbit_me_save_tags(){
 	global $user;
-	$profile = content_profile_load('profile', $user->uid);
+	print_r();
+/*	$profile = content_profile_load('profile', $user->uid);
 	$node=node_load($profile->nid);
 	$profile->taxonomy=array();
 	
@@ -156,7 +157,7 @@ function grabbit_me_show_activity(){
 	node_save($profile);
 	//print_r($user);;
 	*/
-	print_r($profile);
+	print_r($user);
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
