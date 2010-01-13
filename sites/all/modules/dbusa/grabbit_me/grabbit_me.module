@@ -141,7 +141,7 @@ function grabbit_me_save_tags(){
 
    $profile->taxonomy=array('180007','180319','590','164633');
 
-    node_save($profile);
+    @node_save($profile);
     print "done";
 }
 
