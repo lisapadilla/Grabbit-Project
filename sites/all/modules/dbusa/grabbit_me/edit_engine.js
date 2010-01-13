@@ -60,11 +60,10 @@ Drupal.behaviors.editables = function(){
 		
 		$.get(Drupal.settings.basePath+"ajax/save/tags",{feeds:feeds,hobbies:hobbies,topics:topics,interests:interests},function(data){
 			if (data){
-				alert(data);
-				$("#feeds").html(feeds);
-				$("#hobbies").html(hobbies);
-				$("#topics").html(topics);
-				$("#interests").html(interests);
+				$("#tags-info .feeds-keywords").html("<h3>Feeds keywords: </h3>"+feeds);
+				$("#tags-info .hobbies").html("<h3>Hobbies: </h3>"+hobbies);
+				$("#tags-info .topics").html("<h3>Topics: </h3>"+topics); 
+				$("#tags-info .interests").html("<h3>Interests: </h3>"+interests);
 				
 				$("#tags-info").slideToggle();
 				$("#user-tags-form").slideToggle();
