@@ -893,8 +893,8 @@ function grabbit_me_get_my_profile(){
 	<input type="text" value="'.$profile->field_profile_country[0]['value'].'" id="country" name="country"/>
 	</div>
 	<div class="bio-item">
-	<label>Websites:</label>    
-	<input type="text" value="'.$webs.'" id="webs" name="webs"/>
+	<label>Websites (one per line):</label>    
+	<textarea id="webs" name="webs">'.$webs.'</textarea>
 	</div>
 	<div class="bio-item">      
 	<button type="button" id="bio-submit">Save</button>
