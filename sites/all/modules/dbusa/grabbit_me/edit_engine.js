@@ -49,6 +49,30 @@ Drupal.behaviors.editables = function(){
 		return false;
 	});
 	
-	
+	$("#tags-submit").click(function (){
+		
+		feeds=$("#feeds").val();
+		hobbies=$("#hobbies").val();
+		topics=$("#topics").val();
+		interests=$("#interests").val();
+		
+		$.get(Drupal.settings.basePath+"ajax/save/tags",{feeds:feeds,hobbies:hobbies,topics:topics,interests:interests},function(data){
+			if (data){
+				
+				$("#feeds").html(feeds);
+				$("#hobbies").html(hobbies);
+				$("#topics").html(topics);
+				$("#interests").html(interests);
+				
+				$("#tags-info").slideToggle();
+				$("#user-tags-form").slideToggle();
+				
+			}else{
+				alert("Problem connecting with the server, please try to update your settings latter.");
+			}
+		});
+		
+		return false;
+	});
 	
 }
