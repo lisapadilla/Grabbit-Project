@@ -109,13 +109,8 @@ function grabbit_me_save_tags(){
 function grabbit_me_show_activity(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
-	//print_r($profile);
-	//print_r($user);
-	$vid = 1; //put here the vocabulary ID of your interest
-	$term = 'Extraçterm'; //put here the term you want to insert
-	$edit = array('vid' => $vid, 'name' => $term);
-	$total=taxonomy_save_term($edit);
-	print_r($total);
+	print_r($profile);
+	//print_r($user);;
 	
 }
 
