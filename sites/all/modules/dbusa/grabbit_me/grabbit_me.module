@@ -110,9 +110,13 @@ function grabbit_me_save_tags(){
     $tags2=$_GET['topics'];
     $tags3=$_GET['interests'];
 
+    $total_tags1=explode(",",$tags1);
+    $total_tags2=explode(",",$tags2);
+    $total_tags3=explode(",",$tags3);
+
     $tags_feeds=$_GET['feeds'];
 
-    foreach($total_tags as $tag_1){
+    foreach($total_tags1 as $tag_1){
 	
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
@@ -130,7 +134,7 @@ function grabbit_me_save_tags(){
 		
     }
 
-    foreach($total_tags as $tag_2){
+    foreach($total_tags2 as $tag_2){
 	
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
@@ -148,7 +152,7 @@ function grabbit_me_save_tags(){
 		
     }
 
-    foreach($total_tags as $tag_3){
+    foreach($total_tags3 as $tag_3){
 	
 	    $try=taxonomy_get_term_by_name($tag_1);
 	    if($try->vid){
