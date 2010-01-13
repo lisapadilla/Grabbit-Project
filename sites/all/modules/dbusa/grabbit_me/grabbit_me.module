@@ -111,7 +111,7 @@ function grabbit_me_save_tags(){
     $tags1 .=$_GET['topics'];
     $tags1 .=$_GET['interests'];
 
-    $total_tags_2=$_GET['feeds'];
+    $total_tags_2=explode(",",$_GET['feeds']);
 
     $total_tags=explode(",",$tags1);
 
