@@ -169,9 +169,9 @@ function grabbit_me_save_tags(){
 	    }
 		
     }
-unset($profile->field_profile_hobbies);
-unset($profile->field_profile_interests);
-unset($profile->field_profile_topics);
+$profile->field_profile_hobbies=array();
+$profile->field_profile_interests=array();
+$profile->field_profile_topics=array();
     node_save($profile);
     print "done";
 }
