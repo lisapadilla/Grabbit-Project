@@ -19,7 +19,8 @@ Drupal.behaviors.editables = function(){
 		state=$("#state").val();
 		city=$("#city").val();
 		bio=$("#bio").val();
-		$.get(Drupal.settings.basePath+"ajax/save/bio",{bio:bio,city:city,state:state,country:country,web:webs},function(data){
+		name=$("#name").val();
+		$.get(Drupal.settings.basePath+"ajax/save/bio",{name:name,bio:bio,city:city,state:state,country:country,web:webs},function(data){
 			if (data){
 				
 				$(".other-info .websites").html(webs);
@@ -27,6 +28,7 @@ Drupal.behaviors.editables = function(){
 				$(".other-info .state").html(state);
 				$(".other-info .city").html(city);
 				$(".other-info .bio").html(bio);
+				$(".other-info .display").html(name);
 				$("#bio-no-edit").slideToggle();
 				$("#user-profile-form").slideToggle();
 			}else{

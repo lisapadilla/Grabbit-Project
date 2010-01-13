@@ -986,6 +986,7 @@ function grabbit_me_get_my_profile(){
 	</div>
 	
 	<div class="other-info">
+	  <div class="bio display"><strong>'.$profile->title.'</strong></div>
 	  <div class="bio submiter">'.$profile->field_profile_about[0]['value'].'</div>
 	  <div class="city submiter">'.$profile->field_profile_city[0]['value'].'</div>
 	  <div class="state submiter"> '.$profile->field_profile_state[0]['value'].'</div>
@@ -995,6 +996,10 @@ function grabbit_me_get_my_profile(){
 	</div>
 	<div id="user-profile-form" style="display:none">
 	  <form id="user-profile-ajax-form">
+	<div class="bio-item">    
+	<label>Display name:</label>
+	 <input type="text" value="'.$profile->title.'" id="name" name="name"/>
+	</div>
 	<div class="bio-item">    
 	<label>About you:</label>
 	    <textarea id="bio" name="bio">'.$profile->field_profile_about[0]['value'].'</textarea>
