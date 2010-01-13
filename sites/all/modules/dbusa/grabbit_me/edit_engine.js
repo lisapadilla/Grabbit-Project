@@ -22,7 +22,13 @@ Drupal.behaviors.editables = function(){
 		
 		$.get(Drupal.settings.basePath+"ajax/save/bio",{bio:bio,city:city,state:state,country:country,web:webs},function(data){
 			if (data){
-				alert(data);
+				$(".other-info .websites").html(webs);
+				$(".other-info .country").html(country);
+				$(".other-info .state").html(state);
+				$(".other-info .city").html(city);
+				$(".other-info .bio").html(bio);
+			}else{
+				alert("Problem connecting with the server, please try to update your settings latter.");
 			}
 		});
 		

@@ -98,6 +98,7 @@ function grabbit_me_save_bio(){
 	}
 	
 	node_save($profile);
+	return 1;
 	
 }
 function grabbit_me_save_tags(){
