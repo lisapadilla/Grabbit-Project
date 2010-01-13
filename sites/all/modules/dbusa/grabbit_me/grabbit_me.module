@@ -109,7 +109,10 @@ function grabbit_me_save_tags(){
 function grabbit_me_show_activity(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
-	print_r($profile);
+	
+	$profile->taxonomy['tags'] = array(1 => "probando, nuevos, DINOSAURIOS");
+	node_save($profile);
+	
 	//print_r($user);;
 	
 }
