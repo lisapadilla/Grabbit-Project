@@ -194,7 +194,7 @@ function grabbit_me_save_tags(){
 		
     }
 
-    node_save($profile);
+    @node_save($profile);
     print "done";
 }
 
