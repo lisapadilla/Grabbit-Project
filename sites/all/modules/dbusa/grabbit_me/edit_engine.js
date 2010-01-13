@@ -28,7 +28,7 @@ Drupal.behaviors.editables = function(){
 				$(".other-info .state").html(state);
 				$(".other-info .city").html(city);
 				$(".other-info .bio").html(bio);
-				$(".other-info .display").html(name);
+				$(".other-info .display").html("<strong>"+name+"</strong>");
 				$("#bio-no-edit").slideToggle();
 				$("#user-profile-form").slideToggle();
 			}else{
