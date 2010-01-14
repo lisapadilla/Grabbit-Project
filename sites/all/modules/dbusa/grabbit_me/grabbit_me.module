@@ -87,7 +87,7 @@ function grabbit_me_menu() {
 }
 
 function grabbit_upload_picture(){
-	$uploaddir = base_path().'sites/default/files/';  
+	$uploaddir = '/public_html/'.base_path().'sites/default/files/';  
     $file = $uploaddir . basename($_FILES['uploadfile']['name']);   
 	   
 	 if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $file)) {  
