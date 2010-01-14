@@ -96,6 +96,7 @@ function grabbit_upload_picture(){
 
 }
 
+
 function grabbit_me_save_bio(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
