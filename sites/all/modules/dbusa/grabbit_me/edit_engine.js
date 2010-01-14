@@ -98,7 +98,7 @@ Drupal.behaviors.editables = function(){
              if(response==="success"){  
                  $('<li></li>').appendTo('#files').html('<img src="./uploads/'+file+'" alt="" /><br />'+file).addClass('success');  
              } else{  
-                 $('<li></li>').appendTo('#files').text(file).addClass('error');  
+                 $('<li></li>').appendTo('#files').text(error).addClass('error');  
              }  
          }  
      });
