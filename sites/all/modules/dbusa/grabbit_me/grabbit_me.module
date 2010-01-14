@@ -90,9 +90,11 @@ function grabbit_upload_picture(){
 	$files=$_FILES;
 	$_FILES['files']=$_FILES;
 	$_FILES['files']['name']['uploadfile']=$files;
+	$_FILES['files']['tmp_name']['uploadfile']=$files['uploadfile']['tmp_name'];
 	print_r($_FILES);
 	$file=file_save_upload('uploadfile');
 	print_r($file);
+	
 
 }
 
