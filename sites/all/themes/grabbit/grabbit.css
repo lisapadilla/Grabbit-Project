@@ -3276,12 +3276,12 @@ div.navbar
     position:absolute;
     top:0px; left:0;
 	padding: 15px 0 0 0;
-	margin-left:-70px;
+	margin-left:270px;
 	width:200px;
 	color: #0066FF;
     text-align: center;
 }
-.tooltip a span.top{
+.tooltip span.top{
 	display: block;
 	padding: 30px 8px 0;
     background: url(images/buble/bubble.gif) no-repeat top;
