@@ -80,7 +80,7 @@ Drupal.behaviors.editables = function(){
      var btnUpload=$('#upload');  
      var status=$('#status');  
      new AjaxUpload(btnUpload, {  
-         action: 'ajax/upload/file',  
+         action: '/grabbit/ajax/upload/file',  
          //Name of the file input box  
          name: 'uploadfile',  
          onSubmit: function(file, ext){  
