@@ -132,9 +132,9 @@ function grabbit_upload_picture(){
 		}
 
 		node_save($profile);
-		print "success";
+		print theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
 	}else{
-		print "there was a problem with the connection, try again latter",
+		
 	}
 	
 	
