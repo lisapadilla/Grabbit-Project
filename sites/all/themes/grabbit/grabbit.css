@@ -3121,12 +3121,13 @@ div.navbar
 	color:#3399FF;
 	font-size:14px;
 	font-weight:bold;
-	display:block;
-	float:left;
+	display:inline;
 	width:80px;
 	
 }
-
+#content-area #user-login .edit-pass-wrapper #edit-pass{
+	margin-left:2px;
+}
 #content-area #user-login .description,
 #content-area #user-login .form-required{
 	display:none;
