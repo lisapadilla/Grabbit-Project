@@ -832,9 +832,6 @@ function facebook_grabbit_private_view_panel($param){
 							default:
 							  if($node->type=='deal'){
 								if(is_array($node->taxonomy) && is_array($deals_profile->taxonomy)){
-									print_r($node->taxonomy);
-									print_r($deals_profile->taxonomy);
-									print "separator";
 								  $matches=array_intersect_key($node->taxonomy,$deals_profile->taxonomy);	
 								}
 							    	
