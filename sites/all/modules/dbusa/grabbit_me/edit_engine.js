@@ -81,8 +81,7 @@ Drupal.behaviors.editables = function(){
      var status=$('#status');  
      new AjaxUpload(btnUpload, {  
          action: Drupal.settings.basePath+'ajax/upload/file',  
-         //Name of the file input box
-         responseType:'json',  
+         //Name of the file input box  
          name: 'uploadfile',  
          onSubmit: function(file, ext){  
              if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){  
@@ -97,9 +96,7 @@ Drupal.behaviors.editables = function(){
              status.text('');  
              //Add uploaded file to list  
              if(response){
-	alert(response);            
-//	 $('.picture img').attr('src',response);
-//	             $('.image img').attr('src',response);  
+                 $('.picture')html(response);  
                  $("#bio-no-edit").slideToggle();
 				 $("#user-profile-form").slideToggle();
              } else{  
