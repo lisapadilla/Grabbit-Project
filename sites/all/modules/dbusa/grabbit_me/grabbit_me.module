@@ -302,18 +302,31 @@ function grabbit_me_save_tags(){
 function grabbit_me_show_activity(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
-	/*
-	// I create a term in a specific vocabulary with the same name as the node
-  $edit = array('name' => 'dinosaurios', 'description' => ' ', 'weight' => "0", 'vid' => 1);
-  taxonomy_save_term($edit);
-  $tid = $edit['tid'];
+	
+	$tags_feeds=explode(",",$_GET['feeds']);
 
-  // associate node and term
-  $profile->taxonomy[$edit['tid']]=$edit;
-	node_save($profile);
-	//print_r($user);;
-	*/
-print_r($profile->field_profile_picture);
+    foreach($tags_feeds as $tag_1){
+	
+	    $try=taxonomy_get_term_by_name(trim($tag_1));
+	    if($try->vid){
+		  print_r($try);		  
+	    }else{
+		  if(is_array($try)){
+		 	print_r($try[0]->tid);
+		  }else{
+		  	// I create a term in a specific vocabulary
+		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
+		    taxonomy_save_term($edit);
+		    $tid = $edit['tid'];
+		    // associate node and term
+		    
+		    //$profile->taxonomy[]=$edit['tid'];
+		    print "creado";
+		    print_r($edit);
+		  }
+		}
+		
+    }
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
