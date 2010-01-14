@@ -1391,7 +1391,7 @@ a.active{
 }
 a.twit-reply{
   display: block;
-  width: 10px;
+  width: 11px;
   height: 11px;
   background: url(images/rep_ico.gif) 0 0 no-repeat;
   float: right;
