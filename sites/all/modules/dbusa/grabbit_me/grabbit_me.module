@@ -132,7 +132,7 @@ function grabbit_upload_picture(){
 		}
 
 		node_save($profile);
-		print theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
+		print $profile->field_profile_picture[0]['filepath'];
 	}else{
 		
 	}

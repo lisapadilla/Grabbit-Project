@@ -95,8 +95,11 @@ Drupal.behaviors.editables = function(){
              //On completion clear the status  
              status.text('');  
              //Add uploaded file to list  
-             if(response){  
-                 $('<li></li>').appendTo('#files').html(response).addClass('success');  
+             if(response){
+	             $('.picture img').attr('src')=response;
+	             $('.image img').attr('src')=response;  
+                 $("#bio-no-edit").slideToggle();
+				 $("#user-profile-form").slideToggle();
              } else{  
                  //$('<li></li>').appendTo('#files').text(response).addClass('error');
                  alert("There was a problem connecting with the server, try again latter");  
