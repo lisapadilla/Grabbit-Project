@@ -87,14 +87,13 @@ function grabbit_me_menu() {
 }
 
 function grabbit_upload_picture(){
-	$uploaddir = base_path().'sites/default/files';  
-    $file = $uploaddir . basename($_FILES['uploadfile']['name']);   
-	   
-	 if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $file)) {  
-	   echo "success";  
-	 } else {  
-	     echo "error";  
-	 }
+	$source = file_check_upload('uploadfile');
+	$dir = variable_get('file_directory_path', 'files');
+	if (file_save_upload($source,$dir, FALSE)) {
+	  echo "success";  
+	}else{
+	  echo "error";  
+	}
 }
 
 function grabbit_me_save_bio(){
