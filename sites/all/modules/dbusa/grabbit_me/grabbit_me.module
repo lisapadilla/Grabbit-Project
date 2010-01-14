@@ -311,11 +311,11 @@ function grabbit_me_show_activity(){
 	    if($try->vid){
 		  print_r($try);		  
 	    }else{
-		  
+		   print_r($try); 
 		  if(is_array($try)){
 		 	print_r($try[0]->tid);
 		  }else{
-			print "ultimo else";
+			
 		  	// I create a term in a specific vocabulary
 		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
 		    taxonomy_save_term($edit);
