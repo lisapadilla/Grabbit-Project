@@ -1405,7 +1405,7 @@ a.facebook-makecomment-link, a.comment-news{
   height: 11px;
   background: url(images/rep_ico.gif) 0 0 no-repeat;
   float: right;
-
+  text-indent: 3000em;
   overflow: hidden;
   margin-left: 5px;
 }
@@ -3289,8 +3289,8 @@ div.navbar
 .links_stream a span{ display: none; }
 
 /*background:; ie hack, something must be changed in a for ie to execute it*/
-.links_stream a:hover{ z-index:25; color: #aaaaff; background:;}
-.links_stream a:hover span.tooltip{
+.links_stream a{ z-index:25; color: #aaaaff; background:;}
+.links_stream a span.tooltip{
     display:block;
     position:absolute;
     top:0px; left:0;
@@ -3300,17 +3300,17 @@ div.navbar
 	color: #0066FF;
     text-align: center;
 }
-.links_stream a:hover span.top{
+.links_stream a span.top{
 	display: block;
 	padding: 30px 8px 0;
     background: url(images/buble/bubble.gif) no-repeat top;
 }
-.links_stream a:hover span.middle{ /* different middle bg for stretch */
+.links_stream a span.middle{ /* different middle bg for stretch */
 	display: block;
 	padding: 0 8px; 
 	background: url(images/buble/bubble_filler.gif) repeat bottom; 
 }
-.links_stream a:hover span.bottom{
+.links_stream a span.bottom{
 	display: block;
 	padding:3px 8px 10px;
 	color: #548912;
