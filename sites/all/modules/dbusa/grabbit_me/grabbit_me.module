@@ -90,10 +90,11 @@ function grabbit_upload_picture(){
 	$source = file_check_upload('uploadfile');
 	$dir = variable_get('file_directory_path', 'files');
 	if (file_save_upload($source,$dir, FALSE)) {
-	  echo "success";  
+	  print "success";  
 	}else{
-	  echo "error";  
+	  print "error";  
 	}
+	print "naranjas";
 }
 
 function grabbit_me_save_bio(){
