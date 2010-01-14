@@ -1863,10 +1863,10 @@ function _news_theme($comments,$node,$matches=NULL){
 	     }
 	    $text_why=implode(', ', $why);
 	   }
-	   $text_link=l('Edit tags','user/me/edit/profile');
+	   $text_link=l('Edit tags','activity/updates');
 	   $text_explain='This deal matches your following tags:<br>';
 	   
-	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
+	   $text_total=$text_explain.'<strong>'.$text_why.'</strong><br>'.$text_link;
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
                            <div class="tooltip tooltip_deal fixed persistent" style="display:none;"><span class="tooltip"><span class="top"></span><span class="middle">'.$text_total.'</span><span class="bottom"></span></span></div>
