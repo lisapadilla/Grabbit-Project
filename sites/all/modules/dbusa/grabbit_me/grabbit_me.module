@@ -1178,10 +1178,6 @@ function grabbit_me_get_my_tags(){
 	
 	<div id="user-tags-form" style="display:none">
 	  <form id="user-tags-ajax-form">
-	<div class="tags-item">    
-	<label>Feeds keywords:</label>
-	    <textarea id="feeds" name="feeds">'.implode(', ',$feeds).'</textarea>
-	</div>
 	
 	<div class="tags-item">    
 	<label>Hobbies:</label>
@@ -1196,6 +1192,11 @@ function grabbit_me_get_my_tags(){
 	<div class="tags-item">    
 	<label>Interests:</label>
 	    <textarea id="interests" name="interests">'.implode(', ',$interests).'</textarea>
+	</div>
+	
+	<div class="tags-item">    
+	<label>Feeds keywords:</label>
+	    <textarea id="feeds" name="feeds">'.implode(', ',$feeds).'</textarea>
 	</div>
 	
 	<div class="tags-item">      
