@@ -96,8 +96,7 @@ Drupal.behaviors.editables = function(){
              status.text('');  
              //Add uploaded file to list  
              if(response){
-	             $('.picture img').attr('src')=response;
-	             $('.image img').attr('src')=response;  
+	            
                  $("#bio-no-edit").slideToggle();
 				 $("#user-profile-form").slideToggle();
              } else{  
