@@ -2457,20 +2457,6 @@ div.messages, div.status, div.warning, div.error{
 	margin-right: 10px;
 }
 
-.tooltip-deal .tooltip{
-	background-color:#F5F5B5;
-	border:1px solid #DECA7E;
-	color:#303030;
-	font-family:sans-serif;
-	font-size:12px;
-	line-height:18px;
-	z-index:5;
-	position:relative;
-	width:380px;
-}
-.tooltip-deal .tooltip .tooltip-inner{
-	
-}
 .tooltip-deal{
 	background:transparent url(images/tags_ico.gif) no-repeat scroll 0 0;
 	display:block;
@@ -2483,9 +2469,6 @@ div.messages, div.status, div.warning, div.error{
 }
 .odd .tooltip-deal{
 	background:transparent url(images/tags_ico_gr.gif) no-repeat scroll 0 0;
-}
-.tooltip-deal .tooltip{
-	text-indent:0em;
 }
 
 .tooltip-deal .tooltip a{
@@ -3286,11 +3269,9 @@ div.navbar
 }
 /*---------- bubble tooltip -----------*/
 
-.links_stream a span{ display: none; }
-
 /*background:; ie hack, something must be changed in a for ie to execute it*/
-.links_stream a{ z-index:25; color: #aaaaff; background:;}
-.links_stream a span.tooltip{
+
+.tooltip span.tooltip{
     display:block;
     position:absolute;
     top:0px; left:0;
@@ -3300,17 +3281,17 @@ div.navbar
 	color: #0066FF;
     text-align: center;
 }
-.links_stream a span.top{
+.tooltip a span.top{
 	display: block;
 	padding: 30px 8px 0;
     background: url(images/buble/bubble.gif) no-repeat top;
 }
-.links_stream a span.middle{ /* different middle bg for stretch */
+.tooltip span.middle{ /* different middle bg for stretch */
 	display: block;
 	padding: 0 8px; 
 	background: url(images/buble/bubble_filler.gif) repeat bottom; 
 }
-.links_stream a span.bottom{
+.tooltip span.bottom{
 	display: block;
 	padding:3px 8px 10px;
 	color: #548912;

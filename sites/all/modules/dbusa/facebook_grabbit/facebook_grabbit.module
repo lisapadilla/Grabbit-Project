@@ -1869,7 +1869,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	   $text_total=$text_explain.$text_why.'<br>'.$text_link;
 	   $deal_matches= '<span class="matches">
 	                    <div title="Why do I see this?" class="tooltip-deal">
-                           <div class="tooltip tooltip_deal fixed persistent" style="display:none;"><div class="tooltip-inner">'.$text_total.'</div></div>
+                           <div class="tooltip tooltip_deal fixed persistent" style="display:none;"><span class="tooltip"><span class="top"></span><span class="middle">'.$text_total.'</span><span class="bottom"></span></span></div>
 	                    </div>
 	                   </span>';
 	   $submitted ='<p>'.format_date($node->created).'</p>
@@ -1904,7 +1904,7 @@ function _news_theme($comments,$node,$matches=NULL){
 					  <div class="links_stream">  
 					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 					    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
-					    <a href="javascript:void(0)" class="comment-news">Comment<span class="tooltip"><span class="top"></span><span class="middle">This is my Bubble Tooltip with CSS</span><span class="bottom"></span></span></a>
+					    <a href="javascript:void(0)" class="comment-news">Comment</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
 					    '.$deal_matches.'
 					    '.$deal.'
