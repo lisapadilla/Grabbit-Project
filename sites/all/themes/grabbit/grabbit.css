@@ -1405,7 +1405,7 @@ a.facebook-makecomment-link, a.comment-news{
   height: 11px;
   background: url(images/rep_ico.gif) 0 0 no-repeat;
   float: right;
-  text-indent: 3000em;
+
   overflow: hidden;
   margin-left: 5px;
 }
