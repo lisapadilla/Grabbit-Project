@@ -2709,7 +2709,7 @@ div.messages, div.status, div.warning, div.error{
 	color:#317CF9;
 	font-weight:bold
 }
-#grabbit-gmail-add-form{
+#grabbit-gmail-add-form, #grabbit-imap-add-form{
 	padding-left:10px;
 	color: #555E6B;
 }
