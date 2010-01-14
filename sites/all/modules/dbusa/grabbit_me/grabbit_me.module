@@ -121,7 +121,7 @@ function grabbit_upload_picture(){
 
 */		//node_save($profile);
 		print "success";
-	}
+	
 	
 	
 	
