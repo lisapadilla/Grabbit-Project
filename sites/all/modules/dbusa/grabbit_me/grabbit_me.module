@@ -96,8 +96,8 @@ function grabbit_upload_picture(){
 	$_FILES['files']['tmp_name']['uploadfile']=$files['uploadfile']['tmp_name'];
 	
 	$file=file_save_upload('uploadfile');
-	print_r($file);
-/*	if($file){
+	
+	if($file){
 		file_set_status(&$file, 1);
 		$profile = content_profile_load('profile', $user->uid);
 		if($profile->nid){
@@ -107,21 +107,35 @@ function grabbit_upload_picture(){
                     'uid' => $user->uid,
                     'filename' => $file->filename,
                     'filepath' => $file->filepath,
-                    [filemime] => image/gif
-                    [filesize] => 2196
-                    [status] => 1
-                    [timestamp] => 1255580447
+                    'filemime' => $file->filemime,
+                    'filesize' => $file->filesize,
+                    'status' => $file->status,
+                    'timestamp' => $file->timestamp
+                    );
 
 		}else{
 			$profile = new StdClass();
 			$profile->type = 'profile';
 			$profile->uid=$user->uid;
 			$profile->title=$user->name;
+			$profile->field_profile_picture[0]=array(
+                    'fid' => $file->fid,
+                    'list' => 1,
+                    'uid' => $user->uid,
+                    'filename' => $file->filename,
+                    'filepath' => $file->filepath,
+                    'filemime' => $file->filemime,
+                    'filesize' => $file->filesize,
+                    'status' => $file->status,
+                    'timestamp' => $file->timestamp
+                    );
 		}
 
-*/		//node_save($profile);
+		node_save($profile);
 		print "success";
-	
+	}else{
+		print "there was a problem with the connection, try again latter",
+	}
 	
 	
 	
