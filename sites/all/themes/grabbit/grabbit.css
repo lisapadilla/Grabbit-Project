@@ -2464,10 +2464,12 @@ div.messages, div.status, div.warning, div.error{
 	font-family:sans-serif;
 	font-size:12px;
 	line-height:18px;
-	padding:10px 13px;
 	z-index:5;
 	position:relative;
-	width:350px;
+	width:380px;
+}
+.tooltip-deal .tooltip .tooltip-inner{
+	
 }
 .tooltip-deal{
 	background:transparent url(images/tags_ico.gif) no-repeat scroll 0 0;
@@ -3281,4 +3283,36 @@ div.navbar
 	font-weight:bold;
 	display:block;
 	margin-top:10px;
+}
+/*---------- bubble tooltip -----------*/
+
+.links_stream a span{ display: none; }
+
+/*background:; ie hack, something must be changed in a for ie to execute it*/
+.links_stream a:hover{ z-index:25; color: #aaaaff; background:;}
+.links_stream a:hover span.tooltip{
+    display:block;
+    position:absolute;
+    top:0px; left:0;
+	padding: 15px 0 0 0;
+	margin-left:-70px;
+	width:200px;
+	color: #0066FF;
+    text-align: center;
+}
+.links_stream a:hover span.top{
+	display: block;
+	padding: 30px 8px 0;
+    background: url(images/buble/bubble.gif) no-repeat top;
+}
+.links_stream a:hover span.middle{ /* different middle bg for stretch */
+	display: block;
+	padding: 0 8px; 
+	background: url(images/buble/bubble_filler.gif) repeat bottom; 
+}
+.links_stream a:hover span.bottom{
+	display: block;
+	padding:3px 8px 10px;
+	color: #548912;
+    background: url(images/buble/bubble.gif) no-repeat bottom;
 }
