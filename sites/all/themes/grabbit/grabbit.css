@@ -1401,7 +1401,7 @@ a.twit-reply{
 }
 a.facebook-makecomment-link, a.comment-news{
   display: block;
-  width: 10px;
+  width: 11px;
   height: 11px;
   background: url(images/rep_ico.gif) 0 0 no-repeat;
   float: right;
@@ -1412,6 +1412,10 @@ a.facebook-makecomment-link, a.comment-news{
 .odd a.facebook-makecomment-link, .odd a.comment-news, .odd a.twit-reply{
   background: url(images/rep_ico_gr.gif) 0 0 no-repeat;
 }
+.links_stream .flag-wrapper{
+	float:right;
+	margin-left:5px;
+}
 .url-deal a{
   display: block;
   width: 14px;
@@ -1421,6 +1425,7 @@ a.facebook-makecomment-link, a.comment-news{
   text-indent: 3000em;
   overflow: hidden;
   margin-left: 10px;
+  margin-top:-1px;
 }
 a.twitter_favorite, a.flag-action, a.facebook_favorite{
   display: block;
