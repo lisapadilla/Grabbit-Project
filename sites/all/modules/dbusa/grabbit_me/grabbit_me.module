@@ -78,8 +78,23 @@ function grabbit_me_menu() {
    'access arguments' => array('access content'),
    );
 
+  $items['ajax/upload/file'] = array(
+     'page callback' => 'grabbit_upload_picture',
+     'access arguments' => array('access content'),
+   );
 
   return $items;
+}
+
+function grabbit_upload_picture(){
+	$uploaddir = base_path().'sites/default/files';  
+    $file = $uploaddir . basename($_FILES['uploadfile']['name']);   
+	   
+	 if (move_uploaded_file($_FILES['uploadfile']['tmp_name'], $file)) {  
+	   echo "success";  
+	 } else {  
+	     echo "error";  
+	 }
 }
 
 function grabbit_me_save_bio(){
@@ -1016,6 +1031,8 @@ function grabbit_me_get_my_profile(){
 	</div>
 	</div>
 	<div id="user-profile-form" style="display:none">
+	    <div id="upload" >Upload File</div><span id="status" ></span>    
+		<ul id="files" ></ul> 
 	  <form id="user-profile-ajax-form">
 	<div class="bio-item">    
 	<label>Display name:</label>
