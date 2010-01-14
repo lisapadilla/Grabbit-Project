@@ -3273,7 +3273,6 @@ div.navbar
 
 .tooltip span.tooltip{
     display:block;
-    position:absolute;
     top:0px; left:0;
 	padding: 15px 0 0 0;
 	margin-left:270px;
