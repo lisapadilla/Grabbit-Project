@@ -87,14 +87,10 @@ function grabbit_me_menu() {
 }
 
 function grabbit_upload_picture(){
-	$source = file_check_upload('uploadfile');
-	$dir = variable_get('file_directory_path', 'files');
-	if (file_save_upload($source,$dir, FALSE)) {
-	  print "success";  
-	}else{
-	  print "error";  
-	}
-	print "naranjas";
+	
+	$file = file_save_upload('uploadfile', $validators, $dest, FALSE);
+	print_r($file);
+	return; 
 }
 
 function grabbit_me_save_bio(){
