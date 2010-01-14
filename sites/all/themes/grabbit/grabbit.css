@@ -1414,8 +1414,8 @@ a.facebook-makecomment-link, a.comment-news{
 }
 .url-deal a{
   display: block;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 15px;
   background: url(images/various/dollar_ico.gif) 0 0 no-repeat;
   float: right;
   text-indent: 3000em;
@@ -1424,7 +1424,7 @@ a.facebook-makecomment-link, a.comment-news{
 }
 a.twitter_favorite, a.flag-action, a.facebook_favorite{
   display: block;
-  width: 9px;
+  width: 10px;
   height: 11px;
   float: right;
   background: url(images/star_ico.gif) 0 0 no-repeat;
@@ -2460,7 +2460,7 @@ div.messages, div.status, div.warning, div.error{
 	width:350px;
 }
 .tooltip-deal{
-	background:transparent url(images/ref_ico.gif) no-repeat scroll 0 0;
+	background:transparent url(images/tags_ico.gif) no-repeat scroll 0 0;
 	display:block;
 	float:right;
 	height:11px;
