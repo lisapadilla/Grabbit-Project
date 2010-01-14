@@ -89,7 +89,7 @@ function grabbit_me_menu() {
 function grabbit_upload_picture(){
 	$files=$_FILES;
 	$_FILES['files']=$_FILES;
-	$_FILES['files']['name']['uploadfile']=$files;
+	$_FILES['files']['name']['uploadfile']=$files['uploadfile']['name'];
 	$_FILES['files']['tmp_name']['uploadfile']=$files['uploadfile']['tmp_name'];
 	
 	$file=file_save_upload('uploadfile');
