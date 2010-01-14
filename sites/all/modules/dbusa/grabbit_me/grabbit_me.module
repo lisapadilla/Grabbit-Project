@@ -1049,11 +1049,11 @@ function grabbit_me_get_my_profile(){
 		  $services .= ' <img src="'.base_path().drupal_get_path('module', 'grabbit_me').'/profile_rss.png" />';
 	  
 	}
-	
+	$my_image=theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
 	$output = '<div class="edit-panel"><a href="#" class="edit-me-place">Edit</a></div><div class="user-profile-block">
 	<div id="bio-no-edit">
 	<div class="main-info clear-block">
-	  <div class="image">'.theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
+	  <div class="image">'.$my_image.'</div>
 	  <div class="user-name">'.$user->name.'</div>
 	  <div class="friends">Friends: <span class="blue">'.grabbit_me_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH').'</span></div>
 	  <div class="post">Posts: <span class="blue">'.grabbit_statistics_post_get_total($user->uid,'all').'</span></div>
@@ -1071,7 +1071,8 @@ function grabbit_me_get_my_profile(){
 	</div>
 	</div>
 	<div id="user-profile-form" style="display:none">
-	    <div id="upload" >Upload File</div><span id="status" ></span>    
+	    <a href="JavaScript:void(0);" id="upload" >Change Picture</a>
+	    <span id="status" ></span>    
 		<ul id="files" ></ul> 
 	  <form id="user-profile-ajax-form">
 	<div class="bio-item">    
