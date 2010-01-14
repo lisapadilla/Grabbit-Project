@@ -96,11 +96,21 @@ function grabbit_upload_picture(){
 	$_FILES['files']['tmp_name']['uploadfile']=$files['uploadfile']['tmp_name'];
 	
 	$file=file_save_upload('uploadfile');
-	
-	if($file){
+	print_r($file);
+/*	if($file){
 		file_set_status(&$file, 1);
 		$profile = content_profile_load('profile', $user->uid);
 		if($profile->nid){
+			$profile->field_profile_picture[0]=array(
+                    'fid' => $file->fid,
+                    'list' => 1,
+                    'uid' => $user->uid,
+                    'filename' => $file->filename,
+                    'filepath' => $file->filepath,
+                    [filemime] => image/gif
+                    [filesize] => 2196
+                    [status] => 1
+                    [timestamp] => 1255580447
 
 		}else{
 			$profile = new StdClass();
@@ -109,8 +119,8 @@ function grabbit_upload_picture(){
 			$profile->title=$user->name;
 		}
 
-		node_save($profile);
-		return "success";
+*/		//node_save($profile);
+		print "success";
 	}
 	
 	
@@ -1025,7 +1035,7 @@ function grabbit_me_get_my_profile(){
 		  $services .= ' <img src="'.base_path().drupal_get_path('module', 'grabbit_me').'/profile_rss.png" />';
 	  
 	}
-	print_r($profile);
+	
 	$output = '<div class="edit-panel"><a href="#" class="edit-me-place">Edit</a></div><div class="user-profile-block">
 	<div id="bio-no-edit">
 	<div class="main-info clear-block">
