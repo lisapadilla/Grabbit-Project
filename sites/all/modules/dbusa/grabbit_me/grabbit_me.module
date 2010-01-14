@@ -306,7 +306,7 @@ function grabbit_me_show_activity(){
 	$tags_feeds=explode(",",$_GET['feeds']);
 
     foreach($tags_feeds as $tag_1){
-	
+	print "<br>".$tag_1. "-> ";
 	    $try=taxonomy_get_term_by_name(trim($tag_1));
 	    if($try->vid){
 		  print_r($try);		  
