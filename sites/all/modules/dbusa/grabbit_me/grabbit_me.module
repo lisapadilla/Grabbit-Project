@@ -132,7 +132,9 @@ function grabbit_upload_picture(){
 		}
 
 		node_save($profile);
-		print $profile->field_profile_picture[0]['filepath'];
+		$response['left']=theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
+		$response['top']=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image');
+		print json_encode($response);
 	}else{
 		
 	}
