@@ -311,8 +311,7 @@ function grabbit_me_show_activity(){
 	    if($try->vid){
 		  print_r($try);		  
 	    }else{
-		   print_r($try); 
-		  if(is_array($try)){
+		  if(count($try)){
 		 	print_r($try[0]->tid);
 		  }else{
 			
