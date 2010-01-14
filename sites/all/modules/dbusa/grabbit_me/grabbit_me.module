@@ -311,6 +311,7 @@ function grabbit_me_show_activity(){
 	    if($try->vid){
 		  print_r($try);		  
 	    }else{
+		  print "segundo else";
 		  if(is_array($try)){
 		 	print_r($try[0]->tid);
 		  }else{
@@ -319,7 +320,6 @@ function grabbit_me_show_activity(){
 		    taxonomy_save_term($edit);
 		    $tid = $edit['tid'];
 		    // associate node and term
-		    
 		    //$profile->taxonomy[]=$edit['tid'];
 		    print "creado";
 		    print_r($edit);
