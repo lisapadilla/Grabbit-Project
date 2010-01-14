@@ -2705,6 +2705,10 @@ div.messages, div.status, div.warning, div.error{
 	float: left;
 	margin-right: 15px;
 }
+#user-profile-form #upload{
+	color:#317CF9;
+	font-weight:bold
+}
 .block-grabbit_me .content .main-info
 {
 	background-color: #E6EAED;
