@@ -81,7 +81,8 @@ Drupal.behaviors.editables = function(){
      var status=$('#status');  
      new AjaxUpload(btnUpload, {  
          action: Drupal.settings.basePath+'ajax/upload/file',  
-         //Name of the file input box  
+         //Name of the file input box
+         responseType:'json',  
          name: 'uploadfile',  
          onSubmit: function(file, ext){  
              if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){  
