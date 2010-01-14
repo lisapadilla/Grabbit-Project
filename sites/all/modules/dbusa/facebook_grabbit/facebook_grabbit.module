@@ -1836,7 +1836,7 @@ function facebook_grabbit_tags_form(){
 }
 
 function _news_theme($comments,$node,$matches=NULL){
-	
+	print_r($matches);
 	$comments_output = '<div class="news-comments">';
 	
 	while ($item = db_fetch_object($comments)){
