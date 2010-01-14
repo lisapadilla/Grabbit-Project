@@ -1025,7 +1025,7 @@ function grabbit_me_get_my_profile(){
 		  $services .= ' <img src="'.base_path().drupal_get_path('module', 'grabbit_me').'/profile_rss.png" />';
 	  
 	}
-	
+	print_r($profile);
 	$output = '<div class="edit-panel"><a href="#" class="edit-me-place">Edit</a></div><div class="user-profile-block">
 	<div id="bio-no-edit">
 	<div class="main-info clear-block">
