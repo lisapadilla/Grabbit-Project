@@ -1179,7 +1179,8 @@ function grabbit_me_get_my_tags(){
 	<div id="user-tags-form" style="display:none">
 	  <form id="user-tags-ajax-form">
 	
-	<div class="tags-item">    
+	<div class="tags-item">
+	<label>A comma-separated list</label>    
 	<label>Hobbies:</label>
 	    <textarea id="hobbies" name="hobbies">'.implode(', ',$hobbies).'</textarea>
 	</div>
