@@ -182,6 +182,13 @@ function grabbit_me_save_tags(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
 	
+	if(!$profile->nid){
+		$profile = new StdClass();
+		$profile->type = 'profile';
+		$profile->uid=$user->uid;
+		$profile->title=$user->name;
+	}
+	
     $tags1=$_GET['hobbies'];
     $tags2=$_GET['topics'];
     $tags3=$_GET['interests'];
