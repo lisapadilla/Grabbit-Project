@@ -1,14 +1,14 @@
 Drupal.behaviors.editables = function(){
 	
 	$(".edit-me-place").click(function (){
-		$("#bio-no-edit").slideToggle();
-		$("#user-profile-form").slideToggle();
+		$("#bio-no-edit").slideToggle("fast");
+		$("#user-profile-form").slideToggle("fast");
 		return false;
 	});
 	
 	$("#bio-cancel").click(function (){
-		$("#bio-no-edit").slideToggle();
-		$("#user-profile-form").slideToggle();
+		$("#bio-no-edit").slideToggle("fast");
+		$("#user-profile-form").slideToggle("fast");
 		return false;
 	});
 	
@@ -29,8 +29,8 @@ Drupal.behaviors.editables = function(){
 				$(".other-info .city").html(city);
 				$(".other-info .bio").html(bio);
 				$(".other-info .display").html("<strong>"+name+"</strong>");
-				$("#bio-no-edit").slideToggle();
-				$("#user-profile-form").slideToggle();
+				$("#bio-no-edit").slideToggle("fast");
+				$("#user-profile-form").slideToggle("fast");
 			}else{
 				alert("Problem connecting with the server, please try to update your settings latter.");
 			}
@@ -40,14 +40,14 @@ Drupal.behaviors.editables = function(){
 	});
 	
 	$("#edit-user-tags").click(function (){
-		$("#tags-info").slideToggle();
-		$("#user-tags-form").slideToggle();
+		$("#tags-info").slideToggle("fast");
+		$("#user-tags-form").slideToggle("fast");
 		return false;
 	});
 	
 	$("#tags-cancel").click(function (){
-		$("#tags-info").slideToggle();
-		$("#user-tags-form").slideToggle();
+		$("#tags-info").slideToggle("fast");
+		$("#user-tags-form").slideToggle("fast");
 		return false;
 	});
 	
@@ -65,8 +65,8 @@ Drupal.behaviors.editables = function(){
 				$("#tags-info .topics").html("<h3>Topics: </h3>"+topics); 
 				$("#tags-info .interests").html("<h3>Interests: </h3>"+interests);
 				
-				$("#tags-info").slideToggle();
-				$("#user-tags-form").slideToggle();
+				$("#tags-info").slideToggle("fast");
+				$("#user-tags-form").slideToggle("fast");
 				
 			}else{
 				alert("Problem connecting with the server, please try to update your settings latter.");
@@ -97,8 +97,8 @@ Drupal.behaviors.editables = function(){
              //Add uploaded file to list  
              if(response){
                  $('.image').html(response);  
-                 $("#bio-no-edit").slideToggle();
-				 $("#user-profile-form").slideToggle();
+                 $("#bio-no-edit").slideToggle("fast");
+				 $("#user-profile-form").slideToggle("fast");
              } else{  
                  //$('<li></li>').appendTo('#files').text(response).addClass('error');
                  alert("There was a problem connecting with the server, try again latter");  
