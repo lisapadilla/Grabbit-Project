@@ -282,7 +282,7 @@ function grabbit_me_show_activity(){
 	node_save($profile);
 	//print_r($user);;
 	*/
-print_r($profile);
+print_r($profile->field_profile_picture);
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
