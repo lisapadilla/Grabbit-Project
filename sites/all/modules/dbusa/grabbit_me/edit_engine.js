@@ -99,7 +99,7 @@ Drupal.behaviors.editables = function(){
                  $('<li></li>').appendTo('#files').html('<img src="./uploads/'+file+'" alt="" /><br />'+file).addClass('success');  
              } else{  
                  //$('<li></li>').appendTo('#files').text(response).addClass('error');
-alert(response);  
+                 alert(response);  
              }  
          }  
      });
