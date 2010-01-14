@@ -87,17 +87,35 @@ function grabbit_me_menu() {
 }
 
 function grabbit_upload_picture(){
+	
+	global $user;
+	
 	$files=$_FILES;
 	$_FILES['files']=$_FILES;
 	$_FILES['files']['name']['uploadfile']=$files['uploadfile']['name'];
 	$_FILES['files']['tmp_name']['uploadfile']=$files['uploadfile']['tmp_name'];
 	
 	$file=file_save_upload('uploadfile');
-	print_r($file);
 	
+	if($file){
+		file_set_status(&$file, 1);
+		$profile = content_profile_load('profile', $user->uid);
+		if($profile->nid){
 
+		}else{
+			$profile = new StdClass();
+			$profile->type = 'profile';
+			$profile->uid=$user->uid;
+			$profile->title=$user->name;
+		}
+
+		node_save($profile);
+		return "success";
+	}
+	
+	
+	
 }
-
 
 function grabbit_me_save_bio(){
 	global $user;
@@ -264,11 +282,7 @@ function grabbit_me_show_activity(){
 	node_save($profile);
 	//print_r($user);;
 	*/
-	$tag_1=' Rams';
-	 $try=taxonomy_get_term_by_name(trim($tag_1));
-	  if(is_array($try)){
-	    print_r($try[0]);	
-	  }
+print_r($profile);
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
