@@ -2696,8 +2696,9 @@ div.messages, div.status, div.warning, div.error{
 }
 .block-grabbit_me .user-tags-block div
 {
-	padding: 10px, 8px;
-	padding-bottom: 0px;
+	padding-bottom:10px;
+	padding-left:8px;
+	padding-right:10px;
 }
 .block-grabbit_me .content .main-info .image
 {
