@@ -35,12 +35,12 @@ function easylogin_menu() {
   );
 
     // admin settings path
-/*  $items['admin/settings/easylogin'] = array(
+  $items['admin/settings/easylogin'] = array(
     'title' => 'EasyLogin Settings',
     'description' => t('Options for Easy Login.'),
     'access arguments' => array('administer site configuration'),
     'page callback' => 'easylogin_admin_settings',
-  );*/
+  );
 
 
   return $items;
