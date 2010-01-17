@@ -1,0 +1,282 @@
+<?php
+// $Id: easylogin.module,v 1.12 2009/03/11 00:40:46 george2 Exp $
+
+/**
+ * @file
+ * Easy login - allows users to log in to site from an URL </shudders>.
+ */
+
+/**
+ * HOOKS *********************************************************
+ */
+
+/**
+ * Implementation of hook_menu()
+ */
+function easylogin_menu() {
+  $items = array();
+  // CALLBACK to handle login url
+  $items['easylogin/%'] = array(
+    'title' => 'Easy Login',
+    'access callback' => TRUE,
+    'page arguments' => array(1),
+    'page callback' => '_easylogin_login',
+    'type' => MENU_CALLBACK,
+  );
+  
+  // LOCAL TASK CALLBACK for user page
+  $items['user/%/easylogin'] = array(
+    'title' => 'Easy Login',
+    'access callback' => '_easylogin_access_profile',
+    'access arguments' => array(1),
+    'page callback' => '_easylogin_userdata',
+    'page arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+  );
+
+    // admin settings path
+/*  $items['admin/settings/easylogin'] = array(
+    'title' => 'EasyLogin Settings',
+    'description' => t('Options for Easy Login.'),
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'easylogin_admin_settings',
+  );*/
+
+
+  return $items;
+}
+
+/**
+ * Implementation of hook_perm()
+ */
+function easylogin_perm(){
+  return array(
+    'login from url',
+    'reset own url',
+  );
+}
+
+/**
+ * Implementation of hook_user().
+ */
+function easylogin_user($op, &$edit, &$account, $category = NULL){
+  switch ($op){
+    // new user added...
+    case 'insert':
+      include_once drupal_get_path('module', 'easylogin') . '/easylogin_admin.inc';
+      $url = easylogin_hash($account->uid);
+      db_query("INSERT INTO {easylogin_urls} (uid, url) VALUES (%d, '%s')", $account->uid, $url);
+      
+      // only show this message to users who can administer users to not bother new users
+      global $user;
+      if (user_access('administer users')) {
+        drupal_set_message(t('Easylogin URL for user ' . $account->name . ' has been created.'));
+      }
+      break;
+
+    // if user is changed from  active to blocked or vice versa...
+    case 'validate':
+      // active to blocked
+      if ($edit['_account']->status == 1 && $edit['status'] == 0 && db_result(db_query("SELECT 1 FROM {easylogin_urls} WHERE uid = %d", $account->uid))) {
+        db_query("DELETE FROM {easylogin_urls} WHERE uid = %d", $account->uid);
+        drupal_set_message(t('Easylogin URL for user ' . $account->name . ' has been removed.'));
+      }
+      // blocked to active
+      else if ($edit['_account']->status == 0 && $edit['status'] == 1 && !db_result(db_query("SELECT 1 FROM {easylogin_urls} WHERE uid = %d", $account->uid))) {
+        include_once drupal_get_path('module', 'easylogin') . '/easylogin_admin.inc';
+        $url = easylogin_hash($account->uid);
+        db_query("INSERT INTO {easylogin_urls} (uid, url) VALUES (%d, '%s')", $account->uid, $url);
+        drupal_set_message(t('Easylogin URL for user ' . $account->name . ' has been created.'));
+      }
+      break;
+
+    // user removed
+    case 'delete':
+      db_query("DELETE FROM {easylogin_urls} WHERE uid = %d", $account->uid);
+      drupal_set_message(t('Easylogin URL for user ' . $account->name . ' has been removed.'));
+      break;
+  
+    // add easylogin url to user object if exists
+    case 'load':
+      $easylogin_url = db_result(db_query("SELECT url FROM {easylogin_urls} WHERE uid = %d", $account->uid));
+      if ($easylogin_url){
+        global $base_url;
+        $account->easylogin_url = $base_url . '/easylogin/' . $easylogin_url;
+      }
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_mail().
+ */
+function easylogin_mail($key, &$message, $params){
+  $language = $message['language'];
+  $variables = user_mail_tokens($params['account'], $language);
+  $variables['!easylogin_fullurl'] = $params['easylogin_fullurl'];
+
+  switch($key){
+    case 'your_url':
+      $message['subject'] = t('Log in URL from !site', $variables, $language->language);
+      $message['body'] = t("Dear !username\n\nYour login URL is:\n!easylogin_fullurl", $variables, $language->language);
+      break;
+      
+    case 'changed_url':
+      $message['subject'] = t('New log in URL from !site', $variables, $language->language);
+      $message['body'] = t("Dear !username\n\nYour login URL has been reset and is:\n!easylogin_fullurl\n\nThanks", $variables, $language->language);
+      break;      
+  }
+}
+
+/**
+ * CALLBACKS *************************************************************************************
+ */
+ 
+ /**
+ * _easylogin_login
+ * check url data, and handle as appropriate
+ */
+function _easylogin_login($code){
+  // if login destination module is installed, then set _GET['destination'] to ensure redirect
+  if (module_exists('login_destination')){
+    $_GET['destination'] = $_GET['q'];
+  }
+    
+  $resultuid = db_result(db_query("SELECT uid FROM {easylogin_urls} WHERE url = '%s'", $code));
+  
+  if ($resultuid && ($account = user_load($resultuid)) && user_access('login from url', $account)) {
+    user_external_login($account);    
+    drupal_goto($_REQUEST['destination']);
+    exit;
+  }
+  else{
+    drupal_not_found();
+    exit;
+  }
+}
+ 
+ /**
+ * access check that current user can access login link from url
+ */
+function _easylogin_access_profile($uid){
+  global $user;
+  if ($uid == 1 || user_is_anonymous() || !user_access('login from url') || ($user->uid != $uid && !user_access('administer users'))){
+    return FALSE;
+  }
+  return TRUE;
+}
+
+/**
+ * _easylogin_userdata
+ * show relevant data to user in local task in user account pages
+ *
+ */
+function _easylogin_userdata($uid){
+  drupal_set_title('Easy Login');
+  $account = user_load($uid);
+
+  $url = db_result(db_query("SELECT url FROM {easylogin_urls} WHERE uid = %d", $uid));
+  
+  global $base_url;
+  $fullurl = $base_url . '/easylogin/' . $url;
+
+  $content = '<p>' . t('This is your private URL which allows you to quickly and easily log in without entering your details into a login box. Please keep this URL safe and secure.') . '</p>';
+  $content .= '<p>' . t('Your Login URL is:') . ' ' . $fullurl . '</p>';
+
+  if (user_access('reset own url') || user_access('administer users')){
+    $content .= drupal_get_form('_easylogin_userform', $uid, $url);  
+  }
+
+  return $content;
+}
+
+
+/**
+ * FORM HANDLING *******************************************************************
+ */ 
+ 
+ /**
+ * _easylogin_userform
+ * build form for user to reset url
+ */
+function _easylogin_userform($form_state, $uid, $url){
+  $form = array();
+  $form['#validate'][] = '_easylogin_userform_validate';
+  $form['#submit'][] = '_easylogin_userform_submit';
+
+  $form['easylogin'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Reset URL',
+    '#description' => t('Reset the url to another randomly generated url by pressing the <em>Reset URL</em> button. This will email you with a new copy of the link for your safekeeping.'),
+  );
+  $form['easylogin']['sendemail'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Email new URL',
+    '#default_value' => FALSE,
+  );
+  $form['easylogin']['reseturl'] = array(
+    '#type' => 'submit',
+    '#value' => 'Reset URL',
+  );
+  return $form;
+}
+
+function _easylogin_userform_validate(&$form, $form_state){
+  $url = db_result(db_query("SELECT url FROM {easylogin_urls} WHERE uid = %d", $form['#parameters'][2]));
+  
+  if ($url != $form['#parameters'][3]){
+    return FALSE;
+  }  
+  return TRUE;
+}
+
+function _easylogin_userform_submit(&$form, $form_state){
+  include_once drupal_get_path('module', 'easylogin') . '/easylogin_admin.inc';
+
+  $url = easylogin_hash($form['#parameters'][2]);
+  db_query("UPDATE {easylogin_urls} SET url = '%s' WHERE uid = %d", $url, $form['#parameters'][2]);
+  drupal_set_message(t('Your login URL has been reset.'));
+
+  if ($form_state['values']['sendemail']) {
+    // get email address of current user
+    $account = user_load(arg(1));
+    drupal_mail('easylogin', 'changed_url', $account->mail, user_preferred_language($account), array('account' => $account, 'easylogin_fullurl' => $account->easylogin_url));
+    drupal_set_message(t('Your new login URL has been emailed to you.'));
+  }
+}
+
+/**
+ * set up admin options
+ */
+/*
+function easylogin_admin_settings(){
+  drupal_set_title("EasyLogin Settings");
+  
+  $content = '<h4>' . t('Email All Links To Users') . '</h4>';
+  $content .= '<p>' . t('Email links to those users who have the <em>login from url</em> permission. Warning! If you only want to email one or a few users, navigate to their profile, and reset their password which will send out an email. Any user with the <em>administer users</em> will be able to navigate to a users profile and reset the login url.') . '</p>';
+  
+  $content .= drupal_get_form('_easylogin_admin_emailallform');
+  
+  return $content;
+}
+*/
+/*
+function _easylogin_admin_emailallform($form_state){  
+  $form = array();
+  $form['#submit'][] = '_easylogin_admin_emailallform_submit';
+  $form['email_all_button'] = array(
+    '#type' => 'submit',
+    '#value' => 'Email all users',  
+  );
+  return $form;
+}
+
+function _easylogin_admin_emailallform_submit(&$form, $form_state){
+  // email all users  
+  //drupal_set_message(t('All users have been emailed their links'));
+}
+
+function _easylogin_admin_emailadd_email(){
+
+}
+*/

@@ -1,0 +1,60 @@
+<?php
+/**
+ * file
+ * set up random string for path, and tidy up on uninstall
+ */
+ 
+function easylogin_install(){
+  // create table to store random links for user
+  drupal_install_schema('easylogin');
+
+  $result = db_query('SELECT uid FROM {users} WHERE status != 0 AND access != 0 AND uid > 1');
+  
+  while ($account = db_fetch_object($result)) {
+    $uid = $account->uid;
+   
+    include_once drupal_get_path('module', 'easylogin') . '/easylogin_admin.inc';
+    
+    $salt = easylogin_salt();
+    $url = easylogin_hash($account->uid, $salt);
+
+    db_query("INSERT INTO {easylogin_urls} (uid, url) VALUES (%d, '%s')", $uid, $url);
+  }
+
+  drupal_set_message('EasyLogin has been installed. Please give the necessary user roles the <em>login from url</em> permission.');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+ // should i delete unwanted permissions?
+function easylogin_uninstall(){
+  drupal_uninstall_schema('easylogin');
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function easylogin_schema(){
+  $schema['easylogin_urls'] = array(
+    'fields' => array(
+      'uid' => array(
+        'description' => t('The {user}.uid for which this link is for.'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      
+      'url' => array(
+        'description' => t('The url for the user to login with.'),
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'tiny',
+      ),
+    ),
+    
+    'primary key' => array('uid', 'url_index' => array('url', 40)),
+);
+  
+  return $schema;
+}

@@ -1,0 +1,12 @@
+; $Id: easylogin.info,v 1.2 2009/02/21 14:33:49 george2 Exp $
+name = Easylogin
+description = Login users from a secret URL.
+core = 6.x
+package = Other
+
+; Information added by drupal.org packaging script on 2009-03-11
+version = "6.x-1.2"
+core = "6.x"
+project = "easylogin"
+datestamp = "1236732323"
+
