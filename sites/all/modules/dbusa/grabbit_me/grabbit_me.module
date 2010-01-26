@@ -1215,7 +1215,7 @@ function grabbit_me_user($op, &$edit, &$account, $category = NULL){
 }
 
 function grabbit_me_preprocess_user_profile(&$variables){
-	$variables['account']->content='nada';
+	print_r($variables);
 }
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
