@@ -300,12 +300,12 @@ function facebook_grabbit_facebook(){
 
   $facebook = new Facebook($api_key, $secret);
   $facebook->require_frame();
-  $user = $facebook->require_login();
+  $user = $facebook->rxequire_login();
 
   $duid=$_GET["duid"];
 
   if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access") || !$facebook->api_client->users_hasAppPermission("read_stream") || !$facebook->api_client->users_hasAppPermission("publish_stream")){  
-	$output .= "To start using Grabbit for reading and updating your Facebook Stream you have to grant permissions for the grabbit application:<br>";
+	$output .= "To starts using Grabbit for reading and updating your Facebook Stream you have to grant permissions for the grabbit application:<br>";
     $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream, publish_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status and read your stream!</strong></fb:prompt-permission>';  
     $visibility = "none";  
   }else{
