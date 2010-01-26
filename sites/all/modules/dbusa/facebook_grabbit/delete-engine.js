@@ -6,7 +6,7 @@ Drupal.behaviors.grabbitDeleteFacebook = function (context) {
 	if(confirm==false){
 	  return 0;	// return empty 
 	}
-	$('.views-field-action-link-requestee').html('Removing... this may take several minutes, do not close this window. please wait...');
+	$('.views-field-action-link-requestee').html('<img src="'+Drupal.settings.basePath+'sites/all/modules/dbusa/facebook_grabbit/working.gif"> Removing... this may take several minutes, do not close this window. please wait...');
 	$.get(Drupal.settings.basePath+"facebook/remove",{panel:panel},function(data){
 		if (data){
 			$('.views-field-action-link-requestee').html('Your facebook account has been removed');
