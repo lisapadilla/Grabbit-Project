@@ -150,7 +150,7 @@ function oauth_twitter_remove(){
 		      node_delete($n->nid);
 		      $count++;
 		    }
-		    
+		    drupal_get_messages($type = NULL, $clear_queue = TRUE);
 		    print "finished";
 
 }
