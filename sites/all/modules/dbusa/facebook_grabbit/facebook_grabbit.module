@@ -348,7 +348,7 @@ function facebook_grabbit_remove(){
 		    $aquery = db_query("SELECT n.nid FROM {node} n WHERE n.type = 'facebook' AND n.uid=%d", $user->uid);
             ini_set("memory_limit","348M");
 			ini_set('max_execution_time', 500);
-		
+		print "SELECT n.nid FROM {node} n WHERE n.type = 'facebook' AND n.uid=".$user->uid;
 		    while ($n = db_fetch_object($aquery)) {
 			print_r($n);
 			print "<br>";
