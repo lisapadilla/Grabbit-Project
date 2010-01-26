@@ -355,6 +355,8 @@ function facebook_grabbit_remove(){
 		    }
 		    drupal_set_message( 'Your facebook account has been deleted from Grabbit. '.$count);
 		    drupal_goto('user/me/edit/facebook');
+		
+		    return "finished";
 
 }
 
