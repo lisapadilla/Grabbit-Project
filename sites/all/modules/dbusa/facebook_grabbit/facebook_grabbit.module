@@ -347,16 +347,14 @@ function facebook_grabbit_remove(){
 		    $aquery = db_query("SELECT n.nid FROM {node} n WHERE n.type = 'facebook' AND n.uid=%d", $user->uid);
             ini_set("memory_limit","348M");
 			ini_set('max_execution_time', 500);
-		    $oun=0;
+		    
 		    while ($n = db_fetch_object($aquery)) {
-			$oun++;
 		      //set_time_limit(5);
-		      //node_delete($n->nid);
+		      node_delete($n->nid);
 		    }
-print $oun;
-		    //drupal_set_message( 'Your facebook account has been deleted from Grabbit.');
-		    //drupal_goto('user/me/edit/facebook');
-		
+
+		    drupal_set_message( 'Your facebook account has been deleted from Grabbit.');
+		    drupal_goto('user/me/edit/facebook');
 
 }
 
