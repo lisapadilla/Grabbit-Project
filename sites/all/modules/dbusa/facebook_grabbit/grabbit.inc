@@ -26,6 +26,7 @@ function grabbit_facebook_account($account){
 			  <a class="facebook-story-name" href="#"><span class="facebook-user-name">'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'</span></a>
 			<div class="facebook-post-body">
 			  <div class="facebook-post-inside-body">You have a facebook account with grabbit</div>
+			  <div class="views-field-action-link-requestee">'.l('Remove facebook account from grabbit','facebook/remove').'</div>
 			</div>
 			</div>
 			</div>';
