@@ -19,6 +19,12 @@ function oauth_twitter_menu()
     'type' => MENU_CALLBACK
   );
 
+  $items['twitter/remove'] = array(  
+    'page callback' => 'oauth_twitter_remove', 
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+
   $items['application/ajustes'] = array( 
     'title' => 'Grabbit application', 
     'page callback' => 'oauth_twitter_ajuste', 
@@ -60,20 +66,6 @@ function oauth_twitter_user($op, &$edit, &$account, $category = NULL) {
 function oauth_twitter_ajuste(){
 	variable_set('cron_semaphore', 0);
 	watchdog("grabbit", "Cron has been liberated");
-/*	
-    db_query("DELETE  from feedapi_mapper where nid =138016");
-    db_query("DELETE  from feedapi_mapper where nid =138024");
-db_query("DELETE  from feedapi_mapper where nid =138190");
-db_query("DELETE  from feedapi_mapper where nid =138193");
-db_query("DELETE  from feedapi_mapper where nid =138231");
-db_query("DELETE  from feedapi_mapper where nid =138238");
-db_query("DELETE  from feedapi_mapper where nid =138246");
-db_query("DELETE  from feedapi_mapper where nid =138315");
-db_query("DELETE  from feedapi_mapper where nid =138358");
-db_query("DELETE  from feedapi_mapper where nid =138380");
-db_query("DELETE  from feedapi_mapper where nid =139347");
-db_query("DELETE  from feedapi_mapper where nid =139402");
-*/
 }
 function oauth_twitter_page(){
 	
@@ -121,6 +113,7 @@ function oauth_twitter_account(){
 		          <a class="twitter-name-link" href="#">'.$twitterInfo->screen_name.'</a>
 		          <div class="twitter-body">
 		            <div class="twitter-body-contains">You have a twitter account with grabbit</div>
+		            <div class="views-field-action-link-requestee" id="removing-tw"><a href="#">Remove twitter account from grabbit</a></div>
 		          </div>
 				</div>';
 	
@@ -136,6 +129,25 @@ function oauth_twitter_account(){
     }
 
 	return $output;
+}
+
+function oauth_twitter_remove(){
+	global $user;
+	
+	db_query("DELETE FROM {oauth_twitter} WHERE uid =%d",$user->uid);	
+	    
+		    $aquery = db_query("SELECT n.nid FROM {node} n WHERE n.type = 'twitter' AND n.uid=%d ORDER BY n.created DESC LIMIT 500", $user->uid);
+            ini_set("memory_limit","348M");
+			ini_set('max_execution_time', 500);
+		    $count = 0;
+		    while ($n = db_fetch_object($aquery)) {
+		      //set_time_limit(5);
+		      node_delete($n->nid);
+		      $count++;
+		    }
+		    
+		    return "finished";
+
 }
 
 function oauth_twitter_save_config($user,$config){
