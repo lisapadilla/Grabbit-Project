@@ -6,6 +6,9 @@ function grabbit_facebook_account($account){
 	require_once("facebook/facebook_desktop.php");
 	include("facebook/config.php");
 	
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/delete-engine.js', $type = 'module');	
+	
+	
 	global $user;
 	
 	$fuser = facebook_grabbit_get_fid($user->uid);
