@@ -101,6 +101,11 @@ function oauth_twitter_account(){
     $twitter_account = oauth_twitter_get_uid($user->uid);
 
     if($twitter_account){
+	  	
+	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	  drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
+	  drupal_add_js(drupal_get_path('module', 'oauth_twitter').'/delete-oauth.js', $type = 'module');
+		
 	  $token = unserialize($twitter_account->config);
 	  $twitterObj->setToken($token['token'], $token['secret']);
 	  $twitterInfo= $twitterObj->get_accountVerify_credentials();
