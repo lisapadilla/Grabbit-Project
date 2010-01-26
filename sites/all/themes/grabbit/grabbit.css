@@ -3299,3 +3299,7 @@ div.navbar
 	color: #548912;
     background: url(images/buble/bubble.gif) no-repeat bottom;
 }
+#removing-fb{
+	color:red;
+	padding:10px;
+}
