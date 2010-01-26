@@ -350,12 +350,14 @@ function facebook_grabbit_remove(){
 			ini_set('max_execution_time', 500);
 		
 		    while ($n = db_fetch_object($aquery)) {
-		      set_time_limit(5);
+			print_r($n);
+			print "<br>";
+		      //set_time_limit(5);
 		      node_delete($n->nid);
 		    }
 
-		    drupal_set_message( 'Your facebook account has been deleted from Grabbit.');
-		    drupal_goto('user/me/edit/facebook');
+		    //drupal_set_message( 'Your facebook account has been deleted from Grabbit.');
+		    //drupal_goto('user/me/edit/facebook');
 		
 	}
 }
