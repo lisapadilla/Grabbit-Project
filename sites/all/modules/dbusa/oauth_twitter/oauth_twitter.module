@@ -151,7 +151,7 @@ function oauth_twitter_remove(){
 		      $count++;
 		    }
 		    
-		    return "finished";
+		    print "finished";
 
 }
 
