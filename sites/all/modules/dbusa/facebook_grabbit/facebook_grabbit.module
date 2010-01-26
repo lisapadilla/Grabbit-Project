@@ -354,7 +354,7 @@ function facebook_grabbit_remove(){
 		      $count++;
 		    }
 		   global $messages;
-		print_r($messages);
+		   print_r($messages);
 		    print "finished";
 
 }
