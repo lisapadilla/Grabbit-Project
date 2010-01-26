@@ -52,7 +52,7 @@ function grabbit_facebook_account($account){
 		$output = '<div class="facebook-details">You dont have a facebook account with grabbit
 		              '.l('<img src="'.base_path().drupal_get_path('module', 'facebook_grabbit').'/facebook/connect.gif">','http://apps.facebook.com/onixmedia/?duid='.$user->uid,array('html'=>TRUE,'attributes'=>array('target'=>'blank'))).'          
 		            </div>
-					  <div class="views-field-action-link-requestee" id="removing-fb"><a href="#">Remove facebook account from grabbit</a></div>';
+					';
 		
 	}
 	
