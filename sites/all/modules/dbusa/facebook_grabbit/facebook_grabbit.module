@@ -353,7 +353,7 @@ function facebook_grabbit_remove(){
 		      node_delete($n->nid);
 		      $count++;
 		    }
-		   global $messages
+		   global $messages;
 		print_r($messages);
 		    print "finished";
 
