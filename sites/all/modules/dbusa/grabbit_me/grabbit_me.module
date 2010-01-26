@@ -1215,11 +1215,14 @@ function grabbit_me_user($op, &$edit, &$account, $category = NULL){
 }
 
 function grabbit_me_preprocess_user_profile(&$variables){
-	unset($variables['content']);
-	unset($variables['account']->content);
-	unset($variables['profile']);
-	unset($variables['user_profile']);
-	print_r($variables);
+	global $user;
+	
+	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
+    if($status=='TW_BOTH'){
+	  $variables['user_profile']='La pagina de you';  
+    }
+	
+	
 }
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
