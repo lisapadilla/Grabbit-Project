@@ -353,9 +353,8 @@ function facebook_grabbit_remove(){
 		      node_delete($n->nid);
 		      $count++;
 		    }
-print $count;
-		    //drupal_set_message( 'Your facebook account has been deleted from Grabbit. '.$count);
-		   // drupal_goto('user/me/edit/facebook');
+		    drupal_set_message( 'Your facebook account has been deleted from Grabbit. '.$count);
+		    drupal_goto('user/me/edit/facebook');
 
 }
 
