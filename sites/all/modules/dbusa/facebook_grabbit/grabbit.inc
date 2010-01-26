@@ -7,7 +7,8 @@ function grabbit_facebook_account($account){
 	include("facebook/config.php");
 	
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/delete-engine.js', $type = 'module');	
-	
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
 	
 	global $user;
 	
