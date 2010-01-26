@@ -29,6 +29,11 @@ function facebook_grabbit_menu () {
     'page callback' => 'facebook_grabbit_facebook_comment_submit_action', 
     'access arguments' => array('access content')
   );
+
+  $items['facebook/remove'] = array( 
+    'page callback' => 'facebook_grabbit_remove', 
+    'access arguments' => array('access content')
+  );
 	
   $items['facebook/getuserinfo'] = array( 
     'page callback' => '_get_current_user_info', 
@@ -332,6 +337,26 @@ function facebook_grabbit_facebook(){
 	</script>';
 
   print $output;
+}
+
+function facebook_grabbit_remove(){
+	global $user;
+	
+	if($fuser = facebook_grabbit_get_fid($user->uid)){
+		db_query("DELETE FROM {facebook_grabbit} WHERE uid=%d",$user->uid);	
+	    
+		    $aquery = db_query("SELECT n.nid FROM {node} n WHERE n.type = 'facebook' AND n.uid=%d", $user->uid);
+            ini_set("memory_limit","348M");
+			ini_set('max_execution_time', 500);
+		
+		    while ($n = db_fetch_object($aquery)) {
+		      set_time_limit(5);
+		      node_delete($n->nid);
+		    }
+
+		    drupal_set_message( 'Your facebook account has been deleted from Grabbit.');
+		
+	}
 }
 
 /**
