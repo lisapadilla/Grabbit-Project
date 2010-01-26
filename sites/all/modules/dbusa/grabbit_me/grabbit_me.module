@@ -1212,9 +1212,10 @@ function grabbit_me_user($op, &$edit, &$account, $category = NULL){
     if ($op == "login"){
         drupal_goto('user/me');
     }
-    if($op=='view'){
-	  print_r($edit);
-    }
+}
+
+function grabbit_me__preprocess_user_profile(&$variables){
+	print_r($variables);
 }
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
