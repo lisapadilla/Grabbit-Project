@@ -1212,6 +1212,10 @@ function grabbit_me_user($op){
     if ($op == "login"){
         drupal_goto('user/me');
     }
+    if($op=='view'){
+	global $user;  
+	print_r($user);
+    }
 }
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
