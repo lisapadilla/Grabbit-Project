@@ -1885,7 +1885,8 @@ function _news_theme($comments,$node,$matches=NULL){
 	    foreach($matches as $match){
 	      $why[]=$match->name;	
 	     }
-	    $text_why=implode(', ', $why);
+	    if(is_array($why))
+	      $text_why=implode(', ', $why);
 	   }
 	   $text_link=l('Edit tags','activity/updates');
 	   $text_explain='This deal matches your following tags:<br>';
