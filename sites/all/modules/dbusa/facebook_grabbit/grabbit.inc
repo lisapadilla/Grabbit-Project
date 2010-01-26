@@ -23,7 +23,7 @@ function grabbit_facebook_account($account){
 		try{
 		  
 		  $user_details = $facebook->api_client->users_getInfo($suser, 'last_name, first_name, pic_square '); 
-		
+		  if(is_array($user_details[0])):
 		  $output='<div id="fb_story_000000000" class="facebook-post clearfix even" style="display: block;">
 			<div class="facebook-post-header">
 			  <a class="facebook-story-pic" href="#"><span class="facebook-user-pic"><img width="48" src="'.$user_details[0]['pic_square'].'" alt="'.$user_details[0]['first_name'].' '.$user_details[0]['last_name'].'" class="facebook-image-s" target="_blank"/></span></a>
@@ -34,6 +34,7 @@ function grabbit_facebook_account($account){
 			</div>
 			</div>
 			</div>';
+			endif;
 			
 		}catch(FacebookRestClientException $e){
 			
