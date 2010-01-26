@@ -1214,7 +1214,7 @@ function grabbit_me_user($op, &$edit, &$account, $category = NULL){
     }
 }
 
-function grabbit_me__preprocess_user_profile(&$variables){
+function grabbit_me_preprocess_user_profile(&$variables){
 	print_r($variables);
 }
 
