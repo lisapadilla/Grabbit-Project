@@ -1219,21 +1219,8 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
-	  	$updates = grabbit_me_get_statuses_all($variables['account']->uid);
-
-		$output .='<div class="panels-controllers">
-				           <div id="panels-pager" class="panels-pager"></div>
-				           <a href="JavaScript:void(0);" class="move-left"></a>
-				           <a href="JavaScript:void(0);" class="move-right"></a>
-				           </div><div class="panel-grabbit suser-panels">
-				           <div class="panel-grabbit user-panel" id="panel-activity">
-				            <div class="panel-title clearfix">
-							  <div class="controller-top"> 
-							    <h3 class="title">Last Updates</h3>
-							  </div>
-							</div>'.$updates.'</div>';
-							
-	  $variables['user_profile']=$output;  
+	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
+	  $variables['user_profile']=$updates;  
     }
 	
 	
