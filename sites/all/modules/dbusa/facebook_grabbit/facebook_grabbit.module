@@ -354,7 +354,7 @@ function facebook_grabbit_remove(){
 		      $count++;
 		    }
 		   
-		    return "finished";
+		    print "finished";
 
 }
 
