@@ -1213,7 +1213,7 @@ function grabbit_me_user($op, &$edit, &$account, $category = NULL){
         drupal_goto('user/me');
     }
     if($op=='view'){
-	  print_r($account);
+	  print_r($edit);
     }
 }
 
