@@ -12,7 +12,31 @@ function grabbit_me_menu() {
 
   $items['you/updates'] = array( 
     'page callback' => 'grabbit_me_you_updates', 
-    'title' => 'Updates',
+    'title' => 'You Updates',
+    'access arguments' => array('access content')
+  );
+
+  $items['you/comments'] = array( 
+    'page callback' => 'grabbit_me_you_comments', 
+    'title' => 'You Comments',
+    'access arguments' => array('access content')
+  );
+
+  $items['you/friends'] = array( 
+    'page callback' => 'grabbit_me_you_friends', 
+    'title' => 'You Friends',
+    'access arguments' => array('access content')
+  );
+
+  $items['you/rss'] = array( 
+    'page callback' => 'grabbit_me_you_rss', 
+    'title' => 'You RSS',
+    'access arguments' => array('access content')
+  );
+
+  $items['you/mentions'] = array( 
+    'page callback' => 'grabbit_me_you_mentions', 
+    'title' => 'You Mentions',
     'access arguments' => array('access content')
   );
 
@@ -1275,6 +1299,70 @@ function grabbit_me_you_updates(){
 	}
 }
 
+function grabbit_me_you_comments(){
+	global $user;
+	
+	$friend = user_load(arg(2));
+	
+	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
+    if($status=='TW_BOTH'){
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Comments'); })",'inline');
+	  $output = theme_you_activity($friend->uid, $friend->name);
+	  $output .=grabbit_me_you_activity_comments($friend);
+	  return $output;
+	}else{
+		drupal_goto('users/'.$friend->name);
+	}
+}
+
+function grabbit_me_you_friends(){
+	global $user;
+	
+	$friend = user_load(arg(2));
+	
+	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
+    if($status=='TW_BOTH'){
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." added Friends'); })",'inline');
+	  $output = theme_you_activity($friend->uid, $friend->name);
+	  $output .=grabbit_me_you_activity_friends($friend);
+	  return $output;
+	}else{
+		drupal_goto('users/'.$friend->name);
+	}
+}
+
+function grabbit_me_you_rss(){
+	global $user;
+	
+	$friend = user_load(arg(2));
+	
+	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
+    if($status=='TW_BOTH'){
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." RSS'); })",'inline');
+	  $output = theme_you_activity($friend->uid, $friend->name);
+	  $output .=grabbit_me_you_activity_rss($friend);
+	  return $output;
+	}else{
+		drupal_goto('users/'.$friend->name);
+	}
+}
+
+function grabbit_me_you_mentions(){
+	global $user;
+	
+	$friend = user_load(arg(2));
+	
+	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
+    if($status=='TW_BOTH'){
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." mentions'); })",'inline');
+	  $output = theme_you_activity($friend->uid, $friend->name);
+	  $output .=grabbit_me_you_activity_mentions($friend);
+	  return $output;
+	}else{
+		drupal_goto('users/'.$friend->name);
+	}
+}
+
 function grabbit_me_you_activity_rendered($user){
 	
     // get statuses
@@ -1297,6 +1385,120 @@ function grabbit_me_you_activity_rendered($user){
     } 
     // end statuses
 
+    
+			$output .='<div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Last Updates</h3>
+						  </div>
+						</div>';
+			$output .=$updates;
+
+			
+			$output .='</div>';
+	
+
+  return $output;	
+}
+
+
+function grabbit_me_you_activity_comments($user){
+	
+	// get comments
+	$comm = grabbit_me_get_comments($user->uid,$limit=10);
+	if (!count($comm)){
+	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+	}else{
+	    $nod='even display';
+	  	foreach($comm as $comment){
+		  $item=unserialize($comment->extra);
+	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
+	      if($nod=='odd display'){
+		    $nod='even display';
+	      }else{
+		    $nod='odd display';
+	      }
+	    } 
+	}
+	// end comments
+	
+			$output .='<div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Comments</h3>
+						  </div>
+						</div>';
+			$output .=$comments;
+
+			
+			$output .='</div>';
+
+   return $output;
+	
+}
+
+function grabbit_me_you_activity_rss($user){
+	
+    $updates = grabbit_me_get_statuses_rss($user->uid);
+    
+			$output .='<div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Last Updates</h3>
+						  </div>
+						</div>';
+			$output .=$updates;
+
+			
+			$output .='</div>';
+	
+
+  return $output;	
+}
+
+function grabbit_me_you_activity_mentions($user){
+
+		// get mentions
+		$ment = grabbit_me_get_mentions($user->uid,$user->name);
+		if (!count($ment)){
+		  $mentions = '<div class="messages-status-updates">No mentions in grabbit yet</div>';
+		}else{
+		    $nod='even';
+		  	foreach($ment as $m_status){
+			  $item=unserialize($m_status->extra);
+
+		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
+		      if($nod=='odd'){
+			    $nod='even';
+		      }else{
+			    $nod='odd';
+		      }
+		    } 
+		}
+		// end mentions
+
+			$output .='<div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Mentions</h3>
+						  </div>
+						</div>';
+			$output .=$mentions;
+
+			
+			$output .='</div>';
+
+   return $output;
+	
+}
+
+function grabbit_me_you_activity_friends($user){
+	
+    $updates = grabbit_me_get_statuses_friends($user->uid);
     
 			$output .='<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
