@@ -3312,3 +3312,9 @@ div.navbar
 .profile-display #content-area .you-profile .odd{
 	background:#E6EAED none repeat scroll 0 0;
 }
+#content-area .you-tabs .tab a{
+	color:#FFFFFF;
+}
+#content-area .you-tabs .tab a.active{
+	color:#666;
+}
