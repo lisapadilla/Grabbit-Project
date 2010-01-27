@@ -1217,13 +1217,28 @@ function grabbit_me_user($op, &$edit, &$account, $category = NULL){
 function grabbit_me_preprocess_user_profile(&$variables){
 	global $user;
 	
+	if($user->uid==1):
+	
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
-	  //$variables['user_profile']=$updates;  
+	  $variables['user_profile']=theme_you_activity($variables['account']->uid).$updates;  
     }
+
+    endif;
 	
 	
+}
+
+function theme_you_activity($you){
+	$tabs='<div class="tabs"><ul class="tabs primary clear-block">
+	<li>'.l('<span class="tab">All Activity</span>','you/activity/'.$you,array('HTML'=>TRUE)).'</li>
+	<li>'.l('<span class="tab">Status updates</span>','you/updates/'.$you,array('HTML'=>TRUE)).'</li>
+	<li>'.l('<span class="tab">Comments</span>','you/comments/'.$you,array('HTML'=>TRUE)).'</li>
+	<li>'.l('<span class="tab">Added friends</span>','you/friends/'.$you,array('HTML'=>TRUE)).'</li>
+	<li>'.l('<span class="tab">Added RSS</span>','you/rss/'.$you,array('HTML'=>TRUE)).'</li>
+	<li>'.l('<span class="tab">Mentions</span>','you/mentions/'.$you,array('HTML'=>TRUE)).'</li>
+	</ul></div>';
 }
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
