@@ -3303,18 +3303,18 @@ div.navbar
 	color:red;
 	padding:10px;
 }
-#content-area div.you-tabs{
+.profile-extended-view #content-area div.you-tabs{
 	display:block;
 }
-.profile-display .profile{
+.profile-extended-view .profile{
 	padding:0px;
 }
-.profile-display #content-area .you-profile .odd{
+.profile-extended-view #content-area .you-profile .odd{
 	background:#E6EAED none repeat scroll 0 0;
 }
-#content-area .you-tabs .tab a{
+.profile-extended-view #content-area .you-tabs .tab a{
 	color:#FFFFFF;
 }
-#content-area .you-tabs .tab a.active{
+.profile-extended-view #content-area .you-tabs .tab a.active{
 	color:#666;
 }
