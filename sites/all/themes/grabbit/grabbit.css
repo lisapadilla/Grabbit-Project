@@ -3303,10 +3303,10 @@ div.navbar
 	color:red;
 	padding:10px;
 }
-.you-tabs{
+#content-area div.you-tabs{
 	display:block;
 }
-.profile-display .you-tabs{
+.profile-display .profile{
 	padding:0px;
 }
 .profile-display #content-area .you-profile .odd{
