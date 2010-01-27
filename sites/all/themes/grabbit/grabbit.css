@@ -2213,13 +2213,13 @@ margin-top:5px;
   font-size: 12px;
   line-height: 15px;
 }
-#content .node-type-news h1
+.node-type-news #content h1
 {
 	padding-left: 47px;
 	padding-right: 47px;
 	margin-bottom: 20px;
 }
-#content .node-type-news p
+.node-type-news #content p
 {
 	margin-bottom: 10px;
 }
