@@ -1235,7 +1235,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
 }
 
 function grabbit_me_preprocess(&$variables){
-  print_r($variables['extended_view']);
+  print_r($variables['user_profile']);
 }
 
 
