@@ -1266,9 +1266,11 @@ function grabbit_me_you_updates(){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
-	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); })",'inline');
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Updates'); })",'inline');
 	  $output = theme_you_activity($user->uid, $friend->name);
 	  return $output;
+	}else{
+		drupal_goto('users/'.$friend->name);
 	}
 }
 
