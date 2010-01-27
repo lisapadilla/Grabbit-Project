@@ -1223,7 +1223,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
     if($status=='TW_BOTH'){
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
 	  $variables['user_profile']='empty';//theme_you_activity($variables['account']->uid).$updates;  
-	  print_r($variables);
+	  
     }
 
     endif;
