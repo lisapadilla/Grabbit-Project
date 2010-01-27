@@ -1267,12 +1267,57 @@ function grabbit_me_you_updates(){
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Updates'); })",'inline');
-	  $output = theme_you_activity($user->uid, $friend->name);
+	  $output = theme_you_activity($friend->uid, $friend->name);
+	  $output .=grabbit_me_you_activity_rendered($friend);
 	  return $output;
 	}else{
 		drupal_goto('users/'.$friend->name);
 	}
 }
+
+function grabbit_me_you_activity_rendered($user){
+	
+    // get statuses
+    $statuses = grabbit_me_get_statuses($user->uid);
+    $profile = content_profile_load('profile', $user->uid);
+    $nod='even';
+    if(!count($statuses)){
+	  $updates = '<div class="messages-status-updates">You have no status updates in grabbit yet</div>';
+    }else{
+	  	foreach($statuses as $status){
+		  $item=unserialize($status->extra);
+	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	      if($nod=='odd'){
+		    $nod='even';
+	      }else{
+		    $nod='odd';
+	      }
+	    }
+	
+    } 
+    // end statuses
+
+    
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div><div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Last Updates</h3>
+						  </div>
+						</div>';
+			$output .=$updates;
+
+			
+			$output .='</div>';
+	
+
+  return $output;	
+}
+
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
 	if($form_id=='user_login'){
