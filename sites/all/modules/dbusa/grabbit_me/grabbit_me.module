@@ -1227,8 +1227,11 @@ function grabbit_me_preprocess_user_profile(&$variables){
     }
 
     endif;
-	
-	
+
+}
+
+function grabbit_me_preprocess_page(&$variables){
+	print_r($variables);
 }
 
 function theme_you_activity($you){
