@@ -1232,12 +1232,12 @@ function grabbit_me_preprocess_user_profile(&$variables){
 
 function theme_you_activity($you){
 	$tabs='<div class="tabs"><ul class="tabs primary clear-block">
-	<li>'.l('<span class="tab">All Activity</span>','you/activity/'.$you,array('HTML'=>TRUE)).'</li>
-	<li>'.l('<span class="tab">Status updates</span>','you/updates/'.$you,array('HTML'=>TRUE)).'</li>
-	<li>'.l('<span class="tab">Comments</span>','you/comments/'.$you,array('HTML'=>TRUE)).'</li>
-	<li>'.l('<span class="tab">Added friends</span>','you/friends/'.$you,array('HTML'=>TRUE)).'</li>
-	<li>'.l('<span class="tab">Added RSS</span>','you/rss/'.$you,array('HTML'=>TRUE)).'</li>
-	<li>'.l('<span class="tab">Mentions</span>','you/mentions/'.$you,array('HTML'=>TRUE)).'</li>
+	<li><span class="tab">'.l('All Activity','you/activity/'.$you,array('HTML'=>TRUE)).'</span></li>
+	<li><span class="tab">'.l('Status updates','you/updates/'.$you,array('HTML'=>TRUE)).'</span></li>
+	<li><span class="tab">'.l('Comments','you/comments/'.$you,array('HTML'=>TRUE)).'</span></li>
+	<li><span class="tab">'.l('Added friends','you/friends/'.$you,array('HTML'=>TRUE)).'</span></li>
+	<li><span class="tab">'.l('Added RSS','you/rss/'.$you,array('HTML'=>TRUE)).'</span></li>
+	<li><span class="tab">'.l('Mentions','you/mentions/'.$you,array('HTML'=>TRUE)).'</span></li>
 	</ul></div>';
 	
 	return $tabs;
