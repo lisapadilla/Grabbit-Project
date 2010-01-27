@@ -10,6 +10,11 @@ function grabbit_me_menu() {
     'access arguments' => array('access content')
   );
 
+  $items['you/updates'] = array( 
+    'page callback' => 'grabbit_me_you_updates', 
+    'access arguments' => array('access content')
+  );
+
   $items['activity/updates'] = array(
    'title' => 'Activity',
    'description' => t('Watch your activity.'),
@@ -1237,6 +1242,9 @@ function grabbit_me_preprocess_user_profile(&$variables){
 
 
 function theme_you_activity($you,$you_name){
+	
+	
+	
 	$tabs='<div class="tabs you-tabs"><ul class="tabs primary clear-block">
 	<li><span class="tab">'.l('All Activity','users/'.$you_name).'</span></li>
 	<li><span class="tab">'.l('Status updates','you/updates/'.$you).'</span></li>
@@ -1248,6 +1256,15 @@ function theme_you_activity($you,$you_name){
 	
 	return $tabs;
 	
+}
+
+function grabbit_me_you_updates(){
+	global $user;
+	
+	$friend = user_load(arg(2));
+	
+	$output = theme_you_activity($user->uid, $friend->name);
+	return $output;
 }
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
