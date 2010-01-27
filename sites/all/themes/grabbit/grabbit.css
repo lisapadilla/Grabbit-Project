@@ -2195,9 +2195,10 @@ margin-top:5px;
 .node-type-news .node-news
 {
 	color: #6C7885;
-	padding: 0 47px;
+	padding: 0 47px 20px;
 	font-size: 13px;
 	line-height: 16px;
+	border-bottom: 1px solid #6C7885;
 }
 .node-type-news .node-news img
 {
@@ -2225,7 +2226,6 @@ margin-top:5px;
 }
 .node-type-news .node-news a{
   color: #0073CF;
-  font-weight: bold;
 }
 .node-news ul.links{
   padding-top: 20px;
