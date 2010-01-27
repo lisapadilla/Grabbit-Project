@@ -12,6 +12,7 @@ function grabbit_me_menu() {
 
   $items['you/updates'] = array( 
     'page callback' => 'grabbit_me_you_updates', 
+    'title' => 'Updates',
     'access arguments' => array('access content')
   );
 
