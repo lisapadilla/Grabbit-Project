@@ -1221,6 +1221,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
+	print_r($variables);
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
 	  $variables['user_profile']=theme_you_activity($variables['account']->uid);
 	  $variables['user_profile'] .= '<div class="you-profile">'.$updates.'</div>';  
@@ -1232,7 +1233,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
 
 
 function theme_you_activity($you){
-	$tabs='<div class="tabs"><ul class="tabs primary clear-block">
+	$tabs='<div class="tabs you-tabs"><ul class="tabs primary clear-block">
 	<li><span class="tab">'.l('All Activity','you/activity/'.$you,array('HTML'=>TRUE)).'</span></li>
 	<li><span class="tab">'.l('Status updates','you/updates/'.$you,array('HTML'=>TRUE)).'</span></li>
 	<li><span class="tab">'.l('Comments','you/comments/'.$you,array('HTML'=>TRUE)).'</span></li>
