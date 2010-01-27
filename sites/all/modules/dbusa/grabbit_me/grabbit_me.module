@@ -1222,7 +1222,8 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
-	  $variables['user_profile']=theme_you_activity($variables['account']->uid).$updates;  
+	  $variables['user_profile']='empty';//theme_you_activity($variables['account']->uid).$updates;  
+	  print_r($variables);
     }
 
     endif;
