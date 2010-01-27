@@ -312,10 +312,10 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	$text=get_url_msg_formatted($item['status']);
 	
 	if($item['facebook'])
-	  $social_networks .='<span class="from-facebook"><img src="'.base_path().path_to_theme().'/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
+	  $social_networks .='<span class="from-facebook"><img src="'.base_path().'sites/all/themes/grabbit/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
 
 	if($item['twitter'])
-	  $social_networks .='<span class="from-twitter"> <img src="'.base_path().path_to_theme().'d/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
+	  $social_networks .='<span class="from-twitter"> <img src="'.base_path().'sites/all/themes/grabbit/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
 	
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
