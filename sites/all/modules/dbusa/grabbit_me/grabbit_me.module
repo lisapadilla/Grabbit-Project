@@ -16,6 +16,12 @@ function grabbit_me_menu() {
     'access arguments' => array('access content')
   );
 
+  $items['you/comments'] = array( 
+    'page callback' => 'grabbit_me_you_comments', 
+    'title' => 'Comments',
+    'access arguments' => array('access content')
+  );
+
   $items['activity/updates'] = array(
    'title' => 'Activity',
    'description' => t('Watch your activity.'),
@@ -1275,6 +1281,22 @@ function grabbit_me_you_updates(){
 	}
 }
 
+function grabbit_me_you_comments(){
+	global $user;
+	
+	$friend = user_load(arg(2));
+	
+	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
+    if($status=='TW_BOTH'){
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Comments'); })",'inline');
+	  $output = theme_you_activity($friend->uid, $friend->name);
+	  $output .=grabbit_me_you_activity_comments($friend);
+	  return $output;
+	}else{
+		drupal_goto('users/'.$friend->name);
+	}
+}
+
 function grabbit_me_you_activity_rendered($user){
 	
     // get statuses
@@ -1313,6 +1335,44 @@ function grabbit_me_you_activity_rendered($user){
 
   return $output;	
 }
+
+
+function grabbit_me_you_activity_comments($user){
+	
+	// get comments
+	$comm = grabbit_me_get_comments($user->uid,$limit=10);
+	if (!count($comm)){
+	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+	}else{
+	    $nod='even display';
+	  	foreach($comm as $comment){
+		  $item=unserialize($comment->extra);
+	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
+	      if($nod=='odd display'){
+		    $nod='even display';
+	      }else{
+		    $nod='odd display';
+	      }
+	    } 
+	}
+	// end comments
+	
+			$output .='<div class="panel-grabbit suser-panels">
+			           <div class="panel-grabbit user-panel" id="panel-activity">
+			            <div class="panel-title clearfix">
+						  <div class="controller-top"> 
+						    <h3 class="title">Comments</h3>
+						  </div>
+						</div>';
+			$output .=$comments;
+
+			
+			$output .='</div>';
+
+   return $output;
+	
+}
+
 
 
 function grabbit_me_form_alter(&$form, $form_state, $form_id){
