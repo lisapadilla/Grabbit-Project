@@ -1298,11 +1298,7 @@ function grabbit_me_you_activity_rendered($user){
     // end statuses
 
     
-			$output .='<div class="panels-controllers">
-			           <div id="panels-pager" class="panels-pager"></div>
-			           <a href="JavaScript:void(0);" class="move-left"></a>
-			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
+			$output .='<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
