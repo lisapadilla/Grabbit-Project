@@ -1221,6 +1221,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); })",'inline');
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
 	
 	  $variables['user_profile'] =theme_you_activity($variables['account']->uid, $variables['account']->name);
@@ -1232,14 +1233,6 @@ function grabbit_me_preprocess_user_profile(&$variables){
 
     endif;
 
-}
-
-function grabbit_me_preprocess(&$variables,$hook){
-  print_r($hook);
-  print "<br>";
-  if($hook=='page'){
-	print_r($variables);
-  }
 }
 
 
