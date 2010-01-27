@@ -1223,7 +1223,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
     if($status=='TW_BOTH'){
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
 	
-	  $variables['user_profile'] =theme_you_activity($variables['account']->uid);
+	  $variables['user_profile'] =theme_you_activity($variables['account']->uid, $variables['account']->name);
 	  $variables['user_profile'] .='<div class="you-profile"><div id="panel-activity" class="panel-grabbit user-panel"><div class="panel-title clearfix"><div class="controller-top"> 
 	   <h3 class="title">Last Updates</h3></div></div>';
 	  $variables['user_profile'] .= $updates.'</div></div>';  
@@ -1234,9 +1234,9 @@ function grabbit_me_preprocess_user_profile(&$variables){
 }
 
 
-function theme_you_activity($you){
+function theme_you_activity($you,$you_name){
 	$tabs='<div class="tabs you-tabs"><ul class="tabs primary clear-block">
-	<li><span class="tab">'.l('All Activity','you/activity/'.$you,array('HTML'=>TRUE)).'</span></li>
+	<li><span class="tab">'.l('All Activity','users/'.$you_name,array('HTML'=>TRUE)).'</span></li>
 	<li><span class="tab">'.l('Status updates','you/updates/'.$you,array('HTML'=>TRUE)).'</span></li>
 	<li><span class="tab">'.l('Comments','you/comments/'.$you,array('HTML'=>TRUE)).'</span></li>
 	<li><span class="tab">'.l('Added friends','you/friends/'.$you,array('HTML'=>TRUE)).'</span></li>
