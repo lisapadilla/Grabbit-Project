@@ -1236,6 +1236,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
 
 function grabbit_me_preprocess(&$variables,$hook){
   print_r($hook);
+  print "<br>";
 }
 
 
