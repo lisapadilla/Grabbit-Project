@@ -1442,7 +1442,7 @@ function grabbit_me_you_activity_comments($user){
 	}
 	// end comments
 	
-			$output .='<div class="panel-grabbit suser-panels">
+			$output .='
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
@@ -1450,10 +1450,6 @@ function grabbit_me_you_activity_comments($user){
 						  </div>
 						</div>';
 			$output .=$comments;
-
-			
-			$output .='</div>';
-
    return $output;
 	
 }
