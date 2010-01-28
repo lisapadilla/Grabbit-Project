@@ -3370,3 +3370,12 @@ div.navbar
 .profile-extended-view #content-area .you-tabs .tab a.active{
 	color:#666;
 }
+.flag-myfeeds a.flag-action{
+	background:transparent;
+	display:block;
+	float:none;
+	height:auto;
+	margin-left:0px;
+	text-indent:0px;
+	width:auto;
+}
