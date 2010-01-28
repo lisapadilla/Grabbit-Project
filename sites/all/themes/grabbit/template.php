@@ -204,7 +204,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
   }
 
   if($vars['node']->type=='news'){
-    print_r($vars['content']);	
+    print_r($vars);	
   }
   
 }
