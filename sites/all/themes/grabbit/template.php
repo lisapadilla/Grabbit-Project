@@ -146,6 +146,7 @@ function grabbit_preprocess_page(&$vars, $hook) {
 		  $vars['content']='	<h1 class="title">Search your Stream</h1><div class="panels-controllers"><div class="panels-pager" id="panels-pager"><a href="#" title="Search Results">Search Results</a></div></div><div class="messages-status-updates">Your search for <strong>'.arg(2).'</strong> did not match any results, please try again</div>';
 		}
 	}
+	
 }
 // */
 
@@ -200,6 +201,10 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	}else{
 		$error;
 	}	
+  }
+
+  if($vars['node']->type=='news'){
+    print_r($vars);	
   }
   
 }
