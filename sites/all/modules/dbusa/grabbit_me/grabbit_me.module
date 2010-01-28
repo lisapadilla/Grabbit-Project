@@ -366,10 +366,14 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 
 function grabbit_me_theme_feeds($nod,$item){
 	
-	print_r($item);
+	if($item->field_rss_logo[0]['filepath']){
+		$logo=theme('imagecache', 'friend_thumbnail', $item->field_rss_logo[0]['filepath'], 'RSS');
+	}else{
+		$logo=theme('imagecache', 'friend_thumbnail', 'sites/default/files/imagefield_default_images/blue-rss-button.png', 'RSS');
+	}
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
-	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', 'sites/default/files/imagefield_default_images/blue-rss-button.png', 'RSS').'
+	    <span class="twitter-image" style="background:none;">'.$logo.'
 	    </span>
 	  </div>
 	  '.l($item->title,'node/'.$item->nid,array('attributes'=>array('target'=>'_blank','class'=>'twitter-name-link'))).'
