@@ -1405,18 +1405,13 @@ function grabbit_me_you_activity_rendered($user){
     // end statuses
 
     
-			$output .='<div class="panel-grabbit suser-panels">
-			           <div class="panel-grabbit user-panel" id="panel-activity">
+			$output .='<div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
 						    <h3 class="title">Last Updates</h3>
 						  </div>
 						</div>';
 			$output .=$updates;
-
-			
-			$output .='</div>';
-	
 
   return $output;	
 }
@@ -1458,8 +1453,7 @@ function grabbit_me_you_activity_rss($user){
 	
     $updates = grabbit_me_get_statuses_rss($user->uid);
     
-			$output .='<div class="panel-grabbit suser-panels">
-			           <div class="panel-grabbit user-panel" id="panel-activity">
+			$output .='<div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
 						    <h3 class="title">Last Updates</h3>
@@ -1467,9 +1461,6 @@ function grabbit_me_you_activity_rss($user){
 						</div>';
 			$output .=$updates;
 
-			
-			$output .='</div>';
-	
 
   return $output;	
 }
@@ -1495,17 +1486,13 @@ function grabbit_me_you_activity_mentions($user){
 		}
 		// end mentions
 
-			$output .='<div class="panel-grabbit suser-panels">
-			           <div class="panel-grabbit user-panel" id="panel-activity">
+			$output .='<div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
 						    <h3 class="title">Mentions</h3>
 						  </div>
 						</div>';
 			$output .=$mentions;
-
-			
-			$output .='</div>';
 
    return $output;
 	
@@ -1515,8 +1502,7 @@ function grabbit_me_you_activity_friends($user){
 	
     $updates = grabbit_me_get_statuses_friends($user->uid);
     
-			$output .='<div class="panel-grabbit suser-panels">
-			           <div class="panel-grabbit user-panel" id="panel-activity">
+			$output .='<div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
 						    <h3 class="title">Last Updates</h3>
@@ -1524,9 +1510,6 @@ function grabbit_me_you_activity_friends($user){
 						</div>';
 			$output .=$updates;
 
-			
-			$output .='</div>';
-	
 
   return $output;	
 }
