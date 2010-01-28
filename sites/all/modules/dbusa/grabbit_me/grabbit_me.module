@@ -1315,7 +1315,7 @@ function grabbit_me_you_comments(){
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
-	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Comments'); })",'inline');
+	//  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Comments'); })",'inline');
 	  
 	  $output = theme_you_activity($friend->uid, $friend->name);
 	  $output .=grabbit_me_you_activity_comments($friend);
