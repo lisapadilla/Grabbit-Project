@@ -372,7 +372,7 @@ function grabbit_me_theme_feeds($nod,$item){
 	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', 'sites/default/files/imagefield_default_images/blue-rss-button.png', 'RSS').'
 	    </span>
 	  </div>
-	  <a target="_blank" class="twitter-name-link" href="#">'.$item->title.'</a>
+	  '.l($item->title,'node/'.$item->nid,array('attributes'=>array('target'=>'_blank','class'=>'twitter-name-link'))).'
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$item->body.'</div> 
 	    <span class="twitter-date"><span class="blue">feed added</span> on '.format_date($item->created).'</span>
