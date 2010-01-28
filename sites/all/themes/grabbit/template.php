@@ -146,6 +146,7 @@ function grabbit_preprocess_page(&$vars, $hook) {
 		  $vars['content']='	<h1 class="title">Search your Stream</h1><div class="panels-controllers"><div class="panels-pager" id="panels-pager"><a href="#" title="Search Results">Search Results</a></div></div><div class="messages-status-updates">Your search for <strong>'.arg(2).'</strong> did not match any results, please try again</div>';
 		}
 	}
+	
 }
 // */
 
@@ -200,6 +201,11 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	}else{
 		$error;
 	}	
+  }
+
+  if($vars['node']->type=='news'){
+	$title ='<div class="titles"><h2>'.$vars['node']->links['feedapi_feed']['title']."</h2><h1>".$vars['node']->title."</h1></div>";
+    $vars['content']= $title.'<div class="news-body">'.$vars['content']."</div>"; 	
   }
   
 }
