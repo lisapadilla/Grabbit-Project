@@ -2215,6 +2215,10 @@ margin-top:5px;
 {
 	padding: 0 47px;
 }
+.node-type-news #content-area h1.title
+{
+	display: none;
+}
 .node-type-news .node-news img
 {
 	float: right;
