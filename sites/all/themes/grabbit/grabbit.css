@@ -1109,7 +1109,14 @@ a.active{
   font-size: 20px;
   line-height: 21px;
   margin: 0px;
+  background: none;
   font-weight: bold;
+}
+.node-type-news h2
+{
+	color: #385291;
+	font-size: 18px;
+	font-weight: normal;
 }
 #content-area .grabbit-list{
 }
