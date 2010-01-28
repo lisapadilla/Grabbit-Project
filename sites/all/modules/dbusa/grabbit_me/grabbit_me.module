@@ -349,7 +349,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  	<a href="JavaScript:void(0);" class="retweet">RT</a>
-           <a href="javaScript:void(0);" class="twit-reply" id="@'.$screen_name.'">Reply This</a>
+           <a href="javaScript:void(0);" class="twit-reply" id="@'.$profile->name.'">Reply This</a>
 	  <div class="listable">
 	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
 	    '.$social_networks.'</span>
