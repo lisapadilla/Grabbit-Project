@@ -204,7 +204,9 @@ function grabbit_preprocess_node(&$vars, $hook) {
   }
 
   if($vars['node']->type=='news'){
-    print_r($vars);	
+	
+	$title = '<div class="titles"><h2>'$vars['node']->links['feedapi_feed']['title']."</h2><h1>".$vars['node']->title."</h1></div>";
+    $vars['content']= $title.$vars['content']; 	
   }
   
 }
