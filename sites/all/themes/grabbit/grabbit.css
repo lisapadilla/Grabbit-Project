@@ -2195,7 +2195,10 @@ margin-top:5px;
 .node-type-news .node-news
 {
 	color: #6C7885;
-	padding: 0 47px;
+	padding: 0 47px 20px;
+	font-size: 13px;
+	line-height: 16px;
+	border-bottom: 1px solid #6C7885;
 }
 .node-type-news .node-news img
 {
@@ -2211,11 +2214,18 @@ margin-top:5px;
   font-size: 12px;
   line-height: 15px;
 }
+.node-type-news #content h1
+{
+	padding-left: 47px;
+	padding-right: 47px;
+	margin-bottom: 20px;
+}
+.node-type-news #content p
+{
+	margin-bottom: 10px;
+}
 .node-type-news .node-news a{
   color: #0073CF;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 15px;
 }
 .node-news ul.links{
   padding-top: 20px;
