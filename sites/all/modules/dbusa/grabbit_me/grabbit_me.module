@@ -366,7 +366,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 
 function grabbit_me_theme_feeds($nod,$item){
 	
-	
+	print_r($item);
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
 	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', 'sites/default/files/imagefield_default_images/blue-rss-button.png', 'RSS').'
