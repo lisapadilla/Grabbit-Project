@@ -376,7 +376,7 @@ function grabbit_me_theme_feeds($nod,$item){
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$item->body.'</div> 
 	    <span class="twitter-date"><span class="blue">feed added</span> on '.format_date($item->created).'</span>
-	    <div class="">'.flag_create_link('myfeeds', $item->nid).'</div>
+	    <div class="">flag'.flag_create_link('myfeeds', $item->nid).'</div>
 	  </div>
 	</div>';
 	
