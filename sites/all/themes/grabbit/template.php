@@ -204,7 +204,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
   }
 
   if($vars['node']->type=='news'){
-    drupal_set_title('test');	
+    print_r($vars['content']);	
   }
   
 }
