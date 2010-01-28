@@ -1252,6 +1252,9 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); })",'inline');
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
 	
 	  $variables['user_profile'] =theme_you_activity($variables['account']->uid, $variables['account']->name);
@@ -1291,6 +1294,9 @@ function grabbit_me_you_updates(){
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Updates'); })",'inline');
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
 	  $output = theme_you_activity($friend->uid, $friend->name);
 	  $output .=grabbit_me_you_activity_rendered($friend);
 	  return $output;
@@ -1307,6 +1313,9 @@ function grabbit_me_you_comments(){
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Comments'); })",'inline');
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
 	  $output = theme_you_activity($friend->uid, $friend->name);
 	  $output .=grabbit_me_you_activity_comments($friend);
 	  return $output;
@@ -1323,6 +1332,9 @@ function grabbit_me_you_friends(){
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." added Friends'); })",'inline');
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
 	  $output = theme_you_activity($friend->uid, $friend->name);
 	  $output .=grabbit_me_you_activity_friends($friend);
 	  return $output;
@@ -1339,6 +1351,9 @@ function grabbit_me_you_rss(){
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." RSS'); })",'inline');
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
 	  $output = theme_you_activity($friend->uid, $friend->name);
 	  $output .=grabbit_me_you_activity_rss($friend);
 	  return $output;
@@ -1355,6 +1370,9 @@ function grabbit_me_you_mentions(){
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." mentions'); })",'inline');
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
 	  $output = theme_you_activity($friend->uid, $friend->name);
 	  $output .=grabbit_me_you_activity_mentions($friend);
 	  return $output;
