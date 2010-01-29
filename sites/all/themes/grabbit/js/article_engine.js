@@ -17,8 +17,7 @@ Drupal.behaviors.article = function(){
   });
 
   $(".comment-news").click(function(eve){
-	var scroll = $("#comment-form");
-	$(document).scrollTo(scroll,100);
+	$("#comment-form").focus();
   });
 
 }
