@@ -1289,12 +1289,14 @@ function grabbit_me_preprocess_user_profile(&$variables){
 }
 
 
-function theme_you_activity($you,$you_name){
+function theme_you_activity($you,$you_name,$is_section=FALSE){
 	
-	
+	if($is_section){
+		$class='active';
+	}
 	
 	$tabs='<div class="tabs you-tabs"><ul class="tabs primary clear-block">
-	<li><span class="tab">'.l('All Activity','users/'.$you_name).'</span></li>
+	<li><span class="tab">'.l('All Activity','users/'.$you_name,array('attributes'=>array('class'=>$class))).'</span></li>
 	<li><span class="tab">'.l('Status updates','you/updates/'.$you).'</span></li>
 	<li><span class="tab">'.l('Comments','you/comments/'.$you).'</span></li>
 	<li><span class="tab">'.l('Added friends','you/friends/'.$you).'</span></li>
