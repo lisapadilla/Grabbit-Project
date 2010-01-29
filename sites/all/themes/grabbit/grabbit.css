@@ -3383,3 +3383,9 @@ div.navbar
 	font-weight:bold;
 	line-height:13px;
 }
+
+.node-type-news #content .node-news .links_stream
+{
+	margin-right:47px;
+	margin-top:72px;
+}
