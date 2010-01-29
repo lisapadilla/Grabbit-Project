@@ -3389,3 +3389,7 @@ div.navbar
 	margin-right:47px;
 	margin-top:72px;
 }
+.profile-extended-view .invite{
+	color:#999999;
+	font-size:11px;
+}
