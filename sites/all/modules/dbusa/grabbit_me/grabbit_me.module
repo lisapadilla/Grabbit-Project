@@ -1277,7 +1277,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	
 	  $updates = grabbit_me_get_statuses_all($variables['account']->uid);
 	
-	  $variables['user_profile'] =theme_you_activity($variables['account']->uid, $variables['account']->name);
+	  $variables['user_profile'] =theme_you_activity($variables['account']->uid, $variables['account']->name,TRUE);
 	  $variables['user_profile'] .='<div class="you-profile"><div id="panel-activity" class="panel-grabbit user-panel"><div class="panel-title clearfix"><div class="controller-top"> 
 	   <h3 class="title">Last Updates</h3></div></div>';
 	  $variables['user_profile'] .= $updates.'</div></div>';
