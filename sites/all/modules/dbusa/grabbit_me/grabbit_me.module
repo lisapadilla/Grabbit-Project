@@ -1493,7 +1493,7 @@ function grabbit_me_you_activity_mentions($user){
 		    $nod='even';
 		  	foreach($ment as $m_status){
 			  $item=unserialize($m_status->extra);
-              $profile=user_load($m_status->uid);
+              $profile = content_profile_load('profile', $m_status->uid);
 		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
 		      if($nod=='odd'){
 			    $nod='even';
