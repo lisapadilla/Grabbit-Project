@@ -1282,6 +1282,7 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	  $variables['extended_view'] = 'Extended';  
     }
 
+
 }
 
 
