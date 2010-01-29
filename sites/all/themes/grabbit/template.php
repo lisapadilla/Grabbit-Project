@@ -209,7 +209,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
 	$controles='<div class="links_stream" id="article-news">  
 	    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
-	    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
+	    <a href="JavaScript:void(0);" class="grabb-that">RT</a>
 	    <a href="javascript:void(0)" class="comment-news">Comment</a>
 	    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
 	  </div>';
