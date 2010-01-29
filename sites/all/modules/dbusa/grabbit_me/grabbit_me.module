@@ -403,6 +403,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'</div> 
 	    <span class="twitter-date"><span class="blue">friend added</span> on '.format_date($items->last_update_time).'</span>
+	    <span class="invite">'.l('Send friend request', 'friendlist/add/'.$profile->uid.'/1',array('query'=>'destination='.drupal_get_destination())).'</span>
 	  </div>
 	</div>';
 	

@@ -384,6 +384,7 @@ function friend_search_show_friends(){
 	// end grabbit friends
 	
 	//get facebook friends
+	$facebook=array();
 	$facebook=friend_search_get_friends_facebook();
 	foreach ($facebook as $facebook_friend){
 	  $friends[$facebook_friend['first_name'].$facebook_friend['last_name'].' f']=$facebook_friend;
@@ -391,6 +392,7 @@ function friend_search_show_friends(){
 	//end facebook friends
 	
 	//get twitter friends
+	$twitter=array();
 	$twitter=friend_search_get_friends_twitter();
 	foreach ($twitter as $twitter_friend){
 		$twitter_friend=parseArrayToObject($twitter_friend);
@@ -399,6 +401,7 @@ function friend_search_show_friends(){
 	//endf teitter friends
 	
 	//get contacts
+	$contacts=array();
 	$contacts=grabbit_invites_get_contacts();
 	foreach ($contacts as $contact){
 		$friends[$contact->email.' c']=$contact;
