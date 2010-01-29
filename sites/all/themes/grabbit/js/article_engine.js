@@ -25,4 +25,20 @@ Drupal.behaviors.article = function(){
 	}
   });
 
+  	$(".trash-item").live('click',function () {
+	  var id = $(this).attr("item_id"); //post_id
+	  var trashElement = $(this);
+	
+	  $.get(Drupal.settings.basePath+"trash/save/facebook",{id:id,type:"item"},function(data){
+	      //Successfully added to favorites
+	      //Testing if it works
+				if (data){
+					alert ("Item trashed");
+				}else{
+					alert ("There was a connection problem. Try later");
+				}
+	    });
+	  
+	});
+
 }
