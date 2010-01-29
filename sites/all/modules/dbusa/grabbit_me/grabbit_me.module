@@ -528,7 +528,9 @@ function grabbit_me_get_statuses($uid,$limit=10){
   $array=array();
   while ($status = db_fetch_object($result)){
 	$data=unserialize($status->extra);
+	if(substr($data['status'], 0, 2) != 'DM'){ //NO DIRECT MESSAGES
     $array[]=$status;
+    }
   }
 
   return $array;
