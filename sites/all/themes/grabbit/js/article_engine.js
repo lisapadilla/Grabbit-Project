@@ -17,7 +17,12 @@ Drupal.behaviors.article = function(){
   });
 
   $(".comment-news").click(function(eve){
-	$("#edit-comment").focus();
+	var comment=$("#edit-comment");
+	if(comment){
+		comment.focus();	
+	}else{
+		alert('Login or register to post a comment');
+	}
   });
 
 }
