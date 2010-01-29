@@ -3410,3 +3410,8 @@ div.navbar
 	font-style: italic;
 	text-decoration: underline;
 }
+
+.profile-extended-view .invite{
+	color:#999999;
+	font-size:11px;
+}
