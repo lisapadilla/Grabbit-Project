@@ -1267,8 +1267,6 @@ function grabbit_me_user($op, &$edit, &$account, $category = NULL){
 function grabbit_me_preprocess_user_profile(&$variables){
 	global $user;
 	
-	if($user->uid==1):
-	
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); })",'inline');
@@ -1283,8 +1281,6 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	  $variables['user_profile'] .= $updates.'</div></div>';
 	  $variables['extended_view'] = 'Extended';  
     }
-
-    endif;
 
 }
 
