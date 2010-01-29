@@ -1,6 +1,6 @@
 Drupal.behaviors.article = function(){
 
-  $("#article-news .trash-item").click(function(ev){
+  $(".grabb-that").click(function(ev){
 	alert("hola");
 		ev.preventDefault();
 		urlcomplete = window.location;
