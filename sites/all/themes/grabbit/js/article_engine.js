@@ -18,6 +18,7 @@ Drupal.behaviors.article = function(){
 
   $(".comment-news").click(function(eve){
 	var scroll = $("#comments");
+	alert(scroll.html());
 	$(document).scrollTo(scroll,100);
   });
 
