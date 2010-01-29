@@ -204,8 +204,18 @@ function grabbit_preprocess_node(&$vars, $hook) {
   }
 
   if($vars['node']->type=='news'){
+	
+	//controles
+	$controles='<div class="links_stream">  
+	    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
+	    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
+	    <a href="javascript:void(0)" class="comment-news">Comment</a>
+	    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
+	  </div>';
+	// end controles
+	
 	$title ='<div class="titles"><h2>'.$vars['node']->links['feedapi_feed']['title']."</h2><h1>".$vars['node']->title."</h1></div>";
-    $vars['content']= $title.'<div class="news-body">'.$vars['content']."</div>"; 	
+    $vars['content']= $controles.$title.'<div class="news-body">'.$vars['content']."</div>"; 	
   }
   
 }
