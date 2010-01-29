@@ -206,6 +206,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
   if($vars['node']->type=='news'){
 	
 	//controles
+	drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
 	$controles='<div class="links_stream" id="article-news">  
 	    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
 	    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
