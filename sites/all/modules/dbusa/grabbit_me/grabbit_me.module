@@ -582,7 +582,9 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	  break;
 	  case 'status':
 	      $item=unserialize($element->extra);
-	      $output .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	      if(substr($item['status'], 0, 2) != 'DM'){ //NO DIRECT MESSAGES
+		    $output .= grabbit_me_theme_my_activity($nod,$item,$profile); 
+	      }
 	  break;
 	  case 'feed':
 	      $node=node_load($element->nid);
