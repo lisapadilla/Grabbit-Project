@@ -1409,7 +1409,7 @@ function grabbit_me_you_activity_rendered($user){
     $profile = content_profile_load('profile', $user->uid);
     $nod='even';
     if(!count($statuses)){
-	  $updates = '<div class="messages-status-updates">You have no status updates in grabbit yet</div>';
+	  $updates = '<div class="messages-status-updates">No status updates in grabbit yet</div>';
     }else{
 	  	foreach($statuses as $status){
 		  $item=unserialize($status->extra);
@@ -1442,7 +1442,7 @@ function grabbit_me_you_activity_comments($user){
 	// get comments
 	$comm = grabbit_me_get_comments($user->uid,$limit=10);
 	if (!count($comm)){
-	  $comments = '<div class="messages-status-updates">You have no comments in grabbit yet</div>';
+	  $comments = '<div class="messages-status-updates">No comments in grabbit yet</div>';
 	}else{
 	    $nod='even display';
 	  	foreach($comm as $comment){
