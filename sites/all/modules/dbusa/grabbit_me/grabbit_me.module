@@ -394,7 +394,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	  switch($status){
 	  case 'TW_BOTH':
 	    $friends='<strong>You are grabbit friends!</strong>';
-	    $action ='&raquo;';
+	    $action ='&raquo; ';
 	    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
 	    $class = 'grabbit-friends';
 	  break;
@@ -404,7 +404,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	  break;
 	  case 'TW_2_TO_1_P':
 	    $friends='He requested you to be friends in grabbit!';
-	    $action = '&raquo;';
+	    $action = '&raquo; ';
 	    $action .= l('accept friend request', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
 	    $class = 'accept-pending';
 	  break;	
