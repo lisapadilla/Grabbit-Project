@@ -227,7 +227,11 @@ function grabbit_preprocess_node(&$vars, $hook) {
     $vars['links'] = '<div class="submitted">From '.
       l( $vars['node']->links['feedapi_feed']['title'], 'node/'. $feednid ). ' - '.$vars['date'].
       '</div>';
-    $vars['links'] .= '<div class="original">&raquo; '.l( 'go to original article', $vars['node']->feedapi_node->url, array( 'absolute' => true ) ) .'</div>';
+    $vars['links'] .= '<div class="original">&raquo; '.
+      l( 'go to original article', 
+        $vars['node']->feedapi_node->url, 
+        array( 'attributes' => array('target' => '_blank'), 'absolute' => true ) ) 
+      .'</div>';
   }
 }
 // */
