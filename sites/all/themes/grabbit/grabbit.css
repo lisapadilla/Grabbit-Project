@@ -3389,6 +3389,28 @@ div.navbar
 	margin-right:47px;
 	margin-top:72px;
 }
+.node-type-news #content .links .original
+{
+	float: right;
+	margin-top: -16px;
+}
+.node-type-news #content .links
+{
+	margin: 0 47px;
+	font-size: 11px;
+	color: #999999;
+}
+.node-type-news #content .links a
+{
+	color: #3399FF;
+	font-size: 11px;
+}
+.node-type-news #content .links .original a
+{
+	font-style: italic;
+	text-decoration: underline;
+}
+
 .profile-extended-view .invite{
 	color:#999999;
 	font-size:11px;
