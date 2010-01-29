@@ -17,8 +17,6 @@ Drupal.behaviors.article = function(){
   });
 
   $(".comment-news").click(function(eve){
-	alert("debug");
-	eve.preventDefault();
 	var scroll = $("#comments");
 	$(document).scrollTo(scroll,100);
   });
