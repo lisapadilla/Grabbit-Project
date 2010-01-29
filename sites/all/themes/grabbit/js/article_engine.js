@@ -1,7 +1,6 @@
 Drupal.behaviors.article = function(){
 
   $(".grabb-that").click(function(ev){
-	alert("hola");
 		ev.preventDefault();
 		urlcomplete = window.location;
 		myurl = encodeURIComponent(urlcomplete);
@@ -15,6 +14,12 @@ Drupal.behaviors.article = function(){
 				pageTracker._trackPageview(myurl);
 	        }
 	    );
+  });
+
+  $(".comment-news").click(function(eve){
+	eve.preventDefault();
+	var scroll = $("#comments");
+	$(document).scrollTo(scroll,100);
   });
 
 }
