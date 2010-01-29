@@ -232,6 +232,7 @@ function friend_search_get_friends_facebook(){
 	   }
 	  }
 	  catch(FacebookRestClientException $e){
+		return array();
 	  }
     }else{
 	  return array();
@@ -384,7 +385,7 @@ function friend_search_show_friends(){
 	// end grabbit friends
 	
 	//get facebook friends
-	$facebook=array();
+
 	$facebook=friend_search_get_friends_facebook();
 	foreach ($facebook as $facebook_friend){
 	  $friends[$facebook_friend['first_name'].$facebook_friend['last_name'].' f']=$facebook_friend;
