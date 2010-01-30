@@ -219,7 +219,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	}
 	// end controles
 	
-	  $title ='<div class="titles"><h2>'.$vars['node']->links['feedapi_feed']['title']."</h2><h1>".$vars['node']->title."</h1></div>";
+	$title ='<div class="titles"><h2>'.$vars['node']->links['feedapi_feed']['title']."</h2><h1>".$vars['node']->title."</h1></div>";
     $vars['content']= $controles.$title.'<div class="news-body">'.$vars['content']."</div>"; 	
     
     unset($vars['submitted']);

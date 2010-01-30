@@ -75,9 +75,9 @@
         
       </div>
       <?php }else{ ?>
-	    <?php if ($node->field_image_inline[0]['value']):?>
+	    <?php /* if ($node->field_image_inline[0]['value']):?>
 		  <span class="image-inline-rss"><img src="<?=$node->field_image_inline[0]['value'];?>" /></span>
-		<? endif; ?>
+		<? endif; */ ?>
 		  <?php if($file_media): ?>
 			<div class="file-media">
 			<?php print $file_media; ?>
