@@ -1213,8 +1213,9 @@ function grabbit_me_get_my_tags(){
 		if(arg(0)=='you'){
 			$user=user_load(arg(2));
 			$you=1;
-		  }
-	  global $user;	
+		  }else{
+		    global $user;	
+		  }	
 	}
 
     $feeds=array();
