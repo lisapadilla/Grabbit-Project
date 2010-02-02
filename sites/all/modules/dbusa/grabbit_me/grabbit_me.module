@@ -1103,7 +1103,13 @@ function grabbit_me_block($op = 'list', $delta = 0, $edit = array()) {
 }
 
 function grabbit_me_get_my_profile(){
-	global $user;
+	
+	if(arg(0)=='users'){
+	  $user=user_load(array('name'=>arg(1)));
+	}else{
+	  global $user;	
+	}
+	
 	
 	$profile = content_profile_load('profile', $user->uid);
 	if($profile->field_profile_websites){
@@ -1190,7 +1196,12 @@ function grabbit_me_get_my_profile(){
 }
 
 function grabbit_me_get_my_tags(){
-	global $user;
+	
+	if(arg(0)=='users'){
+	  $user=user_load(array('name'=>arg(1)));
+	}else{
+	  global $user;	
+	}
 
     $feeds=array();
     $hobbies=array();
