@@ -515,7 +515,7 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 		$node->body=$status;
 		$node->status=1;
 		$node->uid=$uid;
-		$node->comment=1;
+		$node->comment=2;
 		node_save($node);
   }
 	
