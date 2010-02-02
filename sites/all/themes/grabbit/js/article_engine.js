@@ -3,7 +3,7 @@ Drupal.behaviors.article = function(){
   $(".grabb-that").click(function(ev){
 		ev.preventDefault();
 		urlcomplete = window.location;
-		myurl = encodeURIComponent(urlcomplete);
+		myurl = urlcomplete; //encodeURIComponent(urlcomplete);
 		alert(myurl);
 		$.get("http://api.tr.im/v1/trim_simple?url=" + myurl, 
 	        function(data)
