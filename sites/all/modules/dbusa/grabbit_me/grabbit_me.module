@@ -1103,9 +1103,10 @@ function grabbit_me_block($op = 'list', $delta = 0, $edit = array()) {
 }
 
 function grabbit_me_get_my_profile(){
-	print_r(arg(0));
-	if(arg(0)=='users'){
-	  $user=user_load(array('name'=>arg(1)));
+	
+	if(arg(0)=='user' && arg(1)){
+	  $user=user_load(arg(1));
+	  $you=1;
 	}else{
 	  global $user;	
 	}
@@ -1133,7 +1134,11 @@ function grabbit_me_get_my_profile(){
 	  
 	}
 	$my_image=theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
-	$output = '<div class="edit-panel"><a href="#" class="edit-me-place">Edit</a></div><div class="user-profile-block">
+	
+	if(!$you)
+      $edit='<a href="#" class="edit-me-place">Edit</a>';
+	
+	$output = '<div class="edit-panel">'.$edit.'</div><div class="user-profile-block">
 	<div id="bio-no-edit">
 	<div class="main-info clear-block">
 	  <div class="image">'.$my_image.'</div>
@@ -1197,8 +1202,9 @@ function grabbit_me_get_my_profile(){
 
 function grabbit_me_get_my_tags(){
 	
-	if(arg(0)=='users'){
-	  $user=user_load(array('name'=>arg(1)));
+	if(arg(0)=='user' && arg(1)){
+	  $user=user_load(arg(1));
+	  $you=1;
 	}else{
 	  global $user;	
 	}
@@ -1234,8 +1240,11 @@ function grabbit_me_get_my_tags(){
 		$feeds[]=$feed->name;
 	}
 	endif;
+
+    if(!$you)
+	  $edit='<a href="#" id="edit-user-tags">Edit</a>';
 	
-	$output = '<div class="edit-panel"><a href="#" id="edit-user-tags">Edit</a></div>
+	$output = '<div class="edit-panel">'.$edit.'</div>
 	<div class="user-tags-block">
 	 <div id="tags-info"> 
 	  <div class="hobbies"><h3>Hobbies: </h3>'.implode(', ',$hobbies).'</div>
