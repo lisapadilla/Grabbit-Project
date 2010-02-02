@@ -1108,11 +1108,12 @@ function grabbit_me_get_my_profile(){
 	  $user=user_load(arg(1));
 	  $you=1;
 	}else{
-	  if(arg(0)=='you'){
-		$user=user_load(arg(2));
-		$you=1;
-	  }
-	  global $user;	
+	  	if(arg(0)=='you'){
+			$user=user_load(arg(2));
+			$you=1;
+		  }else{
+		    global $user;	
+		  }	
 	}
 	
 	
@@ -1213,7 +1214,6 @@ function grabbit_me_get_my_tags(){
 		if(arg(0)=='you'){
 			$user=user_load(arg(2));
 			$you=1;
-			print_r($user);
 		  }else{
 		    global $user;	
 		  }	
