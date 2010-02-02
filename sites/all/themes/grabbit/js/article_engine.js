@@ -4,7 +4,7 @@ Drupal.behaviors.article = function(){
 		ev.preventDefault();
 		urlcomplete = window.location;
 		myurl = encodeURIComponent(urlcomplete);
-		$.get("http://api.tr.im/api/trim_url.xml?url=" + myurl, 
+	/*	$.get("http://api.tr.im/api/trim_url.xml?url=" + myurl, 
 	        function(data)
 	        { 
 			alert(data);	
@@ -13,7 +13,16 @@ Drupal.behaviors.article = function(){
 				$('#edit-RT').val(1);
 				pageTracker._trackPageview(myurl);
 	        }
-	    );
+	    );*/
+	    $.get(Drupal.settings.basePath+"sites/all/modules/dbusa/facebook_grabbit/trim_proxy.php",{url:myurl},function(data){
+		      //Successfully added to favorites
+		      //Testing if it works
+					if (data){
+						alert (data);
+					}else{
+						alert ("There was a connection problem. Try later");
+					}
+		    });
   });
 
   $(".comment-news").click(function(eve){
