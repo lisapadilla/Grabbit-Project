@@ -522,10 +522,19 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 }
 //Implementation of hook_flag
 function grabbit_me_flag($action, $flag, $content_id, $account){
-	drupal_set_message("action = ".$action." content id=".$content_id." flaggg = <pre>".print_r($flag,TRUE)."</pre>");
-	if($action == 'flag'){
-		
-	}
+	global $user;
+	 if($flag->name=='myfeeds'){
+	      $extra_array=array();
+		  $extra_array['twitter']=0;
+		  $extra_array['facebook']=0;
+		  $extra_array['time']=time();
+		  $extra_array['rss']=$content_id;
+		  $extra_array['action']=$action;
+
+		  $extra=serialize($extra_array);
+
+		  db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'rss','%s',%d)",$user->uid,$extra,$extra_array['time']);
+	  }
 }
 
 //Implementation of hook_grabbit_facebook_comment
@@ -598,6 +607,13 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	$super_array[$status->number]->type='comment';
   }
 
+  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='rss' ORDER BY number DESC LIMIT %d",$uid,$limit);
+
+  while ($status = db_fetch_object($result)){
+	$super_array[$status->number]=$status;
+	$super_array[$status->number]->type='rss';
+  }
+
   $result = db_query("SELECT * FROM {node} WHERE uid=%d AND type='feed' ORDER BY created DESC LIMIT %d",$uid,$limit);
 
   while ($status = db_fetch_object($result)){
@@ -623,6 +639,11 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	      if(substr($item['status'], 0, 2) != 'D '){ //NO DIRECT MESSAGES
 		    $output .= grabbit_me_theme_my_activity($nod,$item,$profile); 
 	      }
+	  break;
+	  case 'rss':
+	      $item=unserialize($element->extra);
+	      $node=node_load($item['rss']);
+	      $output .= grabbit_me_theme_feeds($nod,$node);
 	  break;
 	  case 'feed':
 	      $node=node_load($element->nid);
@@ -691,6 +712,16 @@ function grabbit_me_get_statuses_rss($uid,$limit=10){
   while ($status = db_fetch_object($result)){
 	$super_array[$status->created]=$status;
   }
+
+  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='rss' ORDER BY number DESC LIMIT %d",$uid,$limit);
+
+  while ($status = db_fetch_object($result)){
+	$item=unserialize($status->extra);
+	$elemento=node_load($item['rss']);
+	$super_array[$status->number]=$elemento;
+	$super_array[$status->number]->type='rss';
+  }
+
   ksort($super_array);
   $reverse = array_reverse($super_array);
   $total = array_slice($reverse,0,15);
