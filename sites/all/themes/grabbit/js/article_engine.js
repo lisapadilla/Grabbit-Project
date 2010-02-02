@@ -4,8 +4,8 @@ Drupal.behaviors.article = function(){
 		ev.preventDefault();
 		urlcomplete = window.location;
 		myurl = encodeURIComponent(urlcomplete);
-		alert("http://api.tr.im/api/trim_url.json?url=" + myurl + "&callback=?");
-		$.getJSON("http://api.tr.im/api/trim_url.json?url=" + myurl + "&callback=?", 
+		alert("http://api.tr.im/api/trim_url.json?url=" + myurl);
+		$.getJSON("http://api.tr.im/api/trim_url.json?url=" + myurl, 
 	        function(data)
 	        { 
 		       alert(data);
