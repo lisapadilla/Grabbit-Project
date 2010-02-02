@@ -8,7 +8,7 @@ Drupal.behaviors.article = function(){
 	        function(data)
 	        { 
 				
-				$("#edit-status").val(data.tinyurl+' ');
+				$("#edit-status").val(data.url+' ');
 				$("#edit-status").focus();
 				$('#edit-RT').val(1);
 				pageTracker._trackPageview(myurl);
