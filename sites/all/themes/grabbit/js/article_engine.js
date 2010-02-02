@@ -4,21 +4,12 @@ Drupal.behaviors.article = function(){
 		ev.preventDefault();
 		urlcomplete = window.location;
 		myurl = encodeURIComponent(urlcomplete);
-	/*	$.get("http://api.tr.im/api/trim_url.xml?url=" + myurl, 
-	        function(data)
-	        { 
-			alert(data);	
-				$("#edit-status").val(data.tinyurl+' ');
-				$("#edit-status").focus();
-				$('#edit-RT').val(1);
-				pageTracker._trackPageview(myurl);
-	        }
-	    );*/
-	    $.get(Drupal.settings.basePath+"sites/all/modules/dbusa/facebook_grabbit/trim_proxy.php",{url:myurl},function(data){
-		      //Successfully added to favorites
-		      //Testing if it works
+	    $.getJSON(Drupal.settings.basePath+"sites/all/modules/dbusa/facebook_grabbit/trim_proxy.php",{url:myurl},function(data){
 					if (data){
-						alert (data);
+						$("#edit-status").val(data.url+' ');
+						$("#edit-status").focus();
+						$('#edit-RT').val(1);
+						pageTracker._trackPageview(myurl);
 					}else{
 						alert ("There was a connection problem. Try later");
 					}
