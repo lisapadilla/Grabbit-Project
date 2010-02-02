@@ -523,7 +523,7 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 //Implementation of hook_flag
 function grabbit_me_flag($action, $flag, $content_id, $account){
 	global $user;
-	 if($flag->name=='myfeeds'){
+	 if($flag->name=='myfeeds' && $action=='flag'){
 	      $extra_array=array();
 		  $extra_array['twitter']=0;
 		  $extra_array['facebook']=0;
@@ -643,6 +643,7 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	  case 'rss':
 	      $item=unserialize($element->extra);
 	      $node=node_load($item['rss']);
+	      $node->created=$item['time'];
 	      $output .= grabbit_me_theme_feeds($nod,$node);
 	  break;
 	  case 'feed':
@@ -718,6 +719,7 @@ function grabbit_me_get_statuses_rss($uid,$limit=10){
   while ($status = db_fetch_object($result)){
 	$item=unserialize($status->extra);
 	$elemento=node_load($item['rss']);
+	$elemento->created=$item['time'];
 	$super_array[$status->number]=$elemento;
 	$super_array[$status->number]->type='rss';
   }
