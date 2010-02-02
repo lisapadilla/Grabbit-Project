@@ -1103,7 +1103,7 @@ function grabbit_me_block($op = 'list', $delta = 0, $edit = array()) {
 }
 
 function grabbit_me_get_my_profile(){
-	print_r($_GET['q']);
+	print_r(request_uri());
 	if(arg(0)=='users'){
 		
 	  $user=user_load(array('name'=>arg(1)));
