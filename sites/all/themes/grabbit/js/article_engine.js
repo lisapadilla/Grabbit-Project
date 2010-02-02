@@ -48,6 +48,7 @@ Drupal.behaviors.imageResizer = function()
   $('#content-area .news-body img').each(function(i){
     if ( $(this).width() > 532 )
     {
+      alert('width');
       $(this).width(532);
     }
   });
