@@ -4,7 +4,7 @@ Drupal.behaviors.article = function(){
 		ev.preventDefault();
 		urlcomplete = window.location;
 		myurl = encodeURIComponent(urlcomplete);
-		$.getJSON("http://json-tinyurl.appspot.com/?url=" + myurl + "&callback=?", 
+		$.getJSON("http://api.tr.im/api/trim_url.json?url=" + myurl, 
 	        function(data)
 	        { 
 				
