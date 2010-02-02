@@ -7,7 +7,7 @@ Drupal.behaviors.article = function(){
 		$.getJSON("http://api.tr.im/api/trim_url.json?url=" + myurl, 
 	        function(data)
 	        { 
-				
+				alert(data);
 				$("#edit-status").val(data.url+' ');
 				$("#edit-status").focus();
 				$('#edit-RT').val(1);
