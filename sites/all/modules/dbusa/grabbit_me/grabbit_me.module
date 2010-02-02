@@ -721,7 +721,7 @@ function grabbit_me_get_statuses_rss($uid,$limit=10){
 	$elemento=node_load($item['rss']);
 	$elemento->created=$item['time'];
 	$super_array[$status->number]=$elemento;
-	$super_array[$status->number]->type='rss';
+	$super_array[$status->number]->timer=$status->number;
   }
 
   ksort($super_array);
@@ -735,6 +735,9 @@ function grabbit_me_get_statuses_rss($uid,$limit=10){
   foreach($total as $element){
 
 	      $node=node_load($element->nid);
+	      if($element->timer)
+	        $node->created=$element->timer;
+	
 	      $output .= grabbit_me_theme_feeds($nod,$node);
 
   	 if($nod=='odd display'){
