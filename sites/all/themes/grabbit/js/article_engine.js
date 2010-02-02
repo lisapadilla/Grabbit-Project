@@ -3,16 +3,18 @@ Drupal.behaviors.article = function(){
   $(".grabb-that").click(function(ev){
 		ev.preventDefault();
 		urlcomplete = window.location;
-		myurl = urlcomplete; //encodeURIComponent(urlcomplete);
-		alert(myurl);
-		$.get("http://api.tr.im/v1/trim_simple?url=" + myurl, 
+		myurl = encodeURIComponent(urlcomplete);
+		alert("http://api.tr.im/api/trim_url.json?url=" + myurl + "&callback=?");
+		$.getJSON("http://api.tr.im/api/trim_url.json?url=" + myurl + "&callback=?", 
 	        function(data)
 	        { 
-				alert(data);
-				$("#edit-status").val(data.url+' ');
+		       alert(data);
+				/*
+				$("#edit-status").val(data.tinyurl+' ');
 				$("#edit-status").focus();
 				$('#edit-RT').val(1);
 				pageTracker._trackPageview(myurl);
+				*/
 	        }
 	    );
   });
