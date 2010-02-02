@@ -66,11 +66,11 @@
 function file_to_tinymce(urlcomplete){
         
 		myurl = encodeURIComponent(urlcomplete);
-		$.getJSON("http://json-tinyurl.appspot.com/?url=" + myurl + "&callback=?", 
+		$.getJSON(Drupal.settings.basePath+"sites/all/modules/dbusa/facebook_grabbit/trim_proxy.php",{url:myurl}, 
 	        function(data)
 	        { 
 				
-				$("#edit-status").val($("#edit-status").val()+data.tinyurl+' ');
+				$("#edit-status").val($("#edit-status").val()+data.url+' ');
 				var scroll = $("#edit-status");
 				$("#edit-status").focus();
 	        }
