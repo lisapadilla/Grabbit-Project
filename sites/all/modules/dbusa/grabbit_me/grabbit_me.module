@@ -522,8 +522,9 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 }
 //Implementation of hook_flag
 function grabbit_me_flag($action, $flag, $content_id, $account){
+	drupal_set_message("action = ".$action." content id=".$content_id." flaggg = <pre>".print_r($flag,TRUE)."</pre>");
 	if($action == 'flag'){
-		drupal_set_message("action = ".$action." content id=".$content_id." flaggg = <pre>".print_r($flag,TRUE)."</pre>");
+		
 	}
 }
 
