@@ -3438,7 +3438,7 @@ div.navbar
 #content-area .node-news .grabb-that
 {
 	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
-	margin-left: 78px;
+	margin-left: 71px;
 }
 #content-area .node-news .trash-item
 {
@@ -3449,11 +3449,11 @@ div.navbar
 #content-area .node-news .comment-news
 {
 	background: url(images/btns/ctrl_com.gif) no-repeat center 0;
-	margin-left:56px;
-	margin-top:1px;
+	margin-left: 42px;
+	margin-top: 1px;
 }
 #content-area .node-news .flag-action
 {
 	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
-	margin-left:35px;
+	margin-left:14px;
 }
