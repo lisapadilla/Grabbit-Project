@@ -3417,7 +3417,16 @@ div.navbar
 	font-size:11px;
 }
 
+#content-area .node-news #article-news a
+{
+	height: 28px;
+	width: 35px;
+}
+#content-area .node-news #article-news a:hover
+{
+	background-position: center -40px;
+}
 #content-area .node-news .grabb-that
 {
-	background: url(images/btns/ctrl_rtw.gif) no-repeat center;
+	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
 }
