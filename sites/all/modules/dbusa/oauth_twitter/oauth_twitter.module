@@ -118,7 +118,7 @@ function oauth_twitter_account(){
 		          <a class="twitter-name-link" href="#">'.$twitterInfo->screen_name.'</a>
 		          <div class="twitter-body">
 		            <div class="twitter-body-contains">You have a twitter account with grabbit</div>
-		           <!-- <div class="views-field-action-link-requestee" id="removing-tw"><a href="#">Remove twitter account from grabbit</a></div> -->
+		            <div class="views-field-action-link-requestee" id="removing-tw"><a href="#">Remove twitter account from grabbit</a></div>
 		          </div>
 				</div>';
 	
