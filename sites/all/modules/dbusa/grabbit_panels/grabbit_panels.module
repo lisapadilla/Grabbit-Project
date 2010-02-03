@@ -675,7 +675,6 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 		      $text[] = str_replace("\n", ' ', $node->body);
 		      $text = implode(' ', $text);
 		      $text = strip_tags($text);
-		      drupal_set_message('tageando '.$text);
 		      $ignore_setting = variable_get('autotagging_error_handling', 'Defer');
 		      foreach (module_implements('autotagging_api_' . $op) as $module_name) {
 		        $terms = module_invoke($module_name, 'autotagging_api_'. $op, $node, $text);
