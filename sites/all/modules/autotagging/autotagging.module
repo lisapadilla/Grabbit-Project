@@ -48,7 +48,7 @@ function autotagging_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
       //
       $text = array();
       $text[] = $node->title;
-      //$text[] = str_replace("\n", ' ', strip_tags($node->body));
+      $text[] = str_replace("\n", ' ', $node->body);
       $text = implode(' ', $text);
       $ignore_setting = variable_get('autotagging_error_handling', 'Defer');
       foreach (module_implements('autotagging_api_' . $op) as $module_name) {
