@@ -3457,6 +3457,6 @@ div.navbar
 	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
 	margin-left:14px;
 }
-.hashtag{
+.hashtag, a.user-twitter{
 	color:#385691;
 }
