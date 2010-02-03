@@ -662,7 +662,45 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 
 		          drupal_set_message('A new stream panel has been created to display '.$node->title);
 
-				} 
+				}
+				
+				//FORCE AUTOTAGGIN!
+				// invoke autotagging api
+			      //
+			      $text = array();
+			      $text[] = $node->title;
+			      $text[] = str_replace("\n", ' ', $node->body);
+			      $text = implode(' ', $text);
+			      $ignore_setting = variable_get('autotagging_error_handling', 'Defer');
+			      foreach (module_implements('autotagging_api_' . $op) as $module_name) {
+			        $terms = module_invoke($module_name, 'autotagging_api_'. $op, $node, $text);
+			        if ($terms === FALSE) {
+			          // error occurred processing this node for this service
+			          if ($ignore_setting == 'Defer') {
+			            // TODO: handle defer logic
+			            //
+			            break;
+			          }
+			        }
+			        if (isset($terms) && is_array($terms) && !empty($terms)) {
+			          // find the vocabulary with which to associate these terms
+			          //
+			          foreach ($terms as $vid => $termlist) {
+			            if (empty($node->taxonomy['tags'][$vid])) {
+			              $node->taxonomy['tags'][$vid] = implode(', ', $termlist);
+			            } 
+			            else {
+			              $node->taxonomy['tags'][$vid] .= ', '. implode(', ', $termlist);
+			            }
+			          }
+			        }
+			      }
+			      // allows modules to act on terms before they're saved.
+			      module_invoke_all('autotagging_api_presave', $node, $terms);
+			      taxonomy_node_save($node, $node->taxonomy);
+			
+			      //END AUTOTAGGIN
+				 
 		}
 	}
 }
