@@ -3422,6 +3422,14 @@ div.navbar
 	height: 28px;
 	width: 45px;
 	text-indent: -9999em;
+	float: none;
+	position: absolute;
+}
+#content-area .node-news .flag-wrapper
+{
+	float: none;
+	margin: 0;
+	position: absolute;
 }
 #content-area .node-news #article-news a:hover
 {
