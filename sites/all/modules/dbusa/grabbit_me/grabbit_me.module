@@ -654,7 +654,7 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	      $item=unserialize($element->extra);
 	      $node=node_load($item['rss']);
 	      $node->created=$item['time'];
-	      $node->action=$item['action']
+	      $node->action=$item['action'];
 	      $output .= grabbit_me_theme_feeds($nod,$node);
 	  break;
 	  case 'feed':
