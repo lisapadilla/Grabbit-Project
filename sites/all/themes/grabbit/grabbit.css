@@ -3399,6 +3399,7 @@ div.navbar
 	margin: 0 47px;
 	font-size: 11px;
 	color: #999999;
+	clear: both;
 }
 .node-type-news #content .links a
 {
@@ -3414,4 +3415,45 @@ div.navbar
 .profile-extended-view .invite{
 	color:#999999;
 	font-size:11px;
+}
+
+#content-area .node-news #article-news a
+{
+	height: 28px;
+	width: 45px;
+	text-indent: -9999em;
+	float: none;
+	position: absolute;
+}
+#content-area .node-news .flag-wrapper
+{
+	float: none;
+	margin: 0;
+	position: absolute;
+}
+#content-area .node-news #article-news a:hover
+{
+	background-position: center -40px;
+}
+#content-area .node-news .grabb-that
+{
+	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
+	margin-left: 71px;
+}
+#content-area .node-news .trash-item
+{
+	background: url(images/btns/ctrl_del.gif) no-repeat center 0;
+	margin-left: 95px;
+	margin-top: -1px;
+}
+#content-area .node-news .comment-news
+{
+	background: url(images/btns/ctrl_com.gif) no-repeat center 0;
+	margin-left: 42px;
+	margin-top: 1px;
+}
+#content-area .node-news .flag-action
+{
+	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
+	margin-left:14px;
 }
