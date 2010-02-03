@@ -3420,7 +3420,8 @@ div.navbar
 #content-area .node-news #article-news a
 {
 	height: 28px;
-	width: 35px;
+	width: 45px;
+	text-indent: -9999em;
 }
 #content-area .node-news #article-news a:hover
 {
@@ -3429,4 +3430,16 @@ div.navbar
 #content-area .node-news .grabb-that
 {
 	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
+}
+#content-area .node-news .trash-item
+{
+	background: url(images/btns/ctrl_del.gif) no-repeat center 0;
+}
+#content-area .node-news .comment-news
+{
+	background: url(images/btns/ctrl_com.gif) no-repeat center 0;
+}
+#content-area .node-news .flag-action
+{
+	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
 }
