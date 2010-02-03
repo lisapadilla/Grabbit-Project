@@ -366,6 +366,11 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 
 function grabbit_me_theme_feeds($nod,$item){
 	
+	$action='feed added';
+	
+	if($item->action)
+	  $action=$item->action;
+	
 	if($item->field_rss_logo[0]['filepath']){
 		$logo=theme('imagecache', 'friend_thumbnail', $item->field_rss_logo[0]['filepath'], 'RSS');
 	}else{
@@ -379,7 +384,7 @@ function grabbit_me_theme_feeds($nod,$item){
 	  '.l($item->title,'node/'.$item->nid,array('attributes'=>array('target'=>'_blank','class'=>'twitter-name-link'))).'
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$item->body.'</div> 
-	    <span class="twitter-date"><span class="blue">feed added</span> on '.format_date($item->created).'</span>
+	    <span class="twitter-date"><span class="blue">'.$action.'</span> on '.format_date($item->created).'</span>
 	    <div class="flag-wrapper flag-myfeeds">'.flag_create_link('myfeeds', $item->nid).'</div>
 	  </div>
 	</div>';
@@ -523,13 +528,18 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 //Implementation of hook_flag
 function grabbit_me_flag($action, $flag, $content_id, $account){
 	global $user;
-	 if($flag->name=='myfeeds' && $action=='flag'){
+	 if($flag->name=='myfeeds'){
+		  
 	      $extra_array=array();
+	      if($action=='flag'){
+		    $extra_array['action']='feed added';
+	      }else{
+		    $extra_array['action']='feed removed';
+	      }
 		  $extra_array['twitter']=0;
 		  $extra_array['facebook']=0;
 		  $extra_array['time']=time();
 		  $extra_array['rss']=$content_id;
-		  $extra_array['action']=$action;
 
 		  $extra=serialize($extra_array);
 
@@ -644,6 +654,7 @@ function grabbit_me_get_statuses_all($uid,$limit=10){
 	      $item=unserialize($element->extra);
 	      $node=node_load($item['rss']);
 	      $node->created=$item['time'];
+	      $node->action=$item['action']
 	      $output .= grabbit_me_theme_feeds($nod,$node);
 	  break;
 	  case 'feed':
@@ -720,6 +731,7 @@ function grabbit_me_get_statuses_rss($uid,$limit=10){
 	$item=unserialize($status->extra);
 	$elemento=node_load($item['rss']);
 	$elemento->created=$item['time'];
+	$elemento->action=$item['action'];
 	$super_array[$status->number]=$elemento;
 	$super_array[$status->number]->timer=$status->number;
   }
@@ -735,8 +747,10 @@ function grabbit_me_get_statuses_rss($uid,$limit=10){
   foreach($total as $element){
 
 	      $node=node_load($element->nid);
-	      if($element->timer)
-	        $node->created=$element->timer;
+	      if($element->timer){
+		    $node->created=$element->timer;
+		    $node->action =$element->action;
+	      }
 	
 	      $output .= grabbit_me_theme_feeds($nod,$node);
 
