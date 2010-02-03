@@ -3399,6 +3399,7 @@ div.navbar
 	margin: 0 47px;
 	font-size: 11px;
 	color: #999999;
+	clear: both;
 }
 .node-type-news #content .links a
 {
@@ -3414,4 +3415,9 @@ div.navbar
 .profile-extended-view .invite{
 	color:#999999;
 	font-size:11px;
+}
+
+#content-area .node-news .grabb-that
+{
+	background: url(images/btns/ctrl_rtw.gif) no-repeat center;
 }
