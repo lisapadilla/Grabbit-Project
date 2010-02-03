@@ -46,8 +46,7 @@ function autotagging_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
 
       // invoke autotagging api
       //
-	ini_set("memory_limit","500M");
-	ini_set('max_execution_time', 500);
+	  ini_set("memory_limit","500M");
       $text = array();
       $text[] = $node->title;
       $text[] = str_replace("\n", ' ', strip_tags($node->body));
