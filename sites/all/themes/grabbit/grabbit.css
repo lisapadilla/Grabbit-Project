@@ -3438,16 +3438,22 @@ div.navbar
 #content-area .node-news .grabb-that
 {
 	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
+	margin-left: 78px;
 }
 #content-area .node-news .trash-item
 {
 	background: url(images/btns/ctrl_del.gif) no-repeat center 0;
+	margin-left: 95px;
+	margin-top: -1px;
 }
 #content-area .node-news .comment-news
 {
 	background: url(images/btns/ctrl_com.gif) no-repeat center 0;
+	margin-left:56px;
+	margin-top:1px;
 }
 #content-area .node-news .flag-action
 {
 	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
+	margin-left:35px;
 }
