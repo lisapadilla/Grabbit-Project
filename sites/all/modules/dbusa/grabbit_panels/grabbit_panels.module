@@ -675,6 +675,7 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 			      foreach (module_implements('autotagging_api_' . $op) as $module_name) {
 			        $terms = module_invoke($module_name, 'autotagging_api_'. $op, $node, $text);
 			        if ($terms === FALSE) {
+				      drupal_set_message('ERROR OCCURRED!!!!');
 			          // error occurred processing this node for this service
 			          if ($ignore_setting == 'Defer') {
 			            // TODO: handle defer logic
