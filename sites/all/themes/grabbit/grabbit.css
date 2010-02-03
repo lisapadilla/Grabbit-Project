@@ -1478,7 +1478,7 @@ a.trash-facebook, a.trash-twitter, a.trash-item{
 .odd a.trash-facebook, .odd a.trash-twitter, .odd a.trash-item{
   background: url(images/trash_ico_gr.gif) 0 0 no-repeat;
 }
-.flag-myfeeds .view-my-feeds a.flag{
+.view-my-feeds .flag-myfeeds a.flag{
   display: inline-block;
   width: auto;
   height: auto;
