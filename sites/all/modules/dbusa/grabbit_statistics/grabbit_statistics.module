@@ -43,10 +43,6 @@ function grabbit_statistics_detail_deals(){
 
 function grabbit_statistics_statistics(){
 	
-	$testing=grabbit_statistics_num_new(1, $timestamp = 0);
-	while($test=db_fetch_object($testing)){
-		print_r($test);
-	}
 	
 	drupal_add_js(drupal_get_path('module', 'grabbit_statistics').'/sorttable.js', $type = 'module');
 	$output .='<div class="admin-panel"><h3>Users Statistics</h3><div class="body"><p class="description"></p>';
