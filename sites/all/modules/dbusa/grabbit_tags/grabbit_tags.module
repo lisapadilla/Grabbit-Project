@@ -19,7 +19,7 @@ function grabbit_tags_display(){
 	$type=$_GET['type'];
 	
 	$node=node_load($nid);
-	
+	print_r($node->tags);
 	foreach($node->tags as  $tag){
 		$text[]=$tag->name;
 	}
