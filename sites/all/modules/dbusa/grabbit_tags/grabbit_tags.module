@@ -66,14 +66,11 @@ function grabbit_tags_save(){
 
         taxonomy_node_save($node, $node->taxonomy);
 
-	    print_r($node);
-	    print "OK";	
+	    print "OK";	// Everything went smooth
 
 	}else{
-		print "OT";
-	}
-	
-	
+		print "OT"; // No terms sent, so we return a no terms message to handle
+	}	
 }
 
 function grabbit_tags_profile_save(){
@@ -84,10 +81,25 @@ function grabbit_tags_profile_save(){
 }
 
 function grabbit_tags_delete(){
-	
+
 	$nid=$_GET['nid'];
-	$type=$_GET['tag'];
 	
-	$node=node_load($nid);
+	if($_GET['tag']){
+	
+		$term=$_GET['tag'];
+		$node=node_load($nid);
+		$terms=$node->taxonomy['tags'][3];
+		$node->taxonomy=array();
+		$terms = str_replace($term,'',$terms);
+		
+		$node->taxonomy['tags'][3]=$terms;
+        
+        taxonomy_node_save($node, $node->taxonomy);
+
+	    print "OK";	// Everything went smooth
+
+	}else{
+		print "OT"; // No terms sent, so we return a no terms message to handle
+	}
 	
 }
