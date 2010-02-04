@@ -20,8 +20,12 @@ function grabbit_tags_display(){
 	
 	$node=node_load($nid);
 	
-	print_r($node);
+	foreach($tags as  $tag){
+		$text[]=$tag->name;
+	}
 	
+	$text=implode(' ',$text);
+	print $text;
 	$output = '<div class="tags-engine"><span class="all-tags">';
 	
 	$output = '</span><span class=""></div>';
