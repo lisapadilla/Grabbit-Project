@@ -90,24 +90,7 @@ function grabbit_tags_profile_save(){
       $profile = content_profile_load('profile', $user->uid);
 
 	  foreach($node->tags[3] as $tag){
-        $tag_1=$tag->name;
-	    $try=taxonomy_get_term_by_name(trim($tag_1));
-	    if($try->vid){
-		  $profile->taxonomy[]=$try->tid;		  
-	    }else{
-		  if(count($try)){
-		 	$profile->taxonomy[]=$try[0]->tid;
-		  }else{
-		  	// I create a term in a specific vocabulary
-		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
-		    taxonomy_save_term($edit);
-		    $tid = $edit['tid'];
-		    // associate node and term
-
-		    $profile->taxonomy[]=$edit['tid'];
-		  }
-		}
-
+        $profile->taxonomy[$tag->tid]=$tag;
       }
 	print_r($profile->taxonomy);
 	  taxonomy_node_save($profile, $profile->taxonomy);
