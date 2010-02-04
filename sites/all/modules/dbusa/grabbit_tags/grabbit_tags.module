@@ -57,33 +57,18 @@ function grabbit_tags_save(){
 	
 	if($_GET['tags']){
 	
-		$tags=explode(",",$_GET['tags']);
+		$terms=$_GET['tags'];
 		$node=node_load($nid);
-        $node->taxonomy=array('tags'=>$_GET['tags']);
-        $node->tags=array();
-	    /*foreach($tags as $tag_1){
+		
+		if (isset($terms)) {
+           $node->taxonomy['tags'][3]=$terms;
+        }
 
-		    $try=taxonomy_get_term_by_name(trim($tag_1));
-		    if($try->vid){
-			  $node->taxonomy[]=$try->tid;		  
-		    }else{
-			  if(count($try)){
-			 	$node->taxonomy[]=$try[0]->tid;
-			  }else{
-			  	// I create a term in a specific vocabulary
-			    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 3);
-			    taxonomy_save_term($edit);
-			    $tid = $edit['tid'];
-			    // associate node and term
-			    $node->taxonomy[]=$edit['tid'];
-			  }
-			}
+        taxonomy_node_save($node, $node->taxonomy);
 
-	    }
-*/
-	    node_save($node);
-	print_r($node);
+	    print_r($node);
 	    print "OK";	
+
 	}else{
 		print "OT";
 	}
