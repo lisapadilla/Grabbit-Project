@@ -59,7 +59,7 @@ function grabbit_tags_save(){
 	
 		$terms=$_GET['tags'];
 		$node=node_load($nid);
-		
+		$node->taxonomy=array();
 		if (isset($terms)) {
            $node->taxonomy['tags'][3]=$terms;
         }
