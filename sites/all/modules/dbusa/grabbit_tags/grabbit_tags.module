@@ -109,7 +109,7 @@ function grabbit_tags_profile_save(){
 		}
 
       }
-	
+	print_r($profile->taxonomy);
 	  taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
 	
