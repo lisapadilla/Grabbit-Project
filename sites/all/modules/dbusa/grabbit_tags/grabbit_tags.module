@@ -22,11 +22,10 @@ function grabbit_tags_display(){
 	
 	foreach($node->tags as  $tag_group){
 		foreach($tag_group as $tag){
-			print_r($tag);
 		  $text[]=$tag->name;	
 		}
 	}
-	
+	print_r($text);
 	$text=implode(' ',$text);
 	print $text;
 	$output = '<div class="tags-engine"><span class="all-tags">';
