@@ -48,6 +48,12 @@ function autotagging_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
       //
 	  ini_set("memory_limit","500M");
       $text = array();
+      // only if this is a facebook node
+      if($node->type=='facebook'){
+	    $text[]=$node->field_text[0]['value'];
+	    $text[]=$node->field_attachment[0]['value'];
+      }
+      // end of facebook node
       $text[] = $node->title;
       $text[] = str_replace("\n", ' ', strip_tags($node->body));
       $text = implode(' ', $text);
