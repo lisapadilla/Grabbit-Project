@@ -81,6 +81,7 @@ function grabbit_tags_save(){
 	    }
 
 	    node_save($node);
+	print_r($node);
 	    print "OK";	
 	}else{
 		print "OT";
