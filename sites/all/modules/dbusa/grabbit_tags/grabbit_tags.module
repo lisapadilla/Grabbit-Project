@@ -49,10 +49,22 @@ function grabbit_tags_display(){
 	}
 	
 	print_r($text);
+
+    if(count($text)){
 	
-	$output = '<div class="tags-engine"><span class="all-tags">';
+	  $output = '<div class="tags-engine"><span class="all-tags"><ul>';
+   
+      foreach($text as $term){
+	    $output .='<li>'.$term.'</li>';
+      }
 	
-	$output = '</span><span class=""></div>';
+	  $output .= '</ul></span><span class=""></div>';
+	  
+	  print $output;
+    }else{
+	  print "OT";
+    }
+	
 	
 }
 
