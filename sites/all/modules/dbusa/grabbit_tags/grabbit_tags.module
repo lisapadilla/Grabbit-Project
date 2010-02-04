@@ -90,8 +90,10 @@ function grabbit_tags_delete(){
 		$node=node_load($nid);
 		$terms=$node->taxonomy['tags'][3];
 		$node->taxonomy=array();
+		print_r($terms);
+		print "separador";
 		$terms = str_replace($term,'',$terms);
-		
+		print_r($terms);
 		$node->taxonomy['tags'][3]=$terms;
         
         taxonomy_node_save($node, $node->taxonomy);
