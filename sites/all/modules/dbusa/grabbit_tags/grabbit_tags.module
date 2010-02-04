@@ -6,7 +6,7 @@
 function grabbit_tags_menu() {
 
   $items['tags/display'] = array( 
-    'page callback' => 'grabbit_tags_save', 
+    'page callback' => 'grabbit_tags_display', 
     'access arguments' => array('access content')
   );
 
