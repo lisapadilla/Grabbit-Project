@@ -35,10 +35,12 @@ function grabbit_tags_display(){
 	
 	$node=node_load($nid);
 	
-	foreach($node->tags as  $tag_group){
-		foreach($tag_group as $tag){
-		  $text[]=$tag->name;	
-		}
+	if(is_array($node->tags)){
+	  	foreach($node->tags as  $tag_group){
+			foreach($tag_group as $tag){
+			  $text[]=$tag->name;	
+			}
+		}	
 	}
 	
 	print_r($text);
