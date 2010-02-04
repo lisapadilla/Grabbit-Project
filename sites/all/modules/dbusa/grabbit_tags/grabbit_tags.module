@@ -1,0 +1,29 @@
+<?
+
+/**
+ * Implementation of hook_menu()
+ */
+function grabbit_tags_menu() {
+
+  $items['tags/display'] = array( 
+    'page callback' => 'grabbit_tags_save', 
+    'access arguments' => array('access content')
+  );
+
+  return $items;
+}
+
+function grabbit_tags_display(){
+	
+	$nid=$_GET['nid'];
+	$type=$_GET['type'];
+	
+	$node=node_load($nid);
+	
+	print_r($node);
+	
+	$output = '<div class="tags-engine"><span class="all-tags">';
+	
+	$output = '</span><span class=""></div>';
+	
+}
