@@ -25,7 +25,6 @@ function grabbit_tags_display(){
 		  $text[]=$tag->name;	
 		}
 	}
-	print_r($text);
 	
 	$text=implode(' ',$text);
 	print $text;
