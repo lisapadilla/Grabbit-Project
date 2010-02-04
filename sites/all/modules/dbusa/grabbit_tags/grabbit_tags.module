@@ -123,7 +123,14 @@ function grabbit_tags_profile_save_one(){
 		node_save($profile);
 	  }
 	  $tag=trim($tag);
-	  $profile->taxonomy['tags'][3]=$tag;  
+	// check if the term already exist
+	  	$try=taxonomy_get_term_by_name($tag);
+	    if($try->vid){
+		  $profile->taxonomy[]=$try->tid;		  
+	    }else{
+		  $profile->taxonomy['tags'][3]=$tag;
+	    }
+	// end check  
 	  taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
     }else{
