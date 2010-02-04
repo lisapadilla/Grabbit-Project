@@ -55,7 +55,15 @@ function grabbit_tags_display(){
 	  $output = '<div class="tags-engine"><span class="all-tags"><ul>';
    
       foreach($text as $term){
-	    $output .='<li>'.$term.'</li>';
+	    $output .='<li>
+	                   <span class="controlers-tags" tag="'.$term.'">
+	                    <a href="#" class="tag-yes">Yes</a>
+	                    <a href="#" class="tag-no">No</a>
+	                   </span>
+	                   <span class="actual-tag">
+	                   '.$term.'
+	                   </span>
+	               </li>';
       }
 	
 	  $output .= '</ul></span><span class=""></div>';
