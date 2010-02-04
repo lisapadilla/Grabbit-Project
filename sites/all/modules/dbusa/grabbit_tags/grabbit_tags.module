@@ -125,9 +125,13 @@ function grabbit_tags_profile_save_one(){
 	  $tag=trim($tag);
 	// check if the term already exist
 	  	$try=taxonomy_get_term_by_name($tag);
-	print_r($try);
-	    if($try->vid){
-		  $profile->taxonomy[$try->tid]=$try;		  
+	
+	    if($try){
+		  if($try->tid){
+		    $profile->taxonomy[$try->tid]=$try;
+		  }elseif(count($try)){
+		 	$profile->taxonomy[$try[0]->tid]=$try[0];
+		  }		  
 	    }else{
 		print "else";
 		  $profile->taxonomy['tags'][3]=$tag;
