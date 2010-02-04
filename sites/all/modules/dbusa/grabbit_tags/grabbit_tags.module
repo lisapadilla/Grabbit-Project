@@ -26,6 +26,7 @@ function grabbit_tags_display(){
 		}
 	}
 	print_r($text);
+	
 	$text=implode(' ',$text);
 	print $text;
 	$output = '<div class="tags-engine"><span class="all-tags">';
