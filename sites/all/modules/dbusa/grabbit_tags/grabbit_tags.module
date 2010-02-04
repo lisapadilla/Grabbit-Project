@@ -20,8 +20,10 @@ function grabbit_tags_display(){
 	
 	$node=node_load($nid);
 	print_r($node->tags);
-	foreach($node->tags as  $tag){
-		$text[]=$tag->name;
+	foreach($node->tags as  $tag_group){
+		foreach($tag_group as $tag){
+		  $text[]=$tag->name;	
+		}
 	}
 	
 	$text=implode(' ',$text);
