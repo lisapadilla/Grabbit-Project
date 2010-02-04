@@ -60,7 +60,7 @@ function grabbit_tags_save(){
 		$tags=explode(",",$_GET['tags']);
 		$node=node_load($nid);
 
-	    foreach($tags_feeds as $tag_1){
+	    foreach($tags as $tag_1){
 
 		    $try=taxonomy_get_term_by_name(trim($tag_1));
 		    if($try->vid){
