@@ -88,6 +88,8 @@ function grabbit_tags_profile_save(){
       global $user;
 
       $profile = content_profile_load('profile', $user->uid);
+print_r($profile);
+print_r($node);
       $new_tags = array_merge($profile->taxonomy[3],$node->taxonomy[3]);
 	  $profile->taxonomy[3]=$new_tags;
 	
