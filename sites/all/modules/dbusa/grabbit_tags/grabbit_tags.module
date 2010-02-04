@@ -133,7 +133,6 @@ function grabbit_tags_profile_save_one(){
 		 	$profile->taxonomy[$try[0]->tid]=$try[0];
 		  }		  
 	    }else{
-		print "else";
 		  $profile->taxonomy['tags'][3]=$tag;
 	    }
 	// end check  
