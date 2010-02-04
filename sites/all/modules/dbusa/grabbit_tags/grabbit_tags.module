@@ -88,11 +88,17 @@ function grabbit_tags_profile_save(){
       global $user;
 
       $profile = content_profile_load('profile', $user->uid);
-
+      if(!$profile->nid){
+		$profile = new StdClass();
+		$profile->type = 'profile';
+		$profile->uid=$user->uid;
+		$profile->title=$user->name;
+		node_save($profile);
+	  }
 	  foreach($node->tags[3] as $tag){
         $profile->taxonomy[$tag->tid]=$tag;
       }
-	print_r($profile->taxonomy);
+
 	  taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
 	
@@ -103,7 +109,22 @@ function grabbit_tags_profile_save(){
 }
 
 function grabbit_tags_profile_save_one(){
-	
+    $tag=$_GET['tag'];
+
+    if(isset($tag)){
+	  global $user;
+
+      $profile = content_profile_load('profile', $user->uid);
+      if(!$profile->nid){
+		$profile = new StdClass();
+		$profile->type = 'profile';
+		$profile->uid=$user->uid;
+		$profile->title=$user->name;
+		node_save($profile);
+	  }
+	  $tag=trim($tag);
+	  $node->taxonomy['tags'][3]=$tag;  
+    }
 }
 
 function grabbit_tags_delete(){
