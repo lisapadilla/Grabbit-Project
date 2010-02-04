@@ -123,7 +123,7 @@ function grabbit_tags_profile_save_one(){
 		node_save($profile);
 	  }
 	  $tag=trim($tag);
-	  $node->taxonomy['tags'][3]=$tag;  
+	  $profile->taxonomy['tags'][3]=$tag;  
 	  taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
     }else{
