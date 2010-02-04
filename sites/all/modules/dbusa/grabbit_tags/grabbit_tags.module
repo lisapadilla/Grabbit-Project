@@ -10,6 +10,21 @@ function grabbit_tags_menu() {
     'access arguments' => array('access content')
   );
 
+  $items['tags/save'] = array( 
+    'page callback' => 'grabbit_tags_save', 
+    'access arguments' => array('access content')
+  );
+
+  $items['tags/profile/save'] = array( 
+    'page callback' => 'grabbit_tags_profile_save', 
+    'access arguments' => array('access content')
+  );
+
+  $items['tags/delete'] = array( 
+    'page callback' => 'grabbit_tags_delete', 
+    'access arguments' => array('access content')
+  );
+
   return $items;
 }
 
@@ -26,10 +41,57 @@ function grabbit_tags_display(){
 		}
 	}
 	
-	$text=implode(' ',$text);
-	print $text;
+	print_r($text);
+	
 	$output = '<div class="tags-engine"><span class="all-tags">';
 	
 	$output = '</span><span class=""></div>';
+	
+}
+
+function grabbit_tags_save(){
+	
+	$nid=$_GET['nid'];
+	$tags=explode(",",$_GET['tags']);
+	
+	$node=node_load($nid);
+
+    foreach($tags_feeds as $tag_1){
+
+	    $try=taxonomy_get_term_by_name(trim($tag_1));
+	    if($try->vid){
+		  $node->taxonomy[]=$try->tid;		  
+	    }else{
+		  if(count($try)){
+		 	$node->taxonomy[]=$try[0]->tid;
+		  }else{
+		  	// I create a term in a specific vocabulary
+		    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 3);
+		    taxonomy_save_term($edit);
+		    $tid = $edit['tid'];
+		    // associate node and term
+		    $node->taxonomy[]=$edit['tid'];
+		  }
+		}
+
+    }
+
+    node_save($node);
+    print "all OK";
+}
+
+function grabbit_tags_profile_save(){
+	
+	$nid=$_GET['nid'];
+	$type=$_GET['type'];
+	
+}
+
+function grabbit_tags_delete(){
+	
+	$nid=$_GET['nid'];
+	$type=$_GET['tag'];
+	
+	$node=node_load($nid);
 	
 }
