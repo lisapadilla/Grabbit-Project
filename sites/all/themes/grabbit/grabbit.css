@@ -3585,7 +3585,10 @@ div.navbar
 }
 .deals-display .more
 {
-	float: right;
+	color:#FF6600;
+	float:right;
+	font-size:11px;
+	font-style:italic;
 }
 .deals-display .name
 {
