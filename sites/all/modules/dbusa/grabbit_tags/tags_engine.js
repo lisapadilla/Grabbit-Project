@@ -17,4 +17,8 @@ Drupal.behaviors.tagsEngine = function(){
     $(this).parent().html('');	
   });
 
+  $(document).keyup(function(e){
+    if (e.keyCode == 27) { $('.close-tags').click(); }	
+  });
+
 }
