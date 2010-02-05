@@ -3500,6 +3500,13 @@ div.navbar
 	outline: none;
 	resize: none;
 }
+.tags-engine .all-tags .tags-submit-profile{
+	float:right;
+	margin-left:10px;
+	margin-top:30px;
+	position:absolute;	
+}
+
 .tags-engine .tags-instruction{
 	color:#666666;
 	float:right;
@@ -3513,6 +3520,21 @@ div.navbar
 	padding:10px;
 	background: url(images/tags_bg.gif);
 	margin-bottom:13px;	
+}
+.tags-success{
+	background-color:#40B3FF;
+	color:#000000;
+	display:block;
+	font-size:12px;
+	font-weight:bold;
+	margin-left:-10px;
+	margin-top:-25px;
+	padding-bottom:1px;
+	padding-left:10px;
+	padding-right:5px;
+	padding-top:1px;
+	position:absolute;
+	width:601px;
 }
 .odd .bring-tags.selected{
 	height:24px;
