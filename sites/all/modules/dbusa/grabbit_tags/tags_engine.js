@@ -15,8 +15,9 @@ Drupal.behaviors.tagsEngine = function(){
 
   $('.close-tags').live('click', function(i){
 	i.preventDefault();
-    $(this).parent().html('');
-    $(this).removeClass('selected');	
+    var container = $(this).parents('.twitter-message-stream');
+    $('.bring-tags',container).removeClass('selected');
+    $(this).parent().remove();	
   });
 
   $(document).keyup(function(e){
