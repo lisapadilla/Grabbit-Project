@@ -5,6 +5,7 @@ Drupal.behaviors.tagsEngine = function(){
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
 			$('#tags-show-'+tag_node).html(data);
+			$(this).addClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
@@ -14,7 +15,8 @@ Drupal.behaviors.tagsEngine = function(){
 
   $('.close-tags').live('click', function(i){
 	i.preventDefault();
-    $(this).parent().html('');	
+    $(this).parent().html('');
+    $(this).removeClass('selected');	
   });
 
   $(document).keyup(function(e){
@@ -27,6 +29,7 @@ Drupal.behaviors.tagsEngine = function(){
 	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
 			$('#tags-show-'+tag_node).html('<span class="tags-success">The tags were added to your profile successfully.</span>');
+			$(this).removeClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
