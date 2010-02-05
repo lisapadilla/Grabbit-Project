@@ -3557,18 +3557,29 @@ div.navbar
 .deals-display .close
 {
 	float: right;
+	background: url(images/btns/deal_close.gif) no-repeat;
+	width: 40px;
+	height: 10px;
+	text-indent: -99em;
+	overflow: hidden;
 }
 .deals-display h4
 {
 	font-size: 12px;
 	color: #FF6600;
+	background: url(images/big_cart.gif) no-repeat;
 }
 .deals-display .buy
 {
-	float: right;
-	text-indent: -99em;
-	display: block;
-	background: url(images/btns/deal_buy.gif) no-repeat;
+	background:transparent url(images/btns/deal_buy.gif) no-repeat scroll 0 0;
+	display:block;
+	float:right;
+	height:17px;
+	margin-right:18px;
+	margin-top:5px;
+	overflow:hidden;
+	text-indent:-99em;
+	width:40px;
 }
 .deals-display .deal-item
 {

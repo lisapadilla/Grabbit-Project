@@ -40,7 +40,7 @@ function grabbit_deals_display()
         <span class="price">$109</span>
       </div>
     </div>
-    <div class="deal-item">
+    <div class="deal-item clearfix">
       <a class="buy" href="#">buy</a>
       <div class="provider">Amazon.com</div>
       <div class="info">
