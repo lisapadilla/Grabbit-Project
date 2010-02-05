@@ -52,11 +52,13 @@ function grabbit_tags_display(){
 
     if(count($text)){
 	
-	  $output = '<div class="tags-engine"><span class="all-tags"><ul>';
+	  $output = '<div class="tags-engine" node="'.$nid.'"><a href="#" class="close-tags">Close</a><span class="all-tags">';
    
-	    $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>';
+	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>
+	             <button type="button" class="tags-submit">Save</button>
+				 <button type="button" class="tags-cancel">Cancel</button>';
 	
-	  $output .= '</ul></span><span class=""></div>';
+	  $output .= '</span><span class="tags-to-profile"><button type="tags-submit-profile">Save to Profile</button></span></div>';
 	  
 	  print $output;
     }else{
