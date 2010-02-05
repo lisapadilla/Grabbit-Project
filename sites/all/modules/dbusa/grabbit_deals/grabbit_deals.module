@@ -27,11 +27,11 @@ function grabbit_deals_grabbit_status_form(){
 function grabbit_deals_display()
 {
   $out = 
-  '<div class="deals-display">
+  '<div class="deals-display clearfix">
     <a class="close" href="#">close</a>
     <h4>Deals that match your tags:</h4>
     
-    <div class="deal-item">
+    <div class="deal-item clearfix">
       <a class="buy" href="#">buy</a>
       <div class="provider">Amazon.com</div>
       <div class="info">

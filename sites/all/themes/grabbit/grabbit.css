@@ -3525,3 +3525,52 @@ div.navbar
 	margin-top:-13px;
 	background:transparent url(images/tags_ico_sel.gif) no-repeat scroll 0 0;
 }
+
+.deals-display
+{
+	background-color: #F6F3D8;
+	padding: 10px;
+	margin-bottom:10px;
+}
+.deals-display .close
+{
+	float: right;
+}
+.deals-display h4
+{
+	font-size: 12px;
+	color: #FF6600;
+}
+.deals-display .buy
+{
+	float: right;
+}
+.deals-display .deal-item
+{
+	clear: both;
+	margin-bottom: 5px;
+}
+.deals-display .provider
+{
+	float: left;
+	background-color: #FFFFFF;
+	width: 120px;
+	font-size: 12px;
+	color: #0099FF;
+	font-weight: bold;
+	padding: 3px;
+	margin-right: 5px;
+}
+.deals-display .more
+{
+	float: right;
+}
+.deals-display .info
+{
+	background-color: #FFFFFF;
+	width: 345px;
+	float: left;
+	font-size: 12px;
+	padding: 3px;
+	color: #666666;
+}
