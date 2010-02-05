@@ -61,7 +61,7 @@ function grabbit_tags_display(){
     if($node->nid){
 	  if(!count($text)){
 	    if($node->type=='twitter' || $node->type=='facebook'){
-		  $input ='<div class="no-tags">There are no tags in this item, you can add tags using the form below</div>';
+		  //$input ='<div class="no-tags">There are no tags in this item, you can add tags using the form below</div>';
 	    } 	
 	  }
 	  $output = '<div class="tags-engine" node="'.$nid.'">
