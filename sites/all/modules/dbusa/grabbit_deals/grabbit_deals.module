@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_menu()
  */
-function grabbit_tags_menu() {
+function grabbit_deals_menu() {
 
   $items['deals/display'] = array( 
     'page callback' => 'grabbit_deals_display', 
