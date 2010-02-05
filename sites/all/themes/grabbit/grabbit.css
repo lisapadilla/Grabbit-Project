@@ -3475,10 +3475,19 @@ div.navbar
 .hashtag, a.user-twitter{
 	color:#385691;
 }
+.tags-engine .close-tags{
+	color:#999999;
+	float:right;
+	font-size:10px;
+	font-weight:bold;
+	background: url(images/close_tags.gif) no-repeat center 0;
+	margin-left:14px;
+}
 .tags-engine{
-	height:90px;
+	height:80px;
+	padding:5px;
 	background: url(images/tags_bg.gif);
-	margin-bottom:13px;
+	margin-bottom:13px;	
 }
 .odd .bring-tags.selected{
 	height:24px;
