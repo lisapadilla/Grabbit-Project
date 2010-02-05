@@ -3500,6 +3500,13 @@ div.navbar
 	outline: none;
 	resize: none;
 }
+.tags-engine .all-tags .tags-submit-profile{
+	float:right;
+	margin-left:10px;
+	margin-top:30px;
+	position:absolute;	
+}
+
 .tags-engine .tags-instruction{
 	color:#666666;
 	float:right;
