@@ -3587,6 +3587,11 @@ div.navbar
 {
 	float: right;
 }
+.deals-display .name
+{
+	font-weight: bold;
+	color: #385491;
+}
 .deals-display .info
 {
 	background-color: #FFFFFF;
