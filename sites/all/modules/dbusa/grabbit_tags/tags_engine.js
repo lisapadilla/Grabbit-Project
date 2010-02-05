@@ -32,7 +32,7 @@ Drupal.behaviors.tagsEngine = function(){
 			$('#tags-show-'+tag_node).html('<span class="tags-success">The tags were added to your profile successfully.</span>').fadeIn(function(){
 			      setTimeout(function(){
 			         $(".tags-success").fadeOut("fast");
-			      }, 500);
+			      }, 2000);
 			});
 			
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
