@@ -2537,16 +2537,6 @@ div.messages, div.status, div.warning, div.error{
 	background:transparent url(images/tags_ico_gr.gif) no-repeat scroll 0 0;
 }
 
-.odd .bring-tags.selected{
-	height:24px;
-	background:transparent url(images/tags_ico_sel_gr.gif) no-repeat scroll 0 0;
-}
-
-.bring-tags.selected{
-	height:24px;
-	background:transparent url(images/tags_ico_sel.gif) no-repeat scroll 0 0;
-}
-
 
 .tooltip-deal .tooltip a{
 	color:#0073CF;
@@ -3488,4 +3478,14 @@ div.navbar
 .tags-engine{
 	height:90px;
 	background: url(images/tags_bg.gif)
+}
+.odd .bring-tags.selected{
+	height:24px;
+	background:transparent url(images/tags_ico_sel_gr.gif) no-repeat scroll 0 0;
+	margin-bottom:9px;
+}
+
+.bring-tags.selected{
+	height:24px;
+	background:transparent url(images/tags_ico_sel.gif) no-repeat scroll 0 0;
 }
