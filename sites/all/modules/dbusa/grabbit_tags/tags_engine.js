@@ -4,7 +4,7 @@ Drupal.behaviors.tagsEngine = function(){
 	
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
-			alert(data);
+			$('#tags-show-'+tag_node).html(data);
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
