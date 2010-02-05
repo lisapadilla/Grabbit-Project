@@ -2,10 +2,10 @@ Drupal.behaviors.tagsEngine = function(){
   $('.bring-tags').live('click',function(i){
 	var tag_node=$(this).attr('node');
 	var selector = $(this);
+	var parent = $(this).parents('.user-panel');
+	
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
-			var parent = $('#tags-show-'+tag_node).parents('.user-panel');
-			alert(parent.html());
 			$('#tags-show-'+tag_node, parent).html(data);
 			selector.addClass('selected');
 		}else{
@@ -28,10 +28,11 @@ Drupal.behaviors.tagsEngine = function(){
 
   $('.tags-submit-profile').live('click',function(i){
 	var tag_node=$(this).attr('node');
+    var parent = $(this).parents('.user-panel');
 
 	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
-			var parent = $('#tags-show-'+tag_node).parents('.user-panel');
+
 			$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your profile successfully.</span>').fadeIn(function(){
 			      setTimeout(function(){
 			         $(".tags-success").fadeOut("fast");
