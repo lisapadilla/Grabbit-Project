@@ -5,6 +5,7 @@ Drupal.behaviors.tagsEngine = function(){
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
 			var parent = $('#tags-show-'+tag_node).parents('.user-panel');
+			alert(parent.html());
 			$('#tags-show-'+tag_node, parent).html(data);
 			selector.addClass('selected');
 		}else{
