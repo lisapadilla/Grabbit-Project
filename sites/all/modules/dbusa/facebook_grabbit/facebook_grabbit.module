@@ -1700,7 +1700,7 @@ function theme_twitter_message($node){
 	  else{ //true
 	    $output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" nid="'.$node->nid.'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a></div>';
 	  }
-
+    $output .='<span class="url-deal"><a href="#">Deal</a></span>';
 	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
 	<a href="'.$node->field_twitter_url[0]['value'].'" class="twitter-name-link" target="_blank">'.$node->field_twitter_name[0]['value'].'</a>
 	          <div class="twitter-body"><div class="twitter-body-contains">'.$msg_formatted. '</div> <span class="twitter-date">on '. format_date($node->created) . '</span>
