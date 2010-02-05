@@ -3489,11 +3489,14 @@ div.navbar
 	display:block;
 	font-size:12px;
 	font-weight:bold;
+	padding-left:20px;
 	background:transparent url(images/tags_icon.gif) no-repeat scroll left 0;
 }
 .tags-engine .all-tags textarea{
 	font-size:12px;
 	width:428px;
+	height:49px;
+	color:#999;
 }
 .tags-engine .tags-instruction{
 	color:#666666;
@@ -3504,8 +3507,8 @@ div.navbar
 	position:absolute;
 }
 .tags-engine{
-	height:80px;
-	padding:5px;
+	height:70px;
+	padding:10px;
 	background: url(images/tags_bg.gif);
 	margin-bottom:13px;	
 }
