@@ -48,9 +48,15 @@ function grabbit_tags_display(){
 		}	
 	}
 
-    if(count($text)){
-	
-	  $output = '<div class="tags-engine" node="'.$nid.'"><a href="#" class="close-tags">Close</a><span class="all-tags">';
+    if($node->nid){
+	  if(!count($text)){
+	    if($node->type=='twitter' || $node->type=='facebook'){
+		  $input ='<div class="no-tags">There are no tags in this item, you can add tags using the form below</div>';
+	    } 	
+	  }
+	  $output = '<div class="tags-engine" node="'.$nid.'">
+	             '.$input.'
+	             <a href="#" class="close-tags">Close</a><span class="all-tags">';
    
 	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>
 	             <button type="button" class="tags-submit">Save</button>
