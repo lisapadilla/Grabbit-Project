@@ -3521,6 +3521,21 @@ div.navbar
 	background: url(images/tags_bg.gif);
 	margin-bottom:13px;	
 }
+.tags-success{
+	background-color:#40B3FF;
+	color:#000000;
+	display:block;
+	font-size:12px;
+	font-weight:bold;
+	margin-left:-10px;
+	margin-top:-25px;
+	padding-bottom:1px;
+	padding-left:10px;
+	padding-right:5px;
+	padding-top:1px;
+	position:absolute;
+	width:601px;
+}
 .odd .bring-tags.selected{
 	height:24px;
 	margin-top:-13px;
