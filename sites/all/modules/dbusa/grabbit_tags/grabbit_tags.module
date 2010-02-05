@@ -68,11 +68,12 @@ function grabbit_tags_display(){
 	             '.$input.'
 	             <a href="#" class="close-tags">Close</a><span class="all-tags">
 	             <span class="tags-legend">Add item tags to my profile:</span>
-	             <span class="tags-instruction">(comma-separated list)</span>';
+	             ';
    
-	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>';
+	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>
+	             <span class="tags-instruction">(comma-separated list)</span>';
 	
-	  $output .= '</span><span class="tags-to-profile"><button node="'.$nid.'" class="tags-submit-profile">Add</button></span></div>';
+	  $output .= '<button node="'.$nid.'" class="tags-submit-profile">Add</button></span></div>';
 	  
 	  print $output;
     }else{

@@ -3484,6 +3484,24 @@ div.navbar
 	line-height:10px;
 	width:42px;
 }
+.tags-engine .tags-legend{
+	color:#0073CF;
+	display:block;
+	font-size:12px;
+	font-weight:bold;
+}
+.tags-engine .all-tags textarea{
+	font-size:12px;
+	width:428px;
+}
+.tags-engine .tags-instruction{
+	color:#666666;
+	float:right;
+	font-size:11px;
+	font-style:italic;
+	margin-left:10px;
+	position:absolute;
+}
 .tags-engine{
 	height:80px;
 	padding:5px;
