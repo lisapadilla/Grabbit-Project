@@ -5,7 +5,7 @@ Drupal.behaviors.tagsEngine = function(){
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
 			$('#tags-show-'+tag_node).html(data);
-			$(this).addClass('selected');
+			$(i).addClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
