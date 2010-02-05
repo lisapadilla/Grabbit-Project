@@ -11,4 +11,9 @@ Drupal.behaviors.tagsEngine = function(){
 	});
 	
   });
+
+  $('.close-tags').live('click', function(i){
+    $(this).parent().html();	
+  });
+
 }
