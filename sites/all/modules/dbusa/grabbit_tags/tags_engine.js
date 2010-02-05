@@ -13,6 +13,7 @@ Drupal.behaviors.tagsEngine = function(){
   });
 
   $('.close-tags').live('click', function(i){
+	i.preventDefault();
     $(this).parent().html();	
   });
 
