@@ -54,7 +54,7 @@ function grabbit_tags_display(){
 	
 	  $output = '<div class="tags-engine"><span class="all-tags"><ul>';
    
-	    $output .='<textarea id="text-area-'.$nid.'">'.implode(',',$text).'</textarea>';
+	    $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>';
 	
 	  $output .= '</ul></span><span class=""></div>';
 	  
