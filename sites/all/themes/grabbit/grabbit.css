@@ -3489,6 +3489,7 @@ div.navbar
 	display:block;
 	font-size:12px;
 	font-weight:bold;
+	background:transparent url(images/tags_icon.gif) no-repeat scroll left 0;
 }
 .tags-engine .all-tags textarea{
 	font-size:12px;
