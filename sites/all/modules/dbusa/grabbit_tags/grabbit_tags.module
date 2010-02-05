@@ -33,6 +33,16 @@ function grabbit_tags_menu() {
   return $items;
 }
 
+//implementation of hook grabbit_status_form
+function grabbit_tags_grabbit_status_form(){
+	global $user;
+	
+	if($user->uid>0){
+		drupal_add_js(drupal_get_path('module', 'grabbit_tags').'/tags_engine.js', $type = 'module');		
+	}
+	
+}
+
 function grabbit_tags_display(){
 	
 	$nid=$_GET['nid'];
