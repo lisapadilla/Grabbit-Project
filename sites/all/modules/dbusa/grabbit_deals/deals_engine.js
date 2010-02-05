@@ -2,7 +2,7 @@ Drupal.behaviors.deals = function()
 {
   $('.url-deal a').live('click', function(i){
     i.preventDefault();
-    var nid = i.attr('node');
+    var nid = $(this).attr('node');
     var x = Math.random();
     $.get(Drupal.settings.basePath+"deals/display",{x:x},function(data){
        if (data)
