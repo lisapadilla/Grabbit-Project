@@ -3477,15 +3477,17 @@ div.navbar
 }
 .tags-engine{
 	height:90px;
-	background: url(images/tags_bg.gif)
+	background: url(images/tags_bg.gif);
+	margin-bottom:13px;
 }
 .odd .bring-tags.selected{
 	height:24px;
+	margin-top:-13px;
 	background:transparent url(images/tags_ico_sel_gr.gif) no-repeat scroll 0 0;
-	margin-bottom:9px;
 }
 
 .bring-tags.selected{
 	height:24px;
+	margin-top:-13px;
 	background:transparent url(images/tags_ico_sel.gif) no-repeat scroll 0 0;
 }
