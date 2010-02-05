@@ -3497,6 +3497,8 @@ div.navbar
 	width:428px;
 	height:49px;
 	color:#999;
+	outline: none;
+	resize: none;
 }
 .tags-engine .tags-instruction{
 	color:#666666;
