@@ -2523,6 +2523,21 @@ div.messages, div.status, div.warning, div.error{
 	background:transparent url(images/tags_ico_gr.gif) no-repeat scroll 0 0;
 }
 
+.bring-tags{
+	background:transparent url(images/tags_ico.gif) no-repeat scroll 0 0;
+	display:block;
+	float:right;
+	height:11px;
+	margin-left:5px;
+	text-indent:3000em;
+	width:11px;
+	cursor:pointer;
+}
+.odd .bring-tags{
+	background:transparent url(images/tags_ico_gr.gif) no-repeat scroll 0 0;
+}
+
+
 .tooltip-deal .tooltip a{
 	color:#0073CF;
 	font-size:12px;
