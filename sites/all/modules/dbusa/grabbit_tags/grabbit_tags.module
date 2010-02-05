@@ -38,7 +38,7 @@ function grabbit_tags_grabbit_status_form(){
 	global $user;
 	
 	if($user->uid>0){
-		drupal_add_js(drupal_get_path('module', 'grabbit_tags').'/tags_engine.js', $type = 'module');		
+	  drupal_add_js(drupal_get_path('module', 'grabbit_tags').'/tags_engine.js', $type = 'module');		
 	}
 	
 }
@@ -66,13 +66,13 @@ function grabbit_tags_display(){
 	  }
 	  $output = '<div class="tags-engine" node="'.$nid.'">
 	             '.$input.'
-	             <a href="#" class="close-tags">Close</a><span class="all-tags">';
+	             <a href="#" class="close-tags">Close</a><span class="all-tags">
+	             <span class="tags-legend">Add item tags to my profile:</span>
+	             <span class="tags-instruction">(comma-separated list)</span>';
    
-	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>
-	             <button type="button" class="tags-submit">Save</button>
-				 <button type="button" class="tags-cancel">Cancel</button>';
+	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>';
 	
-	  $output .= '</span><span class="tags-to-profile"><button type="tags-submit-profile">Save to Profile</button></span></div>';
+	  $output .= '</span><span class="tags-to-profile"><button type="tags-submit-profile">Add</button></span></div>';
 	  
 	  print $output;
     }else{
