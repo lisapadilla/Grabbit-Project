@@ -3475,3 +3475,7 @@ div.navbar
 .hashtag, a.user-twitter{
 	color:#385691;
 }
+.tags-engine{
+	height:99px;
+	background: url(images/tags_bg.gif)
+}

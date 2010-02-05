@@ -26,7 +26,7 @@ Drupal.behaviors.tagsEngine = function(){
 
 	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
-			$('#tags-show-'+tag_node).html('<span class="tags-success">Your tags were added to your profile successfully.</span>');
+			$('#tags-show-'+tag_node).html('<span class="tags-success">The tags were added to your profile successfully.</span>');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
