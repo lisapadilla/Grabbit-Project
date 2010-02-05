@@ -35,7 +35,7 @@ function grabbit_deals_display()
       <a class="buy" href="#">buy</a>
       <div class="provider">Amazon.com</div>
       <div class="info">
-        <a class="more">more...</a>
+        <a class="more" href="#">more...</a>
         <span class="name">Silver iPod Nano, 16 GB</span>
         <span class="price">$109</span>
       </div>
@@ -44,7 +44,7 @@ function grabbit_deals_display()
       <a class="buy" href="#">buy</a>
       <div class="provider">Amazon.com</div>
       <div class="info">
-        <a class="more">more...</a>
+        <a class="more" href="#">more...</a>
         <span class="name">Silver iPod Nano, 16 GB</span>
         <span class="price">$109</span>
       </div>
