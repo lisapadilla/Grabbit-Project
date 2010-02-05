@@ -3566,6 +3566,9 @@ div.navbar
 .deals-display .buy
 {
 	float: right;
+	text-indent: -99em;
+	display: block;
+	background: url(images/btns/deal_buy.gif) no-repeat;
 }
 .deals-display .deal-item
 {
@@ -3585,7 +3588,19 @@ div.navbar
 }
 .deals-display .more
 {
-	float: right;
+	color:#FF6600;
+	float:right;
+	font-size:11px;
+	font-style:italic;
+}
+.deals-display .more span
+{
+	text-decoration: underline;
+}
+.deals-display .name
+{
+	font-weight: bold;
+	color: #385491;
 }
 .deals-display .info
 {
