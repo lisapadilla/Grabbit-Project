@@ -47,8 +47,6 @@ function grabbit_tags_display(){
 			}
 		}	
 	}
-	
-	print_r($text);
 
     if(count($text)){
 	
