@@ -3476,12 +3476,13 @@ div.navbar
 	color:#385691;
 }
 .tags-engine .close-tags{
+	background:transparent url(images/close_tags.gif) no-repeat scroll right 0;
 	color:#999999;
 	float:right;
 	font-size:10px;
 	font-weight:bold;
-	background: url(images/close_tags.gif) no-repeat center 0;
-	margin-left:14px;
+	line-height:10px;
+	width:42px;
 }
 .tags-engine{
 	height:80px;
