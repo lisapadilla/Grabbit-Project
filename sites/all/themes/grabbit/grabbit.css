@@ -3475,3 +3475,53 @@ div.navbar
 .hashtag, a.user-twitter{
 	color:#385691;
 }
+.tags-engine .close-tags{
+	background:transparent url(images/close_tags.gif) no-repeat scroll right 0;
+	color:#999999;
+	float:right;
+	font-size:10px;
+	font-weight:bold;
+	line-height:10px;
+	width:42px;
+}
+.tags-engine .tags-legend{
+	color:#0073CF;
+	display:block;
+	font-size:12px;
+	font-weight:bold;
+	padding-left:20px;
+	background:transparent url(images/tags_icon.gif) no-repeat scroll left 0;
+}
+.tags-engine .all-tags textarea{
+	font-size:12px;
+	width:428px;
+	height:49px;
+	color:#999;
+	outline: none;
+	resize: none;
+}
+.tags-engine .tags-instruction{
+	color:#666666;
+	float:right;
+	font-size:11px;
+	font-style:italic;
+	margin-left:10px;
+	position:absolute;
+}
+.tags-engine{
+	height:70px;
+	padding:10px;
+	background: url(images/tags_bg.gif);
+	margin-bottom:13px;	
+}
+.odd .bring-tags.selected{
+	height:24px;
+	margin-top:-13px;
+	background:transparent url(images/tags_ico_sel_gr.gif) no-repeat scroll 0 0;
+}
+
+.bring-tags.selected{
+	height:24px;
+	margin-top:-13px;
+	background:transparent url(images/tags_ico_sel.gif) no-repeat scroll 0 0;
+}

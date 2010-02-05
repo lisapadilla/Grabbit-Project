@@ -1,10 +1,11 @@
 Drupal.behaviors.tagsEngine = function(){
   $('.bring-tags').live('click',function(i){
 	var tag_node=$(this).attr('node');
-	
+	var selector = $(this);
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
 			$('#tags-show-'+tag_node).html(data);
+			selector.addClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
@@ -14,7 +15,9 @@ Drupal.behaviors.tagsEngine = function(){
 
   $('.close-tags').live('click', function(i){
 	i.preventDefault();
-    $(this).parent().html('');	
+    var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
+    $('.bring-tags',container).removeClass('selected');
+    $(this).parent().remove();	
   });
 
   $(document).keyup(function(e){
@@ -26,7 +29,8 @@ Drupal.behaviors.tagsEngine = function(){
 
 	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
-			$('#tags-show-'+tag_node).html('<span class="tags-success">Your tags were added to your profile successfully.</span>');
+			$('#tags-show-'+tag_node).html('<span class="tags-success">The tags were added to your profile successfully.</span>');
+			$(this).removeClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
