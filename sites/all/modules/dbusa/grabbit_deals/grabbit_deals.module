@@ -32,7 +32,7 @@ function grabbit_deals_display()
     <h4>Deals that match your tags:</h4>
     
     <div class="deal-item">
-      <a class="buy">buy</a>
+      <a class="buy" href="#">buy</a>
       <div class="provider">Amazon.com</div>
       <div class="info">
         <a class="more">more...</a>
@@ -41,7 +41,7 @@ function grabbit_deals_display()
       </div>
     </div>
     <div class="deal-item">
-      <a class="buy">buy</a>
+      <a class="buy" href="#">buy</a>
       <div class="provider">Amazon.com</div>
       <div class="info">
         <a class="more">more...</a>
