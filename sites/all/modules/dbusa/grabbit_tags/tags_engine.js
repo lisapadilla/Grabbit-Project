@@ -21,4 +21,17 @@ Drupal.behaviors.tagsEngine = function(){
     if (e.keyCode == 27) { $('.close-tags').click(); }	
   });
 
+  $('.tags-submit-profile').live('click',function(i){
+	var tag_node=$(this).attr('node');
+
+	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
+		if (data){
+			$('#tags-show').html('<span class="tags-success">Your tags were added to your profile successfully.</span>');
+		}else{
+			alert('Oops, there was a problem connecting to the server. Please try again');
+		}
+	});
+
+  });
+
 }

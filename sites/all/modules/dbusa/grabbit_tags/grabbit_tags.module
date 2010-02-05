@@ -72,7 +72,7 @@ function grabbit_tags_display(){
    
 	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>';
 	
-	  $output .= '</span><span class="tags-to-profile"><button class="tags-submit-profile">Add</button></span></div>';
+	  $output .= '</span><span class="tags-to-profile" node="'.$nid.'"><button class="tags-submit-profile">Add</button></span></div>';
 	  
 	  print $output;
     }else{
