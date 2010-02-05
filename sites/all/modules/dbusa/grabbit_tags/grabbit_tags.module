@@ -62,7 +62,10 @@ function grabbit_tags_display(){
 	  if(!count($text)){
 	    if($node->type=='twitter' || $node->type=='facebook'){
 		  //$input ='<div class="no-tags">There are no tags in this item, you can add tags using the form below</div>';
+		  $text = '';
 	    } 	
+	  }else{
+		$text = implode(', ',$text);
 	  }
 	  $output = '<div class="tags-engine" node="'.$nid.'">
 	             '.$input.'
@@ -70,7 +73,7 @@ function grabbit_tags_display(){
 	             <span class="tags-legend">Add item tags to my profile:</span>
 	             ';
    
-	  $output .='<textarea id="text-area-'.$nid.'">'.implode(', ',$text).'</textarea>
+	  $output .='<textarea id="text-area-'.$nid.'">'.$text.'</textarea>
 	             <span class="tags-instruction">(comma-separated list)</span>';
 	
 	  $output .= '<button node="'.$nid.'" class="tags-submit-profile">Add</button></span></div>';
@@ -110,7 +113,7 @@ function grabbit_tags_profile_save(){
 	$nid=$_GET['nid'];
 	
 	if($nid){
-		
+	  	
 	  $node = node_load($nid);
       global $user;
 
@@ -122,9 +125,12 @@ function grabbit_tags_profile_save(){
 		$profile->title=$user->name;
 		node_save($profile);
 	  }
-	  foreach($node->tags[3] as $tag){
-        $profile->taxonomy[$tag->tid]=$tag;
-      }
+	
+	  if(is_array($node->tags[3])){
+	    foreach($node->tags[3] as $tag){
+          $profile->taxonomy[$tag->tid]=$tag;
+        }	
+	  }
 
 	  taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
