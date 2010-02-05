@@ -14,7 +14,7 @@ function grabbit_deals_menu() {
 }
 
 //implementation of hook grabbit_status_form
-function grabbit_tags_grabbit_status_form(){
+function grabbit_deals_grabbit_status_form(){
 	global $user;
 	
 	if($user->uid>0)
