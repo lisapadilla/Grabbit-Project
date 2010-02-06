@@ -3,11 +3,13 @@ Drupal.behaviors.deals = function()
   $('.url-deal a').live('click', function(i){
     i.preventDefault();
     var nid = $(this).attr('node');
+    var anch = $(this);
     var x = Math.random();
     $.get(Drupal.settings.basePath+"deals/display",{x:x},function(data){
        if (data)
        {
            $('#tags-show-'+nid).html(data);
+           anch.toggleClass('selected');
        }
     });
   });
