@@ -3573,6 +3573,14 @@ div.navbar
 	padding-left:25px;
 	padding-top:3px;
 }
+.url-deal a.selected
+{
+	height:25px;
+	margin-top:-10px;
+	overflow:hidden;
+	text-indent:-99em;
+	width:16px;
+}
 .even .url-deal a.selected
 {
 	background: url(images/btns/cart_pnch_w.gif) no-repeat;
