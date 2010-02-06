@@ -3551,7 +3551,7 @@ div.navbar
 .deals-display
 {
 	background-color: #F6F3D8;
-	padding: 10px;
+	padding:10px 10px 5px;
 	margin-bottom:10px;
 }
 .deals-display .close
@@ -3565,9 +3565,13 @@ div.navbar
 }
 .deals-display h4
 {
-	font-size: 12px;
-	color: #FF6600;
-	background: url(images/big_cart.gif) no-repeat;
+	background:transparent url(images/big_cart.gif) no-repeat scroll 0 0;
+	color:#FF6600;
+	font-size:12px;
+	height:17px;
+	margin-bottom:10px;
+	padding-left:25px;
+	padding-top:3px;
 }
 .deals-display .buy
 {
