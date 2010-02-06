@@ -3573,6 +3573,14 @@ div.navbar
 	padding-left:25px;
 	padding-top:3px;
 }
+.even .url-deal a.selected
+{
+	background: url(images/btns/cart_pnch_w.gif) no-repeat;
+}
+.odd .url-deal a.selected
+{
+	background: url(images/btns/cart_pnch_g.gif) no-repeat;
+}
 .deals-display .buy
 {
 	background:transparent url(images/btns/deal_buy.gif) no-repeat scroll 0 0;
