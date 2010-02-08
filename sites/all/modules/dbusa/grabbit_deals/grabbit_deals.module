@@ -46,16 +46,14 @@ function grabbit_deals_display()
   
   if ( $result )
   {
-    // get the first five deals ONLY
-    $deals = array_slice( $result->Items->Item, 0, 5 );
+    //$result = array_slice( $result, 0, 5 );
     
-    // build the markup
     $out = 
     '<div class="deals-display clearfix">
       <a class="close" href="#">close</a>
       <h4>Deals that match your tags:</h4>';
-    
-    foreach ( $deals as $i )
+      
+    foreach ( $result->Items->Item as $i )
     {
       $out .= 
       '<div class="deal-item clearfix">'.
@@ -69,7 +67,6 @@ function grabbit_deals_display()
         </div>
       </div>';
     }
-    
     $out .= '</div>';
   
     print $out;  
