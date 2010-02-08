@@ -149,7 +149,7 @@ function grabbit_tags_custom_profile_save(){
 			  }		  
 		    }else{
 			  		// I create a term in a specific vocabulary
-				    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
+				    $edit = array('name' => trim($tag), 'description' => ' ', 'weight' => "0", 'vid' => 3);
 				    taxonomy_save_term($edit);
 				    $tid = $edit['tid'];
 				    // associate node and term
