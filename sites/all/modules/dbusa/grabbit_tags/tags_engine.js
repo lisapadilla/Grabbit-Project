@@ -30,7 +30,17 @@ Drupal.behaviors.tagsEngine = function(){
 	var tag_node=$(this).attr('node');
     var parent = $(this).parents('.user-panel');
 
-	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
+    /*if()
+
+    $.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
+	  	if (data){
+		
+ 	    }else{
+			alert('Oops, there was a problem connecting to the server. Please try again');
+		}
+    });
+*/
+    $.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
 
 			$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your profile successfully.</span>').fadeIn(function(){

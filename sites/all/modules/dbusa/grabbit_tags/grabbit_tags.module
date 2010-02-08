@@ -44,8 +44,21 @@ function grabbit_tags_grabbit_status_form(){
 }
 
 function grabbit_tags_display(){
+
+    $nid=$_GET['nid'];
+    global $user;
+    $uid=$user->uid;
+
+	$node=node_load($nid);
+	$profile = content_profile_load('profile', $uid);
+	if($node->nid && $profile->nid){
+      print_r($node);
+      print_r($profile);		
+	}else{
+		//return 0; // the user has no profile or the parameters were incorrect
+	}
 	
-	$nid=$_GET['nid'];
+/*	$nid=$_GET['nid'];
 	$type=$_GET['type'];
 	
 	$node=node_load($nid);
@@ -71,7 +84,7 @@ function grabbit_tags_display(){
 		$allowed='<span class="tags-block"><input type="checkbox" name="save-tags" value="1" checked="checked" /> Save tags to item.</span>';
 	  }
 	  $output = '<div class="tags-engine" node="'.$nid.'">
-	             '.$input.'
+	            '.$input.'
 	             <a href="#" class="close-tags">Close</a><span class="all-tags">
 	             <span class="tags-legend">Add item tags to my profile:</span><span class="tags-instruction">(comma-separated list)</span>
 	             ';
@@ -88,7 +101,7 @@ function grabbit_tags_display(){
     }else{
 	  print "OT";
     }
-	
+*/	
 	
 }
 
