@@ -29,9 +29,15 @@ Drupal.behaviors.tagsEngine = function(){
   $('.tags-submit-profile').live('click',function(i){
 	var tag_node=$(this).attr('node');
     var parent = $(this).parents('.user-panel');
+    var options = $(this).parent('.all-tags');
 
-    /*if()
-
+    if($('#add-tags',options).val()!==null){
+	  alert('add tags');
+    }
+    if($('#save-tags',options).val()!==null){
+	  alert('save tags');
+    }
+/*
     $.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
 		
@@ -39,7 +45,7 @@ Drupal.behaviors.tagsEngine = function(){
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
     });
-*/
+
     $.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
 
@@ -55,7 +61,7 @@ Drupal.behaviors.tagsEngine = function(){
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
 	});
-
+  */
   });
 
 }
