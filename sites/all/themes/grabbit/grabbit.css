@@ -3486,7 +3486,6 @@ div.navbar
 }
 .tags-engine .tags-legend{
 	color:#0073CF;
-	display:block;
 	font-size:12px;
 	font-weight:bold;
 	padding-left:20px;
@@ -3509,11 +3508,9 @@ div.navbar
 
 .tags-engine .tags-instruction{
 	color:#666666;
-	float:right;
 	font-size:11px;
 	font-style:italic;
 	margin-left:10px;
-	position:absolute;
 }
 .tags-engine{
 	height:70px;
@@ -3647,4 +3644,7 @@ div.navbar
 	font-size:11px;
 	margin-top:0;
 	position:absolute;
+}
+.tags-block{
+	display:block;
 }

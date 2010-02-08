@@ -68,7 +68,7 @@ function grabbit_tags_display(){
 		$text = implode(', ',$text);
 	  }
 	  if($node->type!='news'){
-		$allowed='<input type="checkbox" name="save-tags" value="1" checked="checked" /> Save tags to item.';
+		$allowed='<span class="tags-block"><input type="checkbox" name="save-tags" value="1" checked="checked" /> Save tags to item.</span>';
 	  }
 	  $output = '<div class="tags-engine" node="'.$nid.'">
 	             '.$input.'
@@ -80,7 +80,7 @@ function grabbit_tags_display(){
 	
 	  $output .= '<span class="checkboxes-tags">
 	              '.$allowed.'
-	              <input type="checkbox" name="add-tags" value="1" checked="checked" /> Add tags to my profile.
+	              <span class="tags-block"><input type="checkbox" name="add-tags" value="1" checked="checked" /> Add tags to my profile.</span>
 	              </span>
 	              <button node="'.$nid.'" class="tags-submit-profile">Add</button></span></div>';
 	  
