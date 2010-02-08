@@ -26,6 +26,20 @@ function grabbit_deals_grabbit_status_form(){
 
 function grabbit_deals_display()
 {
+  require_once 'amazon/amazon_api_class.php';
+
+  $obj = new AmazonProductAPI();  
+  try
+  {
+    $result = $obj->getItemByKeyword("Crave By Calvin Klein For Men", AmazonProductAPI::ALL);
+  }
+  catch(Exception $e)
+  {
+    echo $e->getMessage();
+  }
+  
+  print_r($result);
+  
   $out = 
   '<div class="deals-display clearfix">
     <a class="close" href="#">close</a>
