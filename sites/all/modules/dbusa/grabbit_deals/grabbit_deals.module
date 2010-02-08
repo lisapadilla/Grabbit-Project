@@ -99,8 +99,8 @@ function grabbit_deals_extract_tags($nid, $uid){
 	    }	
 	  }
 	
-	  print_r($node_tags);
-	  print_r($profile_tags);
+	  //print_r($node_tags);
+	  //print_r($profile_tags);
 	  $result=array_intersect($profile_tags, $node_tags);
 	  if(is_array($result)){
 		  return implode(', ',$result);
