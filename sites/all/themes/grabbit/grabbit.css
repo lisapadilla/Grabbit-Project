@@ -3642,3 +3642,9 @@ div.navbar
 	padding: 3px;
 	color: #666666;
 }
+.checkboxes-tags{
+	float:right;
+	font-size:11px;
+	margin-top:0;
+	position:absolute;
+}
