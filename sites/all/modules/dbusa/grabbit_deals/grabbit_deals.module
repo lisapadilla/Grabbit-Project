@@ -19,7 +19,8 @@ function grabbit_deals_grabbit_status_form(){
 	
 	if($user->uid>0)
 	{
-	  drupal_add_js(drupal_get_path('module', 'grabbit_deals').'/deals_engine.js', $type = 'module');		
+	  drupal_add_js(drupal_get_path('module', 'grabbit_deals').'/deals_engine.js', $type = 'module');
+	  drupal_add_js(drupal_get_path('module', 'grabbit_deals').'/stream_visibles.js', $type = 'module');
 	}
 	
 }
