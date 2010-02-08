@@ -33,7 +33,7 @@ Drupal.behaviors.tagsEngine = function(){
     var messages = new Array(0);
     
   if($('#save-tags',options).is(':checked')){
-	tags=($('#text-area-'+tag_node,options).val());
+	var tag_tags=($('#text-area-'+tag_node,options).val());
    	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
 		  messages['item']='item';
