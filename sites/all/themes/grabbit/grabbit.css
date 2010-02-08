@@ -3653,3 +3653,7 @@ div.navbar
 .tags-block{
 	display:block;
 }
+.url-deal
+{
+	display: none;
+}
