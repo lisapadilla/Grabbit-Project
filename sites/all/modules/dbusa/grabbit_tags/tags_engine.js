@@ -31,7 +31,7 @@ Drupal.behaviors.tagsEngine = function(){
     var parent = $(this).parents('.user-panel');
     var options = $(this).parent('.all-tags');
     var messages = [];
-    
+    messages[0]='item';
   if($('#save-tags',options).is(':checked')){
 	var tag_tags=($('#text-area-'+tag_node,options).val());
    	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
