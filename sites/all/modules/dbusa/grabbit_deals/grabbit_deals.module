@@ -36,7 +36,7 @@ function grabbit_deals_display()
   $keywords = grabbit_deals_extract_tags( $nid, $uid );
   
   print_r($keywords);
-  
+  /*
   try
   {
     $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
@@ -73,7 +73,7 @@ function grabbit_deals_display()
     </div>
   </div>';
   
-  print $out;
+  print $out;*/
 }
 
 // estracts the matching tags of a node/userprofile
