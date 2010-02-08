@@ -488,7 +488,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	
 	// Output for wall and status update.
 	$output = '
-	<div class="facebook-post clearfix '.$post->rowx.'" id="node-'.$post->created.'">
+	<div class="facebook-post clearfix '.$post->rowx.' stream-node" id="node-'.$post->created.'">
 	<div id="tags-show-'.$post->nid.'"></div>
 	<a href="JavaScript:void(0);" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
@@ -573,7 +573,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	
 	// Output for aplication updates
 	
-	$output = '<div class="facebook-post clearfix '.$post->rowx.'" id="node-'.$post->created.'">
+	$output = '<div class="facebook-post clearfix '.$post->rowx.' stream-node" id="node-'.$post->created.'">
 	<div id="tags-show-'.$post->nid.'"></div>
 	<a href="JavaScript:void(0);" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
@@ -1687,7 +1687,7 @@ function theme_twitter_message($node){
 	
 	$msg_formatted=get_url_msg_formatted($msg);
 	$screen_name=str_replace('http://www.twitter.com/','',$node->field_twitter_url[0]['value']);
-	$output = '<div id="node-'.$node->created.'" class="twitter-message-stream clearfix '.$node->rowx.'">
+	$output = '<div id="node-'.$node->created.'" class="twitter-message-stream clearfix '.$node->rowx.' stream-node">
 	           <div id="tags-show-'.$node->nid.'"></div>
 	           <div class="twitter-reply">
 	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$node->nid.'">TR</a>
@@ -1932,7 +1932,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	             <p>Source: <a title="View original article" target="_blank" href="'.$node->feedapi_node->url.'">'.$rss->title.'</a></p>';
 	}
 	$node->teaser = strip_tags($node->teaser);
-	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element '.$node->rowx.'" id="node-'.$node->created.'">
+	$output = '<div class="node-stream-'.$node->type.' clearfix stream-item-element '.$node->rowx.' stream-node" id="node-'.$node->created.'">
 	             <div id="tags-show-'.$node->nid.'"></div>
 	             <div class="meta">
 					'.$image.'
@@ -1992,7 +1992,7 @@ function theme_gmail_message($comments,$node){
 	
 	$node->body =substr(strip_tags($node->body),0,150); 
 	
-	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element '.$node->rowx.'" id="node-'.$node->created.'">
+	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element '.$node->rowx.' stream-node" id="node-'.$node->created.'">
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
@@ -2052,7 +2052,7 @@ function theme_imap_message($comments,$node){
 	
 	$node->body =substr(strip_tags($node->body),0,150); 
 	
-	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element '.$node->rowx.'" id="node-'.$node->created.'">
+	$output = '<div class="node-stream-'.$node->type.' node-stream-news clearfix stream-item-element '.$node->rowx.' stream-node" id="node-'.$node->created.'">
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
