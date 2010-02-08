@@ -44,39 +44,33 @@ function grabbit_deals_display()
     //echo $e->getMessage();
   }
   
-  //print_r( $result->Items );
-  
-  foreach ( $result->Items->Item as $i )
-  {
-    print_r($i);
-  }
-  
   if ( $result )
   {
+    // get the first five deals ONLY
+    $result = array_slice( $result, 0, 5 );
+    
+    // build the markup
     $out = 
     '<div class="deals-display clearfix">
       <a class="close" href="#">close</a>
-      <h4>Deals that match your tags:</h4>
+      <h4>Deals that match your tags:</h4>';
     
-      <div class="deal-item clearfix">
-        <a class="buy" href="#">buy</a>
+    foreach ( $result->Items->Item as $i )
+    {
+      $out .= 
+      '<div class="deal-item clearfix">'.
+        l( 'buy', $i->DetailPageURL, 
+          array( 'attributes' => array('class' => 'buy'), 'absolute' => true ) ).'
         <div class="provider">Amazon.com</div>
         <div class="info">
           <a class="more" href="#">&raquo; <span>more...</span></a>
-          <span class="name">Silver iPod Nano, 16 GB</span>
-          <span class="price">$109</span>
+          <span class="name">'. $i->ItemAttributes->Title .'</span>
+          <span class="price">'. $i->ItemAttributes->ListPrice->FormattedPrice .'</span>
         </div>
-      </div>
-      <div class="deal-item clearfix">
-        <a class="buy" href="#">buy</a>
-        <div class="provider">Amazon.com</div>
-        <div class="info">
-          <a class="more" href="#">&raquo; <span>more...</span></a>
-          <span class="name">Silver iPod Nano, 16 GB</span>
-          <span class="price">$109</span>
-        </div>
-      </div>
-    </div>';
+      </div>';
+    }
+    
+    $out .= '</div>';
   
     print $out;  
   }
