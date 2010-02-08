@@ -32,10 +32,10 @@ Drupal.behaviors.tagsEngine = function(){
     var options = $(this).parent('.all-tags');
 
     if($('#add-tags',options).val()!==null){
-	  alert('add tags');
+	  alert('add tags '+$('#add-tags',options).val());
     }
     if($('#save-tags',options).val()!==null){
-	  alert('save tags');
+	  alert('save tags'+ $('#save-tags',options).val());
     }
 /*
     $.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
