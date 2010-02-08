@@ -30,38 +30,40 @@ Drupal.behaviors.tagsEngine = function(){
 	var tag_node=$(this).attr('node');
     var parent = $(this).parents('.user-panel');
     var options = $(this).parent('.all-tags');
-
-    if($('#add-tags',options).is(':checked')){
-	  alert('add tags '+$('#add-tags',options).is(':checked'));
-    }
-    if($('#save-tags',options).is(':checked')){
-	  alert('save tags'+ $('#save-tags',options).is(':checked'));
-    }
-/*
-    $.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
+    var messages = new Array(0);
+    
+  if($('#save-tags',options).is(':checked')){
+	tags=($('#text-area-'+tag_node,options).val());
+   	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
-		
+		  messages['item']='item';
  	    }else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
-    });
+    }); 
+  }
 
+  if($('#add-tags',options).is(':checked')){
     $.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
-
-			$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your profile successfully.</span>').fadeIn(function(){
-			      setTimeout(function(){
-			         $(".tags-success").fadeOut("fast");
-			      }, 2000);
-			});
-			
+		    messages['profile']='profile'
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			$('.bring-tags',container).removeClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
-	});
-  */
+	});	  
+  }
+
+  if(messages.length>0){
+	    
+    	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your '+message.join(' and ')+' successfully.</span>').fadeIn(function(){
+		    setTimeout(function(){
+		      $(".tags-success").fadeOut("fast");
+		    }, 2000);
+		});	
+  }  
+
   });
 
 }
