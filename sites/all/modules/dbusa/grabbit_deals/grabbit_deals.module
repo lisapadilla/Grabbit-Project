@@ -54,21 +54,23 @@ function grabbit_deals_display()
     $i = 0;
     foreach ( $result->Items->Item as $deal )
     {
-      if ( !$deal->ItemAttributes->ListPrice->FormattedPrice ) break;
-      $i++;
-      if ( $i == 6 ) break;
+      if ( $deal->ItemAttributes->ListPrice->FormattedPrice )
+      {
+        $i++;
+        if ( $i == 6 ) break;
       
-      $out .= 
-      '<div class="deal-item clearfix">'.
-        l( 'buy', $deal->DetailPageURL, 
-          array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
-        <div class="provider">Amazon.com</div>
-        <div class="info">
-          <a class="more" href="#">&raquo; <span>more...</span></a>
-          <span class="name">'. $deal->ItemAttributes->Title .'</span>
-          <span class="price">'. $deal->ItemAttributes->ListPrice->FormattedPrice .'</span>
-        </div>
-      </div>';
+        $out .= 
+        '<div class="deal-item clearfix">'.
+          l( 'buy', $deal->DetailPageURL, 
+            array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
+          <div class="provider">Amazon.com</div>
+          <div class="info">
+            <a class="more" href="#">&raquo; <span>more...</span></a>
+            <span class="name">'. $deal->ItemAttributes->Title .'</span>
+            <span class="price">'. $deal->ItemAttributes->ListPrice->FormattedPrice .'</span>
+          </div>
+        </div>';
+      }
     }
     $out .= '</div>';
   
