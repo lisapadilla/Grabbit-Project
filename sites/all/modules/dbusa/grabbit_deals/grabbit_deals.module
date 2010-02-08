@@ -54,6 +54,7 @@ function grabbit_deals_display()
     $i = 0;
     foreach ( $result->Items->Item as $deal )
     {
+      if ( !$deal->ItemAttributes->ListPrice->FormattedPrice ) break;
       $i++;
       if ( $i == 6 ) break;
       
