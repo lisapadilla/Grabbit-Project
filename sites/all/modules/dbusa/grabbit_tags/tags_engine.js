@@ -31,11 +31,11 @@ Drupal.behaviors.tagsEngine = function(){
     var parent = $(this).parents('.user-panel');
     var options = $(this).parent('.all-tags');
 
-    if($('#add-tags',options).val()!==null){
-	  alert('add tags '+$('#add-tags',options).val());
+    if($('#add-tags',options).is(':checked')){
+	  alert('add tags '+$('#add-tags',options).is(':checked'));
     }
-    if($('#save-tags',options).val()!==null){
-	  alert('save tags'+ $('#save-tags',options).val());
+    if($('#save-tags',options).is(':checked')){
+	  alert('save tags'+ $('#save-tags',options).is(':checked'));
     }
 /*
     $.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
