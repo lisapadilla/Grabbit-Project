@@ -36,8 +36,8 @@ Drupal.behaviors.tagsEngine = function(){
 	var tag_tags=($('#text-area-'+tag_node,options).val());
    	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
-		  var messages;
 		  messages[0]='item';
+		  alert(messages[0]);
  	    }else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
@@ -47,7 +47,6 @@ Drupal.behaviors.tagsEngine = function(){
   if($('#add-tags',options).is(':checked')){
     $.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
-			var messages;
 		    messages[1]='profile';
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
