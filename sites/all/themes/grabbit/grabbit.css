@@ -3494,7 +3494,7 @@ div.navbar
 .tags-engine .all-tags textarea{
 	font-size:12px;
 	width:428px;
-	height:49px;
+	height:52px;
 	color:#999;
 	outline: none;
 	resize: none;
@@ -3502,7 +3502,7 @@ div.navbar
 .tags-engine .all-tags .tags-submit-profile{
 	float:right;
 	margin-left:10px;
-	margin-top:30px;
+	margin-top:40px;
 	position:absolute;	
 }
 
@@ -3513,7 +3513,7 @@ div.navbar
 	margin-left:10px;
 }
 .tags-engine{
-	height:70px;
+	height:80px;
 	padding:10px;
 	background: url(images/tags_bg.gif);
 	margin-bottom:13px;	
@@ -3640,10 +3640,14 @@ div.navbar
 	color: #666666;
 }
 .checkboxes-tags{
-	float:right;
-	font-size:11px;
-	margin-top:0;
+	font-size:10px;
+	line-height:1px;
+	margin-left:10px;
 	position:absolute;
+	margin-top:3px;
+}
+.checkboxes-tags input{
+	margin:0px;
 }
 .tags-block{
 	display:block;
