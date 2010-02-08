@@ -45,39 +45,7 @@ function grabbit_tags_grabbit_status_form(){
 
 function grabbit_tags_display(){
 
-    $nid=$_GET['nid'];
-    global $user;
-    $uid=$user->uid;
-
-	$node=node_load($nid);
-	$profile = content_profile_load('profile', $uid);
-	if($node->nid && $profile->nid){
-		
-	  // creates an array of tags from the node
-	  if(is_array($node->tags[3])){
-	    foreach($node->tags[3] as $node_tag){
-		  $node_tags[]=$node_tag->name;
-	    }	
-	  }
-	  
-	  // creates an array of tags from the user profile
-	  if(is_array($profile->tags)){
-	    foreach($profile->tags as $vocabulary){
-		  foreach($vocabulary as $profile_tag){
-		    $profile_tags[]=$profile_tag->name;	
-		  }
-	    }	
-	  }
-	
-	  $result=array_intersect($profile_tags, $node_tags);
-	  print implode(', ',$result);
-	  
-	
-	}else{
-		return 0; // the user has no profile or the parameters were incorrect
-	}
-	
-/*	$nid=$_GET['nid'];
+	$nid=$_GET['nid'];
 	$type=$_GET['type'];
 	
 	$node=node_load($nid);
@@ -119,8 +87,7 @@ function grabbit_tags_display(){
 	  print $output;
     }else{
 	  print "OT";
-    }
-*/	
+    }	
 	
 }
 
