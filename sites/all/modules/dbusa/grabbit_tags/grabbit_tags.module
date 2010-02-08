@@ -72,7 +72,7 @@ function grabbit_tags_display(){
 	  print_r($node_tags);
 	  print_r($profile_tags);
 	
-	  $result=array_intersect($profile_tags,$node_tags);
+	  $result=array_intersect($node_tags,$profile_tags);
 	  print "intersec <br><br>";
 	  print_r($result);
 	
