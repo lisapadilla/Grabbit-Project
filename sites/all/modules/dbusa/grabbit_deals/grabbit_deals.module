@@ -44,39 +44,35 @@ function grabbit_deals_display()
     //echo $e->getMessage();
   }
   
-  //print_r( $result->Items );
-  
-  foreach ( $result->Items->Item as $i )
-  {
-    print_r($i);
-  }
-  
   if ( $result )
   {
     $out = 
     '<div class="deals-display clearfix">
       <a class="close" href="#">close</a>
-      <h4>Deals that match your tags:</h4>
-    
-      <div class="deal-item clearfix">
-        <a class="buy" href="#">buy</a>
-        <div class="provider">Amazon.com</div>
-        <div class="info">
-          <a class="more" href="#">&raquo; <span>more...</span></a>
-          <span class="name">Silver iPod Nano, 16 GB</span>
-          <span class="price">$109</span>
-        </div>
-      </div>
-      <div class="deal-item clearfix">
-        <a class="buy" href="#">buy</a>
-        <div class="provider">Amazon.com</div>
-        <div class="info">
-          <a class="more" href="#">&raquo; <span>more...</span></a>
-          <span class="name">Silver iPod Nano, 16 GB</span>
-          <span class="price">$109</span>
-        </div>
-      </div>
-    </div>';
+      <h4>Deals that match your tags:</h4>';
+      
+    $i = 0;
+    foreach ( $result->Items->Item as $deal )
+    {
+      if ( $deal->ItemAttributes->ListPrice->FormattedPrice )
+      {
+        $i++;
+        if ( $i == 6 ) break;
+      
+        $out .= 
+        '<div class="deal-item clearfix">'.
+          l( 'buy', $deal->DetailPageURL, 
+            array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
+          <div class="provider">Amazon.com</div>
+          <div class="info">
+            <a class="more" href="#">&raquo; <span>more...</span></a>
+            <span class="name">'. $deal->ItemAttributes->Title .'</span>
+            <span class="price">'. $deal->ItemAttributes->ListPrice->FormattedPrice .'</span>
+          </div>
+        </div>';
+      }
+    }
+    $out .= '</div>';
   
     print $out;  
   }
@@ -90,6 +86,7 @@ function grabbit_deals_extract_tags($nid, $uid){
 	if($node->nid && $profile->nid){
 		
 	  // creates an array of tags from the node
+	  $node_tags = array();
 	  if(is_array($node->tags[3])){
 	    foreach($node->tags[3] as $node_tag){
 		  $node_tags[]=$node_tag->name;
@@ -97,6 +94,7 @@ function grabbit_deals_extract_tags($nid, $uid){
 	  }
 	  
 	  // creates an array of tags from the user profile
+	  $profile_tags = array();
 	  if(is_array($profile->tags)){
 	    foreach($profile->tags as $vocabulary){
 		  foreach($vocabulary as $profile_tag){
