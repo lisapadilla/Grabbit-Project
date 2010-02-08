@@ -3494,10 +3494,11 @@ div.navbar
 .tags-engine .all-tags textarea{
 	font-size:12px;
 	width:428px;
-	height:57px;
+	height:53px;
 	color:#999;
 	outline: none;
 	resize: none;
+	margin-top:4px;
 }
 .tags-engine .all-tags .tags-submit-profile{
 	float:right;
