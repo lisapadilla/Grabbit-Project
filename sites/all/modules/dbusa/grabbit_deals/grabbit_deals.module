@@ -44,7 +44,12 @@ function grabbit_deals_display()
     //echo $e->getMessage();
   }
   
-  print_r( $result->Items );
+  //print_r( $result->Items );
+  
+  foreach ( $result->Items->Item as $i )
+  {
+    print_r($i);
+  }
   
   if ( $result )
   {
