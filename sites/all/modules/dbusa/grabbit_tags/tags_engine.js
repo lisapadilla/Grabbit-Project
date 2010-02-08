@@ -52,7 +52,7 @@ Drupal.behaviors.tagsEngine = function(){
 		}
 	});	  
   }
-alert(messages.length);
+alert(messages[0]);
   if(messages.length>0){
 	    alert(messages.length);
     	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your '+messages.join(' and ')+' successfully.</span>').fadeIn(function(){
