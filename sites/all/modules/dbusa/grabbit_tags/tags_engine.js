@@ -46,9 +46,7 @@ Drupal.behaviors.tagsEngine = function(){
   if($('#add-tags',options).is(':checked')){
     $.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 		if (data){
-		    messages['profile']='profile'
-			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
-			$('.bring-tags',container).removeClass('selected');
+		    messages['profile']='profile';
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
@@ -61,7 +59,9 @@ alert(messages.length);
 		    setTimeout(function(){
 		      $(".tags-success").fadeOut("fast");
 		    }, 2000);
-		});	
+		});
+		var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
+		$('.bring-tags',container).removeClass('selected');	
   }  
 
   });
