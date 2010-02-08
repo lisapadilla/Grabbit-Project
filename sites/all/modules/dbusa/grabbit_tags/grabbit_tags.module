@@ -126,7 +126,7 @@ function grabbit_tags_custom_profile_save(){
 	  $tags=explode(',',$tags);
 	
 	  foreach($tags as $tag){
-	    grabbit_tags_profile_save_one($tag)
+	    grabbit_tags_profile_save_one($tag);
 	  }
 
 	  print "OK";
