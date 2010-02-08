@@ -60,7 +60,7 @@ function grabbit_deals_display()
       $out .= 
       '<div class="deal-item clearfix">'.
         l( 'buy', $deal->DetailPageURL, 
-          array( 'attributes' => array('class' => 'buy'), 'absolute' => true ) ).'
+          array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
         <div class="provider">Amazon.com</div>
         <div class="info">
           <a class="more" href="#">&raquo; <span>more...</span></a>
@@ -83,6 +83,7 @@ function grabbit_deals_extract_tags($nid, $uid){
 	if($node->nid && $profile->nid){
 		
 	  // creates an array of tags from the node
+	  $node_tags = array();
 	  if(is_array($node->tags[3])){
 	    foreach($node->tags[3] as $node_tag){
 		  $node_tags[]=$node_tag->name;
@@ -90,6 +91,7 @@ function grabbit_deals_extract_tags($nid, $uid){
 	  }
 	  
 	  // creates an array of tags from the user profile
+	  $profile_tags = array();
 	  if(is_array($profile->tags)){
 	    foreach($profile->tags as $vocabulary){
 		  foreach($vocabulary as $profile_tag){
