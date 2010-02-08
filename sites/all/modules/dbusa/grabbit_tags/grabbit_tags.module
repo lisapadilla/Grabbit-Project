@@ -19,6 +19,11 @@ function grabbit_tags_menu() {
     'page callback' => 'grabbit_tags_profile_save', 
     'access arguments' => array('access content')
   );
+
+  $items['tags/custom/profile/save'] = array( 
+    'page callback' => 'grabbit_tags_custom_profile_save', 
+    'access arguments' => array('access content')
+  );
  
   $items['tags/profile/one'] = array( 
     'page callback' => 'grabbit_tags_profile_save_one', 
@@ -111,6 +116,49 @@ function grabbit_tags_save(){
 	}else{
 		print "OT"; // No terms sent, so we return a no terms message to handle
 	}	
+}
+
+function grabbit_tags_custom_profile_save(){
+	$tags=$_GET['tags']
+	
+	if($tags){
+	  	
+      global $user;
+
+      $profile = content_profile_load('profile', $user->uid);
+      if(!$profile->nid){
+		$profile = new StdClass();
+		$profile->type = 'profile';
+		$profile->uid=$user->uid;
+		$profile->title=$user->name;
+		node_save($profile);
+	  }
+	
+	  $tags=explode(',',$tags);
+	
+	  foreach($tags as $tag){
+	    $tag=trim($tag);
+		// check if the term already exist
+		  	$try=taxonomy_get_term_by_name($tag);
+
+		    if($try){
+			  if($try->tid){
+			    $profile->taxonomy[$try->tid]=$try;
+			  }elseif(count($try)){
+			 	$profile->taxonomy[$try[0]->tid]=$try[0];
+			  }		  
+		    }else{
+			  $profile->taxonomy['tags'][3]=$tag;
+		    }
+		// end check	
+	  }
+
+	  taxonomy_node_save($profile, $profile->taxonomy);
+	  print "OK";
+	
+	}else{
+	  print "OT";
+	}
 }
 
 function grabbit_tags_profile_save(){

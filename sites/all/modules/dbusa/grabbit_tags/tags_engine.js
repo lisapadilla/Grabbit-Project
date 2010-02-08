@@ -69,7 +69,8 @@ Drupal.behaviors.tagsEngine = function(){
 		}
     });	  
   }else if(!$('#save-tags',options).is(':checked') && $('#add-tags',options).is(':checked')){
-	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
+	var tag_tags=($('#text-area-'+tag_node,options).val());
+	$.get(Drupal.settings.basePath+"tags/custom/profile/save",{nid:tag_node,tags:tag_tags},function(data){
 		if (data){
 	      	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your profile successfully.</span>').fadeIn(function(){
 			    setTimeout(function(){
