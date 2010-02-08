@@ -54,9 +54,9 @@ Drupal.behaviors.tagsEngine = function(){
 		}
 	});	  
   }
-
+alert(messages.length);
   if(messages.length>0){
-	    
+	    alert(messages.length);
     	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your '+message.join(' and ')+' successfully.</span>').fadeIn(function(){
 		    setTimeout(function(){
 		      $(".tags-success").fadeOut("fast");
