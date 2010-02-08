@@ -27,45 +27,54 @@ function grabbit_deals_grabbit_status_form(){
 function grabbit_deals_display()
 {
   require_once 'amazon/amazon_api_class.php';
-
-  $obj = new AmazonProductAPI();  
+  
+  $obj = new AmazonProductAPI();
+  $nid = $_GET['nid'];
+  global $user;
+  $uid = $user->uid;
+  
+  $keywords = grabbit_deals_extract_tags( $nid, $uid );
+  
   try
   {
-    $result = $obj->getItemByKeyword("Crave By Calvin Klein For Men", AmazonProductAPI::ALL);
+    $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
   }
   catch(Exception $e)
   {
-    echo $e->getMessage();
+    //echo $e->getMessage();
   }
   
   print_r($result);
   
-  $out = 
-  '<div class="deals-display clearfix">
-    <a class="close" href="#">close</a>
-    <h4>Deals that match your tags:</h4>
+  if ( $result )
+  {
+    $out = 
+    '<div class="deals-display clearfix">
+      <a class="close" href="#">close</a>
+      <h4>Deals that match your tags:</h4>
     
-    <div class="deal-item clearfix">
-      <a class="buy" href="#">buy</a>
-      <div class="provider">Amazon.com</div>
-      <div class="info">
-        <a class="more" href="#">&raquo; <span>more...</span></a>
-        <span class="name">Silver iPod Nano, 16 GB</span>
-        <span class="price">$109</span>
+      <div class="deal-item clearfix">
+        <a class="buy" href="#">buy</a>
+        <div class="provider">Amazon.com</div>
+        <div class="info">
+          <a class="more" href="#">&raquo; <span>more...</span></a>
+          <span class="name">Silver iPod Nano, 16 GB</span>
+          <span class="price">$109</span>
+        </div>
       </div>
-    </div>
-    <div class="deal-item clearfix">
-      <a class="buy" href="#">buy</a>
-      <div class="provider">Amazon.com</div>
-      <div class="info">
-        <a class="more" href="#">&raquo; <span>more...</span></a>
-        <span class="name">Silver iPod Nano, 16 GB</span>
-        <span class="price">$109</span>
+      <div class="deal-item clearfix">
+        <a class="buy" href="#">buy</a>
+        <div class="provider">Amazon.com</div>
+        <div class="info">
+          <a class="more" href="#">&raquo; <span>more...</span></a>
+          <span class="name">Silver iPod Nano, 16 GB</span>
+          <span class="price">$109</span>
+        </div>
       </div>
-    </div>
-  </div>';
+    </div>';
   
-  print $out;
+    print $out;  
+  }
 }
 
 // estracts the matching tags of a node/userprofile
@@ -91,9 +100,11 @@ function grabbit_deals_extract_tags($nid, $uid){
 	    }	
 	  }
 	
+	  //print_r($node_tags);
+	  //print_r($profile_tags);
 	  $result=array_intersect($profile_tags, $node_tags);
 	  if(is_array($result)){
-		return implode(', ',$result);
+		  return implode(', ',$result);
 	  }else{
 	    return NULL;	
 	  }

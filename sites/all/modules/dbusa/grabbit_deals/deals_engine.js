@@ -6,7 +6,7 @@ Drupal.behaviors.deals = function()
     var anch = $(this);
     var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
     var x = Math.random();
-    $.get(Drupal.settings.basePath+"deals/display",{x:x},function(data){
+    $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
        if (data)
        {
            $('#tags-show-'+nid, parent).html(data);
