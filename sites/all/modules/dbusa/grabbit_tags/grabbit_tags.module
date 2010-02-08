@@ -72,6 +72,10 @@ function grabbit_tags_display(){
 	  print_r($node_tags);
 	  print_r($profile_tags);
 	
+	  $result=array_intersect($profile_tags,$node_tags);
+	  print "intersec <br><br>";
+	  print_r($result);
+	
 	}else{
 		//return 0; // the user has no profile or the parameters were incorrect
 	}
