@@ -44,7 +44,7 @@ function grabbit_deals_display()
     //echo $e->getMessage();
   }
   
-  print_r($result);
+  print_r( $result->Items );
   
   if ( $result )
   {
