@@ -119,7 +119,7 @@ function grabbit_tags_save(){
 }
 
 function grabbit_tags_custom_profile_save(){
-	$tags=$_GET['tags']
+	$tags=$_GET['tags'];
 	
 	if($tags){
 	  	
