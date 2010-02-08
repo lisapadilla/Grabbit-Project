@@ -123,43 +123,12 @@ function grabbit_tags_custom_profile_save(){
 	
 	if($tags){
 	  	
-      global $user;
-
-      $profile = content_profile_load('profile', $user->uid);
-      if(!$profile->nid){
-		$profile = new StdClass();
-		$profile->type = 'profile';
-		$profile->uid=$user->uid;
-		$profile->title=$user->name;
-		node_save($profile);
-	  }
-	
 	  $tags=explode(',',$tags);
 	
 	  foreach($tags as $tag){
-	    $tag=trim($tag);
-		// check if the term already exist
-		  	$try=taxonomy_get_term_by_name($tag);
-print_r($try);
-		    if($try){
-			  if($try->tid){
-			    $profile->taxonomy[$try->tid]=$try;
-			  }elseif(count($try)){
-			 	$profile->taxonomy[$try[0]->tid]=$try[0];
-			  }		  
-		    }else{
-			  		// I create a term in a specific vocabulary
-				    $edit = array('name' => $tag, 'description' => ' ', 'weight' => "0", 'vid' => 3);
-				    taxonomy_save_term($edit);
-				    $tid = $edit['tid'];
-				    // associate node and term
-				    $profile->taxonomy[]=$edit['tid'];
-				print_r($edit);
-		    }
-		// end check	
+	    grabbit_tags_profile_save_one($tag)
 	  }
 
-	  taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
 	
 	}else{
@@ -200,8 +169,9 @@ function grabbit_tags_profile_save(){
 	
 }
 
-function grabbit_tags_profile_save_one(){
-    $tag=$_GET['tag'];
+function grabbit_tags_profile_save_one($tag=FALSE){
+    if(!$tag)
+      $tag=$_GET['tag'];
 
     if(isset($tag)){
 	  global $user;
