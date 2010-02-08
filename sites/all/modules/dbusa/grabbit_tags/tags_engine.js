@@ -31,10 +31,10 @@ Drupal.behaviors.tagsEngine = function(){
     var parent = $(this).parents('.user-panel');
     var options = $(this).parent('.all-tags');
 
-    if($('#add-tags',options).val()!==null){
+    if($('#add-tags',options).is(':checked')){
 	  alert('add tags '+$('#add-tags',options).is(':checked'));
     }
-    if($('#save-tags',options).val()!==null){
+    if($('#save-tags',options).is(':checked')){
 	  alert('save tags'+ $('#save-tags',options).is(':checked'));
     }
 /*
