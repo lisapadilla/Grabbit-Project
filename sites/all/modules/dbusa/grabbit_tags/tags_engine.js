@@ -30,7 +30,7 @@ Drupal.behaviors.tagsEngine = function(){
 	var tag_node=$(this).attr('node');
     var parent = $(this).parents('.user-panel');
     var options = $(this).parent('.all-tags');
-    var messages = new Array(0);
+    var messages = [];
     
   if($('#save-tags',options).is(':checked')){
 	var tag_tags=($('#text-area-'+tag_node,options).val());
@@ -57,7 +57,7 @@ Drupal.behaviors.tagsEngine = function(){
 alert(messages.length);
   if(messages.length>0){
 	    alert(messages.length);
-    	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your '+message.join(' and ')+' successfully.</span>').fadeIn(function(){
+    	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your '+messages.join(' and ')+' successfully.</span>').fadeIn(function(){
 		    setTimeout(function(){
 		      $(".tags-success").fadeOut("fast");
 		    }, 2000);
