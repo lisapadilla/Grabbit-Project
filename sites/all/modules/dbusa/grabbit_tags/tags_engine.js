@@ -50,6 +50,7 @@ Drupal.behaviors.tagsEngine = function(){
 					});
 					var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 					reset_buttons_container(container);
+					calculateDeals(container);
 				}else{
 					alert('Oops, there was a problem connecting to the server. Please try again');
 				}
@@ -71,6 +72,7 @@ Drupal.behaviors.tagsEngine = function(){
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);
+			calculateDeals(container);
  	    }else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
@@ -87,6 +89,7 @@ Drupal.behaviors.tagsEngine = function(){
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);
+			calculateDeals(container);
 	    }else{
 		  alert('Oops, there was a problem connecting to the server. Please try again');
 		}
