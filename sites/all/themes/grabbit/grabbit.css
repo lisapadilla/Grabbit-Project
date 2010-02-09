@@ -3781,3 +3781,9 @@ div.navbar
 	text-decoration:underline;
 	width:250px;
 }
+.section-deals .product-link
+{
+	color:#999999;
+	font-size:11px;
+	line-height:14px;
+}
