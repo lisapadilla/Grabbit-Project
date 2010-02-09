@@ -33,7 +33,7 @@ function streamVisibles(stream, item, callback, timeout)
     { 
       // timer for recalculation
       if ( timer != null ) clearTimeout( timer );
-      timer = setTimeout( "engageVisibles("+this+",'"+item+"',"+callback+","+streamh+")", timeout );
+      timer = setTimeout( "engageVisibles('"+stream+"','"+item+"',"+callback+","+streamh+")", timeout );
     });  
   /*});*/
   
