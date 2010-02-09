@@ -246,6 +246,7 @@ function grabbit_deals_open_and_track(){
 		    echo $e->getMessage();
 		  }
 		  if($deal->DetailPageURL){
+			grabbit_statistics_save_deal_prog(base_path().'deals/open/'.$asin,$deal->ItemAttributes->ListPrice->FormattedPrice);
 		    drupal_goto($deal->DetailPageURL);	
 		  }
 	 }

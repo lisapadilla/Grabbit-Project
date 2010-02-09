@@ -218,3 +218,11 @@ function grabbit_statistics_save_deal(){
 	return 'allgood';
 }
 
+function grabbit_statistics_save_deal_prog($deal='NONE',$price='NONE'){
+	global $user;
+	
+	grabbit_statistics_deals_entry($user->uid,$deal,$price);
+	
+	return 'allgood';
+}
+
