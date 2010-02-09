@@ -43,7 +43,7 @@ Drupal.behaviors.tagsEngine = function(){
 	  	if (data){
 		  	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 				if (data){
-				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
+				    $('#tags-show-'+tag_node).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
 					    setTimeout(function(){
 					      $(".tags-success").fadeOut("fast");
 					    }, 2000);
