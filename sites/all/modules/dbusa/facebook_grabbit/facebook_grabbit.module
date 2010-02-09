@@ -1945,6 +1945,7 @@ function _news_theme($comments,$node,$matches=NULL){
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
 					    '.$deal_matches.'
 					    '.$deal.'
+					    <span class="url-deal"><a href="#" node="'.$node->nid.'" >Deal</a></span>
 					  </div>
 					  <h2>'.$node_title.'</h2>
 					  <div class="content-body">
