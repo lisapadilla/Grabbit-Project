@@ -20,6 +20,7 @@ Drupal.behaviors.editables = function(){
 		city=$("#city").val();
 		bio=$("#bio").val();
 		name=$("#name").val();
+		$('#user-profile-form').mask("Saving...");
 		$.get(Drupal.settings.basePath+"ajax/save/bio",{name:name,bio:bio,city:city,state:state,country:country,web:webs},function(data){
 			if (data){
 				
@@ -31,6 +32,7 @@ Drupal.behaviors.editables = function(){
 				$(".other-info .display").html("<strong>"+name+"</strong>");
 				$("#bio-no-edit").slideToggle("fast");
 				$("#user-profile-form").slideToggle("fast");
+				$('#user-profile-form').unmask();
 			}else{
 				alert("Problem connecting with the server, please try to update your settings latter.");
 			}
@@ -57,7 +59,7 @@ Drupal.behaviors.editables = function(){
 		hobbies=$("#hobbies").val();
 		topics=$("#topics").val();
 		interests=$("#interests").val();
-		
+		$('#user-tags-form').mask("Saving...");
 		$.get(Drupal.settings.basePath+"ajax/save/tags",{feeds:feeds,hobbies:hobbies,topics:topics,interests:interests},function(data){
 			if (data){
 				$("#tags-info .feeds-keywords").html("<h3>Feeds keywords: </h3>"+feeds);
@@ -67,7 +69,7 @@ Drupal.behaviors.editables = function(){
 				
 				$("#tags-info").slideToggle("fast");
 				$("#user-tags-form").slideToggle("fast");
-				
+		        $('#user-tags-form').unmask();		
 			}else{
 				alert("Problem connecting with the server, please try to update your settings latter.");
 			}
