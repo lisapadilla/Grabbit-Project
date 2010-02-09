@@ -3682,9 +3682,7 @@ div.navbar
     position: absolute;
     top: 0;
     left: 0;
-    border:1px solid #6593cf;
     background: #c3daf9;
-    padding:2px;
 }
 .loadmask-msg div {
     padding:5px 10px 5px 25px;
