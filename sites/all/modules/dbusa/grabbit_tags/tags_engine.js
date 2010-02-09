@@ -55,6 +55,7 @@ Drupal.behaviors.tagsEngine = function(){
   }
   else if($('#save-tags',options).is(':checked') && !$('#add-tags',options).is(':checked')){
     var tag_tags=($('#text-area-'+tag_node,options).val());
+       alert(tag_tags);
    	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
 		  	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item successfully.</span>').fadeIn(function(){
