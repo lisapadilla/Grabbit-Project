@@ -80,7 +80,7 @@
 		<? endif; */ ?>
 		  <?php if($file_media): ?>
 			<div class="file-uploader">
-				<?php print $uploader; ?>
+				<?php print $file_uploader; ?>
 			</div>
 			<div class="file-media">
 			<?php print $file_media; ?>
