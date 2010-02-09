@@ -14,19 +14,8 @@ function grabbit_deals_menu() {
     'page callback' => 'grabbit_deals_calculate', 
     'access arguments' => array('access content')
   );
-  
-  $items['deals/detail'] = array( 
-    'page callback' => 'grabbit_deals_detail', 
-    'access arguments' => array('access content')
-  );
 
   return $items;
-}
-
-// renders the page view of a specific deal
-function grabbit_deals_detail()
-{
-  return '<h1>Deal detail</h1>';
 }
 
 //implementation of hook grabbit_status_form
@@ -123,9 +112,11 @@ function grabbit_deals_calculate()
   $nid = $_GET['nid'];
   global $user;
   
-  if ( grabbit_deals_extract_tags($nid, $user->uid) )
+  if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
   {
-    print '1';
+	if(grabbit_deals_check_available($tags)){
+	  print '1';	
+	}
   }
 }
 
