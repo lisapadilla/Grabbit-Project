@@ -193,7 +193,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				break;
 			}
 			$vars['file_media']= $output;
-			$profile = content_profile_load('profile', $user->uid);
+			$profile = content_profile_load('profile', $vars['node']->uid);
 			if($profile->field_profile_picture[0]['filepath']){
 			  $pic=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend');
 			}else{
