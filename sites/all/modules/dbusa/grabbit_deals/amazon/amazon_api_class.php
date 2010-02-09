@@ -224,7 +224,8 @@
                                 
             $xml_response = $this->queryAmazon($parameters);
             
-            return $this->verifyXmlResponse($xml_response);
+            print_r($xml_response);
+            //throw new Exception("No results");
         }
 
     }
