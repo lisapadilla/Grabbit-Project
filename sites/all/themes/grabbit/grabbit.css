@@ -3781,6 +3781,14 @@ div.navbar
 	text-decoration:underline;
 	width:250px;
 }
+.section-deals .deal-detail
+{
+	position: relative;
+}
+.section-deals .back
+{
+	position: absolute;
+}
 .section-deals .product-link
 {
 	color:#999999;

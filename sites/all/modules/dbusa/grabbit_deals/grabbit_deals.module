@@ -45,6 +45,7 @@ function grabbit_deals_detail()
   $offer = (int)$deal->OfferSummary->LowestNewPrice->Amount;
   
   $out = '
+  <div class="deal-detail">
     <h1>Amazon Deal</h1>
     <div class="back">'.l('&laquo; <span>Back to stream</span>', '<front>', array('html' => true)).'</div>
     <div class="deal-container">
@@ -71,6 +72,7 @@ function grabbit_deals_detail()
       </div>
       <div class="from">From <span>Amazon.com</span></div>
     </div>
+  </div>
     ';
     
   return $out;
