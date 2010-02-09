@@ -27,12 +27,16 @@ function streamVisibles(stream, item, callback, timeout)
   // engage visibles for the first time
   engageVisibles(stream, item, callback, streamh);
   
-  $(stream).scroll(function()
-  { 
-    // timer for recalculation
-    if ( timer != null ) clearTimeout( timer );
-    timer = setTimeout( "engageVisibles('"+stream+"','"+item+"',"+callback+","+streamh+")", timeout );
+  $(stream).each(function()
+  {
+    $(this).scroll(function()
+    { 
+      // timer for recalculation
+      if ( timer != null ) clearTimeout( timer );
+      timer = setTimeout( "engageVisibles("+this+",'"+item+"',"+callback+","+streamh+")", timeout );
+    });  
   });
+  
 }
 
 function firstVisibles(stream, item, callback)
@@ -45,7 +49,7 @@ function firstVisibles(stream, item, callback)
 function engageVisibles(stream, item, callback, streamh)
 { 
   // loop through items to find visibles
-  $(item).each(function()
+  $(item, stream).each(function()
   {
     // item properties
     var pos     = $(this).position().top;
