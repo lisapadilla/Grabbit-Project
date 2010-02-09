@@ -47,6 +47,7 @@ function grabbit_deals_detail()
       <div class="group">'.$deal->ItemAttributes->ProductGroup.'</div>
       <div class="image">
         <img src="'.$deal->LargeImage->URL.'" width="250"/>
+        '.l('buy', $deal->DetailPageURL, array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true )).'
       </div>
       <div class="info">
         <h2>'.$deal->ItemAttributes->Title.'</h2>
@@ -55,10 +56,11 @@ function grabbit_deals_detail()
           <div class="list">List Price: '.$deal->ItemAttributes->ListPrice->CurrencyCode.' '.$deal->ItemAttributes->ListPrice->FormattedPrice.'</div>';
   if ( $deal->ItemAttributes->ListPrice->FormattedPrice != $deal->OfferSummary->LowestNewPrice->FormattedPrice )
   {
-    $out .= '<div class="lowest">Lowest New Price: '.$deal->OfferSummary->LowestNewPrice->CurrencyCode.' '.$deal->OfferSummary->LowestNewPrice->FormattedPrice.'</div>'; 
+    $out .= '<div class="lowest">Lowest New Price: <span>'.$deal->OfferSummary->LowestNewPrice->CurrencyCode.' '.$deal->OfferSummary->LowestNewPrice->FormattedPrice.'</span></div>'; 
   }
   $out .= '
         </div>
+        <div class="description">'.$deal->EditorialReviews->EditorialReview->Content.'</div>
       </div>
     </div>
     ';

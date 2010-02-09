@@ -3711,7 +3711,11 @@ div.navbar
 {
 	float:left;
 	margin-right: 20px;
+}
+.section-deals .image img
+{
 	border: 1px dashed #CCCCCC;
+	display: block;
 }
 .section-deals .group
 {
