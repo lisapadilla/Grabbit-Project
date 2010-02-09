@@ -27,6 +27,7 @@ function grabbit_deals_menu() {
 function grabbit_deals_detail()
 {
   $asin = arg(0);
+  print_r($asin);
   
   require_once 'amazon/amazon_api_class.php';
   $api = new AmazonProductAPI();
