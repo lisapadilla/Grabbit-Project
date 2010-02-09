@@ -1450,7 +1450,6 @@ a.facebook-makecomment-link, a.comment-news{
   float: right;
   text-indent: 3000em;
   overflow: hidden;
-  margin-left: 10px;
   margin-top:-1px;
 }
 .odd .url-deal a{
@@ -3557,9 +3556,9 @@ div.navbar
 
 .deals-display
 {
-	background-color: #F6F3D8;
 	padding:10px 10px 5px;
 	margin-bottom:10px;
+	background: #F6F3D8 url(images/deals_grad.gif) repeat-x 0 bottom;
 }
 .deals-display .close
 {

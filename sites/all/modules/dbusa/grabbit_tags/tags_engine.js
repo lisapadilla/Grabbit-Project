@@ -6,7 +6,9 @@ Drupal.behaviors.tagsEngine = function(){
 	reset_buttons(tag_node);
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
-			$('#tags-show-'+tag_node, parent).html(data).show(4000);
+			$('#tags-show-'+tag_node, parent).hide();
+			$('#tags-show-'+tag_node, parent).html(data);
+			$('#tags-show-'+tag_node, parent).show(4000);
 			selector.addClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
