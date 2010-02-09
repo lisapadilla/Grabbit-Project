@@ -213,7 +213,7 @@ function grabbit_statistics_save_deal(){
 	global $user;
 	$deal=$_GET['deal'];
 	$price=$_GET['price'];
-	grabbit_statistics_deals_entry($user->uid,$deal,$price);
+	//grabbit_statistics_deals_entry($user->uid,$deal,$price);
 	
 	return 'allgood';
 }

@@ -84,7 +84,7 @@ function grabbit_deals_detail()
     </div>
   </div>
     ';
-    
+    grabbit_statistics_save_deal_prog(base_path().'deals/open/'.$asin,$deal->ItemAttributes->ListPrice->FormattedPrice); // tracking statistics
   return $out;
 }
 
