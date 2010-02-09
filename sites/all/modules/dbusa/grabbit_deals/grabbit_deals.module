@@ -77,7 +77,7 @@ function grabbit_deals_display()
   }
   catch(Exception $e)
   {
-    echo $e->getMessage();
+    $error = $e->getMessage();
   }
   
   if ( $result )
@@ -114,14 +114,39 @@ function grabbit_deals_display()
   }
 }
 
+function grabbit_deals_check_available($keywords=NULL)
+{
+  require_once 'amazon/amazon_api_class.php';
+  
+  $obj = new AmazonProductAPI();
+  
+  try
+  {
+    $result = $obj->getItemFast($keywords, AmazonProductAPI::ALL);
+  }
+  catch(Exception $e)
+  {
+    $error = $e->getMessage();
+  }
+  
+  if ( $result )
+  {
+	print_r($result);
+  }else{
+    print_r($error);	
+  }
+}
+
 function grabbit_deals_calculate()
 {
   $nid = $_GET['nid'];
   global $user;
   
-  if ( grabbit_deals_extract_tags($nid, $user->uid) )
+  if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
   {
-    print '1';
+	if(grabbit_deals_check_available($tags)){
+	  print '1';	
+	}
   }
 }
 
