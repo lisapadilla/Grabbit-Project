@@ -3332,13 +3332,13 @@ div.navbar
 	height:100px;
 	width:210px;
 }
-.section-user .form-item{
+.section-user #content-area .form-item{
   display: inline-block;
   clear: both;
   width: 605px;
   margin: 0px;
 }
-.section-user .form-item label{
+.section-user #content-area .form-item label{
   display: block;
   width: 145px;
   padding-left: 45px;
@@ -3346,20 +3346,22 @@ div.navbar
   font-size: 12px;
   line-height: 13px;
   margin-bottom: 0px;
+  float: left;
+  height: 72px;
 }
-.section-user .form-item label span{
+.section-user #content-area .form-item label span{
   display: none;
 }
-.section-user .form-item .form-text{
-  width: 400px;
-  float: right;
+.section-user #content-area .form-item .form-text{
+  width: 360px;
+  float: left;
   display: block;
   padding: 0px;
-  margin: -15px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
-.section-user .form-item .description{
+.section-user #content-area .form-item .description{
   width: 400px;
-  float: right;
+  float: left;
   display: block;
   padding: 0px;
   margin: 0px 0px 0px 0px;
