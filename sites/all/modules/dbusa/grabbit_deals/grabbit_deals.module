@@ -46,13 +46,14 @@ function grabbit_deals_detail()
   
   $out = '
     <h1>Amazon Deal</h1>
+    <div class="back">'.l('&laquo; <span>Back to stream</span>', '<front>', array('html' => true)).'</div>
     <div class="deal-container">
       <div class="group">'.$deal->ItemAttributes->ProductGroup.'</div>
       <div class="image">
         <img src="'.$deal->LargeImage->URL.'" width="250"/>
         '.l('buy', $deal->DetailPageURL, array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true )).'
         <div class="product-link">
-          <strong>Or go to product page:</strong>'.l(substr($deal->DetailPageURL, 0, 30).'...', $deal->DetailPageURL, array( 'attributes' => array('target' => '_blank'), 'absolute' => true )).'
+          <strong>Or go to product page:</strong>'.l(substr($deal->DetailPageURL, 0, 60).'...', $deal->DetailPageURL, array( 'attributes' => array('target' => '_blank'), 'absolute' => true )).'
         </div>
       </div>
       <div class="info">
@@ -68,6 +69,7 @@ function grabbit_deals_detail()
         </div>
         <div class="description">'.$deal->EditorialReviews->EditorialReview->Content.'</div>
       </div>
+      <div class="from">From <span>Amazon.com</span></div>
     </div>
     ';
     
