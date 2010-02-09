@@ -26,7 +26,26 @@ function grabbit_deals_menu() {
 // renders the page view of a specific deal
 function grabbit_deals_detail()
 {
-  return '<h1>Deal detail</h1>';
+  $asin = arg(0);
+  
+  require_once 'amazon/amazon_api_class.php';
+  $api = new AmazonProductAPI();
+  
+  try
+  {
+    $result = $api->getItemByAsin($asin);
+  }
+  catch (Exception $e)
+  {
+    echo $e->getMessage();
+  }
+  
+  print_r($result);
+  
+  $out = 
+    '<h1>Amazon Deal</h1>';
+    
+  return $out;
 }
 
 //implementation of hook grabbit_status_form
