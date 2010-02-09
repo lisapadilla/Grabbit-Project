@@ -32,6 +32,7 @@ Drupal.behaviors.tagsEngine = function(){
     var options = $(this).parent('.all-tags');
     
   if($('#save-tags',options).is(':checked') && $('#add-tags',options).is(':checked')){
+	$(options).mask("Loading...");
 	var tag_tags=($('#text-area-'+tag_node,options).val());
    	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
@@ -54,6 +55,7 @@ Drupal.behaviors.tagsEngine = function(){
     }); 
   }
   else if($('#save-tags',options).is(':checked') && !$('#add-tags',options).is(':checked')){
+	$(options).mask("Loading...");
     var tag_tags=($('#text-area-'+tag_node,options).val());
    	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
@@ -69,6 +71,7 @@ Drupal.behaviors.tagsEngine = function(){
 		}
     });	  
   }else if(!$('#save-tags',options).is(':checked') && $('#add-tags',options).is(':checked')){
+	$(options).mask("Loading...");
 	var tag_tags=($('#text-area-'+tag_node,options).val());
 	$.get(Drupal.settings.basePath+"tags/custom/profile/save",{nid:tag_node,tags:tag_tags},function(data){
 		if (data){
