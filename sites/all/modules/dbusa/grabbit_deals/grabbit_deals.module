@@ -131,9 +131,9 @@ function grabbit_deals_check_available($keywords=NULL)
   
   if ( $result )
   {
-	print_r($result);
+	return $result;
   }else{
-    print_r($error);	
+    return NULL;	
   }
 }
 
@@ -144,8 +144,8 @@ function grabbit_deals_calculate()
   
   if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
   {
-	if(grabbit_deals_check_available($tags)){
-	  print '1';	
+	if($availale = grabbit_deals_check_available($tags)){
+	  print $available;	
 	}
   }
 }

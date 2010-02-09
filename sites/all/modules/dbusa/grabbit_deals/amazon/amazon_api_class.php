@@ -225,7 +225,11 @@
             $xml_response = $this->queryAmazon($parameters);
             
             print_r($xml_response);
-            //throw new Exception("No results");
+            if($xml_response->Items->TotalResults>0){
+	          return $xml_response->Items->TotalResults;
+            }else{
+	          throw new Exception("No results");
+            }
         }
 
     }
