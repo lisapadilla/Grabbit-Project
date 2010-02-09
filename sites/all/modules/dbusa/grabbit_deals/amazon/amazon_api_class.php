@@ -87,9 +87,14 @@
                 }
                 else
                 {
-	print_r($response);
-	
-                  //  throw new Exception("Invalid xml response.");   
+	               switch($response->Items->Errors->Error->Message){
+		             case 'We did not find any matches for your request.':
+		               throw new Exception("No results");
+		             break;
+		             default:
+		               throw new Exception("Invalid xml response");
+		             break;
+	               }   
                 }
             }
         }
