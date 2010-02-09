@@ -134,8 +134,9 @@ function grabbit_tags_custom_profile_save(){
 	  }
 	
 	 $profile->taxonomy['tags'][3]=$profile->taxonomy['tags'][3]. $tags;
-	 
-      node_save($profile);
+	 $node=node_load($profile->nid);
+	  print_r($node->taxonomy);
+      //node_save($profile);
 	  print "OK";
 	
 	}else{
