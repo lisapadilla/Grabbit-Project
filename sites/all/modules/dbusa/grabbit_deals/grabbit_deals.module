@@ -14,8 +14,73 @@ function grabbit_deals_menu() {
     'page callback' => 'grabbit_deals_calculate', 
     'access arguments' => array('access content')
   );
+  
+  $items['deals/detail'] = array( 
+    'page callback' => 'grabbit_deals_detail', 
+    'access arguments' => array('access content')
+  );
 
   return $items;
+}
+
+// renders the page view of a specific deal
+function grabbit_deals_detail()
+{
+  $asin = arg(2);
+  
+  require_once 'amazon/amazon_api_class.php';
+  $api = new AmazonProductAPI();
+  
+  try
+  {
+    $result = $api->getItemByAsin($asin);
+    $deal = $result->Items->Item;
+  }
+  catch (Exception $e)
+  {
+    echo $e->getMessage();
+  }
+  
+  $listprice = (int)$deal->ItemAttributes->ListPrice->Amount;
+  $offer = (int)$deal->OfferSummary->LowestNewPrice->Amount;
+  
+  $out = '
+  <div class="deal-detail">
+    <h1>Amazon Deal</h1>
+    <div class="back">'.l('&laquo; <span>Back to stream</span>', '<front>', array('html' => true)).'</div>
+    <div class="deal-container">
+      <div class="group">'.$deal->ItemAttributes->ProductGroup.'</div>
+      
+      <div class="clearfix">
+          
+        <div class="image">
+            <img src="'.$deal->LargeImage->URL.'" width="250"/>
+            '.l('buy', $deal->DetailPageURL, array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true )).'
+            <div class="product-link">
+              <strong>Or go to product page:</strong>'.l(substr($deal->DetailPageURL, 0, 60).'...', $deal->DetailPageURL, array( 'attributes' => array('target' => '_blank'), 'absolute' => true )).'
+            </div>
+        </div>
+        <div class="info">
+          <h2>'.$deal->ItemAttributes->Title.'</h2>
+          <div class="asin">Product #: '.$asin.'</div>
+          <div class="prices">
+            <div class="list">List Price: '.$deal->ItemAttributes->ListPrice->CurrencyCode.' '.$deal->ItemAttributes->ListPrice->FormattedPrice.'</div>';
+    if ( $listprice != $offer )
+    {
+      $out .= '<div class="lowest">Lowest New Price: <span>'.$deal->OfferSummary->LowestNewPrice->CurrencyCode.' '.$deal->OfferSummary->LowestNewPrice->FormattedPrice.'</span></div>'; 
+    }
+    $out .= '
+            </div>
+            <div class="description">'.$deal->EditorialReviews->EditorialReview->Content.'</div>
+          </div>
+        
+      </div>
+      <div class="from">From <span>Amazon.com</span></div>
+    </div>
+  </div>
+    ';
+    
+  return $out;
 }
 
 //implementation of hook grabbit_status_form
@@ -47,7 +112,7 @@ function grabbit_deals_display()
   }
   catch(Exception $e)
   {
-    echo $e->getMessage();
+    $error = $e->getMessage();
   }
   
   if ( $result )
@@ -71,7 +136,8 @@ function grabbit_deals_display()
             array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
           <div class="provider">Amazon.com</div>
           <div class="info">
-            <a class="more" href="#">&raquo; <span>more...</span></a>
+            '.l( '&raquo; <span>more...</span>', 'deals/detail/'.$deal->ASIN , 
+              array( 'attributes' => array('class' => 'more'), 'html' => true ) ).'
             <span class="name">'. $deal->ItemAttributes->Title .'</span>
             <span class="price">'. $deal->ItemAttributes->ListPrice->FormattedPrice .'</span>
           </div>
@@ -84,14 +150,39 @@ function grabbit_deals_display()
   }
 }
 
+function grabbit_deals_check_available($keywords=NULL)
+{
+  require_once 'amazon/amazon_api_class.php';
+  
+  $obj = new AmazonProductAPI();
+  
+  try
+  {
+    $result = $obj->getItemFast($keywords, AmazonProductAPI::ALL);
+  }
+  catch(Exception $e)
+  {
+    $error = $e->getMessage();
+  }
+  
+  if ( $result )
+  {
+	return $result;
+  }else{
+    return NULL;	
+  }
+}
+
 function grabbit_deals_calculate()
 {
   $nid = $_GET['nid'];
   global $user;
   
-  if ( grabbit_deals_extract_tags($nid, $user->uid) )
+  if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
   {
-    print '1';
+	if($available = grabbit_deals_check_available($tags)){
+	  print $available;	
+	}
   }
 }
 

@@ -3701,3 +3701,130 @@ div.navbar
 .masked-hidden {
     visibility: hidden !important;
 }
+
+.section-deals .deal-container
+{
+	border-bottom:1px solid #A2B0BA;
+	padding:0 50px 30px;
+}
+.section-deals .image
+{
+	float:left;
+	margin-right: 20px;
+}
+.section-deals .image img
+{
+	border: 1px dashed #CCCCCC;
+	display: block;
+}
+.section-deals .group
+{
+	font-weight: bold;
+	font-size: 13px;
+	color: #0099FF;
+	margin-bottom: 20px;
+}
+.section-deals .info
+{
+	float:left;
+	width:254px;
+}
+.section-deals .description
+{
+	color:#6C7885;
+	font-size:13px;
+	margin-top:20px;
+}
+.section-deals h2
+{
+	font-size: 16px;
+	font-weight: normal;
+	color: #385491;
+}
+.section-deals .asin
+{
+	color: #999999;
+	font-size: 11px;
+}
+.section-deals .prices
+{
+	margin-top: 15px;
+	font-size: 13px;
+	color: #666666;
+}
+.section-deals .lowest
+{
+	color: #999999;
+}
+.section-deals .lowest span
+{
+	color:#FF6600;
+	font-weight:bold;
+}
+.section-deals .buy
+{
+	background: url(images/btns/dd_buy.gif) no-repeat;
+	width: 50px;
+	height: 20px;
+	display: block;
+	text-indent: -300em;
+	overflow: hidden;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:15px;
+}
+.section-deals #main #content .product-link a
+{
+	color:#FF6600;
+	display:block;
+	font-style:italic;
+	text-decoration:underline;
+	width:250px;
+}
+.section-deals .deal-detail
+{
+	position: relative;
+}
+.section-deals .back
+{
+	font-size:11px;
+	font-weight:bold;
+	position:absolute;
+	right:15px;
+	top:10px;
+}
+.section-deals .back a
+{
+	color: #C3C8CD;
+}
+.section-deals .from
+{
+	border-top:1px solid #A2B0BA;
+	clear:both;
+	color:#999999;
+	font-size:11px;
+	margin-top:20px;
+	padding-top:15px;
+}
+.section-deals .from span
+{
+	font-weight: bold;
+	color: #3399FF;
+}
+.section-deals .back a span
+{
+	text-decoration: underline;
+}
+.section-deals #main #content h1
+{
+	border-bottom:1px solid #E2E4E7;
+	height:19px;
+	margin-bottom:20px;
+}
+.section-deals .product-link
+{
+	color:#999999;
+	font-size:11px;
+	line-height:14px;
+	margin-top: 15px;
+}

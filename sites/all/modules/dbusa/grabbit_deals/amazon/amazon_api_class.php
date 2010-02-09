@@ -87,7 +87,6 @@
                 }
                 else
                 {
-	
 	               switch($response->Items->Request->Errors->Error->Code){
 		             case 'AWS.ECommerceService.NoExactMatches':
 		               throw new Exception("No results");
@@ -207,6 +206,29 @@
             $xml_response = $this->queryAmazon($parameters);
             
             return $this->verifyXmlResponse($xml_response);
+        }
+
+        /**
+         * Return fats products searched by keyword
+         * 
+         * @param string $keyword keyword to search
+         * @param string $product_type type of the product
+         * @return mixed simpleXML object
+         */
+        public function getItemFast($keyword, $product_type)
+        {
+            $parameters = array("Operation"   => "ItemSearch",
+                                "Keywords"    => $keyword,
+                                "SearchIndex" => $product_type,
+                                "ResponseGroup" => "ItemIds");
+                                
+            $xml_response = $this->queryAmazon($parameters);
+            
+            if($xml_response->Items->TotalResults>0){
+	          return $xml_response->Items->TotalResults;
+            }else{
+	          throw new Exception("No results");
+            }
         }
 
     }
