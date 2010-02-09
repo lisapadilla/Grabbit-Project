@@ -123,6 +123,7 @@ function grabbit_tags_custom_profile_save(){
 	
 	if($tags){
 	print $tags;	
+	  global $user;
 	 $profile = content_profile_load('profile', $user->uid);
       if(!$profile->nid){
 		$profile = new StdClass();
