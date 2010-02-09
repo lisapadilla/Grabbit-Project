@@ -137,7 +137,7 @@ function grabbit_deals_display()
       
         $out .= 
         '<div class="deal-item clearfix">'.
-          l( 'buy', $deal->DetailPageURL, 
+          l( 'buy', 'deals/open/'.$deal->ASIN, 
             array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
           <div class="provider">Amazon.com</div>
           <div class="info">
