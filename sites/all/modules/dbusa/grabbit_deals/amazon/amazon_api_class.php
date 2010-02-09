@@ -87,7 +87,7 @@
                 }
                 else
                 {
-	print_r($response->Items->Request->Errors);
+	print_r($response->Items->Request->Errors->Error);
 	               switch($response->Items->Errors->Error->Message){
 		             case 'We did not find any matches for your request.':
 		               throw new Exception("No results");
