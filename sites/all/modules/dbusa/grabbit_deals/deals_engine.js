@@ -2,6 +2,7 @@ Drupal.behaviors.deals = function()
 {
   // calculate deals on visible stream nodes
   $('.user-panel').each(function(i){
+	alert($(this).attr('id'));
 	streamVisibles($(this).attr('id'), '.stream-node', calculateDeals, 1500);
   });
   
