@@ -44,10 +44,15 @@ Drupal.behaviors.tagsEngine = function(){
 		  	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 				if (data){
 					
-				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn();
-					//var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
-					//reset_buttons_container(container);
-					//calculateDeals(container.parent());
+				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
+					    setTimeout(function(){
+					      $(".tags-success").fadeOut("fast");
+					    }, 2000);
+					});
+					var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
+					container.removeClass('masked');
+					reset_buttons_container(container);
+					calculateDeals(container.parent());
 				}else{
 					alert('Oops, there was a problem connecting to the server. Please try again');
 				}
@@ -69,6 +74,7 @@ Drupal.behaviors.tagsEngine = function(){
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);
+			container.removeClass('masked');
 			calculateDeals(container.parent());
  	    }else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
@@ -86,6 +92,7 @@ Drupal.behaviors.tagsEngine = function(){
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);
+			container.removeClass('masked');
 			calculateDeals(container.parent());
 	    }else{
 		  alert('Oops, there was a problem connecting to the server. Please try again');
