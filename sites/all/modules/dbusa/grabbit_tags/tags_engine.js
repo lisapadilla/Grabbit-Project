@@ -50,7 +50,7 @@ Drupal.behaviors.tagsEngine = function(){
 					    }, 2000);
 					});
 					var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
-					container.removeClass('masked');
+					$('#tags-show-'+tag_node).removeClass('masked-relative');
 					reset_buttons_container(container);
 					calculateDeals(container.parent());
 				}else{
@@ -74,7 +74,7 @@ Drupal.behaviors.tagsEngine = function(){
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);
-			container.removeClass('masked');
+			$('#tags-show-'+tag_node).removeClass('masked-relative');
 			calculateDeals(container.parent());
  	    }else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
@@ -92,7 +92,7 @@ Drupal.behaviors.tagsEngine = function(){
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);
-			container.removeClass('masked');
+			$('#tags-show-'+tag_node).removeClass('masked-relative');
 			calculateDeals(container.parent());
 	    }else{
 		  alert('Oops, there was a problem connecting to the server. Please try again');
