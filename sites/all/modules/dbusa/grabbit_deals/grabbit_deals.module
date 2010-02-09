@@ -34,16 +34,28 @@ function grabbit_deals_detail()
   try
   {
     $result = $api->getItemByAsin($asin);
+    $deal = $result->Items->Item;
   }
   catch (Exception $e)
   {
     echo $e->getMessage();
   }
   
-  print_r($result);
-  
-  $out = 
-    '<h1>Amazon Deal</h1>';
+  $out = '
+    <h1>Amazon Deal</h1>
+    <div class="group">'.$deal->ItemAttributes->ProductGroup.'</div>
+    <div class="image">
+      <img src="'.$deal->LargeImage->URL.'"/>
+    </div>
+    <div class="info">
+      <h2>'.$deal->ItemAttributes->Title.'</h2>
+      <div class="asin">Product #: '.$asin.'</div>
+      <div class="prices">
+        <div class="list">List Price: '.$deal->ItemAttributes->ListPrice->CurrencyCode.' '.$deal->ItemAttributes->ListPrice->FormattedPrice.'</div>
+        <div class="lowest">Lowest New Price: '.$deal->OfferSummary->LowestNewPrice->CurrencyCode.' '.$deal->OfferSummary->LowestNewPrice->FormattedPrice.'</div>
+      </div>
+    </div>
+    ';
     
   return $out;
 }
