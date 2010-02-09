@@ -147,7 +147,7 @@ function grabbit_tags_custom_profile_save(){
 			    taxonomy_save_term($edit);
 			    $tid = $edit['tid'];
 			    // associate node and term
-			    $profile->taxonomy[$tid]=$edit;
+			    $profile->taxonomy[]=$edit;
 			  }
 			}
 
