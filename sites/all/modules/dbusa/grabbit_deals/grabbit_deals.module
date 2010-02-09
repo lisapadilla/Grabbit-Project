@@ -121,7 +121,8 @@ function grabbit_deals_display()
             array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
           <div class="provider">Amazon.com</div>
           <div class="info">
-            <a class="more" href="#">&raquo; <span>more...</span></a>
+            '.l( '&raquo; <span>more...</span>', 'deals/detail/'.$deal->ASIN , 
+              array( 'attributes' => array('class' => 'more'), 'html' => true ) ).'
             <span class="name">'. $deal->ItemAttributes->Title .'</span>
             <span class="price">'. $deal->ItemAttributes->ListPrice->FormattedPrice .'</span>
           </div>
