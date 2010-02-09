@@ -101,9 +101,9 @@ function grabbit_deals_check_available($keywords=NULL)
   
   if ( $result )
   {
-	print_r($result);
+	return $result;
   }else{
-    print_r($error);	
+    return NULL;	
   }
 }
 
