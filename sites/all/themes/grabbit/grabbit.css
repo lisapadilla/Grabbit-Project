@@ -3354,7 +3354,12 @@ div.navbar
 .section-user .form-item .description{
   width: 400px;
   float: right;
+  display: block;
+  border: none;
+  padding: 0px;
+  margin: 0px;
 }
+
 /*---------- bubble tooltip -----------*/
 
 /*background:; ie hack, something must be changed in a for ie to execute it*/
