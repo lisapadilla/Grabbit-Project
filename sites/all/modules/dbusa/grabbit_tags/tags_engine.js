@@ -8,7 +8,7 @@ Drupal.behaviors.tagsEngine = function(){
 		if (data){
 			$('#tags-show-'+tag_node, parent).hide();
 			$('#tags-show-'+tag_node, parent).html(data);
-			$('#tags-show-'+tag_node, parent).show(1000);
+			$('#tags-show-'+tag_node, parent).show(600);
 			selector.addClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
@@ -21,7 +21,10 @@ Drupal.behaviors.tagsEngine = function(){
 	i.preventDefault();
     var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
     reset_buttons_container(container);
-    $(this).parent().remove();	
+    $(this).parent().hide(500, function(i){
+	  $(i).parent().remove();
+	});
+    	
   });
 
   $(document).keyup(function(e){
