@@ -1532,6 +1532,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 .section-user #content-area fieldset
 {
 	border: none;
+	padding: 0px;
 }
 .section-user #content-area legend, 
 .section-user #content-area legend a
@@ -3337,6 +3338,10 @@ div.navbar
 	font-weight:bold;
 	display:block;
 	margin-top:10px;
+}
+.section-user .form-item{
+  display: inline-block;
+  
 }
 /*---------- bubble tooltip -----------*/
 
