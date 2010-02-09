@@ -1531,13 +1531,13 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 }
 .section-user #content-area fieldset
 {
-	border: 1px solid #CCCCCC;
+	border: none;
+	padding: 0px;
 }
 .section-user #content-area legend, 
 .section-user #content-area legend a
 {
-	color: #333333;
-	font-size: 11px;
+	display: none;
 }
 .panel-grabbit .panel-title h3{
   display: block;
@@ -3339,6 +3339,10 @@ div.navbar
 	display:block;
 	margin-top:10px;
 }
+.section-user .form-item{
+  display: inline-block;
+  
+}
 /*---------- bubble tooltip -----------*/
 
 /*background:; ie hack, something must be changed in a for ie to execute it*/
@@ -3706,7 +3710,7 @@ div.navbar
 .section-deals .deal-container
 {
 	border-bottom:1px solid #A2B0BA;
-	padding:0 50px 20px;
+	padding:0 50px 30px;
 }
 .section-deals .image
 {
@@ -3805,7 +3809,7 @@ div.navbar
 	color:#999999;
 	font-size:11px;
 	margin-top:20px;
-	padding-top:20px;
+	padding-top:15px;
 }
 .section-deals .from span
 {
