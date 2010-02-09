@@ -43,12 +43,8 @@ Drupal.behaviors.tagsEngine = function(){
 	  	if (data){
 		  	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 				if (data){
-					alert($('#tags-show-'+tag_node, parent).html());
-				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
-					    setTimeout(function(){
-					      $(".tags-success").fadeOut("fast");
-					    }, 2000);
-					});
+					
+				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn();
 					//var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 					//reset_buttons_container(container);
 					//calculateDeals(container.parent());
