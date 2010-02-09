@@ -3791,15 +3791,28 @@ div.navbar
 	font-weight:bold;
 	position:absolute;
 	right:15px;
-	top:9px;
+	top:10px;
 }
 .section-deals .back a
 {
-	color: #6C7885;
+	color: #C3C8CD;
+}
+.section-deals .from
+{
+	border-top:1px solid #A2B0BA;
+	clear:both;
+	margin-top:20px;
+	padding-top:20px;
 }
 .section-deals .back a span
 {
 	text-decoration: underline;
+}
+.section-deals #main #content h1
+{
+	border-bottom:1px solid #E2E4E7;
+	height:19px;
+	margin-bottom:20px;
 }
 .section-deals .product-link
 {
