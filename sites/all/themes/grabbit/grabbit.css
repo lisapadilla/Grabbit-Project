@@ -3775,6 +3775,9 @@ div.navbar
 }
 .section-deals #main #content .product-link a
 {
-	display: block;
-	width: 250px;
+	color:#FF6600;
+	display:block;
+	font-style:italic;
+	text-decoration:underline;
+	width:250px;
 }
