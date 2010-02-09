@@ -52,7 +52,7 @@ function grabbit_deals_detail()
         <img src="'.$deal->LargeImage->URL.'" width="250"/>
         '.l('buy', $deal->DetailPageURL, array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true )).'
         <div class="product-link">
-          <strong>Or go to product page:</strong>'.l(substr($deal->DetailPageURL, 50), $deal->DetailPageURL, array( 'attributes' => array('target' => '_blank'), 'absolute' => true )).'
+          <strong>Or go to product page:</strong>'.l(substr($deal->DetailPageURL, 30).'...', $deal->DetailPageURL, array( 'attributes' => array('target' => '_blank'), 'absolute' => true )).'
         </div>
       </div>
       <div class="info">
