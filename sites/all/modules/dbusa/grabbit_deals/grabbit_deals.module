@@ -50,16 +50,17 @@ function grabbit_deals_detail()
     <div class="back">'.l('&laquo; <span>Back to stream</span>', '<front>', array('html' => true)).'</div>
     <div class="deal-container">
       <div class="group">'.$deal->ItemAttributes->ProductGroup.'</div>
-      <div class="image">
-        <img src="'.$deal->LargeImage->URL.'" width="250"/>
-        '.l('buy', $deal->DetailPageURL, array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true )).'
-        <div class="product-link">
-          <strong>Or go to product page:</strong>'.l(substr($deal->DetailPageURL, 0, 60).'...', $deal->DetailPageURL, array( 'attributes' => array('target' => '_blank'), 'absolute' => true )).'
+      
+      <div class="clearfix">
+          
+        <div class="image">
+            <img src="'.$deal->LargeImage->URL.'" width="250"/>
+            '.l('buy', $deal->DetailPageURL, array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true )).'
+            <div class="product-link">
+              <strong>Or go to product page:</strong>'.l(substr($deal->DetailPageURL, 0, 60).'...', $deal->DetailPageURL, array( 'attributes' => array('target' => '_blank'), 'absolute' => true )).'
+            </div>
         </div>
-      </div>
-      <div class="info">
-        <div class="clearfix">
-        
+        <div class="info">
           <h2>'.$deal->ItemAttributes->Title.'</h2>
           <div class="asin">Product #: '.$asin.'</div>
           <div class="prices">
