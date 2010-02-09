@@ -3332,13 +3332,13 @@ div.navbar
 	height:100px;
 	width:210px;
 }
-.section-user .form-item{
+.section-user #content-area .form-item{
   display: inline-block;
   clear: both;
   width: 605px;
   margin: 0px;
 }
-.section-user .form-item label{
+.section-user #content-area .form-item label{
   display: block;
   width: 145px;
   padding-left: 45px;
@@ -3348,17 +3348,17 @@ div.navbar
   margin-bottom: 0px;
   float: left;
 }
-.section-user .form-item label span{
+.section-user #content-area .form-item label span{
   display: none;
 }
-.section-user .form-item .form-text{
+.section-user #content-area .form-item .form-text{
   width: 360px;
   float: left;
   display: block;
   padding: 0px;
   margin: 0px 0px 0px 0px;
 }
-.section-user .form-item .description{
+.section-user #content-area .form-item .description{
   width: 400px;
   float: left;
   display: block;
