@@ -21,7 +21,10 @@ Drupal.behaviors.tagsEngine = function(){
 	i.preventDefault();
     var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
     reset_buttons_container(container);
-    $(this).parent().remove();	
+    $(this).parent().hide(500, function(i){
+	  $(i).parent().remove();
+	});
+    	
   });
 
   $(document).keyup(function(e){
