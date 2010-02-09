@@ -49,7 +49,7 @@ function grabbit_deals_display()
   {
     //echo $e->getMessage();
   }
-  
+  print_r($result);
   if ( $result )
   {
     $out = 
@@ -80,7 +80,7 @@ function grabbit_deals_display()
     }
     $out .= '</div>';
   
-    //print $out;  
+    print $out;  
   }
 }
 
