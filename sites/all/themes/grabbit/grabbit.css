@@ -3368,6 +3368,7 @@ div.navbar
   font-size: 11px;
   color: #999999;
   line-height: 13px;
+  float: right;
 }
 
 /*---------- bubble tooltip -----------*/
