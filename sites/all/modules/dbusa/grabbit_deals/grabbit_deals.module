@@ -47,9 +47,9 @@ function grabbit_deals_display()
   }
   catch(Exception $e)
   {
-    //echo $e->getMessage();
+    echo $e->getMessage();
   }
-  print_r($result);
+  
   if ( $result )
   {
     $out = 

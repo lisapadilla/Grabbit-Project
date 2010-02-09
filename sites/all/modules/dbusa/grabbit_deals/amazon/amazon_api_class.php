@@ -87,9 +87,7 @@
                 }
                 else
                 {
-                  
-                    throw new Exception("Invalid xml response.");
-                    
+                    throw new Exception("Invalid xml response.");   
                 }
             }
         }
