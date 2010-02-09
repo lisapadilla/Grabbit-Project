@@ -14,8 +14,38 @@ function grabbit_deals_menu() {
     'page callback' => 'grabbit_deals_calculate', 
     'access arguments' => array('access content')
   );
+  
+  $items['deals/detail'] = array( 
+    'page callback' => 'grabbit_deals_detail', 
+    'access arguments' => array('access content')
+  );
 
   return $items;
+}
+
+// renders the page view of a specific deal
+function grabbit_deals_detail()
+{
+  $asin = arg(0);
+  
+  require_once 'amazon/amazon_api_class.php';
+  $api = new AmazonProductAPI();
+  
+  try
+  {
+    $result = $api->getItemByAsin($asin);
+  }
+  catch (Exception $e)
+  {
+    echo $e->getMessage();
+  }
+  
+  print_r($result);
+  
+  $out = 
+    '<h1>Amazon Deal</h1>';
+    
+  return $out;
 }
 
 //implementation of hook grabbit_status_form
