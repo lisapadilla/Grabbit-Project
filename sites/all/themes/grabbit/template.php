@@ -199,7 +199,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			}else{
 			  $pic=theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg');
 			}
-			$vars['file_uploader']='<div class="uploader"><span class="pic-uploader">'.$pic.'</span><span class="body-uploader">'.$vars['body'].'</span></div>';
+			$vars['file_uploader']='<div class="uploader"><span class="pic-uploader">'.$pic.'</span><span class="class-uploader">'.$vars['node']->name.'</span><span class="body-uploader">'.$vars['body'].'</span></div>';
 		}else{
 			$error;
 		}
