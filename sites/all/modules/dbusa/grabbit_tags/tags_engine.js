@@ -95,13 +95,15 @@ Drupal.behaviors.tagsEngine = function(){
 function reset_buttons(nodeid){
 	var container = $('#tags-show-'+nodeid).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 	$('.iconchange',container).each(function(i){
-	  $(this).removeClass('selected');	
+	  $(this).removeClass('selected');
+	  $('a ', this).removeClass('selected');	
 	});
 }
 
 function reset_buttons_container(container){
 	$('.iconchange',container).each(function(i){
 	  $(this).removeClass('selected');	
+	  $('a ', this).removeClass('selected');	
 	});
 }
 
