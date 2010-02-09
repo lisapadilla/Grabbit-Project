@@ -3702,3 +3702,42 @@ div.navbar
 .masked-hidden {
     visibility: hidden !important;
 }
+
+.section-deals .deal-container
+{
+	padding: 0 50px;
+}
+.section-deals .image
+{
+	float:left;
+	margin-right: 20px;
+	border: 1px dashed #CCCCCC;
+}
+.section-deals .group
+{
+	font-weight: bold;
+	font-size: 13px;
+	color: #0099FF;
+	margin-bottom: 20px;
+}
+.section-deals h2
+{
+	font-size: 16px;
+	font-weight: normal;
+	color: #385491;
+}
+.section-deals .asin
+{
+	color: #999999;
+	font-size: 11px;
+}
+.section-deals .prices
+{
+	margin-top: 15px;
+	font-size: 13px;
+	color: #666666;
+}
+.section-deals .lowest
+{
+	color: #999999;
+}
