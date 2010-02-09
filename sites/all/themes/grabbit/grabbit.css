@@ -1167,6 +1167,10 @@ a.active{
   float: left;
   overflow: hidden;
 }
+.user-panel
+{
+	position: relative;
+}
 #files-container-inner{
   padding:15px;
   height:450px;	
@@ -3652,4 +3656,8 @@ div.navbar
 }
 .tags-block{
 	display:block;
+}
+.url-deal
+{
+	display: none;
 }

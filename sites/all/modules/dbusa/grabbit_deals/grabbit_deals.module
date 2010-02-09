@@ -9,6 +9,11 @@ function grabbit_deals_menu() {
     'page callback' => 'grabbit_deals_display', 
     'access arguments' => array('access content')
   );
+  
+  $items['deals/calculate'] = array( 
+    'page callback' => 'grabbit_deals_calculate', 
+    'access arguments' => array('access content')
+  );
 
   return $items;
 }
@@ -76,6 +81,17 @@ function grabbit_deals_display()
     $out .= '</div>';
   
     print $out;  
+  }
+}
+
+function grabbit_deals_calculate()
+{
+  $nid = $_GET['nid'];
+  global $user;
+  
+  if ( grabbit_deals_extract_tags($nid, $user->uid) )
+  {
+    print '1';
   }
 }
 
