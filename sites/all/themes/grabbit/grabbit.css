@@ -3787,7 +3787,19 @@ div.navbar
 }
 .section-deals .back
 {
-	position: absolute;
+	font-size:11px;
+	font-weight:bold;
+	position:absolute;
+	right:15px;
+	top:9px;
+}
+.section-deals .back a
+{
+	color: #6C7885;
+}
+.section-deals .back a span
+{
+	text-decoration: underline;
 }
 .section-deals .product-link
 {
