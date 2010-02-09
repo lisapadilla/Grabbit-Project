@@ -122,7 +122,7 @@ function grabbit_tags_custom_profile_save(){
 	$tags=$_GET['tags'];
 	
 	if($tags){
-	print $tags;	
+		
 	  global $user;
 	 $profile = content_profile_load('profile', $user->uid);
       if(!$profile->nid){
@@ -132,11 +132,29 @@ function grabbit_tags_custom_profile_save(){
 		$profile->title=$user->name;
 		node_save($profile);
 	  }
+	  $tags_feeds=explode(",",$tags);  
+	  foreach($tags_feeds as $tag_1){
+
+		    $try=taxonomy_get_term_by_name(trim($tag_1));
+		    if($try->vid){
+			  $profile->taxonomy[]=$try->tid;		  
+		    }else{
+			  if(count($try)){
+			 	$profile->taxonomy[]=$try[0]->tid;
+			  }else{
+			  	// I create a term in a specific vocabulary
+			    $edit = array('name' => trim($tag_1), 'description' => ' ', 'weight' => "0", 'vid' => 1);
+			    taxonomy_save_term($edit);
+			    $tid = $edit['tid'];
+			    // associate node and term
+
+			    $profile->taxonomy[]=$edit['tid'];
+			  }
+			}
+
+	    }
 	
-	 $profile->taxonomy['tags'][3]=$profile->taxonomy['tags'][3]. $tags;
-	 $node=node_load($profile->nid);
-	  print_r($node->taxonomy);
-      //node_save($profile);
+	  taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
 	
 	}else{
