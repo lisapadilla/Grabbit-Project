@@ -80,7 +80,7 @@ function grabbit_deals_display()
     }
     $out .= '</div>';
   
-    print $out;  
+    //print $out;  
   }
 }
 
