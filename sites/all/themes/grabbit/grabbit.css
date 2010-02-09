@@ -3773,3 +3773,8 @@ div.navbar
 	margin-right:auto;
 	margin-top:15px;
 }
+.section-deals #main #content .product-link a
+{
+	display: block;
+	width: 250px;
+}
