@@ -45,14 +45,18 @@ function grabbit_deals_detail()
     <h1>Amazon Deal</h1>
     <div class="group">'.$deal->ItemAttributes->ProductGroup.'</div>
     <div class="image">
-      <img src="'.$deal->LargeImage->URL.'"/>
+      <img src="'.$deal->LargeImage->URL.'" width="250"/>
     </div>
     <div class="info">
       <h2>'.$deal->ItemAttributes->Title.'</h2>
       <div class="asin">Product #: '.$asin.'</div>
       <div class="prices">
-        <div class="list">List Price: '.$deal->ItemAttributes->ListPrice->CurrencyCode.' '.$deal->ItemAttributes->ListPrice->FormattedPrice.'</div>
-        <div class="lowest">Lowest New Price: '.$deal->OfferSummary->LowestNewPrice->CurrencyCode.' '.$deal->OfferSummary->LowestNewPrice->FormattedPrice.'</div>
+        <div class="list">List Price: '.$deal->ItemAttributes->ListPrice->CurrencyCode.' '.$deal->ItemAttributes->ListPrice->FormattedPrice.'</div>';
+  if ( $deal->ItemAttributes->ListPrice->FormattedPrice != $deal->OfferSummary->LowestNewPrice->FormattedPrice )
+  {
+    $out .= '<div class="lowest">Lowest New Price: '.$deal->OfferSummary->LowestNewPrice->CurrencyCode.' '.$deal->OfferSummary->LowestNewPrice->FormattedPrice.'</div>'; 
+  }
+  $out .= '
       </div>
     </div>
     ';
