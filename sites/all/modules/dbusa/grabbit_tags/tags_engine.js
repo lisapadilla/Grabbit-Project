@@ -3,7 +3,7 @@ Drupal.behaviors.tagsEngine = function(){
 	var tag_node=$(this).attr('node');
 	var selector = $(this);
 	var parent = $(this).parents('.user-panel');
-	
+	reset_buttons(tag_node);
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
 			$('#tags-show-'+tag_node, parent).html(data);
@@ -18,7 +18,7 @@ Drupal.behaviors.tagsEngine = function(){
   $('.close-tags').live('click', function(i){
 	i.preventDefault();
     var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
-    $('.bring-tags',container).removeClass('selected');
+    reset_buttons_container(container);
     $(this).parent().remove();	
   });
 
@@ -44,7 +44,7 @@ Drupal.behaviors.tagsEngine = function(){
 					    }, 2000);
 					});
 					var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
-					$('.bring-tags',container).removeClass('selected');
+					reset_buttons_container(container);
 				}else{
 					alert('Oops, there was a problem connecting to the server. Please try again');
 				}
@@ -65,7 +65,7 @@ Drupal.behaviors.tagsEngine = function(){
 			    }, 2000);
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
-			$('.bring-tags',container).removeClass('selected');
+			reset_buttons_container(container);
  	    }else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
 		}
@@ -81,7 +81,7 @@ Drupal.behaviors.tagsEngine = function(){
 			    }, 2000);
 			});
 			var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
-			$('.bring-tags',container).removeClass('selected');
+			reset_buttons_container(container);
 	    }else{
 		  alert('Oops, there was a problem connecting to the server. Please try again');
 		}
@@ -90,6 +90,19 @@ Drupal.behaviors.tagsEngine = function(){
 
   });
 
+}
+
+function reset_buttons(nodeid){
+	var container = $('#tags-show-'+nodeid).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
+	$('.iconchange',container).each(function(i){
+	  $(this).removeClass('selected');	
+	});
+}
+
+function reset_buttons_container(container){
+	$('.iconchange',container).each(function(i){
+	  $(this).removeClass('selected');	
+	});
 }
 
 /**
