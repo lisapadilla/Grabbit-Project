@@ -3724,6 +3724,17 @@ div.navbar
 	color: #0099FF;
 	margin-bottom: 20px;
 }
+.section-deals .info
+{
+	float:left;
+	width:254px;
+}
+.section-deals .description
+{
+	color:#6C7885;
+	font-size:13px;
+	margin-top:20px;
+}
 .section-deals h2
 {
 	font-size: 16px;
@@ -3744,4 +3755,9 @@ div.navbar
 .section-deals .lowest
 {
 	color: #999999;
+}
+.section-deals .lowest span
+{
+	color:#FF6600;
+	font-weight:bold;
 }

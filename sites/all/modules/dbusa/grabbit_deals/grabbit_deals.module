@@ -54,7 +54,7 @@ function grabbit_deals_detail()
         <div class="asin">Product #: '.$asin.'</div>
         <div class="prices">
           <div class="list">List Price: '.$deal->ItemAttributes->ListPrice->CurrencyCode.' '.$deal->ItemAttributes->ListPrice->FormattedPrice.'</div>';
-  if ( $deal->ItemAttributes->ListPrice->FormattedPrice != $deal->OfferSummary->LowestNewPrice->FormattedPrice )
+  if ( $deal->ItemAttributes->ListPrice->Amount != $deal->OfferSummary->LowestNewPrice->Amount )
   {
     $out .= '<div class="lowest">Lowest New Price: <span>'.$deal->OfferSummary->LowestNewPrice->CurrencyCode.' '.$deal->OfferSummary->LowestNewPrice->FormattedPrice.'</span></div>'; 
   }
