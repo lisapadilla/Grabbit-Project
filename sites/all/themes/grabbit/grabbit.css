@@ -3350,6 +3350,11 @@ div.navbar
 .section-user .form-item label span{
   display: none;
 }
+.section-user .form-item .form-text,
+.section-user .form-item .description{
+  width: 400px;
+  float: right;
+}
 /*---------- bubble tooltip -----------*/
 
 /*background:; ie hack, something must be changed in a for ie to execute it*/
