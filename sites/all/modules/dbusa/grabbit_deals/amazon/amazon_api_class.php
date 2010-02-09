@@ -87,6 +87,7 @@
                 }
                 else
                 {
+	print_r($response);
                     throw new Exception("Invalid xml response.");   
                 }
             }
