@@ -3320,7 +3320,6 @@ div.navbar
 	font-size:12px;
 	font-weight:bold;
 }
-#user-profile-form div,
 #user-tags-form div{
 	display:block;
 }
@@ -3341,7 +3340,7 @@ div.navbar
 }
 .section-user .form-item{
   display: inline-block;
-  
+  clear: both;
 }
 /*---------- bubble tooltip -----------*/
 
