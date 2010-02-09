@@ -1530,13 +1530,13 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 }
 .section-user #content-area fieldset
 {
-	border: 1px solid #CCCCCC;
+	border: none;
+	padding: 0px;
 }
 .section-user #content-area legend, 
 .section-user #content-area legend a
 {
-	color: #333333;
-	font-size: 11px;
+	display: none;
 }
 .panel-grabbit .panel-title h3{
   display: block;
@@ -3337,6 +3337,10 @@ div.navbar
 	font-weight:bold;
 	display:block;
 	margin-top:10px;
+}
+.section-user .form-item{
+  display: inline-block;
+  
 }
 /*---------- bubble tooltip -----------*/
 
