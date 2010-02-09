@@ -1531,13 +1531,12 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 }
 .section-user #content-area fieldset
 {
-	border: 1px solid #CCCCCC;
+	border: none;
 }
 .section-user #content-area legend, 
 .section-user #content-area legend a
 {
-	color: #333333;
-	font-size: 11px;
+	display: none;
 }
 .panel-grabbit .panel-title h3{
   display: block;
