@@ -1533,6 +1533,7 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 {
 	border: none;
 	padding: 0px;
+	margin: 0px;
 }
 .section-user #content-area legend, 
 .section-user #content-area legend a
