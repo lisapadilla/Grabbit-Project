@@ -3347,6 +3347,7 @@ div.navbar
   line-height: 13px;
   margin-bottom: 0px;
   float: left;
+  height: 72px;
 }
 .section-user #content-area .form-item label span{
   display: none;
