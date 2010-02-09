@@ -3705,7 +3705,8 @@ div.navbar
 
 .section-deals .deal-container
 {
-	padding: 0 50px;
+	border-bottom:1px solid #A2B0BA;
+	padding:0 50px 20px;
 }
 .section-deals .image
 {
@@ -3801,8 +3802,15 @@ div.navbar
 {
 	border-top:1px solid #A2B0BA;
 	clear:both;
+	color:#999999;
+	font-size:11px;
 	margin-top:20px;
 	padding-top:20px;
+}
+.section-deals .from span
+{
+	font-weight: bold;
+	color: #3399FF;
 }
 .section-deals .back a span
 {
