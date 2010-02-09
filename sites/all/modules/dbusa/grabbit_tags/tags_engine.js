@@ -38,11 +38,11 @@ Drupal.behaviors.tagsEngine = function(){
 	  	if (data){
 		  	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 				if (data){
-				    /*$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
+				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
 					    setTimeout(function(){
 					      $(".tags-success").fadeOut("fast");
 					    }, 2000);
-					});*/
+					});
 					var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 					$('.bring-tags',container).removeClass('selected');
 				}else{
@@ -55,7 +55,7 @@ Drupal.behaviors.tagsEngine = function(){
     }); 
   }
   else if($('#save-tags',options).is(':checked') && !$('#add-tags',options).is(':checked')){
-	$(options).mask("Loading...");
+	$('#tags-show-'+tag_node, parent).mask("Loading...");
     var tag_tags=($('#text-area-'+tag_node,options).val());
    	$.get(Drupal.settings.basePath+"tags/save",{nid:tag_node,tags:tag_tags}, function(data){
 	  	if (data){
@@ -71,7 +71,7 @@ Drupal.behaviors.tagsEngine = function(){
 		}
     });	  
   }else if(!$('#save-tags',options).is(':checked') && $('#add-tags',options).is(':checked')){
-	$(options).mask("Loading...");
+	$('#tags-show-'+tag_node, parent).mask("Loading...");
 	var tag_tags=($('#text-area-'+tag_node,options).val());
 	$.get(Drupal.settings.basePath+"tags/custom/profile/save",{nid:tag_node,tags:tag_tags},function(data){
 		if (data){
