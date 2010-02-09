@@ -152,8 +152,8 @@ function grabbit_tags_custom_profile_save(){
 			}
 
 	    }
-	print_r($profile->taxonomy);
-	  taxonomy_node_save($profile, $profile->taxonomy);
+	
+	  @taxonomy_node_save($profile, $profile->taxonomy);
 	  print "OK";
 	
 	}else{
