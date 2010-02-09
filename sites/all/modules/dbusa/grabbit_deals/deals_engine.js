@@ -11,7 +11,7 @@ Drupal.behaviors.deals = function()
     var nid = $(this).attr('node');
     var anch = $(this);
     var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
-    
+    reset_buttons(nid);
     $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
        if (data)
        {
@@ -23,6 +23,8 @@ Drupal.behaviors.deals = function()
   
   $('.deals-display .close').live('click', function(i){
     i.preventDefault();
+    var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
+    reset_buttons_container(container);
     $(this).parent().remove();
   });
   
