@@ -47,7 +47,7 @@ function grabbit_deals_display()
   }
   catch(Exception $e)
   {
-    echo $e->getMessage();
+    $error = $e->getMessage();
   }
   
   if ( $result )
@@ -81,6 +81,29 @@ function grabbit_deals_display()
     $out .= '</div>';
   
     print $out;  
+  }
+}
+
+function grabbit_deals_check_available($keywords=NULL)
+{
+  require_once 'amazon/amazon_api_class.php';
+  
+  $obj = new AmazonProductAPI();
+  
+  try
+  {
+    $result = $obj->getItemFast($keywords, AmazonProductAPI::ALL);
+  }
+  catch(Exception $e)
+  {
+    $error = $e->getMessage();
+  }
+  
+  if ( $result )
+  {
+	print_r($result);
+  }else{
+    print_r($error);	
   }
 }
 
