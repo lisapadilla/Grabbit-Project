@@ -3769,4 +3769,7 @@ div.navbar
 	display: block;
 	text-indent: -300em;
 	overflow: hidden;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:15px;
 }
