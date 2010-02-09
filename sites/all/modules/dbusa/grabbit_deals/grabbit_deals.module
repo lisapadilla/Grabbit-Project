@@ -40,7 +40,7 @@ function grabbit_deals_display()
   $uid = $user->uid;
   
   $keywords = grabbit_deals_extract_tags( $nid, $uid );
-  
+  print_r($keywords);
   try
   {
     $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
