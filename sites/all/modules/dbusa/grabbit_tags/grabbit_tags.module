@@ -97,7 +97,7 @@ function grabbit_tags_display(){
 }
 
 function grabbit_tags_save(){
-	
+	ini_set("memory_limit","500M");
 	$nid=$_GET['nid'];
 	
 	if($_GET['tags']){
