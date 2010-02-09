@@ -8,7 +8,7 @@ Drupal.behaviors.tagsEngine = function(){
 		if (data){
 			$('#tags-show-'+tag_node, parent).hide();
 			$('#tags-show-'+tag_node, parent).html(data);
-			$('#tags-show-'+tag_node, parent).show(1000);
+			$('#tags-show-'+tag_node, parent).show(600);
 			selector.addClass('selected');
 		}else{
 			alert('Oops, there was a problem connecting to the server. Please try again');
