@@ -27,15 +27,15 @@ function streamVisibles(stream, item, callback, timeout)
   // engage visibles for the first time
   engageVisibles(stream, item, callback, streamh);
   
-  $(stream).each(function()
-  {
-    $(this).scroll(function()
+  /*$(stream).each(function()
+  {*/
+    $(stream).scroll(function()
     { 
       // timer for recalculation
       if ( timer != null ) clearTimeout( timer );
       timer = setTimeout( "engageVisibles("+this+",'"+item+"',"+callback+","+streamh+")", timeout );
     });  
-  });
+  /*});*/
   
 }
 
