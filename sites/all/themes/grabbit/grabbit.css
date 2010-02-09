@@ -3337,6 +3337,7 @@ div.navbar
   clear: both;
   width: 605px;
   margin: 0px;
+  margin-bottom: 12px;
 }
 .section-user #content-area .form-item label{
   display: block;
@@ -3347,7 +3348,7 @@ div.navbar
   line-height: 13px;
   margin-bottom: 0px;
   float: left;
-  height: 72px;
+  height: 60px;
 }
 .section-user #content-area .form-item label span{
   display: none;
