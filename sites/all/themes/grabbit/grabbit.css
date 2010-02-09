@@ -3761,3 +3761,12 @@ div.navbar
 	color:#FF6600;
 	font-weight:bold;
 }
+.section-deals .buy
+{
+	background: url(images/btns/dd_buy.gif) no-repeat;
+	width: 50px;
+	height: 20px;
+	display: block;
+	text-indent: -300em;
+	overflow: hidden;
+}
