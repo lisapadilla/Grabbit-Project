@@ -122,7 +122,16 @@ function grabbit_tags_custom_profile_save(){
 	$tags=$_GET['tags'];
 	
 	if($tags){
-	  	
+		
+	 $profile = content_profile_load('profile', $user->uid);
+      if(!$profile->nid){
+		$profile = new StdClass();
+		$profile->type = 'profile';
+		$profile->uid=$user->uid;
+		$profile->title=$user->name;
+		node_save($profile);
+	  }
+	
 	 $profile->taxonomy['tags'][3]=$profile->taxonomy['tags'][3]. $tags;
 	 
       @node_save($profile);
