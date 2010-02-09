@@ -3350,14 +3350,19 @@ div.navbar
 .section-user .form-item label span{
   display: none;
 }
-.section-user .form-item .form-text,
+.section-user .form-item .form-text{
+  width: 400px;
+  float: right;
+  display: block;
+  padding: 0px;
+  margin: -15px 0px 0px 0px;
+}
 .section-user .form-item .description{
   width: 400px;
   float: right;
   display: block;
-  border: none;
   padding: 0px;
-  margin: 0px;
+  margin: 0px 0px 0px 0px;
 }
 
 /*---------- bubble tooltip -----------*/
