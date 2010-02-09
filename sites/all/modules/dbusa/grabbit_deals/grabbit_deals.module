@@ -26,8 +26,7 @@ function grabbit_deals_menu() {
 // renders the page view of a specific deal
 function grabbit_deals_detail()
 {
-  $asin = arg(0);
-  print_r($asin);
+  $asin = arg(2);
   
   require_once 'amazon/amazon_api_class.php';
   $api = new AmazonProductAPI();
