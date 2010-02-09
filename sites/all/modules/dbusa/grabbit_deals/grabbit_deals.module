@@ -20,6 +20,11 @@ function grabbit_deals_menu() {
     'access arguments' => array('access content')
   );
 
+  $items['deals/open'] = array( 
+    'page callback' => 'grabbit_deals_open_and_track', 
+    'access arguments' => array('access content')
+  );
+
   return $items;
 }
 
@@ -132,7 +137,7 @@ function grabbit_deals_display()
       
         $out .= 
         '<div class="deal-item clearfix">'.
-          l( 'buy', $deal->DetailPageURL, 
+          l( 'buy', 'deals/open/'.$deal->ASIN, 
             array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
           <div class="provider">Amazon.com</div>
           <div class="info">
@@ -223,4 +228,27 @@ function grabbit_deals_extract_tags($nid, $uid){
 	}else{
 		return 1; // the user has no profile or the parameters were incorrect
 	}
+}
+
+function grabbit_deals_open_and_track(){
+	$asin = arg(2);
+	if(isset($asin)){
+		require_once 'amazon/amazon_api_class.php';
+		  $api = new AmazonProductAPI();
+
+		  try
+		  {
+		    $result = $api->getItemByAsin($asin);
+		    $deal = $result->Items->Item;
+		  }
+		  catch (Exception $e)
+		  {
+		    echo $e->getMessage();
+		  }
+		  if($deal->DetailPageURL){
+			grabbit_statistics_save_deal_prog(base_path().'deals/open/'.$asin,$deal->ItemAttributes->ListPrice->FormattedPrice);
+		    drupal_goto($deal->DetailPageURL);	
+		  }
+	 }
+	 return NULL;
 }
