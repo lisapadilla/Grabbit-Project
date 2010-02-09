@@ -3346,20 +3346,21 @@ div.navbar
   font-size: 12px;
   line-height: 13px;
   margin-bottom: 0px;
+  float: left;
 }
 .section-user .form-item label span{
   display: none;
 }
 .section-user .form-item .form-text{
-  width: 400px;
-  float: right;
+  width: 360px;
+  float: left;
   display: block;
   padding: 0px;
-  margin: -15px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 .section-user .form-item .description{
   width: 400px;
-  float: right;
+  float: left;
   display: block;
   padding: 0px;
   margin: 0px 0px 0px 0px;
