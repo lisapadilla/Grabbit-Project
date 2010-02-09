@@ -156,7 +156,7 @@ function grabbit_deals_calculate()
   
   if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
   {
-	if($availale = grabbit_deals_check_available($tags)){
+	if($available = grabbit_deals_check_available($tags)){
 	  print $available;	
 	}
   }

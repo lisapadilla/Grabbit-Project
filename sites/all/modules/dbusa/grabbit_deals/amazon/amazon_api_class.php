@@ -224,7 +224,6 @@
                                 
             $xml_response = $this->queryAmazon($parameters);
             
-            print_r($xml_response);
             if($xml_response->Items->TotalResults>0){
 	          return $xml_response->Items->TotalResults;
             }else{
