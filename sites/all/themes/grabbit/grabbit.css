@@ -1022,13 +1022,22 @@ a.active{
 .panels-update-wraper #edit-status-wrapper textarea,
 .panels-update-wraper #edit-status-1{
   display: block;
-  width: 458px;
-  height: 70px;
-  background: url(images/bg_textarea.gif) 0 0 no-repeat;
+  width: 448px;
+  height: 55px;
   border: none;
-  overflow: hidden;
-  padding: 10px 0px 0px 10px;
+  overflow: auto;
+  padding: 0px 0px 0px 0px;
   color: #555e6b;
+}
+.panels-update-wraper #edit-status-wrapper{
+  	display: block;
+	  width: 458px;
+	  height: 70px;
+	  background: url(images/bg_textarea.gif) 0 0 no-repeat;
+	  border: none;
+	  overflow: hidden;
+	  padding: 10px 0px 0px 10px;
+	  color: #555e6b;
 }
 #edit-status-wrapper textarea,
 .block-grabbit_search .form-text
