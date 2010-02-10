@@ -1029,7 +1029,7 @@ a.active{
   padding: 0px 0px 0px 0px;
   color: #555e6b;
 }
-.panels-update-wraper .edit-status-wrapper{
+.panels-update-wraper #edit-status-wrapper{
   	display: block;
 	  width: 458px;
 	  height: 70px;
