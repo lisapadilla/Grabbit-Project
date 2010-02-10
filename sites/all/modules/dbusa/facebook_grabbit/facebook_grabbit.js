@@ -464,14 +464,14 @@ Drupal.behaviors.charCountDown = function(context)
     {
       //handle the over the limit part here
       $(this).addClass('overlimit');
-      $('input',form).attr('disabled', 'true');
-      $('input',form).css('opacity', '0.5');      
+      $('#article-indicator').show('slow');
+      //$('input',form).css('opacity', '0.5');      
     } 
     else 
     {
       $(this).removeClass('overlimit');
-      $('input',form).removeAttr('disabled');
-      $('input',form).css('opacity', '1');
+      $('#article-indicator').hide('slow');
+      //$('input',form).css('opacity', '1');
     }
     $('#counter div').text(limit-this.value.length);
   });
