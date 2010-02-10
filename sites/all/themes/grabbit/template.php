@@ -166,7 +166,13 @@ function grabbit_preprocess_node(&$vars, $hook) {
   }
 
   if($vars['node']->type=='media'){
-	
+		$profile = content_profile_load('profile', $vars['node']->uid);
+		if($profile->field_profile_picture[0]['filepath']){
+		  $pic=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend');
+		}else{
+		  $pic=theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg');
+		}
+		$vars['file_uploader']='<div class="uploader"><span class="pic-uploader">'.$pic.'</span><span class="body-uploader">'.$vars['body'].'<span class="submitted">on '.format_date($vars['node']->created).'</span></span></div>';
     $error="Oops! we could not find the file, check the URL and try again!";
 	if ($vars['node']->field_media[0]['value']){
 		$result = db_query('SELECT * FROM {files} WHERE fid = %d', $vars['node']->field_media[0]['value']);
@@ -193,13 +199,6 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				break;
 			}
 			$vars['file_media']= $output;
-			$profile = content_profile_load('profile', $vars['node']->uid);
-			if($profile->field_profile_picture[0]['filepath']){
-			  $pic=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend');
-			}else{
-			  $pic=theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg');
-			}
-			$vars['file_uploader']='<div class="uploader"><span class="pic-uploader">'.$pic.'</span><span class="body-uploader">'.$vars['body'].'<span class="submitted">on '.format_date($vars['node']->created).'</span></span></div>';
 		}else{
 			$error;
 		}
