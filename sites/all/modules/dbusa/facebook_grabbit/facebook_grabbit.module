@@ -2380,7 +2380,7 @@ function facebook_grabbit_checkout_textlong($text){
 		global $user;
 		$new_text=substr($text,0,117);
 		$node = new stdClass();
-		  $node->title = $user->name.' - '.format_date(date());
+		  $node->title = $user->name.' - '.format_date(time());
 		  $node->created = time();
 		  $node->type = 'media';
 		  $node->status = 1;
