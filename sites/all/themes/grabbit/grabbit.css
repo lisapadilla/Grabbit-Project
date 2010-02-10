@@ -2238,6 +2238,24 @@ margin-top:5px;
 	margin-bottom: 25px;
 }
 
+.node-media .body-uploader
+{
+	color:#333333;
+	font-size:14px;
+}
+.node-media .body-uploader .submitted
+{
+	color:#999999;
+	font-size:11px;
+}
+.node-type-media #main #content .body-uploader a
+{
+	color: #385691;
+}
+.node-type-media .node-media .links
+{
+	display: none;
+}
 .node-media .file-uploader
 {
 	background-color: #E6EAED;
