@@ -3381,14 +3381,16 @@ div.navbar
 	height:100px;
 	width:210px;
 }
-.section-user #content-area .form-item{
+.section-user #content-area .form-item,
+.section-invite #content-area .form-item{
   display: inline-block;
   clear: both;
   width: 605px;
   margin: 0px;
   margin-bottom: 12px;
 }
-.section-user #content-area .form-item label{
+.section-user #content-area .form-item label,
+.section-invite #content-area .form-item label{
   display: block;
   width: 145px;
   color: #385491;
@@ -3398,11 +3400,13 @@ div.navbar
   float: left;
   padding: 0px 0px 20px 45px;
 }
-.section-user #content-area .form-item label span{
+.section-user #content-area .form-item label span,
+.section-invite #content-area .form-item label span{
   display: none;
 }
 .section-user #content-area .form-item .form-text,
-.section-user #content-area .filefield-element{
+.section-user #content-area .filefield-element,
+.section-invite #content-area .form-item .form-textarea{
   width: 360px;
   float: left;
   display: block;
@@ -3436,7 +3440,8 @@ div.navbar
   float: none;
   text-align: left;
 }
-.section-user #content-area .form-item .description{
+.section-user #content-area .form-item .description,
+.section-invite #content-area .form-item .description{
   width: 360px;
   display: block;
   padding: 0px 55px 0px 0px;
@@ -3453,7 +3458,13 @@ div.navbar
   margin-bottom: 10px;
   display: block;
 }
-
+.section-invite #edit-message-wrapper .form-item .form-textarea{
+  width: 360px;
+  float: left;
+  display: block;
+  padding: 0px;
+  margin: 0px 0px 2px 0px;
+}
 /*---------- bubble tooltip -----------*/
 
 /*background:; ie hack, something must be changed in a for ie to execute it*/
