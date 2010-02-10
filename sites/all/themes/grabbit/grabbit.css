@@ -3465,6 +3465,15 @@ div.navbar
   padding: 0px;
   margin: 0px 23px 2px 0px;
 }
+.section-invite #content-area .invite-message{
+  padding: 0px 23px 0px 45px;
+}
+.section-invite #content-area .invite-message p{
+  font-size: 11px;
+  color: #666666;
+  line-height: 13px;
+  margin-bottom: 0px;
+}
 /*---------- bubble tooltip -----------*/
 
 /*background:; ie hack, something must be changed in a for ie to execute it*/
