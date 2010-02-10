@@ -3363,6 +3363,7 @@ div.navbar
 }
 .section-user #content-area .filefield-element .widget-edit{
   max-width: 100%;
+  float: none;
 }
 .section-user #content-area .form-item .description{
   width: 360px;
