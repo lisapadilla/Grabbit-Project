@@ -3368,6 +3368,17 @@ div.navbar
 .section-user #content-area .filefield-element .form-item{
   width: 100%;
 }
+.section-user #content-area .filefield-element .form-item .description{
+  width: 100%;
+  display: block;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  font-size: 11px;
+  color: #999999;
+  line-height: 13px;
+  float: none;
+  text-align: right;
+}
 .section-user #content-area .form-item .description{
   width: 360px;
   display: block;
