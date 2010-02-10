@@ -3380,10 +3380,10 @@ div.navbar
   padding: 0px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
   font-size: 11px;
-  color: #999999;
+  color: #666666;
   line-height: 13px;
   float: none;
-  text-align: right;
+  text-align: left;
 }
 .section-user #content-area .form-item .description{
   width: 360px;
