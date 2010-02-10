@@ -52,6 +52,7 @@ Drupal.behaviors.tagsEngine = function(){
 					var container = $('#tags-show-'+tag_node).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 					$('#tags-show-'+tag_node).removeClass('masked-relative');
 					reset_buttons_container(container);
+					alert(container.html());
 					calculateDeals(container);
 				}else{
 					alert('Oops, there was a problem connecting to the server. Please try again');
