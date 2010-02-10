@@ -3340,13 +3340,12 @@ div.navbar
 .section-user #content-area .form-item label{
   display: block;
   width: 145px;
-  padding-left: 45px;
   color: #385491;
   font-size: 12px;
   line-height: 13px;
   margin-bottom: 0px;
   float: left;
-  padding: 0px 0px 20px 0px;
+  padding: 0px 45px 20px 0px;
 }
 .section-user #content-area .form-item label span{
   display: none;
