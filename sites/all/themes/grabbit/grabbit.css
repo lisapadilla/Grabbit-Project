@@ -3350,12 +3350,16 @@ div.navbar
 .section-user #content-area .form-item label span{
   display: none;
 }
-.section-user #content-area .form-item .form-text{
+.section-user #content-area .form-item .form-text,
+.section-user #content-area .filefield-element{
   width: 360px;
   float: left;
   display: block;
   padding: 0px;
   margin: 0px 0px 2px 0px;
+}
+.section-user #content-area .filefield-element{
+  background: #E6EaEd;
 }
 .section-user #content-area .form-item .description{
   width: 360px;
