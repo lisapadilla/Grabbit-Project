@@ -3440,7 +3440,8 @@ div.navbar
   float: none;
   text-align: left;
 }
-.section-user #content-area .form-item .description{
+.section-user #content-area .form-item .description,
+.section-invite #content-area .form-item .description{
   width: 360px;
   display: block;
   padding: 0px 55px 0px 0px;
