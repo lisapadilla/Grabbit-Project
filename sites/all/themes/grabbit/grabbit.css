@@ -3558,6 +3558,9 @@ div.navbar
 
 .node-type-media .links_stream{
 	display:inline-block;
+	margin:0px;
+	margin-left:470px;
+	float:none;
 }
 
 #content-area .node-news #article-news a
