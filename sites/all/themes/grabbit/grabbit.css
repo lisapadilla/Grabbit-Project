@@ -3364,6 +3364,8 @@ div.navbar
 .section-user #content-area .filefield-element .widget-edit{
   max-width: 100%;
   float: none;
+}
+.section-user #content-area .filefield-element .filefield-upload{
   margin-bottom: 10px;
 }
 .section-user #content-area .filefield-element .form-item{
