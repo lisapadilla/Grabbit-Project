@@ -3381,7 +3381,8 @@ div.navbar
 	height:100px;
 	width:210px;
 }
-.section-user #content-area .form-item{
+.section-user #content-area .form-item,
+.section-invite #content-area .form-item{
   display: inline-block;
   clear: both;
   width: 605px;
