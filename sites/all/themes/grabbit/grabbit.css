@@ -2257,6 +2257,15 @@ margin-top:5px;
 	color:#999999;
 	font-size:11px;
 }
+.node-media .file-media
+{
+	margin: 30px 0;
+}
+.node-media .file-media img
+{
+	display: block;
+	margin: 0 auto;
+}
 .node-type-media #main #content .body-uploader a
 {
 	color: #385691;
