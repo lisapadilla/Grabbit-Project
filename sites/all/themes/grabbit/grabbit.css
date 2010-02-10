@@ -3359,7 +3359,6 @@ div.navbar
 }
 .section-user #content-area .form-item .description{
   width: 360px;
-  float: left;
   display: block;
   padding: 0px 55px 0px 0px;
   margin: 0px 0px 0px 0px;
@@ -3368,7 +3367,15 @@ div.navbar
   line-height: 13px;
   float: right;
 }
-#edit-contact-wrapper .form-item .description{
+.section-user #edit-contact-wrapper .form-item .description{
+  width: 360px;
+  display: block;
+  padding: 0px 55px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  font-size: 11px;
+  color: #999999;
+  line-height: 13px;
+  float: none;
   clear: both;
 }
 
