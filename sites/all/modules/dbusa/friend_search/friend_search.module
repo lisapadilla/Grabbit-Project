@@ -30,7 +30,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
           $blocks['content'] = '<div class="panels-update-form">
 		             <div class="panels-update-wraper">'.drupal_get_form('facebook_grabbit_update_form');
 		
-          $blocks['content'] .= '<div class="upload_button_expand exeded-hidden overloaded" id="article-indicator" style="display:none;">An article page will be generated in grabbit</div>
+          $blocks['content'] .= '<div class="upload_button_expand exeded-hidden" id="article-indicator" style="display:none"><span class="overloaded">An article page will be generated in grabbit</span></div>
                                  <div class="upload_button_expand"><a href="#">&raquo; Upload file</a></div>
                                  <div class="panels-update-form_file" style="display:none">
                                  <div id="swfupload-control">  
