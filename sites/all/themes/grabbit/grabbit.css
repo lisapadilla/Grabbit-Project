@@ -1019,8 +1019,8 @@ a.active{
   margin: 0px;
   padding: 0px;
 }
-#edit-status-wrapper textarea,
-#edit-status-1{
+.front #edit-status-wrapper textarea,
+.front #edit-status-1{
   display: block;
   width: 458px;
   height: 70px;
@@ -2939,7 +2939,7 @@ div.navbar
 	height:16px;
 }
 .navbar ul{
-	height:16px;
+	height: 20px;
 }
 .navbar ul li{
 	display:inline;
@@ -3340,26 +3340,53 @@ div.navbar
 .section-user #content-area .form-item label{
   display: block;
   width: 145px;
-  padding-left: 45px;
   color: #385491;
   font-size: 12px;
   line-height: 13px;
   margin-bottom: 0px;
   float: left;
+  padding: 0px 0px 20px 45px;
 }
 .section-user #content-area .form-item label span{
   display: none;
 }
-.section-user #content-area .form-item .form-text{
+.section-user #content-area .form-item .form-text,
+.section-user #content-area .filefield-element{
   width: 360px;
   float: left;
   display: block;
   padding: 0px;
   margin: 0px 0px 2px 0px;
 }
+.section-user #content-area .filefield-element{
+  background: #E6EaEd;
+  padding: 10px;
+  width: 340px;
+}
+.section-user #content-area .filefield-element .widget-edit{
+  max-width: 340px;
+  float: none;
+}
+.section-user #content-area .filefield-element .filefield-upload{
+  margin-bottom: 10px;
+}
+.section-user #content-area .filefield-element .form-item{
+  width: 340px;
+  margin-bottom: 0px;
+}
+.section-user #content-area .filefield-element .form-item .description{
+  width: 340px;
+  display: block;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  font-size: 11px;
+  color: #666666;
+  line-height: 13px;
+  float: none;
+  text-align: left;
+}
 .section-user #content-area .form-item .description{
   width: 360px;
-  float: left;
   display: block;
   padding: 0px 55px 0px 0px;
   margin: 0px 0px 0px 0px;
@@ -3367,6 +3394,13 @@ div.navbar
   color: #999999;
   line-height: 13px;
   float: right;
+}
+.section-user #edit-submit{
+  margin-left: 500px;
+}
+#dcl-importer-form strong{
+  margin-bottom: 10px;
+  display: block;
 }
 
 /*---------- bubble tooltip -----------*/
