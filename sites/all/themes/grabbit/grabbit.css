@@ -3458,8 +3458,12 @@ div.navbar
   margin-bottom: 10px;
   display: block;
 }
-.section-invite #edit-message-wrapper textarea{
-  float: right;
+.section-invite #edit-message-wrapper .form-item .form-textarea{
+  width: 360px;
+  float: left;
+  display: block;
+  padding: 0px;
+  margin: 0px 0px 2px 0px;
 }
 /*---------- bubble tooltip -----------*/
 
