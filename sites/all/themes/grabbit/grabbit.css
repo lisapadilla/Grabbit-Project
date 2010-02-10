@@ -3398,6 +3398,9 @@ div.navbar
 .section-user #edit-submit{
   margin-left: 500px;
 }
+#dcl-importer-form strong{
+  margin-bottom: 20px;
+}
 
 /*---------- bubble tooltip -----------*/
 
