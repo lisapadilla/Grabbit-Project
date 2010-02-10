@@ -3470,8 +3470,9 @@ div.navbar
   margin: 0px 23px 2px 0px;
 }
 .section-invite #content-area .invite-message{
-  width: 360px;
+  width: 416px;
   float: right;
+  margin-top: -30px;
 }
 .section-invite #content-area .invite-message p{
   font-size: 12px;
