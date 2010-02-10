@@ -86,8 +86,12 @@
 			<?php print $file_media; ?>
 			</div>
 		  <?php endif; ?>
-		
-		<?php if(!$file_media): ?>
+		<?php if($node->type=='media' && !$file_media && $file_uploader):?>
+			<div class="file-uploader clearfix">
+				<?php print $file_uploader; ?>
+			</div>
+		<?php endif; ?>
+		<?php if(!$file_media && $node->type!='media'): ?>
           <?php print $content; ?>
         <?php endif; ?>
 
