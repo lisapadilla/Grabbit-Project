@@ -3460,10 +3460,10 @@ div.navbar
 }
 .section-invite #content-area #edit-message-wrapper .form-textarea{
   width: 360px;
-  float: left;
+  float: right;
   display: block;
   padding: 0px;
-  margin: 0px 0px 2px 0px;
+  margin: 0px 20px 2px 0px;
 }
 /*---------- bubble tooltip -----------*/
 
