@@ -3337,7 +3337,8 @@ div.navbar
   margin: 0px;
   margin-bottom: 12px;
 }
-.section-user #content-area .form-item label{
+.section-user #content-area .form-item label,
+.section-invite #content-area .form-item label{
   display: block;
   width: 145px;
   color: #385491;
@@ -3347,7 +3348,8 @@ div.navbar
   float: left;
   padding: 0px 0px 20px 45px;
 }
-.section-user #content-area .form-item label span{
+.section-user #content-area .form-item label span,
+.section-invite #content-area .form-item label span{
   display: none;
 }
 .section-user #content-area .form-item .form-text,
