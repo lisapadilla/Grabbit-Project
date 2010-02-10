@@ -3362,7 +3362,7 @@ div.navbar
   background: #E6EaEd;
 }
 .section-user #content-area .filefield-element .widget-edit{
-  width: 99%;
+  max-width: auto;
 }
 .section-user #content-area .form-item .description{
   width: 360px;
