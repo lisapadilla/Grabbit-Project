@@ -3361,6 +3361,7 @@ div.navbar
 .section-user #content-area .filefield-element{
   background: #E6EaEd;
   padding: 10px;
+  width: 340px;
 }
 .section-user #content-area .filefield-element .widget-edit{
   max-width: 340px;
