@@ -200,24 +200,25 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			}
 			$vars['file_media']= $output;
 		}else{
-			drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
-			//controles
-			if($user->uid>0){
-
-				$controles='<div class="links_stream" id="article-news">  
-				    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
-				    <a href="JavaScript:void(0);" class="grabb-that">RT</a>
-				    <a href="javascript:void(0)" class="comment-news">Comment</a>
-				    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
-				  </div>';
-
-			}
-			// end controles
-            $vars['controles']= $controles;
 			$error;
 		}
 
 	}else{
+		drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
+		//controles
+		if($user->uid>0){
+
+			$controles='<div class="links_stream" id="article-news">  
+			    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
+			    <a href="JavaScript:void(0);" class="grabb-that">RT</a>
+			    <a href="javascript:void(0)" class="comment-news">Comment</a>
+			    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
+			  </div>';
+
+		}
+		// end controles
+        $vars['controles']= $controles;
+		
 		$error;
 	}	
   }
