@@ -79,7 +79,7 @@
 		  <span class="image-inline-rss"><img src="<?=$node->field_image_inline[0]['value'];?>" /></span>
 		<? endif; */ ?>
 		  <?php if($file_media): ?>
-			<div class="file-uploader">
+			<div class="file-uploader clearfix">
 				<?php print $file_uploader; ?>
 			</div>
 			<div class="file-media">
@@ -91,7 +91,7 @@
           <?php print $content; ?>
         <?php endif; ?>
 
-        <?php if ($submitted): ?>
+        <?php if ($submitted && !$file_uploader): ?>
           <p><span class="submited-by"><?php print $submitted; ?></span></p>
         <?php endif; ?>
         <?php if ($links): ?>
