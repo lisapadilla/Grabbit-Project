@@ -193,7 +193,13 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				break;
 			}
 			$vars['file_media']= $output;
-			
+			$profile = content_profile_load('profile', $vars['node']->uid);
+			if($profile->field_profile_picture[0]['filepath']){
+			  $pic=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend');
+			}else{
+			  $pic=theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg');
+			}
+			$vars['file_uploader']='<div class="uploader"><span class="pic-uploader">'.$pic.'</span><span class="class-uploader">'.$vars['node']->name.'</span><span class="body-uploader">'.$vars['body'].'</span></div>';
 		}else{
 			$error;
 		}
