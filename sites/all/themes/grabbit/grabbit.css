@@ -3405,7 +3405,8 @@ div.navbar
   display: none;
 }
 .section-user #content-area .form-item .form-text,
-.section-user #content-area .filefield-element{
+.section-user #content-area .filefield-element,
+.section-invite #content-area .form-item .form-textarea{
   width: 360px;
   float: left;
   display: block;
