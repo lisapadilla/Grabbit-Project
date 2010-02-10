@@ -3367,17 +3367,7 @@ div.navbar
   line-height: 13px;
   float: right;
 }
-.section-user #content-area #edit-contact-wrapper .description{
-  width: 360px;
-  display: block;
-  padding: 0px 55px 0px 0px;
-  margin: 0px 0px 0px 0px;
-  font-size: 11px;
-  color: #999999;
-  line-height: 13px;
-  float: none;
-  clear: both;
-}
+
 
 /*---------- bubble tooltip -----------*/
 
