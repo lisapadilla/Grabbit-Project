@@ -3458,7 +3458,9 @@ div.navbar
   margin-bottom: 10px;
   display: block;
 }
-
+.section-invite #edit-message-wrapper textarea{
+  float: right;
+}
 /*---------- bubble tooltip -----------*/
 
 /*background:; ie hack, something must be changed in a for ie to execute it*/
