@@ -1019,8 +1019,8 @@ a.active{
   margin: 0px;
   padding: 0px;
 }
-#edit-status-wrapper textarea,
-#edit-status-1{
+.front #edit-status-wrapper textarea,
+.front #edit-status-1{
   display: block;
   width: 458px;
   height: 70px;
