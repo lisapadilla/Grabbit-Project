@@ -3519,7 +3519,7 @@ div.navbar
 }
 
 .node-type-news #content .node-news .links_stream,
-.node-type-media #content .node-news .links_stream
+.node-type-media .links_stream
 {
 	margin-right:47px;
 	margin-top:72px;
