@@ -2249,7 +2249,9 @@ margin-top:5px;
 .node-media .body-uploader
 {
 	color:#333333;
+	float:left;
 	font-size:14px;
+	width:530px;
 }
 .node-media .body-uploader .submitted
 {
