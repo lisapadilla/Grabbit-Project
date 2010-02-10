@@ -3370,6 +3370,7 @@ div.navbar
 }
 .section-user #content-area .filefield-element .form-item{
   width: 100%;
+  margin-bottom: 0px;
 }
 .section-user #content-area .filefield-element .form-item .description{
   width: 100%;
