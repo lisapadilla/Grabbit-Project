@@ -3365,6 +3365,9 @@ div.navbar
   max-width: 100%;
   float: none;
 }
+.section-user #content-area .filefield-element .form-item{
+  width: 100%;
+}
 .section-user #content-area .form-item .description{
   width: 360px;
   display: block;
