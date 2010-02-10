@@ -3360,20 +3360,21 @@ div.navbar
 }
 .section-user #content-area .filefield-element{
   background: #E6EaEd;
+  padding: 10px;
 }
 .section-user #content-area .filefield-element .widget-edit{
-  max-width: 100%;
+  max-width: 340px;
   float: none;
 }
 .section-user #content-area .filefield-element .filefield-upload{
   margin-bottom: 10px;
 }
 .section-user #content-area .filefield-element .form-item{
-  width: 100%;
+  width: 340px;
   margin-bottom: 0px;
 }
 .section-user #content-area .filefield-element .form-item .description{
-  width: 100%;
+  width: 340px;
   display: block;
   padding: 0px 0px 0px 0px;
   margin: 0px 0px 0px 0px;
