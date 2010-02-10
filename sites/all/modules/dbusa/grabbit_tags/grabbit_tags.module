@@ -78,7 +78,7 @@ function grabbit_tags_display(){
 	  $output = '<div class="tags-engine" node="'.$nid.'">
 	            '.$input.'
 	             <a href="#" class="close-tags">Close</a><span class="all-tags">
-	             <span class="tags-legend">Add item tags to my profile:</span><span class="tags-instruction">(comma-separated list)</span>
+	             <span class="tags-legend">Add or edit tags to your settings:</span><span class="tags-instruction">(comma-separated list)</span>
 	             ';
    
 	  $output .='<textarea id="text-area-'.$nid.'">'.$text.'</textarea>';

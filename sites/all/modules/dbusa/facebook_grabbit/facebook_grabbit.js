@@ -453,29 +453,7 @@ $(document).ready(function() {
 });
 
 
-Drupal.behaviors.charCountDown = function(context)
-{
-  var limit = 140;
-  var form = $("#facebook-grabbit-update-form");
-  
-  $('#edit-status').keyup(function()
-  {
-    if(this.value.length >= limit) 
-    {
-      //handle the over the limit part here
-      $(this).addClass('overlimit');
-      $('input',form).attr('disabled', 'true');
-      $('input',form).css('opacity', '0.5');      
-    } 
-    else 
-    {
-      $(this).removeClass('overlimit');
-      $('input',form).removeAttr('disabled');
-      $('input',form).css('opacity', '1');
-    }
-    $('#counter div').text(limit-this.value.length);
-  });
-}
+
 
 /*!
  * jQuery Cycle Plugin (with Transition Definitions)

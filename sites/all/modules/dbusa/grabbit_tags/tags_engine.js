@@ -47,7 +47,7 @@ Drupal.behaviors.tagsEngine = function(){
 				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
 					    setTimeout(function(){
 					      $(".tags-success").fadeOut("fast");
-					    }, 2000);
+					    }, 4000);
 					});
 					var container = $('#tags-show-'+tag_node, parent).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 					$('#tags-show-'+tag_node, parent).removeClass('masked-relative');
@@ -70,7 +70,7 @@ Drupal.behaviors.tagsEngine = function(){
 		  	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item successfully.</span>').fadeIn(function(){
 			    setTimeout(function(){
 			      $(".tags-success").fadeOut("fast");
-			    }, 2000);
+			    }, 4000);
 			});
 			var container = $('#tags-show-'+tag_node, parent).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);
@@ -88,7 +88,7 @@ Drupal.behaviors.tagsEngine = function(){
 	      	$('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your profile successfully.</span>').fadeIn(function(){
 			    setTimeout(function(){
 			      $(".tags-success").fadeOut("fast");
-			    }, 2000);
+			    }, 4000);
 			});
 			var container = $('#tags-show-'+tag_node, parent).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
 			reset_buttons_container(container);

@@ -43,7 +43,7 @@ function grabbit_deals_detail()
   }
   catch (Exception $e)
   {
-    echo $e->getMessage();
+    drupal_goto('deals/invalid');
   }
   
   $listprice = (int)$deal->ItemAttributes->ListPrice->Amount;

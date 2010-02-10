@@ -78,20 +78,27 @@
 	    <?php /* if ($node->field_image_inline[0]['value']):?>
 		  <span class="image-inline-rss"><img src="<?=$node->field_image_inline[0]['value'];?>" /></span>
 		<? endif; */ ?>
+		  <?php if($controles): ?>
+			<?php print $controles; ?>
+	      <?php endif; ?>
 		  <?php if($file_media): ?>
-			<div class="file-uploader">
+			<div class="file-uploader clearfix">
 				<?php print $file_uploader; ?>
 			</div>
 			<div class="file-media">
 			<?php print $file_media; ?>
 			</div>
 		  <?php endif; ?>
-		
-		<?php if(!$file_media): ?>
+		<?php if($node->type=='media' && !$file_media && $file_uploader):?>
+			<div class="file-uploader clearfix">
+				<?php print $file_uploader; ?>
+			</div>
+		<?php endif; ?>
+		<?php if(!$file_media && $node->type!='media'): ?>
           <?php print $content; ?>
         <?php endif; ?>
 
-        <?php if ($submitted): ?>
+        <?php if ($submitted && !$file_uploader): ?>
           <p><span class="submited-by"><?php print $submitted; ?></span></p>
         <?php endif; ?>
         <?php if ($links): ?>
