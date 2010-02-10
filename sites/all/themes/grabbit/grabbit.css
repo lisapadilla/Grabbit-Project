@@ -3462,12 +3462,12 @@ div.navbar
   margin-bottom: 10px;
   display: block;
 }
-.section-invite #edit-message-wrapper .form-item .form-textarea{
+.section-invite #content-area #edit-message-wrapper .form-textarea{
   width: 360px;
-  float: left;
+  float: right;
   display: block;
   padding: 0px;
-  margin: 0px 0px 2px 0px;
+  margin: 0px 23px 2px 0px;
 }
 /*---------- bubble tooltip -----------*/
 
@@ -3972,7 +3972,7 @@ div.navbar
 	margin-top: 15px;
 }
 .overloaded{
-	color:red;
+	color:#0073CF;
 	font-size:11px;
 	padding-left:16px;
 }
