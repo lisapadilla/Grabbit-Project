@@ -204,6 +204,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 		}
 
 	}else{
+		global $user;
 		drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
 		//controles
 		if($user->uid>0){
