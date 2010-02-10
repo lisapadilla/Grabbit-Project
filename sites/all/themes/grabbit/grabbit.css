@@ -1101,14 +1101,13 @@ a.active{
 }
 .node-type-media  #content-area h1
 {
-  display: block;
-  padding: 30px 70px 0px 70px;
-  color: #6E7887;
-  font-size: 20px;
-  line-height: 21px;
-  margin: 0px;
-  background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
-  font-weight: bold;
+  	background:transparent url(images/mp_top_w.gif) no-repeat scroll 0 0;
+	color:#385291;
+	display:block;
+	font-size:18px;
+	line-height:18px;
+	margin:0;
+	padding:10px 14px;
 }
 .node-type-news  #content-area h1
 {
@@ -2250,7 +2249,9 @@ margin-top:5px;
 .node-media .body-uploader
 {
 	color:#333333;
+	float:left;
 	font-size:14px;
+	width:530px;
 }
 .node-media .body-uploader .submitted
 {
