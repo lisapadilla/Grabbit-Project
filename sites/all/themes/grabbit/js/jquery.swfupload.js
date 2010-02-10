@@ -89,13 +89,13 @@ Drupal.behaviors.charCountDown = function(context)
       //handle the over the limit part here
       $(this).addClass('overlimit');
       $('#article-indicator').show();
-      
+      $('#edit-status-wrapper').attr('background','transparent url(images/bg_textarea_big.gif) no-repeat scroll 0 0');
     } 
     else 
     {
       $(this).removeClass('overlimit');
       $('#article-indicator').hide();
-      $('#edit-status-wrapper').attr('background','transparent url(images/bg_textarea_big.gif) no-repeat scroll 0 0');
+      
     }
     $('#counter div').text(limit-this.value.length);
   });
