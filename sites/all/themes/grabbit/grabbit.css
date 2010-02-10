@@ -2238,7 +2238,21 @@ margin-top:5px;
 	margin-bottom: 25px;
 }
 
-.node-type-media .node-media, 
+.node-media .file-uploader
+{
+	background-color: #E6EAED;
+	padding: 15px;
+}
+.node-media .pic-uploader img
+{
+	display: block;
+}
+.node-media .pic-uploader
+{
+	float: left;
+	margin-right: 15px;
+}
+
 .node-type-media #comments, .node-type-news #comments{
   padding: 10px 70px 30px 70px;
   color: #555e6b;
