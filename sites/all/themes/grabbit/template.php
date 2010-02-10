@@ -267,7 +267,19 @@ function grabbit_preprocess_node(&$vars, $hook) {
  */
 
 function grabbit_preprocess_comment(&$vars, $hook) {
-  print_r($vars);
+
+  // Load user's profile picture for display
+  $profile = content_profile_load('profile', $vars['comment']->uid);
+  if ( $profile->field_profile_picture[0]['filepath'] )
+  {
+    $pic = theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend');
+  }
+  else
+  {
+    $pic = theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg');
+  }
+  $vars['profile_pic'] = $pic;
+  
 }
 // */
 

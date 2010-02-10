@@ -48,7 +48,7 @@
     <div class="unpublished"><?php print t('Unpublished'); ?></div>
   <?php endif; ?>
 
-  <?php if ($picture) print $picture; ?>
+  <?php if ($profile_pic) print $profile_pic; ?>
 
   <div class="submitted">
     <?php print $submitted; ?>
