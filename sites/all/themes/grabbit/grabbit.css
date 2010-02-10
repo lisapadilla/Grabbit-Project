@@ -3367,7 +3367,9 @@ div.navbar
   line-height: 13px;
   float: right;
 }
-
+.section-user #edit-submit{
+  margin-left: 200px;
+}
 
 /*---------- bubble tooltip -----------*/
 
