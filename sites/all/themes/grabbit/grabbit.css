@@ -3361,6 +3361,9 @@ div.navbar
 .section-user #content-area .filefield-element{
   background: #E6EaEd;
 }
+.section-user #content-area .filefield-element .widget-edit{
+  width: 99%;
+}
 .section-user #content-area .form-item .description{
   width: 360px;
   display: block;
