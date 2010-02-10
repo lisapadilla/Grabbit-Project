@@ -3462,7 +3462,13 @@ div.navbar
   margin-bottom: 10px;
   display: block;
 }
-
+.section-invite #content-area #edit-message-wrapper{
+  width: 360px;
+  float: right;
+  display: block;
+  padding: 0px;
+  margin: 0px 23px 2px 0px;
+}
 .section-invite #content-area .invite-message{
   width: 416px;
   float: right;
