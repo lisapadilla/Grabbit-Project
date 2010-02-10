@@ -3399,7 +3399,8 @@ div.navbar
   margin-left: 500px;
 }
 #dcl-importer-form strong{
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  display: block;
 }
 
 /*---------- bubble tooltip -----------*/
