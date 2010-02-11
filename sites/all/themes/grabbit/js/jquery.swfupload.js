@@ -90,6 +90,7 @@ Drupal.behaviors.charCountDown = function(context)
       $(this).addClass('overlimit');
       $('#article-indicator').show();
       $('#edit-status-wrapper').attr('background','transparent url(images/bg_textarea_big.gif) no-repeat scroll 0 0');
+      $('#edit-status-wrapper').attr('height','120px');
     } 
     else 
     {
