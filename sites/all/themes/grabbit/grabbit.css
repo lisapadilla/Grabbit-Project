@@ -1153,6 +1153,18 @@ a.active{
   float: left;
   margin: 0px 10px 10px 0px;
 }
+#content-area .views-row .views-field-created .field-content{
+  font-size: 11px;
+  color:#999999;
+  line-height: 13px;
+  margin-bottom: 0px;
+}
+#content-area .views-row .views-field-created .field-content a{
+  font-size: 11px;
+  color: #3399FF;  
+  line-height: 13px;
+  margin-bottom: 0px;
+}
 
 
 #block-friend_search-2{
