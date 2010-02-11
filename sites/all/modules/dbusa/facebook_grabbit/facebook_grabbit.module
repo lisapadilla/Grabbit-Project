@@ -112,15 +112,15 @@ function facebook_grabbit_update_form($form_state){
 		$suser=$fuser->fid;
 		$session_key=$fuser->kid;
 		
-		$facebook = new FacebookDesktop($api_key, $secret);
+	//	$facebook = new FacebookDesktop($api_key, $secret);
 		
-		$facebook->set_user($suser, $session_key);
-		try{
+	//	$facebook->set_user($suser, $session_key);
+		/*try{
 		  $status = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'5'));
 		}catch(FacebookRestClientException $e){
 			$e;
-		}
-		if ($facebook){
+		}*/
+		if ($suser){
 		  
 		  $form['facebook']= array(
 		  '#type' => 'checkbox',
