@@ -3986,3 +3986,79 @@ div.navbar
 	font-size:11px;
 	padding-left:16px;
 }
+
+.node-type-media .comment-inner
+{
+	padding: 15px;
+}
+.node-type-media .comment img
+{
+	float: left;
+	margin-right: 15px;
+	display: block;
+}
+.node-type-media .comment .content
+{
+	float: left;
+	width: 390px;
+}
+.node-type-media .comment .submitted
+{
+	color: #999999;
+	font-size: 10px;
+	line-height: 13px;
+}
+.node-type-media .comment .name a
+{
+	font-weight: bold;
+	color: #385691;
+}
+.node-type-media #comments
+{
+	padding: 0 68px;
+	margin: 0;
+}
+.node-type-media #comments h2.title
+{
+	font-size: 14px;
+	margin-top:15px;
+	color: #385291;
+}
+.node-type-media #comments-title
+{
+	color:#385291;
+	font-weight: normal;
+	font-size:18px;
+	line-height:18px;
+	margin-bottom: 10px;
+}
+.node-type-media #comment-form textarea
+{
+	width: 489px;
+	height: 100px;
+}
+.node-type-media #comment-form .form-item
+{
+	display: none;
+}
+.node-type-media #comment-form #edit-comment-wrapper
+{
+	display: block;
+}
+.node-type-media #comment-form #edit-comment-wrapper label
+{
+	display: none;
+}
+.node-type-media #comment-form fieldset
+{
+	display: none;
+}
+.node-type-media #comment-form #edit-preview
+{
+	display: none;
+}
+.node-type-media #comment-form #edit-submit
+{
+	display:block;
+	margin-left: auto;
+}
