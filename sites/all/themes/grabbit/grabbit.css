@@ -4133,3 +4133,7 @@ div.navbar
 {
 	display: none;
 }
+.node-type-news #comments
+{
+	margin-top: 10px;
+}
