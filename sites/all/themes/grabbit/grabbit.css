@@ -1007,7 +1007,9 @@ a.active{
   margin-bottom: 2px;
 }
 #facebook-grabbit-update-form .user-friends .numbers{
-  color: #317cf9;
+  	color:#317CF9;
+	font-family:helvetica;
+	font-weight:bold;
 }
 #edit-status-wrapper,
 #edit-status-1-wrapper{
