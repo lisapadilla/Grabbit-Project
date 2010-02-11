@@ -4160,7 +4160,7 @@ div.navbar
 .file-media .swftools-wrapper{
 	margin-left:70px;
 }
-#edit-mollom-captcha{
+.section-user #content-area .form-item #edit-mollom-captcha{
   float: right;
   margin-right: 20px;
 }
