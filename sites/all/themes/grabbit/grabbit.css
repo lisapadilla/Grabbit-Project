@@ -4224,3 +4224,14 @@ display: none;
 #edit-opml{
   margin-left: 45px;
 }
+.node-type-page #content-area .meta{
+	color:#6C7885;
+	font-size:13px;
+	margin-top:20px;
+	border-bottom:1px solid #A2B0BA;
+	padding:0 50px 30px;
+}
+.node-type-page #content-area .meta p{
+	margin-bottom:10px;
+	
+}
