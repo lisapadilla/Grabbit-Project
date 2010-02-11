@@ -3310,7 +3310,7 @@ div.navbar
 	font-size:10px;
 	line-height:11px;
 	margin-left:422px;
-	margin-top:63px;
+	margin-top:45px;
 	position:absolute;
 	width:160px;
 }
@@ -4182,7 +4182,12 @@ div.navbar
   float: right;
   margin-right: 49px;
 }
-.section-user #content-area .form-item #wrapper .description{
-  position: relative;
-  margin: -20px 0px 0px 0px;
+.section-user #content-area #edit-pass-wrapper .description{
+display: none;
+}
+.section-user #content-area .form-checkbox{
+  float: right;
+}
+#edit-opml{
+  margin-left: 45px;
 }
