@@ -4128,3 +4128,16 @@ div.navbar
 {
 	margin-top: 10px;
 }
+.tags-submit-profile{
+	background:transparent url(images/add-tags.gif) repeat scroll 0 0;
+	border:medium none;
+	cursor:pointer;
+	display:block;
+	font-size:0;
+	height:15px;
+	line-height:1000px;
+	overflow:hidden;
+	position:absolute;
+	text-indent:-999px;
+	width:45px;
+}
