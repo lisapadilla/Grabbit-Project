@@ -3463,14 +3463,11 @@ div.navbar
   display: block;
 }
 .section-invite #content-area #edit-message-wrapper{
-  width: 360px;
+  width: 395px;
   float: right;
   display: block;
   padding: 0px;
   margin: 0px 23px 2px 0px;
-}
-.section-invite #content-area #edit-message-wrapper textarea{
-  float: left;
 }
 .section-invite #content-area .invite-message{
   width: 416px;
@@ -3482,6 +3479,9 @@ div.navbar
   color: #333333;
   line-height: 15px;
   margin-bottom: 0px;
+}
+.section-invite #content-area #edit-submit{
+  clear: both;
 }
 /*---------- bubble tooltip -----------*/
 
