@@ -1165,6 +1165,13 @@ a.active{
   line-height: 13px;
   margin-bottom: 0px;
 }
+#content-area .views-row .views-field-ops a{
+  font-size: 11px;
+  color: #3399FF;  
+  line-height: 13px;
+  margin-bottom: 0px;
+  font-style: italic;
+}
 
 
 #block-friend_search-2{
