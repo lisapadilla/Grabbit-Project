@@ -3504,6 +3504,9 @@ div.navbar
 .section-invite #content-area #edit-message-wrapper .description{
   width: 340px;
 }
+.page-user-1-invites-pending #content-area{
+  padding: 10px 10px 20px 10px;
+}
 /*---------- bubble tooltip -----------*/
 
 /* background:; ie hack, something must be changed in a for ie to execute it */
