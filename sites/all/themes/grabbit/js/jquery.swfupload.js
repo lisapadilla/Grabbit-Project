@@ -89,7 +89,7 @@ Drupal.behaviors.charCountDown = function(context)
       //handle the over the limit part here
       $(this).addClass('overlimit');
       $('#article-indicator').show();
-      $('#edit-status-wrapper').css({'background':'transparent url(images/bg_textarea_big.gif) no-repeat scroll 0 0',
+      $('#edit-status-wrapper').css({'background':'transparent url(sites/all/themes/grabbit/images/bg_textarea_big.gif) no-repeat scroll 0 0',
                                       'height':'120px'});
     } 
     else 
