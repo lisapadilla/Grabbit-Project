@@ -91,7 +91,7 @@ Drupal.behaviors.charCountDown = function(context)
       $(this).addClass('overlimit');
       $('#article-indicator').show();
       if($('#edit-status').css('height')=='55px'){
-	    $('#edit-status-wrapper').hide();
+	    $('#edit-status-wrapper').fadeOut(400);
 	    var flag='hide';
 
       }
@@ -102,7 +102,7 @@ Drupal.behaviors.charCountDown = function(context)
       $('#edit-status').css('height','85px');
       $('#facebook-grabbit-update-form').css('height','110px');
       if(flag=='hide'){
-	    $('#edit-status-wrapper').show(200);
+	    $('#edit-status-wrapper').fadeIn(200);
       }
     } 
     else 
@@ -110,7 +110,7 @@ Drupal.behaviors.charCountDown = function(context)
       $(this).removeClass('overlimit');
       $('#article-indicator').hide();
       if($('#edit-status').css('height')=='85px'){
-	    $('#edit-status-wrapper').hide();
+	    $('#edit-status-wrapper').fadeOut(400);
 	    var flag='show';
 	
       }
@@ -121,7 +121,7 @@ Drupal.behaviors.charCountDown = function(context)
       $('#edit-status').css('height','55px');
       $('#facebook-grabbit-update-form').css('height','90px');
       if(flag=='show'){
-	    $('#edit-status-wrapper').show(200);
+	    $('#edit-status-wrapper').fadeIn(200);
       }
     }
     $('#counter div').text(limit-this.value.length);
