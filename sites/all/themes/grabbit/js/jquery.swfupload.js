@@ -90,7 +90,10 @@ Drupal.behaviors.charCountDown = function(context)
       $(this).addClass('overlimit');
       $('#article-indicator').show();
       $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea_big.gif) no-repeat scroll 0 0',
-                                      'height':'120px'});
+                                      'height':'95px'});
+      $('.panels-update-wraper .form-submit').css('top','110px');
+      $('#counter').css('top','85');
+      $('#edit-status').css('height','85px');
     } 
     else 
     {
