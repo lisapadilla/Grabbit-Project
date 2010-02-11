@@ -4143,7 +4143,7 @@ div.navbar
 	margin-top: 10px;
 }
 .tags-submit-profile{
-	background:transparent url(images/add-tags.gif) repeat scroll 0 0;
+	background:transparent url(images/add_tags.gif) repeat scroll 0 0;
 	border:medium none;
 	cursor:pointer;
 	display:block;
