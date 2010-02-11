@@ -4272,7 +4272,8 @@ display: none;
 #edit-opml{
   margin-left: 45px;
 }
-.node-type-page #content-area .meta{
+.node-type-page #content-area .meta,
+.page-contact #content-area #contact-mail-page{
 	color:#6C7885;
 	font-size:13px;
 	margin-top:20px;
