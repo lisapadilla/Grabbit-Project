@@ -2711,14 +2711,24 @@ div.messages, div.status, div.warning, div.error{
 #TB_window
 {
 	border: none;
-	background: #FFFFFF;
+	background-color: transparent;
 	border-bottom: 35px solid #8B939F;
 	font-family: Helvetica, Arial, Geneva, sans-serif;
+	border-radius: 12px;
+	-moz-border-radius: 12px;
 }
 #TB_title
 {
 	background: #8B939F;
 	height: 35px;
+	-moz-border-radius-bottomleft:0;
+  -moz-border-radius-bottomright:0;
+  -moz-border-radius-topleft:12px;
+  -moz-border-radius-topright:12px;
+  border-radius-bottomleft:0;
+  border-radius-bottomright:0;
+  border-radius-topleft:12px;
+  border-radius-topright:12px;
 }
 #TB_ajaxContent .gmail-wrap
 {
