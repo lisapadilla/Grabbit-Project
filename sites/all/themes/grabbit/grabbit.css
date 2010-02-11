@@ -982,7 +982,7 @@ a.active{
 }
 #facebook-grabbit-update-form .user-data-wraper{
   background: url(images/udata_top.gif) top no-repeat;
-  padding: 10px 13px;
+  padding: 10px;
 }
 #facebook-grabbit-update-form .picture{
   width: 48px;
@@ -1274,7 +1274,7 @@ a.active{
   margin-bottom: 10px;
 }
 .facebook-post .facebook-post-body, .facebook-post .facebook-attachment{
-  width: 530px;
+  width: 510px;
   float: left;
   font-size: 14px;
   line-height: 17px;
@@ -1298,7 +1298,7 @@ a.active{
   display: block;
 }
 .panel-grabbit .twitter-message-stream .twitter-body{
-  width: 530px;
+  width: 510px;
   float: left;
   font-size: 14px;
   line-height: 17px;
