@@ -412,6 +412,8 @@ function grabbit_panels_source_create_form($form,$panel_id){
 	
 	$form['instructions'] = array(
 	    '#type'=> 'item',
+	    '#prefix'=>'<div id="new-stream-instruction">',
+	    '#suffix'=>'</div>',
 		'#title' => t('Create new stream')
 	    );
 	
