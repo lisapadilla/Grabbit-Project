@@ -54,7 +54,7 @@ function calculateDeals( item )
   $.get(Drupal.settings.basePath+"deals/calculate",{nid:nid},function(data){
      if (data)
      {
-        $('.url-deal', item).toggleClass('available');
+        $('.url-deal a', item).toggleClass('available');
      }
   });
 }
