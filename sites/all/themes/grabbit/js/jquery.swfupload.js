@@ -81,6 +81,7 @@ Drupal.behaviors.charCountDown = function(context)
 {
   var limit = 140;
   var form = $("#facebook-grabbit-update-form");
+  var flag = 0;
   
   $('#edit-status').keyup(function()
   {
@@ -103,6 +104,7 @@ Drupal.behaviors.charCountDown = function(context)
       if($('#edit-status').css('height')=='85px'){
 	    $('#edit-status-wrapper').hide();
 	    var flag='show';
+	
       }
       $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
                                       'height':'70px'});
@@ -110,7 +112,7 @@ Drupal.behaviors.charCountDown = function(context)
       $('#counter').css('top','63px');
       $('#edit-status').css('height','55px');
       $('#facebook-grabbit-update-form').css('height','90px');
-      if(flav=='show'){
+      if(flag=='show'){
 	    $('#edit-status-wrapper').show(200);
       }
     }
