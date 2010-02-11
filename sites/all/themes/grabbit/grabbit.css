@@ -964,14 +964,23 @@ a.active{
   position: relative;
 }
 .upload_button_expand a{
-  color: #555E6B;
-  font-size: 12px;
-  line-height: 13px;
-  font-weight: bold;
+  color:#555E6B;
+  font-size:11px;
+  font-weight:bold;
+  line-height:13px;
   margin-left:15px;
 }
 .panels-update-form_file{
  	margin-left: 267px;
+}
+#SWFUpload_0
+{
+  margin-bottom:-1px;
+  margin-left:10px;
+}
+p#queuestatus
+{
+  margin: 0;
 }
 #facebook-grabbit-update-form .user-data{
   width: 247px;
@@ -1040,6 +1049,7 @@ a.active{
 	  overflow: hidden;
 	  padding: 10px 0px 0px 10px;
 	  color: #555e6b;
+	  margin-right: 15px;
 }
 #edit-status-wrapper textarea,
 .block-grabbit_search .form-text
@@ -1947,8 +1957,9 @@ a.truncate_hide{
   background: url(images/pan_sel.gif) 0 0 no-repeat; 
 }
 #swfupload-control p{ 
-  margin:10px 5px; 
-  font-size:0.9em; 
+  font-size:0.9em;
+  margin:5px 5px 10px 11px;
+  width:325px; 
 }  
 #log{ 
   margin:0; 
@@ -1993,8 +2004,9 @@ a.truncate_hide{
   background:url('js/swfupload/cancel.png') no-repeat; cursor:pointer; 
 }
 .upload_button_expand{
-	margin-left: 254px;
-	margin-top: -1px;
+  margin-bottom:2px;
+  margin-left:254px;
+  margin-top:-3px;
 }
 ul.dropdown,
 ul.dropdown li,
