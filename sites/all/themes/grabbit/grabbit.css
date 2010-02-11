@@ -3496,10 +3496,9 @@ div.navbar
   margin-bottom: 20px;
 }
 .section-invite #content-area .invite-message p{
-  font-size: 12px;
-  color: #333333;
-  line-height: 15px;
-  margin-bottom: 0px;
+  color:#555E6B;
+  font-size:0.875em;
+  line-height:1.286em;
 }
 .section-invite #content-area #edit-submit{
   clear: both;
@@ -3510,7 +3509,7 @@ div.navbar
 }
 /*---------- bubble tooltip -----------*/
 
-/*background:; ie hack, something must be changed in a for ie to execute it*/
+/* background:; ie hack, something must be changed in a for ie to execute it */
 
 .tooltip span.tooltip{
     display:block;
