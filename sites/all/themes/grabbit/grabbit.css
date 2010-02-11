@@ -4073,4 +4073,10 @@ div.navbar
 {
 	display:block;
 	margin-left: auto;
+	width: 100px;
+	height: 19px;
+	text-indent: -999em;
+	overflow: hidden;
+	background: url(images/btns/add_comm.gif) no-repeat;
+	cursor: pointer;
 }
