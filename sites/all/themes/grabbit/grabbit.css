@@ -3473,6 +3473,7 @@ div.navbar
   width: 416px;
   float: right;
   margin-top: -50px;
+  margin-bottom: 20px;
 }
 .section-invite #content-area .invite-message p{
   font-size: 12px;
