@@ -98,7 +98,7 @@ Drupal.behaviors.charCountDown = function(context)
 		      $('#counter').css('top','85px');
 		      $('#edit-status').css('height','85px');
 		      $('#facebook-grabbit-update-form').css('height','110px');
-		      $('#edit-status-wrapper').fadeIn(200);
+		      $('#edit-status-wrapper').fadeIn(400);
 	    });
       }
     } 
@@ -114,7 +114,7 @@ Drupal.behaviors.charCountDown = function(context)
 		      $('#counter').css('top','63px');
 		      $('#edit-status').css('height','55px');
 		      $('#facebook-grabbit-update-form').css('height','90px');
-		      $('#edit-status-wrapper').fadeIn(200);
+		      $('#edit-status-wrapper').fadeIn(400);
 	    });
       }
     }
