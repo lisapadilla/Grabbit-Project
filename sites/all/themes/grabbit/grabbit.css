@@ -3462,7 +3462,7 @@ div.navbar
   margin-bottom: 10px;
   display: block;
 }
-.section-invite #content-area #edit-message-wrapper .form-textarea{
+.section-invite #content-area #edit-message-wrapper{
   width: 360px;
   float: right;
   display: block;
@@ -3472,7 +3472,7 @@ div.navbar
 .section-invite #content-area .invite-message{
   width: 416px;
   float: right;
-  margin-top: -30px;
+  margin-top: -50px;
 }
 .section-invite #content-area .invite-message p{
   font-size: 12px;
