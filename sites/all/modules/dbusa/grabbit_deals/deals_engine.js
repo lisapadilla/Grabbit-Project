@@ -8,19 +8,27 @@ Drupal.behaviors.deals = function()
   // deals box behaviors
   $('.url-deal a').live('click', function(i){
     i.preventDefault();
-    var nid = $(this).attr('node');
-    var anch = $(this);
-    var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
-    reset_buttons(nid);
-    $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
-       if (data)
-       {
-	       $('#tags-show-'+nid, parent).hide();
-           $('#tags-show-'+nid, parent).html(data);
-           $('#tags-show-'+nid, parent).show(600);
-           anch.toggleClass('selected');
-       }
-    });
+    if ( $(this).hasClass('selected') )
+    {
+      $('.deals-display .close').click();
+    }
+    else
+    {
+      var nid = $(this).attr('node');
+      var anch = $(this);
+      var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
+      reset_buttons(nid);
+      $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
+         if (data)
+         {
+  	       $('#tags-show-'+nid, parent).hide();
+             $('#tags-show-'+nid, parent).html(data);
+             $('#tags-show-'+nid, parent).show(600);
+             anch.toggleClass('selected');
+         }
+      });  
+    }
+    
   });
   
   $('.deals-display .close').live('click', function(i){
