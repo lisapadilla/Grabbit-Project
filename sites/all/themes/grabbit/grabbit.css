@@ -992,6 +992,7 @@ p#queuestatus
 #facebook-grabbit-update-form .user-data-wraper{
   background: url(images/udata_top.gif) top no-repeat;
   padding: 10px;
+  padding-bottom: 5px;
 }
 #facebook-grabbit-update-form .picture{
   width: 48px;
