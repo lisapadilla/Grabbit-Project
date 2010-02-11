@@ -2548,8 +2548,7 @@ div.messages, div.status, div.warning, div.error{
 }
 .action-button
 {
-	float: left;
-	margin: 0px 10px 0px 0px;
+	float: right;
 }
 .action-button a
 {
