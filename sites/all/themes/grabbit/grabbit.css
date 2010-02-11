@@ -1138,7 +1138,6 @@ a.active{
 }
 #content-area .views-row-odd,
 #content-area .odd{
-  background: #e6eaed;
 }
 #content-area .views-row,
 #content-area .facebook-friend,
@@ -1146,12 +1145,32 @@ a.active{
   display: inline-block;
   padding: 10px;
   width: 606px;
+  border-bottom: 1px solid #E2E4E7;
 }
 #content-area .views-row .views-field-field-profile-picture-fid img,
 #content-area .facebook-friend .picture img,
 #content-area .twitter-friend .picture img{
   float: left;
   margin: 0px 10px 10px 0px;
+}
+#content-area .views-row .views-field-created .field-content{
+  font-size: 11px;
+  color:#999999;
+  line-height: 13px;
+  margin-bottom: 0px;
+}
+#content-area .views-row .views-field-created .field-content a{
+  font-size: 11px;
+  color: #3399FF;  
+  line-height: 13px;
+  margin-bottom: 0px;
+}
+#content-area .views-row .views-field-ops a{
+  font-size: 11px;
+  color: #3399FF;  
+  line-height: 13px;
+  margin-bottom: 0px;
+  font-style: italic;
 }
 
 
@@ -3324,7 +3343,7 @@ div.navbar
 	line-height:15px;
 	float:left;
 	width:500px;
-	margin-bottom:10px;
+	margin-bottom:5px;
 }
 
 .view-my-feeds .views-field-created{
