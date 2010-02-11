@@ -1172,6 +1172,16 @@ a.active{
   margin-bottom: 0px;
   font-style: italic;
 }
+#content-area .views-row .views-field-ops a.unflag-action{
+  display: block;
+  width: 57px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
+  background: url(images/remove_sust.gif) 0 0 no-repeat;
+  float: left;
+  margin-top: 5px;
+}
 
 
 #block-friend_search-2{
@@ -2538,7 +2548,8 @@ div.messages, div.status, div.warning, div.error{
 }
 .action-button
 {
-	float: right;
+	float: left;
+	margin: 0px 10px 0px 0px;
 }
 .action-button a
 {
@@ -3323,6 +3334,9 @@ div.navbar
 	font-weight:bold;
 	line-height:13px;
 	margin:5px 20px 0 0;
+	padding: 5px 0px 0px 0px;
+	display: block;
+	float: right;
 }
 .view-my-feeds .views-field-field-rss-logo-fid{
 	float:left;
