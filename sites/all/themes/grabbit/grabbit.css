@@ -4170,3 +4170,6 @@ display: none;
 .section-user #content-area .form-checkbox{
   float: right;
 }
+#edit-opml{
+  float: left;
+}
