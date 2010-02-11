@@ -3455,8 +3455,8 @@ div.navbar
   line-height: 13px;
   float: right;
 }
-.section-user #edit-submit{
-  margin-left: 500px;
+.section-user #content-area .form-submit{
+  float: right;
 }
 #dcl-importer-form strong{
   margin-bottom: 10px;
@@ -3482,6 +3482,10 @@ div.navbar
 }
 .section-invite #content-area #edit-submit{
   clear: both;
+  float: right;
+}
+.section-invite #content-area #edit-message-wrapper .description{
+  width: 340px;
 }
 /*---------- bubble tooltip -----------*/
 
