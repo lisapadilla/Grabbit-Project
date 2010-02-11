@@ -4098,4 +4098,9 @@ div.navbar
 	overflow: hidden;
 	background: url(images/btns/add_comm.gif) no-repeat;
 	cursor: pointer;
+	border: none;
+}
+.node-type-media .comment.odd
+{
+	background: #e6eaed;
 }
