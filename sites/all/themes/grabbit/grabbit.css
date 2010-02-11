@@ -3502,7 +3502,12 @@ div.navbar
 }
 .page-user-1-invites-pending #content-area #invites th{
   background: none;
-  width: 200px;
+  width: 190px;
+}
+.page-user-1-invites-pending #content-area #invites tr.even, 
+.page-user-1-invites-pending #content-area #invites tr.odd{
+  background: none;
+  padding: 5px;
 }
 .page-user-1-invites-pending #content-area #invites td{
   background: none;
