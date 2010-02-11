@@ -3507,6 +3507,9 @@ div.navbar
 .page-user-1-invites-pending #content-area{
   padding: 10px 10px 20px 10px;
 }
+.page-user-1-invites-pending #content-area table{
+  display: block;
+}
 /*---------- bubble tooltip -----------*/
 
 /* background:; ie hack, something must be changed in a for ie to execute it */
