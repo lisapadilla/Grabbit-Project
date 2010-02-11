@@ -1377,6 +1377,10 @@ a.active{
   display: inline-block;
   width: 100%;
 }
+#facebook-grabbit-update-form .user-data-wrapper .picture img
+{
+  display: block;
+}
 #block-views-friends-block_1,
 #block-views-suggested_friends-block_1
 {
