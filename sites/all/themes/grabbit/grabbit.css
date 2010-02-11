@@ -3334,6 +3334,8 @@ div.navbar
 	line-height:13px;
 	margin:5px 20px 0 0;
 	padding: 5px 0px 0px 0px;
+	display: block;
+	float: right;
 }
 .view-my-feeds .views-field-field-rss-logo-fid{
 	float:left;
