@@ -4029,9 +4029,10 @@ div.navbar
 }
 .node-type-media #comments h2.title
 {
-	font-size: 14px;
-	margin-top:15px;
-	color: #385291;
+	color:#3399CC;
+	font-size:12px;
+	margin-left:78px;
+	margin-top:30px;
 }
 .node-type-media #comments-title
 {
@@ -4043,8 +4044,9 @@ div.navbar
 }
 .node-type-media #comment-form textarea
 {
-	width: 489px;
-	height: 100px;
+	height:100px;
+	margin-left:78px;
+	width:410px;
 }
 .node-type-media #comment-form .form-item
 {
@@ -4052,7 +4054,8 @@ div.navbar
 }
 .node-type-media #comment-form #edit-comment-wrapper
 {
-	display: block;
+	display:block;
+	margin-top:5px;
 }
 .node-type-media #comment-form #edit-comment-wrapper label
 {
