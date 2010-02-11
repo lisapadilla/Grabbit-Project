@@ -1172,6 +1172,14 @@ a.active{
   margin-bottom: 0px;
   font-style: italic;
 }
+#content-area .views-row .views-field-ops a.unflag-action{
+  display: block;
+  width: 57px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
+  background: url(images/varios/remove_sust.gif) 0 0 no-repeat;
+}
 
 
 #block-friend_search-2{
