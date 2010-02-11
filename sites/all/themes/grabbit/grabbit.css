@@ -3318,11 +3318,11 @@ div.navbar
   display: inline;
 }
 #rss-controls a{
-	color:#555E6B;
-	font-size:12px;
+	color:#666666;
+	font-size:11px;
 	font-weight:bold;
 	line-height:13px;
-	margin:5px 5px 0 0;
+	margin:5px 20px 0 0;
 }
 .view-my-feeds .views-field-field-rss-logo-fid{
 	float:left;
@@ -3489,7 +3489,7 @@ div.navbar
   margin-bottom: 20px;
 }
 .section-invite #content-area .invite-message .opening{
-  width: 400px;
+  width: 360px;
 }
 .section-invite #content-area .invite-message p{
 }
