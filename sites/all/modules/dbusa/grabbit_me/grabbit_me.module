@@ -1411,7 +1411,7 @@ function theme_you_activity($you,$you_name,$is_section=FALSE){
 		$class='active';
 	}
 	
-	drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#block-views-friends-block_1 .title').html('".$friend->name."´s friends'); })",'inline');
+	drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#block-views-friends-block_1 .title').html('".$you_name."´s friends'); })",'inline');
 	
 	$tabs='<div class="tabs you-tabs"><ul class="tabs primary clear-block">
 	<li><span class="tab">'.l('All Activity','users/'.$you_name,array('attributes'=>array('class'=>$class))).'</span></li>
