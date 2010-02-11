@@ -215,7 +215,7 @@ function grabbit_panels_edit_panels(){
 	if(arg(2)){
 		$panel=arg(2);
 		$output = drupal_get_form("grabbit_panels_source_form",$panel);
-		print $output;	
+		print '<div id="grabbit-panel-source-form" class="grabbit-panels-forms">'.$output.'</div>';	
 	}
 	else{
 		global $user;
@@ -224,7 +224,7 @@ function grabbit_panels_edit_panels(){
 		  print "We are sorry. Grabbit is still on Beta and your account can only have 4 streams. We will increase this number in the future!";	
 		}else{
 		  $output = drupal_get_form("grabbit_panels_source_create_form",$panel);
-		  print $output;
+		  print '<div id="grabbit-panel-create-form" class="grabbit-panels-forms">'.$output."</div>";
 		}
 	}
 }
@@ -233,7 +233,7 @@ function grabbit_panels_filters(){
 	$panel=arg(2);
 	
 	$output = drupal_get_form("grabbit_panels_tags_form",$panel);
-	print $output;
+	print  '<div id="grabbit-panel-tags-form" class="grabbit-panels-forms">'.$output.'</div>';
 }
 
 
@@ -412,7 +412,7 @@ function grabbit_panels_source_create_form($form,$panel_id){
 	
 	$form['instructions'] = array(
 	    '#type'=> 'item',
-		'#title' => t('Create a new Stream Panel')
+		'#title' => t('Create new stream')
 	    );
 	
 	$flag = flag_get_user_flags('node', $content_id = NULL, $uid = $user->uid, $reset = FALSE);
