@@ -3321,14 +3321,15 @@ div.navbar
 	width:225px;
 	height:100px;
 }
+#rss-controls span{
+  display: inline;
+}
 #rss-controls a{
 	color:#555E6B;
-	float:right;
 	font-size:12px;
 	font-weight:bold;
 	line-height:13px;
 	margin:5px 5px 0 0;
-	display:block;
 }
 .view-my-feeds .views-field-field-rss-logo-fid{
 	float:left;
@@ -4092,4 +4093,15 @@ div.navbar
 {
 	display:block;
 	margin-left: auto;
+	width: 100px;
+	height: 19px;
+	text-indent: -999em;
+	overflow: hidden;
+	background: url(images/btns/add_comm.gif) no-repeat;
+	cursor: pointer;
+	border: none;
+}
+.node-type-media .comment.odd
+{
+	background: #e6eaed;
 }
