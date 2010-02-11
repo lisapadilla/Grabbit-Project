@@ -14,8 +14,7 @@ Drupal.behaviors.deals = function()
       $('.deals-display .close').click();
     }
     else
-    {
-      $(this).toggleClass('available');
+    { 
       var nid = $(this).attr('node');
       var anch = $(this);
       var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
@@ -23,6 +22,7 @@ Drupal.behaviors.deals = function()
       $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
          if (data)
          {
+           anch.toggleClass('available');
   	       $('#tags-show-'+nid, parent).hide();
              $('#tags-show-'+nid, parent).html(data);
              $('#tags-show-'+nid, parent).show(600);
