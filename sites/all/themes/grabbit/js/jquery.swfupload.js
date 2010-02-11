@@ -91,18 +91,15 @@ Drupal.behaviors.charCountDown = function(context)
       $(this).addClass('overlimit');
       $('#article-indicator').show();
       if($('#edit-status').css('height')=='55px'){
-	    $('#edit-status-wrapper').fadeOut(400);
-	    var flag='hide';
-
-      }
-      $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea_big.gif) no-repeat scroll 0 0',
-                                      'height':'95px'});
-      $('.panels-update-wraper .form-submit').css('top','110px');
-      $('#counter').css('top','85px');
-      $('#edit-status').css('height','85px');
-      $('#facebook-grabbit-update-form').css('height','110px');
-      if(flag=='hide'){
-	    $('#edit-status-wrapper').fadeIn(200);
+	    $('#edit-status-wrapper').fadeOut(400, function(){
+		  	$('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea_big.gif) no-repeat scroll 0 0',
+		                                      'height':'95px'});
+		      $('.panels-update-wraper .form-submit').css('top','110px');
+		      $('#counter').css('top','85px');
+		      $('#edit-status').css('height','85px');
+		      $('#facebook-grabbit-update-form').css('height','110px');
+		      $('#edit-status-wrapper').fadeIn(200);
+	    });
       }
     } 
     else 
@@ -110,18 +107,15 @@ Drupal.behaviors.charCountDown = function(context)
       $(this).removeClass('overlimit');
       $('#article-indicator').hide();
       if($('#edit-status').css('height')=='85px'){
-	    $('#edit-status-wrapper').fadeOut(400);
-	    var flag='show';
-	
-      }
-      $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
-                                      'height':'70px'});
-      $('.panels-update-wraper .form-submit').css('top','88px');
-      $('#counter').css('top','63px');
-      $('#edit-status').css('height','55px');
-      $('#facebook-grabbit-update-form').css('height','90px');
-      if(flag=='show'){
-	    $('#edit-status-wrapper').fadeIn(200);
+	    $('#edit-status-wrapper').fadeOut(400, function(i){
+			$('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
+		                                      'height':'70px'});
+		      $('.panels-update-wraper .form-submit').css('top','88px');
+		      $('#counter').css('top','63px');
+		      $('#edit-status').css('height','55px');
+		      $('#facebook-grabbit-update-form').css('height','90px');
+		      $('#edit-status-wrapper').fadeIn(200);
+	    });
       }
     }
     $('#counter div').text(limit-this.value.length);
