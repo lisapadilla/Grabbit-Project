@@ -2546,7 +2546,7 @@ div.messages, div.status, div.warning, div.error{
 	margin-right: 10px;
 	background: #CAD2D8 url(images/red_top.gif) no-repeat;
 }
-.action-button
+.action-button, .flag-wrapper
 {
 	float: right;
 }
