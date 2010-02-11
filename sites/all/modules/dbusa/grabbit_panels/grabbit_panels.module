@@ -603,7 +603,7 @@ function grabbit_panels_rss(){
 function grabbit_panels_form_alter($form,$form_state,$form_id){
 	if($form_id=='feed_node_form'){
 		unset($form['body_field']);
-		$form['#redirect'] = 'activity/updates/rss';
+		$form['#redirect'] = 'user/me/myfeeds';
 		global $user;
 		$panels = grabbit_panels_get_all_panels($user->uid);
 		if(db_affected_rows($panels)>=4){
