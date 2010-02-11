@@ -3514,6 +3514,9 @@ div.navbar
   background: none;
   width: 200px;
 }
+.page-user-1-invites-pending #content-area #invites td{
+  background: none;
+}
 /*---------- bubble tooltip -----------*/
 
 /* background:; ie hack, something must be changed in a for ie to execute it */
