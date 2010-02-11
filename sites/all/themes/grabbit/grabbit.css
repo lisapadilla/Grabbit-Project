@@ -3469,6 +3469,9 @@ div.navbar
   padding: 0px;
   margin: 0px 23px 2px 0px;
 }
+.section-invite #content-area #edit-message-wrapper textarea{
+  float: left;
+}
 .section-invite #content-area .invite-message{
   width: 416px;
   float: right;
