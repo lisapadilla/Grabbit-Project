@@ -10,12 +10,12 @@ Drupal.behaviors.deals = function()
     i.preventDefault();
     if ( $(this).hasClass('selected') )
     {
-      this.toggleClass('available');
+      $(this).toggleClass('available');
       $('.deals-display .close').click();
     }
     else
     {
-      this.toggleClass('available');
+      $(this).toggleClass('available');
       var nid = $(this).attr('node');
       var anch = $(this);
       var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo

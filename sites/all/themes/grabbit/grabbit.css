@@ -1510,7 +1510,8 @@ a.facebook-makecomment-link, a.comment-news{
 {
 	background: url(images/various/dollar_ico.gif) 0 0 no-repeat;
 }
-.odd .url-deal a{
+.odd .url-deal a.available
+{
 	background: url(images/various/dollar_ico_gr.gif) 0 0 no-repeat;
 } 
 a.twitter_favorite, a.flag-action, a.facebook_favorite{
