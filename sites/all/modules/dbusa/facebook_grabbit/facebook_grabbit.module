@@ -2379,7 +2379,7 @@ function facebook_grabbit_checkout_textlong($text){
 	if($total>140){
 		global $user;
 		//$new_text=substr($text,0,117);
-		$new_text = substr($text,0,strpos($text,' ',107));
+		$new_text = utf8_wordwrap($text,107); //substr($text,0,strpos($text,' ',107));
 		$node = new stdClass();
 		  $node->title = $user->name."'s update ";
 		  $node->created = time();
@@ -2401,3 +2401,23 @@ function facebook_grabbit_checkout_textlong($text){
 		return $text;
 	}
 }
+
+function utf8_wordwrap($str, $width = 75, $break = "\n") // wordwrap() with utf-8 support
+    {
+        $str =  preg_split('/([\x20\r\n\t]++|\xc2\xa0)/sSX', $str, -1, PREG_SPLIT_NO_EMPTY);
+        $len = 0;
+        foreach ($str as $val)
+        {
+            $val .= ' ';
+            $tmp = mb_strlen($val, 'utf-8');
+            $len += $tmp;
+            if ($len >= $width)
+            {
+                $return .= $break . $val;
+                $len = $tmp;
+            }
+            else
+                $return .= $val;
+        }
+        return $return;
+    }
