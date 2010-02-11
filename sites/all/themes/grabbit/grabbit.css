@@ -4161,5 +4161,6 @@ div.navbar
 	margin-left:70px;
 }
 #edit-mollom-captcha{
-  margin-left: 200px;
+  float: right;
+  margin-right: 20px;
 }
