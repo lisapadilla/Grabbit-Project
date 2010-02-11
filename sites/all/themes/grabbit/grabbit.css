@@ -4152,3 +4152,9 @@ div.navbar
 	text-indent:-999px;
 	width:40px;
 }
+#user-pass-reset{
+  padding: 10px;
+}
+#user-pass-reset p{
+  color: #6C7885;
+}
