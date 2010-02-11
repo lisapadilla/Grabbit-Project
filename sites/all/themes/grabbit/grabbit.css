@@ -1180,7 +1180,6 @@ a.active{
   text-indent: -3000px;
   background: url(images/remove_sust.gif) 0 0 no-repeat;
   float: left;
-  margin-top: 5px;
 }
 
 
@@ -2546,10 +2545,9 @@ div.messages, div.status, div.warning, div.error{
 	margin-right: 10px;
 	background: #CAD2D8 url(images/red_top.gif) no-repeat;
 }
-.action-button
+.action-button, .flag-wrapper
 {
-	float: left;
-	margin: 0px 10px 0px 0px;
+	float: right;
 }
 .action-button a
 {
