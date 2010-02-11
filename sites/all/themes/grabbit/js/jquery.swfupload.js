@@ -103,6 +103,7 @@ Drupal.behaviors.charCountDown = function(context)
       if($('#edit-status').css('height')=='85px'){
 	    $('#edit-status-wrapper').hide();
 	    var flag='show';
+	
       }
       $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
                                       'height':'70px'});
