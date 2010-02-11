@@ -4167,3 +4167,6 @@ div.navbar
 .section-user #content-area #edit-pass-wrapper .description{
 display: none;
 }
+.section-user #content-area .form-checkbox{
+  float: right;
+}
