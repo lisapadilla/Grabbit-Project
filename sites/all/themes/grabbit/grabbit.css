@@ -4164,6 +4164,6 @@ div.navbar
   float: right;
   margin-right: 49px;
 }
-#edit-pass-wrapper .description{
-  margin-top: -20px;
+.section-user #content-area .form-item #edit-pass-pass2-wrapper label{
+  padding: 0px 0px 0px 45px;
 }
