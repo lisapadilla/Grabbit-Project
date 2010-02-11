@@ -872,6 +872,8 @@ function theme_invite_form($form) {
     $types = _invite_token_types(array('data' => array('message' => $message_form)));
     $output .= token_replace_multiple($body, $types);
 
+    
+
     $output .= "</div></div>\n";
   }
 
@@ -1089,7 +1091,7 @@ function invite_form_submit($form, &$form_state) {
   }
   else if (user_access('track invitations') && $user->uid) {
     // Everything went well: redirect to pending invites page.
-    $form_state['redirect'] = "user/$user->uid/invites/pending";
+    $form_state['redirect'] = "user/me/myfriends/view_contacts";
   }
 }
 
@@ -1189,7 +1191,7 @@ function invite_cancel(&$form_state, $origin, $code) {
   if ($invite->inviter->uid == $user->uid) {
     // Verify the invitation may be deleted.
     if (!$invite->joined || user_access('withdraw accepted invitations')) {
-      $form['#redirect'] = "user/$user->uid/invites/$origin";
+      $form['#redirect'] = "user/me/myfriends/view_contacts";
       $form['invite'] = array(
         '#type' => 'value',
         '#value' => $invite,
