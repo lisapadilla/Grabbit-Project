@@ -4101,3 +4101,7 @@ div.navbar
 	cursor: pointer;
 	border: none;
 }
+.node-type-media .comment.odd
+{
+	background: #e6eaed;
+}
