@@ -4158,3 +4158,6 @@ div.navbar
 #user-pass-reset p{
   color: #6C7885;
 }
+.file-media .swftools-wrapper{
+	margin-left:70px;
+}
