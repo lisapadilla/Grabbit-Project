@@ -2378,7 +2378,7 @@ function facebook_grabbit_checkout_textlong($text){
 	$total=strlen($text);
 	if($total>140){
 		global $user;
-		$new_text=substr($text,0,117);
+		$new_text = substr($text,0,strpos($text,' ',117));
 		$node = new stdClass();
 		  $node->title = $user->name."'s update ";
 		  $node->created = time();
