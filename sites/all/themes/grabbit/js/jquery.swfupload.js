@@ -100,12 +100,19 @@ Drupal.behaviors.charCountDown = function(context)
     {
       $(this).removeClass('overlimit');
       $('#article-indicator').hide();
+      if($('#edit-status').css('height')=='85px'){
+	    $('#edit-status-wrapper').hide();
+	    var flag='show';
+      }
       $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
                                       'height':'70px'});
       $('.panels-update-wraper .form-submit').css('top','88px');
       $('#counter').css('top','63px');
       $('#edit-status').css('height','55px');
       $('#facebook-grabbit-update-form').css('height','90px');
+      if(flav=='show'){
+	    $('#edit-status-wrapper').show(200);
+      }
     }
     $('#counter div').text(limit-this.value.length);
   });
