@@ -4164,3 +4164,6 @@ div.navbar
   float: right;
   margin-right: 49px;
 }
+#edit-pass-wrapper .description{
+  margin-top: -20px;
+}
