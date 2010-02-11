@@ -1093,7 +1093,7 @@ a.active{
   display: block;
   padding: 10px;
   color: #385691;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 23px;
   margin: 0px;
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
@@ -1247,7 +1247,7 @@ a.active{
   font-weight: bold;
   font-size: 14px;
   line-height: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding-right: 5px;
   display: block;
   width: 440px;
@@ -1260,7 +1260,7 @@ a.active{
   display: block;
   width: 440px;
   float: left;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 #panel-1 .twitter-message-stream a.twitter-name-link, .user-panels .panel-grabbit .twitter-message-stream a.twitter-name-link{
   color: #0073CF;
@@ -1358,17 +1358,18 @@ a.active{
 #block-views-friends-block_1,
 #block-views-suggested_friends-block_1
 {
- margin-bottom: 10px; 
+ margin-bottom: 15px; 
 }
 #block-views-friends-block_1 h2,
 #block-views-suggested_friends-block_1 h2
 {
-  font-size: 22px;
+  font-size: 20px;
   color: #385691;
   line-height: 23px;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: normal;
+  text-transform: capitalize;
 }
 #block-views-friends-block_1,
 #block-views-suggested_friends-block_1
@@ -1380,13 +1381,14 @@ a.active{
 #block-views-suggested_friends-block_1
 {
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
-  padding-bottom:10px;
+  padding-bottom:9px;
 }
 #block-views-friends-block_1 .block-inner,
 #block-views-suggested_friends-block_1 .block-inner
 {
   background: url(images/sidebar_top.gif) 0 0 no-repeat;
-  padding: 12px 14px 12px 17px;
+  padding: 15px;
+  padding-top: 13px;
 }
 #block-views-friends-block_1 .views-row,
 #block-views-suggested_friends-block_1 .views-row
@@ -1700,7 +1702,7 @@ a.panel-filters{
 #panel-0 .node-stream-deal h2{
   float: left;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   line-height: 13px;
   width: 260px;
 }
@@ -2064,7 +2066,7 @@ ul.dropdown li:hover ul {
 
 
 #block-grabbit_search-0{
-  margin: 0px 0px 20px 0px;
+  margin: 0px 0px 15px 0px;
   padding: 0px 0px 10px 0px;
   border: none;
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
@@ -2079,20 +2081,37 @@ ul.dropdown li:hover ul {
   border-top: 10px solid #8b939f;
 }
 #block-grabbit_search-0 a#collapse-custom{
-  display: inline-block;
-  color: #555e6b;
-  height: 14px;
-  margin-right:10px;
-padding:5px 0 0 10px;
-  height: 15px;
-  font-size: 12px;
-  line-height: 13px;
-  background: url(images/more.gif) right no-repeat;
-  font-weight: bold;
-padding:0px 0 0 10px;
-width:80px;
-margin-left:20px;
-margin-top:5px;
+  background:transparent url(images/more.gif) no-repeat scroll right center;
+  color:#555E6B;
+  display:inline-block;
+  float:right;
+  font-size:12px;
+  font-weight:bold;
+  height:15px;
+  line-height:13px;
+  margin-left:20px;
+  margin-right:12px;
+  margin-top:10px;
+  padding:0 0 0 10px;
+  width:80px;
+}
+#grabbit-search-custom-form #edit-onlystream
+{
+  margin-top: 10px;
+}
+#bio-no-edit .image img
+{
+  display: block;
+}
+#bio-no-edit .main-info
+{
+  position: relative;
+}
+#bio-no-edit .resources
+{
+  bottom:12px;
+  left:127px;
+  position:absolute;
 }
 #edit-onlystream-wrapper{
 	display: block;
@@ -2788,7 +2807,7 @@ div.messages, div.status, div.warning, div.error{
 
 .block-grabbit_me
 {
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 	color: #666666;
 	font-size: 12px;
 	line-height: 14px;
@@ -2881,6 +2900,7 @@ div.messages, div.status, div.warning, div.error{
 	color: #385491;
 	font-weight: normal;
 	padding: 9px 15px;
+	font-size: 20px;
 }
 .twitter-message-stream .twitter-date .blue{
 	color:#0073CF;
