@@ -4165,6 +4165,5 @@ div.navbar
   margin-right: 49px;
 }
 .section-user #content-area #edit-pass-wrapper .description{
-  position: relative;
-  margin: -29px 0px 0px 0px;
+display: none;
 }
