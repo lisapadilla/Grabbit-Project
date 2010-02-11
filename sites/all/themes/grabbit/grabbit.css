@@ -3321,14 +3321,15 @@ div.navbar
 	width:225px;
 	height:100px;
 }
+#rss-controls span{
+  display: inline;
+}
 #rss-controls a{
 	color:#555E6B;
-	float:right;
 	font-size:12px;
 	font-weight:bold;
 	line-height:13px;
 	margin:5px 5px 0 0;
-	display:block;
 }
 .view-my-feeds .views-field-field-rss-logo-fid{
 	float:left;
