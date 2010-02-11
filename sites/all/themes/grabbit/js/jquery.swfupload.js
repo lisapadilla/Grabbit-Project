@@ -89,14 +89,30 @@ Drupal.behaviors.charCountDown = function(context)
       //handle the over the limit part here
       $(this).addClass('overlimit');
       $('#article-indicator').show();
-      $('#edit-status-wrapper').attr('background','transparent url(images/bg_textarea_big.gif) no-repeat scroll 0 0');
-      $('#edit-status-wrapper').attr('height','120px');
+      $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea_big.gif) no-repeat scroll 0 0',
+                                      'height':'95px'});
+      $('.panels-update-wraper .form-submit').css('top','110px');
+      $('#counter').css('top','85px');
+      $('#edit-status').css('height','85px');
+      $('#facebook-grabbit-update-form').css('height','110px');
     } 
     else 
     {
       $(this).removeClass('overlimit');
       $('#article-indicator').hide();
-      
+      if($('#edit-status').css('height')=='85px'){
+	    $('#edit-status-wrapper').hide();
+	    var flag='show';
+      }
+      $('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
+                                      'height':'70px'});
+      $('.panels-update-wraper .form-submit').css('top','88px');
+      $('#counter').css('top','63px');
+      $('#edit-status').css('height','55px');
+      $('#facebook-grabbit-update-form').css('height','90px');
+      if(flav=='show'){
+	    $('#edit-status-wrapper').show(200);
+      }
     }
     $('#counter div').text(limit-this.value.length);
   });
