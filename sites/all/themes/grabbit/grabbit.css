@@ -4231,6 +4231,31 @@ div.navbar
 #user-pass-reset p{
   color: #6C7885;
 }
+#grabbit-panels-source-create-form
+{
+  padding: 20px
+}
+#grabbit-panels-source-create-form #new-stream-instruction
+{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  margin: 0;
+}
+#grabbit-panels-source-create-form #new-stream-instruction .form-item
+{
+  margin: 0;
+  font-size: 16px;
+}
+#grabbit-panels-source-create-form #new-stream-instruction .form-item label
+{
+  font-weight: normal;
+  color: #385691;
+}
+#grabbit-panels-source-create-form .form-item
+{
+  margin-top: 0;
+}
 .file-media .swftools-wrapper{
 	margin-left:70px;
 }
