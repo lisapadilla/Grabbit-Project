@@ -4146,7 +4146,6 @@ div.navbar
 	background:transparent url(images/add_tags.gif) repeat scroll 0 0;
 	border:medium none;
 	cursor:pointer;
-	display:block;
 	font-size:0;
 	height:15px;
 	line-height:1000px;
