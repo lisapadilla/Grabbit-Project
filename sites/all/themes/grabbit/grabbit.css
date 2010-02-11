@@ -3276,7 +3276,6 @@ div.navbar
 }
 
 #content-area #user-login {
-	background-color:#E6EAED;
 }
 
 #content-area #user-login .form-submit{
@@ -4152,6 +4151,19 @@ div.navbar
 	text-indent:-999px;
 	width:40px;
 }
+#user-pass-reset{
+  padding: 10px;
+}
+#user-pass-reset p{
+  color: #6C7885;
+}
 .file-media .swftools-wrapper{
 	margin-left:70px;
+}
+.section-user #content-area .form-item #edit-mollom-captcha{
+  float: right;
+  margin-right: 49px;
+}
+.section-user #content-area .form-item #edit-pass-pass2-wrapper label{
+  padding: 0px 0px 0px 45px;
 }
