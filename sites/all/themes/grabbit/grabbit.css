@@ -1367,7 +1367,7 @@ a.active{
   color: #385691;
   line-height: 23px;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
   font-weight: normal;
   text-transform: capitalize;
 }
@@ -1377,18 +1377,22 @@ a.active{
   display: inline-block;
   width: 100%;
 }
+#facebook-grabbit-update-form .user-data-wrapper .picture img
+{
+  display: block;
+}
 #block-views-friends-block_1,
 #block-views-suggested_friends-block_1
 {
   background: #e2e4e7 url(images/sidebar_bot.gif) bottom no-repeat;
-  padding-bottom:9px;
+  padding-bottom:10px;
 }
 #block-views-friends-block_1 .block-inner,
 #block-views-suggested_friends-block_1 .block-inner
 {
   background: url(images/sidebar_top.gif) 0 0 no-repeat;
   padding: 15px;
-  padding-top: 13px;
+  padding-top: 11px;
 }
 #block-views-friends-block_1 .views-row,
 #block-views-suggested_friends-block_1 .views-row
