@@ -4030,45 +4030,53 @@ div.navbar
 	padding-left:16px;
 }
 
-.node-type-media .comment-inner
+.node-type-media .comment-inner,
+.node-type-news .comment-inner
 {
 	padding: 15px;
 }
-.node-type-media .comment img
+.node-type-media .comment img,
+.node-type-news .comment img
 {
 	float: left;
 	margin-right: 15px;
 	display: block;
 }
-.node-type-media .comment .content
+.node-type-media .comment .content,
+.node-type-news .comment .content
 {
 	float: left;
 	width: 390px;
 }
-.node-type-media .comment .submitted
+.node-type-media .comment .submitted,
+.node-type-news .comment .submitted
 {
 	color: #999999;
 	font-size: 10px;
 	line-height: 13px;
 }
-.node-type-media .comment .name a
+.node-type-media .comment .name a,
+.node-type-news .comment .name a
 {
 	font-weight: bold;
 	color: #385691;
 }
-.node-type-media #comments
+.node-type-media #comments,
+.node-type-news #comments
 {
 	padding: 0 68px;
 	margin: 0;
 }
-.node-type-media #comments h2.title
+.node-type-media #comments h2.title,
+.node-type-news #comments h2.title
 {
 	color:#3399CC;
 	font-size:12px;
 	margin-left:78px;
 	margin-top:30px;
 }
-.node-type-media #comments-title
+.node-type-media #comments-title,
+.node-type-news #comments-title
 {
 	color:#385291;
 	font-weight: normal;
@@ -4076,34 +4084,41 @@ div.navbar
 	line-height:18px;
 	margin-bottom: 10px;
 }
-.node-type-media #comment-form textarea
+.node-type-media #comment-form textarea,
+.node-type-news #comment-form textarea
 {
 	height:100px;
 	margin-left:78px;
 	width:410px;
 }
-.node-type-media #comment-form .form-item
+.node-type-media #comment-form .form-item,
+.node-type-news #comment-form .form-item
 {
 	display: none;
 }
-.node-type-media #comment-form #edit-comment-wrapper
+.node-type-media #comment-form #edit-comment-wrapper,
+.node-type-news #comment-form #edit-comment-wrapper
 {
 	display:block;
 	margin-top:5px;
 }
-.node-type-media #comment-form #edit-comment-wrapper label
+.node-type-media #comment-form #edit-comment-wrapper label,
+.node-type-news #comment-form #edit-comment-wrapper label
 {
 	display: none;
 }
-.node-type-media #comment-form fieldset
+.node-type-media #comment-form fieldset,
+.node-type-news #comment-form fieldset
 {
 	display: none;
 }
-.node-type-media #comment-form #edit-preview
+.node-type-media #comment-form #edit-preview,
+.node-type-news #comment-form #edit-preview
 {
 	display: none;
 }
-.node-type-media #comment-form #edit-submit
+.node-type-media #comment-form #edit-submit,
+.node-type-news #comment-form #edit-submit
 {
 	display:block;
 	margin-left: auto;
@@ -4115,7 +4130,8 @@ div.navbar
 	cursor: pointer;
 	border: none;
 }
-.node-type-media .comment.odd
+.node-type-media .comment.odd,
+.node-type-news .comment.odd
 {
 	background: #e6eaed;
 }
