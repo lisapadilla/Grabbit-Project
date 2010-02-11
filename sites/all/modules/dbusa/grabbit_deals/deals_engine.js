@@ -10,10 +10,12 @@ Drupal.behaviors.deals = function()
     i.preventDefault();
     if ( $(this).hasClass('selected') )
     {
+      this.toggleClass('available');
       $('.deals-display .close').click();
     }
     else
     {
+      this.toggleClass('available');
       var nid = $(this).attr('node');
       var anch = $(this);
       var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
@@ -52,7 +54,7 @@ function calculateDeals( item )
   $.get(Drupal.settings.basePath+"deals/calculate",{nid:nid},function(data){
      if (data)
      {
-        $('.url-deal', item).fadeIn('slow');
+        $('.url-deal', item).toggleClass('available');
      }
   });
 }

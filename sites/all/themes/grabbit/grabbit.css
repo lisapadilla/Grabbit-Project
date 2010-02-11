@@ -1500,11 +1500,15 @@ a.facebook-makecomment-link, a.comment-news{
   display: block;
   width: 14px;
   height: 15px;
-  background: url(images/various/dollar_ico.gif) 0 0 no-repeat;
+  background: url(images/btns/cart_off.png) no-repeat;
   float: right;
   text-indent: 3000em;
   overflow: hidden;
   margin-top:-1px;
+}
+.url-deal a.available
+{
+	background: url(images/various/dollar_ico.gif) 0 0 no-repeat;
 }
 .odd .url-deal a{
 	background: url(images/various/dollar_ico_gr.gif) 0 0 no-repeat;
@@ -3914,10 +3918,6 @@ div.navbar
 }
 .tags-block{
 	display:block;
-}
-.url-deal
-{
-	display: none;
 }
 
 /*loader*/
