@@ -178,7 +178,7 @@ function grabbit_panels_get_panels(){
 	    
 	}
 	else{
-/*		if($mesa['status'][0])
+		if($mesa['status'][0])
 		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 		
 		$output .='<div class="panels-controllers">
@@ -188,16 +188,16 @@ function grabbit_panels_get_panels(){
 		           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">';
 		$panel_1 = facebook_grabbit_private_view_panel_public(0);	
 		$output .= theme_panels($panel_1,0,"Public Stream");     
-		$all_panels=grabbit_panels_get_all_panels(53);
+	/*	$all_panels=grabbit_panels_get_all_panels(53);
 		while($panel = db_fetch_object($all_panels)){
 		  	$settings=grabbit_panels_get_uid(53,$panel->pid);
 			$panel_settings=unserialize($settings->config);
 		    $panel_2 = facebook_grabbit_private_view_panel_public_panels($panel->pid);	
 		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
-		}      		           
+		}*/      		           
 		$output .='</div>';	
-*/
-        $output = 'test';		
+
+		
 	}
 	
 	return $output;
