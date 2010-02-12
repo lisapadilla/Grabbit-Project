@@ -5,6 +5,7 @@ Drupal.behaviors.tagsEngine = function(){
     {
       $(this).toggleClass('available');
       $('.close-tags').click();
+      return 0;
     }
 	
 	var tag_node=$(this).attr('node');
