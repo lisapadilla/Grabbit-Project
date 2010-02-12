@@ -968,7 +968,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	
 	if(is_array($twitface)){
 //			ksort($twitface);
-//			$result = array_reverse($twitface);
+			$result = $twitface//array_reverse($twitface);
 			$rowx='even';
 			foreach($result as $entry){
 					if($entry['value']->nid){
