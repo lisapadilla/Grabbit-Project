@@ -1,5 +1,13 @@
 Drupal.behaviors.tagsEngine = function(){
   $('.bring-tags').live('click',function(i){
+	
+	if ( $(this).hasClass('selected') )
+    {
+      $(this).toggleClass('available');
+      $('.close-tags').click();
+      return 0;
+    }
+	
 	var tag_node=$(this).attr('node');
 	var selector = $(this);
 	var parent = $(this).parents('.user-panel');
