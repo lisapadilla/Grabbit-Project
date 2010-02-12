@@ -959,7 +959,6 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	$view->execute();
 
     foreach($view->result as $node){
-	  if(!in_array($node->nid,$trashes))
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
