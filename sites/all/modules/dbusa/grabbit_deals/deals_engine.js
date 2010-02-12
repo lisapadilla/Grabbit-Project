@@ -10,10 +10,11 @@ Drupal.behaviors.deals = function()
     i.preventDefault();
     if ( $(this).hasClass('selected') )
     {
+      $(this).toggleClass('available');
       $('.deals-display .close').click();
     }
     else
-    {
+    { 
       var nid = $(this).attr('node');
       var anch = $(this);
       var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
@@ -21,6 +22,7 @@ Drupal.behaviors.deals = function()
       $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
          if (data)
          {
+           anch.toggleClass('available');
   	       $('#tags-show-'+nid, parent).hide();
              $('#tags-show-'+nid, parent).html(data);
              $('#tags-show-'+nid, parent).show(600);
@@ -52,7 +54,7 @@ function calculateDeals( item )
   $.get(Drupal.settings.basePath+"deals/calculate",{nid:nid},function(data){
      if (data)
      {
-        $('.url-deal', item).fadeIn('slow');
+        $('.url-deal a', item).toggleClass('available');
      }
   });
 }
