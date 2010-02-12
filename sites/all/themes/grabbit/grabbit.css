@@ -2716,7 +2716,6 @@ div.messages, div.status, div.warning, div.error{
 #TB_window
 {
 	border: none;
-	background-color: transparent;
 	border-bottom: 35px solid #8B939F;
 	font-family: Helvetica, Arial, Geneva, sans-serif;
 	border-radius: 12px;
