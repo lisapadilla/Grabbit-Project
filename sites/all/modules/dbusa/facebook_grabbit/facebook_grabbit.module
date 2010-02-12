@@ -1034,7 +1034,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 			}
 				
 		}
-			
+			print "test";
 	
     $GET=array();
 	return $output;
