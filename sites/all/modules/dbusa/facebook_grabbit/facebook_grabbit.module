@@ -900,6 +900,11 @@ function facebook_grabbit_private_view_panel_public_panels($param){
     $view->pager['items_per_page']=30;
 
     $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
+
+    $view_deals = views_get_view('grabbit_private_deals');
+    $view_deals->pager['items_per_page']=30;
+
+    $trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
 		if($result = grabbit_panels_get_uid(53,$param)){
@@ -910,7 +915,55 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 			}
 		  }
      }
+     else{
+	   $GET['blogs']="blogs";
+	   $GET['news']="news";
+	   $GET['show_facebook']=1;
+	   $GET['show_twitter']=1;
+	   $GET['show_gmail']=1;
+	   $GET['show_imap']=1;
+     }
+    if($user->uid>0){
+	  	//get FB,TW and soon GMAIL
+		$view_elements = views_get_view('grabbit_public_elements');
+		$view_elements->display['default']->display_options['filters']['uid']['value'][0]=53;
+		$view_elements->pager['items_per_page']=30;
+
+		$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='FALSE';
+		$view_elements->display['default']->display_options['filters']['type']['value']['twitter']='FALSE';
+		$view_elements->display['default']->display_options['filters']['type']['value']['gmail']='FALSE';
+		$view_elements->display['default']->display_options['filters']['type']['value']['imap']='FALSE';
+
+		if($GET['show_facebook']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='facebook';
+		}
+		if($GET['show_twitter']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['twitter']='twitter';
+		}
+		if($GET['show_gmail']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['gmail']='gmail';
+		}
+		if($GET['show_imap']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['imap']='imap';
+		}
+
+		if(!$GET['favorites']){
+		  $view_elements->display['default']->display_options['relationships']=array();	
+		}
+		$view_elements->execute();
+		foreach($view_elements->result as $node){
+		  if(!in_array($node->nid,$trashes))
+		  $twitface[$node->node_created]=array('time'=>$node->node_created,
+		                              'value'=>$node);
+	    }
+		// end of elements
+    }
+	
       
+	// Filters of all kind
+	$view->display['default']->display_options['filters']['type']['value']=array();
+	$view->display['default']->display_options['filters']['type']['value']['blogs']='FALSE';
+	$view->display['default']->display_options['filters']['type']['value']['news']='FALSE';
 	if($GET['blogs'] || $GET['news']){
 	  if($GET['blogs'])
 	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
@@ -964,7 +1017,24 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	                              'value'=>$node);
     }
 
-    
+    // prepeare the deals view according to the user's tags
+	$deals_profile = content_profile_load('profile', 53);
+	if (count($deals_profile->taxonomy)){
+	  foreach ($deals_profile->taxonomy as $term){
+	    $d_tags[] = $term->tid;
+	  }
+	  $deals_tags = implode("+", $d_tags);
+	}else{
+		$deals_tags = 'all';	
+	}
+	
+    $view_deals->set_arguments(array($deals_tags));	
+	$view_deals->execute();
+
+    foreach($view_deals->result as $node){
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
     // end of deals view
 	
 	if(is_array($twitface)){
@@ -1034,7 +1104,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 			}
 				
 		}
-			print "test";
+			
 	
     $GET=array();
 	return $output;
