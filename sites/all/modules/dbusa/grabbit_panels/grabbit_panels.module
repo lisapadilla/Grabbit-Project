@@ -178,7 +178,7 @@ function grabbit_panels_get_panels(){
 	    
 	}
 	else{
-		if($mesa['status'][0])
+/*		if($mesa['status'][0])
 		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 		
 		$output .='<div class="panels-controllers">
@@ -196,7 +196,7 @@ function grabbit_panels_get_panels(){
 		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 		}      		           
 		$output .='</div>';	
-		
+*/		
 	}
 	
 	return $output;
