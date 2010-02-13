@@ -179,7 +179,7 @@ function grabbit_panels_get_panels(){
 	}
 	else{
 		if($mesa['status'][0])
-		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+/*		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 		
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
@@ -196,7 +196,7 @@ function grabbit_panels_get_panels(){
 		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 		}      		           
 		$output .='</div>';	
-		
+*/ $output = 'performance';		
 	}
 	
 	return $output;
