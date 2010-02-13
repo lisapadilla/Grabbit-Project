@@ -1134,9 +1134,8 @@ function facebook_grabbit_private_view_panel_public($param){
 	*/
 			$rowx='even';
 			foreach($view->result as $entry){
-					if($entry['value']->nid){
-						
-						$node=node_load($entry['value']->nid,NULL,TRUE);
+					
+						$node=node_load($entry->nid,NULL,TRUE);
 						$node->rowx=$rowx;
 						switch($node->type){
 							case 'facebook':
@@ -1193,7 +1192,7 @@ function facebook_grabbit_private_view_panel_public($param){
 					  }
 						 
 					}
-			}
+			
 				
 		
 			
