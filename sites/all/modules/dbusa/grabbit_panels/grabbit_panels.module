@@ -123,7 +123,7 @@ function grabbit_panels_get_panels(){
 	global $user;
 	
 	if($user->uid>0){
-		ini_set("memory_limit","328M");
+/*		ini_set("memory_limit","328M");
 		set_time_limit(328);
 		if($fuser = facebook_grabbit_get_fid($user->uid))
 		  facebook_grabbit_update_facebook($user);
