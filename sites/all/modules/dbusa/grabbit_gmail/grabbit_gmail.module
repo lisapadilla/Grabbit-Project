@@ -966,7 +966,7 @@ class receiveMail
 }
 
 function grabbit_gmail_crear($user=1){
-	ini_set("memory_limit","128M");
+	//ini_set("memory_limit","128M");
 	
 	$yesterday = date('D, j M Y');
 	set_time_limit(0);
