@@ -179,8 +179,8 @@ function grabbit_panels_get_panels(){
 	}
 	else{
 		$output = 'performance';
-		if($mesa['status'][0])
-/*		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+/*		if($mesa['status'][0])
+		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 		
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
