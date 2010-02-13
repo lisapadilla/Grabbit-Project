@@ -783,7 +783,7 @@ function facebook_grabbit_private_view_panel($param){
     }
 
     // prepeare the deals view according to the user's tags
-	$deals_profile = content_profile_load('profile', $user->uid);
+	/*$deals_profile = content_profile_load('profile', $user->uid);
 	if (count($deals_profile->taxonomy)){
 	  foreach ($deals_profile->taxonomy as $term){
 	    $d_tags[] = $term->tid;
@@ -795,22 +795,22 @@ function facebook_grabbit_private_view_panel($param){
 	
 	$view_deals = views_get_view('grabbit_private_deals');
     $view_deals->pager['items_per_page']=30;
+    */
+	 // 	$first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
     
-	  	$first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
     
-    
-    $view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
-    $view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s');
+    //$view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
+    //$view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s');
 
-    $view_deals->set_arguments(array($deals_tags));	
-	$view_deals->execute();
-
+    //$view_deals->set_arguments(array($deals_tags));	
+	//$view_deals->execute();
+/*
     foreach($view_deals->result as $node){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
     // end of deals view
-	
+*/	
 	if(is_array($twitface)){
 			ksort($twitface);
 			$result = array_reverse($twitface);
