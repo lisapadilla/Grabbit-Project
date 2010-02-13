@@ -811,14 +811,14 @@ function facebook_grabbit_private_view_panel($param){
     }
     // end of deals view
 */	
-	if(is_array($twitface)){
-			ksort($twitface);
-			$result = array_reverse($twitface);
+	//if(is_array($twitface)){
+	//		ksort($twitface);
+	//		$result = array_reverse($twitface);
 			$rowx='even';
-			foreach($result as $entry){
-					if($entry['value']->nid){
+			foreach($view->result as $entry){
+					//if($entry['value']->nid){
 						
-						$node=node_load($entry['value']->nid,NULL,TRUE);
+						$node=node_load($entry->nid,NULL,TRUE);
 						$node->rowx=$rowx;
 						switch($node->type){
 							case 'facebook':
@@ -881,9 +881,9 @@ function facebook_grabbit_private_view_panel($param){
 					  }
 						 
 					}
-			}
+			//}
 				
-		}
+		//}
 			
 	
     $GET=array();
