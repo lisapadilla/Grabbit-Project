@@ -689,7 +689,7 @@ function facebook_grabbit_private_view_panel($param){
 	   $GET['show_imap']=1;
      }
     if($user->uid>0){
-	  	//get FB,TW and soon GMAIL
+	  	//get FB,TW , GMAIL, IMAP
 		$view_elements = views_get_view('grabbit_public_elements');
 		$view_elements->display['default']->display_options['filters']['uid']['value'][0]=$user->uid;
 		$view_elements->pager['items_per_page']=30;
@@ -716,6 +716,7 @@ function facebook_grabbit_private_view_panel($param){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		$view_elements->execute();
+		print_r($view_elements->result);
 		foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
 		  $twitface[$node->node_created]=array('time'=>$node->node_created,
@@ -821,7 +822,6 @@ function facebook_grabbit_private_view_panel($param){
 						
 						$node=node_load($entry->nid,NULL,TRUE);
 						$node->rowx=$rowx;
-						print_r($node->type);
 						switch($node->type){
 							case 'facebook':
 							    $actor=array('name'=>$node->field_user_name[0]['value'],
