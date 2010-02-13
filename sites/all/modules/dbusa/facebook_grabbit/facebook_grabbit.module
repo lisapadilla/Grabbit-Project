@@ -899,12 +899,12 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	$view = views_get_view('grabbit_public_stream');
     $view->pager['items_per_page']=30;
 
-    $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
+    //$view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
 
-    $view_deals = views_get_view('grabbit_private_deals');
-    $view_deals->pager['items_per_page']=30;
+    //$view_deals = views_get_view('grabbit_private_deals');
+   // $view_deals->pager['items_per_page']=30;
 
-    $trashes =  grabbit_favorites_get_trash('item');
+    //$trashes =  grabbit_favorites_get_trash('item');
     
     if($param>0){
 		if($result = grabbit_panels_get_uid(53,$param)){
@@ -923,7 +923,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	   $GET['show_gmail']=1;
 	   $GET['show_imap']=1;
      }
-    if($user->uid>0){
+    /*if($user->uid>0){
 	  	//get FB,TW and soon GMAIL
 		$view_elements = views_get_view('grabbit_public_elements');
 		$view_elements->display['default']->display_options['filters']['uid']['value'][0]=53;
@@ -958,7 +958,7 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	    }
 		// end of elements
     }
-	
+	*/
       
 	// Filters of all kind
 	$view->display['default']->display_options['filters']['type']['value']=array();
@@ -1011,12 +1011,12 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	
 	$view->execute();
 
-    foreach($view->result as $node){
+   /* foreach($view->result as $node){
 	  if(!in_array($node->nid,$trashes))
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
-    }
-
+    }*/
+    /*
     // prepeare the deals view according to the user's tags
 	$deals_profile = content_profile_load('profile', 53);
 	if (count($deals_profile->taxonomy)){
@@ -1036,15 +1036,15 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 	                              'value'=>$node);
     }
     // end of deals view
-	
-	if(is_array($twitface)){
-			ksort($twitface);
-			$result = array_reverse($twitface);
+*/	
+	//if(is_array($twitface)){
+	//		ksort($twitface);
+	//		$result = array_reverse($twitface);
 			$rowx='even';
-			foreach($result as $entry){
-					if($entry['value']->nid){
+			foreach($view->result as $entry){
+	//				if($entry['value']->nid){
 						
-						$node=node_load($entry['value']->nid,NULL,TRUE);
+						$node=node_load($entry->nid,NULL,TRUE);
 						$node->rowx=$rowx;
 						switch($node->type){
 							case 'facebook':
@@ -1100,10 +1100,10 @@ function facebook_grabbit_private_view_panel_public_panels($param){
 						$rowx='even';
 					  }
 						 
-					}
+				//	}
 			}
 				
-		}
+	//	}
 			
 	
     $GET=array();
