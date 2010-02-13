@@ -1116,27 +1116,24 @@ function facebook_grabbit_private_view_panel_public_panels($param){
  */
 function facebook_grabbit_private_view_panel_public($param){
 	
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	//drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	$view = views_get_view('grabbit_anonymous_stream');
     $view->pager['items_per_page']=30;
 
-    $trashes =  grabbit_favorites_get_trash('item');
+    //$trashes =  grabbit_favorites_get_trash('item');
 	
 	$view->execute();
 
-    foreach($view->result as $node){
-	  if(!in_array($node->nid,$trashes))
+    /*foreach($view->result as $node){
+	 // if(!in_array($node->nid,$trashes))
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
-	
-	if(is_array($twitface)){
-			ksort($twitface);
-			$result = array_reverse($twitface);
+	*/
 			$rowx='even';
-			foreach($result as $entry){
+			foreach($view->result as $entry){
 					if($entry['value']->nid){
 						
 						$node=node_load($entry['value']->nid,NULL,TRUE);
@@ -1198,7 +1195,7 @@ function facebook_grabbit_private_view_panel_public($param){
 					}
 			}
 				
-		}
+		
 			
 	
     $GET=array();
