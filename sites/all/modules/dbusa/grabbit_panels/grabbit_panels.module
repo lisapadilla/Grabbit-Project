@@ -196,7 +196,8 @@ function grabbit_panels_get_panels(){
 		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 		}      		           
 		$output .='</div>';	
-*/ $output = 'performance';		
+*/ 
+$output = 'performance';		
 	}
 	
 	return $output;
