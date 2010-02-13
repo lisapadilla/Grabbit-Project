@@ -716,6 +716,7 @@ function facebook_grabbit_private_view_panel($param){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		$view_elements->execute();
+		print_r($view_elements);
 	/*	foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
 		  $twitface[$node->node_created]=array('time'=>$node->node_created,
@@ -776,12 +777,12 @@ function facebook_grabbit_private_view_panel($param){
 	
 	$view->execute();
 
-    /*foreach($view->result as $node){
+    foreach($view->result as $node){
 	  if(!in_array($node->nid,$trashes))
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                              'value'=>$node);
     }
-*/
+
     // prepeare the deals view according to the user's tags
 	/*$deals_profile = content_profile_load('profile', $user->uid);
 	if (count($deals_profile->taxonomy)){
@@ -815,8 +816,7 @@ function facebook_grabbit_private_view_panel($param){
 	//		ksort($twitface);
 	//		$result = array_reverse($twitface);
 			$rowx='even';
-			$obj_merged = (object) array_merge((array) $view->result, (array) $view_elements->result);
-			foreach($obj_merged as $entry){
+			foreach($view->result as $entry){
 				
 					//if($entry['value']->nid){
 						
