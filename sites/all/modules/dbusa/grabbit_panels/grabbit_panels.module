@@ -178,6 +178,7 @@ function grabbit_panels_get_panels(){
 	    
 	}
 	else{
+		$output = 'performance';
 		if($mesa['status'][0])
 /*		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 		
@@ -197,7 +198,7 @@ function grabbit_panels_get_panels(){
 		}      		           
 		$output .='</div>';	
 */ 
-$output = 'performance';		
+		
 	}
 	
 	return $output;
