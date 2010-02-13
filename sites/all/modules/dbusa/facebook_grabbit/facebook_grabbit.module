@@ -816,10 +816,12 @@ function facebook_grabbit_private_view_panel($param){
 	//		$result = array_reverse($twitface);
 			$rowx='even';
 			foreach($view->result as $entry){
+				
 					//if($entry['value']->nid){
 						
 						$node=node_load($entry->nid,NULL,TRUE);
 						$node->rowx=$rowx;
+						print_r($node->type);
 						switch($node->type){
 							case 'facebook':
 							    $actor=array('name'=>$node->field_user_name[0]['value'],
