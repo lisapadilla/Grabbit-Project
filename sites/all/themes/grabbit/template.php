@@ -178,6 +178,9 @@ function grabbit_preprocess_node(&$vars, $hook) {
 		
 			$unserialize=unserialize($vars['node']->field_media[0]['value']);
 			if($unserialize){
+				if($unserialize['dependencia']){
+					drupal_goto('node/'.$unserialize['node']);
+				}
 				$node_media=node_load($unserialize['file']);
 				$file_fid=$node_media->field_media[0]['value'];	
 			}else{
