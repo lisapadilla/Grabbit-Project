@@ -2627,11 +2627,11 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE){
 		
 		$node = new stdClass();
 		if($media){
-			print_r($media);
 		  $text = preg_replace("/(http:\/\/tr.im[^\s]+)/", "", $text);
-		  $media['file']=$media;
-		  $media['post']='POST';
-		  $media_field=serialize($media);
+		  $media_file=array();
+		  $media_file['file']=$media;
+		  $media_file['post']='POST';
+		  $media_field=serialize($media_file);
 		  $node->field_media[0]['value']=$media_field;
 		}
 		
