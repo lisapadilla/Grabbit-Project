@@ -523,7 +523,7 @@ function grabbit_me_grabbit_status_update($status, $tw_status_ch, $fb_status_ch,
 		$node->status=1;
 		$node->uid=$uid;
 		$node->comment=2;
-		$node->title=$user->name . ' ' . $node->title;
+		$node->title=$user->name . $node->title;
 		node_save($node);
   }
 	

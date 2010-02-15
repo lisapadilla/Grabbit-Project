@@ -2641,7 +2641,7 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 		
 		$new_text=substr($text,0,117);
 		
-		  $node->title = $user->name."'s update ";
+		  $node->title = $user->name."’s update ";
 		  $node->created = time();
 		  $node->type = 'media';
 		  $node->status = 1;
