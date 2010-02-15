@@ -73,6 +73,7 @@ function file_to_tinymce(urlcomplete){
 				$("#edit-status").val($("#edit-status").val()+data.url+' ');
 				var scroll = $("#edit-status");
 				$("#edit-status").focus();
+				$("#edit-media_link").val(data.url);
 	        }
 	    );
 }
