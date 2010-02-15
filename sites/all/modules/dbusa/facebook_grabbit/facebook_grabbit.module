@@ -2654,6 +2654,16 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 			$url_json=json_decode(file_get_contents('http://api.tr.im/api/trim_url.json?url='.$_SERVER['HTTP_HOST'] . base_path() . 'node/'.$node->nid));
 			$url_trim=$url_json->url;
 			$new_text=$new_text . '... '.$url_trim;
+			
+			if($media){
+				$media_node=node_load($media);
+				$media_node->body=$text;
+				$media_data=array();
+				$media_data['dependencia']='dependiente';
+				$media_data['node']=$node->nid;
+				$media_node->field_media[0]['value']=serialize($media_data);
+			}
+			
 		  }
 		
 		return $new_text;
