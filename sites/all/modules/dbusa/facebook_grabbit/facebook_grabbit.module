@@ -2627,6 +2627,7 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE){
 		
 		$node = new stdClass();
 		if($media){
+			print_r($media);
 		  $text = preg_replace("/(http:\/\/tr.im[^\s]+)/", "", $text);
 		  $media['file']=$media;
 		  $media['post']='POST';
