@@ -279,9 +279,12 @@ function grabbit_uploads_comment(&$a1, $op) {
     $node = node_load($a1['nid']);
     $serialize=$node->field_media[0]['value'];
     if($serialize){
+	print_r($serialize);
+	
 	  $node_image=$serialize['file'];
 	  $comment=$a1;
 	  $comment['nid']=$node_image;
+	print_r($comment);
 	  comment_save($comment);
     }
   }
