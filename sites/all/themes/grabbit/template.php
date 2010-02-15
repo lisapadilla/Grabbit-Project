@@ -178,6 +178,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 		
 		if(is_int($vars['node']->field_media[0]['value'])){
 		  $file_fid=$vars['node']->field_media[0]['value'];
+		print_r($file_fid);
 		}else{
 			$unserialize=unserialize($vars['node']->field_media[0]['value']);
 			$node_media=node_load($unserialize['file']);
