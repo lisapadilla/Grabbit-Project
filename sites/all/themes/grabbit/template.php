@@ -175,7 +175,16 @@ function grabbit_preprocess_node(&$vars, $hook) {
 		$vars['file_uploader']='<div class="uploader"><span class="pic-uploader">'.$pic.'</span><span class="body-uploader">'.$vars['body'].'<span class="submitted">on '.format_date($vars['node']->created).'</span></span></div>';
     $error="Oops! we could not find the file, check the URL and try again!";
 	if ($vars['node']->field_media[0]['value']){
-		$result = db_query('SELECT * FROM {files} WHERE fid = %d', $vars['node']->field_media[0]['value']);
+		
+		if(is_int($vars['node']->field_media[0]['value'])){
+		  $file_fid=$vars['node']->field_media[0]['value'];
+		}else{
+			$unserialize=unserialize($vars['node']->field_media[0]['value']);
+			$node_media=node_load($unserialize['file']);
+			$file_fid=$node_media->field_media[0]['value'];
+		}
+		
+		$result = db_query('SELECT * FROM {files} WHERE fid = %d', $file_fid);
 		if (db_affected_rows($result)){
 			$file=db_fetch_object($result);
 			$ext = substr($file->filename, strrpos($file->filename, '.') + 1);

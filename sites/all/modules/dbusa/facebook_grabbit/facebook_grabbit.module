@@ -206,7 +206,7 @@ function facebook_grabbit_update_form($form_state){
 
 function facebook_grabbit_update_form_submit($form, &$form_state) {
 	
-	$form_state['values']['status']=facebook_grabbit_checkout_textlong($form_state['values']['status']);
+	$form_state['values']['status']=facebook_grabbit_checkout_textlong($form_state['values']['status'],$_POST['media']);
 	
 	if($form_state['values']['facebook']){
 		
@@ -891,6 +891,254 @@ function facebook_grabbit_private_view_panel($param){
 	return $output;
 
 }
+
+/**
+ * Creates PROBANDO users pannel()
+ */
+function facebook_grabbit_private_view_panel_prueba($param){
+	
+	global $user;
+    //drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery.simpletip-1.3.1.min.js', $type = 'module');	
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+   
+    $twitface=array();
+	
+	global $user_info;
+	
+	//It starts getting parameters from index 1, 0 is the response id
+	//prepeare_status_update & prepeare_standar_update request 'name' at index 1, if it's needed to get more params, leave 'name' as first
+	$params = array('name','pic_square','profile_url');
+    $user_info = _get_current_user_info($params);
+	
+	$view = views_get_view('grabbit_public_stream');
+    $view->pager['items_per_page']=30;
+
+    $view->display['default']->display_options['filters']['uid']['value'][]=$user->uid;
+
+    $trashes =  grabbit_favorites_get_trash('item');
+    
+    if($param>0){
+		if($result = grabbit_panels_get_uid($user->uid,$param)){
+			$GET = unserialize($result->config);
+			$tags= unserialize($result->filters);
+			if($tags['tags']){
+			  $GET['tags']=$tags['tags'];	
+			}
+		  }
+     }
+     else{
+	   $GET['blogs']="blogs";
+	   $GET['news']="news";
+	   $GET['show_facebook']=1;
+	   $GET['show_twitter']=1;
+	   $GET['show_gmail']=1;
+	   $GET['show_imap']=1;
+     }
+    if($user->uid>0){
+	  	//get FB,TW , GMAIL, IMAP
+		$view_elements = views_get_view('grabbit_public_elements');
+		$view_elements->display['default']->display_options['filters']['uid']['value'][0]=$user->uid;
+		$view_elements->pager['items_per_page']=30;
+
+		$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='FALSE';
+		$view_elements->display['default']->display_options['filters']['type']['value']['twitter']='FALSE';
+		$view_elements->display['default']->display_options['filters']['type']['value']['gmail']='FALSE';
+		$view_elements->display['default']->display_options['filters']['type']['value']['imap']='FALSE';
+
+		if($GET['show_facebook']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['facebook']='facebook';
+		}
+		if($GET['show_twitter']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['twitter']='twitter';
+		}
+		if($GET['show_gmail']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['gmail']='gmail';
+		}
+		if($GET['show_imap']){
+			$view_elements->display['default']->display_options['filters']['type']['value']['imap']='imap';
+		}
+
+		if(!$GET['favorites']){
+		  $view_elements->display['default']->display_options['relationships']=array();	
+		}
+		$view_elements->execute();
+		foreach($view_elements->result as $node){
+		  if(!in_array($node->nid,$trashes))
+		  $twitface[$node->node_created]=array('time'=>$node->node_created,
+		                              'value'=>$node);
+	    }
+		// end of elements
+    }
+	
+      
+	// Filters of all kind
+	$view->display['default']->display_options['filters']['type']['value']=array();
+	$view->display['default']->display_options['filters']['type']['value']['blogs']='FALSE';
+	$view->display['default']->display_options['filters']['type']['value']['news']='FALSE';
+	if($GET['blogs'] || $GET['news']){
+	  if($GET['blogs'])
+	    $view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
+	  if($GET['news'])
+	    $view->display['default']->display_options['filters']['type']['value']['news']='news';
+	}
+
+	if(!$GET['favorites']){
+	  $view->display['default']->display_options['relationships']=array();	
+	}
+	
+	if ($GET['tags']){
+		$tags = implode(" ", $GET['tags']);
+		$filters[0] = $tags;
+	}else{
+		$filters[0] = 'all';	
+	}
+	if ($GET['feeds']){
+		unset($view->display['default']->display_options['filters']['uid']);
+		$view->display['default']->display_options['filters']['type']['value']['blogs']='blogs';
+		$view->display['default']->display_options['filters']['type']['value']['news']='news';
+		$tags = implode(",", $GET['feeds']);
+        $filters[1] = $tags;
+	}else{
+		$flag = flag_get_user_flags('node', $content_id = NULL, $uid = NULL, $reset = FALSE);
+
+		if(is_array($flag['myfeeds'])){
+			
+		  	foreach($flag['myfeeds'] as $my_feeds){
+			  $user_feeds[]=$my_feeds->content_id;	
+			}
+			
+			$tags = implode(",", $user_feeds);
+			$filters[1] = $tags;	
+		}
+		else{
+			$filters[1] = "all";	
+		}
+
+	}
+	
+	//End filters of all kind
+ 
+	$view->set_arguments(array($filters[0],$filters[1]));	
+	
+	$view->execute();
+
+    foreach($view->result as $node){
+	  if(!in_array($node->nid,$trashes))
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+
+    // prepeare the deals view according to the user's tags
+	/*$deals_profile = content_profile_load('profile', $user->uid);
+	if (count($deals_profile->taxonomy)){
+	  foreach ($deals_profile->taxonomy as $term){
+	    $d_tags[] = $term->tid;
+	  }
+	  $deals_tags = implode("+", $d_tags);
+	}else{
+		$deals_tags = 'all';	
+	}
+	
+	$view_deals = views_get_view('grabbit_private_deals');
+    $view_deals->pager['items_per_page']=30;
+    */
+	 // 	$first_item_element= end(array_reverse($twitface)); // get the first element of the current view of items
+    
+    
+    //$view_deals->display['default']->display_options['filters']['created']['value']['min']=date('Y-m-d H:i:s',$last_item_element['time']);
+    //$view_deals->display['default']->display_options['filters']['created']['value']['max']=date('Y-m-d H:i:s');
+
+    //$view_deals->set_arguments(array($deals_tags));	
+	//$view_deals->execute();
+/*
+    foreach($view_deals->result as $node){
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                              'value'=>$node);
+    }
+    // end of deals view
+*/	
+	if(is_array($twitface)){
+			ksort($twitface);
+			$result = array_reverse($twitface);
+			$rowx='even';
+			foreach($result as $entry){
+				
+					if($entry['value']->nid){
+						
+						$node=node_load($entry['value']->nid,NULL,TRUE);
+						$node->rowx=$rowx;
+						switch($node->type){
+							case 'facebook':
+							    $actor=array('name'=>$node->field_user_name[0]['value'],
+								             'url'=>$node->field_user_url[0]['value'],
+								             'pic_square'=>$node->field_user_picture[0]['value']
+								             );
+								$commenta=array();
+								$actors=array();
+								if($node->field_comments[0]['value']){
+									$profiles=unserialize($node->field_comments[0]['value']);
+									$commenta=$profiles['comments'];	
+									$actors=$profiles['profiles'];
+								}
+								
+								if(!$node->field_attachment[0]['value']){ //STATUS UPDATE
+									$target='';
+									if($node->field_target[0]['value'])
+									  $target=$node->field_target[0]['value'];
+                                         
+									$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta);
+									$comments=array();
+									}else{
+										$target='';
+										if($node->field_target[0]['value'])
+										  $target=$node->field_target[0]['value'];
+
+										$output .= prepeare_standar_update($node,$actor,$target,$actors,$commenta);
+										$comments=array();
+									}
+							
+							break;
+							case 'twitter':
+							  $output .=theme_twitter_message($node);
+							break;
+							case 'gmail':
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= theme_gmail_message($comments,$node);
+							break;
+							case 'imap':
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= theme_imap_message($comments,$node);
+							break;
+							default:
+							  if($node->type=='deal'){
+								if(is_array($node->taxonomy) && is_array($deals_profile->taxonomy)){
+								  $matches=array_intersect_key($node->taxonomy,$deals_profile->taxonomy);	
+								}
+							    	
+							  }
+							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+							  $output .= _news_theme($comments,$node,$matches);
+							break;
+						}
+						
+					  if($rowx=='even'){
+						$rowx='odd';
+					  }else{
+						$rowx='even';
+					  }
+						 
+					}
+			}
+				
+		}
+			
+	
+    $GET=array();
+	return $output;
+
+}
+
 
 /**
  * Creates users pannel()
@@ -2372,13 +2620,22 @@ function facebook_grabbit_theme_results($twitface){
 		return $output;
 }
 
-function facebook_grabbit_checkout_textlong($text){
+function facebook_grabbit_checkout_textlong($text, $media=FALSE){
 	$total=strlen($text);
 	if($total>140){
 		global $user;
-		$new_text=substr($text,0,117);
-		//$new_text = utf8_wordwrap($text,107); //substr($text,0,strpos($text,' ',107));
+		
 		$node = new stdClass();
+		if($media){
+		  $text = preg_replace("/(http:\/\/tr.im[^\s]+)/", "", $test);
+		  $media['file']=$media;
+		  $media['post']='POST';
+		  $media_field=serialize($media);
+		  $node->field_media[0]['value']=$media_field;
+		}
+		
+		$new_text=substr($text,0,117);
+		
 		  $node->title = $user->name."'s update ";
 		  $node->created = time();
 		  $node->type = 'media';
