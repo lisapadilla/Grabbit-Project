@@ -277,14 +277,11 @@ function grabbit_uploads_file_form_getit(){
 function grabbit_uploads_comment(&$a1, $op) {
   if ($op == 'insert' || $op == 'update') {
     $node = node_load($a1['nid']);
-    $serialize=$node->field_media[0]['value'];
+    $serialize=unserialize($node->field_media[0]['value']);
     if($serialize){
-	print_r($serialize);
-	
 	  $node_image=$serialize['file'];
 	  $comment=$a1;
 	  $comment['nid']=$node_image;
-	print_r($comment);
 	  comment_save($comment);
     }
   }
