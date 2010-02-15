@@ -177,10 +177,13 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	if ($vars['node']->field_media[0]['value']){
 		
 			$unserialize=unserialize($vars['node']->field_media[0]['value']);
-			$node_media=node_load($unserialize['file']);
-			$file_fid=$node_media->field_media[0]['value'];
+			if($unserialize){
+				$node_media=node_load($unserialize['file']);
+				$file_fid=$node_media->field_media[0]['value'];	
+			}else{
+				$file_fid=$vars['node']->field_media[0]['value'];
+			}
 			
-			print_r($unserialize);
 		
 		$result = db_query('SELECT * FROM {files} WHERE fid = %d', $file_fid);
 		if (db_affected_rows($result)){
