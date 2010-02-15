@@ -2662,6 +2662,7 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 				$media_data['dependencia']='dependiente';
 				$media_data['node']=$node->nid;
 				$media_node->field_media[0]['value']=serialize($media_data);
+				node_save($media_node);
 			}
 			
 		  }
