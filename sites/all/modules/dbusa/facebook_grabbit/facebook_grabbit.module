@@ -2663,7 +2663,7 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 }
 
 function facebook_grabbit_get_post_from_file($node_file){
-	$result=db_query("SELECT nid FROM {content_type_media} WHERE field_media_value LIKE %%d%%",$node_file);
+	$result=db_query("SELECT nid FROM {content_type_media} WHERE field_media_value LIKE ('%$node_file%')");
 	return db_result($result);
 }
 
