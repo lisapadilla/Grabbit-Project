@@ -2654,24 +2654,17 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 			$url_json=json_decode(file_get_contents('http://api.tr.im/api/trim_url.json?url='.$_SERVER['HTTP_HOST'] . base_path() . 'node/'.$node->nid));
 			$url_trim=$url_json->url;
 			$new_text=$new_text . '... '.$url_trim;
-			
-			if($media){
-				$media_node=node_load($media);
-				$media_node->body=$text;
-				$media_data=array();
-				$media_data['dependencia']='dependiente';
-				$media_data['node']=$node->nid;
-				$media_node->field_media[0]['value']=serialize($media_data);
-				node_save($media_node);
-				print_r($media_node);
-			}
-			
 		  }
 		
 		return $new_text;
 	}else{
 		return $text;
 	}
+}
+
+function facebook_grabbit_get_post_from_file($node_file){
+	$result=db_query("SELECT nid FROM {content_type_media} WHERE field_media_value LIKE %%d%%",$node_file);
+	return db_result($result);
 }
 
 function utf8_wordwrap($str, $width = 75, $break = "\n") // wordwrap() with utf-8 support
