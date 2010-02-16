@@ -780,8 +780,12 @@ function facebook_grabbit_private_view_panel($param){
  
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	$view->build();
-	print_r($view->build_info);
-	$view->execute();
+	//print_r($view->build_info);
+	$test_result=db_query($view->build_info['query'],implode(', ', $view->query_args));
+	while($result_ob=db_fetch_object($test_result)){
+		$result1[]=$result_ob;
+	}
+	//$view->execute();
 
   /*  foreach($view->result as $node){
 	  if(!in_array($node->nid,$trashes))
@@ -819,7 +823,7 @@ function facebook_grabbit_private_view_panel($param){
     }
     // end of deals view
 */	
-	$twitface=array_merge($view->result,$view_elements->result);
+	$twitface=array_merge($result1,$view_elements->result);
 	
 	if(is_array($twitface)){
 			usort($twitface,"comparison");
