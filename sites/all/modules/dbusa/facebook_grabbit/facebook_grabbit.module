@@ -720,6 +720,7 @@ function facebook_grabbit_private_view_panel($param){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
 		$view_elements->execute();
+		print_r($view_elements);
 		foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
 		  $twitface[$node->node_created]=array('time'=>$node->node_created,
