@@ -781,20 +781,12 @@ function facebook_grabbit_private_view_panel($param){
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	$view->build();
 	//print_r($view->build_info);
-	$test_result=db_query("SELECT node.nid AS nid,
-	   node.created AS node_created
-	 FROM {node} node 
-	 INNER JOIN {users} users ON node.uid = users.uid
-	 LEFT JOIN {feedapi_node_item_feed} feedapi_node_item_feed ON node.nid = feedapi_node_item_feed.feed_item_nid
-	 WHERE (node.status <> 0) AND (node.type in ('%s', '%s')) AND (users.uid in ('%s', '%s')) AND (feedapi_node_item_feed.feed_nid IN (%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d))
-	   ORDER BY node_created DESCop
-	",implode(',', $view->build_info['query_args']));
+	$test_result=db_query($view->build_info['query'],$view->build_info['query_args']);
 	
 	print_r(db_affected_rows());
 	
 	while($result_ob=db_fetch_object($test_result)){
 		$result1[]=$result_ob;
-		print_r($result_ob);
 	}
 	//$view->execute();
 
