@@ -660,6 +660,8 @@ function facebook_grabbit_private_view_panel($param){
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
    
     $twitface=array();
+    $view->result=array();
+    $view_elements->result=array();
 	
 	global $user_info;
 	
@@ -721,11 +723,11 @@ function facebook_grabbit_private_view_panel($param){
 		}
 		$view_elements->execute();
 		
-		foreach($view_elements->result as $node){
+		/*foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
 		  $twitface[]=$node;
 	    }
-		// end of elements
+		// end of elements*/
     }
 	
       
@@ -780,7 +782,7 @@ function facebook_grabbit_private_view_panel($param){
 	
 	$view->execute();
 
-    foreach($view->result as $node){
+  /*  foreach($view->result as $node){
 	  if(!in_array($node->nid,$trashes))
 	    $twitface[]=$node;
 	  //$twitface[$node->node_created]=array('time'=>$node->node_created,
@@ -816,6 +818,8 @@ function facebook_grabbit_private_view_panel($param){
     }
     // end of deals view
 */	
+	$twitface=array_merge($view->result,$view_elements->result);
+	
 	if(is_array($twitface)){
 			usort($twitface,"comparison");
 			//$result = array_reverse($twitface);
@@ -902,7 +906,7 @@ function comparison($a, $b)
     if ($a->node_created == $b->node_created) {
         return 0;
     }
-    return ($a->node_created < $b->node_created) ? -1 : 1;
+    return ($a->node_created < $b->node_created) ? 1 : -1;
 }
 
 /**
