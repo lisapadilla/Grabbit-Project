@@ -721,6 +721,7 @@ function facebook_grabbit_private_view_panel($param){
 		if(!$GET['favorites']){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
+		$view_elements->build();
 		//$view_elements->execute();
 		
 		/*foreach($view_elements->result as $node){
@@ -780,7 +781,7 @@ function facebook_grabbit_private_view_panel($param){
  
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	$view->build();
-	$view_elements->build();
+	
 	//print_r($view->build_info);
 	$args=array_merge($view->build_info['query_args'],$view_elements->build_info['query_args']);
 	$test_result=db_query("(".$view->build_info['query']." LIMIT 30) UNION (".$view_elements->build_info['query']." LIMIT 30) ORDER BY node_created DESC",$args);
