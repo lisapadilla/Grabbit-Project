@@ -721,7 +721,7 @@ function facebook_grabbit_private_view_panel($param){
 		if(!$GET['favorites']){
 		  $view_elements->display['default']->display_options['relationships']=array();	
 		}
-		$view_elements->execute();
+		//$view_elements->execute();
 		
 		/*foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
@@ -780,8 +780,10 @@ function facebook_grabbit_private_view_panel($param){
  
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	$view->build();
+	$view_elements->build();
 	//print_r($view->build_info);
-	$test_result=db_query($view->build_info['query']." LIMIT 30 ",$view->build_info['query_args']);
+	$args=array_merge($view->build_info['query_args'],$view_elements->build_info['query_args']);
+	$test_result=db_query("(".$view->build_info['query']." LIMIT 30) UNION (".$view_elements->build_info['query']." LIMIT 30)",$args);
 	$result1=array();
 	while($result_ob=db_fetch_object($test_result)){
 		$result1[]=$result_ob;
@@ -824,10 +826,10 @@ function facebook_grabbit_private_view_panel($param){
     }
     // end of deals view
 */	
-	$twitface=array_merge($result1,$view_elements->result);
+//	$twitface=array_merge($result1,$view_elements->result);
 	
 	if(is_array($twitface)){
-			usort($twitface,"comparison");
+//			usort($twitface,"comparison");
 			//$result = array_reverse($twitface);
 			$rowx='even';
 			foreach($twitface as $entry){
