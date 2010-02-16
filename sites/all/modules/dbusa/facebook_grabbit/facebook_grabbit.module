@@ -782,7 +782,7 @@ function facebook_grabbit_private_view_panel($param){
 	$view->build();
 	//print_r($view->build_info);
 	$test_result=db_query($view->build_info['query'],implode(', ', $view->build_info['query_args']));
-	var_dump($test_result);
+	var_dump(implode(', ', $view->build_info['query_args']));
 	print_r(db_fetch_array($test_result));
 	while($result_ob=db_fetch_object($test_result)){
 		$result1[]=$result_ob;
