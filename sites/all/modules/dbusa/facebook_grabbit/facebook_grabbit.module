@@ -781,7 +781,7 @@ function facebook_grabbit_private_view_panel($param){
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	$view->build();
 	//print_r($view->build_info);
-	$test_result=db_query($view->build_info['query'],$view->build_info['query_args']);
+	$test_result=db_query($view->build_info['query']." LIMIT 30 ",$view->build_info['query_args']);
 	
 	print_r(db_affected_rows());
 	
