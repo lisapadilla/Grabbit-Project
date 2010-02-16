@@ -782,8 +782,8 @@ function facebook_grabbit_private_view_panel($param){
 	$view->set_arguments(array($filters[0],$filters[1]));	
 	$view->build();
 	
-	$args=array_merge($view->build_info['query_args'],$view_elements->build_info['query_args']);
-	$test_result=db_query($view->build_info['query']." LIMIT 30 UNION ".$view_elements->build_info['query']." LIMIT 30 ORDER BY node_created DESC",$args);
+	$args=$view->build_info['query_args'];
+	$test_result=db_query("(".$view->build_info['query']." LIMIT 30)",$args);
 	$result1=array();
 	while($result_ob=db_fetch_object($test_result)){
 		$twitface[]=$result_ob;
