@@ -723,8 +723,7 @@ function facebook_grabbit_private_view_panel($param){
 		
 		foreach($view_elements->result as $node){
 		  if(!in_array($node->nid,$trashes))
-		  $twitface[$node->node_created]=array('time'=>$node->node_created,
-		                              'value'=>$node);
+		  $twitface[]=$node;
 	    }
 		// end of elements
     }
@@ -783,8 +782,9 @@ function facebook_grabbit_private_view_panel($param){
 
     foreach($view->result as $node){
 	  if(!in_array($node->nid,$trashes))
-	  $twitface[$node->node_created]=array('time'=>$node->node_created,
-	                              'value'=>$node);
+	    $twitface[]=$node;
+	  //$twitface[$node->node_created]=array('time'=>$node->node_created,
+	  //                            'value'=>$node);
     }
 
     // prepeare the deals view according to the user's tags
@@ -817,14 +817,14 @@ function facebook_grabbit_private_view_panel($param){
     // end of deals view
 */	
 	if(is_array($twitface)){
-			ksort($twitface);
-			$result = array_reverse($twitface);
+			usort($twitface,"comparison");
+			//$result = array_reverse($twitface);
 			$rowx='even';
-			foreach($result as $entry){
+			foreach($twitface as $entry){
 				
-					if($entry['value']->nid){
+					//if($entry['value']->nid){
 						
-						$node=node_load($entry['value']->nid,NULL,TRUE);
+						$node=node_load($entry->nid,NULL,TRUE);
 						$node->rowx=$rowx;
 						switch($node->type){
 							case 'facebook':
@@ -887,7 +887,7 @@ function facebook_grabbit_private_view_panel($param){
 					  }
 						 
 					}
-			}
+			//}
 				
 		}
 			
@@ -895,6 +895,14 @@ function facebook_grabbit_private_view_panel($param){
     $GET=array();
 	return $output;
 
+}
+
+function comparison($a, $b)
+{
+    if ($a->node_created == $b->node_created) {
+        return 0;
+    }
+    return ($a->node_created < $b->node_created) ? -1 : 1;
 }
 
 /**
