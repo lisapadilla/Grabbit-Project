@@ -181,7 +181,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				$node_media=node_load($unserialize['file']);
 				$file_fid=$node_media->field_media[0]['value'];	
 			}else{
-				if(!$file_fid=facebook_grabbit_get_post_from_file($vars['node']->field_media[0]['value']);){
+				if(!$file_fid=facebook_grabbit_get_post_from_file($vars['node']->field_media[0]['value'])){
 				    $file_fid= $vars['node']->field_media[0]['value'];
 			    }
 			}
