@@ -183,6 +183,8 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			}else{
 				if(!$file_fid=facebook_grabbit_get_post_from_file($vars['node']->field_media[0]['value'])){
 				    $file_fid= $vars['node']->field_media[0]['value'];
+			    }else{
+				  drupal_goto('node/'.$file_fid);
 			    }
 			}
 			
