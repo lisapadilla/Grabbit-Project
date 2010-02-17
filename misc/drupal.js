@@ -1,11 +1,11 @@
-// $Id: drupal.js,v 1.41.2.3 2008/06/25 09:06:57 goba Exp $
+// $Id: drupal.js,v 1.41.2.4 2009/07/21 08:59:10 goba Exp $
 
 var Drupal = Drupal || { 'settings': {}, 'behaviors': {}, 'themes': {}, 'locale': {} };
 
 /**
  * Set the variable that indicates if JavaScript behaviors should be applied
  */
-Drupal.jsEnabled = document.getElementsByTagName && document.createElement && document.createTextNode && document.documentElement && document.getElementById;
+Drupal.jsEnabled = true;
 
 /**
  * Attach all registered behaviors to a page element.
@@ -36,12 +36,10 @@ Drupal.jsEnabled = document.getElementsByTagName && document.createElement && do
  */
 Drupal.attachBehaviors = function(context) {
   context = context || document;
-  if (Drupal.jsEnabled) {
-    // Execute all of them.
-    jQuery.each(Drupal.behaviors, function() {
-      this(context);
-    });
-  }
+  // Execute all of them.
+  jQuery.each(Drupal.behaviors, function() {
+    this(context);
+  });
 };
 
 /**
@@ -218,8 +216,9 @@ Drupal.unfreezeHeight = function () {
 };
 
 /**
- * Wrapper to address the mod_rewrite url encoding bug
- * (equivalent of drupal_urlencode() in PHP).
+ * Wrapper around encodeURIComponent() which avoids Apache quirks (equivalent of
+ * drupal_urlencode() in PHP). This function should only be used on paths, not
+ * on query string arguments.
  */
 Drupal.encodeURIComponent = function (item, uri) {
   uri = uri || location.href;
@@ -252,30 +251,25 @@ Drupal.getSelection = function (element) {
  */
 Drupal.ahahError = function(xmlhttp, uri) {
   if (xmlhttp.status == 200) {
-    if (jQuery.trim($(xmlhttp.responseText).text())) {
+    if (jQuery.trim(xmlhttp.responseText)) {
       var message = Drupal.t("An error occurred. \n@uri\n@text", {'@uri': uri, '@text': xmlhttp.responseText });
     }
     else {
-      var message = Drupal.t("An error occurred. \n@uri\n(no information available).", {'@uri': uri, '@text': xmlhttp.responseText });
+      var message = Drupal.t("An error occurred. \n@uri\n(no information available).", {'@uri': uri });
     }
   }
   else {
     var message = Drupal.t("An HTTP error @status occurred. \n@uri", {'@uri': uri, '@status': xmlhttp.status });
   }
-  return message;
+  return message.replace(/\n/g, '<br />');
 }
 
 // Global Killswitch on the <html> element
-if (Drupal.jsEnabled) {
-  // Global Killswitch on the <html> element
-  $(document.documentElement).addClass('js');
-  // 'js enabled' cookie
-  document.cookie = 'has_js=1; path=/';
-  // Attach all behaviors.
-  $(document).ready(function() {
-    Drupal.attachBehaviors(this);
-  });
-}
+$(document.documentElement).addClass('js');
+// Attach all behaviors.
+$(document).ready(function() {
+  Drupal.attachBehaviors(this);
+});
 
 /**
  * The default themes.

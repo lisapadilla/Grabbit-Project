@@ -1,5 +1,5 @@
 # $Id: robots.txt,v 1.9.2.1 2008/12/10 20:12:19 goba Exp $
-# ejemplo
+#
 # robots.txt
 #
 # This file is to prevent the crawling and indexing of certain parts

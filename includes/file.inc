@@ -1,5 +1,5 @@
 <?php
-// $Id: file.inc,v 1.121.2.6 2009/04/13 19:07:16 dries Exp $
+// $Id: file.inc,v 1.121.2.9 2009/09/16 19:34:14 goba Exp $
 
 /**
  * @file
@@ -529,13 +529,6 @@ function file_save_upload($source, $validators = array(), $dest = FALSE, $replac
     $file->filepath = $_FILES['files']['tmp_name'][$source];
     $file->filemime = file_get_mimetype($file->filename);
 
-    // Rename potentially executable files, to help prevent exploits.
-    if (preg_match('/\.(php|pl|py|cgi|asp|js)$/i', $file->filename) && (substr($file->filename, -4) != '.txt')) {
-      $file->filemime = 'text/plain';
-      $file->filepath .= '.txt';
-      $file->filename .= '.txt';
-    }
-
     // If the destination is not provided, or is not writable, then use the
     // temporary directory.
     if (empty($dest) || file_check_path($dest) === FALSE) {
@@ -550,8 +543,22 @@ function file_save_upload($source, $validators = array(), $dest = FALSE, $replac
     $errors = array();
     foreach ($validators as $function => $args) {
       array_unshift($args, $file);
+      // Make sure $file is passed around by reference.
+      $args[0] = &$file;
       $errors = array_merge($errors, call_user_func_array($function, $args));
     }
+
+    // Rename potentially executable files, to help prevent exploits.
+    if (preg_match('/\.(php|pl|py|cgi|asp|js)$/i', $file->filename) && (substr($file->filename, -4) != '.txt')) {      
+      $file->filemime = 'text/plain';
+      $file->filepath .= '.txt';
+      $file->filename .= '.txt';
+      // As the file may be named example.php.txt, we need to munge again to
+      // convert to example.php_.txt, then create the correct destination.
+      $file->filename = file_munge_filename($file->filename, $extensions);
+      $file->destination = file_destination(file_create_path($dest .'/'. $file->filename), $replace);
+    }
+
 
     // Check for validation errors.
     if (!empty($errors)) {
@@ -640,7 +647,7 @@ function file_validate_extensions($file, $extensions) {
  * @param $file_limit
  *   An integer specifying the maximum file size in bytes. Zero indicates that
  *   no limit should be enforced.
- * @param $$user_limit
+ * @param $user_limit
  *   An integer specifying the maximum number of bytes the user is allowed. Zero
  *   indicates that no limit should be enforced.
  * @return
@@ -657,8 +664,8 @@ function file_validate_size($file, $file_limit = 0, $user_limit = 0) {
       $errors[] = t('The file is %filesize exceeding the maximum file size of %maxsize.', array('%filesize' => format_size($file->filesize), '%maxsize' => format_size($file_limit)));
     }
 
-    $total_size = file_space_used($user->uid) + $file->filesize;
-    if ($user_limit && $total_size > $user_limit) {
+    // Save a query by only calling file_space_used() when a limit is provided.
+    if ($user_limit && (file_space_used($user->uid) + $file->filesize) > $user_limit) {
       $errors[] = t('The file is %filesize which would exceed your disk quota of %quota.', array('%filesize' => format_size($file->filesize), '%quota' => format_size($user_limit)));
     }
   }

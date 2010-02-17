@@ -1,5 +1,5 @@
 <?php
-// $Id: system.admin.inc,v 1.63.2.7 2009/02/25 11:38:41 goba Exp $
+// $Id: system.admin.inc,v 1.63.2.13 2009/09/16 18:02:32 goba Exp $
 
 /**
  * @file
@@ -19,7 +19,7 @@ function system_main_admin_page($arg = NULL) {
 
   // Check for status report errors.
   if (system_status(TRUE) && user_access('administer site configuration')) {
-    drupal_set_message(t('One or more problems were detected with your Drupal installation. Check the <a href="@status">status report</a> for more information.', array('@status' => url('admin/reports/status'))), 'error');
+    drupal_set_message(t('One or more problems were detected with your Pressflow installation. Check the <a href="@status">status report</a> for more information.', array('@status' => url('admin/reports/status'))), 'error');
   }
   $blocks = array();
   if ($admin = db_fetch_array(db_query("SELECT menu_name, mlid FROM {menu_links} WHERE link_path = 'admin' AND module = 'system'"))) {
@@ -187,7 +187,6 @@ function system_admin_theme_settings() {
  */
 function system_themes_form() {
 
-  drupal_clear_css_cache();
   $themes = system_theme_data();
 
   uasort($themes, 'system_sort_modules_by_info_name');
@@ -198,13 +197,20 @@ function system_themes_form() {
 
   foreach ($themes as $theme) {
     $screenshot = NULL;
-    $theme_key = $theme->name;
-    while ($theme_key) {
-      if (file_exists($themes[$theme_key]->info['screenshot'])) {
+    // Create a list which includes the current theme and all its base themes.
+    if (isset($themes[$theme->name]->base_themes)) {
+      $theme_keys = array_keys($themes[$theme->name]->base_themes);
+      $theme_keys[] = $theme->name;
+    }
+    else {
+      $theme_keys = array($theme->name);
+    }
+    // Look for a screenshot in the current theme or in its closest ancestor.
+    foreach (array_reverse($theme_keys) as $theme_key) {
+      if (isset($themes[$theme_key]) && file_exists($themes[$theme_key]->info['screenshot'])) {
         $screenshot = $themes[$theme_key]->info['screenshot'];
         break;
       }
-      $theme_key = isset($themes[$theme_key]->info['base theme']) ? $themes[$theme_key]->info['base theme'] : NULL;
     }
     $screenshot = $screenshot ? theme('image', $screenshot, t('Screenshot for %theme theme', array('%theme' => $theme->info['name'])), '', array('class' => 'screenshot'), FALSE) : t('no screenshot');
 
@@ -263,6 +269,7 @@ function system_themes_form() {
  * Process system_themes_form form submissions.
  */
 function system_themes_form_submit($form, &$form_state) {
+  drupal_clear_css_cache();
 
   // Store list of previously enabled themes and disable all themes
   $old_theme_list = $new_theme_list = array();
@@ -618,12 +625,15 @@ function _system_is_incompatible(&$incompatible, $files, $file) {
  *   The form array.
  */
 function system_modules($form_state = array()) {
-  drupal_rebuild_theme_registry();
-  node_types_rebuild();
-  menu_rebuild();
-  cache_clear_all('schema', 'cache');
   // Get current list of modules.
   $files = module_rebuild_cache();
+
+  // Remove hidden modules from display list.
+  foreach ($files as $filename => $file) {
+    if (!empty($file->info['hidden'])) {
+      unset($files[$filename]);
+    }
+  }
 
   uasort($files, 'system_sort_modules_by_info_name');
 
@@ -933,6 +943,10 @@ function system_modules_submit($form, &$form_state) {
     drupal_set_message(t('The configuration options have been saved.'));
   }
 
+  drupal_rebuild_theme_registry();
+  node_types_rebuild();
+  menu_rebuild();
+  cache_clear_all('schema', 'cache');
   drupal_clear_css_cache();
   drupal_clear_js_cache();
 
@@ -1127,7 +1141,7 @@ function system_site_information_settings() {
   $form['site_name'] = array(
     '#type' => 'textfield',
     '#title' => t('Name'),
-    '#default_value' => variable_get('site_name', 'Drupal'),
+    '#default_value' => variable_get('site_name', 'Pressflow'),
     '#description' => t('The name of this website.'),
     '#required' => TRUE
   );
@@ -1252,28 +1266,33 @@ function system_logging_overview() {
  */
 function system_performance_settings() {
 
-  $description = '<p>'. t("The normal cache mode is suitable for most sites and does not cause any side effects. The aggressive cache mode causes Drupal to skip the loading (boot) and unloading (exit) of enabled modules when serving a cached page. This results in an additional performance boost but can cause unwanted side effects.") .'</p>';
+  $description = '<p>'. t("The normal cache mode is suitable for most sites and does not cause any side effects. The aggressive cache mode causes Pressflow to skip the loading (boot) and unloading (exit) of enabled modules when serving a cached page. This results in an additional performance boost but can cause unwanted side effects.") .'</p>';
 
   $problem_modules = array_unique(array_merge(module_implements('boot'), module_implements('exit')));
   sort($problem_modules);
 
   if (count($problem_modules) > 0) {
-    $description .= '<p>'. t('<strong class="error">The following enabled modules are incompatible with aggressive mode caching and will not function properly: %modules</strong>', array('%modules' => implode(', ', $problem_modules))) .'.</p>';
+    $description .= '<p>'. t('<strong class="error">The following enabled modules are potentially incompatible with aggressive- and external-mode caching and will not function properly: %modules</strong>', array('%modules' => implode(', ', $problem_modules))) .'.</p>';
   }
   else {
-    $description .= '<p>'. t('<strong class="ok">Currently, all enabled modules are compatible with the aggressive caching policy.</strong> Please note, if you use aggressive caching and enable new modules, you will need to check this page again to ensure compatibility.') .'</p>';
+    $description .= '<p>'. t('<strong class="ok">Currently, all enabled modules are compatible with an aggressive or external caching policy.</strong> Please note, if you use aggressive or external caching and enable new modules, you will need to check this page again to ensure compatibility.') .'</p>';
   }
   $form['page_cache'] = array(
     '#type' => 'fieldset',
     '#title' => t('Page cache'),
-    '#description' => t('Enabling the page cache will offer a significant performance boost. Drupal can store and send compressed cached pages requested by <em>anonymous</em> users. By caching a web page, Drupal does not have to construct the page each time it is viewed.'),
+    '#description' => t('Enabling the page cache will offer a significant performance boost. Pressflow can store and send compressed cached pages requested by <em>anonymous</em> users. By caching a web page, Pressflow does not have to construct the page each time it is viewed.'),
   );
 
   $form['page_cache']['cache'] = array(
     '#type' => 'radios',
     '#title' => t('Caching mode'),
     '#default_value' => variable_get('cache', CACHE_DISABLED),
-    '#options' => array(CACHE_DISABLED => t('Disabled'), CACHE_NORMAL => t('Normal (recommended for production sites, no side effects)'), CACHE_AGGRESSIVE => t('Aggressive (experts only, possible side effects)')),
+    '#options' => array(
+      CACHE_DISABLED => t('Disabled'),
+      CACHE_NORMAL => t('Normal (recommended for production sites, no side effects)'),
+      CACHE_AGGRESSIVE => t('Aggressive (experts only, possible side effects)'),
+      CACHE_EXTERNAL => t('External (experts only, possible side effects)'),
+    ),
     '#description' => $description
   );
 
@@ -1286,12 +1305,19 @@ function system_performance_settings() {
     '#options' => $period,
     '#description' => t('On high-traffic sites, it may be necessary to enforce a minimum cache lifetime. The minimum cache lifetime is the minimum amount of time that will elapse before the cache is emptied and recreated, and is applied to both page and block caches. A larger minimum cache lifetime offers better performance, but users will not see new content for a longer period of time.')
   );
+  $form['page_cache']['page_cache_max_age'] = array(
+    '#type' => 'select',
+    '#title' => t('Page cache maximum age'),
+    '#default_value' => variable_get('page_cache_max_age', 0),
+    '#options' => $period,
+    '#description' => t('Internal and external page caches will not deliver cached paged older than this setting.')
+  );
   $form['page_cache']['page_compression'] = array(
     '#type' => 'radios',
     '#title' => t('Page compression'),
     '#default_value' => variable_get('page_compression', TRUE),
     '#options' => array(t('Disabled'), t('Enabled')),
-    '#description' => t("By default, Drupal compresses the pages it caches in order to save bandwidth and improve download times. This option should be disabled when using a webserver that performs compression."),
+    '#description' => t("By default, Pressflow compresses the pages it caches in order to save bandwidth and improve download times. This option should be disabled when using a webserver that performs compression."),
   );
 
   $form['block_cache'] = array(
@@ -1357,7 +1383,7 @@ function system_performance_settings() {
  *
  * @ingroup forms
  */
-function system_clear_cache_submit(&$form_state, $form) {
+function system_clear_cache_submit($form, &$form_state) {
   drupal_flush_all_caches();
   drupal_set_message(t('Caches cleared.'));
 }
@@ -1642,7 +1668,7 @@ function system_site_maintenance_settings() {
   $form['site_offline_message'] = array(
     '#type' => 'textarea',
     '#title' => t('Site off-line message'),
-    '#default_value' => variable_get('site_offline_message', t('@site is currently under maintenance. We should be back shortly. Thank you for your patience.', array('@site' => variable_get('site_name', 'Drupal')))),
+    '#default_value' => variable_get('site_offline_message', t('@site is currently under maintenance. We should be back shortly. Thank you for your patience.', array('@site' => variable_get('site_name', 'Pressflow')))),
     '#description' => t('Message to show visitors when the site is in off-line mode.')
   );
 
@@ -1843,7 +1869,7 @@ EOT;
 /**
  * This function formats the content of an administrative block.
  *
- * @param $block
+ * @param $content
  *   An array containing information about the block. It should
  *   include a 'title', a 'description' and a formatted 'content'.
  * @ingroup themeable
@@ -1971,7 +1997,7 @@ function theme_system_admin_by_module($menu_items) {
  *   An array of requirements.
  * @ingroup themeable
  */
-function theme_status_report(&$requirements) {
+function theme_status_report($requirements) {
   $i = 0;
   $output = '<table class="system-status-report">';
   foreach ($requirements as $requirement) {

@@ -1,5 +1,5 @@
 <?php
-// $Id: cache.inc,v 1.17.2.1 2009/04/27 14:23:58 goba Exp $
+// $Id: cache.inc,v 1.17.2.4 2009/12/16 17:30:00 goba Exp $
 
 /**
  * Return data from the persistent cache. Data may be stored as either plain text or as serialized data.
@@ -126,9 +126,9 @@ function cache_set($cid, $data, $table = 'cache', $expire = CACHE_PERMANENT, $he
  *   argument if $cid is set.
  *
  * @param $wildcard
- *   If set to TRUE, the $cid is treated as a substring
- *   to match rather than a complete ID. The match is a right hand
- *   match. If '*' is given as $cid, the table $table will be emptied.
+ *   If $wildcard is TRUE, cache IDs starting with $cid are deleted in
+ *   addition to the exact cache ID specified by $cid.  If $wildcard is
+ *   TRUE and $cid is '*' then the entire table $table is emptied.
  */
 function cache_clear_all($cid = NULL, $table = NULL, $wildcard = FALSE) {
   global $user;
@@ -155,7 +155,7 @@ function cache_clear_all($cid = NULL, $table = NULL, $wildcard = FALSE) {
         variable_set('cache_flush_'. $table, time());
       }
       else if (time() > ($cache_flush + variable_get('cache_lifetime', 0))) {
-        // Clear the cache for everyone, cache_flush_delay seconds have
+        // Clear the cache for everyone, cache_lifetime seconds have
         // passed since the first request to clear the cache.
         db_query("DELETE FROM {". $table ."} WHERE expire != %d AND expire < %d", CACHE_PERMANENT, time());
         variable_set('cache_flush_'. $table, 0);
@@ -169,7 +169,7 @@ function cache_clear_all($cid = NULL, $table = NULL, $wildcard = FALSE) {
   else {
     if ($wildcard) {
       if ($cid == '*') {
-        db_query("DELETE FROM {". $table ."}");
+        db_query("TRUNCATE TABLE {". $table ."}");
       }
       else {
         db_query("DELETE FROM {". $table ."} WHERE cid LIKE '%s%%'", $cid);

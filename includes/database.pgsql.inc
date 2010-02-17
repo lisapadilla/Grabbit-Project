@@ -1,5 +1,5 @@
 <?php
-// $Id: database.pgsql.inc,v 1.68.2.4 2009/03/30 13:04:06 goba Exp $
+// $Id: database.pgsql.inc,v 1.68.2.7 2009/09/14 10:49:34 goba Exp $
 
 /**
  * @file
@@ -128,15 +128,22 @@ function db_query($query) {
 /**
  * Helper function for db_query().
  */
-function _db_query($query, $debug = 0) {
-  global $active_db, $last_result, $queries;
+function _db_query($query, $debug = 0, $slave = FALSE) {
+  global $active_db, $active_slave_db, $last_result, $queries;
 
   if (variable_get('dev_query', 0)) {
     list($usec, $sec) = explode(' ', microtime());
     $timer = (float)$usec + (float)$sec;
   }
 
-  $last_result = pg_query($active_db, $query);
+  $sent_to_slave = FALSE;
+  if (isset($active_slave_db) && $slave) {
+    $last_result = pg_query($active_slave_db, $query);
+    $sent_to_slave = TRUE;
+  }
+  else {
+    $last_result = pg_query($active_db, $query);
+  }
 
   if (variable_get('dev_query', 0)) {
     $bt = debug_backtrace();
@@ -144,11 +151,17 @@ function _db_query($query, $debug = 0) {
     list($usec, $sec) = explode(' ', microtime());
     $stop = (float)$usec + (float)$sec;
     $diff = $stop - $timer;
-    $queries[] = array($query, $diff);
+    $queries[] = array($query, $diff, $sent_to_slave);
+  }
+
+  if (!$sent_to_slave) {
+    $active_last_db = $active_db;
+  } else {
+    $active_last_db = $active_slave_db;
   }
 
   if ($debug) {
-    print '<p>query: '. $query .'<br />error:'. pg_last_error($active_db) .'</p>';
+    print '<p>query: '. $query .'<br />error:'. pg_last_error($active_last_db) .'</p>';
   }
 
   if ($last_result !== FALSE) {
@@ -157,7 +170,7 @@ function _db_query($query, $debug = 0) {
   else {
     // Indicate to drupal_error_handler that this is a database error.
     ${DB_ERROR} = TRUE;
-    trigger_error(check_plain(pg_last_error($active_db) ."\nquery: ". $query), E_USER_WARNING);
+    trigger_error(check_plain(pg_last_error($active_last_db) ."\nquery: ". $query), E_USER_WARNING);
     return FALSE;
   }
 }
@@ -283,6 +296,51 @@ function db_query_range($query) {
   $query = preg_replace_callback(DB_QUERY_REGEXP, '_db_query_callback', $query);
   $query .= ' LIMIT '. (int)$count .' OFFSET '. (int)$from;
   return _db_query($query);
+}
+
+/**
+ * Runs a limited-range query in the active slave database.
+ *
+ * Use this as a substitute for db_query_slave() when a subset of the query
+ * is to be returned.
+ * User-supplied arguments to the query should be passed in as separate
+ * parameters so that they can be properly escaped to avoid SQL injection
+ * attacks.
+ *
+ * @param $query
+ *   A string containing an SQL query.
+ * @param ...
+ *   A variable number of arguments which are substituted into the query
+ *   using printf() syntax. Instead of a variable number of query arguments,
+ *   you may also pass a single array containing the query arguments.
+ *   Valid %-modifiers are: %s, %d, %f, %b (binary data, do not enclose
+ *   in '') and %%.
+ *
+ *   NOTE: using this syntax will cast NULL and FALSE values to decimal 0,
+ *   and TRUE values to decimal 1.
+ *
+ * @param $from
+ *   The first result row to return.
+ * @param $count
+ *   The maximum number of result rows to return.
+ * @return
+ *   A database query result resource, or FALSE if the query was not executed
+ *   correctly.
+ */
+function db_query_range_slave($query) {
+  $args = func_get_args();
+  $count = array_pop($args);
+  $from = array_pop($args);
+  array_shift($args);
+
+  $query = db_prefix_tables($query);
+  if (isset($args[0]) and is_array($args[0])) { // 'All arguments in one array' syntax
+    $args = $args[0];
+  }
+  _db_query_callback($args, TRUE);
+  $query = preg_replace_callback(DB_QUERY_REGEXP, '_db_query_callback', $query);
+  $query .= ' LIMIT '. (int)$count .' OFFSET '. (int)$from;
+  return _db_query($query, FALSE, TRUE);
 }
 
 /**
@@ -611,7 +669,7 @@ function _db_create_field_sql($name, $spec) {
     }
   }
 
-  if (!empty($spec['length'])) {
+  if (in_array($spec['type'], array('varchar', 'char', 'text')) && isset($spec['length'])) {
     $sql .= '('. $spec['length'] .')';
   }
   elseif (isset($spec['precision']) && isset($spec['scale'])) {
@@ -906,13 +964,24 @@ function db_drop_index(&$ret, $table, $name) {
  *   table specification but without the 'fields' element.
  */
 function db_change_field(&$ret, $table, $field, $field_new, $spec, $new_keys = array()) {
-  $ret[] = update_sql("ALTER TABLE {". $table ."} RENAME $field TO ". $field ."_old");
+  $ret[] = update_sql('ALTER TABLE {'. $table .'} RENAME "'. $field .'" TO "'. $field .'_old"');
   $not_null = isset($spec['not null']) ? $spec['not null'] : FALSE;
   unset($spec['not null']);
 
+  if (!array_key_exists('size', $spec)) {
+    $spec['size'] = 'normal';
+  }
   db_add_field($ret, $table, "$field_new", $spec);
 
-  $ret[] = update_sql("UPDATE {". $table ."} SET $field_new = ". $field ."_old");
+  // We need to type cast the new column to best transfer the data
+  // db_type_map will return possiblities that are not 'cast-able'
+  // such as serial - they must be made 'int' instead.
+  $map =  db_type_map();
+  $typecast = $map[$spec['type'] .':'. $spec['size']];
+  if (in_array($typecast, array('serial', 'bigserial', 'numeric'))) {
+    $typecast = 'int';
+  }
+  $ret[] = update_sql('UPDATE {'. $table .'} SET '. $field_new .' = CAST('. $field .'_old AS '. $typecast .')');
 
   if ($not_null) {
     $ret[] = update_sql("ALTER TABLE {". $table ."} ALTER $field_new SET NOT NULL");

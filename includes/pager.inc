@@ -1,5 +1,5 @@
 <?php
-// $Id: pager.inc,v 1.63 2007/12/06 09:58:30 goba Exp $
+// $Id: pager.inc,v 1.63.2.1 2009/07/01 20:51:55 goba Exp $
 
 /**
  * @file
@@ -69,10 +69,21 @@ function pager_query($query, $limit = 10, $element = 0, $count_query = NULL) {
   $pager_page_array = explode(',', $page);
 
   // We calculate the total of pages as ceil(items / limit).
-  $pager_total_items[$element] = db_result(db_query($count_query, $args));
+  if (isset($_SESSION['not_slavesafe']) && $_SESSION['not_slavesafe']) {
+    $pager_total_items[$element] = db_result(db_query($count_query, $args));
+  }
+  else {
+    $pager_total_items[$element] = db_result(db_query_slave($count_query, $args));
+  }
   $pager_total[$element] = ceil($pager_total_items[$element] / $limit);
   $pager_page_array[$element] = max(0, min((int)$pager_page_array[$element], ((int)$pager_total[$element]) - 1));
-  return db_query_range($query, $args, $pager_page_array[$element] * $limit, $limit);
+  if (isset($_SESSION['not_slavesafe']) && $_SESSION['not_slavesafe']) {
+    unset($_SESSION['not_slavesafe']);
+    return db_query_range($query, $args, $pager_page_array[$element] * $limit, $limit);
+  }
+  else {
+    return db_query_range_slave($query, $args, $pager_page_array[$element] * $limit, $limit);
+  }
 }
 
 /**
@@ -85,7 +96,7 @@ function pager_query($query, $limit = 10, $element = 0, $count_query = NULL) {
 function pager_get_querystring() {
   static $string = NULL;
   if (!isset($string)) {
-    $string = drupal_query_string_encode($_REQUEST, array_merge(array('q', 'page'), array_keys($_COOKIE)));
+    $string = drupal_query_string_encode($_REQUEST, array_merge(array('q', 'page', 'pass'), array_keys($_COOKIE)));
   }
   return $string;
 }
