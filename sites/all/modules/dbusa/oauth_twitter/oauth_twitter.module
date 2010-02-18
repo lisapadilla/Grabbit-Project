@@ -142,9 +142,7 @@ function oauth_twitter_remove(){
 	db_query("DELETE FROM {oauth_twitter} WHERE uid =%d",$user->uid);	
 	    
 		    $aquery = db_query("SELECT n.nid FROM {node} n WHERE n.type = 'twitter' AND n.uid=%d ORDER BY n.created DESC LIMIT 1000", $user->uid);
-            ini_set("memory_limit","348M");
-			ini_set('max_execution_time', 500);
-		    $count = 0;
+            $count = 0;
 		    while ($n = db_fetch_object($aquery)) {
 		      //set_time_limit(5);
 		      node_delete($n->nid);

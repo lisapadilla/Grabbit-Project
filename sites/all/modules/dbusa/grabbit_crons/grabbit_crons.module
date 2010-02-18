@@ -1,6 +1,4 @@
 <?
-//ini_set("memory_limit","348M");
-ini_set('max_execution_time', 500);
 /**
  * Implementation of hook_menu()
  */
@@ -23,8 +21,7 @@ function grabbit_crons_menu() {
 }
 
 function grabbit_crons_cron() {
-  	ini_set("memory_limit","348M");
-	ini_set('max_execution_time', 500);
+  	
 	watchdog("grabbit CRON", "Grabbit cron has started wirh memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
 	$now = time();
 	
@@ -115,8 +112,7 @@ function _save_last_nid($uid){
 }
 
 function grabbit_crons_delete_nodes(){
-	ini_set("memory_limit","348M");
-	ini_set('max_execution_time', 500);
+	
 	$node_types = array(
 	  'facebook', //update this string with the type of node you want to delete
 	  'twitter',
@@ -137,9 +133,8 @@ function grabbit_crons_delete_nodes(){
 }
 
 function grabbit_crons_emails_pull() {
-  	ini_set("memory_limit","448M");
-	ini_set('max_execution_time', 800);
-	watchdog("email", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
+  	
+    watchdog("email", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
 	$last_nid=_get_last_nid_emails();
 	
 	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
