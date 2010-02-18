@@ -23,7 +23,7 @@ function grabbit_crons_menu() {
 
 function grabbit_crons_cron() {
   	ini_set("memory_limit","512M");
-	ini_set('max_execution_time', 500);
+	ini_set('max_execution_time', 1000);
 	watchdog("grabbit CRON", "Grabbit cron has started wirh memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
 	$now = time();
 	
