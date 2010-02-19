@@ -68,12 +68,12 @@ Drupal.flagLink = function(context) {
     $('span.flag-message:visible').fadeOut();
 
     // Send POST request
-alert("click"+element.href);
+
     $.ajax({
       type: 'POST',
       url: element.href,
       data: { js: true },
-      dataType: 'json',
+      dataType: 'xml',
       success: function (data) {
         if (data.status) {
           // Success.
