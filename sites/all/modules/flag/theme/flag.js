@@ -1,4 +1,4 @@
-// $Id: flag.js,v 1.1.2.7 2008/12/16 11:59:31 mooffie Exp $
+// $Id: flag.js,v 1.1.2.8 2009/09/14 21:39:01 quicksketch Exp $
 
 /**
  * Terminology:
@@ -62,7 +62,7 @@ Drupal.flagLink = function(context) {
       // Guard against double-clicks.
       return false;
     }
-    //$wrapper.addClass('flag-waiting');
+    $wrapper.addClass('flag-waiting');
 
     // Hide any other active messages.
     $('span.flag-message:visible').fadeOut();
@@ -91,6 +91,7 @@ Drupal.flagLink = function(context) {
       },
       error: function (xmlhttp) {
         alert('An HTTP error '+ xmlhttp.status +' occurred.\n'+ element.href);
+        $wrapper.removeClass('flag-waiting');
       }
     });
     return false;

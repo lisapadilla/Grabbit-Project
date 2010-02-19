@@ -14,6 +14,7 @@
 }
 
 /* The rest deals with indicating the waiting state. */
+
 .flag-waiting a {
   /* Give an impression of a disabled link. */
   opacity: 0.5;
