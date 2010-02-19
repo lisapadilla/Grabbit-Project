@@ -68,6 +68,7 @@ Drupal.flagLink = function(context) {
     $('span.flag-message:visible').fadeOut();
 
     // Send POST request
+alert(element.href);
     $.ajax({
       type: 'POST',
       url: element.href,
