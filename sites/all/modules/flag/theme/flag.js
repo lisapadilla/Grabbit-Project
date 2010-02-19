@@ -73,7 +73,7 @@ Drupal.flagLink = function(context) {
       type: 'POST',
       url: element.href,
       data: { js: true },
-      dataType: 'xml',
+      dataType: 'json',
       success: function (data) {
         if (data.status) {
           // Success.
