@@ -62,7 +62,7 @@ Drupal.flagLink = function(context) {
       // Guard against double-clicks.
       return false;
     }
-    $wrapper.addClass('flag-waiting');
+    //$wrapper.addClass('flag-waiting');
 
     // Hide any other active messages.
     $('span.flag-message:visible').fadeOut();
