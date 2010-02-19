@@ -483,13 +483,6 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 		}	
 	}
 	
-	$fav_value='Add to favorites';
-	$fav_style='facebook_favorite';
-	
-	if(grabbit_favorites_get('facebook',$post->field_post_id[0]['value'])){
-		$fav_value='Remove from favorites';
-		$fav_style='facebook_favorite-remove';
-	}
 	
 	// Output for wall and status update.
 	$output = '
@@ -499,7 +492,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a href="javascript:void(0);" class="bring-tags iconchange" node="'.$post->nid.'"></a>
-	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
+	<span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
 	<span class="url-deal iconchange"><a href="#" node="'.$post->nid.'" >Deal</a></span>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
 	<span class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</span>
@@ -569,13 +562,6 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 		}	
 	}
 	
-	$fav_value='Add to favorites';
-	$fav_style='facebook_favorite';
-	
-	if(grabbit_favorites_get('facebook',$post->field_post_id[0]['value'])){
-		$fav_value='Remove from favorites';
-		$fav_style='facebook_favorite-remove';
-	}
 	
 	// Output for aplication updates
 	
@@ -585,7 +571,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
 	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
 	<a href="javascript:void(0);" class="bring-tags iconchange" node="'.$post->nid.'"></a>
-	<a id="'.$post->field_post_id[0]['value'].'" nid="'.$post->nid.'" class="'.$fav_style.'" href="javascript:void(0)">'.$fav_value.'</a>
+	<span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
 	<span class="url-deal iconchange"><a href="#" node="'.$post->nid.'" >Deal</a></span>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
 	<a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'<div class="facebook-post-body">
