@@ -24,41 +24,44 @@ function feedapi_parser_exhaustive_feedapi_feed($op, $feed, $somthing) {
     curl_setopt($ch, CURLOPT_HEADER, 0);
     $data = curl_exec($ch);
     curl_close($ch);
-    $feed_full_DOM = new DOMDocument('1.0');
-    $feed_full_DOM->loadXML($data);  
+    if($data){
+	
+	    $feed_full_DOM = new DOMDocument('1.0');
+	    $feed_full_DOM->loadXML($data);  
 
-    // Set var if feed is RSS
-    $channels= $feed_full_DOM->getElementsByTagName("channel");
-    $item_tag='item';
-    foreach ($channels as $feed_dom) {
-      $feed_array =_feedapi_parser_exhaustive_DOM_to_array($feed_dom);
+	    // Set var if feed is RSS
+	    $channels= $feed_full_DOM->getElementsByTagName("channel");
+	    $item_tag='item';
+	    foreach ($channels as $feed_dom) {
+	      $feed_array =_feedapi_parser_exhaustive_DOM_to_array($feed_dom);
+	    }
+	    // Set vars if feed is Atom
+	    if (!$feed_array) {
+	      $feed_tag= $feed_full_DOM->getElementsByTagName("feed");
+	      $item_tag='entry';
+	      foreach ($feed_tag as $feed_dom) {
+	        $feed_array =_feedapi_parser_exhaustive_DOM_to_array($feed_dom);
+	      }
+	    }
+	    // get feed_elements
+	    $feed_elements_array = array_diff_key($feed_array, array( $item_tag => 1 ));
+	    $feed_elements = new stdClass;
+	    $feed_elements = _feedapi_parser_exhaustive_array_to_object_for_feed_api($feed_elements_array);
+
+	    // get item elements
+	    $parsed_source = new stdClass();
+	    $parsed_source->items = array();
+	    if ($feed_items = $feed_array[$item_tag]) {
+	      foreach ($feed_items as $item_array) {
+	        $item = new stdClass;
+	        $item->options = new stdClass;
+	        $item->options->all = _feedapi_parser_exhaustive_array_to_object_for_feed_api($item_array);
+	        $item->options->feed_elements = $feed_elements;
+	        $parsed_source->items[] = $item;
+	      }
+	    }
+	    return $parsed_source;
     }
-    // Set vars if feed is Atom
-    if (!$feed_array) {
-      $feed_tag= $feed_full_DOM->getElementsByTagName("feed");
-      $item_tag='entry';
-      foreach ($feed_tag as $feed_dom) {
-        $feed_array =_feedapi_parser_exhaustive_DOM_to_array($feed_dom);
-      }
-    }
-    // get feed_elements
-    $feed_elements_array = array_diff_key($feed_array, array( $item_tag => 1 ));
-    $feed_elements = new stdClass;
-    $feed_elements = _feedapi_parser_exhaustive_array_to_object_for_feed_api($feed_elements_array);
-    
-    // get item elements
-    $parsed_source = new stdClass();
-    $parsed_source->items = array();
-    if ($feed_items = $feed_array[$item_tag]) {
-      foreach ($feed_items as $item_array) {
-        $item = new stdClass;
-        $item->options = new stdClass;
-        $item->options->all = _feedapi_parser_exhaustive_array_to_object_for_feed_api($item_array);
-        $item->options->feed_elements = $feed_elements;
-        $parsed_source->items[] = $item;
-      }
-    }
-    return $parsed_source;
    }
 
 }
