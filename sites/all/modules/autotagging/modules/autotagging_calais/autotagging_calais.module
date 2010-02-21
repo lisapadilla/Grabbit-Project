@@ -43,7 +43,7 @@ function autotagging_calais_autotagging_api_insert(&$node, &$text) {
   $response = drupal_http_request($url . $alldata, array(), 'POST');
   $xml = $response->data;
   if ($response->code != 200) {
-    watchdog('autotagging_calais', 'Received response code '. $response->code .' from OpenCalais', WATCHDOG_SEVERE);
+    watchdog('autotagging_calais', 'Received response code '. $response->code .' from OpenCalais');
     return array();
   }
   $doc = DOMDocument::loadXML($xml);
