@@ -1955,7 +1955,7 @@ function theme_twitter_message($node){
 	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$node->nid.'">TR</a>
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$screen_name.'">Reply This</a>
 	           <a href="javascript:void(0);" class="bring-tags iconchange" node="'.$node->nid.'"></a>
-	           <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>;
+	           <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>';
 
    /* if (grabbit_favorites_get('twitter',$node->field_twitter_post_id[0]['value'])){
 		$output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" nid="'.$node->nid.'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
