@@ -1554,7 +1554,7 @@ a.trash-facebook, a.trash-twitter, a.trash-item{
   background: none;
   float: none;
 }
-a.twitter_favorite-remove, a.unflag-action, a.facebook_favorite-remove, a.unfriend-action{
+a.twitter_favorite-remove, a.unflag-action, a.facebook_favorite-remove, a.friend_favorite-remove{
   display: block;
   width: 9px;
   height: 11px;
@@ -1564,7 +1564,7 @@ a.twitter_favorite-remove, a.unflag-action, a.facebook_favorite-remove, a.unfrie
   overflow: hidden;
   margin-left: 5px;
 }
-.odd a.twitter_favorite-remove, .odd a.unflag-action, .odd a.facebook_favorite-remove, .odd a.unfriend-action{
+.odd a.twitter_favorite-remove, .odd a.unflag-action, .odd a.facebook_favorite-remove, .odd a.friend_favorite-remove{
   display: block;
   width: 9px;
   height: 11px;
