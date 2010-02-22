@@ -190,7 +190,7 @@ function grabbit_invites_check_facebook_user($facebook){
 			    if(grabbit_favorites_get('friend',$amigo->uid)){
 				  	$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite-remove friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';	
 				}else{
-					$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';
+					$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$amigo->uid.'">Remove from favorites</a></span>';
 				}
 			  break;
 			  case 'TW_1_TO_2_P':
@@ -241,7 +241,7 @@ function grabbit_invites_check_twitter_user( $twitter )
 		    if(grabbit_favorites_get('friend',$amigo->uid)){
 			  	$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite-remove friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';	
 			}else{
-				$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';
+				$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$amigo->uid.'">Remove from favorites</a></span>';
 			}
 		  break;
 		  case 'TW_1_TO_2_P':
@@ -289,7 +289,7 @@ function grabbit_invites_get_contacts(){
 				    if(grabbit_favorites_get('friend',$amigo->uid)){
 					  	$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite-remove friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';	
 					}else{
-						$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';
+						$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$amigo->uid.'">Remove from favorites</a></span>';
 					}
 				  break;
 				  case 'TW_1_TO_2_P':
