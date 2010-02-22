@@ -2615,11 +2615,11 @@ function facebook_grabbit_theme_results($twitface){
 							break;
 							default:
 							  if($entry['value']->uid){
-							  $profile=content_profile_load('profile', $entry['value']->uid);
-							  $output .=grabbit_me_theme_friends($rowx,$entry['value'],$profile,NULL);	
+							    $profile=content_profile_load('profile', $entry['value']->uid);
+							    $output .=grabbit_me_theme_friends($rowx,$entry['value'],$profile,NULL);	
 							  }else{
 							    $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
-								  $output .= _news_theme($comments,$node);	
+								$output .= _news_theme($comments,$node);	
 							  }
 							  
 							break;
