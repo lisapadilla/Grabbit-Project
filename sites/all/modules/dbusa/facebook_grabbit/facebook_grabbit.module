@@ -1955,13 +1955,13 @@ function theme_twitter_message($node){
 	           <a href="JavaScript:void(0);" class="trash-twitter" tweet_id="'.$node->nid.'">TR</a>
 	           <a href="JavaScript:void(0);" class="retweet">RT</a><a href="javaScript:void(0);" class="twit-reply" id="@'.$screen_name.'">Reply This</a>
 	           <a href="javascript:void(0);" class="bring-tags iconchange" node="'.$node->nid.'"></a>
-	           <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>';
+	           <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span></div>';
 
    /* if (grabbit_favorites_get('twitter',$node->field_twitter_post_id[0]['value'])){
 		$output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" nid="'.$node->nid.'" class="twitter_favorite-remove" href="javascript:void(0)">Remove from favorites</a></div>';
 	  }
 	  else{ //true
-	    $output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" nid="'.$node->nid.'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a></div>';
+	    $output .= '<a id="'.$node->field_twitter_post_id[0]['value'].'" nid="'.$node->nid.'" class="twitter_favorite" href="javascript:void(0)">Add to favorites</a>';
 	  }*/
     $output .='<span class="url-deal iconchange"><a href="#" node="'.$node->nid.'" >Deal</a></span>';
 	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
