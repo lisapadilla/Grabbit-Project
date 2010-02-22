@@ -24,7 +24,7 @@ $(document).ready(function() {
 	      //Testing if it works
 				if (data){
 								tag.text("Add to favorites");		
-								tag.attr("class","friend_favorite");
+								tag.attr("class","friend_favorite friend-action");
 				}else{								
 								alert ("There was a connection problem. Try later");
 				}

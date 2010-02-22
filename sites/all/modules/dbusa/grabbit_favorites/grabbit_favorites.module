@@ -68,10 +68,10 @@ function grabbit_favorites_facebook_remove(){
 	global $user;
 	$uid=$user->uid;
 	$type=$_GET['type'];
-	$id=$_GET['id'];
-  	db_query("DELETE FROM {grabbit_favorites} where uid=%d AND type='%s' AND id='%s'",$uid,$type,$id);	
+	$nid=$_GET['nid'];
+  	db_query("DELETE FROM {grabbit_favorites} where uid=%d AND type='%s' AND id='%s'",$uid,$type,$nid);	
     $result = TRUE;	
-    return "all OK";
+    print "all OK";
 }
 
 function grabbit_favorites_facebook_trash_remove(){
