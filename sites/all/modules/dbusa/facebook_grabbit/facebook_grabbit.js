@@ -323,7 +323,8 @@ $(document).ready(function() {
 	
 	$(".friend_favorite, .friend_favorite-remove").live('click',function () {
 	  var tag = $(this);
-	  var nid= $(this).attr("nid"); // user_id
+	  var nid= $(this).attr("uid"); // user_id
+	  this.preventDefault();
 	  
 	  if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
