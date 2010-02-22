@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	
-	$(".friend-favoritess").live('click',function () {
+	$(".friend-favoritess").live('click',function (i) {
+		i.preventDefault();
 	  var tag = $(this);
 	  var nid= $(this).attr("uid"); // user_id
 	  
