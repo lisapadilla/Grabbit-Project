@@ -89,7 +89,8 @@ function grabbit_panels_get_favorites(){
 	if($result = grabbit_favorites_get_all('friend')){
 		while($friend_fav=db_fetch_object($result)){
 			$friend=user_load($friend_fav->id);
-			print_r($friend);
+			$twitface[$friend->created]=array('time'=>$friend->created,
+			                                  'value'=>$friend);
 		}
 	}
 	
