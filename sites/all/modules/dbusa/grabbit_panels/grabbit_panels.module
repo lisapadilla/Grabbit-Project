@@ -86,6 +86,13 @@ function grabbit_panels_get_favorites(){
 	$view->pager['items_per_page']=30;
 	$view->execute();
 	
+	if($result = grabbit_favorites_get_all('friend')){
+		while($friend_fav=db_fetch_object($result)){
+			$friend=user_load($friend_fav->id);
+			print_r($friend);
+		}
+	}
+	
 	foreach($view->result as $node){
 	  
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
