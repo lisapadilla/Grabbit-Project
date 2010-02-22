@@ -11,10 +11,9 @@ $(document).ready(function() {
 	       $(".twitter-container").slideToggle();
 	   });
 	
-	$(".friend-favoritess").live('click',function (i) {
+	$(".friend-favoritess").live('click',function () {
 	  //var tag = $(this);
 	  var nid= $(this).attr("uid"); // user_id
-	  i.preventDefault();
 	  alert(nid);
 	 /* if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
