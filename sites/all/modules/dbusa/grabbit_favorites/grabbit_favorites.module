@@ -43,7 +43,7 @@ function grabbit_favorites_get($type,$id){
 function grabbit_favorites_get_all($type){
 	global $user;
 	$uid=$user->uid;
-	$result = db_query("SELECT * FROM {grabbit_favorites} WHERE uid=%d AND type='%s' AND id='%s'",$uid,$type);
+	$result = db_query("SELECT * FROM {grabbit_favorites} WHERE uid=%d AND type='%s'",$uid,$type);
 	if(db_affected_rows($result)){
 		return $result;
 	}else{
