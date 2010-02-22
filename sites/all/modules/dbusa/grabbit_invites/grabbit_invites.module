@@ -187,6 +187,11 @@ function grabbit_invites_check_facebook_user($facebook){
 			    $action ='&raquo;';
 			    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
 			    $class = 'grabbit-friends';
+			    if(grabbit_favorites_get('friend',$amigo->uid)){
+				  	$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite-remove friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';	
+				}else{
+					$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';
+				}
 			  break;
 			  case 'TW_1_TO_2_P':
 			    $friends='Your friend request is pending';
@@ -204,7 +209,7 @@ function grabbit_invites_check_facebook_user($facebook){
 			  break;
 			  }
 		    }
-		    return array('joined'=>$joined,'friends'=>$friends,'action'=>$action,'class'=>$class);	
+		    return array('joined'=>$joined,'friends'=>$friends,'action'=>$action,'class'=>$class, 'favs'=>$favs);	
 		}else{
 			return 0;
 		}

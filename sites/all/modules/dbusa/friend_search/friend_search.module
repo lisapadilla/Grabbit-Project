@@ -437,6 +437,7 @@ function friend_search_theme_a_friend($friend,$row){
 				$link='<span class="joined-link">'.$suser['joined'].'</span> &raquo; ';
 				$link .="<span class='joined-status'>".$suser['friends'].'</span>';
 				$link .="<span class='joined-action'>".$suser['action']."</span>";
+				$link .=$suser['favs'];
 				$class="joined-grabbit";
 				$link_class=$suser['class'];
 			}else{
