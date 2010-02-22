@@ -12,7 +12,7 @@ $(document).ready(function() {
 	      //Testing if it works
 				if (data){
 								tag.text("Remove from favorites");
-								tag.attr("class","friend_favorite-remove");
+								tag.attr("class","friend_favorite-remove friend-action");
 				}else{
 								alert ("There was a connection problem. Try later");
 				}
