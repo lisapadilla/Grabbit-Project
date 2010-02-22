@@ -2567,7 +2567,7 @@ function facebook_grabbit_theme_results($twitface){
 			$result = array_reverse($twitface);
 			$rowx='even';
 			foreach($result as $entry){
-					if($entry['value']->nid){
+					if($entry['value']->nid || $entry['value']->uid){
 
 						$node=node_load($entry['value']->nid,NULL,TRUE);
 						$node->rowx=$rowx;
@@ -2617,7 +2617,9 @@ function facebook_grabbit_theme_results($twitface){
 							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 							  $output .= _news_theme($comments,$node);
 							break;
-						}else{
+						}
+						
+						if($entry['value']->uid){
 						  $profile=content_profile_load('profile', $entry['value']->uid);
 						  $output .=grabbit_me_theme_friends($rowx,$entry['value'],$profile,NULL);	
 						}
