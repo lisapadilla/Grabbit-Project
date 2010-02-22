@@ -325,8 +325,8 @@ $(document).ready(function() {
 	  var tag = $(this);
 	  var nid= $(this).attr("uid"); // user_id
 	  this.preventDefault();
-	  
-	  if (tag.text() == "Add to favorites"){
+	  alert(nid);
+	 /* if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
 	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{type:"friend",nid:nid},function(data){
 	      //Successfully added to favorites
@@ -339,7 +339,7 @@ $(document).ready(function() {
 				}
 	    });
 	  }
-	  else{ //Remove from favorites
+	 /* else{ //Remove from favorites
 	  tag.text("Removing from favorites...");
 	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{type:"friend",nid:nid},function(data){
 	      //Successfully removed from favorites
@@ -351,7 +351,7 @@ $(document).ready(function() {
 								alert ("There was a connection problem. Try later");
 				}
 	    });		    
-	  }  		  
+	  }*/  		  
 	});
 	
 	$(".trash-facebook").live('click',function () {
