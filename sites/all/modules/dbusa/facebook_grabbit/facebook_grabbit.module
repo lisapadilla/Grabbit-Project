@@ -2617,6 +2617,9 @@ function facebook_grabbit_theme_results($twitface){
 							  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 							  $output .= _news_theme($comments,$node);
 							break;
+						}else{
+						  $profile=content_profile_load('profile', $entry['value']->uid);
+						  $output .=grabbit_me_theme_friends($rowx,$entry['value'],$profile,NULL);	
 						}
 
 					  if($rowx=='even'){
