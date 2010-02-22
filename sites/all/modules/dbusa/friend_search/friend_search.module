@@ -501,6 +501,7 @@ function friend_search_theme_a_friend($friend,$row){
 		$link='<span class="joined-link">'.l('Joined Grabit!','users/'.$friend->name).'</span> &raquo; ';
 		$link .="<span class='joined-status'><strong>You are Grabbit friends!</strong></span> &raquo; ";
 		$link .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$friend->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
+		$link .='<span class="flag-wrapper flag-bookmarks"><a href="#" class="friend_favorite" uid="'.$friend->uid.'">Add as favorite</a></span>':
 		$class="joined-grabbit";
 		$link_class='grabbit-friends';			
 	  }

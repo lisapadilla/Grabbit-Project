@@ -321,19 +321,18 @@ $(document).ready(function() {
 	  
 	});	
 	
-	$(".twitter_favorite, .twitter_favorite-remove").live('click',function () {
-	  var id = $(this).attr("id"); //post_id
+	$(".friend_favorite, .friend_favorite-remove").live('click',function () {
 	  var tag = $(this);
-	  var nid= $(this).attr("nid");
+	  var nid= $(this).attr("nid"); // user_id
 	  
 	  if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
-	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{id:id,type:"twitter",nid:nid},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{type:"friend",nid:nid},function(data){
 	      //Successfully added to favorites
 	      //Testing if it works
 				if (data){
 								tag.text("Remove from favorites");
-								tag.attr("class","twitter_favorite-remove");
+								tag.attr("class","friend_favorite-remove");
 				}else{
 								alert ("There was a connection problem. Try later");
 				}
@@ -341,12 +340,12 @@ $(document).ready(function() {
 	  }
 	  else{ //Remove from favorites
 	  tag.text("Removing from favorites...");
-	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{id:id,type:"twitter",nid:nid},function(data){
+	    $.get(Drupal.settings.basePath+"favorites/remove/facebook",{type:"friend",nid:nid},function(data){
 	      //Successfully removed from favorites
 	      //Testing if it works
 				if (data){
 								tag.text("Add to favorites");		
-								tag.attr("class","twitter_favorite");
+								tag.attr("class","friend_favorite");
 				}else{								
 								alert ("There was a connection problem. Try later");
 				}
