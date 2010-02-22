@@ -1,10 +1,10 @@
 $(document).ready(function() {
 	
 	$(".friend-favoritess").live('click',function (i) {
-		i.preventDefault();
+	
 	  var tag = $(this);
 	  var nid= $(this).attr("uid"); // user_id
-	  
+	  alert(nid);
 	  if (tag.text() == "Add to favorites"){
 	    tag.text("Adding to favorites...");
 	    $.get(Drupal.settings.basePath+"favorites/save/facebook",{type:"friend",nid:nid},function(data){
