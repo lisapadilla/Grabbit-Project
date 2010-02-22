@@ -58,13 +58,10 @@ function grabbit_favorites_facebook(){
 	global $user;
 	$uid=$user->uid;
 	$type=$_GET['type'];
-	$id=$_GET['id'];
 	$nid=$_GET['nid'];
-  	db_query("INSERT INTO {grabbit_favorites} (uid,type,id) VALUES (%d, '%s', '%s')",$uid,$type,$id);	
+  	db_query("INSERT INTO {grabbit_favorites} (uid,type,id) VALUES (%d, '%s', '%s')",$uid,$type,$nid);	
     $result = TRUE;
-    $flag = flag_get_flag('bookmarks');
-    $flag->flag('flag', $nid);
-    return "all OK";	
+    print "all OK";	
 }
 
 function grabbit_favorites_facebook_remove(){
