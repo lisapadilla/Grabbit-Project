@@ -321,8 +321,8 @@ $(document).ready(function() {
 	  
 	});	
 	
-	$(".friend_favorite, .friend_favorite-remove").live('click',function () {
-	  var tag = $(this);
+	$(".friend-favoritess").live('click',function () {
+	  //var tag = $(this);
 	  var nid= $(this).attr("uid"); // user_id
 	  this.preventDefault();
 	  alert(nid);
