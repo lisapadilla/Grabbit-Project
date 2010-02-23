@@ -236,13 +236,24 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 			drupal_set_message("Internet connection failed","error");
 		}
 		else{
-		  $facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
+		  $face_status = $facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
 										       'uid'=>"$suser",
 										       'status_includes_verb'=>TRUE,
 										       'status'=>$form_state['values']['status'])); 
 		  $fb_status_ch=TRUE;
 		  //add to statistics
 		  grabbit_statistics_post_entry($user->uid,'facebook');
+		
+		  drupal_set_message("<pre>".print_r($face_status,TRUE)."</pre>");
+		  print_r();  
+		
+		  	if($userInfo->status->id && is_array($form_status)){
+				$more140['facebook']=$userInfo->status->id;
+				$facebook_140=serialize($more140);
+				$form_status['new_nid']->field_networks[0]['value']=$facebook_140;
+				node_save($form_status['new_nid']);
+			}
+		
 		  $statistics=TRUE;
 		}
 	}
@@ -262,12 +273,18 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 
 			$post_update=$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
 			$userInfo = $twitterObj->get_accountVerify_credentials();
-			drupal_set_message("<pre>".print_r($userInfo->status->id,TRUE)."</pre>");
+		
 			if(!$statistics){
 				//add to statistics
 				grabbit_statistics_post_entry($user->uid,'twitter');
 			}
 			//VERIFICAR SI REGRESA ID DE TWITTER, PROBAR CON UA CUENTa, SI REGRESA ENTONCES LA ASOCIAMOS CON EL NODO DEL 140+
+			if($userInfo->status->id && is_array($form_status)){
+				$more140['twitter']=$userInfo->status->id;
+				$twitter_140=serialize($more140);
+				$form_status['new_nid']->field_networks[0]['value']=$twitter_140;
+				node_save($form_status['new_nid']);
+			}
 			$tw_status_ch=TRUE;
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
@@ -2681,7 +2698,7 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 			$new_text=$new_text . '... '.$url_trim;
 		  }
 		
-		return array('new_text'=>$new_text, 'new_nid'=>$node->nid);
+		return array('new_text'=>$new_text, 'new_nid'=>$node);
 	}else{
 		return $text;
 	}
