@@ -115,16 +115,21 @@ function dmemcache_flush($bin = 'cache') {
 }
 
 function dmemcache_stats($bin = 'cache', $type = '') {
-  // resolve requests for 'default' type to ''
-  if ($type == 'default') {
-    $type = '';
-  }
   // resolve requests for 'default' bin to 'cache'.
   if ($bin == 'default') {
     $bin = 'cache';
   }
   if ($mc = dmemcache_object($bin)) {
-    return $mc->getExtendedStats($type);
+    // The PHP Memcache extension 3.x version throws an error if the stats
+    // type is NULL or not in {reset, malloc, slabs, cachedump, items, sizes}.
+   // If $type is 'default', then no parameter should be passed to the 
+    // Memcache memcache_get_extended_stats() function.
+    if ($type == 'default' || $type == '') {
+      return $mc->getExtendedStats();
+    }
+    else {
+      return $mc->getExtendedStats($type);
+    }
   }
 }
 
