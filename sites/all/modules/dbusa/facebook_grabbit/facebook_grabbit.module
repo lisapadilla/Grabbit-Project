@@ -260,7 +260,8 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 			$token = unserialize($twitter_account->config);
 			$twitterObj->setToken($token['token'], $token['secret']);
 
-			$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
+			$post_update=$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
+			print_r($post_update);
 			if(!$statistics){
 				//add to statistics
 				grabbit_statistics_post_entry($user->uid,'twitter');
