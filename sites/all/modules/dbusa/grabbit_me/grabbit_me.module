@@ -1427,11 +1427,11 @@ function theme_you_activity($you,$you_name,$is_section=FALSE){
 	<li><span class="tab">'.l('All Activity','users/'.$you_name,array('attributes'=>array('class'=>$class))).'</span></li>
 	<li><span class="tab">'.l('Status updates','you/updates/'.$you).'</span></li>
 	<li><span class="tab">'.l('Comments','you/comments/'.$you).'</span></li>
-	<li><span class="tab">'.l('Added friends','you/friends/'.$you).'</span></li>
+	
 	<li><span class="tab">'.l('Added RSS','you/rss/'.$you).'</span></li>
 	<li><span class="tab">'.l('Mentions','you/mentions/'.$you).'</span></li>
 	</ul></div>';
-	
+	//<li><span class="tab">'.l('Added friends','you/friends/'.$you).'</span></li>
 	return $tabs;
 	
 }
