@@ -147,7 +147,7 @@ function grabbit_search_perform($busqueda,$filters=NULL){
 		((node_data_field_text.field_text_value) LIKE ('%$busqueda2%')) OR 
 		((node_data_field_text.field_comments_value) LIKE ('%$busqueda2%')) OR 
 		((node_revisions.body) LIKE ('%$busqueda2%')) OR 
-		((node.title) LIKE ('%$busqueda2%'))";
+		( BINARY (node.title) LIKE ('%$busqueda2%'))";
 		
 		$types="'facebook', 'gmail', 'imap', 'twitter', 'feed', 'news', 'blogs'";
 	}
