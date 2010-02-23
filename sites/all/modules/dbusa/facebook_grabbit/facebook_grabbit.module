@@ -261,8 +261,8 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 			$twitterObj->setToken($token['token'], $token['secret']);
 
 			$post_update=$twitterObj->post_statusesUpdate(array('status' =>$form_state['values']['status']));
-			
-			drupal_set_message("<pre>".print_r($twitterObj,TRUE)."</pre>");
+			$userInfo = $twitterObj->get('/account/verify_credentials.json');
+			drupal_set_message("<pre>".print_r($userInfo,TRUE)."</pre>");
 			if(!$statistics){
 				//add to statistics
 				grabbit_statistics_post_entry($user->uid,'twitter');
