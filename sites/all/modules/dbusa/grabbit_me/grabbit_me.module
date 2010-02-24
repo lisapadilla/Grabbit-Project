@@ -693,10 +693,12 @@ function grabbit_me_get_statuses_all($uid,$limit='10',$pag=FALSE){
 	
   }
 
+  $more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more">more</a></div>';
+
   if($pag){
-    print $output; // if we are paginating this then we print it to the ajax call	
+    print $output.$more; // if we are paginating this then we print it to the ajax call	
   }else{
-    return $output;	
+    return $output.$more;	
   }
 
 }
