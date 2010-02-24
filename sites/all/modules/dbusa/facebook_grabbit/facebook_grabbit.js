@@ -68,7 +68,8 @@ function display_items(panel){
 			      tb_show(t,a,g);
 			      this.blur();
 			      return false;
-			    });																				
+			    });
+			    Drupal.flagLink(data);																
 				}else{
 		        current_panel.parent().next().html('You have reached the end of your stream');
 				}
