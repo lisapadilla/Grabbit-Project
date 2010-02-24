@@ -97,7 +97,7 @@ function friendlist_api_status_data($status_name = '') {
         'description' => 'You are not !rt_name_p',
         'on_add' => array(
           'link' => 'Add to !rt_name_p',
-          'screen' => 'Send a request, which will have to be approved by the recipient.',
+          'screen' => '<span class="friend-message-add">Send a request, which will have to be approved by the recipient.</span>',
           'message' => 'Request has been sent successfully.',
         ),
       ),
