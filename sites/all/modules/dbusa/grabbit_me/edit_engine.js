@@ -108,7 +108,7 @@ Drupal.behaviors.editables = function(){
          }  
      });
 
-     $('#me-more').click(i){
+     $('#me-more').click(function(i){
 	   var page = $(this).attr('page');
 	   var pid  = $(this).attr('pid');
 	   var link = $(this);
@@ -121,6 +121,6 @@ Drupal.behaviors.editables = function(){
 				alert("Problem connecting with the server, please try again latter.");
 			}
 		});   
-     }
+     });
 
 }
