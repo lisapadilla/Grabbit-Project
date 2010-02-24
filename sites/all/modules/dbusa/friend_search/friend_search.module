@@ -245,12 +245,13 @@ function friend_search_get_friends_facebook(){
 function friend_search_get_friends_twitter(){
     global $user;
     $accounts = oauth_twitter_get_uid($user->uid);
-
+    
 	if($accounts){
-		include_once 'includes/EpiCurl.php';
-		include_once 'includes/EpiOAuth.php';
-		include_once 'includes/EpiTwitter.php';
-		include 'includes/secret.php';
+		$module_name='facebook_grabbit';
+		include_once(drupal_get_path('module', $module_name).'includes/EpiCurl.php');
+		include_once(drupal_get_path('module', $module_name).'includes/EpiOAuth.php');
+		include_once(drupal_get_path('module', $module_name).'includes/EpiTwitter.php');
+		include_once(drupal_get_path('module', $module_name).'includes/secret.php');
 
 		try{
         	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
@@ -297,10 +298,12 @@ function friend_search_show_friends_twitter(){
     $accounts = oauth_twitter_get_uid($user->uid);
 
 	if($accounts){
-		include_once 'includes/EpiCurl.php';
-		include_once 'includes/EpiOAuth.php';
-		include_once 'includes/EpiTwitter.php';
-		include 'includes/secret.php';
+		$module_name='facebook_grabbit';
+		include_once(drupal_get_path('module', $module_name).'includes/EpiCurl.php');
+		include_once(drupal_get_path('module', $module_name).'includes/EpiOAuth.php');
+		include_once(drupal_get_path('module', $module_name).'includes/EpiTwitter.php');
+		include_once(drupal_get_path('module', $module_name).'includes/secret.php');
+		
 
 		try{
         	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
