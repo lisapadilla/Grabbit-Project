@@ -60,7 +60,15 @@ function display_items(panel){
 		        current_panel.parent().next().html('<a class="main-stream-next" href="javascript:void(0)">more</a>');
 		        panel=$("#"+panel_id);
 		        //display_items(panel);
-		        fixtheheightMore(panel);																				
+		        fixtheheightMore(panel);
+		        $('a,area,input', data).filter('.thickbox:not(.initThickbox-processed)').addClass('initThickbox-processed').click(function() {
+			      var t = this.title || this.name || null;
+			      var a = this.href || this.alt;
+			      var g = this.rel || false;
+			      tb_show(t,a,g);
+			      this.blur();
+			      return false;
+			    });																				
 				}else{
 		        current_panel.parent().next().html('You have reached the end of your stream');
 				}
