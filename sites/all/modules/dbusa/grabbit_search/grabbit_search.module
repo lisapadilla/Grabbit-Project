@@ -244,12 +244,17 @@ function grabbit_search_custom_results_users($results,$keyword=NULL){
 		    $nod='odd display';
 	      }
     }
+
+    $mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+	
 	
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div class="panel-grabbit suser-panels">
+		           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 		           <div class="panel-favorites">';
 		$output .=$resultados;
 	
@@ -281,12 +286,15 @@ function grabbit_search_custom_results($results,$keyword=NULL){
     }else{
 	  $resultados = '<div class="no-results">Your search for <span class="keyword">'.$keyword.'</span> did not match any results</div>';
     }
+	$mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 	
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div class="panel-grabbit suser-panels">
+		           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 		           <div class="panel-favorites">';
 		$output .=$resultados;
 	

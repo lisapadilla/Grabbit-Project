@@ -80,7 +80,6 @@ function grabbit_panels_get_favorites(){
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	
-	$mesa=drupal_get_messages();
 	$view = views_get_view('flag_bookmarks_tab');
 	$view->set_arguments(array($user->uid));	
 	$view->pager['items_per_page']=30;
@@ -100,13 +99,18 @@ function grabbit_panels_get_favorites(){
 	                                       'value'=>$node);
     }
 
+    $mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+	
+
 	$resultados = facebook_grabbit_theme_results($twitface);
 	
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
-		           </div><div class="panel-grabbit suser-panels">
+		           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 		           <div class="panel-favorites">';
 		$output .=$resultados;
 	
