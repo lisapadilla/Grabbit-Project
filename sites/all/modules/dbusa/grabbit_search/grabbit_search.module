@@ -392,7 +392,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['onlysite']=array(
 		'#type'=>'checkbox',
-		'#title' => 'Search site <a href="#" class="custom-form-collapser" id="collapse-custom"></a>',
+		'#title' => 'Search site <a href="#" title="Join Grabbit for more search options" alt="Join Grabbit for more search options" class="custom-form-collapser" id="collapse-custom"></a>',
 		'#weight'=>7,
 		'#default_value'=>1
 		);
