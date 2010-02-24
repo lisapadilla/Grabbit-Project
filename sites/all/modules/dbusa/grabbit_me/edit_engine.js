@@ -114,7 +114,7 @@ Drupal.behaviors.editables = function(){
 	   var link = $(this);
 	   $.get(Drupal.settings.basePath+"me/pagination",{page:page,pid:pid},function(data){
 			if (data){
-				link.prepend(data);
+				$(data).insertBefore(link);
 				link.attr('page',page+1);
 			}else{
 				alert("Problem connecting with the server, please try again latter.");
