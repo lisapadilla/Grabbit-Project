@@ -412,7 +412,11 @@ function friend_search_show_friends(){
 	
 	ksort($friends);
 	
-    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">';
+	$mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+	
+    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">'.$mensajes;
     $row='views-row-odd';
     foreach($friends as $friend){
 	  $output .= friend_search_theme_a_friend($friend,$row);
