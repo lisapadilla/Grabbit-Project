@@ -123,7 +123,7 @@ function grabbit_me_menu() {
 
 function grabbit_me_pagination(){
 	$page=$_GET['page'];
-	$panel = $_GET['panel'];
+	$panel = $_GET['pid'];
 	
 	switch($panel){
 		case 1:
