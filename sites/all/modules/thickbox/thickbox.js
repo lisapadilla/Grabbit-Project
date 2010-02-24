@@ -10,6 +10,7 @@
 
 // Initialize Thickbox.
 Drupal.behaviors.initThickbox = function (context) {
+	alert(context);
   $('a,area,input', context).filter('.thickbox:not(.initThickbox-processed)').addClass('initThickbox-processed').click(function() {
     var t = this.title || this.name || null;
     var a = this.href || this.alt;
