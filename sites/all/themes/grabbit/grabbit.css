@@ -2463,7 +2463,7 @@ ul.dropdown li:hover ul {
 }
 #status-custom-messages .messages{
 	margin:0px;
-	min-height:auto;
+	min-height:0px;
 }
 div.messages, div.status, div.warning, div.error{
   background: none;
