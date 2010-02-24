@@ -16,6 +16,16 @@ function execute_realtime(){
 					$(data).hide().fadeIn(3000)
 				);
 				Drupal.flagLink(data);
+				
+				$('a,area,input', data).filter('.thickbox:not(.initThickbox-processed)').addClass('initThickbox-processed').click(function() {
+			      var t = this.title || this.name || null;
+			      var a = this.href || this.alt;
+			      var g = this.rel || false;
+			      tb_show(t,a,g);
+			      this.blur();
+			      return false;
+			    });
+				
 			}
 		});
 			
