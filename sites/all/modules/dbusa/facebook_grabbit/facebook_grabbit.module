@@ -241,6 +241,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 										       'status_includes_verb'=>TRUE,
 										       'status'=>$form_state['values']['status'])); 
 		  $fb_status_ch=TRUE;
+		  $status_ch['facebook']='facebook status';
 		  //add to statistics
 		  grabbit_statistics_post_entry($user->uid,'facebook');
 		
@@ -276,6 +277,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 				node_save($form_status['new_nid']);
 			}*/
 			$tw_status_ch=TRUE;
+			$status_ch['twitter']='twitter status';
 	     }
 	     catch(EpiOAuthBadRequestException $e){  
 	        drupal_set_message("Connection error Twitter","error");
@@ -289,23 +291,18 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	
 	if($form_state['values']['contacts']){
 		global $user;
-		grabbit_contacts_send_messages($user,$form_state['values']['status']);		
+		grabbit_contacts_send_messages($user,$form_state['values']['status']);	
+		$status_ch['contact']='contacts message';
 	}
 	
 	global $user;
 	if($_POST['RT'])
 	  grabbit_statistics_post_entry($user->uid,'RT');
 
-	if($tw_status_ch || $fb_status_ch){
-	  if($tw_status_ch && $fb_status_ch){
-	    drupal_set_message('You have changed your facebook and twitter status');	
-	  }else{
-		if($tw_status_ch){
-		  drupal_set_message('You have changed your twitter status');
-		}else{
-		  drupal_set_message('You have changed your facebook status');
-		}
-	  }
+	if(count($status_ch)){
+		
+	  $upd_message = 'You have updated your '.implode(' and ',$status_ch);	
+	  drupal_set_message($upd_message);
 	}
 	
 	//making a hook for others modules to use
