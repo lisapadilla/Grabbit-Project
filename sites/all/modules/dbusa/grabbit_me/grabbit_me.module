@@ -47,6 +47,11 @@ function grabbit_me_menu() {
    'access arguments' => array('access content'),
   );
 
+  $items['me/pagination'] = array(
+   'page callback' => 'grabbit_me_pagination',
+   'access arguments' => array('access content'),
+  );
+
   $items['activity/updates/all'] = array(
    'title' => 'All Activity',
    'weight' => 1,
@@ -114,6 +119,21 @@ function grabbit_me_menu() {
    );
 
   return $items;
+}
+
+function grabbit_me_pagination(){
+	$page=$_GET['page'];
+	$panel = $_GET['panel'];
+	
+	switch($panel){
+		case 1:
+		  global $user;
+		  print grabbit_me_get_statuses_all($user->uid,$limit='10',$page);
+		break;
+		default:
+		  return null;
+		break;
+	}
 }
 
 function grabbit_upload_picture(){

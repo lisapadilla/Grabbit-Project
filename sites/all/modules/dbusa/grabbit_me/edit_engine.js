@@ -107,4 +107,20 @@ Drupal.behaviors.editables = function(){
              }  
          }  
      });
+
+     $('#me-more').click(i){
+	   var page = $(this).attr('page');
+	   var pid  = $(this).attr('pid');
+	   var link = $(this);
+	   $.get(Drupal.settings.basePath+"me/pagination",{page:page,pid:pid},function(data){
+			if (data){
+				alert(data);
+				$('.twitter-message-stream:last').append(data);
+				link.attr('page',page+1);
+			}else{
+				alert("Problem connecting with the server, please try again latter.");
+			}
+		});   
+     }
+
 }
