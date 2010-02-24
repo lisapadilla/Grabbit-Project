@@ -1696,6 +1696,6 @@ function grabbit_me_form_alter(&$form, $form_state, $form_id){
 		}
 	}
 	if($form_id=='user_register'){
-		$form['submit']['#prefix']='<div id="registering">By registering I understand and accept the Grabbit '.l('Terms of Service','page/terms-of-service').'</div>';
+		$form['submit']['#prefix']='<div id="registering">By registering I understand and accept the Grabbit '.l('Terms of Service','terms-service').'</div>';
 	}
 }
