@@ -897,12 +897,15 @@ function grabbit_me_show_activity_comments(){
 	    } 
 	}
 	// end comments
+	       $mesa=drupal_get_messages();
+		   if($mesa['status'][0])
+		     $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 	
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
 			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
+			           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
@@ -939,12 +942,15 @@ function grabbit_me_show_activity_mentions(){
 		    } 
 		}
 		// end mentions
+		$mesa=drupal_get_messages();
+		if($mesa['status'][0])
+		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
 			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
+			           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
@@ -983,13 +989,15 @@ function grabbit_me_show_activity_rendered(){
 	
     } 
     // end statuses
-
+    $mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
     
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
 			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
+			           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
@@ -1009,12 +1017,16 @@ function grabbit_me_show_activity_rendered_all(){
 	global $user;
 	
     $updates = grabbit_me_get_statuses_all($user->uid);
+
+    $mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
     
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
 			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
+			           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
@@ -1035,12 +1047,15 @@ function grabbit_me_show_activity_friends(){
 	global $user;
 	
     $updates = grabbit_me_get_statuses_friends($user->uid);
-    
+    $mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+	
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
 			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
+			           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
@@ -1061,12 +1076,15 @@ function grabbit_me_show_activity_rss(){
 	global $user;
 	
     $updates = grabbit_me_get_statuses_rss($user->uid);
-    
+    $mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+	
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
 			           <a href="JavaScript:void(0);" class="move-right"></a>
-			           </div><div class="panel-grabbit suser-panels">
+			           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
 			           <div class="panel-grabbit user-panel" id="panel-activity">
 			            <div class="panel-title clearfix">
 						  <div class="controller-top"> 
