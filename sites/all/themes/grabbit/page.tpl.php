@@ -189,7 +189,7 @@ global $user;
             <div class="tabs"><?php print $tabs; ?></div>
           <?php endif; ?>
           <?php if ($messages): ?>
-            <?php print $messages; ?>
+            <div id="status-custom-messages"><?php print $messages; ?></div>
           <?php endif; ?>
           <?php print $content; ?>
         </div>
