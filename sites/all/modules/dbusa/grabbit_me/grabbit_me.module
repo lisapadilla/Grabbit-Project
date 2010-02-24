@@ -1696,6 +1696,11 @@ function grabbit_me_form_alter(&$form, $form_state, $form_id){
 		}
 	}
 	if($form_id=='user_register'){
-		print_r($form);
+		$weight=$form['submit']['#weight']-1;
+		$form['terms']=array(
+			  '#type'=>'markup',
+			  '#value'=>'By registering I understand and accept the Grabbit Terms of Service',
+			  '#weight'=>$weight
+			);
 	}
 }
