@@ -4294,7 +4294,7 @@ display: none;
 .page-user-me-myfriends .friend-action{
 	margin-right:35px;
 }
-.section-friendlist #content-area {
+.section-friendlist .friend-message-add,.section-friendlist #friendlist-ui-relation-form {
 	color:#999999;
 	font-size:11px;
 	line-height:13px;
