@@ -2461,6 +2461,10 @@ ul.dropdown li:hover ul {
   font-weight: bold;
   padding: 5px 10px;
 }
+#status-custom-messages .messages{
+	margin:0px;
+	min-height:auto;
+}
 div.messages, div.status, div.warning, div.error{
   background: none;
   border: none;
