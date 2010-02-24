@@ -15,6 +15,7 @@ function execute_realtime(){
 				second.prepend(
 					$(data).hide().fadeIn(3000)
 				);
+				Drupal.flagLink(data);
 			}
 		});
 			
