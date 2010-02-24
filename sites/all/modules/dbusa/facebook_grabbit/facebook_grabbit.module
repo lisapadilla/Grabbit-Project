@@ -786,7 +786,8 @@ function facebook_grabbit_private_view_panel($param){
 	$test_result=db_query("(".$view->build_info['query']." LIMIT 30)".$union,$args);
 	$result1=array();
 	while($result_ob=db_fetch_object($test_result)){
-		$twitface[]=$result_ob;
+		if(!in_array($result_ob->nid,$trashes))
+		  $twitface[]=$result_ob;
 	}
 	//$view->execute();
 
