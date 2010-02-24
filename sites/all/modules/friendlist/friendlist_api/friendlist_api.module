@@ -138,7 +138,7 @@ function friendlist_api_status_data($status_name = '') {
           'on_delete' => array(
           'link' => 'Remove from !rt_name_p',
           'screen' => 'You are about to remove this !rt_name. NOTE: No further !rt_name requests can be send to you.',
-          'message' => 'This person is no longer your !rt_name_p on Grabbit.',
+          'message' => 'This person is no longer your friend on Grabbit.',
         ),
       ),
     );
