@@ -4300,3 +4300,12 @@ display: none;
 	line-height:13px;
 	padding:20px;
 }
+#registering{
+	color:#999999;
+	display:inline-block;
+	float:right;
+	font-size:11px;
+	margin-bottom:5px;
+	text-align:right;
+	width:510px;
+}
