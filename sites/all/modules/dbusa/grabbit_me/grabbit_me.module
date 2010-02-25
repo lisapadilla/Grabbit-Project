@@ -1049,7 +1049,7 @@ function grabbit_me_show_activity_comments(){
 						  </div>
 						</div>';
 						
-			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="3" page="2">more</a></div>';
+			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="3" page="1">more</a></div>';
 			$output .=$comments.$more;
 
 			
