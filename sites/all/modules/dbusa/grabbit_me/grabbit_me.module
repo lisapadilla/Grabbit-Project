@@ -886,15 +886,7 @@ function grabbit_me_get_comments($uid,$limit=10,$pag=FALSE){
       $array[]=$status;
   }
 
-  if($pag){
-    print $output; // if we are paginating this then we print it to the ajax call
-    if(!$output){
-	  print 0;
-    }	
-  }else{
-	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" page="2">more</a></div>';
-    return $output.$more;	
-  }
+  return $array;
 	
 }
 
