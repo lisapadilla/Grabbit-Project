@@ -136,6 +136,7 @@ function grabbit_me_pagination(){
 		  if(count($totals)){
 			$profile = content_profile_load('profile', $user->uid);
 		    $nod='even';
+		print_r($totals);
 			foreach ($totals as $element){
 				$item=unserialize($status->extra);
 			      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
@@ -639,7 +640,6 @@ function grabbit_me_get_statuses($uid,$limit=10, $pag=FALSE){
 
   $array=array();
   while ($status = db_fetch_object($result)){
-	print $status->extra;
 	$data=unserialize($status->extra);
 	if(substr($data['status'], 0, 2) != 'D '){ //NO DIRECT MESSAGES
       $array[]=$status;
