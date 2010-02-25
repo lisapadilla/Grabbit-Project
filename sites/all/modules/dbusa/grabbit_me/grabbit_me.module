@@ -150,6 +150,26 @@ function grabbit_me_pagination(){
 		    print 0;	
 		  }
 		break;
+		case 3:
+		    global $user;
+			$comm = grabbit_me_get_comments($user->uid,$limit=10,$page);
+			if (!count($comm)){
+			  print 0;
+			}else{
+			    $nod='even display';
+			  	foreach($comm as $comment){
+				  $item=unserialize($comment->extra);
+			      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
+			      if($nod=='odd display'){
+				    $nod='even display';
+			      }else{
+				    $nod='odd display';
+			      }
+			    }
+			  print $comments; 
+			}
+			
+		break;
 		default:
 		  return null;
 		break;
@@ -1027,7 +1047,9 @@ function grabbit_me_show_activity_comments(){
 						    <h3 class="title">Comments</h3>
 						  </div>
 						</div>';
-			$output .=$comments;
+						
+			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="3" page="2">more</a></div>';
+			$output .=$comments.$more;
 
 			
 			$output .='</div>';
