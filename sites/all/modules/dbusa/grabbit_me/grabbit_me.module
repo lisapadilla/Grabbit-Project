@@ -629,16 +629,14 @@ function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
 //Implementation of hook_comment
 function grabbit_me_comment($a1,$op){
 	if($op=='insert'){
-		print_r($a1);
-		exit;
 	  	$extra_array=array();
-		  $extra_array['nid']=$nid;
+		  $extra_array['nid']=$a1['nid'];
 		  $extra_array['type']='node';
 		  $extra_array['time']=time();
-		  $extra_array['comment']=$comment;
+		  $extra_array['comment']=$a1['comment'];
 
 		  $extra=serialize($extra_array);
-		  db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'comment','%s',%d)",$uid,$extra,$extra_array['time']);	
+		  db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'comment','%s',%d)",$a1['uid'],$extra,$extra_array['time']);	
 	}
 	
 }
