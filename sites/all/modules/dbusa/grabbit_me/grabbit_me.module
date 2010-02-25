@@ -170,6 +170,10 @@ function grabbit_me_pagination(){
 			}
 			
 		break;
+		case 4:
+		  global $user;
+		  print grabbit_me_get_statuses_rss($user->uid,$limit=10,$page);
+		break;
 		default:
 		  return null;
 		break;
@@ -786,13 +790,8 @@ function grabbit_me_get_statuses_all($uid,$limit='10',$pag=FALSE){
 
 }
 
-function grabbit_me_get_statuses_friends($uid,$limit=10,$pag=FALSE){
+function grabbit_me_get_statuses_friends($uid,$limit=50,$pag=FALSE){
 
-  if($pag){
-	$limit_number=10*$pag;
-	$last_number=$limit_number+10;
-    $limit = $limit_number.','.$last_number;	
-  }
 
   $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d AND status='TW_BOTH' ORDER BY last_update_time DESC LIMIT %s",$uid,$limit);
   
@@ -823,15 +822,7 @@ function grabbit_me_get_statuses_friends($uid,$limit=10,$pag=FALSE){
 	
   }
 
-  if($pag){
-    print $output; // if we are paginating this then we print it to the ajax call
-    if(!$output){
-	  print 0;
-    }	
-  }else{
-	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" page="2">more</a></div>';
-    return $output.$more;	
-  }
+  return $output;
 
 }
 
@@ -894,7 +885,7 @@ function grabbit_me_get_statuses_rss($uid,$limit=10,$pag=FALSE){
 	  print 0;
     }	
   }else{
-	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" page="2">more</a></div>';
+	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="4" page="2">more</a></div>';
     return $output.$more;	
   }
 
