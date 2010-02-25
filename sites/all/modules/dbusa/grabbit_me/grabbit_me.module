@@ -144,8 +144,8 @@ function grabbit_me_pagination(){
 			      }else{
 				    $nod='odd';
 			      }
-			      print $updates;
 			}
+			print $updates;
 		  }else{
 		    print 0;	
 		  }
