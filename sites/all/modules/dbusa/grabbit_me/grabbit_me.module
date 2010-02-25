@@ -136,8 +136,7 @@ function grabbit_me_pagination(){
 		  if(count($totals)){
 			$profile = content_profile_load('profile', $user->uid);
 		    $nod='even';
-		print_r($totals);
-			foreach ($totals as $element){
+			foreach ($totals as $status){
 				$item=unserialize($status->extra);
 			      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
 			      if($nod=='odd'){
