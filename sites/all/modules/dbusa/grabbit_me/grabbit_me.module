@@ -152,7 +152,7 @@ function grabbit_me_pagination(){
 		break;
 		case 3:
 		    global $user;
-			$comm = grabbit_me_get_comments($user->uid,$limit=10,$page);
+			$comm = grabbit_me_get_comments($user->uid,$limit='10',$page);
 			if (!count($comm)){
 			  print 0;
 			}else{
