@@ -1740,7 +1740,7 @@ function grabbit_me_you_activity_comments($user){
 						    <h3 class="title">Comments</h3>
 						  </div>
 						</div>';
-			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="2" uid="'.$user->uid.'" page="2">more</a></div>';
+			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="3" uid="'.$user->uid.'" page="2">more</a></div>';
 			$output .=$comments.$more;
    return $output;
 	
