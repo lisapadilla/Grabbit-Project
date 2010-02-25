@@ -622,8 +622,6 @@ function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
 	  $extra_array['comment']=$comment;
 
 	  $extra=serialize($extra_array);
-print_r($extra);
-exit;
 	  db_query("INSERT INTO {grabbit_me} (uid,type,extra,number) VALUES (%d,'comment','%s',%d)",$uid,$extra,$extra_array['time']);
 	
 }
