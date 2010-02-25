@@ -113,7 +113,7 @@ Drupal.behaviors.editables = function(){
 	   var pid  = $(this).attr('pid');
 	   var uid  = $(this).attr('uid');
 	   var link = $(this);
-	   link.tex('Loading content...');
+	   link.text('Loading content...');
 	   $.get(Drupal.settings.basePath+"me/pagination",{page:page,pid:pid,uid:uid},function(data){
 			if (data){
 				if(data=='0'){
