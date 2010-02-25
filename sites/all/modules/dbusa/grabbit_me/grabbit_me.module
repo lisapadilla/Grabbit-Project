@@ -634,7 +634,7 @@ function grabbit_me_get_statuses($uid,$limit=10, $pag=FALSE){
 		$last_number=$limit_number+10;
 	    $limit = $limit_number.','.$last_number;	
 	  }
-
+print $limit
   $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %s",$uid,$limit);
 
   $array=array();
