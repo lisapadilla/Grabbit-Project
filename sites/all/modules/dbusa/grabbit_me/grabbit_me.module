@@ -130,6 +130,26 @@ function grabbit_me_pagination(){
 		  global $user;
 		  print grabbit_me_get_statuses_all($user->uid,$limit='10',$page);
 		break;
+		case 2:
+		  global $user;
+		  $totals = grabbit_me_get_statuses($user->uid,$limit='10',$page);
+		  if(count($totals)){
+			$profile = content_profile_load('profile', $user->uid);
+		    $nod='even';
+			foreach ($totals as $element){
+				$item=unserialize($status->extra);
+			      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
+			      if($nod=='odd'){
+				    $nod='even';
+			      }else{
+				    $nod='odd';
+			      }
+			      print $updates;
+			}
+		  }else{
+		    print 0;	
+		  }
+		break;
 		default:
 		  return null;
 		break;
@@ -607,9 +627,15 @@ function grabbit_me_grabbit_nodes_comment($nid,$comment,$uid){
 	
 }
 
-function grabbit_me_get_statuses($uid,$limit=10){
-	
-  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %d",$uid,$limit);
+function grabbit_me_get_statuses($uid,$limit=10, $pag=FALSE){
+
+  	if($pag){
+		$limit_number=10*$pag;
+		$last_number=$limit_number+10;
+	    $limit = $limit_number.','.$last_number;	
+	  }
+
+  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %s",$uid,$limit);
 
   $array=array();
   while ($status = db_fetch_object($result)){
@@ -726,9 +752,15 @@ function grabbit_me_get_statuses_all($uid,$limit='10',$pag=FALSE){
 
 }
 
-function grabbit_me_get_statuses_friends($uid,$limit=10){
+function grabbit_me_get_statuses_friends($uid,$limit=10,$pag=FALSE){
 
-  $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d AND status='TW_BOTH' ORDER BY last_update_time DESC LIMIT %d",$uid,$limit);
+  if($pag){
+	$limit_number=10*$pag;
+	$last_number=$limit_number+10;
+    $limit = $limit_number.','.$last_number;	
+  }
+
+  $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d AND status='TW_BOTH' ORDER BY last_update_time DESC LIMIT %s",$uid,$limit);
   
   while ($status = db_fetch_object($result)){
 	$super_array[$status->last_update_time]=$status;
@@ -757,21 +789,35 @@ function grabbit_me_get_statuses_friends($uid,$limit=10){
 	
   }
 
-  return $output;
+  if($pag){
+    print $output; // if we are paginating this then we print it to the ajax call
+    if(!$output){
+	  print 0;
+    }	
+  }else{
+	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" page="2">more</a></div>';
+    return $output.$more;	
+  }
 
 }
 
-function grabbit_me_get_statuses_rss($uid,$limit=10){
+function grabbit_me_get_statuses_rss($uid,$limit=10,$pag=FALSE){
+
+  if($pag){
+	$limit_number=10*$pag;
+	$last_number=$limit_number+10;
+    $limit = $limit_number.','.$last_number;	
+  }
 
   $super_array=array();
 
-  $result = db_query("SELECT * FROM {node} WHERE uid=%d AND type='feed' ORDER BY created DESC LIMIT %d",$uid,$limit);
+  $result = db_query("SELECT * FROM {node} WHERE uid=%d AND type='feed' ORDER BY created DESC LIMIT %s",$uid,$limit);
 
   while ($status = db_fetch_object($result)){
 	$super_array[$status->created]=$status;
   }
 
-  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='rss' ORDER BY number DESC LIMIT %d",$uid,$limit);
+  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='rss' ORDER BY number DESC LIMIT %s",$uid,$limit);
 
   while ($status = db_fetch_object($result)){
 	$item=unserialize($status->extra);
@@ -808,15 +854,29 @@ function grabbit_me_get_statuses_rss($uid,$limit=10){
 	
   }
 
-  return $output;
+  if($pag){
+    print $output; // if we are paginating this then we print it to the ajax call
+    if(!$output){
+	  print 0;
+    }	
+  }else{
+	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" page="2">more</a></div>';
+    return $output.$more;	
+  }
 
 }
 
 
 
-function grabbit_me_get_comments($uid,$limit=10){
+function grabbit_me_get_comments($uid,$limit=10,$pag=FALSE){
+
+  if($pag){
+	$limit_number=10*$pag;
+	$last_number=$limit_number+10;
+    $limit = $limit_number.','.$last_number;	
+  }
 	
-  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='comment' ORDER BY number DESC LIMIT %d",$uid,$limit);
+  $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='comment' ORDER BY number DESC LIMIT %s",$uid,$limit);
 
   $array=array();
   while ($status = db_fetch_object($result)){
@@ -826,12 +886,26 @@ function grabbit_me_get_comments($uid,$limit=10){
       $array[]=$status;
   }
 
-  return $array;
+  if($pag){
+    print $output; // if we are paginating this then we print it to the ajax call
+    if(!$output){
+	  print 0;
+    }	
+  }else{
+	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" page="2">more</a></div>';
+    return $output.$more;	
+  }
 	
 }
 
 
-function grabbit_me_get_mentions($uid,$user_name,$limit=10){
+function grabbit_me_get_mentions($uid,$user_name,$limit=10,$pag=FALSE){
+
+  if($pag){
+	$limit_number=10*$pag;
+	$last_number=$limit_number+10;
+    $limit = $limit_number.','.$last_number;	
+  }
 
   if($fuser = facebook_grabbit_get_fid($uid)){
 	  $first_facebook=grabbit_me_get_cache_data($uid,'facebook');
@@ -1039,7 +1113,8 @@ function grabbit_me_show_activity_rendered(){
 						    <h3 class="title">Last Updates</h3>
 						  </div>
 						</div>';
-			$output .=$updates;
+			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="2" page="2">more</a></div>';
+			$output .=$updates.$more;
 
 			
 			$output .='</div>';
