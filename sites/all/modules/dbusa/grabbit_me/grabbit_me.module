@@ -124,17 +124,16 @@ function grabbit_me_menu() {
 function grabbit_me_pagination(){
 	$page=$_GET['page'];
 	$panel = $_GET['pid'];
+	$uid=$_GET['uid'];
 	
 	switch($panel){
 		case 1:
-		  global $user;
-		  print grabbit_me_get_statuses_all($user->uid,$limit='10',$page);
+		  print grabbit_me_get_statuses_all($uid,$limit='10',$page);
 		break;
 		case 2:
-		  global $user;
-		  $totals = grabbit_me_get_statuses($user->uid,$limit='10',$page);
+		  $totals = grabbit_me_get_statuses($uid,$limit='10',$page);
 		  if(count($totals)){
-			$profile = content_profile_load('profile', $user->uid);
+			$profile = content_profile_load('profile', $uid);
 		    $nod='even';
 			foreach ($totals as $status){
 				$item=unserialize($status->extra);
@@ -151,8 +150,7 @@ function grabbit_me_pagination(){
 		  }
 		break;
 		case 3:
-		    global $user;
-			$comm = grabbit_me_get_comments($user->uid,$limit='10',$page);
+			$comm = grabbit_me_get_comments($uid,$limit='10',$page);
 			if (!count($comm)){
 			  print 0;
 			}else{
@@ -171,8 +169,7 @@ function grabbit_me_pagination(){
 			
 		break;
 		case 4:
-		  global $user;
-		  print grabbit_me_get_statuses_rss($user->uid,$limit=10,$page);
+		  print grabbit_me_get_statuses_rss($uid,$limit=10,$page);
 		break;
 		default:
 		  return null;
@@ -784,7 +781,7 @@ function grabbit_me_get_statuses_all($uid,$limit='10',$pag=FALSE){
 	  print 0;
     }	
   }else{
-	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" page="2">more</a></div>';
+	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" uid="'.$uid.'" page="2">more</a></div>';
     return $output.$more;	
   }
 
@@ -885,7 +882,7 @@ function grabbit_me_get_statuses_rss($uid,$limit=10,$pag=FALSE){
 	  print 0;
     }	
   }else{
-	$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="4" page="2">more</a></div>';
+	$more = '<div class="panel-controller"><a href="javascript:void(0)" uid="'.$uid.'" class="main-stream-next" id="me-more" pid="4" page="2">more</a></div>';
     return $output.$more;	
   }
 
@@ -1039,7 +1036,7 @@ function grabbit_me_show_activity_comments(){
 						  </div>
 						</div>';
 						
-			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="3" page="1">more</a></div>';
+			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="3" uid="'.$uid.'" page="1">more</a></div>';
 			$output .=$comments.$more;
 
 			
@@ -1132,7 +1129,7 @@ function grabbit_me_show_activity_rendered(){
 						    <h3 class="title">Last Updates</h3>
 						  </div>
 						</div>';
-			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="2" page="2">more</a></div>';
+			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="2" uid="'.$uid.'" page="2">more</a></div>';
 			$output .=$updates.$more;
 
 			

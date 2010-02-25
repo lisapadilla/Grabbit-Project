@@ -111,9 +111,10 @@ Drupal.behaviors.editables = function(){
      $('#me-more').click(function(i){
 	   var page = $(this).attr('page');
 	   var pid  = $(this).attr('pid');
+	   var uid  = $(this).attr('uid');
 	   var link = $(this);
-	   link.text('Loading content...');
-	   $.get(Drupal.settings.basePath+"me/pagination",{page:page,pid:pid},function(data){
+	   link.tex('Loading content...');
+	   $.get(Drupal.settings.basePath+"me/pagination",{page:page,pid:pid,uid:uid},function(data){
 			if (data){
 				if(data=='0'){
 					link.text('no more content');
