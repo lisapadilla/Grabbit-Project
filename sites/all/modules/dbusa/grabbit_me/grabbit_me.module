@@ -909,8 +909,7 @@ function grabbit_me_get_comments($uid,$limit=10,$pag=FALSE){
 	$last_number=$limit_number+10;
     $limit = $limit_number.','.$last_number;	
   }
-	print $limit;
-	exit;
+
   $result = db_query("SELECT extra FROM {grabbit_me} WHERE uid=%d AND type='comment' ORDER BY number DESC LIMIT %s",$uid,$limit);
 
   $array=array();
