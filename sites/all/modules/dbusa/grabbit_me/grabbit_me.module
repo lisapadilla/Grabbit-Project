@@ -639,7 +639,7 @@ function grabbit_me_get_statuses($uid,$limit=10, $pag=FALSE){
 
   $array=array();
   while ($status = db_fetch_object($result)){
-	print $status->extra
+	print $status->extra;
 	$data=unserialize($status->extra);
 	if(substr($data['status'], 0, 2) != 'D '){ //NO DIRECT MESSAGES
       $array[]=$status;
