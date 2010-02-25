@@ -1706,7 +1706,7 @@ function grabbit_me_you_activity_rendered($user){
 						  </div>
 						</div>';
 						
-			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="1" uid="'.$user->uid.'" page="2">more</a></div>';
+			$more = '<div class="panel-controller"><a href="javascript:void(0)" class="main-stream-next" id="me-more" pid="2" uid="'.$user->uid.'" page="2">more</a></div>';
 			$output .=$updates.$more;
 
   return $output;	
