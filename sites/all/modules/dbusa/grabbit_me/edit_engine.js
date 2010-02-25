@@ -112,10 +112,16 @@ Drupal.behaviors.editables = function(){
 	   var page = $(this).attr('page');
 	   var pid  = $(this).attr('pid');
 	   var link = $(this);
+	   link.text('Loading content...');
 	   $.get(Drupal.settings.basePath+"me/pagination",{page:page,pid:pid},function(data){
 			if (data){
-				$(data).insertBefore(link.parent());
-				link.attr('page',(page*1)+1);
+				if(data=='0'){
+					link.text('no more content');
+				}else{
+					$(data).insertBefore(link.parent());
+					link.attr('page',(page*1)+1);
+					link.text('more');	
+				}
 			}else{
 				alert("Problem connecting with the server, please try again latter.");
 			}
