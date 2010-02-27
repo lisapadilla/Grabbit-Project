@@ -46,7 +46,7 @@ function autotagging_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
 
       // invoke autotagging api
       //
-	  ini_set("memory_limit","712M");
+	  ini_set("memory_limit","1024M");
       $text = array();
       // only if this is a facebook node
       if($node->type=='facebook'){
