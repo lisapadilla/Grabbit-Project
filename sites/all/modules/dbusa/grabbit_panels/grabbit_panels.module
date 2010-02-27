@@ -642,7 +642,7 @@ function grabbit_panels_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL){
 	if($op == 'insert'){
 		
 		if($node->type=='feed'){
-			
+			ini_set("memory_limit","512M");
 			$elements = array();
 			  if ($merged_item = _feedapi_mapper_get_items_merged($node)) {
 			    $merged_item = _feedapi_mapper_simplify_raw($merged_item, $node->feed->parsers);
