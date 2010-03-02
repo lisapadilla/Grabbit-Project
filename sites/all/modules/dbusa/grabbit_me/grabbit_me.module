@@ -1616,8 +1616,8 @@ function grabbit_me_you_favorites(){
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
       drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Favorites'); })",'inline');
-	  
-	  $output = "favs";
+	  $output = theme_you_activity($friend->uid, $friend->name);
+	  $output .= "favs";
 	  return $output;
 	}else{
 		drupal_goto('users/'.$friend->name);
