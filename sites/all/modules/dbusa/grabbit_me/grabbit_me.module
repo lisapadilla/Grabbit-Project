@@ -1655,11 +1655,11 @@ function grabbit_me_you_get_favorites($user){
 
 	$resultados = facebook_grabbit_theme_results($twitface);
 	
-		$output .=$mensajes.'<div class="panel-grabbit suser-panels">
+		$output .=$mensajes.'<div class="user-panel"><div class="panel-grabbit suser-panels">
 		           <div class="panel-favorites">';
 		$output .=$resultados;
 	
-		$output .='</div></div>';
+		$output .='</div></div></div>';
 	    
 	
 	return $output;
