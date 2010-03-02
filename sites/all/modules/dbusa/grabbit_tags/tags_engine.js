@@ -10,7 +10,7 @@ Drupal.behaviors.tagsEngine = function(){
 	
 	var tag_node=$(this).attr('node');
 	var selector = $(this);
-	var parent = $(this).parents('.user-panel');
+	var parent = $(this).parents('.panel-grabbit');
 	reset_buttons(tag_node);
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
