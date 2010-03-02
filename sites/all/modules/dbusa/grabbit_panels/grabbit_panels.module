@@ -68,9 +68,8 @@ function grabbit_panels_menu () {
   return $items;
 }
 
-function grabbit_panels_get_favorites($user){
-	if(!$user)
-	  global $user;
+function grabbit_panels_get_favorites(){
+	global $user;
 	
 	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
@@ -120,6 +119,7 @@ function grabbit_panels_get_favorites($user){
 	
 	return $output;
 }
+
 
 function grabbit_panels_delete(){
 	global $user;

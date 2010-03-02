@@ -1617,12 +1617,54 @@ function grabbit_me_you_favorites(){
 	
       drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Favorites'); })",'inline');
 	  $output = theme_you_activity($friend->uid, $friend->name);
-	  $output .= grabbit_panels_get_favorites($friend);
+	  $output .= grabbit_me_you_get_favorites($friend);
 	  return $output;
 	}else{
 		drupal_goto('users/'.$friend->name);
 	}
 }
+
+function grabbit_me_you_get_favorites($user){
+	if(!$user)
+	  global $user;
+	
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_uploads').'/jquery.form.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/engine.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.js', $type = 'module');
+	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
+	
+	$view = views_get_view('flag_bookmarks_tab');
+	$view->set_arguments(array($user->uid));	
+	$view->pager['items_per_page']=30;
+	$view->execute();
+	
+	foreach($view->result as $node){
+	  
+	  $twitface[$node->node_created]=array('time'=>$node->node_created,
+	                                       'value'=>$node);
+    }
+
+    $mesa=drupal_get_messages();
+	if($mesa['status'][0])
+	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+	
+
+	$resultados = facebook_grabbit_theme_results($twitface);
+	
+		$output .=$mensajes.'<div class="panel-grabbit suser-panels">
+		           <div class="panel-favorites">';
+		$output .=$resultados;
+	
+		$output .='</div></div>';
+	    
+	
+	return $output;
+}
+
 
 function grabbit_me_you_comments(){
 	global $user;
