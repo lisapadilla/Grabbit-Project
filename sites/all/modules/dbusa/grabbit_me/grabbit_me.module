@@ -1617,7 +1617,7 @@ function grabbit_me_you_favorites(){
 	
       drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Favorites'); })",'inline');
 	  $output = theme_you_activity($friend->uid, $friend->name);
-	  $output .= "favs";
+	  $output .= grabbit_panels_get_favorites($friend);
 	  return $output;
 	}else{
 		drupal_goto('users/'.$friend->name);
