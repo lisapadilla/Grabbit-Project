@@ -22,6 +22,12 @@ function grabbit_me_menu() {
     'access arguments' => array('access content')
   );
 
+  $items['you/favorites'] = array( 
+    'page callback' => 'grabbit_me_you_favorites', 
+    'title' => 'You Favorites',
+    'access arguments' => array('access content')
+  );
+
   $items['you/friends'] = array( 
     'page callback' => 'grabbit_me_you_friends', 
     'title' => 'You Friends',
@@ -1593,6 +1599,25 @@ function grabbit_me_you_updates(){
 	
 	  $output = theme_you_activity($friend->uid, $friend->name);
 	  $output .=grabbit_me_you_activity_rendered($friend);
+	  return $output;
+	}else{
+		drupal_goto('users/'.$friend->name);
+	}
+}
+
+function grabbit_me_you_favorites(){
+	global $user;
+	
+	$friend = user_load(arg(2));
+	
+	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
+    if($status=='TW_BOTH'){
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
+      drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Favorites'); })",'inline');
+	  
+	  $output = "favs";
 	  return $output;
 	}else{
 		drupal_goto('users/'.$friend->name);
