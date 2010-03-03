@@ -101,7 +101,6 @@ function grabbit_tags_save(){
 	$nid=$_GET['nid'];
 	
 	if($_GET['tags']){
-	    ini_set('memory_limit','612M');
 		$terms=$_GET['tags'];
 		$node=node_load($nid);
 		$node->taxonomy=array();
@@ -109,7 +108,7 @@ function grabbit_tags_save(){
            $node->taxonomy['tags'][3]=$terms;
         }
 
-        taxonomy_node_save($node, $node->taxonomy);
+        node_save($node);
 
 	    print "OK";	// Everything went smooth
 
