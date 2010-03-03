@@ -256,6 +256,10 @@ $(document).ready(function() {
     });
 	});
 	
+	$('.show-comment-link').live('click',function(i){
+		i.preventDefault;
+		i.next('.display-comments-buttons').slideToggle('medium');
+	});
 	
 	$(".twit-reply").live('click',function () {
 	  var to = $(this).attr("id")+" "; 
