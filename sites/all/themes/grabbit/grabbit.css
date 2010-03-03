@@ -1891,6 +1891,19 @@ a.truncate_show{
 	margin-left: 520px;
 	clear: both;
 }
+span.numerito-comment
+{
+	position: absolute;
+}
+a.show-comment-link{
+	display:block;
+	width: 15px;
+	height: 15px;
+	overflow: hidden;
+	text-indent: -3000px;
+	background: url(images/more.gif) 0 0 no-repeat;
+	padding: 0px;
+}
 a.truncate_hide{
 	display:block;
   width: 15px;
