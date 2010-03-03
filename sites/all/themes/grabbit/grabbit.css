@@ -1895,11 +1895,20 @@ span.numerito-comment
 {
 	position: absolute;
 	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-moz-box-shadow:1px 1px 1px #888888;
+	-webkit-box-shadow:1px 1px 1px #888888;
+	box-shadow:1px 1px 1px #888888;
 	background-color:#CC0000;
 	color:white;
 	font-family:helvetica;
+	font-size:9px;
 	font-weight:bold;
-	padding:1px 6px;
+	line-height:11px;
+	margin-left:7px;
+	margin-top:-8px;
+	padding:2px 5px;
 }
 .comments-data
 {
