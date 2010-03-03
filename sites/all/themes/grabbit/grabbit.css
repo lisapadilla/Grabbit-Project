@@ -1913,6 +1913,7 @@ span.numerito-comment
 .comments-data
 {
 	clear: both;
+	float: right;
 }
 a.show-comment-link{
 	display:block;
