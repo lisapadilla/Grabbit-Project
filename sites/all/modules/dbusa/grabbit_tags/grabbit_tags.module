@@ -62,7 +62,7 @@ function grabbit_tags_display(){
 			}
 		}	
 	}
-
+print_r($node);
     if($node->nid){
 	  if(!count($text)){
 	    if($node->type=='twitter' || $node->type=='facebook'){
