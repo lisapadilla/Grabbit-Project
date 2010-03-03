@@ -10,7 +10,7 @@ Drupal.behaviors.tagsEngine = function(){
 	
 	var tag_node=$(this).attr('node');
 	var selector = $(this);
-	var parent = $(this).parents('.panel-grabbit');
+	var parent = $(this).parents('.user-panel');
 	reset_buttons(tag_node);
 	$.get(Drupal.settings.basePath+"tags/display",{nid:tag_node},function(data){
 		if (data){
@@ -41,7 +41,7 @@ Drupal.behaviors.tagsEngine = function(){
 
   $('.tags-submit-profile').live('click',function(i){
 	var tag_node=$(this).attr('node');
-    var parent = $(this).parents('.panel-grabbit');
+    var parent = $(this).parents('.user-panel');
     var options = $(this).parent('.all-tags');
     
   if($('#save-tags',options).is(':checked') && $('#add-tags',options).is(':checked')){
