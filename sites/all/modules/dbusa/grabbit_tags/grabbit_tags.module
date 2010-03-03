@@ -54,13 +54,18 @@ function grabbit_tags_display(){
 	$type=$_GET['type'];
 	
 	$node=node_load($nid);
-	print_r($node);
+
 	if(is_array($node->tags)){
 	  	foreach($node->tags as  $tag_group){
 			foreach($tag_group as $tag){
-			  $text[]=$tag->name;	
+			  $text[$tag->name]=$tag->name;	
 			}
 		}	
+	}
+	if(is_array($node->taxonomy)){
+		foreach($node->taxonomy as $taxo_local){
+			$text[$taxo_local->name]=$taxo_local->name;
+		}
 	}
 
     if($node->nid){
