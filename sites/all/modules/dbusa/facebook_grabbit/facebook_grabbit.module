@@ -497,7 +497,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 		}	
 	}
 	if($coments_number>0){
-		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="#" class="show-comment-link">Show</a></div>
+		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
 		<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
 	}else{
 		$show_comments='<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
@@ -582,7 +582,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 		}	
 	}
 	if($coments_number>0){
-		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="#" class="show-comment-link">Show</a></div>
+		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
 		<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
 	}else{
 		$show_comments='<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
@@ -2174,7 +2174,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	}
 	
 	if($comments_count>0){
-	  	$comments_output = '<div class="news-comments"><div class="comments-data"><span class="numerito-comment">'.$comments_count.'</span><a href="#" class="show-comment-link">Show</a></div>
+	  	$comments_output = '<div class="news-comments"><div class="comments-data"><span class="numerito-comment">'.$comments_count.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
 		<div class="display-comments-buttons" style="display:none;">'.$comments_output;	
 	}else{
 		$comments_output = '<div class="news-comments">
