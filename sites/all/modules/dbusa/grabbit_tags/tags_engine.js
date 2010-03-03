@@ -41,7 +41,7 @@ Drupal.behaviors.tagsEngine = function(){
 
   $('.tags-submit-profile').live('click',function(i){
 	var tag_node=$(this).attr('node');
-    var parent = $(this).parents('.user-panel');
+    var parent = $(this).parents('.panel-grabbit');
     var options = $(this).parent('.all-tags');
     
   if($('#save-tags',options).is(':checked') && $('#add-tags',options).is(':checked')){
