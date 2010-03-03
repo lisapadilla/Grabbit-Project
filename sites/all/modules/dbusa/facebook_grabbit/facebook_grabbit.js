@@ -258,7 +258,8 @@ $(document).ready(function() {
 	
 	$('.show-comment-link').live('click',function(i){
 		i.preventDefault;
-		i.next('.display-comments-buttons').slideToggle('medium');
+		var universe = $(this).parents('.facebook-post-comments');
+		$('.display-comments-buttons',universe).slideToggle('medium');
 	});
 	
 	$(".twit-reply").live('click',function () {
