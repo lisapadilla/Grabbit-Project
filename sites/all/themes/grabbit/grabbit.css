@@ -1894,6 +1894,16 @@ a.truncate_show{
 span.numerito-comment
 {
 	position: absolute;
+	-moz-border-radius: 10px;
+	background-color:#CC0000;
+	color:white;
+	font-family:helvetica;
+	font-weight:bold;
+	padding:1px 6px;
+}
+.comments-data
+{
+	clear: both;
 }
 a.show-comment-link{
 	display:block;
