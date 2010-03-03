@@ -1013,13 +1013,19 @@ p#queuestatus
   float: left;
   color: #9ea5ab;
   font-size: 11px;
-  line-height: 12px;
+  line-height: 17px;
   margin-bottom: 2px;
 }
 #facebook-grabbit-update-form .user-friends .numbers{
-  	color:#317CF9;
+	-moz-border-radius:10px;
+	border-radius:10px;
+	-webkit-border-radius:10px;
+	background-color:#CC0000;
+	border:2px solid #FFFFFF;
+	color:white;
 	font-family:helvetica;
 	font-weight:bold;
+	padding:1px 6px;
 }
 #edit-status-wrapper,
 #edit-status-1-wrapper{
@@ -3002,7 +3008,7 @@ div.messages, div.status, div.warning, div.error{
 }
 */
 .user-friends a{
-	color:#317CF9;
+	color:#fff;
 }
 .navbar .title{
 	display:none;
