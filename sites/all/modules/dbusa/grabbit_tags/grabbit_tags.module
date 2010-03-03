@@ -50,6 +50,7 @@ function grabbit_tags_grabbit_status_form(){
 
 function grabbit_tags_display(){
 
+    ini_set('memory_limit','512M');
 	$nid=$_GET['nid'];
 	$type=$_GET['type'];
 	
@@ -62,7 +63,7 @@ function grabbit_tags_display(){
 			}
 		}	
 	}
-print_r($node);
+
     if($node->nid){
 	  if(!count($text)){
 	    if($node->type=='twitter' || $node->type=='facebook'){
