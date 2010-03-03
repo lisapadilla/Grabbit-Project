@@ -1546,7 +1546,10 @@ function grabbit_me_preprocess_user_profile(&$variables){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $variables['account']->uid, 1);
     if($status=='TW_BOTH'){
-	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); })",'inline');
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); 
+	                 $('.content-truncated').truncate( 135,{
+					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
+					});  })",'inline');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
       drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
@@ -1594,7 +1597,10 @@ function grabbit_me_you_updates(){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
-	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Updates'); })",'inline');
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Updates'); 
+	                 $('.content-truncated').truncate( 135,{
+					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
+					});  })",'inline');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
       drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
@@ -1695,7 +1701,10 @@ function grabbit_me_you_friends(){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
-	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." added Friends'); })",'inline');
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." added Friends'); 
+	                 $('.content-truncated').truncate( 135,{
+					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
+					});  })",'inline');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
       drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
@@ -1715,7 +1724,10 @@ function grabbit_me_you_rss(){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
-	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." RSS'); })",'inline');
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." RSS'); 
+	                 $('.content-truncated').truncate( 135,{
+					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
+					});  })",'inline');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
       drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
@@ -1735,7 +1747,10 @@ function grabbit_me_you_mentions(){
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
     if($status=='TW_BOTH'){
-	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." mentions'); })",'inline');
+	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." mentions'); 
+	                 $('.content-truncated').truncate( 135,{
+					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
+					}); })",'inline');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
       drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
