@@ -54,7 +54,7 @@ function grabbit_tags_display(){
 	$type=$_GET['type'];
 	
 	$node=node_load($nid);
-	
+	print_r($node);
 	if(is_array($node->tags)){
 	  	foreach($node->tags as  $tag_group){
 			foreach($tag_group as $tag){
