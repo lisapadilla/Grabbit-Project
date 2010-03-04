@@ -4358,3 +4358,6 @@ display: none;
 	margin:0;
 	text-decoration:none;
 }
+#user-register .captcha img{
+	margin-left:140px;
+}
