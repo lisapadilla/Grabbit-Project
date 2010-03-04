@@ -91,9 +91,15 @@ function facebook_grabbit_update_form($form_state){
 	$profile = content_profile_load('profile', $user->uid);
 	
 	if ($user->uid >0){
+		if($profile->field_profile_picture[0]['filepath']){
+		  $user_image=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image');	
+		}else{
+		  $user_image=theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg', 'My Image');
+		}
+		
 		$data = '<div class="user-data">
 		           <div class="user-data-wraper clearfix">
-		           <div class="picture">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'</div>
+		           <div class="picture">'..'</div>
 		           <div class="user-name">'.$user->name.'</div>
 		           <div class="user-friends"><span class="user-name-friends">Friends: </span><span class="numbers">'.friendlist_api_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH').'</span> 
 		           <br><span class="user-name-friends">Requests: </span><span class="numbers">'.l(friendlist_api_db_statuses('count',NULL,$user->uid, 1, 'TW_1_TO_2_P'),'user/me/myfriends/received').'</span>
