@@ -417,6 +417,7 @@ function grabbit_imap_get($user){
 
 function grabbit_imap_crear($user=1){
 	
+	date_default_timezone_set("America/Monterrey");
 	$yesterday = date('D, j M Y G:i:s', mktime(0, 0, 0, date("m") , date("d") - 3, date("Y")));
 	
 	if($_GET['user'])
@@ -491,6 +492,7 @@ function grabbit_imap_crear($user=1){
 	    
 	}
 	$obj->close_mailbox();   //Close Mail Box
+	date_default_timezone_set("America/Monterrey");
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
 	grabbit_imap_save($user,$settings);
