@@ -417,10 +417,7 @@ function theme_gmail_mail($node){
 		$("#TB_ajaxContent").hide();
 		$("#TB_title").hide();
 		alert("yes");
-		$("#TB_closeWindowButton").click(function(){
-			self.parent.tb_remove();
-			alert("yes");
-		});
+		$("#TB_closeWindowButton").attr("onclick","self.parent.tb_remove();");
 	}
 	
 	</script>
