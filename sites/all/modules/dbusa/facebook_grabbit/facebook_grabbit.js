@@ -137,6 +137,11 @@ $(document).ready(function() {
 		var input = $("#myForm",input1).children("input").prev();
 		$("#myForm",input1).slideToggle("medium",function(){
 			input.focus();
+			$(this).keyup(function(e) {
+		      if(e.keyCode == 13) {
+			    alert('pressed');
+		      }
+		    });
 		});
 		
 	});
@@ -154,7 +159,7 @@ $(document).ready(function() {
 	
 	$('.suser-panels').height($('.suser-panels').height());
 	
-	$('.news-comment-submit-button').click(function(){
+	$('.news-comment-submit-button').live('click',function(){
 		// Save comment
 		
 		var tag = $(this);
