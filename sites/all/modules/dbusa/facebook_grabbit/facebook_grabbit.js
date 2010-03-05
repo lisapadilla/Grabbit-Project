@@ -139,7 +139,7 @@ $(document).ready(function() {
 			input.focus();
 			$(this).keyup(function(e) {
 		      if(e.keyCode == 13) {
-			    alert('pressed');
+			    $(".facebook_comment_submit",input1).click();
 		      }
 		    });
 		});
@@ -154,6 +154,11 @@ $(document).ready(function() {
 		
 		$('#myForm',space).slideToggle('medium',function(){
 			text_input.focus();
+			$(this).keyup(function(e) {
+		      if(e.keyCode == 13) {
+			    $(".news-comment-submit-button",space).click();
+		      }
+		    });
 		});
 	});
 	
