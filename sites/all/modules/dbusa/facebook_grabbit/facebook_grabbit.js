@@ -146,6 +146,10 @@ $(document).ready(function() {
 		
 	});
 	
+	$('#myForm').submit(function(){
+	  return false;	
+	});
+	
 	$('.comment-news').live('click',function(){
 		var space = $(this).parents('.stream-item-element');
 		var text_input = $('.form-text-content',space);
