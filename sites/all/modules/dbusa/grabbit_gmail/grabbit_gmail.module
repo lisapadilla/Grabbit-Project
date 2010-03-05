@@ -301,6 +301,7 @@ function grabbit_gmail_reply_message(){
 			padding:0;
 		}
 </style>
+<script type="text/javascript" src="/grabbit/sites/all/modules/jquery_update/replace/jquery.js?n"></script>
 <script>
 $("#TB_closeWindowButton").each(function(e){
   e.attr("onclick","self.parent.tb_remove()");	
