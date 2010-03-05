@@ -146,11 +146,6 @@ $(document).ready(function() {
 		
 	});
 	
-	$('#myForm').submit(function(){
-		alert('sub');
-	  return false;	
-	});
-	
 	$('.comment-news').live('click',function(){
 		var space = $(this).parents('.stream-item-element');
 		var text_input = $('.form-text-content',space);
@@ -159,6 +154,11 @@ $(document).ready(function() {
 		
 		$('#myForm',space).slideToggle('medium',function(){
 			text_input.focus();
+			
+			$(this).submit(function(i){
+			  return false;	
+			});
+			
 			$(this).keyup(function(e) {
 		      if(e.keyCode == 13) {
 			    e.preventDefault;
