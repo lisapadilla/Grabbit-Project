@@ -141,6 +141,7 @@ function grabbit_crons_emails_pull() {
 	watchdog("email", "Grabbit Emails has started with memory: ".ini_get('memory_limit')." and time: ".ini_get("max_execution_time"));
 	$last_nid=_get_last_nid_emails();
 	print date("F j, Y, g:i a");
+	print date("O");
 	$result = db_query("SELECT * from {users} where status > 0 AND uid>%d LIMIT 50",$last_nid);
 	
 	if(db_affected_rows($result)){
