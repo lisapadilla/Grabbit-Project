@@ -300,7 +300,14 @@ function grabbit_gmail_reply_message(){
 			margin:0;
 			padding:0;
 		}
-</style><div class="gmail-body">';
+</style>
+<script>
+$("#TB_closeWindowButton").each(function(e){
+  e.attr("onclick","self.parent.tb_remove()");	
+});
+
+</script>
+<div class="gmail-body">';
 
   echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to, $message->title,$message->field_from[0]['value'] );
 
@@ -416,7 +423,6 @@ function theme_gmail_mail($node){
 	function cerrar_ventana(){
 		$("#TB_ajaxContent").hide();
 		$("#TB_title").hide();
-		$("#TB_closeWindowButton").attr("onclick","self.parent.tb_remove()");
 	}
 	
 	</script>
