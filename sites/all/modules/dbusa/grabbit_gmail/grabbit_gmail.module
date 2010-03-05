@@ -365,6 +365,7 @@ function grabbit_gmail_mail_form_submit( $form )
   else
   {
     echo 'Your message has been sent.';
+    exit;
   }
 }
 
