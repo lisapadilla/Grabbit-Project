@@ -147,6 +147,7 @@ $(document).ready(function() {
 	});
 	
 	$('#myForm').submit(function(){
+		alert('sub');
 	  return false;	
 	});
 	
