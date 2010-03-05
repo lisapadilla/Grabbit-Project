@@ -149,6 +149,10 @@ $(document).ready(function() {
 		
 	});
 	
+	$("#TB_closeWindowButton").live('click',function(){
+		$(this).parent.tb_remove();
+	});
+	
 	$('.comment-news').live('click',function(){
 		var space = $(this).parents('.stream-item-element');
 		var text_input = $('.form-text-content',space);
