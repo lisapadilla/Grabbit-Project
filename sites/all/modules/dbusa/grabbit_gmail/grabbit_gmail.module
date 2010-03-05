@@ -303,10 +303,8 @@ function grabbit_gmail_reply_message(){
 </style>
 <script>
 $(document).ready(function(){
-	
-	$("#TB_closeWindowButton").live("click",function(){
-		self.parent.tb_remove();
-	});
+	alert("test");
+	$("#TB_closeWindowButton").attr("onclick","JavaScript:self.parent.tb_remove();")
 	
 });
 </script><div class="gmail-body">';
