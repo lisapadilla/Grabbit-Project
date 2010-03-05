@@ -156,6 +156,7 @@ $(document).ready(function() {
 			text_input.focus();
 			$(this).keyup(function(e) {
 		      if(e.keyCode == 13) {
+			    e.preventDefault;
 			    $(".news-comment-submit-button",space).click();
 		      }
 		    });
