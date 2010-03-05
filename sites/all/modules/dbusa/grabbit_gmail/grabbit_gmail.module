@@ -975,12 +975,18 @@ function grabbit_gmail_crear($user=1){
 	  $user=$_GET['user'];
     $gmail = grabbit_gmail_get($user);
 
+
     if($gmail['lastime']){
 	  $time=$gmail['lastime'];
     }else{
 	  $time=$yesterday;
     }
-  
+
+    if($user==1){
+	  print_r($gmail);
+	  print_r("time");
+	  print_r($time);
+    }  
 	$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
 	$obj->connect(); 
 
