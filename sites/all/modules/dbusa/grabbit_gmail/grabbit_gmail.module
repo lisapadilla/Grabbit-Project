@@ -982,12 +982,6 @@ function grabbit_gmail_crear($user=1){
 	  $time=$yesterday;
     }
 
-    $gmail=db_query("SELECT * from {grabbit_gmail}");
-    while($gmails=db_fetch_object($gmail)){
-	    db_query("UPDATE {grabbit_gmail} SET lastime='Thu, 4 Mar 2010 3:20:36' WHERE uid=".$gmails->uid);
-    }
-print "listo";
-    exit;
 
 	$obj= new receiveMail($gmail['user'],$gmail['password'],$gmail['user'],'imap.googlemail.com','gmail');
 	$obj->connect(); 
