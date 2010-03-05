@@ -145,6 +145,7 @@ function grabbit_crons_emails_pull() {
 	
 	if(db_affected_rows($result)){
 	  	while($user = db_fetch_object($result)){
+		print_r($user);
 		if(grabbit_crons_cron_time_emails()):
             // watchdog("email", "PROCESANDO USUARIO ".$user->name);
 			if($gmail_user = grabbit_gmail_get($user->uid)){
