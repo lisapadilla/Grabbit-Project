@@ -137,6 +137,9 @@ $(document).ready(function() {
 		var input = $("#myForm",input1).children("input").prev();
 		$("#myForm",input1).slideToggle("medium",function(){
 			input.focus();
+			$(this).submit(function(i){
+			  return false;	
+			});
 			$(this).keyup(function(e) {
 		      if(e.keyCode == 13) {
 			    $(".facebook_comment_submit",input1).click();
@@ -154,11 +157,9 @@ $(document).ready(function() {
 		
 		$('#myForm',space).slideToggle('medium',function(){
 			text_input.focus();
-			
 			$(this).submit(function(i){
 			  return false;	
 			});
-			
 			$(this).keyup(function(e) {
 		      if(e.keyCode == 13) {
 			    e.preventDefault;
