@@ -1026,6 +1026,10 @@ function grabbit_me_show_activity_comments(){
 	    } 
 	}
 	// end comments
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
 	       $mesa=drupal_get_messages();
 		   if($mesa['status'][0])
 		     $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
@@ -1073,6 +1077,10 @@ function grabbit_me_show_activity_mentions(){
 		    } 
 		}
 		// end mentions
+		drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+		  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+	      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+		
 		$mesa=drupal_get_messages();
 		if($mesa['status'][0])
 		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
@@ -1120,6 +1128,10 @@ function grabbit_me_show_activity_rendered(){
 	
     } 
     // end statuses
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+
     $mesa=drupal_get_messages();
 	if($mesa['status'][0])
 	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
@@ -1149,7 +1161,10 @@ function grabbit_me_show_activity_rendered_all(){
 	global $user;
 	
     $updates = grabbit_me_get_statuses_all($user->uid);
-
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
     $mesa=drupal_get_messages();
 	if($mesa['status'][0])
 	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
@@ -1177,6 +1192,10 @@ function grabbit_me_show_activity_rendered_all(){
 
 function grabbit_me_show_activity_friends(){
 	global $user;
+	
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
     $updates = grabbit_me_get_statuses_friends($user->uid);
     $mesa=drupal_get_messages();
@@ -1206,6 +1225,10 @@ function grabbit_me_show_activity_friends(){
 
 function grabbit_me_show_activity_rss(){
 	global $user;
+	
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
+	  drupal_add_js(drupal_get_path('module', 'grabbit_panels').'/jquery.truncate-2.3.js', $type = 'module');
+      drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
     $updates = grabbit_me_get_statuses_rss($user->uid);
     $mesa=drupal_get_messages();
