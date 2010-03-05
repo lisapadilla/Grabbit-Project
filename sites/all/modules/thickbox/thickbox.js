@@ -140,7 +140,7 @@ function tb_show(caption, url, imageGroup) { //function called when the user cli
 
         TB_WIDTH = imageWidth < 320 ? 350 : imageWidth + 30;
         TB_HEIGHT = imageHeight + 60;
-        $('#TB_window').append('<a href="" id="TB_ImageOff" title="' + settings.next_close + '"><img id="TB_Image" src="' + url + '" width="' + imageWidth + '" height="' + imageHeight + '" alt="' + caption + '" /></a><div id="TB_caption">' + caption + '<div id="TB_secondLine">' + TB_imageCount + TB_PrevHTML + TB_NextHTML + '</div></div><div id="TB_closeWindow"><a href="#" id="TB_closeWindowButton" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div>');
+        $('#TB_window').append('<a href="" id="TB_ImageOff" title="' + settings.next_close + '"><img id="TB_Image" src="' + url + '" width="' + imageWidth + '" height="' + imageHeight + '" alt="' + caption + '" /></a><div id="TB_caption">' + caption + '<div id="TB_secondLine">' + TB_imageCount + TB_PrevHTML + TB_NextHTML + '</div></div><div id="TB_closeWindow"><a href="#" id="TB_closeWindowButton" onclick="self.parent.tb_remove()" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div>');
         $('#TB_closeWindowButton').click(tb_remove);
 
         if (!(TB_PrevHTML === '')) {
@@ -220,7 +220,7 @@ function tb_show(caption, url, imageGroup) { //function called when the user cli
         urlNoQuery = url.split('TB_');
         $('#TB_iframeContent').remove();
         if (params['modal'] != 'true') { //iframe no modal
-          $('#TB_window').append('<div id="TB_title"><div id="TB_ajaxWindowTitle">' + caption + '</div><div id="TB_closeAjaxWindow"><a href="#" id="TB_closeWindowButton" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div></div><iframe frameborder="0" hspace="0" src="' + urlNoQuery[0] + '" id="TB_iframeContent" name="TB_iframeContent' + Math.round(Math.random()*1000) + '" onload="tb_showIframe()" style="width:' + (ajaxContentW + 29) + 'px;height:' + (ajaxContentH + 17) + 'px;"></iframe>');
+          $('#TB_window').append('<div id="TB_title"><div id="TB_ajaxWindowTitle">' + caption + '</div><div id="TB_closeAjaxWindow"><a href="#" id="TB_closeWindowButton" onclick="self.parent.tb_remove()" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div></div><iframe frameborder="0" hspace="0" src="' + urlNoQuery[0] + '" id="TB_iframeContent" name="TB_iframeContent' + Math.round(Math.random()*1000) + '" onload="tb_showIframe()" style="width:' + (ajaxContentW + 29) + 'px;height:' + (ajaxContentH + 17) + 'px;"></iframe>');
         }
         else { //iframe modal
           $('#TB_overlay').unbind();
@@ -230,7 +230,7 @@ function tb_show(caption, url, imageGroup) { //function called when the user cli
       else { // not an iframe, ajax
         if ($('#TB_window').css('display') != 'block') {
           if (params['modal'] != 'true') { //ajax no modal
-            $('#TB_window').append('<div id="TB_title"><div id="TB_ajaxWindowTitle">' + caption + '</div><div id="TB_closeAjaxWindow"><a href="#" id="TB_closeWindowButton" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div></div><div id="TB_ajaxContent" style="width:100%;height:' + ajaxContentH + 'px"></div>');
+            $('#TB_window').append('<div id="TB_title"><div id="TB_ajaxWindowTitle">' + caption + '</div><div id="TB_closeAjaxWindow"><a href="#" id="TB_closeWindowButton" onclick="self.parent.tb_remove()" title="' + settings.close + '">' + settings.close + '</a> ' + settings.esc_key + '</div></div><div id="TB_ajaxContent" style="width:100%;height:' + ajaxContentH + 'px"></div>');
             window.setTimeout("tb_focusFirstFormElement()", 1000);
           }
           else { //ajax modal
