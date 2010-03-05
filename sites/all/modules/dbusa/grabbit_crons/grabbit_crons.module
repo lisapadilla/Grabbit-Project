@@ -146,19 +146,19 @@ function grabbit_crons_emails_pull() {
 	if(db_affected_rows($result)){
 	  	while($user = db_fetch_object($result)){
 		if(grabbit_crons_cron_time_emails()):
-             watchdog("email", "PROCESANDO USUARIO ".$user->name);
+             //watchdog("email", "PROCESANDO USUARIO ".$user->name);
 			if($gmail_user = grabbit_gmail_get($user->uid)){
 				if (!grabbit_crons_cron_time_emails()){
 			      break;
 			    }else{
-				  //watchdog("grabbit", "el usuario tiene gmail: ".$user->name);  
+				  watchdog("grabbit", "el usuario tiene gmail: ".$user->name);  
 			      grabbit_gmail_crear($user->uid);
 			    }
 			}
 
 			if($imap_user = grabbit_imap_get($user->uid)){
 			  	if (!grabbit_crons_cron_time_emails()){
-			      watchdog("email", "no hay tiempo para usuario ".$user->name);     
+			     // watchdog("email", "no hay tiempo para usuario ".$user->name);     
 			      break;
 			    }else{ 
 				  //watchdog("grabbit", "el usuario tiene imap ".$user->name);
@@ -167,7 +167,7 @@ function grabbit_crons_emails_pull() {
 			}
             
 			_save_last_nid_emails($user->uid);
-			watchdog("email", "finished for ".$user->name);
+			//watchdog("email", "finished for ".$user->name);
 		  endif;
 		}
 	}else{
