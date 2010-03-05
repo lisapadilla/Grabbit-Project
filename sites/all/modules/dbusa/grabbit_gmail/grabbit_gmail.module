@@ -302,11 +302,8 @@ function grabbit_gmail_reply_message(){
 		}
 </style>
 <script>
-$(document).ready(function(){
 	alert("test");
 	$("#TB_closeWindowButton").attr("onclick","JavaScript:self.parent.tb_remove();")
-	
-});
 </script><div class="gmail-body">';
 
   echo drupal_get_form( 'grabbit_gmail_mail_form', $gmail['user'], $reply_to, $message->title,$message->field_from[0]['value'] );
