@@ -3,7 +3,7 @@
 /**
  * Implementation of hook_menu()
  */
-function grabbit_me_menu() {
+function grabbit_albums_menu() {
 
   $items['albums/calculate'] = array( 
     'page callback' => 'grabbit_albums_calculate', 
