@@ -53,7 +53,7 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 		  $types = array('jpeg', 'bmp', 'jpg', 'png', 'gif');
 		break;
 	}
-	
+	print_r($types);
 	$sql_more="SELECT node.nid AS nid
 	 FROM node node 
 	 LEFT JOIN content_type_media node_data_field_media_type ON node.vid = node_data_field_media_type.vid
