@@ -152,5 +152,5 @@ function grabbit_albums_display(){
 	
 	$output .='<div>';
 	
-	return $output;
+//	return $output;
 }
