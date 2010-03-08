@@ -2689,6 +2689,14 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 		
 		$node = new stdClass();
 		if($media){
+		  $result = db_query('SELECT * FROM {files} WHERE fid = %d', $media);
+		
+		  if (db_affected_rows($result)){
+				$file=db_fetch_object($result);
+				$ext = substr($file->filename, strrpos($file->filename, '.') + 1);
+				$node->field_media_type[0]['value']=$ext;
+		  }
+		
 		  $text =str_replace($media_link, "", $text);
 		  $media_file=array();
 		  $media_file['file']=$media;
