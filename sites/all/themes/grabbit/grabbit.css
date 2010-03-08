@@ -4342,15 +4342,16 @@ display: none;
 	margin-left:190px;
 }
 .album-control{
-	margin-left:436px;
-	margin-top:-42px;
+	margin-left:458px;
+	margin-top:-40px;
 	position:absolute;
 }
 .album-icon{
-	text-indent: -999px;
-	width: 11px;
-	height: 11px;
-	background: url("images/album_icon.gif") no-repeat scroll right center transparent;
-	text-indent:3000em;
+	background:url("images/album_icon.gif") no-repeat scroll right center transparent;
+	float:right;
+	height:11px;
+	margin-left:10px;
 	overflow:hidden;
+	text-indent:3000px;
+	width:11px;
 }
