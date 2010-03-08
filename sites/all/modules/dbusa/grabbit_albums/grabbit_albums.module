@@ -25,7 +25,7 @@ function grabbit_albums_preprocess_node(&$variables){
 		drupal_add_js(drupal_get_path('module', 'grabbit_albums').'/albums_engine.js', $type = 'module');
 		
 		$controls = grabbit_aldums_calculate_next($variables['field_media_type'][0]['value'],$user,$variables['nid']);
-		
+		print $controls;
 	}
 }
 
@@ -37,6 +37,7 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 		case "flv":
 		// media
 		  $types = array("'mov'","'mp3'","'flv'");  
+		  $album='media';
 		break;
 		case "doc":
 		case "rtf":
@@ -47,10 +48,12 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 		case "pdf":
 		// documents
 		  $types = array("'doc'","'rtf'","'txt'","'csv'","'ppt'","'xls'","'pdf'");  
+		  $album='documents';
 		break;
 		default:
 		// photos
 		  $types = array("'jpeg'", "'bmp'", "'jpg'", "'png'", "'gif'");
+		  $album='images';
 		break;
 	}
 	$sql_more="SELECT node.nid AS nid
@@ -69,7 +72,13 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 	
 	$less = db_result(db_query($sql_less,'media',$user->uid,$nid));
 	
-	print_r($less);
+	$controls = '<div class="album-control">';
+	$controls .=l('Previous','node/'.$less,array('attributes'=>array('class'=>'album-prev')));
+	$controls .=l('Next','node/'.$more,array('attributes'=>array('class'=>'album-next')));
+	$controls .=l('album','album/'.$user->uid.'/'.$album);
+	$controls .= '</div>';
+	
+	return $controls;
 }
 
 function grabbit_albums_display(){
