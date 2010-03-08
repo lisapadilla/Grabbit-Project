@@ -4366,6 +4366,7 @@ a.album-prev{
 	font-weight:bold;
 	background:url("images/album_prev.gif") no-repeat scroll left center transparent;
 	padding-left:10px;
+	margin-right:10px;
 }
 
 a.album-next{
