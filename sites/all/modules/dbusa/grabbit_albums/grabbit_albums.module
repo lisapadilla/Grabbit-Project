@@ -20,6 +20,7 @@ function grabbit_albums_menu() {
 }
 
 function grabbit_albums_preprocess_node(&$variables){
+	print_r($variables->type);
 	if($variables->type=='media'){
 		global $user;
 		drupal_add_js(drupal_get_path('module', 'grabbit_albums').'/albums_engine.js', $type = 'module');
