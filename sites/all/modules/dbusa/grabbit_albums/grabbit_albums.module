@@ -109,11 +109,8 @@ function grabbit_albums_display(){
 			$node_media=node_load($unserialize['file']);
 			$file_fid=$node_media->field_media[0]['value'];	
 		}else{
-			if(!$file_fid=facebook_grabbit_get_post_from_file($vars['node']->nid)){
+			if(!$file_fid=facebook_grabbit_get_post_from_file($vars['node']->nid))
 			    $file_fid= $vars['node']->field_media[0]['value'];
-		    }else{
-			    drupal_goto('node/'.$file_fid);
-		    }
 		}
 		
 	
@@ -138,9 +135,9 @@ function grabbit_albums_display(){
 			default:
 			  $output .= '<div class="image-wrap">'.theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '').'</div>';
 			break;
-		}
+		  }
 		
-	}
+	    }
 	
 	$output .='<div>';
 	
