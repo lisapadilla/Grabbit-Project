@@ -150,8 +150,8 @@ function grabbit_albums_display(){
 		
 	    } }
 	
-	$output .='<div>';
+	$output .='</div>';
 	
 //	return $output;
-	return '1';
+	return $output;
 }
