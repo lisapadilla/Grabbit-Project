@@ -4354,6 +4354,7 @@ display: none;
 	overflow:hidden;
 	text-indent:3000px;
 	width:11px;
+	padding-top:7px;
 }
 .node-type-media #main #content .body-uploader .album-control a{
 	color:#999999;
@@ -4362,6 +4363,14 @@ a.album-prev{
 	color:#999999;
 	font-size:11px;
 	font-weight:bold;
-	background:url("images/album_prev.gif") no-repeat scroll right center transparent;
-	padding-left:15px;
+	background:url("images/album_prev.gif") no-repeat scroll left center transparent;
+	padding-left:10px;
+}
+
+a.album-next{
+	color:#999999;
+	font-size:11px;
+	font-weight:bold;
+	background:url("images/album_next.gif") no-repeat scroll right center transparent;
+	padding-right:10px;
 }
