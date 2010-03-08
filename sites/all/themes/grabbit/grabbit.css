@@ -4355,3 +4355,10 @@ display: none;
 	text-indent:3000px;
 	width:11px;
 }
+.album-prev{
+	color:#999999;
+	font-size:11px;
+	font-weight:bold;
+	background:url("images/album_prev.gif") no-repeat scroll right center transparent;
+	padding-left:15px;
+}
