@@ -73,8 +73,12 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 	$less = db_result(db_query($sql_less,'media',$user->uid,$nid));
 	
 	$controls = '<div class="album-control">';
-	$controls .=l('Previous','node/'.$less,array('attributes'=>array('class'=>'album-prev')));
-	$controls .=l('Next','node/'.$more,array('attributes'=>array('class'=>'album-next')));
+	if($less)
+	  $controls .=l('Previous','node/'.$less,array('attributes'=>array('class'=>'album-prev')));
+	
+	if($more)
+	  $controls .=l('Next','node/'.$more,array('attributes'=>array('class'=>'album-next')));
+	
 	$controls .=l('album','album/'.$user->uid.'/'.$album);
 	$controls .= '</div>';
 	
