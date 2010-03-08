@@ -36,7 +36,7 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 		case "mp3":
 		case "flv":
 		// media
-		  $types = array('mov','mp3','flv');  
+		  $types = array("'mov'","'mp3'","'flv'");  
 		break;
 		case "doc":
 		case "rtf":
@@ -46,11 +46,11 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 		case "xls":
 		case "pdf":
 		// documents
-		  $types = array('doc','rtf','txt','csv','ppt','xls','pdf');  
+		  $types = array("'doc'","'rtf'","'txt'","'csv'","'ppt'","'xls'","'pdf'");  
 		break;
 		default:
 		// photos
-		  $types = array('jpeg', 'bmp', 'jpg', 'png', 'gif');
+		  $types = array("'jpeg'", "'bmp'", "'jpg'", "'png'", "'gif'");
 		break;
 	}
 	$sql_more="SELECT node.nid AS nid
