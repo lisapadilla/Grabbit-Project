@@ -10,7 +10,7 @@ function grabbit_albums_menu() {
     'access arguments' => array('access content')
   );
 
-  $items['albums/display'] = array( 
+  $items['album'] = array( 
     'page callback' => 'grabbit_albums_display', 
     'title' => 'album',
     'access arguments' => array('access content')
@@ -87,6 +87,63 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 
 function grabbit_albums_display(){
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	
+	$uid=arg(0);
+	$type=arg(1);
+	
+	$sql_less="SELECT node.nid AS nid
+	 FROM node node 
+	 LEFT JOIN content_type_media node_data_field_media_type ON node.vid = node_data_field_media_type.vid
+	 INNER JOIN users users ON node.uid = users.uid
+	 WHERE (node.type in ('%s')) AND ((node_data_field_media_type.field_media_type_value) in (".implode($types,',').")) AND (users.uid in (%d)) AND (node.nid < %d) ORDER BY node.nid DESC";
+	$nodes = db_query($sql_less,'media',$user->uid,$nid);
+	
+	
+	$output = '<div class="album-background">';
+	
+	foreach($nodes as $nid){
+		
+		$vars['node']=node_load($nid);
+		$unserialize=unserialize($vars['node']->field_media[0]['value']);
+		if($unserialize){
+			$node_media=node_load($unserialize['file']);
+			$file_fid=$node_media->field_media[0]['value'];	
+		}else{
+			if(!$file_fid=facebook_grabbit_get_post_from_file($vars['node']->nid)){
+			    $file_fid= $vars['node']->field_media[0]['value'];
+		    }else{
+			    drupal_goto('node/'.$file_fid);
+		    }
+		}
+		
+	
+	    $result = db_query('SELECT * FROM {files} WHERE fid = %d', $file_fid);
+	    if (db_affected_rows($result)){
+		  $file=db_fetch_object($result);
+		  $ext = substr($file->filename, strrpos($file->filename, '.') + 1);
+		  switch($ext){
+			case "mov":
+			case "mp3":
+			case "flv":
+			break;
+			case "doc":
+			case "rtf":
+			case "txt":
+			case "csv":
+			case "ppt":
+			case "xls":
+			case "pdf":
+			  $output .= '<div class="download-wrapper"><div class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></div><div class="download-file-type">Download: '.l($file->filename,$file->filepath).'</div></div>';
+			break;
+			default:
+			  $output .= '<div class="image-wrap">'.theme('imagecache', 'image_uploads', $file->filepath, 'Grabbit Image', '').'</div>';
+			break;
+		}
+		
+	}
+	
+	$output .='<div>';
+	
 }
 
 function grabbit_albums_calculate(){
