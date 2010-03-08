@@ -4355,7 +4355,7 @@ display: none;
 	text-indent:3000px;
 	width:11px;
 }
-#main #content .album-control a{
+.node-type-media #main #content .body-uploader .album-control a{
 	color:#999999;
 }
 a.album-prev{
