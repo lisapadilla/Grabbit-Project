@@ -151,7 +151,7 @@ function grabbit_crons_emails_pull() {
 				if (!grabbit_crons_cron_time_emails()){
 			      break;
 			    }else{
-				  watchdog("grabbit", "el usuario tiene gmail: ".$user->name);  
+				  //watchdog("grabbit", "el usuario tiene gmail: ".$user->name);  
 			      grabbit_gmail_crear($user->uid);
 			    }
 			}
