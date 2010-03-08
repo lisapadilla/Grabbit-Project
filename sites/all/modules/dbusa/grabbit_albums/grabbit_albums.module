@@ -24,12 +24,12 @@ function grabbit_albums_preprocess_node(&$variables){
 		global $user;
 		drupal_add_js(drupal_get_path('module', 'grabbit_albums').'/albums_engine.js', $type = 'module');
 		
-		$controls = grabbit_aldums_calculate_next($variables->field_media_type[0]['value'],$user);
+		$controls = grabbit_aldums_calculate_next($variables->field_media_type[0]['value'],$user,$variables->nid);
 		
 	}
 }
 
-function grabbit_aldums_calculate_next($type,$user){
+function grabbit_aldums_calculate_next($type,$user,$nid){
 	
 	switch($type){
 		case "mov":
@@ -54,7 +54,15 @@ function grabbit_aldums_calculate_next($type,$user){
 		break;
 	}
 	
-	return $controls;
+	$sql_more="SELECT node.nid AS nid
+	 FROM node node 
+	 LEFT JOIN content_type_media node_data_field_media_type ON node.vid = node_data_field_media_type.vid
+	 INNER JOIN users users ON node.uid = users.uid
+	 WHERE (node.type in (%s)) AND ((node_data_field_media_type.field_media_type_value) in (".implode($types,',').")) AND (users.uid in (%d)) AND (node.nid > %d) LIMIT 1";
+	
+	$more = db_result(db_query($sql_more,'media',$user->uid,$nid));
+	
+	print_r($more);
 }
 
 function grabbit_albums_display(){
