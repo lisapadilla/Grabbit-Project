@@ -107,8 +107,8 @@ function grabbit_albums_display(){
 	 FROM node node 
 	 LEFT JOIN content_type_media node_data_field_media_type ON node.vid = node_data_field_media_type.vid
 	 INNER JOIN users users ON node.uid = users.uid
-	 WHERE (node.type in ('%s')) AND ((node_data_field_media_type.field_media_type_value) in (".implode($types,',').")) AND (users.uid in (%d)) AND (node.nid < %d) ORDER BY node.nid DESC";
-	$nodes = db_query($sql_less,'media',$user->uid,$nid);
+	 WHERE (node.type in ('%s')) AND ((node_data_field_media_type.field_media_type_value) in (".implode($types,',').")) AND (users.uid in (%d)) ORDER BY node.nid DESC";
+	$nodes = db_query($sql_less,'media',$user->uid);
 	
 	$output = '<div class="album-background">';
 	
