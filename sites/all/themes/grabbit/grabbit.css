@@ -4355,6 +4355,9 @@ display: none;
 	text-indent:3000px;
 	width:11px;
 }
+.album-control a{
+	color:#999999;
+}
 a.album-prev{
 	color:#999999;
 	font-size:11px;
