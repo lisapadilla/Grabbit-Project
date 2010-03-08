@@ -254,6 +254,10 @@ function grabbit_uploads_file_form_getit(){
 				  $node->comment = 2;
 				  $node->uid = $user->uid;
 				  $node->field_media[0]['value'] = $file->fid;
+				
+				  $ext = substr($file->filename, strrpos($file->filename, '.') + 1);
+				  $node->field_media_type[0]['value']=$ext;
+				
 				node_save($node);
 		
 		print $node->nid;
