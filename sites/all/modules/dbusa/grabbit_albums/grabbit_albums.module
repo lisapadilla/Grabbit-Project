@@ -112,9 +112,9 @@ function grabbit_albums_display(){
 	
 	$output = '<div class="album-background">';
 	
-	foreach($nodes as $nid){
+	while($nid = db_fetch_object($nodes)){
 		
-		$vars['node']=node_load($nid);
+		$vars['node']=node_load($nid->nid);
 		$unserialize=unserialize($vars['node']->field_media[0]['value']);
 		if($unserialize){
 			$node_media=node_load($unserialize['file']);
