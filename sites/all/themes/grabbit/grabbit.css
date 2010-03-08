@@ -4346,6 +4346,7 @@ display: none;
 	margin-left:410px;
 	margin-top:-40px;
 	position:absolute;
+	width:122px;
 }
 .album-icon{
 	background:url("images/album_icon.gif") no-repeat scroll right center transparent;
