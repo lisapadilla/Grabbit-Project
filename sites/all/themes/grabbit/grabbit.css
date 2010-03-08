@@ -1918,6 +1918,10 @@ a.show-comment-link{
   width:530px; 
   float: left;
 }
+.panel-wraper a
+{
+	color: #0073CF;
+}
 .user-panels .panel-grabbit .node-stream-news .item-body,
 .user-panels .panel-grabbit .node-stream-blogs .item-body,
 .user-panels .panel-grabbit .node-stream-deal .item-body{
