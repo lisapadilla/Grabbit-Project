@@ -4342,7 +4342,8 @@ display: none;
 	margin-left:190px;
 }
 .album-control{
-	margin-left:458px;
+	display:inline;
+	margin-left:410px;
 	margin-top:-40px;
 	position:absolute;
 }
