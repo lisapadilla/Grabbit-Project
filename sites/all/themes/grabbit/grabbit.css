@@ -1879,18 +1879,6 @@ a.panel-filters{
 .view-friends .views-row .views-field-action-socital-networks .field-content .from-twitter{
   margin-left:5px;
 }
-a.truncate_show{
-	display:block;
-  width: 15px;
-  height: 15px;
-  overflow: hidden;
-  text-indent: -3000px;
-	margin-top:10px;
-	background: url(images/more.gif) 0 0 no-repeat;
-	padding: 0px;
-	margin-left: 520px;
-	clear: both;
-}
 span.numerito-comment
 {
 	position: absolute;
@@ -1924,23 +1912,15 @@ a.show-comment-link{
 	background: url(images/more.gif) 0 0 no-repeat;
 	padding: 0px;
 }
-a.truncate_hide{
-	display:block;
-  width: 15px;
-  height: 15px;
-  overflow: hidden;
-  text-indent: -3000px;
-	margin-top:10px;
-	background: url(images/less.gif) 0 0 no-repeat;
-	padding: 0px;
-	margin-left: 530px;
-	clear: both;
-}
 #panel-0 .node-stream-news .item-body,
 #panel-0 .node-stream-blogs .item-body,
 #panel-0 .node-stream-deal .item-body{
   width:530px; 
   float: left;
+}
+.panel-wraper a
+{
+	color: #0073CF;
 }
 .user-panels .panel-grabbit .node-stream-news .item-body,
 .user-panels .panel-grabbit .node-stream-blogs .item-body,
