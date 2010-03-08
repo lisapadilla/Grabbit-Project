@@ -4350,11 +4350,7 @@ display: none;
 	text-indent: -999px;
 	width: 11px;
 	height: 11px;
-	background: url(images/album_icon.gif);
-	padding: 0px;
-	margin: 0px;
-	cursor: pointer;
-	overflow: hidden;
-	font-size: 0px;
-	line-height: 1000px;
+	background: url("images/album_icon.gif") no-repeat scroll right center transparent;
+	text-indent:3000em;
+	overflow:hidden;
 }
