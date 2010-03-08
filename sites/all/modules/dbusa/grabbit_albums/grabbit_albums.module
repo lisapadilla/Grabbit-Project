@@ -67,7 +67,7 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 	
 	$more = db_result(db_query($sql_more,'media',$user->uid,$nid));
 	
-	$less = db_result(db_query($sql_more,'media',$user->uid,$nid));
+	$less = db_result(db_query($sql_less,'media',$user->uid,$nid));
 	
 	print_r($less);
 }
