@@ -98,7 +98,6 @@ function grabbit_albums_display(){
 	 WHERE (node.type in ('%s')) AND ((node_data_field_media_type.field_media_type_value) in (".implode($types,',').")) AND (users.uid in (%d)) AND (node.nid < %d) ORDER BY node.nid DESC";
 	$nodes = db_query($sql_less,'media',$user->uid,$nid);
 	
-	
 	$output = '<div class="album-background">';
 	
 	foreach($nodes as $nid){
@@ -137,12 +136,9 @@ function grabbit_albums_display(){
 			break;
 		  }
 		
-	    }
+	    } }
 	
 	$output .='<div>';
 	
-}
-
-function grabbit_albums_calculate(){
-	
+	return $output;
 }
