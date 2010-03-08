@@ -25,7 +25,7 @@ function grabbit_albums_preprocess_node(&$variables){
 		drupal_add_js(drupal_get_path('module', 'grabbit_albums').'/albums_engine.js', $type = 'module');
 		
 		$controls = grabbit_aldums_calculate_next($variables['field_media_type'][0]['value'],$user,$variables['nid']);
-		print $controls;
+		print_r($variables);
 	}
 }
 
