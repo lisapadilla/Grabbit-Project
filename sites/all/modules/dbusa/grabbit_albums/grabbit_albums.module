@@ -79,7 +79,7 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 	if($more)
 	  $controls .=l('Next','node/'.$more,array('attributes'=>array('class'=>'album-next')));
 	
-	$controls .=l('album','album/'.$user->uid.'/'.$album);
+	$controls .=l('album','album/'.$user->uid.'/'.$album,array('attributes'=>array('class'=>'album-icon')));
 	$controls .= '</div>';
 	
 	return $controls;

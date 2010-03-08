@@ -4341,3 +4341,20 @@ display: none;
 #user-register .captcha img{
 	margin-left:190px;
 }
+.album-control{
+	margin-left:436px;
+	margin-top:-42px;
+	position:absolute;
+}
+.album-icon{
+	text-indent: -999px;
+	width: 11px;
+	height: 11px;
+	background: url(images/album_icon.gif);
+	padding: 0px;
+	margin: 0px;
+	cursor: pointer;
+	overflow: hidden;
+	font-size: 0px;
+	line-height: 1000px;
+}
