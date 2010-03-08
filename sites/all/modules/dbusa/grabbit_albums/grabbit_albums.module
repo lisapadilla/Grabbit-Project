@@ -91,6 +91,18 @@ function grabbit_albums_display(){
 	$uid=arg(0);
 	$type=arg(1);
 	
+	switch($type){
+		case 'media':
+		  $types = array("'mov'","'mp3'","'flv'");  
+		break;
+		case 'documents':
+		  $types = array("'doc'","'rtf'","'txt'","'csv'","'ppt'","'xls'","'pdf'");  
+		break;
+		default:
+		  $types = array("'jpeg'", "'bmp'", "'jpg'", "'png'", "'gif'");
+		break;
+	}
+	
 	$sql_less="SELECT node.nid AS nid
 	 FROM node node 
 	 LEFT JOIN content_type_media node_data_field_media_type ON node.vid = node_data_field_media_type.vid
