@@ -1262,7 +1262,7 @@ p#queuestatus
   height: 75px;
   background: url(images/twit_ico.png) bottom left no-repeat;
 }
-.facebook-post-header
+#page #main .stream-node
 {
   font-size:13px;
   line-height:17px;
@@ -1747,8 +1747,6 @@ a.panel-filters{
 #panel-0 .node-stream-deal .content-body, #panel-0 .node-stream-news .content-body,
 #panel-0 .node-stream-blogs .content-body
 {
-	font-size:14px;
-  line-height:17px;
   color: #000000;
 }
 #panel-0 .node-stream-news h2,
