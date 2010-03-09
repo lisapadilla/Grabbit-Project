@@ -1017,16 +1017,21 @@ p#queuestatus
 	line-height:17px;
 }
 #facebook-grabbit-update-form .user-friends .numbers{
-	-moz-border-radius:10px;
-	border-radius:10px;
-	-webkit-border-radius:10px;
-	background-color:#CC0000;
-	border:2px solid #C7D0D6;
 	color:white;
 	font-family:helvetica;
 	font-weight:bold;
 	padding:3px 6px 1px;
 	font-size:10px;
+	background: url(images/various/nr_bg.gif) repeat-x;
+}
+.round-numbers
+{
+	position: relative;
+}
+.round-numbers .a
+{
+	position: absolute;
+	background: url(images/various/nr_a.gif) no-repeat;
 }
 #edit-status-wrapper,
 #edit-status-1-wrapper{
