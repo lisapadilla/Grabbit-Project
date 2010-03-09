@@ -1349,7 +1349,7 @@ p#queuestatus
 }
 .facebook-post .facebook-date
 {
-  margin-left:59px;
+  /*margin-left:59px;*/
 }
 .truncate_show, .truncate_hide
 {
@@ -2509,9 +2509,6 @@ div.messages, div.status, div.warning, div.error{
 .front #content-area .views-row-even, .front #content-area .even,
 .front .panel-title{
 	background:#FFFFFF;
-}
-.front .panel-controller{
-  background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;	
 }
 #TB_closeAjaxWindow{
 	font-family:Helvetica,Tahoma,sans-serif;
@@ -4448,4 +4445,15 @@ a.album-next{
 .album-background div.items div.active { 
     border:1px inset #ccc; 
     background-color:#fff; 
+}
+
+#tooltip { 
+    display: none; 
+    background: transparent url(images/tooltip.png) no-repeat; 
+    font-size: 11px; 
+    height: 38px; 
+    width: 83px; 
+    padding: 5px; 
+    color: #0099FF;
+    z-index: 9999;
 }
