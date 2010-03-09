@@ -279,7 +279,7 @@ $(document).ready(function() {
 	
 	$('.show-comment-link').live('click',function(i){
 		i.preventDefault;
-		var universe = $(this).parents('.facebook-post-header, .news-comments');
+		var universe = $(this).parents('.facebook-post-header, .item-body');
 		$('.display-comments-buttons',universe).slideToggle('medium');
 	});
 	
