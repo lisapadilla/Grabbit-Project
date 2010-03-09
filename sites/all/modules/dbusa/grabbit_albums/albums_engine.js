@@ -1,3 +1,5 @@
 Drupal.behaviors.albums = function(){
-  $("div.scrollable").scrollable();
+  $("#scroll-album").scrollable(
+	
+	);
 }

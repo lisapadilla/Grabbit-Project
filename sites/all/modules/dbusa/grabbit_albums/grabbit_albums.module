@@ -117,11 +117,11 @@ function grabbit_albums_display(){
 				        <option value="documents">Documents</option>
 				        <option value="media">Videos</option>
 				 </select>
-				 <a href="#" class="prev">Previous</a>
-				 <a href="#" class="next">Next</a>
+				 <a href="#" class="album-prev prev">Previous</a>
+				 <a href="#" class="album-next next">Next</a>
 				 <a href="#" class="album-icon">Album</a>
 	           </div>
-	<div class="album-background clearfix"><div class="scrollable">';
+	<div class="album-background clearfix"><div id="scroll-album" class="scrollable">';
 	
 	while($nid = db_fetch_object($nodes)){
 		
@@ -155,7 +155,7 @@ function grabbit_albums_display(){
 			  $output .= '<div class="download-wrapper"><div class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></div><div class="download-file-type">Download: '.l($file->filename,$file->filepath).'</div></div>';
 			break;
 			default:
-			  $output .= l('<div class="image-wrap item">'.theme('imagecache', 'image_uploads_album', $file->filepath, 'Grabbit Image', '').'</div>','node/'.$nid->nid,array('html'=>TRUE));
+			  $output .= l('<div class="image-wrap">'.theme('imagecache', 'image_uploads_album', $file->filepath, 'Grabbit Image', '').'</div>','node/'.$nid->nid,array('html'=>TRUE.'attributes'=>array('class'=>'item')));
 			break;
 		  }
 		
