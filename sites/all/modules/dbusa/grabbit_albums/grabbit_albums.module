@@ -144,7 +144,7 @@ function grabbit_albums_display(){
 			  $output .= '<div class="download-wrapper"><div class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></div><div class="download-file-type">Download: '.l($file->filename,$file->filepath).'</div></div>';
 			break;
 			default:
-			  $output .= '<div class="image-wrap">'.theme('imagecache', 'image_uploads_album', $file->filepath, 'Grabbit Image', '').'</div>';
+			  $output .= l('<div class="image-wrap">'.theme('imagecache', 'image_uploads_album', $file->filepath, 'Grabbit Image', '').'</div>','node/'.$nid->nid,array('html'=>TRUE));
 			break;
 		  }
 		
