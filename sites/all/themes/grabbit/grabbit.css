@@ -4439,6 +4439,7 @@ a.album-next{
 */ 
 .album-background div.scrollable div.items div.item { 
     float:left; 
+    width:445px;
 } 
  
 /* you may want to setup some decorations to active the item */ 
