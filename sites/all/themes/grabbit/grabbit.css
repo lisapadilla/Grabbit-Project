@@ -4384,6 +4384,9 @@ a.album-next{
 	width:450px;
 }
 .album-background .image-wrap{
-	width:120px;
+	background:none repeat scroll 0 0 white;
 	float:left;
+	margin:10px;
+	padding:5px;
+	width:120px;
 }

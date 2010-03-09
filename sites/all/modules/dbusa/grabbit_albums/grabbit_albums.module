@@ -110,7 +110,7 @@ function grabbit_albums_display(){
 	 WHERE (node.type in ('%s')) AND ((node_data_field_media_type.field_media_type_value) in (".implode($types,',').")) AND (users.uid in (%d)) ORDER BY node.nid DESC";
 	$nodes = db_query($sql_less,'media',$uid);
 	
-	$output = '<div class="album-background">';
+	$output = '<div class="album-background clearfix">';
 	
 	while($nid = db_fetch_object($nodes)){
 		
