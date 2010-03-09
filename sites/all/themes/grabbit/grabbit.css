@@ -1001,30 +1001,31 @@ p#queuestatus
   float: left;
 }
 #facebook-grabbit-update-form .user-name{
-  width: 158px;
-  float: left;
-  color: #000000;
-  font-size: 12px;
-  line-height: 13px;
-  margin-bottom: 2px;
+ 	color:#000000;
+	float:left;
+	font-size:12px;
+	font-weight:bold;
+	letter-spacing:0.3px;
+	line-height:13px;
+	margin-bottom:2px;
+	width:158px;
 }
 #facebook-grabbit-update-form .user-friends{
-  width: 158px;
-  float: left;
-  color: #9ea5ab;
-  font-size: 11px;
-  line-height: 17px;
-  margin-bottom: 2px;
+	color:#9EA5AB;
+	font-size:11px;
+	font-weight:bold;
+	line-height:17px;
 }
 #facebook-grabbit-update-form .user-friends .numbers{
 	-moz-border-radius:10px;
 	border-radius:10px;
 	-webkit-border-radius:10px;
 	background-color:#CC0000;
+	border:2px solid #C7D0D6;
 	color:white;
 	font-family:helvetica;
 	font-weight:bold;
-	padding:1px 6px;
+	padding:3px 6px 1px;
 }
 #edit-status-wrapper,
 #edit-status-1-wrapper{
