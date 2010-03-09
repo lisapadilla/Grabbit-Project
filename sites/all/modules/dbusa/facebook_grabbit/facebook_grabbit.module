@@ -611,8 +611,8 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	  <a href="JavaScript:void(0);" title="retweet" class="retweet-facebook">RT</a>
 	  <a href="javascript:void(0);" title="comment" class="facebook-makecomment-link">Post a comment</a>
 	  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$post->nid.'"></a>
-	  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
 	  <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$post->nid.'" >Deal</a></span>
+	  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
 	</div>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
 	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div><div class="facebook-post-body">
@@ -2256,14 +2256,16 @@ function _news_theme($comments,$node,$matches=NULL){
 					'.$image.'
 					<div class="item-body">
 					  <div class="links_stream">  
-					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
-					    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that'))).'
-					    <a href="javascript:void(0)" class="comment-news">Comment</a>
-					    <a href="javascript:void(0);" class="bring-tags iconchange" node="'.$node->nid.'"></a>
-					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
+					  <div class="tooltipwraper">
+					    <a href="JavaScript:void(0);" class="trash-item" title="delete" item_id="'.$node->nid.'">TR</a>
+					    '.l('Grabbit', "node/".$node->nid, array('absolute' => TRUE,'attributes'=>array('class'=>'grabb-that', 'title'=>'retweet'))).'
+					    <a href="javascript:void(0)" title="comment" class="comment-news">Comment</a>
+					    <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$node->nid.'"></a>
 					    '.$deal_matches.'
 					    '.$deal.'
-					    <span class="url-deal iconchange"><a href="#" node="'.$node->nid.'" >Deal</a></span>
+					    <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$node->nid.'" >Deal</a></span>
+					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
+					  </div>
 					  </div>
 					  <h2>'.$node_title.'</h2>
 					  <div class="content-body">
@@ -2317,8 +2319,10 @@ function theme_gmail_message($comments,$node){
 					<div class="item-body">
 					  
 					  <div class="links_stream">  
-					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
+					  <div class="tooltipwraper">
+					    <a href="JavaScript:void(0);" class="trash-item" title="delete" item_id="'.$node->nid.'">TR</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
+					  </div>
 					  </div>
 					  <h2>'.l($node->title,'gmail/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'KeepThis=true&height=500&width=740')).'</h2>
 					  <div class="content-body">
@@ -2375,11 +2379,12 @@ function theme_imap_message($comments,$node){
 	             <div class="meta">
 					'.$image.'
 					<div class="item-body">
-					  <div class="links_stream">  
-					    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$node->nid.'">TR</a>
-					    <a href="javascript:void(0)" class="comment-news">Comment</a>
+					  <div class="links_stream">
+					  <div class="tooltipwraper">  
+					    <a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$node->nid.'">TR</a>
+					    <a href="javascript:void(0)" title="comment" class="comment-news">Comment</a>
 					    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'	</span>
-					    
+					  </div>
 					  </div>
 					  <h2>'.l($node->title,'imap/open/email/'.$node->nid.'/',array('attributes'=>array('class'=>'thickbox more_mail'),'query'=>'KeepThis=true&height=500&width=740')).'</h2>
 					  <div class="content-body">
