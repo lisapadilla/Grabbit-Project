@@ -1349,7 +1349,7 @@ p#queuestatus
 }
 .facebook-post .facebook-date
 {
-  margin-left:59px;
+  /*margin-left:59px;*/
 }
 .truncate_show, .truncate_hide
 {
@@ -2509,9 +2509,6 @@ div.messages, div.status, div.warning, div.error{
 .front #content-area .views-row-even, .front #content-area .even,
 .front .panel-title{
 	background:#FFFFFF;
-}
-.front .panel-controller{
-  background: #FFFFFF url(images/mp_bot.gif) bottom no-repeat;	
 }
 #TB_closeAjaxWindow{
 	font-family:Helvetica,Tahoma,sans-serif;

@@ -88,7 +88,7 @@ global $user;
   <?php print $scripts; ?>
 </head>
 <body class="<?php print $body_classes; ?>">
-
+  <div id="tooltip">&nbsp;</div>
   <div id="page"><div id="page-inner">
 
     <a name="top" id="navigation-top"></a>

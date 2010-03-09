@@ -77,6 +77,8 @@ if (theme_get_setting('grabbit_fixed')) {
 }
 // */
 
+drupal_add_js( path_to_theme().'/js/tooltip.js' );
+drupal_add_js( path_to_theme().'/js/engine.js' );
 
 /**
  * Implementation of HOOK_theme().
