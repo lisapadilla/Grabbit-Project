@@ -86,7 +86,8 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 }
 
 function grabbit_albums_display(){
-	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_albums').'/jquery.tools.min.js', $type = 'module');
+	drupal_add_js(drupal_get_path('module', 'grabbit_albums').'/albums_engine.js', $type = 'module');
 	
 	$uid=arg(1);
 	$type=arg(2);
