@@ -503,8 +503,8 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 		}	
 	}
 	if($coments_number>0){
-		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
-		<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
+		$comments_data='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>';
+		$show_comments='<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
 	}else{
 		$show_comments='<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
 	}
@@ -512,19 +512,26 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	// Output for wall and status update.
 	$output = '
 	<div class="facebook-post clearfix '.$post->rowx.' stream-node" id="node-'.$post->created.'">
-	<div id="tags-show-'.$post->nid.'"></div>
-	<a href="JavaScript:void(0);" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
-	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
-	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
-	<a href="javascript:void(0);" class="bring-tags iconchange" node="'.$post->nid.'"></a>
-	<span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
-	<span class="url-deal iconchange"><a href="#" node="'.$post->nid.'" >Deal</a></span>
+	<div class="tooltipwraper">
+	  <div id="tags-show-'.$post->nid.'"></div>
+	  <a href="JavaScript:void(0);" title="Trash item" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
+	  <a href="JavaScript:void(0);" title="Retweet post" class="retweet-facebook">RT</a>
+	  <a href="javascript:void(0);" title="Post comment" class="facebook-makecomment-link">Post a comment</a>
+	  <a href="javascript:void(0);" title="Show tags" class="bring-tags iconchange" node="'.$post->nid.'"></a>
+	  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
+	  <span class="url-deal iconchange"><a title="Display deals" href="#" node="'.$post->nid.'" >Deal</a></span>
+	</div>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
 	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
-	<div class="content-truncated">'.$msg_formatted.'</div><span class="facebook-date">on '.format_date($post->created).'</span>
-	</div></div>'.$show_comments.' ';
+	<div class="content-truncated">'.$msg_formatted.'</div>
+	</div>
+	<div class="frost clearfix">
+	  <span class="facebook-date">on '.format_date($post->created).'</span>
+	  '.$comments_data.'
+	</div>
+	</div>'.$show_comments.' ';
 	
 
 		$output .= '
@@ -588,8 +595,8 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 		}	
 	}
 	if($coments_number>0){
-		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
-		<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
+		$comments_data='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>';
+		$show_comments='<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
 	}else{
 		$show_comments='<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
 	}
@@ -598,13 +605,15 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	// Output for aplication updates
 	
 	$output = '<div class="facebook-post clearfix '.$post->rowx.' stream-node" id="node-'.$post->created.'">
-	<div id="tags-show-'.$post->nid.'"></div>
-	<a href="JavaScript:void(0);" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
-	<a href="JavaScript:void(0);" class="retweet-facebook">RT</a>
-	<a href="javascript:void(0);" class="facebook-makecomment-link">Post a comment</a>
-	<a href="javascript:void(0);" class="bring-tags iconchange" node="'.$post->nid.'"></a>
-	<span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
-	<span class="url-deal iconchange"><a href="#" node="'.$post->nid.'" >Deal</a></span>
+	<div class="tooltipwraper">
+	  <div id="tags-show-'.$post->nid.'"></div>
+	  <a href="JavaScript:void(0);" title="Trash item" class="trash-facebook" face_id="'.$post->nid.'">TR</a>
+	  <a href="JavaScript:void(0);" title="Retweet post" class="retweet-facebook">RT</a>
+	  <a href="javascript:void(0);" title="Post comment" class="facebook-makecomment-link">Post a comment</a>
+	  <a href="javascript:void(0);" title="Show tags" class="bring-tags iconchange" node="'.$post->nid.'"></a>
+	  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
+	  <span class="url-deal iconchange"><a href="#" title="Display deals" node="'.$post->nid.'" >Deal</a></span>
+	</div>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
 	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div><div class="facebook-post-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
@@ -613,7 +622,11 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .='<div class="facebook-attachment">'.$attachment.'</div></div><span class="facebook-date">on '.format_date($post->created).'</span></div>
+	$output .='<div class="facebook-attachment">'.$attachment.'</div></div></div>
+	<div class="frost clearfix">
+	  <span class="facebook-date">on '.format_date($post->created).'</span>
+	  '.$comments_data.'
+	</div>
 	'.$show_comments.'
 	<div class="facebook-comment-form">
 	<div class="facebook-form">
