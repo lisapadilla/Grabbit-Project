@@ -4461,8 +4461,9 @@ a.album-next{
 }
 
 #scroll-album .item a{
-  float:left;
-  width:120px;
+  	float:left;
+	margin-right:8px;
+	width:140px;
 }
 #scroll-album .item img{
   display:block
