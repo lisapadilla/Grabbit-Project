@@ -503,8 +503,8 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 		}	
 	}
 	if($coments_number>0){
-		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
-		<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
+		$comments_data='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>';
+		$show_comments='<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
 	}else{
 		$show_comments='<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
 	}
@@ -523,8 +523,13 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
-	<div class="content-truncated">'.$msg_formatted.'</div><span class="facebook-date">on '.format_date($post->created).'</span>
-	</div></div>'.$show_comments.' ';
+	<div class="content-truncated">'.$msg_formatted.'</div>
+	</div>
+	<div class="frost clearfix">
+	  <span class="facebook-date">on '.format_date($post->created).'</span>
+	  '.$comments_data.'
+	</div>
+	</div>'.$show_comments.' ';
 	
 
 		$output .= '

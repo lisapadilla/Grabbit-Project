@@ -127,7 +127,8 @@ function grabbit_albums_display(){
 	$total=0;
 	while($nid = db_fetch_object($nodes)){
 		
-		if($total=0){
+		if($total=0 || ){
+			$flag=1;
 			$output.='<div class="item">';
 		}
 		
@@ -169,6 +170,7 @@ function grabbit_albums_display(){
 	    if($total=0){
 			$output.='</div>';
 		} 
+		$total++;
 	  }
 	
 	$output .='</div></div></div>';
