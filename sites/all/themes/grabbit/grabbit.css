@@ -1361,12 +1361,6 @@ p#queuestatus
   line-height:17px;
   margin-left:10px;
 }
-.facebook-post-comments
-{
-  bottom:13px;
-  position:absolute;
-  right:15px;
-}
 .facebook-post .facebook-comment-form{
   padding-left: 58px;
   display: block;
@@ -1760,6 +1754,15 @@ a.panel-filters{
   font-weight: bold;
   font-size: 13px;
   line-height: 17px;
+}
+.facebook-with-target
+{
+  font-weight: bold;
+}
+#main .facebook-post .facebook-post-body
+{
+  width: 480px;
+  display: block;
 }
 .node-stream-news h2,
 .node-stream-blogs h2,
