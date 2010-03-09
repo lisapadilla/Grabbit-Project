@@ -1243,7 +1243,7 @@ p#queuestatus
 .node-stream-blogs,
 .node-stream-deal
 {
-  padding: 10px;
+  padding:7px 10px 10px;
 }
 .facebook-post .facebook-post-header a.facebook-story-pic,
 .twitter-message-stream .twitter-image{
@@ -1254,23 +1254,27 @@ p#queuestatus
   display: block;
 }
 .facebook-post .facebook-post-header a.facebook-story-pic{
-  height: 70px;
-  background: url(images/fb_ico.gif) bottom left no-repeat;
+  background:transparent url(images/fb_ico.gif) no-repeat scroll left bottom;
+  height:70px;
+  margin-top:3px;
 }
 .twitter-message-stream .twitter-image{
   height: 75px;
   background: url(images/twit_ico.png) bottom left no-repeat;
 }
+.facebook-post-header
+{
+  font-size:13px;
+  line-height:17px;
+}
 .facebook-post .facebook-post-header a.facebook-story-name
 {
-  color: #385691;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 15px;
-  margin-bottom: 5px;
-  padding-right: 5px;
-  display: block;
-  width: 440px;
+  color:#385691;
+  font-size:13px;
+  font-weight:bold;
+  line-height:15px;
+  margin-bottom:5px;
+  padding-right:5px;
 }
 .panel-grabbit .twitter-message-stream a.twitter-name-link{
   color: #385691;
@@ -1294,13 +1298,12 @@ p#queuestatus
   margin-bottom: 10px;
 }
 .facebook-post .facebook-post-body, .facebook-post .facebook-attachment{
-  width: 510px;
-  float: left;
-  font-size: 14px;
-  line-height: 17px;
-  margin-bottom: 10px;
-  display: block;
-  color: #000000;
+  color:#000000;
+  display:inline;
+  font-size:13px;
+  line-height:17px;
+  margin-bottom:10px;
+  margin-top:3px;
 }
 .user-panels .panel-grabbit .facebook-post .facebook-post-body, .user-panels .panel-grabbit .facebook-post .facebook-attachment{
   width: 200px;
@@ -1340,12 +1343,26 @@ p#queuestatus
 .node-stream-deal .submitted, 
 .node-stream-news .submitted,
 .node-stream-blogs .submitted{
-  display: block;
-  clear: both;
-  color: #999999;
-  font-size: 10px;
-  line-height: 11px;
-  margin-top: 10px;
+  clear:both;
+  color:#999999;
+  display:block;
+  font-size:10px;
+  line-height:11px;
+  /*margin-left:59px;*/
+  margin-top:6px;
+}
+.truncate_show, .truncate_hide
+{
+  font-size:11px;
+  font-weight:bold;
+  line-height:17px;
+  margin-left:10px;
+}
+.facebook-post-comments
+{
+  bottom:13px;
+  position:absolute;
+  right:15px;
 }
 .facebook-post .facebook-comment-form{
   padding-left: 58px;
@@ -1374,6 +1391,7 @@ p#queuestatus
 }
 .facebook-post, .twitter-message-stream, .node-stream-news, .node-stream-deal, .node-stream-blogs{
 	display:block;
+  position:relative;
 }
 #block-views-friends-block_1,
 #block-views-suggested_friends-block_1
@@ -1883,7 +1901,6 @@ a.panel-filters{
 }
 span.numerito-comment
 {
-	position: absolute;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
@@ -1891,14 +1908,15 @@ span.numerito-comment
 	-webkit-box-shadow:1px 1px 1px #888888;
 	box-shadow:1px 1px 1px #888888;
 	background-color:#CC0000;
-	color:white;
-	font-family:helvetica;
-	font-size:9px;
-	font-weight:bold;
-	line-height:11px;
-	margin-left:7px;
-	margin-top:-8px;
-	padding:2px 5px;
+  color:white;
+  font-family:helvetica;
+  font-size:9px;
+  font-weight:bold;
+  line-height:10px;
+  margin-left:7px;
+  margin-top:-8px;
+  padding:4px 5px 1px;
+  position:absolute;
 }
 .comments-data
 {
