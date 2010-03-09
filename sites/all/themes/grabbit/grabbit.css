@@ -1348,8 +1348,11 @@ p#queuestatus
   display:block;
   font-size:10px;
   line-height:11px;
-  /*margin-left:59px;*/
   margin-top:6px;
+}
+.facebook-post .facebook-date
+{
+  margin-left:59px;
 }
 .truncate_show, .truncate_hide
 {
@@ -1392,6 +1395,10 @@ p#queuestatus
 .facebook-post, .twitter-message-stream, .node-stream-news, .node-stream-deal, .node-stream-blogs{
 	display:block;
   position:relative;
+}
+.facebook-post-inside-body
+{
+  display: inline;
 }
 #block-views-friends-block_1,
 #block-views-suggested_friends-block_1
