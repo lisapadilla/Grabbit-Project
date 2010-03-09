@@ -4454,8 +4454,8 @@ a.album-next{
 	display:none;
 	font-size:11px;
 	height:29px;
-	padding:9px 0 0 9px;
-	width:75px;
+	padding-top: 9px;
+	width: 84px;
 	z-index:9999;
 	text-align: center;
 }
