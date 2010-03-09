@@ -113,17 +113,17 @@ function grabbit_albums_display(){
 	$nodes = db_query($sql_less,'media',$uid);
 	
 	$output = '
+		<div class="album-main-controllers album-control">
+		             <select name="album-type" id="album-type">
+					        <option value="images">Images</option>
+					        <option value="documents">Documents</option>
+					        <option value="media">Videos</option>
+					 </select>
+					 <a href="JavaScript:void(0);" class="album-prev prev">Previous</a>
+					 <a href="JavaScript:void(0);" class="album-next next">Next</a>
+					 <a href="JavaScript:void(0);" class="album-icon">Album</a>
+		 </div>
 	<div class="album-background clearfix">
-	<div class="album-main-controllers album-control">
-	             <select name="album-type" id="album-type">
-				        <option value="images">Images</option>
-				        <option value="documents">Documents</option>
-				        <option value="media">Videos</option>
-				 </select>
-				 <a href="#" class="album-prev prev">Previous</a>
-				 <a href="#" class="album-next next">Next</a>
-				 <a href="#" class="album-icon">Album</a>
-	 </div>
 	<div id="scroll-album" class="scrollable">
 	<div class="items"><div class="item">';
 	$total=0;
