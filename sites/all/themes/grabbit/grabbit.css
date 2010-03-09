@@ -1342,6 +1342,7 @@ p#queuestatus
   clear:both;
   color:#999999;
   display:block;
+  float: left;
   font-size:10px;
   line-height:11px;
   margin-top:6px;
@@ -1728,7 +1729,6 @@ a.panel-filters{
   line-height:15px;
 }
 .news-comments{
-  padding-top: 10px;
   clear: both;
 }
 .news-comments .news-comment{
@@ -1845,9 +1845,6 @@ a.panel-filters{
   padding-left: 0px;
   margin-bottom: 10px;
 }
-.node-stream-news .news-comments{
-  padding-top: 10px;
-}
 .node-stream-news .news-comments .news-comment-picture,
 .node-stream-blogs .news-comments .news-comment-picture,
 .node-stream-deal .news-comments .news-comment-picture{
@@ -1914,8 +1911,8 @@ span.numerito-comment
 }
 .comments-data
 {
-	clear: both;
-	float: right;
+	float:right;
+  margin-top:-18px;
 }
 a.show-comment-link{
 	display:block;
