@@ -1854,23 +1854,6 @@ a.panel-filters{
   width: 123px;
   height: 13px;
 }
-#panel-0 .facebook-with-target{
-  display: block;
-  width: 215px;
-  float: left;
-  color: #0073CF;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 13px;
-}
-#panel-0 .facebook-with-target a{
-  color: #385691;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 15px;
-  padding-left: 0px;
-  margin-bottom: 10px;
-}
 .node-stream-news .news-comments .news-comment-picture,
 .node-stream-blogs .news-comments .news-comment-picture,
 .node-stream-deal .news-comments .news-comment-picture{
@@ -2652,6 +2635,7 @@ div.messages, div.status, div.warning, div.error{
 }
 .action-button, .flag-wrapper
 {
+	margin-right: 3px;
 	float: right;
 }
 .action-button a
