@@ -4377,3 +4377,13 @@ a.album-next{
 	background:url("images/album_next.gif") no-repeat scroll right center transparent;
 	padding-right:10px;
 }
+.album-background{
+	background-color:#E2E4E7;
+	margin-left:50px;
+	padding:30px;
+	width:450px;
+}
+.album-background .image-wrap{
+	width:120px;
+	float:left;
+}
