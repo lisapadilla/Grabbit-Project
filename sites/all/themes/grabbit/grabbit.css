@@ -4446,3 +4446,13 @@ a.album-next{
     border:1px inset #ccc; 
     background-color:#fff; 
 }
+
+#tooltip { 
+    display: none; 
+    background: transparent url(images/tooltip.png) no-repeat; 
+    font-size: 11px; 
+    height: 38px; 
+    width: 83px; 
+    padding: 5px; 
+    color: #0099FF;    
+}
