@@ -4448,12 +4448,13 @@ a.album-next{
 }
 
 #tooltip { 
-    display: none; 
-    background: transparent url(images/tooltip.png) no-repeat; 
-    font-size: 11px; 
-    height: 38px; 
-    width: 83px; 
-    padding: 5px; 
-    color: #0099FF;
-    z-index: 9999;
+    background:transparent url(images/tooltip.png) no-repeat scroll 0 0;
+	color:#0099FF;
+	display:none;
+	font-size:11px;
+	height:29px;
+	padding:9px 0 0 9px;
+	width:75px;
+	z-index:9999;
+	text-align: center;
 }
