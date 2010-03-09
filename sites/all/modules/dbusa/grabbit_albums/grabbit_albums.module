@@ -111,7 +111,7 @@ function grabbit_albums_display(){
 	$nodes = db_query($sql_less,'media',$uid);
 	
 	$output = '<div class="album-main-controllers">
-	             <select name="album-type" id="album-type" size="3">
+	             <select name="album-type" id="album-type">
 				        <option value="images">Images</option>
 				        <option value="documents">Documents</option>
 				        <option value="media">Videos</option>
