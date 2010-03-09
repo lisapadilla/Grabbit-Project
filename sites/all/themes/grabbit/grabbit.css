@@ -1758,7 +1758,8 @@ a.panel-filters{
 .node-stream-deal h2 a{
   color: #385691;
   font-weight: bold;
-  line-height: 15px;
+  font-size: 13px;
+  line-height: 17px;
 }
 .node-stream-news h2,
 .node-stream-blogs h2,
