@@ -4390,3 +4390,15 @@ a.album-next{
 	padding:5px;
 	width:120px;
 }
+.album-main-controllers {
+	margin-left:375px;
+	margin-top:-33px;
+	position:absolute;
+	width:230px;
+}
+#album-type{
+	margin-right:10px;
+}
+.album-main-controllers .album-icon{
+	background:url("images/album_icon_active.gif") no-repeat scroll right center transparent;
+}
