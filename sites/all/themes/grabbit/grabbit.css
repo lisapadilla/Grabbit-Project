@@ -4426,10 +4426,10 @@ a.album-next{
 .album-background div.scrollable { 
  
     /* required settings */ 
-    position:relative; 
-    overflow:hidden; 
-    width: 660px; 
-    height:90px; 
+    height:380px;
+	overflow:hidden;
+	position:relative;
+	width:455px;
 } 
  
 /* 
