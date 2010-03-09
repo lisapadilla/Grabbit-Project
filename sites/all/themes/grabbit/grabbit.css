@@ -1023,7 +1023,7 @@ p#queuestatus
 	font-size:10px;
 	font-weight:bold;
 	height:11px;
-	margin-left:5px;
+	margin: 0 5px;
 	padding:5px 3px;
 }
 .round-numbers
