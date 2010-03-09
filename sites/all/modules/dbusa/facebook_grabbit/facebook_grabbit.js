@@ -62,6 +62,7 @@ function display_items(panel){
 		        //display_items(panel);
 		        fixtheheightMore(panel);
 		        Drupal.behaviors.initThickbox(data);
+		        Drupal.behaviors.tooltips(data);
 			    Drupal.flagLink(data);																
 				}else{
 		        current_panel.parent().next().html('You have reached the end of your stream');
