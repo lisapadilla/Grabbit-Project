@@ -117,8 +117,8 @@ function grabbit_albums_display(){
 				        <option value="documents">Documents</option>
 				        <option value="media">Videos</option>
 				 </select>
-				 <a href="#" class="album-prev prev">Previous</a>
-				 <a href="#" class="album-next next">Next</a>
+				 <a href="#" class="prev">Previous</a>
+				 <a href="#" class="next">Next</a>
 				 <a href="#" class="album-icon">Album</a>
 	           </div>
 	<div class="album-background clearfix"><div class="scrollable">';
