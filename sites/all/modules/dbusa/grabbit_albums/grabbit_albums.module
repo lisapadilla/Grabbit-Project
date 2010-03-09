@@ -121,7 +121,8 @@ function grabbit_albums_display(){
 				 <a href="#" class="album-next next">Next</a>
 				 <a href="#" class="album-icon">Album</a>
 	           </div>
-	<div class="album-background clearfix"><div id="scroll-album" class="scrollable"><div class="items">';
+	<div class="album-background clearfix"><div id="scroll-album" class="scrollable">			<a href="#" class="album-prev prev">Previous</a>
+				 <a href="#" class="album-next next">Next</a><div class="items">';
 	
 	while($nid = db_fetch_object($nodes)){
 		
