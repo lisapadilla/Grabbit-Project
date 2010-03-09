@@ -4454,5 +4454,6 @@ a.album-next{
     height: 38px; 
     width: 83px; 
     padding: 5px; 
-    color: #0099FF;    
+    color: #0099FF;
+    z-index: 9999;
 }
