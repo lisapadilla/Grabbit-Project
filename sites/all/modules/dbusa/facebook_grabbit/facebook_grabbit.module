@@ -504,7 +504,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	}
 	if($coments_number>0){
 		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
-		<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
+		<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
 	}else{
 		$show_comments='<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
 	}
@@ -524,7 +524,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">'.$msg_formatted.'</div><span class="facebook-date">on '.format_date($post->created).'</span>
-	</div></div><div class="facebook-post-comments clearfix">'.$show_comments.'</div>';
+	</div></div>'.$show_comments.' ';
 	
 
 		$output .= '
@@ -589,7 +589,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	}
 	if($coments_number>0){
 		$show_comments='<div class="comments-data"><span class="numerito-comment">'.$coments_number.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
-		<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
+		<div class="facebook-post-comments clearfix"><div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div></div>';
 	}else{
 		$show_comments='<div class="display-comments-buttons" style="display:none;">'.$show_comments.'</div>';
 	}
@@ -614,7 +614,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	}
 	
 	$output .='<div class="facebook-attachment">'.$attachment.'</div></div><span class="facebook-date">on '.format_date($post->created).'</span></div>
-	<div class="facebook-post-comments clearfix">'.$show_comments.'</div>
+	'.$show_comments.'
 	<div class="facebook-comment-form">
 	<div class="facebook-form">
 		<form id="myForm" style="display:none;">
@@ -2180,7 +2180,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	}
 	
 	if($comments_count>0){
-	  	$comments_output = '<div class="news-comments"><div class="comments-data"><span class="numerito-comment">'.$comments_count.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
+	  	$comments_output = '<div class="comments-data"><span class="numerito-comment">'.$comments_count.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div><div class="news-comments">
 		<div class="display-comments-buttons" style="display:none;">'.$comments_output;	
 	}else{
 		$comments_output = '<div class="news-comments">
