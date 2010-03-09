@@ -1017,12 +1017,14 @@ p#queuestatus
 	line-height:17px;
 }
 #facebook-grabbit-update-form .user-friends .numbers{
+	background:transparent url(images/various/nr_bg.gif) repeat-x scroll 0 0;
 	color:white;
 	font-family:helvetica;
-	font-weight:bold;
-	padding:3px 6px 1px;
 	font-size:10px;
-	background: url(images/various/nr_bg.gif) repeat-x;
+	font-weight:bold;
+	height:11px;
+	margin: 0 5px;
+	padding:5px 3px;
 }
 .round-numbers
 {
@@ -1030,8 +1032,23 @@ p#queuestatus
 }
 .round-numbers .a
 {
-	position: absolute;
-	background: url(images/various/nr_a.gif) no-repeat;
+	background:transparent url(images/various/nr_a.gif) no-repeat scroll 0 0;
+	display:block;
+	height:19px;
+	left:0;
+	position:absolute;
+	top:-4px;
+	width:10px;
+}
+.round-numbers .b
+{
+	background:transparent url(images/various/nr_b.gif) no-repeat scroll 0 0;
+	display:block;
+	height:19px;
+	right:0;
+	position:absolute;
+	top:-4px;
+	width:10px;
 }
 #edit-status-wrapper,
 #edit-status-1-wrapper{
@@ -1815,6 +1832,10 @@ a.panel-filters{
 	margin-left: 40px;
 	margin-top: 4px;
 }
+.facebook-post .frost .facebook-date
+{
+	margin-left: 59px;
+}
 .facebook-post .facebook-comments
 {
 	margin-bottom: 10px;
@@ -1917,7 +1938,6 @@ span.numerito-comment
 .comments-data
 {
 	float:right;
-  margin-top:-18px;
 }
 a.show-comment-link{
 	display:block;
