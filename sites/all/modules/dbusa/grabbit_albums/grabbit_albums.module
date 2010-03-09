@@ -123,13 +123,13 @@ function grabbit_albums_display(){
 				 <a href="#" class="album-icon">Album</a>
 	           </div>
 	<div class="album-background clearfix"><div id="scroll-album" class="scrollable"><a href="#" class="album-prev prev">Previous</a>
-				 <a href="#" class="album-next next">Next</a><div class="items">';
+				 <a href="#" class="album-next next">Next</a><div class="items"><div class="item">';
 	$total=0;
 	
 	while($nid = db_fetch_object($nodes)){
 		
-		if($total=0){
-		  
+		if($total % $number_of_items){
+		  $output .='</div><div class="item">'
 		}
 		
 		$vars['node']=node_load($nid->nid);
