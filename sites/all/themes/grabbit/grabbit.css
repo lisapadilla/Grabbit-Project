@@ -4437,7 +4437,7 @@ a.album-next{
     typically, this element is the one that *you* will style 
     the most. 
 */ 
-.album-background div.scrollable div.items div { 
+.album-background div.scrollable div.items div.item { 
     float:left; 
 } 
  
@@ -4457,4 +4457,12 @@ a.album-next{
 	width:75px;
 	z-index:9999;
 	text-align: center;
+}
+
+#scroll-album .item a{
+  float:left;
+  width:120px;
+}
+#scroll-album .item img{
+  display:block
 }
