@@ -1279,10 +1279,8 @@ p#queuestatus
 .panel-grabbit .twitter-message-stream a.twitter-name-link{
   color: #385691;
   font-weight: bold;
-  font-size: 14px;
-  line-height: 15px;
   display: block;
-  width: 440px;
+  width: 400px;
   float: left;
   margin-bottom: 5px;
 }
@@ -1323,8 +1321,6 @@ p#queuestatus
 .panel-grabbit .twitter-message-stream .twitter-body{
   width: 510px;
   float: left;
-  font-size: 14px;
-  line-height: 17px;
   display: block;
   color: #000000;
 }
@@ -1759,10 +1755,17 @@ a.panel-filters{
 {
   font-weight: bold;
 }
-#main .facebook-post .facebook-post-body
+#main .facebook-post .facebook-post-body,
+.twitter-body,
+.node-stream-gmail .content-not-truncated,
+.stream-item-element .content-truncated
 {
   width: 480px;
   display: block;
+}
+.facebook-post-body
+{
+  float: left;
 }
 .node-stream-news h2,
 .node-stream-blogs h2,
