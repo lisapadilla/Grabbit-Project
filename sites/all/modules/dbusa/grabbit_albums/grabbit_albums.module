@@ -129,7 +129,7 @@ function grabbit_albums_display(){
 	while($nid = db_fetch_object($nodes)){
 		
 		if($total % $number_of_items){
-		  $output .='</div><div class="item">'
+		  $output .='</div><div class="item">';
 		}
 		
 		$vars['node']=node_load($nid->nid);
