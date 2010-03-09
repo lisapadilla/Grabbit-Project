@@ -2180,7 +2180,7 @@ function _news_theme($comments,$node,$matches=NULL){
 	}
 	
 	if($comments_count>0){
-	  	$comments_output = '<div class="news-comments"><div class="comments-data"><span class="numerito-comment">'.$comments_count.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div>
+	  	$comments_output = '<div class="comments-data"><span class="numerito-comment">'.$comments_count.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div><div class="news-comments">
 		<div class="display-comments-buttons" style="display:none;">'.$comments_output;	
 	}else{
 		$comments_output = '<div class="news-comments">
