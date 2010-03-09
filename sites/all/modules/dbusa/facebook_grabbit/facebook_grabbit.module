@@ -1783,7 +1783,7 @@ function facebook_grabbit_private_view_panel_term($param){
 					if(!$entry['value']['attachment']){ //STATUS UPDATE
 						$target='';
 						if($entry['value']['target_id'])
-						  $target='&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a>';
+						  $target='<span class="facebook-target-wraper">&raquo; <a href="'.$profiles[$entry['value']['actor_id']]['url'].'">'.$profiles[$entry['value']['target_id']]['name'].'</a></span>';
 
 						$output .= prepeare_status_update($entry['value'], $profiles[$entry['value']['actor_id']],$target,$profiles);
 						$comments=array();
