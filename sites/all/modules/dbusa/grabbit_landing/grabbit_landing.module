@@ -48,7 +48,7 @@ function grabbit_landing_display()
 function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta){
 	
 	global $user_info;
-	
+	print_r( $node->field_attachment[0]['value']);
 	$attachment = '';
     $attachment_array=unserialize($post->field_attachment[0]['value']);
 	
@@ -59,7 +59,6 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta)
 	  $attachment .='<span class="facebook-attach-text">'.$attachment_array['description'].'</span>';
 
     if($attachment_array['media']!=''){
-	print_r($attachment_array['media']);
 	  	foreach($attachment_array['media'] as $media){
 	      if($media['type'] =="photo"){
 		    $attachment .='<span class="facebook-attach-photo"><img src="'.$media['src'].'" /></span>';
