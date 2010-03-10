@@ -11,14 +11,39 @@ function grabbit_landing_menu()
   return $items;
 }
 
-function grabbit_landing_display()
+function grabbit_landing_display(){
+	$node=node_load(arg(2));
+	
+	if($node->uid!=$user->uid){ // dont allow others to see yout shit
+		return $output;
+	}
+	
+	switch($node->type){
+		case 'facebook':
+		  return grabbit_landing_display_facebook($node);
+		break;
+	}
+}
+
+function grabbit_landing_display_facebook($node)
 {
   global $user;
-  $node=node_load(arg(2));
 
-  if($node->uid!=$user->uid){ // dont allow others to see yout facebook shit
-	return $output;
-  }
+  $module_name='facebook_grabbit';
+  require_once(drupal_get_path('module', $module_name)."/facebook/facebook.php");
+  require_once(drupal_get_path('module', $module_name)."/facebook/facebook_desktop.php");
+  include(drupal_get_path('module', $module_name)."/facebook/config.php");
+  $app_id='90953553995';
+	
+  $fuser = facebook_grabbit_get_fid($user->uid);
+
+	try{
+		  $facebook = new FacebookDesktop($api_key, $secret);
+		  $facebook->set_user($suser, $session_key);
+		  
+	  }catch(FacebookRestClientException $e){
+		    drupal_set_message("Ooops! you exeeded the facebook api calls, try again latter.","error");
+	  }
 
   $actor=array('name'=>$node->field_user_name[0]['value'],
                'url'=>$node->field_user_url[0]['value'],
@@ -38,7 +63,7 @@ function grabbit_landing_display()
   if($node->field_target[0]['value'])
     $target=$node->field_target[0]['value'];
                                          
-  $output .= grabbit_langing_facebook_update($node,$actor,$target,$actors,$commenta);
+  $output .= grabbit_langing_facebook_update($node,$actor,$target,$actors,$commenta,$facebook);
   $comments=array();
 
   return $output;
@@ -50,7 +75,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta)
 	global $user_info;
 	$attachment = '';
     $attachment_array=unserialize($post->field_attachment[0]['value']);
-	print_r( $attachment_array);
+	
 	if($attachment_array['name'])
 	  $attachment .='<span class="facebook-attach-title">'.$attachment_array['name'].'</span>';
 	
@@ -60,6 +85,8 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta)
     if($attachment_array['media']!=''){
 	  	foreach($attachment_array['media'] as $media){
 	      if($media['type'] =="photo"){
+		    $fb_photo=$facebook->api_client->call_method('facebook.Photos.get', array('pids'=>$media['photo']['pid']));		      
+			print_r($fb_photo);
 		    $attachment .='<span class="facebook-attach-photo"><img src="'.$media['src'].'" /></span>';
 	      }
 		  if($media['type'] =="link"){
@@ -72,7 +99,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta)
 	      }
 		}
     }
-	
+
 	$msg=$post->field_text[0]['value'];
 	$msg_formatted=get_url_msg_formatted($msg);
 	
