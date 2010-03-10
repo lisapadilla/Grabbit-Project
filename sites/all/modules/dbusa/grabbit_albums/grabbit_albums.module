@@ -156,6 +156,7 @@ function grabbit_albums_display(){
 			case "mov":
 			case "mp3":
 			case "flv":
+			  $output .= '<div class="download-wrapper"><div class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></div><div class="download-file-type">'.l($file->filename,'node/'.$nid->nid).'</div></div>';
 			break;
 			case "doc":
 			case "rtf":
