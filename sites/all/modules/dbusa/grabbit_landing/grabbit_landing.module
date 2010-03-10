@@ -80,7 +80,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
     $attachment_array=unserialize($post->field_attachment[0]['value']);
 	
 	if($attachment_array['name'])
-	  $attachment .='<span class="facebook-attach-title">'.$attachment_array['name'].'</span>';
+	  $attachment_title ='<div class="facebook-attach-title">'.$attachment_array['name'].'</div>';
 	
 	if($attachment_array['description'])
 	  $attachment .='<span class="facebook-attach-text">'.$attachment_array['description'].'</span>';
@@ -151,7 +151,8 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .='<div class="facebook-attachment">'.$attachment.'</div></div></div>
+	$output .= $attachment_title .
+	'<div class="facebook-attachment">'.$attachment.'</div></div></div>
 	<div class="frost clearfix">
 	  <span class="facebook-date">on '.format_date($post->created).'</span>
 	  '.$comments_data.'
