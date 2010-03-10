@@ -90,7 +90,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 			  	$fb_photo=$facebook->api_client->call_method('facebook.Photos.get', array('session_key' => $session_key,
 			                                                                              'pids'=>$media['photo']['pid']));		      
 				print_r($fb_photo);
-		    }catch($e){
+		    }catch(FacebookRestClientException $e){
 			   print_r($session_key);
 			   print_r($e);
 		    }
