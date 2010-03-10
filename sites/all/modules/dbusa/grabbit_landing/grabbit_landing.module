@@ -96,6 +96,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 		    
 	      }
 		  if($media['type'] =="link"){
+			print_r($media);
 		    $attachment .='<span class="facebook-attach-link"><img src="'.$media['src'].'" /></span>';
 	      }
 	      if($media['type'] =="video"){
