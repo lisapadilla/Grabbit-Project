@@ -1,0 +1,17 @@
+<?php
+
+function grabbit_landing_menu()
+{
+  $items['resource/display'] = array(
+    'page callback' => 'grabbit_landing_display', 
+    'title' => t('Element'),
+    'access arguments' => array('access content')
+  );
+  
+  return $items;
+}
+
+function grabbit_landing_display()
+{
+  
+}
