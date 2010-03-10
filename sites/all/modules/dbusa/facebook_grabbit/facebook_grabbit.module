@@ -488,7 +488,7 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	global $user_info;
 	
 	$msg=$post->field_text[0]['value'];
-	$msg_formatted=get_url_msg_formatted($msg);
+	$msg_formatted=get_url_msg_formatted($msg,$post);
 	
 	if(count($comenta)>0){
 	    $coments_number=0;	
@@ -580,7 +580,7 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
     }
 	
 	$msg=$post->field_text[0]['value'];
-	$msg_formatted=get_url_msg_formatted($msg);
+	$msg_formatted=get_url_msg_formatted($msg,$post);
 	
 	if(count($comenta)>0){
 		$coments_number=0;
@@ -1993,7 +1993,7 @@ function theme_twitter_message($node){
 
 	$msg = $node->body;
 	
-	$msg_formatted=get_url_msg_formatted($msg);
+	$msg_formatted=get_url_msg_formatted($msg,$node);
 	$screen_name=str_replace('http://www.twitter.com/','',$node->field_twitter_url[0]['value']);
 	$output = '<div id="node-'.$node->created.'" class="twitter-message-stream clearfix '.$node->rowx.' stream-node">
 	           <div id="tags-show-'.$node->nid.'"></div>
@@ -2020,10 +2020,11 @@ function theme_twitter_message($node){
 	return $output;
 }
 
-function get_url_msg_formatted($msg){
+function get_url_msg_formatted($msg,$node=null){
 
     $msg_formatted = preg_replace("/(http:\/\/[^\s]+)/", "<a href=\"$1\" target=\"_blank\">$1</a>", $msg);
 	
+	$msg_formatted = preg_replace("/(http:\/\/twitpic\.com\/)(.*$)/i", "<a href=\"".base_path()."/resource/display/".$node->nid."\" target=\"_blank\">$1</a>", $msg_formatted);
 	$msg_formatted = preg_replace('/(^|[^a-z0-9_])@([a-z0-9_]+)/i', '$1<a href="http://twitter.com/$2" class="user-twitter" target="_blank">@$2</a>', $msg_formatted);
 	$msg_formatted = preg_replace('/(^|\s)#(\w+)/','\1<span class="hashtag">#\2</span>',$msg_formatted);
 	
