@@ -71,7 +71,7 @@ function grabbit_landing_display_facebook($node)
 
 }
 
-function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,$facebook){
+function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,$facebook,$session_key){
 	
 	global $user_info;
 	$attachment = '';
