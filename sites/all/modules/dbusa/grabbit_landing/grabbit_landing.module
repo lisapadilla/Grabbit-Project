@@ -16,7 +16,7 @@ function grabbit_landing_display()
   global $user;
   $node=node_load(arg(2));
 
-  if($node->user!=$user->uid){ // dont allow others to see yout facebook shit
+  if($node->uid!=$user->uid){ // dont allow others to see yout facebook shit
 	return $output;
   }
 
