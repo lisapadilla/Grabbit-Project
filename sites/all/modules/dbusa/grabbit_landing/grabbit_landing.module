@@ -59,12 +59,13 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta)
 	  $attachment .='<span class="facebook-attach-text">'.$attachment_array['description'].'</span>';
 
     if($attachment_array['media']!=''){
+	print_r($attachment_array['media']);
 	  	foreach($attachment_array['media'] as $media){
 	      if($media['type'] =="photo"){
-		    $attachment .='<span class="facebook-attach-photo"><a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+		    $attachment .='<span class="facebook-attach-photo"><img src="'.$media['src'].'" /></span>';
 	      }
 		  if($media['type'] =="link"){
-		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" /></a></span>';
+		    $attachment .='<span class="facebook-attach-link"><img src="'.$media['src'].'" /></span>';
 	      }
 	      if($media['type'] =="video"){
 		    $attachment .='<span class="facebook-attach-video" style="height:500px"><br>
