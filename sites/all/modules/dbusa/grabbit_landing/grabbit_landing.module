@@ -18,7 +18,8 @@ function grabbit_landing_display(){
 	if($node->uid!=$user->uid){ // dont allow others to see yout shit
 		return $output;
 	}
-	
+	$variables=array('user_name'=>$user->name);
+	drupal_add_js($variables,'setting');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	switch($node->type){
 		case 'facebook':
