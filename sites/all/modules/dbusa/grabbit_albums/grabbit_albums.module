@@ -164,7 +164,7 @@ function grabbit_albums_display(){
 			case "ppt":
 			case "xls":
 			case "pdf":
-			  $output .= '<div class="download-wrapper"><div class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></div><div class="download-file-type">Download: '.l($file->filename,$file->filepath).'</div></div>';
+			  $output .= '<div class="download-wrapper"><div class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></div><div class="download-file-type">'.l($file->filename,'node/'.$nid->nid).'</div></div>';
 			break;
 			default:
 			  $output .= l('<div class="image-wrap">'.theme('imagecache', 'image_uploads_album', $file->filepath, 'Grabbit Image', '').'</div>','node/'.$nid->nid,array('html'=>TRUE));
