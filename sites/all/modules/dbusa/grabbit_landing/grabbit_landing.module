@@ -64,7 +64,7 @@ function grabbit_landing_display_facebook($node)
   if($node->field_target[0]['value'])
     $target=$node->field_target[0]['value'];
                                          
-  $output .= grabbit_langing_facebook_update($node,$actor,$target,$actors,$commenta,$facebook);
+  $output .= grabbit_langing_facebook_update($node,$actor,$target,$actors,$commenta,$facebook,$session_key);
   $comments=array();
 
   return $output;
