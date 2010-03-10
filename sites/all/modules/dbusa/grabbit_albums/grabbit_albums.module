@@ -137,14 +137,9 @@ function grabbit_albums_display(){
 		}
 		
 		$vars['node']=node_load($nid->nid);
-		$unserialize=unserialize($vars['node']->field_media[0]['value']);
-		if($unserialize){
-			$node_media=node_load($unserialize['file']);
-			$file_fid=$node_media->field_media[0]['value'];	
-		}else{
-			if(!$file_fid=facebook_grabbit_get_post_from_file($vars['node']->nid))
-			    $file_fid= $vars['node']->field_media[0]['value'];
-		}
+		
+		$file_fid= $vars['node']->field_media[0]['value'];
+		
 		
 	
 	    $result = db_query('SELECT * FROM {files} WHERE fid = %d', $file_fid);
