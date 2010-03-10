@@ -3,10 +3,7 @@ Drupal.behaviors.albums = function(){
 
   $("#album-type").change(function(e){
     var val=$(this).val();
-	
-	var url=Drupal.settings.new_url+val;
-	
-	top.location = url;
+	top.location = val;
 	
   });
 
