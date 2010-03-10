@@ -158,7 +158,8 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	  </div>
 	  
 	</div>
-
+  </div><!-- /facebook-post-header -->
+  
 	<div class="facebook-post-sux">
 	
 	  <div class="facebook-attachment">'.$attachment.'</div></div></div>
@@ -176,8 +177,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	  </div>
 	  
 	</div>
-	
-	</div></div>';
+	</div>';
 	
 	return $output;
 	
