@@ -19,6 +19,7 @@ function grabbit_landing_display(){
 		return $output;
 	}
 	
+	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	switch($node->type){
 		case 'facebook':
 		  return grabbit_landing_display_facebook($node);
@@ -96,7 +97,6 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 		    
 	      }
 		  if($media['type'] =="link"){
-			print_r($media);
 		    $attachment .='<span class="facebook-attach-link"><img src="'.$media['src'].'" /></span>';
 	      }
 	      if($media['type'] =="video"){
