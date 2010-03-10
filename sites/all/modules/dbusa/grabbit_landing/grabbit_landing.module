@@ -144,27 +144,41 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
 	</div>
 	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
-	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div><div class="facebook-post-body">
-	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
-	<div class="content-truncated">';
+	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.$post->field_user_url[0]['value'].'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div>
+	
+	<div class="facebook-post-body">
+	  
+	  <div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
+	  <div class="content-truncated">';
 	if($msg_formatted){
 	  $output .='<div class="facebook-post-inside-body">'.$msg_formatted.'</div>';
 	}
 	
-	$output .= $attachment_title .
-	'<div class="facebook-attachment">'.$attachment.'</div></div></div>
-	<div class="frost clearfix">
-	  <span class="facebook-date">on '.format_date($post->created).'</span>
-	  '.$comments_data.'
+	$output .= $attachment_title.'
+	  </div>
+	  
 	</div>
-	'.$show_comments.'
-	<div class="facebook-comment-form">
-	<div class="facebook-form">
-		<form id="myForm">
-			<input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
-			<input nid="'.$post->nid.'" id="'.$post->field_post_id[0]['value'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
-		</form>
-	</div></div></div></div>';
+
+	<div class="facebook-post-sux">
+	
+	  <div class="facebook-attachment">'.$attachment.'</div></div></div>
+	  <div class="frost clearfix">
+	    <span class="facebook-date">on '.format_date($post->created).'</span>
+	    '.$comments_data.'
+	  </div>
+	  '.$show_comments.'
+	  <div class="facebook-comment-form">
+	  <div class="facebook-form">
+		  <form id="myForm">
+			  <input id="comment" class="form-text" type="textfield" size=30 maxlength=255 required=true>
+			  <input nid="'.$post->nid.'" id="'.$post->field_post_id[0]['value'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
+		  </form>
+	  </div>
+	  
+	</div>
+	
+	</div></div>';
+	
 	return $output;
 	
 }
