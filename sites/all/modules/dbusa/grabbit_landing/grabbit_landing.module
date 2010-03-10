@@ -40,7 +40,7 @@ function grabbit_landing_display_facebook($node)
 
 	try{
 		  $facebook = new FacebookDesktop($api_key, $secret);
-		  $facebook->set_user($suser, $session_key);
+		  $facebook->set_user($suser, $fuser->kid);
 		  
 	  }catch(FacebookRestClientException $e){
 		    drupal_set_message("Ooops! you exeeded the facebook api calls, try again latter.","error");
