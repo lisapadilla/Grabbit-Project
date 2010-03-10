@@ -155,7 +155,8 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	}
 	
 	$output .= $attachment_title.'
-	
+	  </div>
+	  
 	</div>
 
 	<div class="facebook-post-sux">
