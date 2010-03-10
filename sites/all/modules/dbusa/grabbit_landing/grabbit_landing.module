@@ -13,5 +13,37 @@ function grabbit_landing_menu()
 
 function grabbit_landing_display()
 {
-  
+  $node=node_load(arg(2));
+
+  $actor=array('name'=>$node->field_user_name[0]['value'],
+               'url'=>$node->field_user_url[0]['value'],
+	           'pic_square'=>$node->field_user_picture[0]['value']
+  );
+
+  $commenta=array();
+  $actors=array();
+
+  if($node->field_comments[0]['value']){
+		$profiles=unserialize($node->field_comments[0]['value']);
+		$commenta=$profiles['comments'];	
+		$actors=$profiles['profiles'];
+  }
+
+  if(!$node->field_attachment[0]['value']){ //STATUS UPDATE
+	$target='';
+	if($node->field_target[0]['value'])
+	  $target=$node->field_target[0]['value'];
+                                         
+	$output .= prepeare_status_update($node,$actor,$target,$actors,$commenta);
+	$comments=array();
+  }else{
+	$target='';
+	if($node->field_target[0]['value'])
+      $target=$node->field_target[0]['value'];
+
+	$output .= prepeare_standar_update($node,$actor,$target,$actors,$commenta);
+  }
+
+  return $output;
+
 }
