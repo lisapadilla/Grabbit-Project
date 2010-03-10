@@ -2023,7 +2023,7 @@ function theme_twitter_message($node){
 function get_url_msg_formatted($msg,$node=null){
 
     $msg_formatted = preg_replace("/(http:\/\/[^\s]+)/", "<a href=\"$1\" target=\"_blank\">$1</a>", $msg);
-    $anchor = preg_replace("/href=['\"](.+twitpic.com\/(.+)[\/#].*)['\"]/", "<a href=\"\/resource\/display\/".$node->nid."\">$1</a>", $msg_formatted);	
+    $msg_formatted = preg_replace("/href=['\"](.+twitpic.com\/(.+)[\/#].*)['\"]/", "<a href=\"\/resource\/display\/".$node->nid."\">$1</a>", $msg_formatted);	
 	$msg_formatted = preg_replace('/(^|[^a-z0-9_])@([a-z0-9_]+)/i', '$1<a href="http://twitter.com/$2" class="user-twitter" target="_blank">@$2</a>', $msg_formatted);
 	$msg_formatted = preg_replace('/(^|\s)#(\w+)/','\1<span class="hashtag">#\2</span>',$msg_formatted);
 	
