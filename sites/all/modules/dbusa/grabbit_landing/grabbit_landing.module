@@ -12,6 +12,7 @@ function grabbit_landing_menu()
 }
 
 function grabbit_landing_display(){
+	global $user;
 	$node=node_load(arg(2));
 	
 	if($node->uid!=$user->uid){ // dont allow others to see yout shit
