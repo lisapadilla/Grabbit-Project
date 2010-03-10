@@ -2384,7 +2384,8 @@ ul.dropdown li:hover ul {
 {
 	display: none;
 }
-.node-media .file-uploader
+.node-media .file-uploader,
+.section-resource .facebook-post-header
 {
 	background-color: #E6EAED;
 	padding: 15px;
