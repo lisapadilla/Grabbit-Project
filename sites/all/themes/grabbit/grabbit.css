@@ -2378,6 +2378,10 @@ ul.dropdown li:hover ul {
 	display: block;
 	margin: 0 auto;
 }
+.section-resource .facebook-post-sux img
+{
+	margin-bottom: 10px;
+}
 .node-type-media #main #content .body-uploader a
 {
 	color: #385691;
