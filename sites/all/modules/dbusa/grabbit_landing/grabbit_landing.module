@@ -48,7 +48,7 @@ function grabbit_landing_display()
 function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta){
 	
 	global $user_info;
-	print_r( $node->field_attachment[0]['value']);
+	print_r( $post->field_attachment[0]['value']);
 	$attachment = '';
     $attachment_array=unserialize($post->field_attachment[0]['value']);
 	
