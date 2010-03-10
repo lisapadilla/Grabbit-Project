@@ -566,10 +566,10 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
     if($attachment_array['media']!=''){
 	  	foreach($attachment_array['media'] as $media){
 	      if($media['type'] =="photo"){
-		    $attachment .='<span class="facebook-attach-photo"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
+		    $attachment .='<span class="facebook-attach-photo">'.l('<img src="'.$media['src'].'" width="30" />','resource/display/'.$post->nid,array('HTML'=>TRUE)).'</span>';
 	      }
 		  if($media['type'] =="link"){
-		    $attachment .='<span class="facebook-attach-link"><a href="'.$media['href'].'"><img src="'.$media['src'].'" width="30" /></a></span>';
+		    $attachment .='<span class="facebook-attach-link">'.l('<img src="'.$media['src'].'" width="30" />','resource/display/'.$post->nid,array('HTML'=>TRUE)).'</span>';
 	      }
 	      if($media['type'] =="video"){
 		    $attachment .='<span class="facebook-attach-video" style="height:200px"><br>
