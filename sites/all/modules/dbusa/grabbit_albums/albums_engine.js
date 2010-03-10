@@ -3,10 +3,11 @@ Drupal.behaviors.albums = function(){
 
   $("#album-type").val(Drupal.settings.grabbit_1);
 
+  $('.title').html(Drupal.settings.grabbit_2+"'s "+Drupal.settings.grabbit_1);
+
   $("#album-type").change(function(e){
     var val=$(this).val();
 	top.location = val;
-	
   });
 
 }
