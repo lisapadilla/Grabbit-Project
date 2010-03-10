@@ -23,12 +23,12 @@ function grabbit_albums_preprocess_node(&$variables){
 	
 	if($variables['type']=='media'){
 	
-		$controls = grabbit_aldums_calculate_next($variables['field_media_type'][0]['value'],$variables['uid'],$variables['nid']);
+		$controls = grabbit_aldums_calculate_next($variables['field_media_type'][0]['value'],$variables['uid'],$variables);
 		$variables['body']=$controls.$variables['body'];
 	}
 }
 
-function grabbit_aldums_calculate_next($type,$user,$nid){
+function grabbit_aldums_calculate_next($type,$user,$var){
 	
 	switch($type){
 		case "mov":
@@ -55,6 +55,12 @@ function grabbit_aldums_calculate_next($type,$user,$nid){
 		  $album='images';
 		break;
 	}
+	$nid=$var['nid'];
+	$unserialize=unserialize($var['field_media'][0]['value']);
+	if($unserialize){
+		$nid=$unserialize['file'];
+	}
+	
 	$sql_more="SELECT node.nid AS nid
 	 FROM node node 
 	 LEFT JOIN content_type_media node_data_field_media_type ON node.vid = node_data_field_media_type.vid
