@@ -116,7 +116,7 @@ $(document).ready(function() {
 	
 	$(".upload_button_expand_tags a").click(function(i){
 		i.preventDefault;
-		$("#tags-control").slideToggle("medium");
+		$("#tags-control").slideToggle("fast");
 	});
 	
 	$(".facebook-makecomment-link").live('click',function () {
