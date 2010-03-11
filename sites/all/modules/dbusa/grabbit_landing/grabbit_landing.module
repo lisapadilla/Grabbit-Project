@@ -216,8 +216,9 @@ function grabbit_landing_display_twitter($node){
 	
 	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
 	            <a href="'.$node->field_twitter_url[0]['value'].'" class="twitter-name-link" target="_blank">'.$node->field_twitter_name[0]['value'].'</a>
-	            <div class="twitter-body"><div class="twitter-body-contains">'.$msg_formatted. '</div> 
-	              <span class="twitter-date">on '. format_date($node->created) . '</span>
+	            <div class="twitter-body">
+	            	<div class="twitter-body-contains">'.$msg_formatted. '</div> 
+	              	<span class="twitter-date">on '. format_date($node->created) . '</span>
 	            </div>
 	   </div>
 	            <div class="twitpic">'.$twitimage.'</div>
