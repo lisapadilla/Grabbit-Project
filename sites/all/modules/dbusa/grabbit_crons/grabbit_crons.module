@@ -114,22 +114,25 @@ function _save_last_nid($uid){
 }
 
 function grabbit_crons_delete_nodes(){
-	ini_set("memory_limit","512M");
-	ini_set('max_execution_time', 500);
+	ini_set("memory_limit","712M");
+	ini_set('max_execution_time', 1000);
 	$node_types = array(
 	  'facebook', //update this string with the type of node you want to delete
 	  'twitter',
 	  'gmail',
-	  'IMAP' //update this string with the type of node you want to delete and add any more lines you might need
+	  'IMAP',
+	  'news' //update this string with the type of node you want to delete and add any more lines you might need
 	);
     $count = 0;
     $starttime = mktime()-10*3600*24; 
-	
+	$flag = flag_get_flag('bookmarks');
     $sql = 'SELECT nid FROM {node} WHERE type IN ('. implode(', ', array_fill(0, count($node_types), "'%s'")). ') AND created < '.$starttime.' LIMIT 1500';
 	    $result = db_query($sql, $node_types);
 	    while ($row = db_fetch_object($result)) {
-	      node_delete($row->nid);
-	      $count++;
+		  if(!$flag->is_flagged($row->nid)){ //dont delete flaged nodes
+		    node_delete($row->nid); 
+		      $count++;	
+		  }
 	    }
 	watchdog("grabbit", "FROM: ".date('d, M',$starttime));
 	watchdog("grabbit", "Nodes erased: ".$count);
