@@ -4496,8 +4496,9 @@ a.album-next{
 #scroll-album .item img{
   display:block
 }
-.tags-control{
+#tags-control{
 	margin-left:267px;
+	margin-top:8px;
 }
 #tags-on-post{
 	-moz-border-radius:6px 6px 6px 6px;
