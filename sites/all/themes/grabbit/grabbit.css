@@ -4496,3 +4496,12 @@ a.album-next{
 #scroll-album .item img{
   display:block
 }
+.tags-control{
+	margin-left:267px;
+}
+#tags-on-post{
+	-moz-border-radius:6px 6px 6px 6px;
+	-webkit-border-radius: 6px;
+	border:1px solid #A2B0BA;
+	padding:3px;
+}
