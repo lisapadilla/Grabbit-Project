@@ -41,7 +41,7 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 							       <ol id="log"></ol>  
 							     </div> 
 				                </div>
-				                 <div id="tags-control" style="display:block">
+				                 <div id="tags-control" style="display:none;">
 				                   <p>Add a comma separated list of tags.</p>
 							       <input name="tags-on-post" id="tags-on-post" type="textfield" size="81" class="form-text-content">
 							     </div
