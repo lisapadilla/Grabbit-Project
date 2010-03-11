@@ -2372,10 +2372,15 @@ ul.dropdown li:hover ul {
 {
 	margin: 30px 0;
 }
-.node-media .file-media img
+.node-media .file-media img,
+.section-resource .facebook-post-sux img
 {
 	display: block;
 	margin: 0 auto;
+}
+.section-resource .facebook-post-sux img
+{
+	margin-bottom: 10px;
 }
 .node-type-media #main #content .body-uploader a
 {
