@@ -20,6 +20,7 @@ function grabbit_landing_display(){
 	}
 	$variables=array('user_name'=>$user->name);
 	drupal_add_js($variables,'setting');
+	drupal_add_js(drupal_get_path('module', 'grabbit_landing').'/resource_engine.js', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	switch($node->type){
 		case 'facebook':
