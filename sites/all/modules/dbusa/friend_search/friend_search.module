@@ -39,11 +39,12 @@ function friend_search_block($op = 'list', $delta = 0, $edit = array()) {
 							       <input type="button" id="button" />  
 							       <p id="queuestatus" ></p>  
 							       <ol id="log"></ol>  
-							     </div>
-							     <div id="tags-control">
+							     </div> 
+				                </div>
+				                 <div id="tags-control">
 							       <input name="tags-on-post" id="tags-on-post" type="textfield" size="30" class="form-text-content">
 							     </div
-				               </div></div>
+				                </div>
        		           </div>';	
 		
           break;
