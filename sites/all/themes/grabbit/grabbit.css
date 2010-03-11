@@ -2383,7 +2383,8 @@ ul.dropdown li:hover ul {
 	display: block;
 	margin: 0 auto;
 }
-.section-resource .facebook-post-sux img
+.section-resource .facebook-post-sux img,
+.section-resource .twitpic
 {
 	margin-bottom: 10px;
 }
