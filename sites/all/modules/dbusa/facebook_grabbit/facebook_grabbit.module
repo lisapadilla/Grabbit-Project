@@ -236,22 +236,22 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		$suser=$fuser->fid;
 		$session_key=$fuser->kid;
 
-		$facebook = new FacebookDesktop($api_key, $secret);
-		
-		if ($facebook->set_user($suser, $session_key) != null){
-			drupal_set_message("Internet connection failed","error");
-		}
-		else{
-		  $face_status = $facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
+        try{
+		  $facebook = new FacebookDesktop($api_key, $secret);
+		  $facebook->set_user($suser, $session_key);
+			
+		    $face_status = $facebook->api_client->call_method('facebook.users.setStatus', array('api_key' => $api_key,
 										       'uid'=>"$suser",
 										       'status_includes_verb'=>TRUE,
 										       'status'=>$form_state['values']['status'])); 
-		  $fb_status_ch=TRUE;
-		  $status_ch['facebook']='facebook status';
-		  //add to statistics
-		  grabbit_statistics_post_entry($user->uid,'facebook');
+		    $fb_status_ch=TRUE;
+		    $status_ch['facebook']='facebook status';
+		    //add to statistics
+		    grabbit_statistics_post_entry($user->uid,'facebook');
 		
-		  $statistics=TRUE;
+		    $statistics=TRUE;
+		}catch(FacebookRestClientException $e){
+			drupal_set_message("Ooops! some strange error with facebook, too many api calls","error");
 		}
 	}
 	if($form_state['values']['twitter']){
