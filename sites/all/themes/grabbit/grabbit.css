@@ -1278,7 +1278,8 @@ p#queuestatus
   font-size:13px;
   line-height:17px;
 }
-.facebook-post .facebook-post-header a.facebook-story-name
+.facebook-post .facebook-post-header a.facebook-story-name,
+.section-resource .twitter-name-link
 {
   color:#385691;
   font-size:13px;
@@ -2373,18 +2374,19 @@ ul.dropdown li:hover ul {
 	font-size:11px;
 }
 .node-media .file-media,
-.section-resource .facebook-post-sux
+.section-resource .facebook-post-sux,
+.section-resource .twitpic
 {
 	margin: 30px 0;
 }
 .node-media .file-media img,
-.section-resource .facebook-post-sux img
+.section-resource .facebook-post-sux img,
+.section-resource .twitpic img
 {
 	display: block;
 	margin: 0 auto;
 }
-.section-resource .facebook-post-sux img,
-.section-resource .twitpic
+.section-resource .facebook-post-sux img
 {
 	margin-bottom: 10px;
 }
