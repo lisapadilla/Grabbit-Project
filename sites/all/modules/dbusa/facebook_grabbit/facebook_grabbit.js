@@ -31,26 +31,7 @@ function display_items(panel){
 	stories_per_slide_p1=4;
     panel_id=panel.attr('id');
     current_panel=$(".last",panel);
-/*
-	if (current_panel.next().attr('class') != undefined){
-
-		var scroll_to = current_panel.next();
-		for (var i = 0; i< stories_per_slide_p1; i++){	
-			if (current_panel.next().attr('class') != undefined){
-				
-				current_panel.removeClass('last');
-				current_panel = current_panel.next();
-		
-				$("#"+panel_id+" .panel-wraper #"+current_panel.attr('id')+" .content-truncated").truncate( 135,{
-				        trail: [ "...<a href='#' class='truncate_show'>more</a>", "<a href='#' class='truncate_hide'>less</a>" ]
-				});
-				current_panel.addClass('last');
-				current_panel.show();
-			}			
-		}
-	
-	}else{
-*/		current_panel.parent().next().html('retrieving data...');
+		current_panel.parent().next().html('retrieving data...');
 		pid=panel.attr('pid');
 		pager=parseInt(panel.attr('pager'))+1;
 		$.get(Drupal.settings.basePath+"panels/paginate",{pid:pid,page:pager},function(data){
