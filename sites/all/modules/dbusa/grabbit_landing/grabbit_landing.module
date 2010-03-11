@@ -43,7 +43,7 @@ function grabbit_landing_display_facebook($node)
   $app_id='90953553995';
 	
   $fuser = facebook_grabbit_get_fid($user->uid);
-
+	
 	try{
 		  $facebook = new FacebookDesktop($api_key, $secret);
 		  $facebook->set_user($fuser->fid, $fuser->kid);

@@ -1,3 +1,4 @@
+/* @override http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M */
 /* $Id: zen.css,v 1.14.2.1 2009/02/13 07:46:04 johnalbin Exp $ */
 
 /*
@@ -1283,6 +1284,7 @@ p#queuestatus
 .twitter-message-stream .twitter-image{
   height: 75px;
   background: url(images/twit_ico.png) bottom left no-repeat;
+  margin-top: 3px;
 }
 #page #main .stream-node
 {
@@ -1367,6 +1369,12 @@ p#queuestatus
   float: left;
   font-size:10px;
   line-height:11px;
+}
+.twitter-message-stream .twitter-date,
+.node-stream-deal .submitted, 
+.node-stream-news .submitted,
+.node-stream-blogs .submitted{
+  margin-top: 5px;
 }
 .facebook-post .facebook-date
 {
@@ -1737,6 +1745,7 @@ a.panel-filters{
 	float: left;
 	margin-right: 10px;
 	width:48px;
+	margin-top: 4px;
 }
 .node-stream-deal .content-body
 {
