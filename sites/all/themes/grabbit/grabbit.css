@@ -1358,6 +1358,11 @@ p#queuestatus
   font-size:10px;
   line-height:11px;
 }
+.section-resource .twitter-date
+{
+	float: none;
+	clear: none;
+}
 .twitter-message-stream .twitter-date,
 .node-stream-deal .submitted, 
 .node-stream-news .submitted,
