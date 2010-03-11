@@ -201,7 +201,7 @@ function grabbit_landing_display_twitter($node){
 	$screen_name=str_replace('http://www.twitter.com/','',$node->field_twitter_url[0]['value']);
 	$output = '<div id="node-'.$node->created.'" class="twitter-message-stream clearfix '.$node->rowx.' stream-node">
 		
-		<div class="twitter-post">
+		<div class="twitter-post clearfix">
 	             <div id="tags-show-'.$node->nid.'"></div>
 	             <div class="tooltipwraper">
 	               <a href="JavaScript:void(0);" class="trash-twitter" title="delete" tweet_id="'.$node->nid.'">TR</a>

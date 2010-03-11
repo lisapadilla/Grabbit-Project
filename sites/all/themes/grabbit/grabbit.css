@@ -2400,7 +2400,8 @@ ul.dropdown li:hover ul {
 	padding: 0;
 }
 .node-media .file-uploader,
-.section-resource .facebook-post-header
+.section-resource .facebook-post-header,
+.section-resource .twitter-post
 {
 	background-color: #E6EAED;
 	padding: 15px;
