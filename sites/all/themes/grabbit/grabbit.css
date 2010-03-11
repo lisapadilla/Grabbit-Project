@@ -963,7 +963,7 @@ a.active{
   line-height: 12px;
   position: relative;
 }
-.upload_button_expand a{
+.upload_button_expand a, .upload_button_expand_tags a{
   color:#555E6B;
   font-size:11px;
   font-weight:bold;
