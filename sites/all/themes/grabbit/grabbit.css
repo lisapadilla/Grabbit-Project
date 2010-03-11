@@ -1027,29 +1027,16 @@ p#queuestatus
 	margin: 0 5px;
 	padding:5px 3px;
 }
-.round-numbers
-{
-	position: relative;
-}
-.round-numbers .a
-{
-	background:transparent url(images/various/nr_a.gif) no-repeat scroll 0 0;
-	display:block;
-	height:19px;
-	left:0;
-	position:absolute;
-	top:-4px;
-	width:10px;
-}
-.round-numbers .b
-{
-	background:transparent url(images/various/nr_b.gif) no-repeat scroll 0 0;
-	display:block;
-	height:19px;
-	right:0;
-	position:absolute;
-	top:-4px;
-	width:10px;
+#facebook-grabbit-update-form .user-friends .numbers{
+	-moz-border-radius:10px;
+	border-radius:10px;
+	-webkit-border-radius:10px;
+	background-color:#CC0000;
+	color:white;
+	font-family:helvetica;
+	font-weight:bold;
+	padding:1px 6px;
+	background-image: none;
 }
 #edit-status-wrapper,
 #edit-status-1-wrapper{
