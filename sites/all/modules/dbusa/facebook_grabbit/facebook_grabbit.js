@@ -114,6 +114,11 @@ $(document).ready(function() {
         fixtheheightMore(panel);
 	});
 	
+	$(".upload_button_expand_tags a").click(function(i){
+		i.preventDefault;
+		$("#tags-control").slideToggle("medium");
+	});
+	
 	$(".facebook-makecomment-link").live('click',function () {
 		var input1 = $(this).parent();
 		var input = $("#myForm",input1).children("input").prev();
