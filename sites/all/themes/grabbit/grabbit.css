@@ -4499,6 +4499,9 @@ a.album-next{
 #tags-control{
 	margin-left:267px;
 	margin-top:8px;
+	color:#666666;
+	font-size:9px;
+	line-height:12px;
 }
 #tags-on-post{
 	-moz-border-radius:6px 6px 6px 6px;
