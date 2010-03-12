@@ -4198,6 +4198,10 @@ div.navbar
 	margin-left:78px;
 	margin-top:30px;
 }
+.section-resource .frost
+{
+	margin: 0 15px;
+}
 .node-type-media #comments-title,
 .node-type-news #comments-title
 {
