@@ -1018,16 +1018,6 @@ p#queuestatus
 	line-height:17px;
 }
 #facebook-grabbit-update-form .user-friends .numbers{
-	background:transparent url(images/various/nr_bg.gif) repeat-x scroll 0 0;
-	color:white;
-	font-family:helvetica;
-	font-size:10px;
-	font-weight:bold;
-	height:11px;
-	margin: 0 5px;
-	padding:5px 3px;
-}
-#facebook-grabbit-update-form .user-friends .numbers{
 	-moz-border-radius:10px;
 	border-radius:10px;
 	-webkit-border-radius:10px;
