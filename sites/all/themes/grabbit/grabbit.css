@@ -1017,6 +1017,11 @@ p#queuestatus
 	font-weight:bold;
 	line-height:17px;
 }
+#facebook-grabbit-update-form .a,
+#facebook-grabbit-update-form .b
+{
+	display: none;
+}
 #facebook-grabbit-update-form .user-friends .numbers{
 	-moz-border-radius:10px;
 	border-radius:10px;
@@ -1359,9 +1364,9 @@ p#queuestatus
 .node-stream-blogs .submitted{
   margin-top: 5px;
 }
-.facebook-post .facebook-date
+.section-resource .facebook-post .facebook-date
 {
-  /*margin-left:59px;*/
+  margin-top: 5px;
 }
 .truncate_show, .truncate_hide
 {
@@ -4178,7 +4183,8 @@ div.navbar
 	color: #385691;
 }
 .node-type-media #comments,
-.node-type-news #comments
+.node-type-news #comments,
+.section-resource .facebook-form
 {
 	padding: 0 68px;
 	margin: 0;
@@ -4201,7 +4207,8 @@ div.navbar
 	margin-bottom: 10px;
 }
 .node-type-media #comment-form textarea,
-.node-type-news #comment-form textarea
+.node-type-news #comment-form textarea,
+.section-resource #comment
 {
 	height:100px;
 	margin-left:78px;
@@ -4234,7 +4241,8 @@ div.navbar
 	display: none;
 }
 .node-type-media #comment-form #edit-submit,
-.node-type-news #comment-form .form-submit
+.node-type-news #comment-form .form-submit,
+.section-resource input.facebook_comment_submit
 {
 	display:block;
 	margin-left: auto;
