@@ -120,7 +120,7 @@ $(document).ready(function() {
 	});
 	
 	$(".facebook-makecomment-link").live('click',function () {
-		var input1 = $(this).parents('facebook-post');
+		var input1 = $(this).parents('.facebook-post');
 		var input = $("#myForm",input1).children("input").prev();
 		$("#myForm",input1).slideToggle("medium",function(){
 			input.focus();
