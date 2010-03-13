@@ -130,7 +130,6 @@ $(document).ready(function() {
 			$(this).keyup(function(e) {
 		      if(e.keyCode == 13) {
 			    $(".facebook_comment_submit",input1).click();
-			    $('.display-comments-buttons',input1).slideToggle('medium');
 		      }
 		    });
 		});
@@ -185,6 +184,8 @@ $(document).ready(function() {
 
 	// When user submits a comment in facebook
 	$(".facebook_comment_submit").live('click',function () {
+		var input1=$(this).parents('.facebook-post');
+		$('.display-comments-buttons',input1).show();
 		var tag = $(this);
 		var post_id = $(this).attr("id");
 		var comment = $(this).prev("input").attr("value");
