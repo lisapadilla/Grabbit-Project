@@ -94,14 +94,14 @@ function bringPanelsAjax(currentSlide,NextSlide){
 			target=$('.panel-wraper',$(this));
 			wraper=$(this);
 			$('.panel-content-ajax',$(this)).mask("Loading content...");
-			/*$.get(Drupal.settings.basePath+"panels/ajax",{pid:paid,publics:1},function(data){
+			$.get(Drupal.settings.basePath+"panels/ajax",{pid:paid,publics:1},function(data){
 				if (data){
 					target.html(data);
 					wraper.attr('engaged','true');
 				}else{
 					// Handle this depending on the design
 				}
-			});*/
+			});
 		}
 	});
 }
