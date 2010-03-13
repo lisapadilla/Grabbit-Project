@@ -1250,6 +1250,10 @@ p#queuestatus
 {
   padding:7px 10px 10px;
 }
+.twitter-message-stream
+{
+	padding-bottom: 7px;
+}
 .facebook-post .facebook-post-header a.facebook-story-pic,
 .twitter-message-stream .twitter-image{
   width: 48px;
@@ -1264,7 +1268,7 @@ p#queuestatus
   margin-top:3px;
 }
 .twitter-message-stream .twitter-image{
-  height: 75px;
+  height: 73px;
   background: url(images/twit_ico.png) bottom left no-repeat;
   margin-top: 3px;
 }
