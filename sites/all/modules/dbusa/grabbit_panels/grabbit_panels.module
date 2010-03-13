@@ -226,8 +226,8 @@ function grabbit_panels_get_panels(){
 
 function grabbit_panels_show_ajax(){
 	$pid=$_GET['pid'];
-	$public=$_GET['publics'];
-	if($public){
+	global $user;
+	if($user->uid=0){
 		print facebook_grabbit_private_view_panel_public_panels($pid);
 	}else{
 		print facebook_grabbit_private_view_panel($pid);
