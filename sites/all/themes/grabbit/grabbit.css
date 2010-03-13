@@ -4527,3 +4527,11 @@ a.album-next{
 	padding:3px;
 	margin-top:5px;
 }
+.panel-content-ajax{
+	height:65px;
+	padding:10px;
+}
+.panel-content-ajax .loadmask-msg{
+	margin-left:245px;
+	margin-top:26px;
+}
