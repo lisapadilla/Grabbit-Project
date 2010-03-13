@@ -98,6 +98,9 @@ function bringPanelsAjax(currentSlide,NextSlide){
 				if (data){
 					target.html(data);
 					wraper.attr('engaged','true');
+					Drupal.behaviors.initThickbox(data);
+			        Drupal.behaviors.tooltips(data);
+				    Drupal.flagLink(data);
 				}else{
 					// Handle this depending on the design
 				}
