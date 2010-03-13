@@ -87,6 +87,9 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 //		$(".suser-panels").height(height);	
 	}
 }
+function bringPanelsAjax(currentSlide,NextSlide){
+	alert(currentSlide);
+}
 $(document).ready(function() {
 
 
@@ -100,6 +103,7 @@ $(document).ready(function() {
 	    next:    '.move-right',
 	    prev:    '.move-left',
 	    pager: '.panels-pager',
+	    pagerClick: bringPanelsAjax,
 	    timeout:  0,
 	    after: fixtheheightAfter,
 	    prevNextClick: fixtheheight
