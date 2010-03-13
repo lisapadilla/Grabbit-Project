@@ -89,12 +89,14 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 function bringPanelsAjax(currentSlide,NextSlide){
 	$('.suser-panels .user-panel').each(function(i){
-		if(i==currentSlide){
+		if(i==currentSlide && !$(this).attr('engaged')){
 			paid = $('.panel-content-ajax',$(this)).attr('paid');
 			target=$('.panel-wraper',$(this));
+			wraper=$(this);
 			$.get(Drupal.settings.basePath+"panels/ajax",{pid:paid,publics:1},function(data){
 				if (data){
 					target.html(data);
+					wraper.attr('engaged','true');
 				}else{
 					// Handle this depending on the design
 				}
