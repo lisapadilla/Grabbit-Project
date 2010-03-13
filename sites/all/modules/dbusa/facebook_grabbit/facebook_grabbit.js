@@ -88,7 +88,9 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 	}
 }
 function bringPanelsAjax(currentSlide,NextSlide){
-	alert(currentSlide);
+	$('.suser-panels .user-panel').each(function(i){
+		alert(i);
+	});
 }
 $(document).ready(function() {
 
