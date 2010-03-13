@@ -93,7 +93,7 @@ function bringPanelsAjax(currentSlide,NextSlide){
 			paid = $('.panel-content-ajax',$(this)).attr('paid');
 			target=$('.panel-wraper',$(this));
 			wraper=$(this);
-			$(this).mask("Loading...");
+			$('.panel-content-ajax',$(this)).mask("Loading content...");
 			$.get(Drupal.settings.basePath+"panels/ajax",{pid:paid,publics:1},function(data){
 				if (data){
 					target.html(data);
