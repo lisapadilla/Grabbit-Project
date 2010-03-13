@@ -89,7 +89,17 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 function bringPanelsAjax(currentSlide,NextSlide){
 	$('.suser-panels .user-panel').each(function(i){
-		alert(i);
+		if(i==currentSlide){
+			paid = $('.panel-content-ajax',$(this)).attr('paid');
+			target=$('.panel-wraper',$(this));
+			$.get(Drupal.settings.basePath+"panels/ajax",{pid:paid,publics:publics},function(data){
+				if (data){
+					target.html(data);
+				}else{
+					// Handle this depending on the design
+				}
+			});
+		}
 	});
 }
 $(document).ready(function() {

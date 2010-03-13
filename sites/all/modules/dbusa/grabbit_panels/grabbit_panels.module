@@ -225,7 +225,7 @@ function grabbit_panels_get_panels(){
 
 function grabbit_panels_show_ajax(){
 	$pid=$_GET['pid'];
-	$public=$_GET['public'];
+	$public=$_GET['publics'];
 	if($public){
 		print facebook_grabbit_private_view_panel_public_panels($pid);
 	}else{
