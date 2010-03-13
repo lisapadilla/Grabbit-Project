@@ -89,7 +89,7 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 }
 function bringPanelsAjax(currentSlide,NextSlide){
 	$('.suser-panels .user-panel').each(function(i){
-		if(i==currentSlide && !$(this).attr('engaged')){
+		if(i==currentSlide && !$(this).attr('engaged') && i!=0){
 			paid = $('.panel-content-ajax',$(this)).attr('paid');
 			target=$('.panel-wraper',$(this));
 			wraper=$(this);
