@@ -130,6 +130,7 @@ $(document).ready(function() {
 			$(this).keyup(function(e) {
 		      if(e.keyCode == 13) {
 			    $(".facebook_comment_submit",input1).click();
+			    $('.display-comments-buttons',input1).slideToggle('medium');
 		      }
 		    });
 		});
