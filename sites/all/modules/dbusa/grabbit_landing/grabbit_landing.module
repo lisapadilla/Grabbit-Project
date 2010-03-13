@@ -177,6 +177,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	  '.$show_comments.'
 	  <div class="facebook-comment-form">
 	  <div class="facebook-form">
+	  	<h2>Post new comment</h2>
 		  <form id="myForm">
 			  <textarea id="comment" class="form-text" size=30 maxlength=255 required=true></textarea>
 			  <input nid="'.$post->nid.'" id="'.$post->field_post_id[0]['value'].'" class="facebook_comment_submit" type="button" value="Comment" onclick="javascript:void(0)">
