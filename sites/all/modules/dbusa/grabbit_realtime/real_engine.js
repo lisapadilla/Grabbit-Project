@@ -1,6 +1,6 @@
 Drupal.behaviors.realtime = function(){
 	
-	setInterval("execute_realtime()", 300000);
+	setInterval("execute_realtime()", 3000);
 	
 }
 
@@ -10,6 +10,9 @@ function execute_realtime(){
 		var first = $(".panel-wraper div:first",$(this));
 		var second = $(".panel-wraper",$(this));
 		pid=$(this).attr('pid');
+		if(first.attr('paid')){ // es un panel sin procesar
+		  continue;
+		}
 	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
 			if (data){
 				second.prepend(
