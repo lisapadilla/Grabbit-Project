@@ -15,7 +15,9 @@ function execute_realtime(){
 				second.prepend(
 					$(data).hide().fadeIn(3000)
 				);
-				Drupal.flagLink(data);
+				Drupal.behaviors.initThickbox(data);
+		        Drupal.behaviors.tooltips(data);
+			    Drupal.flagLink(data);
 				
 				$('a,area,input', data).filter('.thickbox:not(.initThickbox-processed)').addClass('initThickbox-processed').click(function() {
 			      var t = this.title || this.name || null;
