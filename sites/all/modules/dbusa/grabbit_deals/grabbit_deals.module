@@ -220,8 +220,8 @@ function grabbit_deals_extract_tags($nid, $uid){
 	    }	
 	  }
 	if($uid==1){
-		print_r($node_tags);
-		  print_r($profile_tags);
+		print_r($node);
+		  print_r($profile);
 		
 	}
 	  $result=array_intersect($profile_tags, $node_tags);
