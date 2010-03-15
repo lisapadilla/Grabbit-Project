@@ -31,7 +31,7 @@ function display_items(panel){
 	stories_per_slide_p1=4;
     panel_id=panel.attr('id');
     current_panel=$(".last",panel);
-		current_panel.parent().next().html('retrieving data...');
+		$('.main-stream-next',panel).html('retrieving data...');
 		pid=panel.attr('pid');
 		pager=parseInt(panel.attr('pager'))+1;
 		$.get(Drupal.settings.basePath+"panels/paginate",{pid:pid,page:pager},function(data){
