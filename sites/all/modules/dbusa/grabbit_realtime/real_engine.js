@@ -10,10 +10,8 @@ function execute_realtime(){
 		var first = $(".panel-wraper div:first",$(this));
 		var second = $(".panel-wraper",$(this));
 		pid=$(this).attr('pid');
-		if(first.attr('paid')){ // es un panel sin procesar
-		  continue;
-		}
-	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
+		if(!first.attr('paid')){ // es un panel sin procesar
+		  $.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
 			if (data){
 				second.prepend(
 					$(data).hide().fadeIn(3000)
@@ -32,7 +30,8 @@ function execute_realtime(){
 			    });
 				
 			}
-		});
+		  });
+		}
 			
 	});
 		
