@@ -4535,3 +4535,10 @@ a.album-next{
 	margin-left:245px;
 	margin-top:26px;
 }
+.main-stream-next{
+	color:#999999;
+	font-size:14px;
+	line-height:15px;
+	margin:0;
+	text-decoration:none;
+}
