@@ -38,7 +38,7 @@ function display_items(panel){
 				if (data){
 		        panel.attr('pager',pager);		
 				$("#"+panel_id+" .panel-wraper").append(data);
-		        current_panel.parent().next().html('<a class="main-stream-next" href="javascript:void(0)">more</a>');
+		        $('.main-stream-next',panel).html('more');
 		        panel=$("#"+panel_id);
 		        //display_items(panel);
 		        fixtheheightMore(panel);
