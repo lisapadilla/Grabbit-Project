@@ -142,7 +142,7 @@ $(document).ready(function() {
 	});
 	
 	$('#tags-on-post').keyup(function(e){
-		$('#edit-tags').value(e);
+		$('#edit-tags').val(e);
 	});
 	
 	$(".facebook-makecomment-link").live('click',function () {
