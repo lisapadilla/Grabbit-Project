@@ -142,6 +142,7 @@ $(document).ready(function() {
 	});
 	
 	$('#tags-on-post').keyup(function(e){
+		alert(e);
 		$('#edit-tags').val(e);
 	});
 	
