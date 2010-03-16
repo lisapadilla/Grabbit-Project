@@ -198,7 +198,7 @@ function facebook_grabbit_update_form($form_state){
 		    '#weight'=>4
 		);
 		
-		$form['tags'] = array(
+		$form['tags-for'] = array(
 		    '#type' => 'textfield',
 		    '#prefix'=>'<div id="tags-field-hidden" style="display:none;">',
 		     '#value' => 'weird thing here',
@@ -322,7 +322,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		$new_nid->field_networks[0]['value']=$twitter_140;
 		node_save($form_status['new_nid']);
 	}
-	print_r($form_status['tags']);
+	print_r($form_status['tags-for']);
 	exit;
 	if($form_status['tags'] && is_array($more140) && module_exists('grabbit_customtags')){
 		foreach($more140 as $key => $item){
