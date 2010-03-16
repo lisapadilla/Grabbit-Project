@@ -207,7 +207,8 @@ function facebook_grabbit_update_form($form_state){
 }
 
 function facebook_grabbit_update_form_submit($form, &$form_state) {
-	
+	print_r($form_state);
+	exit;
 	$form_status=facebook_grabbit_checkout_textlong($form_state['values']['status'],$_POST['media'],$_POST['media_link'],$form_state['values']['facebook'],$form_state['values']['twitter']);
 	
 	if(is_array($form_status)){
@@ -309,10 +310,16 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	  drupal_set_message($upd_message);
 	}
 	
-	if(is_array($form_status) && is_array($more140)){
+	if($form_status['new_nid'] && is_array($more140)){
 		$twitter_140=serialize($more140);
 		$form_status['new_nid']->field_networks[0]['value']=$twitter_140;
-		node_save($form_status['new_nid']);	
+		node_save($form_status['new_nid']);
+	}
+	
+	if($form_status['tags'] && is_array($more140) && module_exist('grabbit_customtags')){
+		foreach($more140 as $key => $item){
+			 grabbit_customtags_add_to_queue($user->uid,$item,$key,$form_status['tags']);	
+		}
 	}
 	
 	//making a hook for others modules to use
