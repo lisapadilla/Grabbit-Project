@@ -1272,7 +1272,8 @@ p#queuestatus
   background: url(images/twit_ico.png) bottom left no-repeat;
   margin-top: 3px;
 }
-#page #main .stream-node
+#page #main .stream-node,
+#page #main .twitter-message-stream
 {
   font-size:13px;
   line-height:17px;
