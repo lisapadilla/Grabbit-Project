@@ -199,7 +199,8 @@ function facebook_grabbit_update_form($form_state){
 		);
 		
 		$form['tags'] = array(
-		    '#type' => 'hidden');
+		    '#type' => 'hidden',
+		     '#value' => 'weird thing here');
 	}
 	
 	    //create status form hook
