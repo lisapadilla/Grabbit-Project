@@ -312,19 +312,19 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	  drupal_set_message($upd_message);
 	}
 	
-	if(($form_state['new_nid']>0) && is_array($more140)){
+	if(($form_state['values']['new_nid']>0) && is_array($more140)){
 		$twitter_140=serialize($more140);
         $new_nid = new StdClass();
-        $new_nid->nid=$form_state['new_nid'];		
+        $new_nid->nid=$form_state['values']['new_nid'];		
 		$new_nid->field_networks[0]['value']=$twitter_140;
-		node_save($form_state['new_nid']);
+		node_save($new_nid);
 	}
-	print_r($form_state['tags']);
+	print_r($form_state['values']['tags']);
 	exit;
-	if($form_state['tags'] && is_array($more140) && module_exists('grabbit_customtags')){
+	if($form_state['values']['tags'] && is_array($more140) && module_exists('grabbit_customtags')){
 		foreach($more140 as $key => $item){
-			 grabbit_customtags_add_to_queue($user->uid,$item,$key,$form_state['tags']);
-			 drupal_set_message("Saved tags '".$form_status['tags']."' from element ".$key." with ID ".$item. " and on user ".$user->uid);	
+			 grabbit_customtags_add_to_queue($user->uid,$item,$key,$form_state['values']['tags']);
+			 drupal_set_message("Saved tags '".$form_status['values']['tags']."' from element ".$key." with ID ".$item. " and on user ".$user->uid);	
 		}
 	}
 	
