@@ -197,6 +197,9 @@ function facebook_grabbit_update_form($form_state){
 		    '#value' => t('Send'),
 		    '#weight'=>4
 		);
+		
+		$form['tags'] = array(
+		    '#type' => 'hidden');
 	}
 	
 	    //create status form hook
