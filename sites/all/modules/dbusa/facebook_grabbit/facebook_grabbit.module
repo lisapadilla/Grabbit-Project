@@ -210,8 +210,7 @@ function facebook_grabbit_update_form($form_state){
 }
 
 function facebook_grabbit_update_form_submit($form, &$form_state) {
-	print_r($form_state);
-	exit;
+
 	$form_status=facebook_grabbit_checkout_textlong($form_state['values']['status'],$_POST['media'],$_POST['media_link'],$form_state['values']['facebook'],$form_state['values']['twitter']);
 	
 	if(is_array($form_status)){
@@ -321,7 +320,8 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 	
 	if($form_status['tags'] && is_array($more140) && module_exist('grabbit_customtags')){
 		foreach($more140 as $key => $item){
-			 grabbit_customtags_add_to_queue($user->uid,$item,$key,$form_status['tags']);	
+			 grabbit_customtags_add_to_queue($user->uid,$item,$key,$form_status['tags']);
+			 drupal_set_message("Saved tags '".$form_status['tags']."' from element ".$key." with ID ".$item. " and on user ".$user->uid);	
 		}
 	}
 	
