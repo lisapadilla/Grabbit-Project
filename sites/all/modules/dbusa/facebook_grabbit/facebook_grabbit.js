@@ -31,14 +31,14 @@ function display_items(panel){
 	stories_per_slide_p1=4;
     panel_id=panel.attr('id');
     current_panel=$(".last",panel);
-		current_panel.parent().next().html('retrieving data...');
+		$('.main-stream-next',panel).html('retrieving data...');
 		pid=panel.attr('pid');
 		pager=parseInt(panel.attr('pager'))+1;
 		$.get(Drupal.settings.basePath+"panels/paginate",{pid:pid,page:pager},function(data){
 				if (data){
 		        panel.attr('pager',pager);		
 				$("#"+panel_id+" .panel-wraper").append(data);
-		        current_panel.parent().next().html('<a class="main-stream-next" href="javascript:void(0)">more</a>');
+		        $('.main-stream-next',panel).html('more');
 		        panel=$("#"+panel_id);
 		        //display_items(panel);
 		        fixtheheightMore(panel);
@@ -87,6 +87,27 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 //		$(".suser-panels").height(height);	
 	}
 }
+function bringPanelsAjax(currentSlide,NextSlide){
+	$('.suser-panels .user-panel').each(function(i){
+		if(i==currentSlide && !$(this).attr('engaged') && i!=0){
+			paid = $('.panel-content-ajax',$(this)).attr('paid');
+			target=$('.panel-wraper',$(this));
+			wraper=$(this);
+			$('.panel-content-ajax',$(this)).mask("Loading content...");
+			$.get(Drupal.settings.basePath+"panels/ajax",{pid:paid,publics:1},function(data){
+				if (data){
+					target.html(data);
+					wraper.attr('engaged','true');
+					Drupal.behaviors.initThickbox(data);
+			        Drupal.behaviors.tooltips(data);
+				    Drupal.flagLink(data);
+				}else{
+					// Handle this depending on the design
+				}
+			});
+		}
+	});
+}
 $(document).ready(function() {
 
 
@@ -100,6 +121,7 @@ $(document).ready(function() {
 	    next:    '.move-right',
 	    prev:    '.move-left',
 	    pager: '.panels-pager',
+	    pagerClick: bringPanelsAjax,
 	    timeout:  0,
 	    after: fixtheheightAfter,
 	    prevNextClick: fixtheheight
@@ -119,8 +141,12 @@ $(document).ready(function() {
 		$("#tags-control").slideToggle("fast");
 	});
 	
+	$('#tags-on-post').keyup(function(e){
+		$('#edit-tags').val($(this).val());
+	});
+	
 	$(".facebook-makecomment-link").live('click',function () {
-		var input1 = $(this).parent();
+		var input1 = $(this).parents('.facebook-post');
 		var input = $("#myForm",input1).children("input").prev();
 		$("#myForm",input1).slideToggle("medium",function(){
 			input.focus();
@@ -184,6 +210,8 @@ $(document).ready(function() {
 
 	// When user submits a comment in facebook
 	$(".facebook_comment_submit").live('click',function () {
+		var input1=$(this).parents('.facebook-post');
+		$('.display-comments-buttons',input1).show();
 		var tag = $(this);
 		var post_id = $(this).attr("id");
 		var comment = $(this).prev("input").attr("value");

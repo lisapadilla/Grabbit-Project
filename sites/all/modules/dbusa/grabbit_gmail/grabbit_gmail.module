@@ -973,6 +973,7 @@ function grabbit_gmail_crear($user=1){
 	
 	$yesterday = date('D, j M Y');
 	set_time_limit(0);
+    date_default_timezone_set("America/Monterrey");
 
 	if($_GET['user'])
 	  $user=$_GET['user'];
@@ -1048,7 +1049,6 @@ function grabbit_gmail_crear($user=1){
 	}
 	endif;
 	$obj->close_mailbox();   //Close Mail Box
-	date_default_timezone_set("America/Monterrey");
 	$settings=array('lastime'=>date('D, j M Y G:i:s'));
 	
 	grabbit_gmail_save($user,$settings);

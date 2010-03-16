@@ -1,0 +1,29 @@
+<?
+// CUSTOM TAGS API
+function grabbit_customtags_add_to_queue($uid,$id,$type,$tags){
+	db_query("INSERT INTO {grabbit_customtags} (uid, type, id,tags) VALUES (%d,'%s','%s','%s')",$uid,$type,$id,$tags);
+}
+
+//check for specific item in queue (only facebook and twitter) returns the tags
+function grabbit_customtags_check_queue($uid,$id,$type){
+	$tags = db_query("SELECT tags, faid FROM {grabbit_customtags} WHERE uid=%d, type='%s', id='%s'",$uid,$type,$id);
+	if(!db_affected_rows($tags)){
+	  return;
+	}
+	
+	$totals=db_fetch_object($tags);
+	db_query("DELETE FROM {grabbit_customtags} WHERE faid=%d",$totals->faid);
+	return $totals->tags;
+}
+
+function grabbit_customtags_autotagging_api_presave($node, $terms){
+	global $user;
+	if($node->field_post_id[0]['value']){
+		$id=$node->field_post_id[0]['value'];
+	}else{
+		$id=$node->field_twitter_post_id[0]['value'];
+	}
+	if($tags = grabbit_customtags_check_queue($user->uid,$id,$node->type)){
+		$node->taxonomy['tags'][1]=implode(', ', $tags);	
+	}
+}

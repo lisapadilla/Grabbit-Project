@@ -18,6 +18,11 @@ function grabbit_panels_menu () {
     'access arguments' => array('access content')
   );
 
+  $items['panels/ajax'] = array( 
+    'page callback' => 'grabbit_panels_show_ajax', 
+    'access arguments' => array('access content')
+  );
+
   $items['user/%/myfeeds/add_rss'] = array(
    'title' => 'Add RSS',
    'page callback' => 'grabbit_panels_rss',
@@ -180,7 +185,8 @@ function grabbit_panels_get_panels(){
 			while($panel = db_fetch_object($all_panels)){
 			  	$settings=grabbit_panels_get_uid($user->uid,$panel->pid);
 				$panel_settings=unserialize($settings->config);
-			    $panel_2 = facebook_grabbit_private_view_panel($panel->pid);	
+			    //$panel_2 = facebook_grabbit_private_view_panel($panel->pid);
+			    $panel_2='<div class="panel-content-ajax panel-loading" paid="'.$panel->pid.'"></div>';		
 			    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 			}	
 		}else{
@@ -191,6 +197,7 @@ function grabbit_panels_get_panels(){
 	    
 	}
 	else{
+		drupal_add_js(drupal_get_path('module', 'grabbit_tags').'/tags_engine.js', $type = 'module');		
 //		$output = 'performance';
 		if($mesa['status'][0])
 		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
@@ -206,7 +213,8 @@ function grabbit_panels_get_panels(){
 		while($panel = db_fetch_object($all_panels)){
 		  	$settings=grabbit_panels_get_uid(53,$panel->pid);
 			$panel_settings=unserialize($settings->config);
-		    $panel_2 = facebook_grabbit_private_view_panel_public_panels($panel->pid);	
+		    //$panel_2 = facebook_grabbit_private_view_panel_public_panels($panel->pid);
+		    $panel_2='<div class="panel-content-ajax panel-loading" paid="'.$panel->pid.'"></div>';	
 		    $output .= theme_panels($panel_2,$panel->pid,$panel_settings['panel_name'],$unique);	
 		}      		           
 		$output .='</div>';	
@@ -215,6 +223,16 @@ function grabbit_panels_get_panels(){
 	}
 	
 	return $output;
+}
+
+function grabbit_panels_show_ajax(){
+	$pid=$_GET['pid'];
+	global $user;
+	if($user->uid==0){
+		print facebook_grabbit_private_view_panel_public_panels($pid);
+	}else{
+		print facebook_grabbit_private_view_panel($pid);
+	}
 }
 
 // show the next set of the panel (pagination)

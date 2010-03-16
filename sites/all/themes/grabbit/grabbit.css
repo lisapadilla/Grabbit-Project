@@ -2050,7 +2050,6 @@ a.show-comment-link{
 .upload_button_expand{
   	display:inline;
 	margin-bottom:2px;
-	margin-left:254px;
 	margin-top:-3px;
 	width:100px;
 }
@@ -4527,4 +4526,26 @@ a.album-next{
 	border:1px solid #A2B0BA;
 	padding:3px;
 	margin-top:5px;
+}
+.panel-content-ajax{
+	height:65px;
+	padding:10px;
+}
+.panel-content-ajax .loadmask-msg{
+	margin-left:245px;
+	margin-top:26px;
+}
+.main-stream-next{
+	color:#999999;
+	font-size:14px;
+	line-height:15px;
+	margin:0;
+	text-decoration:none;
+}
+.exeded-hidden{
+	display:inline;
+	margin-left:255px;
+}
+.controls-links-front{
+	margin-left:255px;
 }

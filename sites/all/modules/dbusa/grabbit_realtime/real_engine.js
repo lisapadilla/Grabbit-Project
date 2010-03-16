@@ -10,12 +10,15 @@ function execute_realtime(){
 		var first = $(".panel-wraper div:first",$(this));
 		var second = $(".panel-wraper",$(this));
 		pid=$(this).attr('pid');
-	  	$.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
+		if(!first.attr('paid')){ // es un panel sin procesar
+		  $.get(Drupal.settings.basePath+"execute/realtime",{pannel:pid,last_nid:first.attr('id')},function(data){
 			if (data){
 				second.prepend(
 					$(data).hide().fadeIn(3000)
 				);
-				Drupal.flagLink(data);
+				Drupal.behaviors.initThickbox(data);
+		        Drupal.behaviors.tooltips(data);
+			    Drupal.flagLink(data);
 				
 				$('a,area,input', data).filter('.thickbox:not(.initThickbox-processed)').addClass('initThickbox-processed').click(function() {
 			      var t = this.title || this.name || null;
@@ -27,7 +30,8 @@ function execute_realtime(){
 			    });
 				
 			}
-		});
+		  });
+		}
 			
 	});
 		
