@@ -2049,7 +2049,6 @@ a.show-comment-link{
 .upload_button_expand{
   	display:inline;
 	margin-bottom:2px;
-	margin-left:254px;
 	margin-top:-3px;
 	width:100px;
 }
@@ -4544,4 +4543,8 @@ a.album-next{
 }
 .exeded-hidden{
 	display:inline;
+	margin-left:255px;
+}
+.controls-links-front{
+	margin-left:255px;
 }
