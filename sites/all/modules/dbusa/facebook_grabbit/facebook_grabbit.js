@@ -141,6 +141,10 @@ $(document).ready(function() {
 		$("#tags-control").slideToggle("fast");
 	});
 	
+	$('#tags-on-post').keyup(function(e)){
+		
+	}
+	
 	$(".facebook-makecomment-link").live('click',function () {
 		var input1 = $(this).parents('.facebook-post');
 		var input = $("#myForm",input1).children("input").prev();
