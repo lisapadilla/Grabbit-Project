@@ -320,7 +320,7 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 		node_save($form_status['new_nid']);
 	}
 	
-	if($form_status['tags'] && is_array($more140) && module_exist('grabbit_customtags')){
+	if($form_status['tags'] && is_array($more140) && module_exists('grabbit_customtags')){
 		foreach($more140 as $key => $item){
 			 grabbit_customtags_add_to_queue($user->uid,$item,$key,$form_status['tags']);
 			 drupal_set_message("Saved tags '".$form_status['tags']."' from element ".$key." with ID ".$item. " and on user ".$user->uid);	
