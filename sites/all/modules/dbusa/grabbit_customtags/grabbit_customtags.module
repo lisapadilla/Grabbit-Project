@@ -15,3 +15,14 @@ function grabbit_customtags_check_queue($uid,$id,$type){
 	db_query("DELETE FROM {grabbit_customtags} WHERE faid=%d",$totals->faid);
 	return $totals->tags;
 }
+
+function grabbit_customtags_autotagging_api_presave($node, $terms){
+	global $user;
+	if($node->field_post_id[0]['value']){
+		$id=$node->field_post_id[0]['value'];
+	}else{
+		$id=$node->field_twitter_post_id[0]['value'];
+	}
+	$tags = grabbit_customtags_check_queue($user->uid,$id,$node->type);
+	$node->taxonomy['tags'][1]=implode(', ', $tags);
+}
