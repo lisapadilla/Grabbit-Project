@@ -1,7 +1,12 @@
 <?
 // CUSTOM TAGS API
 function grabbit_customtags_add_to_queue($uid,$id,$type,$tags){
+	print_r($uid);
+	print_r($id);
+	print_r($type);
+	print_r($tags);
 	db_query("INSERT INTO {grabbit_customtags} SET uid=%d, type='%s', id='%s', tags='%d",$uid,$type,$id,$tags);
+	exit;
 }
 
 //check for specific item in queue (only facebook and twitter) returns the tags
