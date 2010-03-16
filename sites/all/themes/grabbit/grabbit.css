@@ -4542,3 +4542,6 @@ a.album-next{
 	margin:0;
 	text-decoration:none;
 }
+.exeded-hidden{
+	display:inline;
+}
