@@ -474,10 +474,14 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments){
 	  </div>
 	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$profile->uid.'">'.$profile->title.'</a>
 	  <div class="twitter-body">
-	    <div class="twitter-body-contains">'.$text.'</div> 
-	    <span class="twitter-date">on '.format_date($item['time']).'</span>
+	    <div class="twitter-body-contains">'.$text.'</div>
+	    <div class="frost clearfix">
+			  <span class="twitter-date">on '.format_date($item['time']).'</span>
+			 '.$comments_output.'
+		</div> 
+	    
 	  </div>
-	  '.$comments_output.'
+	  
 	</div>';
 	
 	return $return;
