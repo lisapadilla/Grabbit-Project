@@ -431,7 +431,30 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	return $return;
 }
 
-function grabbit_me_theme_my_media($nod,$item,$profile){
+function grabbit_me_theme_my_media($nod,$item,$profile,$comments){
+	
+	$comments_count=0;
+	while ($item = db_fetch_object($comments)){
+	  $profile = content_profile_load('profile', $item->uid);
+
+      $comments_output .= '<div id="'.$item->cid.'" class="news-comment"><span class="news-comment-picture">';																			
+      $comments_output .= theme('imagecache', 'friend_comment_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image', '', array('width'=>'30'));																											
+	  $comments_output .= '</span><span class="facebook-comment-link"><a href="/grabbit/user/'.$item->uid.'">'.$item->name.'</a> '.format_date($item->timestamp).':</span><br>
+						  <span class="news-comment-content">'.$item->comment.'</span></div>';
+						
+	  $comments_count++;
+	}
+	
+	if($comments_count>0){
+	  	$comments_output = '<div class="comments-data"><span class="numerito-comment">'.$comments_count.'</span><a href="JavaScript:void(0);" class="show-comment-link">Show</a></div><div class="news-comments">
+		<div class="display-comments-buttons" style="display:none;">'.$comments_output;	
+	}else{
+		$comments_output = '<div class="news-comments">
+		<div class="display-comments-buttons" style="display:none;">'.$comments_output;
+	}
+						
+	$comments_output .= '</div></div>';
+	
 	
 	$text=get_url_msg_formatted($item['status']);
 	
@@ -453,6 +476,7 @@ function grabbit_me_theme_my_media($nod,$item,$profile){
 	    <div class="twitter-body-contains">'.$text.'</div> 
 	    <span class="twitter-date">on '.format_date($item['time']).'</span>
 	  </div>
+	  '.$comments_output.'
 	</div>';
 	
 	return $return;
@@ -601,7 +625,7 @@ function grabbit_me_theme_my_activity_comments($rowx,$item){
 	      $item['twitter']=1;
 	      $item['facebook']=1;
 	      $item['time']=$node->last_update_time;
-		  $output .= grabbit_me_theme_my_media($nod,$item,$profile);
+		  $output .= grabbit_me_theme_my_media($nod,$item,$profile,$comments);
 		break;
 		default:
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
