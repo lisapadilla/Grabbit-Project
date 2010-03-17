@@ -226,8 +226,11 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				if($vars['node']->field_networks[0]['value']){
 					$networks=unserialize($vars['node']->field_networks[0]['value']);
 					$network_id=array_shift($networks);
+				}else{
+					$network_id=$vars['node']->nid;
 				}
-				$controles='<div class="links_stream_media tooltipwraper" id="article-news">  
+				$controles='<div class="links_stream_media tooltipwraper" id="article-news">
+				    <div id="tags-show-1936549"></div>  
 					<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
 					  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
 					  <a href="javascript:void(0);" title="comment" class="comment-news">Post a comment</a>
