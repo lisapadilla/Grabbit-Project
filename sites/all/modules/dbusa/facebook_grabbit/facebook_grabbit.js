@@ -283,7 +283,7 @@ $(document).ready(function() {
 		$('.display-comments-buttons',input1).show();
 		var tag = $(this);
 		var post_id = $(this).attr("id");
-		var comment = $(this).prev("input").attr("value");
+		var comment = $("#comment").attr("value");
 		var nid=$(this).attr("nid");		
 		alert("post_id - "+post_id+" comment:"+comment+" nid="+nid);
 		/*$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,comment:comment,mode:"create",nid:nid},function(data){
