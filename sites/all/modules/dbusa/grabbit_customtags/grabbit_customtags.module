@@ -24,6 +24,6 @@ function grabbit_customtags_autotagging_api_presave($node, $terms){
 		$id=$node->field_twitter_post_id[0]['value'];
 	}
 	if($tags = grabbit_customtags_check_queue($user->uid,$id,$node->type)){
-		$node->taxonomy['tags'][1]=implode(', ', $tags);	
+		$node->taxonomy['tags'][1]=explode(', ', $tags);	
 	}
 }
