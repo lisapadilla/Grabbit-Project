@@ -225,10 +225,11 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 				
 				$controles='<div class="links_stream_media" id="article-news">  
-				    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
-				    <a href="JavaScript:void(0);" class="grabb-that">RT</a>
-				    <a href="javascript:void(0)" class="comment-news">Comment</a>
-				    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
+					<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
+					  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
+					  <a href="javascript:void(0);" title="comment" class="comment-news">Post a comment</a>
+					  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$vars['node']->nid.'"></a>
+				      <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
 				  </div>';
 
 			}
