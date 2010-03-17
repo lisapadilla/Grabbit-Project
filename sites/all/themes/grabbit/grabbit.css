@@ -4549,3 +4549,11 @@ a.album-next{
 .controls-links-front{
 	margin-left:255px;
 }
+.with-controls .album-control{
+	margin-top:-60px;
+}
+
+.with-controls .links_stream_media{
+	margin-right:15px;
+	height:15px;
+}

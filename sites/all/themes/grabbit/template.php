@@ -231,6 +231,8 @@ function grabbit_preprocess_node(&$vars, $hook) {
 					  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$vars['node']->nid.'"></a>
 				      <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
 				  </div>';
+				
+				$vars['body_classes'] .=' with-controls';
 
 			}
 			// end controles
@@ -254,6 +256,8 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			    <a href="javascript:void(0)" class="comment-news">Comment</a>
 			    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
 			  </div>';
+			
+			$vars['']
 
 		}
 		// end controles
