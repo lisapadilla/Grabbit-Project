@@ -315,7 +315,7 @@ $(document).ready(function() {
 											new_content  += '<span class="facebook-comment-text">'+comment+'</span><span class="facebook-date">'+date+'</span><a id="facebook-comment-delete-'+data+'" class="facebook-comment-delete" href="javascript:void(0)">delete comment</a></span></div>';
 									
 									// Add the new comment								
-									tag.closest("div").parent().prev().append(new_content);
+									$('.display-comments-buttons').append(new_content);
 									var id = data;
 									
 									// Add the new handler to jQuery using live() function
