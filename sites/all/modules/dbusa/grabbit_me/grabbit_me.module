@@ -431,7 +431,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	return $return;
 }
 
-function grabbit_me_theme_my_media($nod,$itemx,$profile,$comments){
+function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments){
 	
 	$comments_count=0;
 	while ($item = db_fetch_object($comments)){
@@ -456,6 +456,7 @@ function grabbit_me_theme_my_media($nod,$itemx,$profile,$comments){
 	$comments_output .= '</div></div>';
 	
 	$item=$itemx;
+	$profile=$profilex;
 	$text=get_url_msg_formatted($item['status']);
 	
 	if($item['facebook'])
@@ -619,7 +620,6 @@ function grabbit_me_theme_my_activity_comments($rowx,$item){
 		break;
 		case 'media':
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
-		print_r($node);
 		  $profile = content_profile_load('profile', $node->uid);
 	      $nod=$node->rowx;
 	      $item['status']=$node->body;
