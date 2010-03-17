@@ -219,7 +219,11 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
 			//controles
 			if($user->uid>0){
-
+                $variables=array('user_name'=>$user->name);
+				drupal_add_js($variables,'setting');
+				drupal_add_js(drupal_get_path('module', 'grabbit_landing').'/resource_engine.js', $type = 'module');
+				drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+				
 				$controles='<div class="links_stream_media" id="article-news">  
 				    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
 				    <a href="JavaScript:void(0);" class="grabb-that">RT</a>
