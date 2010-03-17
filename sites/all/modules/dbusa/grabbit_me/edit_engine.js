@@ -86,7 +86,7 @@ Drupal.behaviors.editables = function(){
          //Name of the file input box  
          name: 'uploadfile',  
          onSubmit: function(file, ext){  
-             if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){  
+             if (! (ext && /^(jpg|png|jpeg|gif|JPG|JPEG)$/.test(ext))){  
                    // check for valid file extension  
                  status.text('Only JPG, PNG or GIF files are allowed');  
                  return false;  
