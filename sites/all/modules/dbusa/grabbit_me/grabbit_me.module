@@ -619,6 +619,7 @@ function grabbit_me_theme_my_activity_comments($rowx,$item){
 		break;
 		case 'media':
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+		print_r($node);
 		  $profile = content_profile_load('profile', $node->uid);
 	      $nod=$node->rowx;
 	      $item['status']=$node->body;
