@@ -285,8 +285,8 @@ $(document).ready(function() {
 		var post_id = $(this).attr("id");
 		var comment = $("#comment").attr("value");
 		var nid=$(this).attr("nid");		
-		alert("post_id - "+post_id+" comment:"+comment+" nid="+nid);
-		/*$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,comment:comment,mode:"create",nid:nid},function(data){
+		
+		$.get(Drupal.settings.basePath+"facebook/comment",{post_id:post_id,comment:comment,mode:"create",nid:nid},function(data){
 	      // Comment has succesfully added and the comment box is hidden again
 				if (data){
 								//Try grabbit/facebook/getuserinfo?params=first_name,last_name,sex
@@ -335,16 +335,14 @@ $(document).ready(function() {
 										});	
 									});
 									
-									// Reset comment textbox
-									tag.prev("input").attr("value","");
-									tag.prev("input").focus();
-									// Call a funcion to extend the stream and enable the new comment
-									tag.closest("div").parent().prev().children("#"+data).slideToggle('medium');						
+									$("#comment").attr("value","");
+									$("#comment").focus();
+															
 								});								
 				}else{
 								alert ("There was a connection problem. Try later");
 				}
-    });*/
+    });
 	});
 		
 	$(".facebook-comment-delete").click(function () {
