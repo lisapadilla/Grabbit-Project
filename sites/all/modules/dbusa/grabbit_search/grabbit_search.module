@@ -153,7 +153,7 @@ function grabbit_search_custom_page($term=NULL){
 	  
 	  if ( isset($_POST['onlysite'])  )
   	{
-	  ini_set("memory_limit","1024M");
+	  ini_set("memory_limit","2024M");
       drupal_goto( 'search/node/'.$_POST['search'] );
   	}elseif(isset($_POST['details']['profiles'])){
 	  drupal_goto( 'search/user/'.$_POST['search']);
