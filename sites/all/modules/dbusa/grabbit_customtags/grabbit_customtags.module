@@ -6,7 +6,7 @@ function grabbit_customtags_add_to_queue($uid,$id,$type,$tags){
 
 //check for specific item in queue (only facebook and twitter) returns the tags
 function grabbit_customtags_check_queue($uid,$id,$type){
-	$tags = db_query("SELECT tags, faid FROM {grabbit_customtags} WHERE uid='%s', type='%s', id='%s'",$uid,$type,$id);
+	$tags = db_query("SELECT tags, faid FROM {grabbit_customtags} WHERE uid='%d', type='%s', id='%s'",$uid,$type,$id);
 	if(!db_affected_rows($tags)){
 	  return;
 	}
