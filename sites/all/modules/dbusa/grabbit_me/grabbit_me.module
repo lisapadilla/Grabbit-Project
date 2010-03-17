@@ -431,6 +431,33 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	return $return;
 }
 
+function grabbit_me_theme_my_media($nod,$item,$profile){
+	
+	$text=get_url_msg_formatted($item['status']);
+	
+	if($item['facebook'])
+	  $social_networks .='<span class="from-facebook"><img src="'.base_path().'sites/all/themes/grabbit/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
+
+	if($item['twitter'])
+	  $social_networks .='<span class="from-twitter"> <img src="'.base_path().'sites/all/themes/grabbit/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
+	
+	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
+	  	<a href="JavaScript:void(0);" class="retweet">RT</a>
+           <a href="javaScript:void(0);" class="twit-reply" id="@'.$profile->name.'">Reply This</a>
+	  <div class="listable">
+	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
+	    '.$social_networks.'</span>
+	  </div>
+	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$profile->uid.'">'.$profile->title.'</a>
+	  <div class="twitter-body">
+	    <div class="twitter-body-contains">'.$text.'</div> 
+	    <span class="twitter-date">on '.format_date($item['time']).'</span>
+	  </div>
+	</div>';
+	
+	return $return;
+}
+
 function grabbit_me_theme_feeds($nod,$item){
 	
 	$action='feed added';
@@ -566,13 +593,19 @@ function grabbit_me_theme_my_activity_comments($rowx,$item){
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 		  $output .= theme_imap_message($comments,$node);
 		break;
-		case 'news':
+		case 'media':
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
-		  $output .= _news_theme($comments,$node);
+		  $profile = content_profile_load('profile', $node->uid);
+	      $nod=$node->rowx;
+	      $item['status']=$node->body;
+	      $item['twitter']=1;
+	      $item['facebook']=1;
+	      $item['time']=$node->last_update_time;
+		  $output .= grabbit_me_theme_my_media($nod,$item,$profile);
 		break;
 		default:
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
-		  $output .=theme_twitter_message($node);
+		  $output .= _news_theme($comments,$node);
 		break;
 	}
 	
