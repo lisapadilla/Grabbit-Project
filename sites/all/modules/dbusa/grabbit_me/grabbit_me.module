@@ -431,7 +431,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile){
 	return $return;
 }
 
-function grabbit_me_theme_my_media($nod,$item,$profile,$comments){
+function grabbit_me_theme_my_media($nod,$itemx,$profile,$comments){
 	
 	$comments_count=0;
 	while ($item = db_fetch_object($comments)){
@@ -455,7 +455,7 @@ function grabbit_me_theme_my_media($nod,$item,$profile,$comments){
 						
 	$comments_output .= '</div></div>';
 	
-	
+	$item=$itemx;
 	$text=get_url_msg_formatted($item['status']);
 	
 	if($item['facebook'])
