@@ -257,8 +257,6 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
 			  </div>';
 			
-			$vars['']
-
 		}
 		// end controles
         $vars['controles'] = $controles;
