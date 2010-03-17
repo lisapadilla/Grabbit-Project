@@ -16,7 +16,7 @@ Drupal.behaviors.tagsEngine = function(){
 		if (data){
 			$('#tags-show-'+tag_node, parent).hide();
 			$('#tags-show-'+tag_node, parent).html(data);
-			$('.links_stream_media').attr("style",'height:auto;');
+			$('.links_stream_media').attr("style",'height:128px;');
 			$('#tags-show-'+tag_node, parent).show(600);
 			selector.addClass('selected');
 		}else{
@@ -28,10 +28,11 @@ Drupal.behaviors.tagsEngine = function(){
 
   $('.close-tags').live('click', function(i){
 	i.preventDefault();
-    var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
+    var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news, #content-area');
     reset_buttons_container(container);
     $(this).parent().hide(500, function(i){
 	  $(i).parent().remove();
+	  $('.links_stream_media').attr("style",'height:128px;');
 	});
     	
   });
