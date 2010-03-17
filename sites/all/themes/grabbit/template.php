@@ -257,7 +257,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 
 		}
 		// end controles
-        $vars['controles'] .= $controles;
+        $vars['controles'] = $controles;
 		
 		$error;
 	}	
