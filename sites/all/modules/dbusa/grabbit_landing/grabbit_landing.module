@@ -225,6 +225,13 @@ function grabbit_landing_display_twitter($node){
 	            </div>
 	   </div>
 	            <div class="twitpic">'.$twitimage.'</div>
+	            <div class="facebook-form">
+				  	<h2>Post new comment</h2>
+					  <form id="myForm">
+						  <textarea id="comment" class="form-text" size="30" maxlength="140" required=true></textarea>
+						  <input class="facebook_comment_submit_landing" type="button" value="Comment" onclick="javascript:void(0)">
+					  </form>
+				  </div>
 			  </div>';
 		
 	return $output;
