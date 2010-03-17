@@ -566,9 +566,13 @@ function grabbit_me_theme_my_activity_comments($rowx,$item){
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 		  $output .= theme_imap_message($comments,$node);
 		break;
-		default:
+		case 'news':
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
 		  $output .= _news_theme($comments,$node);
+		break;
+		default:
+		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
+		  $output .=theme_twitter_message($node);
 		break;
 	}
 	
