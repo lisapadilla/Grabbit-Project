@@ -280,10 +280,8 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 				grabbit_statistics_post_entry($user->uid,'twitter');
 			}
 			//VERIFICAR SI REGRESA ID DE TWITTER, PROBAR CON UA CUENTa, SI REGRESA ENTONCES LA ASOCIAMOS CON EL NODO DEL 140+
-			if($userInfo->status->id){
-				print $post_update->response['id'];  
-				exit;
-				$more140['twitter']=$userInfo->status->id;
+			if($post_update->response['id']){
+				$more140['twitter']=$post_update->response['id'];
 			}
 			$tw_status_ch=TRUE;
 			$status_ch['twitter']='twitter status';
