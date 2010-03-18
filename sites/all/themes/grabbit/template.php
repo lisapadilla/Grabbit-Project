@@ -170,7 +170,6 @@ function grabbit_preprocess_node(&$vars, $hook) {
   if($vars['node']->type=='media'){
 	
 	 	global $user;
-		drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
 		//controles
 		if($user->uid>0){
           $variables=array('user_name'=>$user->name);
@@ -195,9 +194,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 
 		}
 		// end controles
-      $vars['controles']= $controles;
-		
-	
+        $vars['controles']= $controles;
 	
 		$profile = content_profile_load('profile', $vars['node']->uid);
 		if($profile->field_profile_picture[0]['filepath']){
