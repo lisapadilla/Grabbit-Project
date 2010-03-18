@@ -4335,7 +4335,7 @@ div.navbar
 }
 .node-type-media #comment-form #edit-submit,
 .node-type-news #comment-form .form-submit,
-.section-resource #comment
+.section-resource .facebook_comment_submit_landing
 {
 	display:block;
 	margin-left: auto;
