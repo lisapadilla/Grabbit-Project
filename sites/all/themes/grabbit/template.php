@@ -182,7 +182,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			}else{
 				$network_id=$vars['node']->nid;
 			}
-			$controles='<div class="links_stream_media tooltipwraper" id="article-news">
+			$controles='<div class="links_stream_media" id="article-news">
 			    <div id="tags-show-'.$network_id.'"></div>  
 				<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
 				  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
