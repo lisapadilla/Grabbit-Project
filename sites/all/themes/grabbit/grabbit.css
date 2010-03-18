@@ -3782,7 +3782,7 @@ div.navbar
 	background-position: center -40px;
 }
 #content-area .node-news .grabb-that,
-.section-resource .grabb-that
+.section-resource .retweet-facebook
 {
 	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
 	margin-left: 71px;
@@ -3795,7 +3795,7 @@ div.navbar
 	margin-top: -1px;
 }
 #content-area .node-news .comment-news,
-.section-resource .comment-news
+.section-resource .facebook-makecomment-link
 {
 	background: url(images/btns/ctrl_com.gif) no-repeat center 0;
 	margin-left: 42px;
