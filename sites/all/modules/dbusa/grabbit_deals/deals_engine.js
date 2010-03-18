@@ -23,6 +23,7 @@ Drupal.behaviors.deals = function()
          if (data)
          {
            anch.toggleClass('available');
+           $('.album-control').hide();
   	       $('#tags-show-'+nid, parent).hide();
              $('#tags-show-'+nid, parent).html(data);
              $('#tags-show-'+nid, parent).show(600);
@@ -37,6 +38,7 @@ Drupal.behaviors.deals = function()
     i.preventDefault();
     var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
     reset_buttons_container(container);
+    $('.album-control').show();
     $(this).parent().hide(500, function(i){
 	  $(i).parent().remove();
 	});

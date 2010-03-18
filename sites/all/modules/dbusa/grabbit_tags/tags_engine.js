@@ -32,7 +32,7 @@ Drupal.behaviors.tagsEngine = function(){
     reset_buttons_container(container);
     $(this).parent().hide(500, function(i){
 	  $(i).parent().remove();
-	  $('.album-control').attr("style",'margin-top:-60px');
+	  $('.album-control').attr("style",'margin-top:-70px');
 	});
     	
   });
