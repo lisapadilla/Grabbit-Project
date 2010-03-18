@@ -37,6 +37,7 @@ function autotagging_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
     case 'insert':
     //
       	if($node->field_post_id[0]['value']){
+		        watchdog('customtags', 'Procesed node '.$node->id.'  con id '.$node->field_post_id[0]['value']);
 		    $id=$node->field_post_id[0]['value'];
 	      }else{
 	  	    $id=$node->field_twitter_post_id[0]['value'];
