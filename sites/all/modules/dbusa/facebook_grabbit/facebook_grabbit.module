@@ -2024,7 +2024,7 @@ function theme_twitter_message($node){
 	  }*/
     $output .='<span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $node->nid).'</span></div>';
 	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
-	<a href="'.base_path().'resource/display/'.$post->nid.'" class="twitter-name-link" >'.$node->field_twitter_name[0]['value'].'</a>
+	<a href="'.base_path().'resource/display/'.$node->nid.'" class="twitter-name-link" >'.$node->field_twitter_name[0]['value'].'</a>
 	          <div class="twitter-body"><div class="twitter-body-contains">'.$msg_formatted. '</div> <span class="twitter-date">on '. format_date($node->created) . '</span>
 	            </div>
 			  </div>';
