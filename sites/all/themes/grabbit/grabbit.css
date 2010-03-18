@@ -3803,7 +3803,7 @@ div.navbar
 .section-resource .url-deal a
 {
 	background: url(images/btns/ctrl_deal.gif) no-repeat center 0;
-	margin-left: 17px;
+	margin-left: -13px;
 }
 
 #content-area .node-news .trash-item,
@@ -3824,7 +3824,7 @@ div.navbar
 .section-resource .flag-action
 {
 	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
-	margin-left:14px;
+	margin-left:13px;
 }
 .hashtag, a.user-twitter{
 	color:#385691;
