@@ -1393,7 +1393,8 @@ p#queuestatus
   width: 24px;
   margin-right: 10px;
 }
-.facebook-post .facebook-comment-text, 
+.facebook-post .facebook-comment-text,
+.section-resource .facebook-comment-text,
 .facebook-post .facebook-comment-timeline{
   font-size: 12px;
   line-height: 15px;
@@ -1827,7 +1828,8 @@ a.panel-filters{
 	width: 240px;
 }
 #panel-1 .facebook-post .facebook-comment-text,
-.user-panels .panel-grabbit .facebook-post .facebook-comment-text
+.user-panels .panel-grabbit .facebook-post .facebook-comment-text,
+.section-resource .facebook-comment-text
 {
 	width: 174px;
 }
