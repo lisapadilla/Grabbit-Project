@@ -262,6 +262,8 @@ function grabbit_preprocess_node(&$vars, $hook) {
 		    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
 		    <a href="JavaScript:void(0);" class="grabb-that">RT</a>
 		    <a href="javascript:void(0)" class="comment-news">Comment</a>
+		    <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$vars['node']->nid.'"></a>
+			   <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$vars['node']->nid.'" >Deal</a></span>
 		    <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
 		  </div>';
 		
