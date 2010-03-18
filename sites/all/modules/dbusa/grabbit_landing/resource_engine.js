@@ -10,4 +10,8 @@ Drupal.behaviors.resource = function()
       $(this).width(596);
     }
   });
+
+  var item=$('#content');
+  calculateDeals(item);
+
 }
