@@ -16,7 +16,6 @@ Drupal.behaviors.tagsEngine = function(){
 		if (data){
 			$('#tags-show-'+tag_node, parent).hide();
 			$('#tags-show-'+tag_node, parent).html(data);
-			$('.links_stream_media').attr("style",'height:128px;');
 			$('.album-control').attr("style",'margin-top:-170px');
 			$('#tags-show-'+tag_node, parent).show(600);
 			selector.addClass('selected');
