@@ -3791,6 +3791,21 @@ div.navbar
 	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
 	margin-left: 71px;
 }
+
+#content-area .node-news .bring-tags,
+.section-resource .bring-tags
+{
+	background: url(images/btns/ctrl_tag.gif) no-repeat center 0;
+	margin-left: 71px;
+}
+
+#content-area .node-news .url-deal,
+.section-resource .url-deal
+{
+	background: url(images/btns/ctrl_deal.gif) no-repeat center 0;
+	margin-left: 71px;
+}
+
 #content-area .node-news .trash-item,
 .section-resource .trash-facebook
 {
