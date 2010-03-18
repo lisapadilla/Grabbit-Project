@@ -172,8 +172,6 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	 	global $user;
 		//controles
 		if($user->uid>0){
-          $variables=array('user_name'=>$user->name);
-			drupal_add_js($variables,'setting');
 			drupal_add_js(drupal_get_path('module', 'grabbit_landing').'/resource_engine.js', $type = 'module');
 			drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 			if($vars['node']->field_networks[0]['value']){
