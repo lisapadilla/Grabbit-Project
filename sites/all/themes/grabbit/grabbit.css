@@ -3824,7 +3824,7 @@ div.navbar
 .section-resource .flag-action
 {
 	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
-	margin-left:13px;
+	margin-left:-44px;
 }
 .hashtag, a.user-twitter{
 	color:#385691;
