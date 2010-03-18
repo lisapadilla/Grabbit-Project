@@ -533,8 +533,8 @@ function prepeare_status_update($post,$user,$target,$profiles,$comenta){
 	  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
 	  <span class="url-deal iconchange"><a title="check deals" href="#" node="'.$post->nid.'" >Deal</a></span>
 	</div>
-	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic" href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
-	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div>
+	<div class="facebook-post-header"><a title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic" href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
+	<div class="facebook-with-target"><a title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div>
 	<div class="facebook-post-body"><div class="facebook-post-inside-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">'.$msg_formatted.'</div>
@@ -626,8 +626,8 @@ function prepeare_standar_update($post,$user,$target,$profiles,$comenta){
 	  <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$post->nid.'" >Deal</a></span>
 	  <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $post->nid).'	</span>
 	</div>
-	<div class="facebook-post-header"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
-	<div class="facebook-with-target"><a target="_blank" title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div><div class="facebook-post-body">
+	<div class="facebook-post-header"><a title="'.$post->field_user_name[0]['value'].'" class="facebook-story-pic"  href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-pic"><img target="_blank" class="facebook-image-s" alt="'.$post->field_user_name[0]['value'].'" src="'.$post->field_user_picture[0]['value'].'" width="48"/></span></a>
+	<div class="facebook-with-target"><a title="'.$post->field_user_name[0]['value'].'" class="facebook-story-name" href="'.base_path().'resource/display/'.$post->nid.'"><span class="facebook-user-name">'.$post->field_user_name[0]['value'].'</span></a>'.$target.'</div><div class="facebook-post-body">
 	<div class="retweet-hide" style="display:none;">'.$msg_formatted.'</div>
 	<div class="content-truncated">';
 	if($msg_formatted){
