@@ -16,7 +16,7 @@ Drupal.behaviors.tagsEngine = function(){
 		if (data){
 			$('#tags-show-'+tag_node, parent).hide();
 			$('#tags-show-'+tag_node, parent).html(data);
-			$('.album-control').attr("style",'margin-top:-170px');
+			$('.album-control').attr("style",'margin-top:-185px');
 			$('#tags-show-'+tag_node, parent).show(600);
 			selector.addClass('selected');
 		}else{
@@ -32,7 +32,6 @@ Drupal.behaviors.tagsEngine = function(){
     reset_buttons_container(container);
     $(this).parent().hide(500, function(i){
 	  $(i).parent().remove();
-	  $('.links_stream_media').attr("style",'height:15px;');
 	  $('.album-control').attr("style",'margin-top:-60px');
 	});
     	
