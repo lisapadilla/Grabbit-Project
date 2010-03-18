@@ -1347,6 +1347,8 @@ p#queuestatus
   padding-left: 58px;
 }
 .facebook-post .facebook-date,
+.section-resource .facebook-date,
+.section-resource .twitter-date,
 .twitter-message-stream .twitter-date,
 .node-stream-deal .submitted, 
 .node-stream-news .submitted,
@@ -1836,7 +1838,8 @@ a.panel-filters{
 	margin-left: 40px;
 	margin-top: 4px;
 }
-.facebook-post .frost .facebook-date
+.facebook-post .frost .facebook-date,
+.section-resource .frost .facebook-date
 {
 	margin-left: 59px;
 }
