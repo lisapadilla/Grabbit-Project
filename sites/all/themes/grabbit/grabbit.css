@@ -3809,6 +3809,14 @@ div.navbar
 	margin-left: 17px;
 }
 
+#content-area .node-news .bring-tags.selected,
+.section-resource .bring-tags.selected,
+.node-type-media .bring-tags.selected
+{
+	margin-left: 30px;
+}
+
+
 #content-area .node-news .url-deal a,
 .section-resource .url-deal a,
 .node-type-media .url-deal a
