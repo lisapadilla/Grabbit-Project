@@ -4246,7 +4246,7 @@ div.navbar
 }
 .node-type-media #comments h2.title,
 .node-type-news #comments h2.title,
-#content-area .section-resource h2
+.section-resource #content-area h2
 {
 	color:#3399CC;
 	font-size:12px;
