@@ -2541,15 +2541,7 @@ function facebook_grabbit_update_facebook($user){
 	    }
 	
 	  }
-	  //custom tags
-	      $id=$node->field_post_id[0]['value'];
-		 watchdog("custom", "Tags wueue en facebook id:".$id." user:".$node->uid." type:".$node->type);
-		  if($tags = grabbit_customtags_check_queue($node->uid,$id,$node->type)){
-			 watchdog("custom", "Entra en tags - encuentra - ".$tags);
-		    $node->taxonomy['tags'][1]=$tags;	
-			taxonomy_node_save($node, $node->taxonomy);
-		  }
-		//
+	
     }catch(FacebookRestClientException $e){
 	    drupal_set_message("Ooops! you exeeded the facebook api calls, try again latter.","error");
     }
@@ -2605,13 +2597,6 @@ function facebook_grabbit_update_twitter($user){
 			
           }
 	    }
-	    //custom tags
-	 	  	  $id=$node->field_twitter_post_id[0]['value'];
-		      if($tags = grabbit_customtags_check_queue($node->uid,$id,$node->type)){
-			    $node->taxonomy['tags'][1]=$tags;	
-			    taxonomy_node_save($node, $node->taxonomy);
-		      }
-		//
      }
      catch(EpiOAuthBadRequestException $e){  
         drupal_set_message("Connection error Twitter","error");

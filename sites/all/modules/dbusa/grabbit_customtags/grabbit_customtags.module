@@ -16,3 +16,14 @@ function grabbit_customtags_check_queue($uid,$id,$type){
 	return $totals->tags;
 }
 
+function grabbit_customtags_autotagging_api_presave($node, $terms){
+
+	if($node->field_post_id[0]['value']){
+		$id=$node->field_post_id[0]['value'];
+	}else{
+		$id=$node->field_twitter_post_id[0]['value'];
+	}
+	if($tags = grabbit_customtags_check_queue($node->uid,$id,$node->type)){
+		$node->taxonomy['tags'][1]=$tags;	
+	}
+}
