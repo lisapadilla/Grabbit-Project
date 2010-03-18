@@ -3788,7 +3788,7 @@ div.navbar
 	margin-left: 71px;
 }
 #content-area .node-news .trash-item,
-.section-resource a.trash-item
+.section-resource #content-area .node-news .trash-item
 {
 	background: url(images/btns/ctrl_del.gif) no-repeat center 0;
 	margin-left: 95px;
