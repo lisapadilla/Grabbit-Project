@@ -178,7 +178,9 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 			if($vars['node']->field_networks[0]['value']){
 				$networks=unserialize($vars['node']->field_networks[0]['value']);
+				print_r($networks);
 				$network_id=array_shift($networks);
+				
 			}else{
 				$network_id=$vars['node']->nid;
 			}
