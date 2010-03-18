@@ -17,7 +17,7 @@ Drupal.behaviors.deals = function()
     { 
       var nid = $(this).attr('node');
       var anch = $(this);
-      var parent = $(this).parents('.user-panel'); // reducir el universo a solo el panel que estoy viendo
+      var parent = $(this).parents('.user-panel, #content-area'); // reducir el universo a solo el panel que estoy viendo
       reset_buttons(nid);
       $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
          if (data)
