@@ -4337,6 +4337,10 @@ div.navbar
 	padding-left:15px;
 	padding-right:10px;
 }
+.node-type-media .url-deal a.selected,
+.section-resource .url-deal a.selected{
+	margin-top:0px;
+}
 .node-type-media #comment-form #edit-submit,
 .node-type-news #comment-form .form-submit,
 .section-resource .facebook_comment_submit_landing
