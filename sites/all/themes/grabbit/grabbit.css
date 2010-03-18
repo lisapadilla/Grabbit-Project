@@ -3778,10 +3778,13 @@ div.navbar
 	margin: 0;
 	position: absolute;
 }
-.section-resource #article-news,
-.node-type-media #article-news{
+.section-resource #article-news{
 	margin-left:487px;
 	padding-bottom:28px;
+}
+.node-type-media #article-news{
+	margin-left:487px;
+	padding-bottom:13px;
 }
 #content-area .node-news #article-news a:hover,
 .section-resource #article-news a:hover,
@@ -4589,7 +4592,7 @@ a.album-next{
 	margin-left:255px;
 }
 .logged-in .album-control{
-	margin-top:-60px;
+	margin-top:-70px;
 }
 
 .logged-in .links_stream_media{
