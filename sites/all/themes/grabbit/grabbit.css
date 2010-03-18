@@ -1814,7 +1814,8 @@ a.panel-filters{
 	float: left;
 	margin-right: 10px;
 }
-.facebook-post .facebook-comment-timeline
+.facebook-post .facebook-comment-timeline,
+.section-resource .facebook-comment-timeline
 {
 	display: block;
 }
