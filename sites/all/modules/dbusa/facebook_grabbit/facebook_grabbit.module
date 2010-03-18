@@ -2543,7 +2543,9 @@ function facebook_grabbit_update_facebook($user){
 	  }
 	  //custom tags
 	      $id=$node->field_post_id[0]['value'];
+		 watchdog("custom", "Tags wueue en facebook id:".$id." user:".$node->uid." type:".$node->type);
 		  if($tags = grabbit_customtags_check_queue($node->uid,$id,$node->type)){
+			 watchdog("custom", "Entra en tags - encuentra - ".$tags);
 		    $node->taxonomy['tags'][1]=$tags;	
 			taxonomy_node_save($node, $node->taxonomy);
 		  }
