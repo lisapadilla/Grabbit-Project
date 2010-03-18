@@ -3761,7 +3761,8 @@ div.navbar
 }
 
 #content-area .node-news #article-news a,
-.section-resource #article-news a
+.section-resource #article-news a,
+.node-type-media #article-news a
 {
 	height: 28px;
 	width: 45px;
@@ -3770,38 +3771,44 @@ div.navbar
 	position: absolute;
 }
 #content-area .node-news .flag-wrapper,
-.section-resource .flag-wrapper
+.section-resource .flag-wrapper,
+.node-type-media .flag-wrapper
 {
 	float: none;
 	margin: 0;
 	position: absolute;
 }
-.section-resource #article-news{
+.section-resource #article-news,
+.node-type-media #article-news{
 	margin-left:476px;
 	padding-bottom:28px;
 }
 #content-area .node-news #article-news a:hover,
-.section-resource #article-news a:hover
+.section-resource #article-news a:hover,
+.node-type-media #article-news a:hover
 {
 	background-position: center -40px;
 }
 #content-area .node-news .grabb-that,
 .section-resource .retweet-facebook,
-.section-resource .retweet
+.section-resource .retweet,
+.node-type-media .grabb-that
 {
 	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
 	margin-left: 71px;
 }
 
 #content-area .node-news .bring-tags,
-.section-resource .bring-tags
+.section-resource .bring-tags,
+.node-type-media .bring-tags
 {
 	background: url(images/btns/ctrl_tag.gif) no-repeat center 0;
 	margin-left: 17px;
 }
 
 #content-area .node-news .url-deal a,
-.section-resource .url-deal a
+.section-resource .url-deal a,
+.node-type-media .url-deal a
 {
 	background: url(images/btns/ctrl_deal.gif) no-repeat center 0;
 	margin-left: -13px;
@@ -3809,7 +3816,8 @@ div.navbar
 
 #content-area .node-news .trash-item,
 .section-resource .trash-facebook,
-.section-resource .trash-twitter
+.section-resource .trash-twitter,
+.node-type-media .trash-item
 {
 	background: url(images/btns/ctrl_del.gif) no-repeat center 0;
 	margin-left: 95px;
@@ -3817,14 +3825,16 @@ div.navbar
 }
 #content-area .node-news .comment-news,
 .section-resource .facebook-makecomment-link,
-.section-resource .twit-reply
+.section-resource .twit-reply,
+.node-type-media .comment-news
 {
 	background: url(images/btns/ctrl_com.gif) no-repeat center 0;
 	margin-left: 42px;
 	margin-top: 1px;
 }
 #content-area .node-news .flag-action,
-.section-resource .flag-action
+.section-resource .flag-action,
+.node-type-media .flag-action
 {
 	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
 	margin-left:-44px;
