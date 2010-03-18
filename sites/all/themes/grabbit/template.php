@@ -168,6 +168,37 @@ function grabbit_preprocess_node(&$vars, $hook) {
   }
 
   if($vars['node']->type=='media'){
+	
+	 	global $user;
+		drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
+		//controles
+		if($user->uid>0){
+          $variables=array('user_name'=>$user->name);
+			drupal_add_js($variables,'setting');
+			drupal_add_js(drupal_get_path('module', 'grabbit_landing').'/resource_engine.js', $type = 'module');
+			drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+			if($vars['node']->field_networks[0]['value']){
+				$networks=unserialize($vars['node']->field_networks[0]['value']);
+				$network_id=array_shift($networks);
+			}else{
+				$network_id=$vars['node']->nid;
+			}
+			$controles='<div class="links_stream_media tooltipwraper" id="article-news">
+			    <div id="tags-show-'.$network_id.'"></div>  
+				<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
+				  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
+				  <a href="javascript:void(0);" title="comment" class="comment-news">Post a comment</a>
+				  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$network_id.'"></a>
+				   <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$network_id.'" >Deal</a></span>
+			      <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
+			  </div>';
+
+		}
+		// end controles
+      $vars['controles']= $controles;
+		
+	
+	
 		$profile = content_profile_load('profile', $vars['node']->uid);
 		if($profile->field_profile_picture[0]['filepath']){
 		  $pic=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'Friend');
@@ -215,70 +246,13 @@ function grabbit_preprocess_node(&$vars, $hook) {
 				break;
 			}
 			
-			global $user;
-			drupal_add_js(path_to_theme().'/js/article_engine.js', $type = 'theme');
-			//controles
-			if($user->uid>0){
-                $variables=array('user_name'=>$user->name);
-				drupal_add_js($variables,'setting');
-				drupal_add_js(drupal_get_path('module', 'grabbit_landing').'/resource_engine.js', $type = 'module');
-				drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-				if($vars['node']->field_networks[0]['value']){
-					$networks=unserialize($vars['node']->field_networks[0]['value']);
-					$network_id=array_shift($networks);
-				}else{
-					$network_id=$vars['node']->nid;
-				}
-				$controles='<div class="links_stream_media tooltipwraper" id="article-news">
-				    <div id="tags-show-'.$network_id.'"></div>  
-					<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
-					  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
-					  <a href="javascript:void(0);" title="comment" class="comment-news">Post a comment</a>
-					  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$network_id.'"></a>
-					   <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$network_id.'" >Deal</a></span>
-				      <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
-				  </div>';
-
-			}
-			// end controles
-	        $vars['controles']= $controles;
-			
 			
 			$vars['file_media']= $output;
 		}else{
 			$error;
 		}
 
-	}else{
-		global $user;
-		//controles
-		if($user->uid>0){
-
-			drupal_add_js($variables,'setting');
-			drupal_add_js(drupal_get_path('module', 'grabbit_landing').'/resource_engine.js', $type = 'module');
-			drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
-			if($vars['node']->field_networks[0]['value']){
-				$networks=unserialize($vars['node']->field_networks[0]['value']);
-				$network_id=array_shift($networks);
-			}else{
-				$network_id=$vars['node']->nid;
-			}
-			$controles='<div class="links_stream_media tooltipwraper" id="article-news">
-			    <div id="tags-show-'.$network_id.'"></div>  
-				<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
-				  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
-				  <a href="javascript:void(0);" title="comment" class="comment-news">Post a comment</a>
-				  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$network_id.'"></a>
-				   <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$network_id.'" >Deal</a></span>
-			      <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
-			  </div>';
-			
-		}
-		// end controles
-        $vars['controles'] = $controles;
-		
-		$error;
-	}	
+	}
   }
 
   if($vars['node']->type=='news'){
