@@ -35,19 +35,7 @@ function autotagging_nodeapi(&$node, $op, $teaser = NULL, $page = NULL) {
   switch ($op) {
     case 'update':
     case 'insert':
-    //
-      	if($node->field_post_id[0]['value']){
-		        watchdog('customtags', 'Procesed node '.$node->id.'  con id '.$node->field_post_id[0]['value']);
-		    $id=$node->field_post_id[0]['value'];
-	      }else{
-	  	    $id=$node->field_twitter_post_id[0]['value'];
-	      }
-	      if($tags = grabbit_customtags_check_queue($node->uid,$id,$node->type)){
-		    $node->taxonomy['tags'][1]=$tags;	
-		    taxonomy_node_save($node, $node->taxonomy);
-		    break;
-	      }
-	//
+   
       $terms = array();
       // check that this node type is allowed for autotagging
       //
