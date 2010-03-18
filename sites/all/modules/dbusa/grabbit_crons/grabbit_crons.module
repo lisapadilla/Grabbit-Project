@@ -123,7 +123,6 @@ function grabbit_crons_delete_nodes(){
 	  'IMAP',
 	  'news' //update this string with the type of node you want to delete and add any more lines you might need
 	);
-	exit;
     $count = 0;
     $starttime = mktime()-10*3600*24; 
 	$flag = flag_get_flag('bookmarks');
