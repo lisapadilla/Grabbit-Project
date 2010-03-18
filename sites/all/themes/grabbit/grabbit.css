@@ -3776,6 +3776,10 @@ div.navbar
 	margin: 0;
 	position: absolute;
 }
+.section-resource #article-news{
+	margin-left:476px;
+	padding-bottom:28px;
+}
 #content-area .node-news #article-news a:hover,
 .section-resource #article-news a:hover
 {
