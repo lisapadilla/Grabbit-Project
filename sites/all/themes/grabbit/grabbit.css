@@ -3842,6 +3842,15 @@ div.navbar
 	background: url(images/btns/ctrl_fav.gif) no-repeat center 0;
 	margin-left:-44px;
 }
+
+#content-area .node-news .unflag-action,
+.section-resource .unflag-action,
+.node-type-media .unflag-action
+{
+	background: url(images/btns/ctrl_unfav.gif) no-repeat center 0;
+	margin-left:-44px;
+}
+
 .hashtag, a.user-twitter{
 	color:#385691;
 }
