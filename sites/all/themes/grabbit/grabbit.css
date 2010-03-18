@@ -1814,6 +1814,13 @@ a.panel-filters{
 	float: left;
 	margin-right: 10px;
 }
+.section-resource .facebook-user-pic{
+	float:left;
+	margin-right:10px;
+}
+.section-resource .display-comments-buttons{
+	margin-left:78px;
+}
 .facebook-post .facebook-comment-timeline,
 .section-resource .facebook-comment-timeline
 {
