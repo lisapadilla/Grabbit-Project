@@ -186,7 +186,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			    <div id="tags-show-'.$network_id.'"></div>  
 				<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
 				  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
-				  <a href="javascript:void(0);" title="comment" class="comment-news">Post a comment</a>
+				  <a href="javascript:void(0);" title="comment" class="comment-news comment-special">Post a comment</a>
 				  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$network_id.'"></a>
 				   <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$network_id.'" >Deal</a></span>
 			      <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>

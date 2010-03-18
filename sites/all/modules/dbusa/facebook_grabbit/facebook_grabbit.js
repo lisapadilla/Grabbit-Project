@@ -186,6 +186,15 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('.comment-special').live('click',function(){
+		var comment=$("#edit-comment");
+		if(comment){
+			comment.focus();	
+		}else{
+			alert('Login or register to post a comment');
+		}
+	});
+	
 	$('.suser-panels').height($('.suser-panels').height());
 	
 	$('.news-comment-submit-button').live('click',function(){
