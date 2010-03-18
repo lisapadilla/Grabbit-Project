@@ -1396,7 +1396,8 @@ p#queuestatus
   font-size: 12px;
   line-height: 15px;
 }
-.facebook-post .facebook-comment-link{
+.facebook-post .facebook-comment-link,
+.section-resource .facebook-comment-link{
   color: #0073CF;
   font-weight: bold;
   font-size: 12px;
@@ -1814,7 +1815,8 @@ a.panel-filters{
 {
 	display: block;
 }
-.facebook-post .facebook-comment-text
+.facebook-post .facebook-comment-text,
+.section-resource .facebook-comment-text
 {
 	float: left;
 }
@@ -1827,7 +1829,8 @@ a.panel-filters{
 {
 	width: 174px;
 }
-.facebook-post .facebook-comments .facebook-date
+.facebook-post .facebook-comments .facebook-date,
+.section-resource .facebook-comments .facebook-date
 {
 	float: left;
 	margin-left: 40px;
@@ -1837,7 +1840,8 @@ a.panel-filters{
 {
 	margin-left: 59px;
 }
-.facebook-post .facebook-comments
+.facebook-post .facebook-comments,
+.section-resource .facebook-comments
 {
 	margin-bottom: 10px;
 }
