@@ -3825,6 +3825,14 @@ div.navbar
 	margin-left: -13px;
 }
 
+#content-area .node-news .url-deal a.available,
+.section-resource .url-deal a.available,
+.node-type-media .url-deal a.available
+{
+	background: url(images/btns/ctrl_adeal.gif) no-repeat center 0;
+	margin-left: -13px;
+}
+
 #content-area .node-news .trash-item,
 .section-resource .trash-facebook,
 .section-resource .trash-twitter,
