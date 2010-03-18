@@ -3786,7 +3786,8 @@ div.navbar
 	background-position: center -40px;
 }
 #content-area .node-news .grabb-that,
-.section-resource .retweet-facebook
+.section-resource .retweet-facebook,
+.section-resource .retweet
 {
 	background: url(images/btns/ctrl_rtw.gif) no-repeat center 0;
 	margin-left: 71px;
@@ -3807,14 +3808,16 @@ div.navbar
 }
 
 #content-area .node-news .trash-item,
-.section-resource .trash-facebook
+.section-resource .trash-facebook,
+.section-resource .trash-twitter
 {
 	background: url(images/btns/ctrl_del.gif) no-repeat center 0;
 	margin-left: 95px;
 	margin-top: -1px;
 }
 #content-area .node-news .comment-news,
-.section-resource .facebook-makecomment-link
+.section-resource .facebook-makecomment-link,
+.section-resource .twit-reply
 {
 	background: url(images/btns/ctrl_com.gif) no-repeat center 0;
 	margin-left: 42px;
