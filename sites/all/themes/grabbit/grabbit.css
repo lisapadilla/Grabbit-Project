@@ -4333,6 +4333,10 @@ div.navbar
 {
 	display: none;
 }
+.section-resource .facebook-attachment{
+	padding-left:15px;
+	padding-right:10px;
+}
 .node-type-media #comment-form #edit-submit,
 .node-type-news #comment-form .form-submit,
 .section-resource .facebook_comment_submit_landing
