@@ -145,6 +145,16 @@ $(document).ready(function() {
 		$('#edit-tags').val($(this).val());
 	});
 	
+	$(".section-resource .facebook-makecomment-link").click(function(e){
+		var comment=$("#comment");
+		if(comment){
+			comment.focus();	
+		}else{
+			alert('Login or register to post a comment');
+		}
+		
+	});
+	
 	$(".facebook-makecomment-link").live('click',function () {
 		var input1 = $(this).parents('.facebook-post');
 		var input = $("#myForm",input1).children("input").prev();
