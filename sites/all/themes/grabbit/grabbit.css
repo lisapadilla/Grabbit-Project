@@ -3796,14 +3796,14 @@ div.navbar
 .section-resource .bring-tags
 {
 	background: url(images/btns/ctrl_tag.gif) no-repeat center 0;
-	margin-left: 71px;
+	margin-left: 17px;
 }
 
-#content-area .node-news .url-deal,
-.section-resource .url-deal
+#content-area .node-news .url-deal a,
+.section-resource .url-deal a
 {
 	background: url(images/btns/ctrl_deal.gif) no-repeat center 0;
-	margin-left: 71px;
+	margin-left: 17px;
 }
 
 #content-area .node-news .trash-item,
