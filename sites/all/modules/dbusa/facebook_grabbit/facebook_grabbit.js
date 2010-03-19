@@ -327,7 +327,7 @@ $(document).ready(function() {
 									var curr_minutes 	= d.getMinutes();													
 								
 									var date 		= curr_date+", "+curr_month+"/"+curr_day+"/"+curr_year+" - "+ curr_hour+":"+curr_minutes;
-									var comment = tag.prev("input").attr("value");
+									var comment = $("#comment").attr("value");
 									
 									var new_content 	= '<div id="'+data+'" class="facebook-comments clearfix"><a target="_blank" title="'+name+'" class="facebook-image-comment" href="'+profile_url+'"><span class="facebook-user-pic"><img class="facebook-image-comm" alt="'+name+'" src="'+pic_square+'" width="30"/></span></a>';
 									    new_content  += '<span class="facebook-comment-timeline"><a target="_blank" title="'+name+'" class="facebook-comment-link" href="'+profile_url+'">'+name+'</a></span>';
