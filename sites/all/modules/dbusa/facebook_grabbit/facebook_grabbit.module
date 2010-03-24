@@ -241,7 +241,9 @@ function facebook_grabbit_update_form_submit($form, &$form_state) {
 										       'status'=>$form_state['values']['status'])); 
 										
 			if($face_status){
+				$more140=array();
 				try{
+				  $status_facebook[0]['status_id']=array();
 				  $status_facebook = $facebook->api_client->call_method("facebook.status.get", array('uid'=>$suser, 'limit'=>'1'));
 				  $more140['facebook']=$suser."_".$status_facebook[0]['status_id'];
 				}catch(FacebookRestClientException $e){
