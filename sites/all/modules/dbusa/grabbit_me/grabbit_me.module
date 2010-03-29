@@ -405,7 +405,8 @@ function grabbit_me_show_activity(){
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile){
-	
+	print_r($item);
+	print_r($profile);
 	$text=get_url_msg_formatted($item['status']);
 	
 	if($item['facebook'])
