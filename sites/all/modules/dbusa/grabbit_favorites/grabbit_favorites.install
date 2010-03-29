@@ -18,7 +18,19 @@ function grabbit_favorites_uninstall() {
   drupal_uninstall_schema('grabbit_favorites');
   drupal_uninstall_schema('grabbit_trash');
 }
-
+function grabbit_favorites_update_1() {
+  $ret = array();
+  switch ($GLOBALS['db_type']) {
+    case 'mysqli':
+      $ret[] = update_sql("ALTER TABLE {grabbit_favorites} ADD COLUMN
+extra text NOT NULL default ''");
+    case 'mysql':
+      $ret[] = update_sql("ALTER TABLE {grabbit_favorites} ADD COLUMN
+extra text NOT NULL default ''");
+      break;
+  }
+  return $ret;
+}
 
 function grabbit_favorites_schema() {
   $schema = array();
