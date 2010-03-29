@@ -71,7 +71,8 @@ function grabbit_favorites_facebook(){
 	$uid=$user->uid;
 	$type=$_GET['type'];
 	$nid=$_GET['nid'];
-  	db_query("INSERT INTO {grabbit_favorites} (uid,type,id) VALUES (%d, '%s', '%s')",$uid,$type,$nid);	
+	$time=time();
+  	db_query("INSERT INTO {grabbit_favorites} (uid,type,id, extra) VALUES (%d, '%s', '%s', '%s')",$uid,$type,$nid,$time);	
     $result = TRUE;
     print "all OK";	
 }
