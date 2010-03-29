@@ -426,7 +426,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	  </div>
 	';
 
-	  if(!$super_link){
+	  if($super_link){
 		$return .='<a target="_blank" class="twitter-name-link" href="'.$super_link.'">'.$profile->title.'</a>';
 	  }else{
 		$return .='<a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/update/'.$node->faid.'">'.$profile->title.'</a>';
@@ -470,8 +470,8 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments,$node){
 	$profile=$profilex;
 	$text=get_url_msg_formatted($item['status']);
 	
-	preg_match("#((?:http|https)://(?:.*?)tr.im/([A-Za-z0-9]+))#is", $text, $matches);
-	$super_link=$matches[0];
+	preg_match("#((?:http|https)://(?:.*?)tr.im/([A-Za-z0-9]+))#is", $item['status'], $matches);
+	$super_link=$matches[0][0];
 	
 	if($item['facebook'])
 	  $social_networks .='<span class="from-facebook"><img src="'.base_path().'sites/all/themes/grabbit/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
@@ -487,7 +487,7 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments,$node){
 	    '.$social_networks.'</span>
 	  </div>';
 	
-	  if(!$super_link){
+	  if($super_link){
 		$return .='<a target="_blank" class="twitter-name-link" href="'.$super_link.'">'.$profile->title.'</a>';
 	  }else{
 		$return .='<a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/'.$node->nid.'">'.$profile->title.'</a>';
