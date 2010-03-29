@@ -13,7 +13,12 @@ function grabbit_landing_menu()
 
 function grabbit_landing_display(){
 	global $user;
-	$node=node_load(arg(2));
+	if(arg(2)=='update'){
+	  	$node=db_result(db_query("SELECT * FROM {grabbit_me} WHERE faid=%d",arg(2)));	
+	    $node->type='update';
+	}else{
+		$node=node_load(arg(2));
+	}
 	
 	/*if($node->uid!=$user->uid){ // dont allow others to see yout shit
 		return $output;
@@ -28,6 +33,9 @@ function grabbit_landing_display(){
 		break;
 		case 'twitter':
 		  return grabbit_landing_display_twitter($node);
+		break;
+		case 'update':
+		  return grabbit_landing_display_update($node);
 		break;
 	}
 }
@@ -220,6 +228,44 @@ function grabbit_landing_display_twitter($node){
 	            <div class="twitter-body">
 	            	<div class="twitter-body-contains">'.$msg_formatted. '</div> 
 	              	<span class="twitter-date">on '. format_date($node->created) . '</span>
+	            </div>
+	   </div>
+	            <div class="twitpic">'.$twitimage.'</div>
+			  </div>';
+		
+	return $output;
+}
+
+function grabbit_landing_display_update($node){  
+
+    $item=unserialize($node->extra);
+
+	$msg = $item['status'];
+	
+	preg_match("/(http:\/\/twitpic\.com\/)(.*$)/i",$msg,$matches);
+	if(is_array($matches)){
+		$twitimage='<img src="http://twitpic.com/show/full/'.$matches[2].'" />';
+	}
+	
+	$profile=content_profile_load('profile', $node->uid);
+	
+	$msg_formatted=get_url_msg_formatted($msg,$node);
+	
+	$output = '<div id="node-'.$node->number.'" class="twitter-message-stream clearfix '.$node->rowx.' stream-node">
+		
+		<div id="article-news">
+		  <a href="JavaScript:void(0);" class="retweet" title="retweet">RT</a>
+		  <a href="javaScript:void(0);" class="twit-reply" title="reply" id="@'.$profile->name.'">Reply This</a>
+		</div>
+		<div class="twitter-post clearfix">
+	            
+	             ';
+	
+	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
+	            <a href="#" class="twitter-name-link" target="_blank">'.$profile->name.'</a>
+	            <div class="twitter-body">
+	            	<div class="twitter-body-contains">'.$msg_formatted. '</div> 
+	              	<span class="twitter-date">on '. format_date($node->number) . '</span>
 	            </div>
 	   </div>
 	            <div class="twitpic">'.$twitimage.'</div>
