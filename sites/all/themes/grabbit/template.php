@@ -257,9 +257,9 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	if($user->uid>0){
 		
 		$controles='
-		
+		<div id="tags-show-'.$vars['node']->nid.'"></div>
 		    <div class="links_stream" id="article-news">
-		<div id="tags-show-'.$vars['node']->nid.'"></div>  
+		  
 		    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
 		    <a href="JavaScript:void(0);" class="grabb-that">RT</a>
 		    <a href="javascript:void(0)" class="comment-news">Comment</a>
