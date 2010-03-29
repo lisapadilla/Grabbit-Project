@@ -94,8 +94,9 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	      if($media['type'] =="photo"){
 		    try{
 			  	$fb_photo=$facebook->api_client->call_method('facebook.Photos.get', array('session_key' => $session_key,
-			    if(is_array($fb_photo))
-				  $attachment .='<span class="facebook-attach-photo"><img src="'.$fb_photo[0]['src_big'].'" /></span>';
+			                                                                              'pids'=>$media['photo']['pid']));
+			if(is_array($fb_photo))
+				$attachment .='<span class="facebook-attach-photo"><img src="'.$fb_photo[0]['src_big'].'" /></span>';
 		    }catch(FacebookRestClientException $e){
 			   $e;
 		    }
