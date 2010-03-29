@@ -16,7 +16,7 @@ function grabbit_landing_display(){
 	if(arg(2)=='update'){
 		print_r(arg(3));
 	  	//$node=db_result(db_query("SELECT * FROM {grabbit_me} WHERE faid=%d",arg(3)));	
-	    $node->type='update';
+	    //$node->type='update';
 	}else{
 		$node=node_load(arg(2));
 	}
