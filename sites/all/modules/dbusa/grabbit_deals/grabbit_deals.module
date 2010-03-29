@@ -185,7 +185,6 @@ function grabbit_deals_calculate()
   
   if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
   {
-	print_r($tags);
 	if($user->uid==1){
 	//	print_r($nid);
 	 // print_r($tags);	
@@ -201,6 +200,7 @@ function grabbit_deals_extract_tags($nid, $uid){
 	
 	$node=node_load($nid);
 	$profile = content_profile_load('profile', $uid);
+	print_r($node);
 	if($node->nid && $profile->nid){
 		
 	  // creates an array of tags from the node
