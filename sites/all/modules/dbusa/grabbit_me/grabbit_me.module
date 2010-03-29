@@ -460,7 +460,7 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments,$node){
 	$text=get_url_msg_formatted($item['status']);
 	
 	preg_match("#((?:http|https)://(?:.*?)tr.im/([A-Za-z0-9]+))#is", $text, $matches);
-	$super_link=$matches[1];
+	$super_link=$matches[0];
 	
 	if($item['facebook'])
 	  $social_networks .='<span class="from-facebook"><img src="'.base_path().'sites/all/themes/grabbit/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
