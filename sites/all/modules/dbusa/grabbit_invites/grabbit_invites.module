@@ -117,7 +117,7 @@ function grabbit_invites_facebook(){
 											
 	    }
 	  }catch(FacebookRestClientException $e){
-		print "error";
+		print $e;
 	  }
     }
 	
