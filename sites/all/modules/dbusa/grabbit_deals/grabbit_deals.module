@@ -200,7 +200,7 @@ function grabbit_deals_extract_tags($nid, $uid){
 	
 	$node=node_load($nid);
 	$profile = content_profile_load('profile', $uid);
-	print_r($node);
+	
 	if($node->nid && $profile->nid){
 		
 	  // creates an array of tags from the node
