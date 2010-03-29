@@ -428,7 +428,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	  if(!$super_link){
 		$return .='<a target="_blank" class="twitter-name-link" href="'.$super_link.'">'.$profile->title.'</a>';
 	  }else{
-		$return .='<a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/update/'.$node->nid.'">'.$profile->title.'</a>';
+		$return .='<a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/update/'.$node->faid.'">'.$profile->title.'</a>';
 	  }
 
 	  $return .='
