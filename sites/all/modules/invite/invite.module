@@ -1030,7 +1030,7 @@ function invite_form_submit($form, &$form_state) {
 
   $subject = isset($form_state['values']['subject']) ? trim($form_state['values']['subject']) : invite_get_subject();
   $message = isset($form_state['values']['message']) ? trim($form_state['values']['message']) : NULL;
-
+  $message_orig = $message;
   if (!variable_get('invite_use_users_email', 0)) {
     $from = variable_get('invite_manual_from', '');
   }
@@ -1043,6 +1043,7 @@ function invite_form_submit($form, &$form_state) {
   }
 
   foreach ($form_state['values']['valid_emails'] as $email) {
+    $message = $message_orig;
     // Create the invite object.
     $code = $form_state['values']['reg_code'] ? $form_state['values']['reg_code'] : invite_generate_code();
     $invite = _invite_substitutions(array(
