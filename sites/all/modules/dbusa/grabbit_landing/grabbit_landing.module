@@ -82,7 +82,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	global $user_info;
 	$attachment = '';
     $attachment_array=unserialize($post->field_attachment[0]['value']);
-	
+	/*
 	if($attachment_array['name'])
 	  $attachment_title ='<div class="facebook-attach-title">'.$attachment_array['name'].'</div>';
 	
@@ -135,7 +135,7 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	}else{
 		$show_comments='<div class="display-comments-buttons" >'.$show_comments.'</div>';
 	}
-	
+	*/
 	
 	// Output for aplication updates
 	
