@@ -459,6 +459,9 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments,$node){
 	$profile=$profilex;
 	$text=get_url_msg_formatted($item['status']);
 	
+	preg_match("#((?:http|https)://(?:.*?)tr.im/([A-Za-z0-9]+))#is", $text, $matches);
+	$super_link=$matches[1];
+	
 	if($item['facebook'])
 	  $social_networks .='<span class="from-facebook"><img src="'.base_path().'sites/all/themes/grabbit/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
 
@@ -471,9 +474,15 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments,$node){
 	  <div class="listable">
 	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
 	    '.$social_networks.'</span>
-	  </div>
-	  <a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/'.$node->nid.'">'.$profile->title.'</a>
-	  <div class="twitter-body">
+	  </div>';
+	
+	  if(!$super_link){
+		$return .='<a target="_blank" class="twitter-name-link" href="'.$super_link.'">'.$profile->title.'</a>';
+	  }else{
+		$return .='<a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/'.$node->nid.'">'.$profile->title.'</a>';
+	  }
+	  
+	  $return .='<div class="twitter-body">
 	    <div class="twitter-body-contains">'.$text.'</div>
 	    <div class="frost clearfix">
 			  <span class="twitter-date">on '.format_date($item['time']).'</span>

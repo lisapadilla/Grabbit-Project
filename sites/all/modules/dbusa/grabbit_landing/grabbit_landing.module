@@ -37,6 +37,7 @@ function grabbit_landing_display(){
 		case 'twitter':
 		  return grabbit_landing_display_twitter($node);
 		break;
+		case 'media':
 		case 'update':
 		  return grabbit_landing_display_update($node);
 		break;
@@ -266,7 +267,7 @@ function grabbit_landing_display_update($node){
 		</div>
 		<div class="twitter-post clearfix">';
 	
-	$output .='<div class="listable"><span class="twitter-image">'.theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image').'
+	$output .='<div class="listable"><span class="twitter-image">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
 	'.$social_networks.'</span></div>
 	            <a href="#" class="twitter-name-link" target="_blank">'.$profile->name.'</a>
 	            <div class="twitter-body">
