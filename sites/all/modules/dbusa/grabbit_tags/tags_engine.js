@@ -60,7 +60,7 @@ Drupal.behaviors.tagsEngine = function(){
 					      $(".tags-success").fadeOut("fast");
 					    }, 4000);
 					});
-					var container = $('#tags-show-'+tag_node, parent).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
+					var container = $('#tags-show-'+tag_node, parent).parents('.twitter-message-stream, .facebook-post, .node-stream-news, #content-area');
 					$('#tags-show-'+tag_node, parent).removeClass('masked-relative');
 					reset_buttons_container(container);
 					calculateDeals(container);
