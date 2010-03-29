@@ -14,7 +14,7 @@ function grabbit_landing_menu()
 function grabbit_landing_display(){
 	global $user;
 	if(arg(2)=='update'){
-		print_r(arg(3));
+	//	print_r(arg(3));
 	  	$node=db_result(db_query("SELECT * FROM {grabbit_me} WHERE faid=%d",arg(3)));	
 	print_r(db_fetch_object($node));    
 	//$node->type='update';
