@@ -185,6 +185,7 @@ function grabbit_deals_calculate()
   
   if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
   {
+	print_r($tags);
 	if($user->uid==1){
 	//	print_r($nid);
 	 // print_r($tags);	
