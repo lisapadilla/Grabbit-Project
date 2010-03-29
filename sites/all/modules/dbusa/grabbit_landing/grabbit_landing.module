@@ -239,7 +239,7 @@ function grabbit_landing_display_twitter($node){
 function grabbit_landing_display_update($node){  
 
     $item=unserialize($node->extra);
-
+print_r($node);
 	$msg = $item['status'];
 	
 	preg_match("/(http:\/\/twitpic\.com\/)(.*$)/i",$msg,$matches);
@@ -257,9 +257,7 @@ function grabbit_landing_display_update($node){
 		  <a href="JavaScript:void(0);" class="retweet" title="retweet">RT</a>
 		  <a href="javaScript:void(0);" class="twit-reply" title="reply" id="@'.$profile->name.'">Reply This</a>
 		</div>
-		<div class="twitter-post clearfix">
-	            
-	             ';
+		<div class="twitter-post clearfix">';
 	
 	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
 	            <a href="#" class="twitter-name-link" target="_blank">'.$profile->name.'</a>
