@@ -180,13 +180,13 @@ function grabbit_preprocess_node(&$vars, $hook) {
 			}else{
 				$network_id=$vars['node']->nid;
 			}
-			$controles='<div id="tags-show-'.$network_id.'"></div>  
+			$controles='<div id="tags-show-'.$vars['node']->nid.'"></div>  
 			<div class="links_stream_media" id="article-news">
 				<a href="JavaScript:void(0);" title="delete" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
 				  <a href="JavaScript:void(0);" title="retweet" class="grabb-that">RT</a>
 				  <a href="javascript:void(0);" title="comment" class="comment-news comment-special">Post a comment</a>
 				  <a href="javascript:void(0);" title="add/edit tags" class="bring-tags iconchange" node="'.$vars['node']->nid.'"></a>
-				   <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$network_id.'" >Deal</a></span>
+				   <span class="url-deal iconchange"><a href="#" title="check deals" node="'.$vars['node']->nid.'" >Deal</a></span>
 			      <span class="flag-wrapper flag-bookmarks">'.flag_create_link('bookmarks', $vars['node']->nid).'	</span>
 			  </div>';
 
