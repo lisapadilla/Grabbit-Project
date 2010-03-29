@@ -407,7 +407,9 @@ function grabbit_me_show_activity(){
 function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	
 	$text=get_url_msg_formatted($item['status']);
-	preg_match_all("#((?:http|https)://(?:.*?)tr.im/([A-Za-z0-9]+))#is", $text, $matches);
+	preg_match_all("#((?:http|https)://(?:.*?)tr.im/([A-Za-z0-9]+))#is", $item['status'], $matches);
+	print_r($matches);
+	print_r($$item['status']);
 	$super_link=$matches[0];
 	
 	if($item['facebook'])
