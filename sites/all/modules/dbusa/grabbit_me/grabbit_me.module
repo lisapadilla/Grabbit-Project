@@ -404,8 +404,8 @@ function grabbit_me_show_activity(){
 
 }
 
-function grabbit_me_theme_my_activity($nod,$item,$profile){
-	print_r($item);
+function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
+	print_r($node);
 	$text=get_url_msg_formatted($item['status']);
 	
 	if($item['facebook'])
@@ -817,7 +817,7 @@ function grabbit_me_get_statuses_all($uid,$limit='10',$pag=FALSE){
 	  case 'status':
 	      $item=unserialize($element->extra);
 	      if(substr($item['status'], 0, 2) != 'D '){ //NO DIRECT MESSAGES
-		    $output .= grabbit_me_theme_my_activity($nod,$item,$profile); 
+		    $output .= grabbit_me_theme_my_activity($nod,$item,$profile,$item); 
 	      }
 	  break;
 	  case 'rss':
