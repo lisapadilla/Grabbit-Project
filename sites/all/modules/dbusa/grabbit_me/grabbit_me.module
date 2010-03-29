@@ -472,7 +472,7 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments){
 	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
 	    '.$social_networks.'</span>
 	  </div>
-	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$profile->uid.'">'.$profile->title.'</a>
+	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$profile->name.'">'.$profile->title.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$text.'</div>
 	    <div class="frost clearfix">
