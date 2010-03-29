@@ -242,8 +242,12 @@ function grabbit_landing_display_twitter($node){
 function grabbit_landing_display_update($node){  
 
     $item=unserialize($node->extra);
-print_r($node);
 	$msg = $item['status'];
+	if($item['facebook'])
+	  $social_networks .='<span class="from-facebook"><img src="'.base_path().'sites/all/themes/grabbit/images/various/facebook_ico_sml.gif" alt="Facebook Account" /></span>';
+
+	if($item['twitter'])
+	  $social_networks .='<span class="from-twitter"> <img src="'.base_path().'sites/all/themes/grabbit/images/various/twitter_ico_sml.gif" alt="Twitter Account" /></span>';
 	
 	preg_match("/(http:\/\/twitpic\.com\/)(.*$)/i",$msg,$matches);
 	if(is_array($matches)){
@@ -262,7 +266,8 @@ print_r($node);
 		</div>
 		<div class="twitter-post clearfix">';
 	
-	$output .='<div class="listable"><span class="twitter-image"><img width="48" src="'.$node->field_twitter_picture[0]['value'].'" /></span></div>
+	$output .='<div class="listable"><span class="twitter-image">'.theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');.'
+	'.$social_networks.'</span></div>
 	            <a href="#" class="twitter-name-link" target="_blank">'.$profile->name.'</a>
 	            <div class="twitter-body">
 	            	<div class="twitter-body-contains">'.$msg_formatted. '</div> 
