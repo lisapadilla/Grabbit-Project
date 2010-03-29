@@ -143,7 +143,7 @@ function grabbit_me_pagination(){
 		    $nod='even';
 			foreach ($totals as $status){
 				$item=unserialize($status->extra);
-			      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
+			      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile,$status);
 			      if($nod=='odd'){
 				    $nod='even';
 			      }else{
@@ -405,7 +405,7 @@ function grabbit_me_show_activity(){
 }
 
 function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
-	print_r($node);
+	
 	$text=get_url_msg_formatted($item['status']);
 	
 	if($item['facebook'])
@@ -421,7 +421,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
 	    '.$social_networks.'</span>
 	  </div>
-	  <a target="_blank" class="twitter-name-link" href="'.base_path().'display/update/'.$profile->name.'">'.$profile->title.'</a>
+	  <a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/update/'.$node->faid.'">'.$profile->title.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$text.'</div> 
 	    <span class="twitter-date">on '.format_date($item['time']).'</span>
@@ -431,7 +431,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	return $return;
 }
 
-function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments){
+function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments,$node){
 	
 	$comments_count=0;
 	while ($item = db_fetch_object($comments)){
@@ -472,7 +472,7 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments){
 	    <span class="twitter-image" style="background:none;">'.theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image').'
 	    '.$social_networks.'</span>
 	  </div>
-	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$profile->name.'">'.$profile->title.'</a>
+	  <a target="_blank" class="twitter-name-link" href="'.base_path().'resource/display/'.$node->nid.'">'.$profile->title.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$text.'</div>
 	    <div class="frost clearfix">
@@ -630,7 +630,7 @@ function grabbit_me_theme_my_activity_comments($rowx,$item){
 	      $item['twitter']=1;
 	      $item['facebook']=1;
 	      $item['time']=$node->last_update_time;
-		  $output .= grabbit_me_theme_my_media($nod,$item,$profile,$comments);
+		  $output .= grabbit_me_theme_my_media($nod,$item,$profile,$comments,$node);
 		break;
 		default:
 		  $comments = db_query("SELECT * FROM {comments} WHERE nid = %d ORDER BY timestamp ASC", $node->nid);
@@ -1135,7 +1135,7 @@ function grabbit_me_show_activity_mentions(){
 		  	foreach($ment as $m_status){
 			  $item=unserialize($m_status->extra);
               
-		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
+		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile,$m_status);
 		      if($nod=='odd'){
 			    $nod='even';
 		      }else{
@@ -1186,7 +1186,7 @@ function grabbit_me_show_activity_rendered(){
     }else{
 	  	foreach($statuses as $status){
 		  $item=unserialize($status->extra);
-	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile,$status);
 	      if($nod=='odd'){
 		    $nod='even';
 	      }else{
@@ -1869,7 +1869,7 @@ function grabbit_me_you_activity_rendered($user){
     }else{
 	  	foreach($statuses as $status){
 		  $item=unserialize($status->extra);
-	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile);
+	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile,$status);
 	      if($nod=='odd'){
 		    $nod='even';
 	      }else{
@@ -1956,7 +1956,7 @@ function grabbit_me_you_activity_mentions($user){
 		  	foreach($ment as $m_status){
 			  $item=unserialize($m_status->extra);
               $profile = content_profile_load('profile', $m_status->uid);
-		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile);
+		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile,$m_status);
 		      if($nod=='odd'){
 			    $nod='even';
 		      }else{
