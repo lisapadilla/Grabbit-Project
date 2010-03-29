@@ -125,7 +125,8 @@ function reset_buttons(nodeid){
 function reset_buttons_container(container){
 	$('.iconchange',container).each(function(i){
 	  $(this).removeClass('selected');	
-	  $('a ', this).removeClass('selected');	
+	  $('a ', this).removeClass('selected');
+	  $('.album-control').attr("style",'margin-top:-70px');	
 	});
 }
 
