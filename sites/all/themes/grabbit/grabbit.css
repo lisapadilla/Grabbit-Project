@@ -1,4 +1,7 @@
-/* @override http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M */
+/* @override 
+	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M
+	http://grabbit.biz/sites/default/files/css/css_7051b96d095d006f2500f7d5d9674d77.css
+*/
 /* $Id: zen.css,v 1.14.2.1 2009/02/13 07:46:04 johnalbin Exp $ */
 
 /*
@@ -1555,6 +1558,8 @@ a.facebook-makecomment-link, a.comment-news{
   overflow: hidden;
   margin-top:-1px;
 }
+
+
 .url-deal a.available
 {
 	background: url(images/various/dollar_ico.gif) 0 0 no-repeat;
@@ -2393,6 +2398,8 @@ ul.dropdown li:hover ul {
 {
 	color:#999999;
 	font-size:11px;
+	line-height: 11px;
+	margin-top: 5px;
 }
 .node-media .file-media,
 .section-resource .facebook-post-sux,
@@ -2429,6 +2436,7 @@ ul.dropdown li:hover ul {
 {
 	background-color: #E6EAED;
 	padding: 15px;
+	padding-bottom: 12px;
 }
 .node-media .pic-uploader img
 {
@@ -4274,7 +4282,7 @@ div.navbar
 .node-type-news #comments,
 .section-resource .facebook-form
 {
-	padding: 0 68px;
+	padding: 0 78px;
 	margin: 0;
 }
 .node-type-media #comments h2.title,
@@ -4283,8 +4291,7 @@ div.navbar
 {
 	color:#3399CC;
 	font-size:12px;
-	margin-left:78px;
-	margin-top:30px;
+	margin-top:20px;
 }
 .section-resource .frost
 {
@@ -4303,9 +4310,9 @@ div.navbar
 .node-type-news #comment-form textarea,
 .section-resource #comment
 {
-	height:100px;
-	margin-left:78px;
-	width:410px;
+	height:78px;
+	width:469px;
+	border: 1px solid #A1A7AF;
 }
 .node-type-media #comment-form .form-item,
 .node-type-news #comment-form .form-item
@@ -4642,10 +4649,70 @@ a.album-next{
 	margin-left:255px;
 }
 .logged-in .album-control{
-	margin-top:-70px;
+	margin-top:-84px;
 }
 
 .logged-in .links_stream_media{
 	margin-right:15px;
 	height:15px;
+}
+
+
+
+.node-type-media #main .url-deal a{
+	background: url(images/btns/art_deals.gif) no-repeat;
+	width: 20px;
+	height: 20px;
+}
+.node-type-media #main .flag-bookmarks a
+{
+	background-image: url(images/btns/art_fav.gif);
+}
+.node-type-media #main a.bring-tags
+{
+	background-image: url(images/btns/art_tags.gif);
+}
+.node-type-media #main a.comment-news
+{
+	background-image: url(images/btns/art_comm.gif);
+}
+.node-type-media #main a.grabb-that
+{
+	background-image: url(images/btns/art_rt.gif);
+}
+.node-type-media #main a.trash-item
+{
+	background-image: url(images/btns/art_delete.gif);
+}
+.node-type-media #main #article-news
+{
+	margin: 0;
+	padding-right: 40px;
+	margin-top: 10px;
+	height: 20px;
+	padding-bottom: 0;
+	margin-bottom: 10px;
+}
+.node-type-media h1.title
+{
+	border-bottom: 1px solid #E6EAED;
+}
+.node-type-media #main #article-news a,
+.node-type-media #main #article-news .flag-wrapper
+{
+	position: relative;
+	margin: 0;
+	width: 20px;
+	height: 20px;
+	float: right;
+	margin-left: 5px;
+}
+.node-type-media #main .body-uploader
+{
+	width: 470px;
+}
+.node-type-media #main .file-uploader p
+{
+	font-size: 13px;
+	line-height: 17px;
 }
