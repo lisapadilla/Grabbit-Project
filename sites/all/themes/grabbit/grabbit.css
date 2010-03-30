@@ -1125,7 +1125,7 @@ p#queuestatus
   padding: 10px;
   color: #385691;
   font-size: 20px;
-  line-height: 23px;
+  line-height: 20px;
   margin: 0px;
   background: transparent url(images/mp_top_w.gif) 0 0 no-repeat;
   font-weight: normal;
@@ -1234,6 +1234,10 @@ p#queuestatus
   float: left;
   overflow: hidden;
 }
+.suser-panels
+{
+	border-bottom: 1px solid #E6EAED;
+}
 .user-panel
 {
 	position: relative;
@@ -1289,7 +1293,8 @@ p#queuestatus
   line-height:17px;
 }
 .facebook-post .facebook-post-header a.facebook-story-name,
-.section-resource .twitter-name-link
+.section-resource .twitter-name-link,
+.twitter-name-link
 {
   color:#385691;
   font-size:13px;
@@ -1721,13 +1726,11 @@ a.add-new-panel{
   background: url(images/various/p1_more.gif) 0 0 no-repeat;
   text-align: center;
 }
-#panel-0 .panel-controller a,
-#panel-1 .panel-controller a,
 .user-panels .panel-grabbit .panel-controller a{
-  font-size: 14px;
+  font-size: 13px;
   line-height: 15px;
   text-decoration: none;
-  color: #999999;
+  color: #385691;
   margin: 0px;
 }
 li.panel-gear{
@@ -1827,6 +1830,8 @@ a.panel-filters{
   display: block;
   width: 530px;
   float: left;
+  font-size: 13px;
+  line-height: 17px;
 }
 .facebook-post .facebook-image-comment
 {
@@ -3173,9 +3178,7 @@ div.navbar
 	margin-right: 2px;
 	padding-top: 4px;
 }
-.navbar ul{
-	display:inline-block;
-}
+
 .navbar .edit{
 	display:none;
 }
@@ -3496,9 +3499,10 @@ div.navbar
 }
 #rss-controls{
   text-align: right;
+  border-bottom: 1px solid #E6EAED;
 }
 #rss-controls span{
-  display: inline;
+  display: block
 }
 #rss-controls a{
 	color:#666666;
@@ -3507,8 +3511,6 @@ div.navbar
 	line-height:13px;
 	margin:5px 20px 0 0;
 	padding: 5px 0px 0px 0px;
-	display: block;
-	float: right;
 }
 .view-my-feeds .views-field-field-rss-logo-fid{
 	float:left;
@@ -3616,6 +3618,10 @@ div.navbar
   padding: 0px;
   margin: 0px 0px 2px 0px;
 }
+.page-user-me-myfriends-find-friends .form-text
+{
+	height: 20px;
+}
 .section-user #content-area .filefield-element{
   background: #E6EaEd;
   padding: 10px;
@@ -3654,12 +3660,86 @@ div.navbar
   line-height: 13px;
   float: right;
 }
+#tags-control
+{
+	position: relative;
+	height: 40px;
+}
+#tags-control p
+{
+	position: absolute;
+	margin-top: 30px;
+	margin-left: 13px;
+}
+.display-comments-buttons
+{
+	margin-top: 10px;
+}
+.facebook-attach-photo
+{
+	display: block;
+	margin-top: 4px;
+}
+.facebook-attach-photo a
+{
+	display: block;
+}
 .section-user #content-area .form-submit{
   float: right;
 }
 #dcl-importer-form strong{
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
   display: block;
+  margin-left: 45px;
+  margin-right: 30px;
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: normal;
+}
+#dcl-importer-form .form-submit
+{
+	margin-right: 50px;
+	margin-top: -5px;
+	margin-bottom: 10px;
+}
+.page-user-me-edit .form-submit,
+.page-user-me-edit-add-imap .form-submit,
+.page-user-me-edit-add-gmail .form-submit
+{
+	margin-right: 50px;
+	background-image: url(images/btns/save.gif);
+	border: none;
+	display: block;
+	height: 20px;
+	width: 46px;
+	text-indent: -3000px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.page-user-me-edit-add-imap .form-submit,
+.page-user-me-edit-add-gmail .form-submit
+{
+	margin-right: 60px;
+}
+.page-user-me-edit .form-text,
+.page-user-me-edit-add-imap .form-text,
+.page-user-me-edit-add-gmail .form-text
+{
+	height: 20px;
+}
+.page-user-me-edit-add-imap #description,
+.page-user-me-edit-add-gmail #description
+{
+	font-size: 13px;
+	line-height: 17px;
+	margin-left: 46px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.page-user-me-edit #user-profile-form
+{
+	margin-top: 20px;
 }
 .section-invite #content-area #edit-message-wrapper{
   width: 395px;
@@ -3735,9 +3815,18 @@ div.navbar
 	color: #548912;
     background: url(images/buble/bubble.gif) no-repeat bottom;
 }
-#removing-fb, #removing-tw{
-	color:red;
-	padding:10px;
+#removing-fb, #removing-tw
+{
+	margin-top: 10px;
+}
+#removing-fb a, #removing-tw a
+{
+	background: url(images/remove_sust.gif) no-repeat;
+	display: block;
+	overflow: hidden;
+	width: 57px;
+	height: 15px;
+	text-indent: -9999em;
 }
 .profile-extended-view #content-area div.you-tabs{
 	display:block;
@@ -4677,11 +4766,14 @@ a.album-next{
 	line-height:12px;
 }
 #tags-on-post{
-	-moz-border-radius:6px 6px 6px 6px;
-	-webkit-border-radius: 6px;
+	-moz-border-radius:12px;
+	-webkit-border-radius: 12px;
 	border:1px solid #A2B0BA;
 	padding:3px;
-	margin-top:5px;
+	width: 233px;
+	height: 17px;
+	font-size: 11px;
+	color: #8B939F;
 }
 .panel-content-ajax{
 	height:65px;
@@ -4692,10 +4784,12 @@ a.album-next{
 	margin-top:26px;
 }
 .main-stream-next{
-	color:#999999;
-	font-size:14px;
+	color:#0066FF;
+	font-size:13px;
 	line-height:15px;
 	margin:0;
+	padding-top: 5px;
+	display: block;
 	text-decoration:none;
 }
 .exeded-hidden{
