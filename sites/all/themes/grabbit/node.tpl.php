@@ -50,7 +50,7 @@
 ?>
 <div<?php print $attributes; ?> class="node-<?=$node->type?>">
     <div class="meta">
-	<div class="back"><a href="#" class="back-to-stream">Back to stream</a></div>
+	
 		<?php if ($links_stream): ?>
 	      <div class="links_stream">
 	        <?php print $comment_link; ?>
