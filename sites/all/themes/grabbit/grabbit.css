@@ -2957,7 +2957,7 @@ div.messages, div.status, div.warning, div.error{
 }
 #grabbit-panels-source-form
 {
-	padding-left: 15px;
+	padding: 0 20px;
 }
 
 .block-grabbit_me
@@ -4453,8 +4453,27 @@ div.navbar
 {
 	color: #3399FF;
 	font-size: 11px;
+	line-height: 17px;
 	font-style: italic;
 	text-decoration: underline;
+}
+#grabbit-panels-source-form .description
+{
+	margin-top: -7px;
+	margin-left: 20px;
+}
+#grabbit-panels-source-form .form-submit
+{
+	display: block;
+	width: 46px;
+	height: 20px;
+	background-image: url(images/btns/save.gif);
+	margin-bottom: 20px;
+	border: none;
+	overflow: hidden;
+	text-indent: -3000px;
+	cursor: pointer;
+	margin-left: auto;
 }
 #grabbit-panels-source-create-form .form-item
 {
