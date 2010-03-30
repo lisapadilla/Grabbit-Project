@@ -953,6 +953,7 @@ a.active{
 }
 .panels-update-wraper{
   padding: 9px;
+  padding-bottom: 11px;
 }
 #facebook-grabbit-update-form{
   height: 90px;
@@ -1054,16 +1055,18 @@ p#queuestatus
   border: none;
   overflow: auto;
   padding: 0px 0px 0px 0px;
-  color: #555e6b;
+  color: #8B939F;
+  font-size: 13px;
+  line-height: 17px;
 }
 .panels-update-wraper #edit-status-wrapper{
   	display: block;
-	  width: 458px;
-	  height: 70px;
+	  width: 461px;
+	  height: 73px;
 	  background: url(images/bg_textarea.gif) 0 0 no-repeat;
 	  border: none;
 	  overflow: hidden;
-	  padding: 10px 0px 0px 10px;
+	  padding: 7px 0px 0px 7px;
 	  color: #555e6b;
 	  margin-right: 15px;
 }
@@ -1087,7 +1090,7 @@ p#queuestatus
   font-size: 0px;
   line-height: 1000px;
   position: absolute;
-  top: 88px;
+  top: 90px;
   left: 691px;
 }
 .grippie{
@@ -1256,6 +1259,10 @@ p#queuestatus
 .twitter-message-stream
 {
 	padding-bottom: 7px;
+}
+.front .tooltipwraper
+{
+	margin-right: 10px;
 }
 .facebook-post .facebook-post-header a.facebook-story-pic,
 .twitter-message-stream .twitter-image{
@@ -1514,7 +1521,7 @@ p#queuestatus
   height: 16px;
   position: absolute;
   left: 705px;
-  top: 63px;
+  top: 60px;
   color: #B3B3B3;
   font-size: 15px;
   line-height: 16px;
@@ -1672,14 +1679,21 @@ a.retweet, a.grabb-that, a.retweet-facebook{
 }
 .panel-title{
   padding: 5px 0px;
+  border-bottom: 1px solid #E6EAED;
+}
+.panel-title span
+{
+	display: block;
+	margin-top: -1px;
 }
 .panel-grabbit .panel-title h3,
 .panel-grabbit .panel-filters{
   display: none;
 }
 .panels-controllers, #files-container-header{
-  height: 37px;
+  height: 40px;
   background: url(images/mp_top.gif) 0 0 no-repeat;
+  background-color: #C6D0D6;
 }
 a.add-new-panel{
   float: right;
@@ -1719,7 +1733,7 @@ a.add-new-panel{
 li.panel-gear{
   display: block;
   float: right;
-  width: 55px;
+  width: 53px;
   height: 20px;
   background: url(images/various/engrane.gif) 0 0 no-repeat;
 }
@@ -2011,7 +2025,7 @@ a.show-comment-link{
   display: block;
   width: 108px;
   padding: 4px 0px 0px 0px;
-  height: 15px;
+  height: 16px;
   color: #555b6e;
   float: left;
   text-align: center;
@@ -2105,15 +2119,18 @@ ul.dropdown li:hover {
  position: relative;
  z-index: 599;
  cursor: default;
+	background-image: url(images/various/engrane_over.gif);
 }
 ul.dropdown ul {
  visibility: hidden;
  position: absolute;
  top: 100%;
- left: 0;
+ right: 18px;
  z-index: 598;
  width: 100%;
- background:#EFEFEF;
+ background:#FFFFFF;
+ border: 1px solid #C6D0D6;
+ border-bottom: none;
 }
 ul.dropdown ul li {
  float: none;
@@ -2123,10 +2140,21 @@ ul.dropdown ul ul {
  left: 99%;
 }
 ul.dropdown a{
-	color:#555E6B;
-	font-size:12px;
-	font-weight:bold;
-	line-height:13px;
+	color:#3399FF;
+	font-size:11px;
+	display: block;
+	height: 10px;
+	font-weight: normal;
+	line-height:11px;
+	padding: 6px 10px;
+	padding-left: 7px;
+	font-style: italic;
+	border-bottom: 1px solid #C6D0D6;
+}
+ul.dropdown a:hover
+{
+	background-color: #C6D0D6;
+	color: #FFFFFF;
 }
 ul.dropdown li:hover ul {
  visibility: visible;
@@ -2929,7 +2957,7 @@ div.messages, div.status, div.warning, div.error{
 }
 #grabbit-panels-source-form
 {
-	padding-left: 15px;
+	padding: 0 20px;
 }
 
 .block-grabbit_me
@@ -4421,6 +4449,32 @@ div.navbar
   font-weight: normal;
   color: #385691;
 }
+#grabbit-panels-source-form .description a
+{
+	color: #3399FF;
+	font-size: 11px;
+	line-height: 17px;
+	font-style: italic;
+	text-decoration: underline;
+}
+#grabbit-panels-source-form .description
+{
+	margin-top: -7px;
+	margin-left: 20px;
+}
+#grabbit-panels-source-form .form-submit
+{
+	display: block;
+	width: 46px;
+	height: 20px;
+	background-image: url(images/btns/save.gif);
+	margin-bottom: 20px;
+	border: none;
+	overflow: hidden;
+	text-indent: -3000px;
+	cursor: pointer;
+	margin-left: auto;
+}
 #grabbit-panels-source-create-form .form-item
 {
   margin-top: 0;
@@ -4516,7 +4570,10 @@ a.album-prev{
 	padding-left:10px;
 	margin-right:10px;
 }
-
+a.add-new-panel
+{
+	font-size: 11px;
+}
 a.album-next{
 	color:#999999;
 	font-size:11px;
@@ -4714,5 +4771,21 @@ a.album-next{
 .node-type-media #main .file-uploader p
 {
 	font-size: 13px;
+	line-height: 17px;
+}
+
+#grabbit-panels-source-form .form-text
+{
+	width: 150px;
+}
+#grabbit-panels-source-form label
+{
+	color: #385691;
+	margin-bottom: 3px;
+}
+#grabbit-panels-source-form label.option
+{
+	color: #8B939F;
+  	font-size: 13px;
 	line-height: 17px;
 }
