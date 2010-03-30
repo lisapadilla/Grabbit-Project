@@ -3704,7 +3704,8 @@ div.navbar
 	margin-bottom: 10px;
 }
 .page-user-me-edit .form-submit,
-.page-user-me-edit-add-imap .form-submit
+.page-user-me-edit-add-imap .form-submit,
+.page-user-me-edit-add-gmail .form-submit
 {
 	margin-right: 50px;
 	background-image: url(images/btns/save.gif);
@@ -3716,21 +3717,25 @@ div.navbar
 	overflow: hidden;
 	cursor: pointer;
 }
-.page-user-me-edit-add-imap .form-submit
+.page-user-me-edit-add-imap .form-submit,
+.page-user-me-edit-add-gmail .form-submit
 {
 	margin-right: 60px;
 }
 .page-user-me-edit .form-text,
-.page-user-me-edit-add-imap .form-text
+.page-user-me-edit-add-imap .form-text,
+.page-user-me-edit-add-gmail .form-text
 {
 	height: 20px;
 }
-.page-user-me-edit-add-imap #description
+.page-user-me-edit-add-imap #description,
+.page-user-me-edit-add-gmail #description
 {
 	font-size: 13px;
 	line-height: 17px;
 	margin-left: 46px;
 	margin-top: 20px;
+	margin-bottom: 10px;
 }
 .page-user-me-edit #user-profile-form
 {
