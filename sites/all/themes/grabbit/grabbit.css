@@ -4683,6 +4683,9 @@ a.album-next{
 	padding:5px;
 	width:120px;
 }
+.logged-in.section-album .album-control{
+	margin-top:-60px;
+}
 .album-main-controllers {
 	margin-left:300px;
 	margin-top:-60px;
