@@ -112,6 +112,28 @@ function grabbit_panels_get_favorites(){
 
     ksort($twitface);
 
+    if(count($twitface)==0){
+	    $mesa=drupal_get_messages();
+		if($mesa['status'][0])
+		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
+
+
+		$resultados = facebook_grabbit_theme_results($twitface);
+
+			$output .='<div class="panels-controllers">
+			           <div id="panels-pager" class="panels-pager"></div>
+			           <a href="JavaScript:void(0);" class="move-left"></a>
+			           <a href="JavaScript:void(0);" class="move-right"></a>
+			           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
+			           <div class="panel-favorites"><div class="no-favs">You don\'t have any favorites in grabbit.</div>';
+
+			$output .='</div></div>';
+
+
+		return $output;
+	  
+    }
+
     $mesa=drupal_get_messages();
 	if($mesa['status'][0])
 	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
