@@ -138,6 +138,7 @@ $(document).ready(function() {
 	
 	$(".upload_button_expand_tags a").click(function(i){
 		i.preventDefault;
+		$(".panels-update-form_file").hide();
 		$("#tags-control").slideToggle("fast");
 	});
 	

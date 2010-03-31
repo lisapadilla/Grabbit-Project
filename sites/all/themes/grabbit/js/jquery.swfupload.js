@@ -197,7 +197,7 @@ Drupal.behaviors.frontpage = function(){
          })
 
       $(".upload_button_expand a").click(function(element){
-	     $("#tags-control").hide("fast");
+	     $("#tags-control").hide();
 	     $(".panels-update-form_file").slideToggle("fast");
 	     return false;
        });
