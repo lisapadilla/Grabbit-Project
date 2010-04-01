@@ -1143,7 +1143,7 @@ p#queuestatus
 .node-type-news  #content-area h1
 {
 	display: block;
-  padding: 30px 70px 0px 70px;
+  padding: 40px 70px 0px 70px;
   color: #6E7887;
   font-size: 20px;
   line-height: 21px;
@@ -2404,6 +2404,7 @@ ul.dropdown li:hover ul {
 	line-height: 16px;
 	border-bottom: 1px solid #CCCCCC;
 	margin-bottom: 5px;
+	position: relative;
 }
 .node-type-news .node-news .news-body
 {
@@ -3857,7 +3858,7 @@ div.navbar
 	line-height:13px;
 }
 
-.node-type-news #content .node-news .links_stream,
+
 .node-type-media .links_stream
 {
 	margin-right:47px;
@@ -3901,7 +3902,7 @@ div.navbar
 	margin-left:470px;
 	float:none;
 }
-
+/*
 #content-area .node-news #article-news a,
 .section-resource #article-news a,
 .node-type-media #article-news a
@@ -4808,28 +4809,35 @@ a.album-next{
 
 
 
-.node-type-media #main .url-deal a{
+.node-type-media #main .url-deal a,
+.node-type-news #main .url-deal a
+{
 	background: url(images/btns/art_deals.gif) no-repeat;
 	width: 20px;
 	height: 20px;
 }
-.node-type-media #main .flag-bookmarks a
+.node-type-media #main .flag-bookmarks a,
+.node-type-news #main .flag-bookmarks a
 {
 	background-image: url(images/btns/art_fav.gif);
 }
-.node-type-media #main a.bring-tags
+.node-type-media #main a.bring-tags,
+.node-type-news #main a.bring-tags
 {
 	background-image: url(images/btns/art_tags.gif);
 }
-.node-type-media #main a.comment-news
+.node-type-media #main a.comment-news,
+.node-type-news #main a.comment-news
 {
 	background-image: url(images/btns/art_comm.gif);
 }
-.node-type-media #main a.grabb-that
+.node-type-media #main a.grabb-that,
+.node-type-news #main a.grabb-that
 {
 	background-image: url(images/btns/art_rt.gif);
 }
-.node-type-media #main a.trash-item
+.node-type-media #main a.trash-item,
+.node-type-news #main a.trash-item
 {
 	background-image: url(images/btns/art_delete.gif);
 }
@@ -4842,12 +4850,28 @@ a.album-next{
 	padding-bottom: 0;
 	margin-bottom: 10px;
 }
-.node-type-media h1.title
+.node-type-news #main #article-news
+{
+	width: 300px;
+	margin-top: 50px;
+	position: absolute;
+	right: 20px;
+	height: 20px;
+}
+.node-type-news #main #article-news a
+{
+	overflow: hidden;
+	text-indent: -3000em;
+}
+.node-type-media h1.title,
+.node-type-news h1.title
 {
 	border-bottom: 1px solid #E6EAED;
 }
 .node-type-media #main #article-news a,
-.node-type-media #main #article-news .flag-wrapper
+.node-type-media #main #article-news .flag-wrapper,
+.node-type-news #main #article-news a,
+.node-type-news #main #article-news .flag-wrapper
 {
 	position: relative;
 	margin: 0;
