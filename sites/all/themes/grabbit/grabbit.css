@@ -4855,7 +4855,7 @@ a.album-next{
 	width: 300px;
 	margin-top: 50px;
 	position: absolute;
-	right: 20px;
+	right: 40px;
 	height: 20px;
 }
 .node-type-news #main #article-news a
@@ -4888,6 +4888,31 @@ a.album-next{
 {
 	font-size: 13px;
 	line-height: 17px;
+}
+.node-type-media #content-area
+{
+	position: relative;
+}
+.node-type-media .backto a
+{
+	position: absolute;
+	top: 11px;
+	right: 175px;
+}
+.node-type-news .backto a
+{
+	position: absolute;
+	right: 15px;
+	top: 14px;
+	color:#999999;
+}
+.backto a
+{
+	color:#999999;
+	font-size:11px;
+	font-weight:bold;
+	background:url("images/album_prev.gif") no-repeat scroll left center transparent;
+	padding-left:10px;
 }
 /*#content-area .node-news #article-news a:hover,
 .section-resource #article-news a:hover,
