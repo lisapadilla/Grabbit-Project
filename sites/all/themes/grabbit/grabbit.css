@@ -3928,7 +3928,7 @@ div.navbar
 	margin-left:487px;
 	padding-bottom:13px;
 }
-
+/*
 #content-area .node-news .grabb-that,
 .section-resource .retweet-facebook,
 .section-resource .retweet,
@@ -4002,7 +4002,7 @@ div.navbar
 {
 	background: url(images/btns/ctrl_unfav.gif) no-repeat center 0;
 	margin-left:-44px;
-}
+}*/
 
 .hashtag, a.user-twitter{
 	color:#385691;
