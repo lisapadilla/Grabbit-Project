@@ -4745,9 +4745,14 @@ a.album-next{
 }
 .section-resource .tooltipwraper
 {
-	float:right;
+	float: right;
 	margin-right:15px;
 	margin-top:-27px;
+}
+.section-resource #main h1.title
+{
+	margin-bottom: 40px;
+	border-bottom: 1px solid #E6EAED;
 }
 #scroll-album .item a{
   	float:left;
@@ -4810,36 +4815,56 @@ a.album-next{
 
 
 .node-type-media #main .url-deal a,
-.node-type-news #main .url-deal a
+.node-type-news #main .url-deal a,
+.section-resource #main .url-deal a
 {
 	background: url(images/btns/art_deals.gif) no-repeat;
 	width: 20px;
 	height: 20px;
 }
+.section-resource #main .url-deal a
+{
+	margin-top: 0px;
+}
 .node-type-media #main .flag-bookmarks a,
-.node-type-news #main .flag-bookmarks a
+.node-type-news #main .flag-bookmarks a,
+.section-resource #main .flag-bookmarks a
 {
 	background-image: url(images/btns/art_fav.gif);
+	width: 20px;
+	height: 20px;
 }
 .node-type-media #main a.bring-tags,
-.node-type-news #main a.bring-tags
+.node-type-news #main a.bring-tags,
+.section-resource #main a.bring-tags
 {
 	background-image: url(images/btns/art_tags.gif);
+	width: 20px;
+	height: 20px;
 }
 .node-type-media #main a.comment-news,
-.node-type-news #main a.comment-news
+.node-type-news #main a.comment-news,
+.section-resource #main a.facebook-makecomment-link
 {
 	background-image: url(images/btns/art_comm.gif);
+	width: 20px;
+	height: 20px;
 }
 .node-type-media #main a.grabb-that,
-.node-type-news #main a.grabb-that
+.node-type-news #main a.grabb-that,
+.section-resource #main a.retweet-facebook
 {
 	background-image: url(images/btns/art_rt.gif);
+	width: 20px;
+	height: 20px;
 }
 .node-type-media #main a.trash-item,
-.node-type-news #main a.trash-item
+.node-type-news #main a.trash-item,
+.section-resource #main a.trash-facebook
 {
 	background-image: url(images/btns/art_delete.gif);
+	width: 20px;
+	height: 20px;
 }
 .node-type-media #main #article-news
 {
@@ -4857,6 +4882,12 @@ a.album-next{
 	position: absolute;
 	right: 40px;
 	height: 20px;
+}
+.section-resource #main #article-news
+{
+	position: absolute;
+	right: 25px;
+	top: -3px;
 }
 .node-type-news #main #article-news a
 {
@@ -4889,7 +4920,8 @@ a.album-next{
 	font-size: 13px;
 	line-height: 17px;
 }
-.node-type-media #content-area
+.node-type-media #content-area,
+.section-resource #content-area
 {
 	position: relative;
 }
@@ -4898,6 +4930,12 @@ a.album-next{
 	position: absolute;
 	top: 11px;
 	right: 175px;
+}
+.section-resource .backto a
+{
+	position: absolute;
+	top: 11px;
+	right: 15px;
 }
 .node-type-news .backto a
 {
