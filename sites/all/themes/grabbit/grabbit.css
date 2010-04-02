@@ -4844,7 +4844,8 @@ a.album-next{
 }
 .node-type-media #main a.comment-news,
 .node-type-news #main a.comment-news,
-.section-resource #main a.facebook-makecomment-link
+.section-resource #main a.facebook-makecomment-link,
+.section-resource #main a.twit-reply
 {
 	background-image: url(images/btns/art_comm.gif);
 	width: 20px;
@@ -4852,7 +4853,8 @@ a.album-next{
 }
 .node-type-media #main a.grabb-that,
 .node-type-news #main a.grabb-that,
-.section-resource #main a.retweet-facebook
+.section-resource #main a.retweet-facebook,
+.section-resource #main a.retweet
 {
 	background-image: url(images/btns/art_rt.gif);
 	width: 20px;
@@ -4860,7 +4862,8 @@ a.album-next{
 }
 .node-type-media #main a.trash-item,
 .node-type-news #main a.trash-item,
-.section-resource #main a.trash-facebook
+.section-resource #main a.trash-facebook,
+.section-resource #main a.trash-twitter
 {
 	background-image: url(images/btns/art_delete.gif);
 	width: 20px;
