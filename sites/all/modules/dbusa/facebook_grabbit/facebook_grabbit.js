@@ -161,7 +161,7 @@ $(document).ready(function() {
 	//Initialize our user agent string to lower case.
 	if(DetectIphoneOrIpod()){
 		$(".user-panel").each(function(elemento,n){
-		  myScroll = new iScroll("panel-0");	
+		  myScroll = new iScroll($(this));	
 		});
 	}
 
