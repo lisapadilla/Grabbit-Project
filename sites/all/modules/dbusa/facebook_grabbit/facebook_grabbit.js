@@ -86,7 +86,13 @@ function fixtheheightAfter(currSlideElement, nextSlideElement, options, forwardF
 	  	var height = $("#"+nextSlideElement.id).height()+200;
 //		$(".suser-panels").height(height);	
 	}
-	
+
+	//Initialize our user agent string to lower case.
+	if(DetectIphoneOrIpod()){
+		$(".user-panel").each(function(elemento,n){
+		  myScroll = new iScroll($(this));	
+		});
+	}	
 	
 }
 function bringPanelsAjax(currentSlide,NextSlide){
@@ -158,12 +164,6 @@ function DetectIphoneOrIpod()
 
 $(document).ready(function() {
 
-	//Initialize our user agent string to lower case.
-	if(DetectIphoneOrIpod()){
-		$(".user-panel").each(function(elemento,n){
-		  myScroll = new iScroll($(this));	
-		});
-	}
 
    $(".suser-panels .user-panel").each(function(elemento,n){
  	    var panel_aid=$(this).attr('id');
