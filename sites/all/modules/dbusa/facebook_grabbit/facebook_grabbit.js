@@ -156,11 +156,7 @@ function DetectIphoneOrIpod()
 
 $(document).ready(function() {
 
-	//Initialize our user agent string to lower case.
-	if(DetectIphoneOrIpod()){
-		$(".user-panel").attr("height",1050);
-		$(".suser-panels").attr("height",1050);
-	}
+	
 
    $(".suser-panels .user-panel").each(function(elemento,n){
  	    var panel_aid=$(this).attr('id');
@@ -196,7 +192,11 @@ $(document).ready(function() {
 	$('#tags-on-post').keyup(function(e){
 		$('#edit-tags').val($(this).val());
 	});
-	
+	//Initialize our user agent string to lower case.
+	if(DetectIphoneOrIpod()){
+		$(".user-panel").attr("height",1050);
+		$(".suser-panels").attr("height",1050);
+	}
 	$(".section-resource .facebook-makecomment-link").click(function(e){
 		var comment=$("#comment");
 		if(comment){
