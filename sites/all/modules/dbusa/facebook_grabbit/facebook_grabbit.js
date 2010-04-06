@@ -158,7 +158,8 @@ $(document).ready(function() {
 
 	//Initialize our user agent string to lower case.
 	if(DetectIphoneOrIpod()){
-		alert("iPad");
+		$(".user-panel").attr("height",1050);
+		$(".suser-panels").attr("height",1050);
 	}
 
    $(".suser-panels .user-panel").each(function(elemento,n){
