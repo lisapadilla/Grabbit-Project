@@ -109,6 +109,10 @@ function bringPanelsAjax(currentSlide,NextSlide){
 	});
 }
 
+var deviceIphone = "iphone";
+var deviceIpod = "ipod";
+var deviceIpad = "ipad";
+var uagent = navigator.userAgent.toLowerCase();
 //**************************
 // Detects if the current device is an iPhone.
 function DetectIphone()
@@ -129,6 +133,13 @@ function DetectIpod()
       return false;
 }
 
+function DetectIpad(){
+	if (uagent.search(deviceIpad) > -1)
+	      return true;
+	   else
+	      return false;
+}
+
 //**************************
 // Detects if the current device is an iPhone or iPod Touch.
 function DetectIphoneOrIpod()
@@ -137,20 +148,18 @@ function DetectIphoneOrIpod()
        return true;
     else if (DetectIpod())
        return true;
+    else if (DetectIpad())
+       return true;
     else
        return false;
 }
 
 $(document).ready(function() {
 
-  	var deviceIphone = "iphone";
-	var deviceIpod = "ipod";
-
 	//Initialize our user agent string to lower case.
-	var uagent = navigator.userAgent.toLowerCase();
-	
-	alert(uagent);
-
+	if(DetectIphoneOrIpod()){
+		alert("iPad");
+	}
 
    $(".suser-panels .user-panel").each(function(elemento,n){
  	    var panel_aid=$(this).attr('id');
