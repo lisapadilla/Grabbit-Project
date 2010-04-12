@@ -119,7 +119,7 @@ function grabbit_panels_get_favorites(){
 
 
 		$resultados = facebook_grabbit_theme_results($twitface);
-
+            
 			$output .='<div class="panels-controllers">
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
@@ -200,7 +200,7 @@ function grabbit_panels_get_panels(){
 		$mesa=drupal_get_messages();
 		if($mesa['status'][0])
 		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
-	
+	    l('<span>Add New&nbsp;&nbsp;</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE))
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
@@ -620,9 +620,9 @@ function theme_panels($private_view,$id,$name,$unique=0){
 	      if($name!='Main Stream'){
 		    $output .= "<ul class='dropdown'><li class='dir panel-gear'><ul><li>".l('<span>Edit</span>','panels/edit/'.$id,array('attributes'=>array('class'=>'thickbox'),'query'=>'height=300&width=250', 'html'=>TRUE)).'
 		                    </li><li>'.$clooser.'</li></ul></li></ul>';
-						$output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
+						$output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
 		   }else{
-			    $output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).l('<span>Add New&nbsp;&nbsp;</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
+			    $output .=l('<span>Edit Filters</span>','panels/filters/'.$id,array('attributes'=>array('class'=>'thickbox panel-filters'),'query'=>'height=300&width=250', 'html'=>TRUE)).'</div>';
 		    }
            
 			$output .= '</div>
