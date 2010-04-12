@@ -98,7 +98,7 @@ function grabbit_albums_display(){
 	
 	$uid=arg(1);
 	$type=arg(2);
-	$number_of_items=10;
+	$number_of_items=9;
 	
 	switch($type){
 		case 'media':
