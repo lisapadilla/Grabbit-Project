@@ -4658,6 +4658,7 @@ a.album-prev{
 a.add-new-panel
 {
 	font-size: 11px;
+	margin-top:15px;
 }
 a.album-next{
 	color:#999999;
