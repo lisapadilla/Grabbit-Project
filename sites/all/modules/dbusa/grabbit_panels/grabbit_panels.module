@@ -200,7 +200,7 @@ function grabbit_panels_get_panels(){
 		$mesa=drupal_get_messages();
 		if($mesa['status'][0])
 		  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
-	    $output . = l('<span>Add New&nbsp;&nbsp;</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE));
+	    $output .= l('<span>Add New&nbsp;&nbsp;</span>','panels/edit/',array('attributes'=>array('class'=>'thickbox add-new-panel'),'query'=>'height=300&width=250', 'html'=>TRUE));
 		$output .='<div class="panels-controllers">
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
