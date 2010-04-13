@@ -392,7 +392,8 @@ function grabbit_panels_source_form($form,$panel_id){
 	if(is_array($flag['myfeeds'])){
 		foreach($flag['myfeeds'] as $term){
 			$nodo = node_load($term->content_id);
-			$terms[$nodo->nid]=$nodo->title;
+			if($nodo->nid)
+			  $terms[$nodo->nid]=$nodo->title;
 		}	
 	}
 	else{
