@@ -1,12 +1,3 @@
-function isNumeric(elem){
-	var numericExpression = /^[0-9]+$/;
-	if(elem.value.match(numericExpression)){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 function display_panel(panel,panel_element){
 
 	// PANEL VARIABLES
@@ -31,10 +22,10 @@ function display_panel(panel,panel_element){
 			current_panel_1.show();	
 		}
 	}
-	alert(panel_id);
-	if(isNumeric(panel_id)){
-	  $('#'+panel_id).append('<div class="panel-controller"><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
-    }
+	alert(window.location);
+	
+	$('#'+panel_id).append('<div class="panel-controller"><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
+
 }
 var panels_heights=new Array();
 function display_items(panel){
