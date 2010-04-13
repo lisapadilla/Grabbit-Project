@@ -1,9 +1,10 @@
 Drupal.behaviors.editables = function(){
 	
-	$(".edit-me-place").click(function (){
+	$(".no-confirm-place").click(function (){
 		$("#bio-no-edit").slideToggle("fast");
 		$("#user-profile-form").slideToggle("fast");
 		$(this).toggleClass('confirm-place');
+		$(this).toggleClass('no-confirm-place');
 		return false;
 	});
 	
@@ -13,6 +14,7 @@ Drupal.behaviors.editables = function(){
 		    return 0;	// return empty to avoit panel deletion 
 		  }else{
 			$(this).toggleClass('confirm-place');
+			$(this).toggleClass('no-confirm-place');
 		  }
 		});
     });
