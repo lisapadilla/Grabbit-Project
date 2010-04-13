@@ -4990,3 +4990,6 @@ a.album-next{
   	font-size: 13px;
 	line-height: 17px;
 }
+#panel-activity #onstream-controller{
+	display:none;
+}
