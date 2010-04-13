@@ -1,6 +1,6 @@
 Drupal.behaviors.editables = function(){
 	
-	$(".no-confirm-place").click(function (){
+	$(".no-confirm-place").live('click',function (){
 		$("#bio-no-edit").slideToggle("fast");
 		$("#user-profile-form").slideToggle("fast");
 		$(this).toggleClass('confirm-place');
