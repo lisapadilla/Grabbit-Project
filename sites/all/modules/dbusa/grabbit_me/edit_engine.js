@@ -18,8 +18,8 @@ Drupal.behaviors.editables = function(){
 			element.toggleClass('no-confirm-place');
 		    return 0;	// return empty to avoid save 
 		  }else{
-			$(this).toggleClass('confirm-place');
-			$(this).toggleClass('no-confirm-place');
+			element.toggleClass('confirm-place');
+			element.toggleClass('no-confirm-place');
 		  }
 		});
     });
