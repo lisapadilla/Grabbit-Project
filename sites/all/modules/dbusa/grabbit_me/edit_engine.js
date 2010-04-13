@@ -3,6 +3,7 @@ Drupal.behaviors.editables = function(){
 	$(".edit-me-place").click(function (){
 		$("#bio-no-edit").slideToggle("fast");
 		$("#user-profile-form").slideToggle("fast");
+		$(this).toggleClass('confirm-place');
 		return false;
 	});
 	

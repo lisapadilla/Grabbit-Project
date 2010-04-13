@@ -37,12 +37,12 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
     });
   });
 
-  $('.edit-me-place').click(function(elem){
+  $('.confirm-place').click(function(elem){
 		jConfirm("Do you want to save your changes before close?", 'Save',function(confirm){
 		  if(confirm==false){
 		    return 0;	// return empty to avoit panel deletion 
 		  }else{
-			
+			$(this).toggleClass('confirm-place');
 		  }
 		});
   });
