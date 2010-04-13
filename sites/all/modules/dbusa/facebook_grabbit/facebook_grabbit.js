@@ -23,8 +23,9 @@ function display_panel(panel,panel_element){
 		}
 	}
 	
-	$('#'+panel_id).append('<div class="panel-controller"><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
-
+	
+	  $('#'+panel_id).append('<div class="panel-controller"><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
+    alert(panel_id);
 }
 var panels_heights=new Array();
 function display_items(panel){
