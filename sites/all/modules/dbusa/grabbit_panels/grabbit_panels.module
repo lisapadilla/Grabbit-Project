@@ -363,6 +363,16 @@ function grabbit_panels_save_panel_tags($user,$config,$pid){
 	
 }
 
+function grabbit_panels_flag($action, $flag, $content_id, $account) {
+  if ($action == 'unflag' && $flag->name == 'myfeeds') {
+    $panel = db_query("SELECT * from {grabbit_panels} WHERE config LIKE '%$content_id%' AND uid=$user->uid");
+    while($result = db_fetch_object($panel)){
+	  $current_config=$result->config;
+	  $new_config = str_replace($content_id,$current_config);
+	  db_query("UPDATE {grabbit_panels} SET config=%s WHERE pan=%d",$new_config,$result->pan);
+    }  
+  }
+}
 
 /**
 * Generate the configuration form for panels
