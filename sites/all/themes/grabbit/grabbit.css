@@ -759,6 +759,17 @@ li a.active /* The active item in a Drupal menu */
   font-weight: bold;
 }
 
+.page-invite #content-inner
+{
+	font-size: 13px;
+	line-height: 17px;
+}
+
+.page-invite #content-inner label
+{
+	padding: 0px;
+}
+
 .form-item label.option /* The label for a radio button or checkbox */
 {
   display: inline;
@@ -3598,13 +3609,13 @@ div.navbar
 .section-user #content-area .form-item label,
 .section-invite #content-area .form-item label{
   display: block;
-  width: 145px;
+  width: 190px;
   color: #385491;
   font-size: 12px;
   line-height: 13px;
   margin-bottom: 0px;
   float: left;
-  padding: 0px 0px 20px 45px;
+  padding: 0px 0px 20px 0px;
 }
 .section-user #content-area .form-item label span,
 .section-invite #content-area .form-item label span{
