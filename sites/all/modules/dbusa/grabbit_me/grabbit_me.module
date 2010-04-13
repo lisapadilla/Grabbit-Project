@@ -1476,7 +1476,7 @@ function grabbit_me_get_my_profile(){
 	$my_image=theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
 	
 	if(!$you)
-      $edit='<a href="#" class="edit-me-place">Edit</a>';
+      $edit='<a href="#" class="edit-me-place no-confirm-place">Edit</a>';
 	
 	$output = '<div class="edit-panel">'.$edit.'</div><div class="user-profile-block">
 	<div id="bio-no-edit">
