@@ -13,8 +13,8 @@ Drupal.behaviors.editables = function(){
 		  if(confirm==false){
 			$("#bio-no-edit").slideToggle("fast");
 			$("#user-profile-form").slideToggle("fast");
-			$(this).toggleClass('confirm-place');
-			$(this).toggleClass('no-confirm-place');
+			$(elem).toggleClass('confirm-place');
+			$(elem).toggleClass('no-confirm-place');
 		    return 0;	// return empty to avoid save 
 		  }else{
 			$(this).toggleClass('confirm-place');
