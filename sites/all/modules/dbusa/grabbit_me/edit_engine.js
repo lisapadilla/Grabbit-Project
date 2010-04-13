@@ -9,12 +9,13 @@ Drupal.behaviors.editables = function(){
 	});
 	
 	$('.confirm-place').live('click',function(elem){
+		var element=$(this);
 		jConfirm("Do you want to save your changes before close?",'Save',function(confirm){
 		  if(confirm==false){
 			$("#bio-no-edit").slideToggle("fast");
 			$("#user-profile-form").slideToggle("fast");
-			$(elem).toggleClass('confirm-place');
-			$(elem).toggleClass('no-confirm-place');
+			element.toggleClass('confirm-place');
+			element.toggleClass('no-confirm-place');
 		    return 0;	// return empty to avoid save 
 		  }else{
 			$(this).toggleClass('confirm-place');
