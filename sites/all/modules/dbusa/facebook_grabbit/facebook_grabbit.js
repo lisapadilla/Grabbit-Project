@@ -22,7 +22,6 @@ function display_panel(panel,panel_element){
 			current_panel_1.show();	
 		}
 	}
-	alert(window.location);
 	
 	$('#'+panel_id).append('<div class="panel-controller"><a class="main-stream-next" href="javascript:void(0)">more</a></div>');
 
