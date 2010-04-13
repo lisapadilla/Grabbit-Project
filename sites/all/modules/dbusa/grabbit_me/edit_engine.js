@@ -20,6 +20,7 @@ Drupal.behaviors.editables = function(){
 		  }else{
 			element.toggleClass('confirm-place');
 			element.toggleClass('no-confirm-place');
+			$('#bio-submit').click();
 		  }
 		});
     });

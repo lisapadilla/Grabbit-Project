@@ -37,4 +37,5 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
     });
   });
 
+
 };
