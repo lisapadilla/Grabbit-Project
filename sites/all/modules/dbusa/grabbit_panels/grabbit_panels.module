@@ -493,7 +493,6 @@ function grabbit_panels_source_create_form($form,$panel_id){
 		$terms=array();
 	}
 	
-	print_r($terms);
 	$panels=array();
     $feeds=array();
 	
