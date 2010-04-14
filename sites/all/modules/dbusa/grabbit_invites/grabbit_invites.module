@@ -117,7 +117,7 @@ function grabbit_invites_facebook(){
 											
 	    }
 	  }catch(FacebookRestClientException $e){
-		print "No more invitations can be sent to facebook";
+		print "Facebook requests are currently being worked on. Thank you for your patience!";
 	  }
     }
 	
