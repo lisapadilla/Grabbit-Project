@@ -146,7 +146,7 @@ function grabbit_albums_display(){
 		$file_fid= $vars['node']->field_media[0]['value'];
 		
 		
-	
+	print_r($vars['node']);
 	    $result = db_query('SELECT * FROM {files} WHERE fid = %d', $file_fid);
 	    if (db_affected_rows($result)){
 		  $file=db_fetch_object($result);
