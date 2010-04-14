@@ -4993,3 +4993,11 @@ a.album-next{
 #panel-activity #onstream-controller{
 	display:none;
 }
+
+a.album-prev.disabled{
+  color:#E2E4E7;
+}
+
+a.album-next.disabled{
+  color:#E2E4E7;
+}
