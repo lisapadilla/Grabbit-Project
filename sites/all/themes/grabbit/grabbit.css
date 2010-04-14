@@ -1026,7 +1026,7 @@ p#queuestatus
 	margin-bottom:2px;
 	width:158px;
 }
-#facebook-grabbit-update-form .user-friends{
+#facebook-grabbit-update-form .user-friends a{
 	color:#9EA5AB;
 	font-size:11px;
 	font-weight:bold;
