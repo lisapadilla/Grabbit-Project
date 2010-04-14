@@ -1048,6 +1048,9 @@ p#queuestatus
 	padding:1px 6px;
 	background-image: none;
 }
+#facebook-grabbit-update-form .user-friends .numbers a{
+	color:white;
+}
 #edit-status-wrapper,
 #edit-status-1-wrapper{
   display: block;

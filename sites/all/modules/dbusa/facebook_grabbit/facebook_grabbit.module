@@ -101,7 +101,7 @@ function facebook_grabbit_update_form($form_state){
 		           <div class="user-data-wraper clearfix">
 		           <div class="picture">'.$user_image.'</div>
 		           <div class="user-name">'.$user->name.'</div>
-		           <div class="user-friends"><span class="user-name-friends">'.l('Friends:','user/me/friends').' </span><span class="round-numbers"><span class="a">&nbsp;</span><span class="numbers">'.friendlist_api_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH').'</span><span class="b">&nbsp;</span></span> 
+		           <div class="user-friends"><span class="user-name-friends">'.l('Friends:','user/me/friends').' </span><span class="round-numbers"><span class="a">&nbsp;</span><span class="numbers">'.l(friendlist_api_db_statuses('count', $user->uid, NULL, 1, 'TW_BOTH'),'user/me/friends').'</span><span class="b">&nbsp;</span></span> 
 		           <br><span class="user-name-friends">'.l('Requests:','user/me/myfriends/received').' </span><span class="round-numbers"><span class="a">&nbsp;</span><span class="numbers">'.l(friendlist_api_db_statuses('count',NULL,$user->uid, 1, 'TW_1_TO_2_P'),'user/me/myfriends/received').'</span><span class="b">&nbsp;</span></span>
 		           <br><span class="user-name-friends">'.l('Posts:','activity/updates').' </span><span class="round-numbers"><span class="a">&nbsp;</span><span class="numbers">'.l(grabbit_statistics_post_get_total($user->uid,'all'),'activity/updates').'</span><span class="b">&nbsp;</span></span> 
 		           </div>
