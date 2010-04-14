@@ -485,7 +485,7 @@ function _get_current_user_info($params=array()){
 				}
 				$i++;
 			}
-		}else{ // Return it as an array to manipulate using php
+		}else{ // Return it as an array to manipulate using phps
 			$results = array();
 			foreach ($user_details[0] as $detail){				
 				array_push($results,$detail);					
