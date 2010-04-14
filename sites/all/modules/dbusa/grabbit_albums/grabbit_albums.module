@@ -145,8 +145,6 @@ function grabbit_albums_display(){
 		
 		$file_fid= $vars['node']->field_media[0]['value'];
 		
-		
-	print_r($vars['node']);
 	    $result = db_query('SELECT * FROM {files} WHERE fid = %d', $file_fid);
 	    if (db_affected_rows($result)){
 		  $file=db_fetch_object($result);
@@ -167,7 +165,7 @@ function grabbit_albums_display(){
 			  $output .= '<div class="download-wrapper"><div class="filetype"><img src="'.base_path().path_to_theme().'/images/logos/'.$ext.'.gif"/></div><div class="download-file-type">'.l($file->filename,'node/'.$nid->nid).'</div></div>';
 			break;
 			default:
-			  $output .= l('<div class="image-wrap">'.theme('imagecache', 'image_uploads_album', $file->filepath, 'Grabbit Image', '').'</div>','node/'.$nid->nid,array('html'=>TRUE));
+			  $output .= l('<div class="image-wrap">'.theme('imagecache', 'image_uploads_album', $file->filepath, 'Grabbit Image', $vars['node']->body).'</div>','node/'.$nid->nid,array('html'=>TRUE));
 			break;
 		  }
 		
