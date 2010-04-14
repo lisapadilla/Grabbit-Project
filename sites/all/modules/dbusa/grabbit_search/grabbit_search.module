@@ -333,7 +333,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['onlystream']=array(
 		'#type'=>'checkbox',
-		'#title' => 'Search my stream <a href="#" class="custom-form-collapser" id="collapse-custom"></a>',
+		'#title' => 'Search my stream <a alt="Log in for more search options" href="#" class="custom-form-collapser" id="collapse-custom"></a>',
 		'#weight'=>7,
 		'#default_value'=>1
 		);
@@ -400,7 +400,7 @@ function grabbit_search_custom_form(&$form_state){
 	
 	$form['onlysite']=array(
 		'#type'=>'checkbox',
-		'#title' => 'Search site <a href="#" title="Join Grabbit for more search options" alt="Join Grabbit for more search options" class="custom-form-collapser" id="collapse-custom"></a>',
+		'#title' => 'Search site <a href="#" title="Join Grabbit for more search options" alt="Log in for more search options" class="custom-form-collapser" id="collapse-custom"></a>',
 		'#weight'=>7,
 		'#default_value'=>1
 		);
