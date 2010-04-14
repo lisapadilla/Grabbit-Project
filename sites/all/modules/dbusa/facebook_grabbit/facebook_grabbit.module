@@ -159,7 +159,7 @@ function facebook_grabbit_update_form($form_state){
         $form['contacts']= array(
 		'#type' => 'checkbox',
 		'#default_value' => 0,
-		'#title'=>'Contacts (email)',
+		'#title'=>'Email contacts',
 		'#weight'=>6
 		);
 	}
