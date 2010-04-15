@@ -111,8 +111,8 @@ function grabbit_deals_display()
   
   $keywords = grabbit_deals_extract_keywords($nid);
   $keywords .= grabbit_deals_extract_tags( $nid, $uid );
-  
-  try
+  print_r($keywords);
+  /*try
   {
     $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
   }
@@ -153,7 +153,7 @@ function grabbit_deals_display()
     $out .= '</div>';
   
     print $out;  
-  }
+  }*/
 }
 
 function grabbit_deals_check_available($keywords=NULL)
