@@ -208,7 +208,7 @@ function grabbit_deals_extract_keywords($string){
        $string=$node->field_text[0]['value'];	
      break;
      case 'twitter':
-       $string=$node->field_text[0]['value'];	
+       $string=$node->body;
      break;	
    }
 print_r($node);    
