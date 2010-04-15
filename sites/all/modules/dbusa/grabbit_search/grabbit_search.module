@@ -197,7 +197,7 @@ function grabbit_search_custom_results_users($results,$keyword=NULL){
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
 	$nod='even display';
-	
+	$resultados_total=count($results);
 	foreach($results as $amigo){
 	  $item=user_load($amigo);
 	  $profile = content_profile_load('profile', $amigo);      
@@ -252,7 +252,7 @@ function grabbit_search_custom_results_users($results,$keyword=NULL){
 	
 	
 		$output .='<div class="panels-controllers">
-		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
+		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a><a href="#">'.$resultados_total.'</a></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
 		           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
@@ -281,7 +281,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 	  $twitface[$node->node_created]=array('time'=>$node->node_created,
 	                                       'value'=>$node);
     }
-
+    $total_results=count($twitface);
     if(count($twitface)){
 	  $resultados = facebook_grabbit_theme_results($twitface);
     }else{
@@ -292,7 +292,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 	
 		$output .='<div class="panels-controllers">
-		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div>
+		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a></div><a href="#" title="results">'.$total_results.'</a>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
 		           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
