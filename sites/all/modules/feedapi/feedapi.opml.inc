@@ -134,7 +134,8 @@ function _feedapi_import_opml($opml, $args = array()) {
           }
           $node->og_groups = $args['og_groups'];
           $node->og_public = (int) $args['og_public'];
-          $node = feedapi_create_node($node, $feed['XMLURL']);
+          //$node = feedapi_create_node($node, $feed['XMLURL']);
+print_r($node);
           $count++;
         
       }
