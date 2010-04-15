@@ -5015,3 +5015,16 @@ a.album-next.disabled{
 	background:url("images/album_prev_dark.gif") no-repeat scroll left center transparent;
 	padding-left:10px;
 }
+div#edit-users-wrapper.form-item 
+{
+	padding-left: 1px;
+}
+#block-grabbit_search-0 a#collapse-custom.custom-form-collapser.expanded,
+#main a.show-comment-link.expanded
+{
+	background-image: url(images/less.gif);
+}
+#edit-onlysite-wrapper label.option 
+{
+	margin-left: -5px;
+}
