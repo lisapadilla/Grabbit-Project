@@ -187,12 +187,12 @@ function grabbit_deals_calculate()
   if($keywords = grabbit_deals_extract_keywords($nid) ){
 	$keys= array_keys($keywords);
 	$keys = implode(',',$keys);
-	print $keys;
 	if($available = grabbit_deals_check_available($keys)){
 	  print $available;	
 	  return;
 	}elseif ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
 	  {
+		print $tags;
 		if($user->uid==1){
 		//	print_r($nid);
 		 // print_r($tags);	
