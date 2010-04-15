@@ -5006,7 +5006,7 @@ a.album-prev.disabled{
 a.album-next.disabled{
   color:#E2E4E7;
 }
-.back-to-search{
+#panels-pager a.back-to-search{
 	float:right;
 	color:#999999;
 	font-size:11px;
