@@ -232,7 +232,7 @@ function grabbit_deals_extract_keywords($string){
 
     arsort($wordCountArr);       
     $wordCountArr = array_slice($wordCountArr, 0, 10);       
-    return $wordCountArr;   
+    return explode(',',$wordCountArr);   
 } 
 
 
