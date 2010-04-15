@@ -118,7 +118,7 @@ function _feedapi_import_opml($opml, $args = array()) {
         $feeds[] = $entry['attributes'];
       }
     }
-
+/*
     foreach ($feeds as $feed) {
       if (strlen($feed['XMLURL']) > 1) {
         // check if feed url is already in the list
@@ -138,7 +138,7 @@ function _feedapi_import_opml($opml, $args = array()) {
           $count++;
         
       }
-    }
+    }*/
   }
   return $count;
 }
