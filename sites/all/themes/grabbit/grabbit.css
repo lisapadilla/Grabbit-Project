@@ -1,6 +1,7 @@
 /* @override 
 	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M
 	http://grabbit.biz/sites/default/files/css/css_7051b96d095d006f2500f7d5d9674d77.css
+	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/html-elements.css?M
 */
 /* $Id: zen.css,v 1.14.2.1 2009/02/13 07:46:04 johnalbin Exp $ */
 
@@ -1311,7 +1312,7 @@ p#queuestatus
 .section-resource .twitter-name-link,
 .twitter-name-link
 {
-  color:#385691;
+  color: #3399FF;
   font-size:13px;
   font-weight:bold;
   line-height:15px;
@@ -1319,7 +1320,7 @@ p#queuestatus
   padding-right:5px;
 }
 .panel-grabbit .twitter-message-stream a.twitter-name-link{
-  color: #385691;
+  color: #3399FF;
   font-weight: bold;
   display: block;
   width: 400px;
@@ -1369,7 +1370,7 @@ p#queuestatus
 .facebook-post-body a,
 .facebook-attachment a,
 .twitter-body a{
-  color: #0073CF;
+  color: #3399FF;
   text-decoration: none;
 }
 .facebook-post .facebook-comments{
@@ -1810,7 +1811,7 @@ a.panel-filters{
 .node-stream-news h2 a,
 .node-stream-blogs h2 a,
 .node-stream-deal h2 a{
-  color: #385691;
+  color: #3399FF;
   font-weight: bold;
   font-size: 13px;
   line-height: 17px;
@@ -1945,7 +1946,7 @@ a.panel-filters{
   display: block;
 }
 .submitted a{
-  color:#0073CF;
+  color: #3399FF;
   font-size:12px;
   font-weight:bold;
   line-height:13px;
@@ -1996,7 +1997,7 @@ a.show-comment-link{
 }
 .panel-wraper a
 {
-	color: #0073CF;
+	color: #3399FF;
 }
 .user-panels .panel-grabbit .node-stream-news .item-body,
 .user-panels .panel-grabbit .node-stream-blogs .item-body,
@@ -3079,7 +3080,7 @@ div.messages, div.status, div.warning, div.error{
 	font-size: 20px;
 }
 .twitter-message-stream .twitter-date .blue{
-	color:#0073CF;
+	color: #3399FF;
 	font-size:12px;
 	font-weight:bold;
 	line-height:13px;
@@ -3868,7 +3869,7 @@ div.navbar
 	margin-left:0px;
 	text-indent:0px;
 	width:auto;
-	color:#0073CF;
+	color: #3399FF;
 	font-size:12px;
 	font-weight:bold;
 	line-height:13px;
@@ -4022,7 +4023,7 @@ div.navbar
 }*/
 
 .hashtag, a.user-twitter{
-	color:#385691;
+	color: #3399FF;
 }
 .tags-engine .close-tags{
 	background:transparent url(images/close_tags.gif) no-repeat scroll right 0;
@@ -4805,7 +4806,7 @@ a.album-next{
 	margin-top:26px;
 }
 .main-stream-next{
-	color:#0066FF;
+	color: #3399FF;
 	font-size:13px;
 	line-height:15px;
 	margin:0;
