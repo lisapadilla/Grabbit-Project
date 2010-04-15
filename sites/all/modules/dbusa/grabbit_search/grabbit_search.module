@@ -26,16 +26,6 @@ function grabbit_search_menu () {
   return $items;
 }
 
-function grabbit_search_init() 
-{
-	
-    if ($_GET['q']=='admin/build/block')
-    {
-      $GLOBALS['custom_theme'] = variable_get('admin_theme', '0');
-      drupal_add_css(drupal_get_path('module', 'system') .'/admin.css', 'module');
-    }
-}
-
 
 /**
  * Implementation of hook_block()
