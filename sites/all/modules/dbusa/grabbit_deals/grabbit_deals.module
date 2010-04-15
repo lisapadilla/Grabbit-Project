@@ -121,6 +121,7 @@ function grabbit_deals_display()
   catch(Exception $e)
   {
     $error = $e->getMessage();
+print_r($error);
   }
   
   if ( $result )
