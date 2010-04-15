@@ -139,6 +139,7 @@ function _feedapi_import_opml($opml, $args = array()) {
         */
 print "feeds";
 print_r($feed);
+exit;
       }
     }
   }
