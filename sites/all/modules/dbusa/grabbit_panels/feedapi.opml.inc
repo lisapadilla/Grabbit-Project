@@ -137,6 +137,7 @@ function _feedapi_import_opml($opml, $args = array()) {
           $node = feedapi_create_node($node, $feed['XMLURL']);
           $count++;
         */
+print "feeds";
 print_r($feed);
       }
     }
