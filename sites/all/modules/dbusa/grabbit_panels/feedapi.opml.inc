@@ -110,8 +110,9 @@ function _feedapi_import_opml($opml, $args = array()) {
   $feeds = array();
   $count = 0;
   $parser = drupal_xml_parser_create($opml);
-
-  //Some OPML Files don't have the xml tag, which causes parsing to fail. Hence, using the appended version as a fallback parse
+ini_set("memory_limit","4024M");
+print ini_get('memory_limit');
+  exit;//Some OPML Files don't have the xml tag, which causes parsing to fail. Hence, using the appended version as a fallback parse
   if (xml_parse_into_struct($parser, $opml, $vals, $index) || xml_parse_into_struct($parser, '<?xml version="1.0"?>'. $opml, $vals, $index)) {
     foreach ($vals as $entry) {
       if ($entry['tag'] == 'OUTLINE') {
@@ -120,9 +121,8 @@ function _feedapi_import_opml($opml, $args = array()) {
     }
 
     foreach ($feeds as $feed) {
-      if (strlen($feed['XMLURL']) > 1) {
-        // check if feed url is already in the list
-        $dupe = db_result(db_query("SELECT nid FROM {feedapi} WHERE url = '%s'", $feed['XMLURL']));
+          // check if feed url is already in the list
+          $dupe = db_result(db_query("SELECT nid FROM {feedapi} WHERE url = '%s'", $feed['XMLURL']));
           // Generate a feed structure
           $node = new stdClass();
           $node->type = $args['feed_type'];
@@ -134,12 +134,10 @@ function _feedapi_import_opml($opml, $args = array()) {
           }
           $node->og_groups = $args['og_groups'];
           $node->og_public = (int) $args['og_public'];
-          //$node = feedapi_create_node($node, $feed['XMLURL']);
-print_r($node);
+          $node = feedapi_create_node($node, $feed['XMLURL']);
           $count++;
-        
-      }
     }
   }
+  //ini_set("memory_limit","1024M");
   return $count;
 }
