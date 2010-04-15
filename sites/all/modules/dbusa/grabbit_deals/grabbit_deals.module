@@ -184,7 +184,7 @@ function grabbit_deals_calculate()
   global $user;
 
   if($keywords = grabbit_deals_extract_keywords($nid) ){
-	print $keywords;
+	print_r($keywords);
   }  
 /*
   if ( $tags = grabbit_deals_extract_tags($nid, $user->uid) )
@@ -232,7 +232,7 @@ function grabbit_deals_extract_keywords($string){
 
     arsort($wordCountArr);       
     $wordCountArr = array_slice($wordCountArr, 0, 10);       
-    return implode(',',$wordCountArr);   
+    return $wordCountArr;   
 } 
 
 
