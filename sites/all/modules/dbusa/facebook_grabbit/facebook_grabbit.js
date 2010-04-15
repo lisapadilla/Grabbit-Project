@@ -433,7 +433,7 @@ $(document).ready(function() {
 		i.preventDefault;
 		var universe = $(this).parents('.facebook-post-header, .item-body, .twitter-message-stream');
 		$('.display-comments-buttons',universe).slideToggle('medium');
-		$(this).classToggle('expanded');
+		$(this).toggleClass('expanded');
 	});
 	
 	$(".twit-reply").live('click',function () {
