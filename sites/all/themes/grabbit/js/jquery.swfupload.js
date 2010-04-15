@@ -204,6 +204,7 @@ Drupal.behaviors.frontpage = function(){
 
      	$('#collapse-custom').click(function(){
 			               $('#collapsable-custom-form').slideToggle();
+			               $(this).classToggle('expanded');
 			               return false; 
 			             });
 			
