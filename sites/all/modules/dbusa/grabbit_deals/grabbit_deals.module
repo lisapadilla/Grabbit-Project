@@ -109,10 +109,10 @@ function grabbit_deals_display()
   global $user;
   $uid = $user->uid;
   $keys=grabbit_deals_extract_keywords($nid);
-  $keywords = implode(',',array_keys($keys));
+  $keywords = implode(', ',array_keys($keys));
   $keywords .= grabbit_deals_extract_tags( $nid, $uid );
-  print_r($keywords);
-  /*try
+  
+  
   {
     $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
   }
@@ -153,7 +153,7 @@ function grabbit_deals_display()
     $out .= '</div>';
   
     print $out;  
-  }*/
+  }
 }
 
 function grabbit_deals_check_available($keywords=NULL)
@@ -186,7 +186,7 @@ function grabbit_deals_calculate()
 
   if($keywords = grabbit_deals_extract_keywords($nid) ){
 	$keys= array_keys($keywords);
-	$keys = implode(',',$keys);
+	$keys = implode(', ',$keys);
 	print $keys;
 	if($available = grabbit_deals_check_available($keys)){
 	  print $available;	
