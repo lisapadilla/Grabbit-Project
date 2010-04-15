@@ -500,15 +500,15 @@ function grabbit_deals_extract_keywords($string){
    	$params['content'] = $string; // content
 	//set the length of keywords you like
 	$params['min_word_length'] = 5;  //minimum length of single words
-	$params['min_word_occur'] = 2;  //minimum occur of single words
+	$params['min_word_occur'] = 3;  //minimum occur of single words
 
 	$params['min_2words_length'] = 3;  //minimum length of words for 2 word phrases
 	$params['min_2words_phrase_length'] = 10; //minimum length of 2 word phrases
-	$params['min_2words_phrase_occur'] = 2; //minimum occur of 2 words phrase
+	$params['min_2words_phrase_occur'] = 3; //minimum occur of 2 words phrase
 
 	$params['min_3words_length'] = 3;  //minimum length of words for 3 word phrases
 	$params['min_3words_phrase_length'] = 10; //minimum length of 3 word phrases
-	$params['min_3words_phrase_occur'] = 2; //minimum occur of 3 words phrase
+	$params['min_3words_phrase_occur'] = 3; //minimum occur of 3 words phrase
 
 	$keyword = new autokeyword($params, "iso-8859-1");  
 	
