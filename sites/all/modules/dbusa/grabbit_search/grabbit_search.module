@@ -28,6 +28,7 @@ function grabbit_search_menu () {
 
 function grabbit_search_init() 
 {
+	print_r($_GET['q']);
     if ($_GET['q']=='admin/build/block')
     {
       $GLOBALS['custom_theme'] = variable_get('admin_theme', '0');
