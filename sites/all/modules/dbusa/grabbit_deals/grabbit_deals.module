@@ -113,8 +113,6 @@ function grabbit_deals_display()
   try
   {
     $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
-    print $keywords;
-    print_r($result);
   }
   catch(Exception $e)
   {
@@ -153,6 +151,50 @@ function grabbit_deals_display()
     $out .= '</div>';
   
     print $out;  
+  }else{
+    $keywords = grabbit_deals_extract_tags( $nid, $uid );	
+	try
+	  {
+	    $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
+	  }
+	  catch(Exception $e)
+	  {
+	    $error = $e->getMessage();
+	  }
+
+	  if ( $result )
+	  {
+	    $out = 
+	    '<div class="deals-display clearfix">
+	      <a class="close" href="#">close</a>
+	      <h4>Deals that match your tags:</h4>';
+
+	    $i = 0;
+	    foreach ( $result->Items->Item as $deal )
+	    {
+	      if ( $deal->ItemAttributes->ListPrice->FormattedPrice )
+	      {
+	        $i++;
+	        if ( $i == 6 ) break;
+
+	        $out .= 
+	        '<div class="deal-item clearfix">'.
+	          l( 'buy', 'deals/open/'.$deal->ASIN, 
+	            array( 'attributes' => array('class' => 'buy', 'target' => '_blank'), 'absolute' => true ) ).'
+	          <div class="provider">Amazon.com</div>
+	          <div class="info">
+	            '.l( '&raquo; <span>more...</span>', 'deals/detail/'.$deal->ASIN , 
+	              array( 'attributes' => array('class' => 'more'), 'html' => true ) ).'
+	            <span class="name">'. $deal->ItemAttributes->Title .'</span>
+	            <span class="price">'. $deal->ItemAttributes->ListPrice->FormattedPrice .'</span>
+	          </div>
+	        </div>';
+	      }
+	    }
+	    $out .= '</div>';
+
+	    print $out;  
+	
   }
   
 }
