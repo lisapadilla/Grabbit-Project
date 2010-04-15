@@ -154,6 +154,7 @@ function grabbit_deals_display()
   
     print $out;  
   }
+  print $keywords
 }
 
 function grabbit_deals_check_available($keywords=NULL)
