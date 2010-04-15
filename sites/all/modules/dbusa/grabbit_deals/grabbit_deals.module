@@ -185,7 +185,8 @@ function grabbit_deals_calculate()
   global $user;
 
   if($keywords = grabbit_deals_extract_keywords($nid) ){
-	$keys = implode(',',$keywords);
+	$keys= array_keys($keywords);
+	$keys = implode(',',$keys);
 	if($available = grabbit_deals_check_available($keys)){
 	  print $available;	
 	  return;
