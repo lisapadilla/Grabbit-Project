@@ -266,7 +266,7 @@ function grabbit_deals_extract_keywords($string){
     }
 
     arsort($wordCountArr);       
-    $wordCountArr = array_slice($wordCountArr, 0, 2);       
+    $wordCountArr = array_slice($wordCountArr, 0, 3);       
     return $wordCountArr;   
 }
 
