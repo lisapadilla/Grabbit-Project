@@ -120,9 +120,9 @@ function _feedapi_import_opml($opml, $args = array()) {
     }
 
     foreach ($feeds as $feed) {
-      if (strlen($feed['XMLURL']) > 1) {
-        // check if feed url is already in the list
-       /* $dupe = db_result(db_query("SELECT nid FROM {feedapi} WHERE url = '%s'", $feed['XMLURL']));
+	      ini_set("memory_limit","2024M");
+          // check if feed url is already in the list
+          $dupe = db_result(db_query("SELECT nid FROM {feedapi} WHERE url = '%s'", $feed['XMLURL']));
           // Generate a feed structure
           $node = new stdClass();
           $node->type = $args['feed_type'];
@@ -136,12 +136,8 @@ function _feedapi_import_opml($opml, $args = array()) {
           $node->og_public = (int) $args['og_public'];
           $node = feedapi_create_node($node, $feed['XMLURL']);
           $count++;
-        */
-print "feeds";
-print_r($feed);
-exit;
-      }
     }
   }
+  ini_set("memory_limit","1024M");
   return $count;
 }
