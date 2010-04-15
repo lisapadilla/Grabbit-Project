@@ -115,6 +115,8 @@ function grabbit_deals_display()
   try
   {
     $result = $obj->getItemByKeyword($keywords, AmazonProductAPI::ALL);
+    print $keywords;
+    print_r($result);
   }
   catch(Exception $e)
   {
@@ -154,7 +156,7 @@ function grabbit_deals_display()
   
     print $out;  
   }
-  print $keywords;
+  
 }
 
 function grabbit_deals_check_available($keywords=NULL)
