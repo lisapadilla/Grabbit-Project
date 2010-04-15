@@ -1016,6 +1016,7 @@ p#queuestatus
   overflow: hidden;
   margin-right: 10px;
   float: left;
+  height: 60px;
 }
 #facebook-grabbit-update-form .user-name{
  	color:#000000;
@@ -1199,6 +1200,21 @@ p#queuestatus
 #content-area .twitter-friend .picture img{
   float: left;
   margin: 0px 10px 10px 0px;
+}
+.page-user-me-myfriends #content-inner .frostin-wrapper img,
+.page-user-me-myfriends-twitter-friends #content-inner .frostin-wrapper img
+{
+	float: none;
+	margin-bottom: 7px;
+}
+.page-user-me-myfriends #content-inner .frostin-wrapper,
+.page-user-me-myfriends-twitter-friends #content-inner .frostin-wrapper
+{
+	float: left;
+}
+.page-user-me-myfriends-twitter-friends #content-inner .frostin-wrapper .from-twitter img
+{
+	margin-bottom: 0;
 }
 #content-area .views-row .views-field-created .field-content{
   font-size: 11px;
