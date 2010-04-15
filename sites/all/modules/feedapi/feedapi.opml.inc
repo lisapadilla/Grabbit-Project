@@ -138,6 +138,7 @@ function _feedapi_import_opml($opml, $args = array()) {
 print_r($node);
 print "nodo - ";
 drupal_set_message("nodo parseado");
+exit;
           $count++;
         
       }
