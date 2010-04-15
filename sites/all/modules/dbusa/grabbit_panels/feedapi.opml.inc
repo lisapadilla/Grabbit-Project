@@ -137,6 +137,6 @@ function _feedapi_import_opml($opml, $args = array()) {
           $count++;
     }
   }
-  //ini_set("memory_limit","1024M");
+  ini_set("memory_limit","1024M");
   return $count;
 }
