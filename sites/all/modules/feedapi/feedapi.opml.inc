@@ -105,3 +105,40 @@ function theme_feedapi_export_opml($feeds) {
 
 /**
  * Imports from OPML XML file.
+ */
+function _feedapi_import_opml($opml, $args = array()) {
+  $feeds = array();
+  $count = 0;
+  $parser = drupal_xml_parser_create($opml);
+
+  //Some OPML Files don't have the xml tag, which causes parsing to fail. Hence, using the appended version as a fallback parse
+  if (xml_parse_into_struct($parser, $opml, $vals, $index) || xml_parse_into_struct($parser, '<?xml version="1.0"?>'. $opml, $vals, $index)) {
+    foreach ($vals as $entry) {
+      if ($entry['tag'] == 'OUTLINE') {
+        $feeds[] = $entry['attributes'];
+      }
+    }
+
+    foreach ($feeds as $feed) {
+      if (strlen($feed['XMLURL']) > 1) {
+        // check if feed url is already in the list
+        $dupe = db_result(db_query("SELECT nid FROM {feedapi} WHERE url = '%s'", $feed['XMLURL']));
+          // Generate a feed structure
+          $node = new stdClass();
+          $node->type = $args['feed_type'];
+          if ($args['override_title'] && isset($feed['TITLE'])) {
+            $node->title = $feed['TITLE'];
+          }
+          if ($args['override_body'] && isset($feed['TEXT'])) {
+            $node->body = $feed['TEXT'];
+          }
+          $node->og_groups = $args['og_groups'];
+          $node->og_public = (int) $args['og_public'];
+          $node = feedapi_create_node($node, $feed['XMLURL']);
+          $count++;
+        
+      }
+    }
+  }
+  return $count;
+}
