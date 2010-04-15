@@ -190,6 +190,7 @@ function grabbit_deals_calculate()
   if($keywords = grabbit_deals_extract_keywords($nid) ){
 	$keys= array_keys($keywords);
 	$keys = implode(', ',$keys);
+	print_r($keys);
 	if($available = grabbit_deals_check_available($keys)){
 	  print $available;	
 	  return;
@@ -265,7 +266,7 @@ function grabbit_deals_extract_keywords($string){
     }
 
     arsort($wordCountArr);       
-    $wordCountArr = array_slice($wordCountArr, 0, 4);       
+    $wordCountArr = array_slice($wordCountArr, 0, 2);       
     return $wordCountArr;   
 }
 
