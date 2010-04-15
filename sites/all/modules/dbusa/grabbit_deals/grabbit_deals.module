@@ -121,7 +121,6 @@ function grabbit_deals_display()
   catch(Exception $e)
   {
     $error = $e->getMessage();
-print_r($error);
   }
   
   if ( $result )
@@ -165,7 +164,7 @@ function grabbit_deals_check_available($keywords=NULL)
   require_once 'amazon/amazon_api_class.php';
   
   $obj = new AmazonProductAPI();
-  
+  print_r($keywords);
   try
   {
     $result = $obj->getItemFast($keywords, AmazonProductAPI::ALL);
