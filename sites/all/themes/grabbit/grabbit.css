@@ -2,6 +2,7 @@
 	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M
 	http://grabbit.biz/sites/default/files/css/css_7051b96d095d006f2500f7d5d9674d77.css
 	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/html-elements.css?M
+	http://daniloblackusa.net/grabbit/modules/system/system.css?M
 */
 /* $Id: zen.css,v 1.14.2.1 2009/02/13 07:46:04 johnalbin Exp $ */
 
@@ -1071,6 +1072,7 @@ p#queuestatus
   height: 55px;
   border: none;
   overflow: auto;
+  overflow-x: hidden;
   padding: 0px 0px 0px 0px;
   color: #8B939F;
   font-size: 13px;
