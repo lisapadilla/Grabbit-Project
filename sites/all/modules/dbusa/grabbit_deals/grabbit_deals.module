@@ -108,8 +108,8 @@ function grabbit_deals_display()
   $nid = $_GET['nid'];
   global $user;
   $uid = $user->uid;
-  
-  $keywords = implode(',',grabbit_deals_extract_keywords($nid));
+  $keys=grabbit_deals_extract_keywords($nid);
+  $keywords = implode(',',array_keys($keys));
   $keywords .= grabbit_deals_extract_tags( $nid, $uid );
   print_r($keywords);
   /*try
