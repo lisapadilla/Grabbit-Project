@@ -547,7 +547,7 @@ function friend_search_theme_a_friend($friend,$row){
 	
 	$output = '<div class="views-row views-row-1 '.$row.' '.$class.'">
 	   
-      
+      <div class="frostin-wrapper">
 	  <div class="views-field-field-profile-picture-fid">
 	    <span class="field-content">'.$picture.'</span>
 	  </div>
@@ -555,7 +555,7 @@ function friend_search_theme_a_friend($friend,$row){
 	  <div class="views-field-action-socital-networks">
 	    <span class="field-content">'.$social.'</span>
 	  </div>
-	
+	  </div>
 	  <span class="views-field-name">
 	    <span class="field-content">'.$name.'</span>
 	  </span>
