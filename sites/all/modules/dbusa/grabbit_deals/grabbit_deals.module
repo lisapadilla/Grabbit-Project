@@ -183,7 +183,7 @@ function grabbit_deals_calculate()
   $nid = $_GET['nid'];
   global $user;
 
-  if($keywords = grabbit_deals_extract_keywords($nid) ){
+  if($keywords = grabbit_deals_extract_keywords($nid->body) ){
 	print_r($keywords);
   }  
 /*
