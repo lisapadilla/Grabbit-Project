@@ -164,7 +164,7 @@ function grabbit_deals_check_available($keywords=NULL)
   require_once 'amazon/amazon_api_class.php';
   
   $obj = new AmazonProductAPI();
-  print_r($keywords);
+
   try
   {
     $result = $obj->getItemFast($keywords, AmazonProductAPI::ALL);
@@ -190,7 +190,6 @@ function grabbit_deals_calculate()
   if($keywords = grabbit_deals_extract_keywords($nid) ){
 	$keys= array_keys($keywords);
 	$keys = implode(', ',$keys);
-	print $keys;
 	if($available = grabbit_deals_check_available($keys)){
 	  print $available;	
 	  return;
