@@ -111,6 +111,7 @@ function _feedapi_import_opml($opml, $args = array()) {
   $count = 0;
   $parser = drupal_xml_parser_create($opml);
 ini_set("memory_limit","4024M");
+print ini_get('memory_limit');
   exit;//Some OPML Files don't have the xml tag, which causes parsing to fail. Hence, using the appended version as a fallback parse
   if (xml_parse_into_struct($parser, $opml, $vals, $index) || xml_parse_into_struct($parser, '<?xml version="1.0"?>'. $opml, $vals, $index)) {
     foreach ($vals as $entry) {
