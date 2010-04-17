@@ -5055,11 +5055,14 @@ color: #3399FF;
 }
 .view-friendlist-manage-twoway.view-display-id-page_3 .views-field-action-link-requester
 {
-clear:both;
 font-size:11px;
 font-style:italic;
 text-decoration:underline;
 color: #3399FF;
+}
+.view-friendlist-manage-twoway.view-display-id-page_3 .views-field-action-link-requester div
+{
+display: inline;
 }
 
 a.album-next.disabled{
