@@ -192,7 +192,7 @@ function friend_search_show_friends_facebook(){
 						}
 		}
 									
-	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">'.$facebooks.'</div></div>';
+	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="grabb-control-buttons"><a href="#" class="all-friends-button">All friends</a><a href="#" class="g-friends-button">Grabbit friends</a></div>'.$facebooks.'</div></div>';
 	  }
 	}catch(FacebookRestClientException $e){
 		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="tw-container-inner">You have no FB account yet</div></div></div>';
@@ -348,7 +348,7 @@ function friend_search_show_friends_twitter(){
 	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
 	     }
 	
-	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container">'.$twitters.'</div></div>';	
+	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container"><div class="grabb-control-buttons"><a href="#" class="all-friends-button">All friends</a><a href="#" class="g-friends-button">Grabbit friends</a></div>'.$twitters.'</div></div>';	
 	}else{
 		$output .='<div class="facebook-list"><div class="facebook-container"><div class="tw-container-inner">You have no Twitter account yet</div></div></div>';
 	}
@@ -427,7 +427,7 @@ function friend_search_show_friends(){
 	if($mesa['status'][0])
 	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 	
-    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">'.$mensajes;
+    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">'.$mensajes.'<div class="grabb-control-buttons"><a href="#" class="all-friends-button">All friends</a><a href="#" class="g-friends-button">Grabbit friends</a></div>';
     $row='views-row-odd';
     foreach($friends as $friend){
 	  $output .= friend_search_theme_a_friend($friend,$row);
@@ -523,7 +523,7 @@ function friend_search_theme_a_friend($friend,$row){
 		}else{
 			$link .='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$friend->uid.'">Remove from favorites</a></span>';
 		}
-		$class="joined-grabbit";
+		$class="joined-grabbit grabbit-fr";
 		$link_class='grabbit-friends';			
 	  }
 	
