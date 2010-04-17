@@ -1024,6 +1024,7 @@ p#queuestatus
 	line-height:13px;
 	margin-bottom:2px;
 	width:158px;
+	padding-bottom: 6px;
 }
 #facebook-grabbit-update-form .user-friends a{
 	color:#9EA5AB;
@@ -2767,6 +2768,10 @@ div.messages, div.status, div.warning, div.error{
 	margin-right: 3px;
 	float: right;
 }
+.section-user .flag-wrapper
+{
+	margin-top: -20px;
+}
 .action-button a
 {
 	display: block;
@@ -3564,6 +3569,7 @@ div.navbar
 {
 	display: inline;
 	color: #666666;
+	text-decoration: underline;
 }
 .section-user #rss-controls
 {
@@ -4667,7 +4673,7 @@ display: none;
 	color:#3399FF;
 }
 .page-user-me-myfriends .friend-action{
-	margin-right:35px;
+	
 }
 .section-friendlist .friend-message-add,.section-friendlist #friendlist-ui-relation-form {
 	color:#999999;
