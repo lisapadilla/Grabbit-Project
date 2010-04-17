@@ -257,7 +257,6 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	if($user->uid>0){
 		
 		$controles='
-		<div id="tags-show-'.$vars['node']->nid.'"></div>
 		    <div class="links_stream" id="article-news">
 		  
 		    <a href="JavaScript:void(0);" class="trash-item" item_id="'.$vars['node']->nid.'">TR</a>
@@ -272,7 +271,7 @@ function grabbit_preprocess_node(&$vars, $hook) {
 	// end controles
 	
 	$title ='<div class="titles"><h2>'.$vars['node']->links['feedapi_feed']['title']."</h2><h1>".$vars['node']->title."</h1></div>";
-    $vars['content']= $controles.$title.'<div class="news-body">'.$vars['content']."</div>"; 	
+    $vars['content']= $controles.$title.'<div id="tags-show-'.$vars['node']->nid.'"></div><div class="news-body">'.$vars['content']."</div>"; 	
     
     unset($vars['submitted']);
     $feednid = array_shift($vars['node']->feedapi_node->feed_nids);
