@@ -4974,6 +4974,9 @@ a.album-next{
 .page-favorites-display .panels-controllers{
 	background:url("images/mp_top_w.gif") no-repeat scroll 0 0 transparent;
 	border-bottom:1px solid #E2E4E7;
+	padding:10px 15px 5px;
+	font-size:18px;
+	color:#385291;
 }
 .section-resource #main #article-news
 {
