@@ -4846,7 +4846,7 @@ a.album-next{
 .section-resource .tooltipwraper
 {
 	float: right;
-	margin-right:15px;
+	margin-right:40px;
 	margin-top: 10px;
 }
 .section-resource #main h1.title
@@ -4923,6 +4923,14 @@ a.album-next{
 .section-resource #main .url-deal a.available
 {
 	background: url(images/btns/art_deals_act.gif) no-repeat;
+}
+.node-type-media #main .url-deal a.selected,
+.node-type-news #main .url-deal a.selected,
+.section-resource #main .url-deal a.selected
+{
+	background: url(images/btns/art_deals_sel.gif) no-repeat;
+	height: 30px !important;
+	margin-top: -10px !important;
 }
 .section-resource #main .url-deal a
 {
