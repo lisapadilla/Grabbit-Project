@@ -4961,6 +4961,8 @@ display:none;
 .section-resource #main a.bring-tags.selected
 {
 	background-image: url(images/btns/art_tags_act.gif);
+	height: 30px !important;
+	margin-top: -10px !important;
 }
 .node-type-media #main a.comment-news,
 .node-type-news #main a.comment-news,
