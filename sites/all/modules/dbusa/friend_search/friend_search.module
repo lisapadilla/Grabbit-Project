@@ -192,7 +192,7 @@ function friend_search_show_friends_facebook(){
 						}
 		}
 									
-	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="grabb-control-buttons" id="rss-controls"><span><a href="#" class="all-friends-button">All friends</a></span><span><a href="#" class="g-friends-button">Grabbit friends</a></span></div>'.$facebooks.'</div></div>';
+	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="grabb-control-buttons" id="rss-controls"><span><a href="#" class="all-friends-button selected">All friends</a></span><span><a href="#" class="g-friends-button">Grabbit friends</a></span></div>'.$facebooks.'</div></div>';
 	  }
 	}catch(FacebookRestClientException $e){
 		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="tw-container-inner">You have no FB account yet</div></div></div>';
@@ -350,7 +350,7 @@ function friend_search_show_friends_twitter(){
 	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
 	     }
 	
-	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container"><div class="grabb-control-buttons" id="rss-controls"><span><a href="#" class="all-friends-button">All friends</a></span><span><a href="#" class="g-friends-button">Grabbit friends</a></span></div>'.$twitters.'</div></div>';	
+	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container"><div class="grabb-control-buttons" id="rss-controls"><span><a href="#" class="all-friends-button selected">All friends</a></span><span><a href="#" class="g-friends-button">Grabbit friends</a></span></div>'.$twitters.'</div></div>';	
 	}else{
 		$output .='<div class="facebook-list"><div class="facebook-container"><div class="tw-container-inner">You have no Twitter account yet</div></div></div>';
 	}
@@ -429,7 +429,7 @@ function friend_search_show_friends(){
 	if($mesa['status'][0])
 	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 	
-    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">'.$mensajes.'<div class="grabb-control-buttons" id="rss-controls"><span><a href="#" class="all-friends-button">All friends</a></span><span><a href="#" class="g-friends-button">Grabbit friends</a></span></div>';
+    $output ='<div class="grabbit-list"><h2>All Friends</h2><div class="grabbit-container">'.$mensajes.'<div class="grabb-control-buttons" id="rss-controls"><span><a href="#" class="all-friends-button selected">All friends</a></span><span><a href="#" class="g-friends-button">Grabbit friends</a></span></div>';
     $row='views-row-odd';
     foreach($friends as $friend){
 	  $output .= friend_search_theme_a_friend($friend,$row);
@@ -659,6 +659,7 @@ function friend_search_user($op, &$edit, &$account, $category = NULL){
 }
 
 function friend_search_preprocess_views_view_fields(&$vars) {
+	
     if($vars['fields']['field_profile_picture_fid']){
 	  if(stristr($vars['fields']['field_profile_picture_fid']->content, '<img') === FALSE){
 		$new_content=str_replace('</a>','',$vars['fields']['field_profile_picture_fid']->content);
