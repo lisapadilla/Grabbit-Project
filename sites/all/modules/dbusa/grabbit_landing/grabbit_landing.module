@@ -257,6 +257,10 @@ global $base_path;
 		$twitimage='<img src="http://twitpic.com/show/full/'.$matches[2].'" />';
 	}
 	
+	if($twitimage=='<img src="http://twitpic.com/show/full/" />'){
+		$twitimage='';
+	}
+	
 	$profile=content_profile_load('profile', $node->uid);
 	
 	$msg_formatted=get_url_msg_formatted($msg,$node);
