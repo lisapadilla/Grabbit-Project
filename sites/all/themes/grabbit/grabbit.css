@@ -5134,3 +5134,13 @@ div#edit-users-wrapper.form-item
 .messages.error{
 	display:none;
 }
+.title-inline{
+	display:block;
+	float:left;
+	font-size:12px;
+	height:16px;
+	line-height:13px;
+	padding:4px 0 0;
+	text-align:center;
+	width:108px;
+}
