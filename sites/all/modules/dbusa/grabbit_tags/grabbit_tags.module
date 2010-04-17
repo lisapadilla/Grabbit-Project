@@ -90,7 +90,7 @@ function grabbit_tags_display(){
 	
 	  $output .= '<span class="checkboxes-tags">
 	              '.$allowed.'
-	              <span class="tags-block"><input type="checkbox" id="add-tags" checked="checked" /> Add tags to my profile.</span>
+	              <span class="tags-block"><input type="checkbox" id="add-tags" /> Add tags to my profile.</span>
 	              </span>
 	              <button node="'.$nid.'" class="tags-submit-profile">Add</button></span></div>';
 	  
