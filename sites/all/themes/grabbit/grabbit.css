@@ -3550,6 +3550,19 @@ div.navbar
 #rss-controls span{
   display: block
 }
+.section-user .grabbit-container .grabb-control-buttons
+{
+	display: inline;
+}
+.section-user #rss-controls
+{
+	height: 24px;
+	padding-top: 5px;
+}
+.page-user-me-myfriends-twitter-friends .friend_favorite
+{
+margin-right: 30px;
+}
 #rss-controls a{
 	color:#666666;
 	font-size:11px;
