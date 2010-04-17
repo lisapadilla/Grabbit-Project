@@ -1,4 +1,8 @@
 Drupal.behaviors.tagsEngine = function(){
+  
+  var prevnext = $('.album-control').detach();
+  $('.backto').after(prevnext);
+
   $('.bring-tags').live('click',function(i){
 	
 	if ( $(this).hasClass('selected') )
