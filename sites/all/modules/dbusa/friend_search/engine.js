@@ -33,12 +33,12 @@ $(document).ready(function() {
 	});
 	
 	$('.grabbit-container .all-friends-button').click(function(){
-		$('.views-row').show();
+		$('.grabbit-container .views-row').show();
 	});
 	
 	$('.grabbit-container .g-friends-button').click(function(){
-		$('.views-row').hide();
-		$('.grabbit-fr').show('slow');
+		$('.grabbit-container .views-row').hide();
+		$('.grabbit-container .grabbit-fr').show('slow');
 	});
 	
 });
