@@ -1,10 +1,9 @@
 Drupal.behaviors.tagsEngine = function(){
   
-  var b = $('.backto');
-  if (b)
+  if (!$('body').hasClass('section-album'))
   {
     var prevnext = $('.album-control').detach();
-    b.after(prevnext);
+    $('.backto').after(prevnext);
   }
 
   $('.bring-tags').live('click',function(i){
