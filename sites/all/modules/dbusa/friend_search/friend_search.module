@@ -198,7 +198,7 @@ function friend_search_show_friends_facebook(){
 		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="fb-container-inner">You have no FB account yet</div></div></div>';
 	}
     }else{
-	    $output .='<div class="facebook-list"><div class="facebook-container">You have no FB account yet</div></div>';
+	    $output .='<div class="facebook-list"><div class="facebook-container"><div class="fb-container-inner">You have no FB account yet</div></div></div>';
     }
 
 	
