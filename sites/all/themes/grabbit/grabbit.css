@@ -4129,6 +4129,12 @@ margin-right: 30px;
 	background: url(images/tags_bg.gif);
 	margin-bottom:13px;	
 }
+
+.node-type-news .tags-engine
+{
+	margin-bottom: 0;
+}
+
 .tags-success{
 	background-color:#40B3FF;
 	color:#000000;
@@ -4950,6 +4956,12 @@ display:none;
 	width: 20px;
 	height: 20px;
 }
+.node-type-media #main a.bring-tags.selected,
+.node-type-news #main a.bring-tags.selected,
+.section-resource #main a.bring-tags.selected
+{
+	background-image: url(images/btns/art_tags_act.gif);
+}
 .node-type-media #main a.comment-news,
 .node-type-news #main a.comment-news,
 .section-resource #main a.facebook-makecomment-link,
@@ -4989,7 +5001,7 @@ display:none;
 .node-type-news #main #article-news
 {
 	width: 300px;
-	margin-top: 20px;
+	margin-top: 10px;
 	position: absolute;
 	right: 40px;
 	height: 20px;
