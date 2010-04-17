@@ -20,7 +20,7 @@ Drupal.behaviors.tagsEngine = function(){
 		if (data){
 			$('#tags-show-'+tag_node, parent).hide();
 			$('#tags-show-'+tag_node, parent).html(data);
-			$('.album-control').attr("style",'margin-top:-185px');
+			//$('.album-control').attr("style",'margin-top:-185px');
 			$('#tags-show-'+tag_node, parent).show(600);
 			selector.addClass('selected');
 		}else{
@@ -36,7 +36,7 @@ Drupal.behaviors.tagsEngine = function(){
     reset_buttons_container(container);
     $(this).parent().hide(500, function(i){
 	  $(i).parent().remove();
-	  $('.album-control').attr("style",'margin-top:-83px');
+	  //$('.album-control').attr("style",'margin-top:-83px');
 	});
     	
   });
@@ -57,7 +57,7 @@ Drupal.behaviors.tagsEngine = function(){
 	  	if (data){
 		  	$.get(Drupal.settings.basePath+"tags/profile/save",{nid:tag_node},function(data){
 				if (data){
-					$('.album-control').attr("style",'margin-top:-83px');
+					//$('.album-control').attr("style",'margin-top:-83px');
 				    $('#tags-show-'+tag_node, parent).html('<span class="tags-success">The tags were added to your item and profile successfully.</span>').fadeIn(function(){
 					
 					    setTimeout(function(){
@@ -131,7 +131,7 @@ function reset_buttons_container(container){
 	$('.iconchange',container).each(function(i){
 	  $(this).removeClass('selected');	
 	  $('a ', this).removeClass('selected');
-	  $('.album-control').attr("style",'margin-top:-83px');	
+	  //$('.album-control').attr("style",'margin-top:-83px');	
 	});
 }
 
