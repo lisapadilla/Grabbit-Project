@@ -34,35 +34,50 @@ $(document).ready(function() {
 	
 	$('.grabbit-container .all-friends-button').click(function(i){
 		$('.grabbit-container .views-row').show();
+		$(this).addClass('selected');
+		$('.g-friends-button').removeClass('selected');
 		i.preventDefault();
+		
 	});
 	
 	$('.grabbit-container .g-friends-button').click(function(i){
 		$('.grabbit-container .views-row').hide();
 		$('.grabbit-container .grabbit-fr').show('slow');
+		$(this).addClass('selected');
+		$('.all-friends-button').removeClass('selected');
 		i.preventDefault();
 	});
 	
 	$('.facebook-container .all-friends-button').click(function(i){
 		$('.facebook-container .views-row').show();
 		i.preventDefault();
+		$(this).addClass('selected');
+		$('.g-friends-button').removeClass('selected');
 	});
 	
 	$('.facebook-container .g-friends-button').click(function(i){
 		$('.facebook-container .views-row').hide();
 		$('.facebook-container .joined-grabbit').show('slow');
 		i.preventDefault();
+		$(this).addClass('selected');
+		$('.all-friends-button').removeClass('selected');
 	});
 	
 	$('.twitter-container .all-friends-button').click(function(i){
 		$('.twitter-container .views-row').show();
 		i.preventDefault();
+		$(this).addClass('selected');
+		$('.g-friends-button').removeClass('selected');
+		
 	});
 	
 	$('.twitter-container .g-friends-button').click(function(i){
 		$('.twitter-container .views-row').hide();
 		$('.twitter-container .joined-grabbit').show('slow');
 		i.preventDefault();
+		$(this).addClass('selected');
+		$('.all-friends-button').removeClass('selected');
+		
 	});
 	
 	
