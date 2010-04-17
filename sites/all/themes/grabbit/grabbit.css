@@ -5046,3 +5046,6 @@ div#edit-users-wrapper.form-item
 {
 	margin-left: -5px;
 }
+.messages.error{
+	display:none;
+}
