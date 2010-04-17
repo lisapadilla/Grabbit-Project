@@ -206,9 +206,10 @@ function grabbit_landing_display_twitter($node){
 	$msg = $node->body;
 	
 	preg_match("/(http:\/\/twitpic\.com\/)(.*$)/i",$msg,$matches);
-	print_r($matches);
+	
 	if(is_array($matches)){
-		$twitimage='<img src="http://twitpic.com/show/full/'.$matches[2].'" />';
+		$string = substr($matches[2],0,6);
+		$twitimage='<img src="http://twitpic.com/show/full/'.$string.'" />';
 	}
 	
 	$msg_formatted=get_url_msg_formatted($msg,$node);
