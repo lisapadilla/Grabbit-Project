@@ -10,7 +10,7 @@ Drupal.behaviors.tagsEngine = function(){
 	
 	if ( $(this).hasClass('selected') )
     {
-      $(this).toggleClass('available');
+      $('.url-deal a').removeClass('selected');
       $('.close-tags').click();
       return 0;
     }
