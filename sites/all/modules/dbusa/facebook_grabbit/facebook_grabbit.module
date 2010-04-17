@@ -168,6 +168,9 @@ function facebook_grabbit_update_form($form_state){
 	}
 	
 	if($tw || $fb || $ct){
+		
+		drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/non_loged.js', $type = 'module');	
+		
 		$form['status'] = array(
 		    '#type' => 'textarea',
 		    '#size' => 60,
