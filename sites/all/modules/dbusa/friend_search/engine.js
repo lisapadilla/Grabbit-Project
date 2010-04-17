@@ -33,11 +33,11 @@ $(document).ready(function() {
 	});
 	
 	$('.grabbit-container .all-friends-button').click(function(){
-		$('.views-row').show('slow');
+		$('.views-row').show();
 	});
 	
 	$('.grabbit-container .g-friends-button').click(function(){
-		$('.views-row').hide('fast');
+		$('.views-row').hide();
 		$('.grabbit-fr').show('slow');
 	});
 	
