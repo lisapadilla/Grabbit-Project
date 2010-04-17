@@ -1473,7 +1473,13 @@ function grabbit_me_get_my_profile(){
 		  $services .= ' <img src="'.base_path().drupal_get_path('module', 'grabbit_me').'/profile_rss.png" />';
 	  
 	}
-	$my_image=theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
+	if($profile->field_profile_picture[0]['filepath']){
+		$my_image=theme('imagecache', 'me_image', $profile->field_profile_picture[0]['filepath'], 'My Image');
+		
+	}else{
+		$my_image='<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" />';
+		
+	}
 	
 	if(!$you)
       $edit='<a href="#" class="edit-me-place no-confirm-place">Edit</a>';
