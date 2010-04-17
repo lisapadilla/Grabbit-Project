@@ -1,8 +1,5 @@
 /* @override 
 	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M
-	http://grabbit.biz/sites/default/files/css/css_7051b96d095d006f2500f7d5d9674d77.css
-	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/html-elements.css?M
-	http://daniloblackusa.net/grabbit/modules/system/system.css?M
 */
 /* $Id: zen.css,v 1.14.2.1 2009/02/13 07:46:04 johnalbin Exp $ */
 
@@ -1271,6 +1268,11 @@ p#queuestatus
 .suser-panels
 {
 	border-bottom: 1px solid #E6EAED;
+}
+.section-favorites .suser-panels
+{
+	overflow: visible;
+	min-height: 50px;
 }
 .user-panel
 {
@@ -2605,7 +2607,11 @@ ul.dropdown li:hover ul {
 	padding-left: 48px;
 	background: url(images/conejillo.gif) no-repeat;
 }
-.messages-status-updates, #status-custom-messages .messages{
+.messages-status-updates, #status-custom-messages .messages,
+.no-favs,
+.tw-container-inner,
+.page-user-me-myfriends-received .view-empty
+{
   background: #A9CB02;
   color: #000000;
   font-size: 12px;
@@ -2613,6 +2619,13 @@ ul.dropdown li:hover ul {
   margin-bottom: 0px;
   font-weight: bold;
   padding: 5px 10px;
+}
+.no-favs,
+.tw-container-inner,
+.page-user-me-myfriends-received .view-empty
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 #status-custom-messages .messages{
 	margin:0px;
@@ -3854,6 +3867,7 @@ div.navbar
 #removing-fb, #removing-tw
 {
 	margin-top: 10px;
+	clear: both;
 }
 #removing-fb a, #removing-tw a
 {
