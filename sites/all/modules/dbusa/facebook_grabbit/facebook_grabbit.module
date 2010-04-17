@@ -168,6 +168,8 @@ function facebook_grabbit_update_form($form_state){
 	}
 	
 	if($tw || $fb || $ct){
+		
+		
 		$form['status'] = array(
 		    '#type' => 'textarea',
 		    '#size' => 60,
@@ -200,6 +202,8 @@ function facebook_grabbit_update_form($form_state){
 		
 		$form['tags'] = array(
 		    '#type' => 'hidden');
+	}else{
+		drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/non_loged.js', $type = 'module');	
 	}
 	
 	    //create status form hook
