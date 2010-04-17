@@ -4912,6 +4912,13 @@ a.album-next{
 	width: 20px;
 	height: 20px;
 }
+
+.node-type-media #main .flag-bookmarks a.flagged,
+.node-type-news #main .flag-bookmarks a.flagged,
+.section-resource #main .flag-bookmarks a.flagged
+{
+	background-image: url(images/btns/art_fav_act.gif);
+}
 .node-type-media #main a.bring-tags,
 .node-type-news #main a.bring-tags,
 .section-resource #main a.bring-tags
