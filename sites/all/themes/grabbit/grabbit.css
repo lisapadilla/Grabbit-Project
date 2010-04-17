@@ -1199,13 +1199,15 @@ p#queuestatus
   margin: 0px 10px 10px 0px;
 }
 .page-user-me-myfriends #content-inner .frostin-wrapper img,
-.page-user-me-myfriends-twitter-friends #content-inner .frostin-wrapper img
+.page-user-me-myfriends-twitter-friends #content-inner .frostin-wrapper img,
+.page-user-me-myfriends-facebook-friends #content-inner .frostin-wrapper img
 {
 	float: none;
 	margin-bottom: 7px;
 }
 .page-user-me-myfriends #content-inner .frostin-wrapper,
-.page-user-me-myfriends-twitter-friends #content-inner .frostin-wrapper
+.page-user-me-myfriends-twitter-friends #content-inner .frostin-wrapper,
+.page-user-me-myfriends-facebook-friends #content-inner .frostin-wrapper
 {
 	float: left;
 }
