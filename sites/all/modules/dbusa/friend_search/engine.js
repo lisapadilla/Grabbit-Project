@@ -32,4 +32,13 @@ $(document).ready(function() {
 	  }  		  
 	});
 	
+	$('.grabbit-container .all-friends-button').click(function(){
+		$('.views-row').show('slow');
+	});
+	
+	$('.grabbit-container .g-friends-button').click(function(){
+		$('.views-row').hide('fast');
+		$('.grabbit-fr').show('slow');
+	});
+	
 });
