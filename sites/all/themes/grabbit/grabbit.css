@@ -4130,7 +4130,8 @@ margin-right: 30px;
 	margin-bottom:13px;	
 }
 
-.node-type-news .tags-engine
+.node-type-news .tags-engine,
+.node-type-media .tags-engine
 {
 	margin-bottom: 0;
 }
@@ -4474,12 +4475,16 @@ margin-right: 30px;
 	font-weight: bold;
 	color: #385691;
 }
-.node-type-media #comments,
 .node-type-news #comments,
 .section-resource .facebook-form
 {
 	padding: 0 78px;
 	margin: 0;
+}
+.node-type-media #comments
+{
+	padding: 0 78px;
+	margin-top: 20px;
 }
 .node-type-media #comments h2.title,
 .node-type-news #comments h2.title,
