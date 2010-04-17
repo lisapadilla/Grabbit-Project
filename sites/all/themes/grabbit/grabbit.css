@@ -4900,6 +4900,12 @@ a.album-next{
 	width: 20px;
 	height: 20px;
 }
+.node-type-media #main .url-deal a.available,
+.node-type-news #main .url-deal a.available,
+.section-resource #main .url-deal a.available
+{
+	background: url(images/btns/art_deals_act.gif) no-repeat;
+}
 .section-resource #main .url-deal a
 {
 	margin-top: 0px;
@@ -4911,6 +4917,23 @@ a.album-next{
 	background-image: url(images/btns/art_fav.gif);
 	width: 20px;
 	height: 20px;
+}
+
+.section-favorites .invite
+{
+	color: #999999;
+	font-size: 11px;
+}
+.section-favorites .joined-action
+{
+	font-style:italic;
+text-decoration:underline;
+color: #6699FF;
+}
+
+.section-resource .frost
+{
+display:none;
 }
 
 .node-type-media #main .flag-bookmarks a.flagged,
