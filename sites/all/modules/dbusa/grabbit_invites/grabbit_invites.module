@@ -185,7 +185,7 @@ function grabbit_invites_check_facebook_user($facebook){
 			  case 'TW_BOTH':
 			    $friends='<strong>You are grabbit friends!</strong>';
 			    $action ='&raquo;';
-			    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
+			    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends')) .'</span>';
 			    $class = 'grabbit-friends';
 			    if(grabbit_favorites_get('friend',$amigo->uid)){
 				  	$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite-remove friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';	
@@ -200,11 +200,11 @@ function grabbit_invites_check_facebook_user($facebook){
 			  case 'TW_2_TO_1_P':
 			    $friends='He requested you to be friends in grabbit!';
 			    $action = '&raquo;';
-			    $action .= l('accept friend request', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+			    $action .= l('accept friend request', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends'));
 			    $class = 'accept-pending';
 			  break;	
 			  default:
-		        $friends=l('send friend request', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+		        $friends=l('send friend request', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends'));
 		        $class = 'no-request';
 			  break;
 			  }
@@ -236,7 +236,7 @@ function grabbit_invites_check_twitter_user( $twitter )
 		  case 'TW_BOTH':
 		    $friends='<strong>You are grabbit friends!</strong>';
 		    $action ='&raquo;';
-		    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
+		    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends')) .'</span>';
 		    $class = 'grabbit-friends';
 		    if(grabbit_favorites_get('friend',$amigo->uid)){
 			  	$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite-remove friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';	
@@ -251,11 +251,11 @@ function grabbit_invites_check_twitter_user( $twitter )
 		  case 'TW_2_TO_1_P':
 		    $friends='He requested you to be friends in grabbit!';
 		    $action = '&raquo;';
-		    $action .= l('accept friend request', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+		    $action .= l('accept friend request', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends'));
 		    $class= 'accept-pending';
 		  break;	
 		  default:
-	        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+	        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends'));
 	        $class='no-request';
 		  break;
 		  }
@@ -284,7 +284,7 @@ function grabbit_invites_get_contacts(){
 				  case 'TW_BOTH':
 				    $friends='<strong>You are grabbit friends!</strong>';
 				    $action ='&raquo;';
-				    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends')) .'</span>';
+				    $action .='<span class="joined-action">'.l('remove from friends', 'friendlist/delete/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends')) .'</span>';
 				    $class = 'grabbit-friends';
 				    if(grabbit_favorites_get('friend',$amigo->uid)){
 					  	$favs='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite-remove friend-action" uid="'.$amigo->uid.'">Add to favorites</a></span>';	
@@ -301,7 +301,7 @@ function grabbit_invites_get_contacts(){
 				    $class = 'accept-pending';
 				  break;	
 				  default:
-			        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends/grabbit_friends'));
+			        $friends=l('Send friend request!', 'friendlist/add/'.$amigo->uid.'/1',array('query'=>'destination=user/me/myfriends'));
 			        $class = 'no-request';
 				  break;
 				  }
