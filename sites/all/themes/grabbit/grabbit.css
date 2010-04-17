@@ -5053,7 +5053,11 @@ margin-top: 4px;
 {
 color: #3399FF;
 }
-.view-friendlist-manage-twoway.view-display-id-page_3 .views-field-action-link-requester
+.view-friendlist-manage-twoway.view-display-id-page_3 .views-field-action-link-requester .friendlist-user-links
+{
+	margin-left: 20px;
+}
+.view-friendlist-manage-twoway.view-display-id-page_3 .views-field-action-link-requester a
 {
 font-size:11px;
 font-style:italic;
