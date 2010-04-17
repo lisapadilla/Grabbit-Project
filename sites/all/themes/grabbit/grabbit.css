@@ -4728,11 +4728,7 @@ display: none;
 	margin-left:190px;
 }
 .section-album .album-control{
-	display:inline;
-	margin-left:410px;
-	margin-top:-40px;
 	position:absolute;
-	width:122px;
 }
 .node-type-media .album-control{
 	right: 15px;
@@ -4787,7 +4783,7 @@ a.album-next{
 	width:120px;
 }
 .logged-in.section-album .album-control{
-	margin-top:-60px;
+	margin-top: 0px;
 }
 .album-main-controllers {
 	margin-left:300px;
@@ -4908,9 +4904,6 @@ a.album-next{
 }
 .controls-links-front{
 	margin-left:255px;
-}
-.logged-in.section-album .album-control{
-	margin-top:-84px;
 }
 
 .logged-in .links_stream_media{
