@@ -523,7 +523,7 @@ function friend_search_theme_a_friend($friend,$row){
 		}else{
 			$link .='<span class="flag-wrapper flag-bookmarks"><a href="JavaScript:void(0);" class="friend_favorite friend-action" uid="'.$friend->uid.'">Remove from favorites</a></span>';
 		}
-		$class="joined-grabbit";
+		$class="joined-grabbit grabbit-fr";
 		$link_class='grabbit-friends';			
 	  }
 	
