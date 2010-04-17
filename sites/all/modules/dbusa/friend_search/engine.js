@@ -54,4 +54,15 @@ $(document).ready(function() {
 		i.preventDefault();
 	});
 	
+	$('.twitter-container .all-friends-button').click(function(i){
+		$('.twitter-container .views-row').show();
+		i.preventDefault();
+	});
+	
+	$('.twitter-container .g-friends-button').click(function(i){
+		$('.twitter-container .views-row').hide();
+		$('.twitter-container .joined-grabbit').show('slow');
+		i.preventDefault();
+	});
+	
 });
