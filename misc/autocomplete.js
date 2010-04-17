@@ -288,7 +288,7 @@ Drupal.ACDB.prototype.search = function (searchString) {
         }
       },
       error: function (xmlhttp) {
-        alert(Drupal.ahahError(xmlhttp, db.uri));
+       // alert(Drupal.ahahError(xmlhttp, db.uri));
       }
     });
   }, this.delay);
