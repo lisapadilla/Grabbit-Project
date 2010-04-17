@@ -4727,7 +4727,14 @@ display: none;
 #user-register .captcha img{
 	margin-left:190px;
 }
-.album-control{
+.section-album .album-control{
+	display:inline;
+	margin-left:410px;
+	margin-top:-40px;
+	position:absolute;
+	width:122px;
+}
+.node-type-media .album-control{
 	right: 15px;
 	top: 11px;
 	position:absolute;
@@ -4902,7 +4909,9 @@ a.album-next{
 .controls-links-front{
 	margin-left:255px;
 }
-
+.logged-in.section-album .album-control{
+	margin-top:-84px;
+}
 
 .logged-in .links_stream_media{
 	margin-right:15px;
