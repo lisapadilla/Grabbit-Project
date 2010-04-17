@@ -215,7 +215,6 @@ function grabbit_landing_display_twitter($node){
 	if($twitimage=='<img src="http://twitpic.com/show/full/" />'){
 		$twitimage='';
 	}
-	$twitimage='';
 	$msg_formatted=get_url_msg_formatted($msg,$node);
 	
 	$screen_name=str_replace('http://www.twitter.com/','',$node->field_twitter_url[0]['value']);
@@ -264,7 +263,6 @@ global $base_path;
 	if($twitimage=='<img src="http://twitpic.com/show/full/" />'){
 		$twitimage='';
 	}
-	$twitimage='';
 	$profile=content_profile_load('profile', $node->uid);
 	
 	$msg_formatted=get_url_msg_formatted($msg,$node);
