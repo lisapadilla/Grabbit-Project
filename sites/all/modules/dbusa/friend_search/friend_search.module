@@ -665,6 +665,7 @@ function friend_search_preprocess_views_view_fields(&$vars) {
 		$new_content=str_replace('</a>','',$vars['fields']['field_profile_picture_fid']->content);
 	    $vars['fields']['field_profile_picture_fid']->content=$new_content.'<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" /></a>';
 	  }else{
+		  print_r($vars['fields']['field_profile_picture_fid']);
 		  $vars['fields']['field_profile_picture_fid']->content='<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" />';
 	}
     }
