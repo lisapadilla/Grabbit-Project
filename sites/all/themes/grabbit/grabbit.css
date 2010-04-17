@@ -4932,6 +4932,11 @@ a.album-next{
 	height: 30px !important;
 	margin-top: -10px !important;
 }
+.section-resource .facebook-date,
+.section-resource .twitter-date
+{
+	float: none !important;
+}
 .section-resource #main .url-deal a
 {
 	margin-top: 0px;
