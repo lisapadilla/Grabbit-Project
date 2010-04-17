@@ -10,7 +10,7 @@ Drupal.behaviors.grabbitDeleteFacebook = function (context) {
 	$('.views-field-action-link-requestee').html('<img src="'+Drupal.settings.basePath+'sites/all/modules/dbusa/facebook_grabbit/working.gif"> Removing... this may take several minutes, do not close this window. please wait...');
 	$.get(Drupal.settings.basePath+"facebook/remove",{panel:panel},function(data){
 		if (data){
-			$('.views-field-action-link-requestee').html('Your facebook account has been removed');
+			location.reload();
 			return false;
 		}else{
 			$('.views-field-action-link-requestee').html('There was a problem connecting to the server, please try again latter');
