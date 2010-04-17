@@ -1,6 +1,4 @@
-/* @override 
-	http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M
-*/
+/* @override http://daniloblackusa.net/grabbit/sites/all/themes/grabbit/grabbit.css?M */
 /* $Id: zen.css,v 1.14.2.1 2009/02/13 07:46:04 johnalbin Exp $ */
 
 /*
@@ -5033,6 +5031,35 @@ a.album-next{
 
 a.album-prev.disabled{
   color:#E2E4E7;
+}
+
+.view-friendlist-manage-twoway.view-display-id-page_3
+{
+font-size: 13px;
+line-height: 17px;
+}
+.view-friendlist-manage-twoway.view-display-id-page_3 .views-field-name
+{
+font-weight: bold;
+}
+.view-friendlist-manage-twoway.view-display-id-page_3 .views-field-create-time
+{
+color:#999999;
+font-size:10px;
+line-height:11px;
+margin-top: 4px;
+}
+.view-friendlist-manage-twoway.view-display-id-page_3 a
+{
+color: #3399FF;
+}
+.view-friendlist-manage-twoway.view-display-id-page_3 .views-field-action-link-requester
+{
+clear:both;
+font-size:11px;
+font-style:italic;
+text-decoration:underline;
+color: #3399FF;
 }
 
 a.album-next.disabled{
