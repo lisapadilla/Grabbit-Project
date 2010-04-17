@@ -32,13 +32,15 @@ $(document).ready(function() {
 	  }  		  
 	});
 	
-	$('.grabbit-container .all-friends-button').click(function(){
-		$('.grabbit-container .views-row').show();
+	$('.grabbit-container .all-friends-button').click(function(i){
+		$('.grabbit-container .views-row').show('fast');
+		i.preventDefault();
 	});
 	
-	$('.grabbit-container .g-friends-button').click(function(){
+	$('.grabbit-container .g-friends-button').click(function(i){
 		$('.grabbit-container .views-row').hide();
 		$('.grabbit-container .grabbit-fr').show('slow');
+		i.preventDefault();
 	});
 	
 });
