@@ -439,24 +439,13 @@ function grabbit_panels_source_form($form,$panel_id){
 				'#default_value' => $panels['show_imap']
 			    );
 	
-	$form['blogs'] = array(
-	    '#type'=> 'checkbox',
-		'#title' => t('Blogs'),
-		'#default_value' => $panels['blogs']
-	    );
-
-	$form['news'] = array(
-	    '#type'=> 'checkbox',
-		'#title' => t('News'),
-		'#default_value' => $panels['news']
-	    );
 	
-	$form['favorites'] = array(
+	/*$form['favorites'] = array(
 	    '#type'=> 'checkbox',
 		'#title' => t('Only Favorites'),
 		'#default_value' => $panels['favorites']
 	    );
-	
+	*/
 	$form['feeds'] = array(
 	    '#type'=> 'checkboxes',
 	    '#title'=>'My Feeds',
@@ -539,24 +528,13 @@ function grabbit_panels_source_create_form($form,$panel_id){
 					'#default_value' => $panels['show_imap']
 				    );
 	
-	$form['blogs'] = array(
-	    '#type'=> 'checkbox',
-		'#title' => t('Blogs'),
-		'#default_value' => $panels['blogs']
-	    );
-
-	$form['news'] = array(
-	    '#type'=> 'checkbox',
-		'#title' => t('News'),
-		'#default_value' => $panels['news']
-	    );
 	
-	$form['favorites'] = array(
+	/*$form['favorites'] = array(
 	    '#type'=> 'checkbox',
 		'#title' => t('Only Favorites'),
 		'#default_value' => $panels['favorites']
 	    );
-	
+	*/
 	$form['feeds'] = array(
 	    '#type'=> 'checkboxes',
 	    '#title'=>'My Feeds',
