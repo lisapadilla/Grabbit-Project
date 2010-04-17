@@ -94,7 +94,7 @@ function facebook_grabbit_update_form($form_state){
 		if($profile->field_profile_picture[0]['filepath']){
 		  $user_image=theme('imagecache', 'friend_thumbnail', $profile->field_profile_picture[0]['filepath'], 'My Image');	
 		}else{
-		  $user_image=theme('imagecache', 'friend_thumbnail', 'sites/all/themes/grabbit/images/default/default_profile.jpg', 'My Image');
+		  $user_image='<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" />';
 		}
 		
 		$data = '<div class="user-data">
