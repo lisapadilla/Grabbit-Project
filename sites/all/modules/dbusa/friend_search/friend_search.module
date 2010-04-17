@@ -192,7 +192,7 @@ function friend_search_show_friends_facebook(){
 						}
 		}
 									
-	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container">'.$facebooks.'<div class="grabb-control-buttons"><a href="#" class="all-friends-button">All friends</a><a href="#" class="g-friends-button">Grabbit friends</a></div></div></div>';
+	    $output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="grabb-control-buttons"><a href="#" class="all-friends-button">All friends</a><a href="#" class="g-friends-button">Grabbit friends</a></div>'.$facebooks.'</div></div>';
 	  }
 	}catch(FacebookRestClientException $e){
 		$output .='<div class="facebook-list"><h2>Facebook Friends</h2><div class="facebook-container"><div class="tw-container-inner">You have no FB account yet</div></div></div>';
@@ -348,7 +348,7 @@ function friend_search_show_friends_twitter(){
 	        drupal_set_message("Ooops! some strange error with twitter, maybe fail wale!","error");
 	     }
 	
-	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container">'.$twitters.'<div class="grabb-control-buttons"><a href="#" class="all-friends-button">All friends</a><a href="#" class="g-friends-button">Grabbit friends</a></div></div></div>';	
+	  $output .='<div class="twitter-list"><h2>Twitter Following</h2><div class="twitter-container"><div class="grabb-control-buttons"><a href="#" class="all-friends-button">All friends</a><a href="#" class="g-friends-button">Grabbit friends</a></div>'.$twitters.'</div></div>';	
 	}else{
 		$output .='<div class="facebook-list"><div class="facebook-container"><div class="tw-container-inner">You have no Twitter account yet</div></div></div>';
 	}
