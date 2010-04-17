@@ -313,6 +313,8 @@ function friend_search_show_friends_twitter(){
 		include_once(drupal_get_path('module', $module_name).'/includes/secret.php');
 		
 
+		drupal_add_js(drupal_get_path('module', 'friend_search').'/engine.js', $type = 'module');
+		
 		try{
         	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 			$twitter_account = oauth_twitter_get_uid($user->uid);
