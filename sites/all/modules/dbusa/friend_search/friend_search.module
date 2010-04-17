@@ -665,7 +665,7 @@ function friend_search_preprocess_views_view_fields(&$vars) {
 		$new_content=str_replace('</a>','',$vars['fields']['field_profile_picture_fid']->content);
 	    $vars['fields']['field_profile_picture_fid']->content=$new_content.'<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" /></a>';
 	  }else{
-		  if($vars['fields']['field_profile_picture_fid']->content==='http://grabbit.biz/sites/default/files/imagecache/friend_thumbnail/imagefield_default_images/usr3.jpg')
+		  if($vars['fields']['field_profile_picture_fid']->content=='http://grabbit.biz/sites/default/files/imagecache/friend_thumbnail/imagefield_default_images/usr3.jpg')
 		    $vars['fields']['field_profile_picture_fid']->content='<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" />';
 	}
     }
