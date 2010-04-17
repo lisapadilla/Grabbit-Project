@@ -33,13 +33,24 @@ $(document).ready(function() {
 	});
 	
 	$('.grabbit-container .all-friends-button').click(function(i){
-		$('.grabbit-container .views-row').show('fast');
+		$('.grabbit-container .views-row').show();
 		i.preventDefault();
 	});
 	
 	$('.grabbit-container .g-friends-button').click(function(i){
 		$('.grabbit-container .views-row').hide();
 		$('.grabbit-container .grabbit-fr').show('slow');
+		i.preventDefault();
+	});
+	
+	$('.facebook-container .all-friends-button').click(function(i){
+		$('.facebook-container .views-row').show();
+		i.preventDefault();
+	});
+	
+	$('.facebook-container .g-friends-button').click(function(i){
+		$('.facebook-container .views-row').hide();
+		$('.facebook-container .joined-grabbit').show('slow');
 		i.preventDefault();
 	});
 	
