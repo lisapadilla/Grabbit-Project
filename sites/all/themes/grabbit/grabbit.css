@@ -3552,9 +3552,18 @@ div.navbar
 #rss-controls span{
   display: block
 }
-.section-user .grabbit-container .grabb-control-buttons
+.section-user #rss-controls .grabb-control-buttons span
 {
 	display: inline;
+}
+.section-user #rss-controls .grabb-control-buttons span a
+{
+	color: #B9C1C7;
+}
+.section-user #rss-controls .grabb-control-buttons span .selected
+{
+	display: inline;
+	color: #666666;
 }
 .section-user #rss-controls
 {
