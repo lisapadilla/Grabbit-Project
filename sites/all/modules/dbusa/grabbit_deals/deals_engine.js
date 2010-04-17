@@ -10,7 +10,7 @@ Drupal.behaviors.deals = function()
     i.preventDefault();
     if ( $(this).hasClass('selected') )
     {
-	  $(this).removeClass('selected');
+      $(this).toggleClass('available');
       $('.deals-display .close').click();
     }
     else
@@ -22,7 +22,7 @@ Drupal.behaviors.deals = function()
       $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
          if (data)
          {
-           //anch.toggleClass('available');
+           anch.toggleClass('available');
            $('.album-control').hide();
   	       $('#tags-show-'+nid, parent).hide();
              $('#tags-show-'+nid, parent).html(data);

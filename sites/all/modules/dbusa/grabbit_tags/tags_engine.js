@@ -7,10 +7,9 @@ Drupal.behaviors.tagsEngine = function(){
   }
 
   $('.bring-tags').live('click',function(i){
-	
+	$('.url-deal a').removeClass('selected');
 	if ( $(this).hasClass('selected') )
     {
-      $('.url-deal a').removeClass('selected');
       $('.close-tags').click();
       return 0;
     }
