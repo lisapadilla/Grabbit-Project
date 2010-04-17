@@ -4130,9 +4130,20 @@ margin-right: 30px;
 	margin-bottom:13px;	
 }
 
-.node-type-news .tags-engine
+.node-type-news .tags-engine,
+.node-type-media .tags-engine
 {
 	margin-bottom: 0;
+}
+.section-resource .tags-engine
+{
+	margin-bottom: 40px;
+}
+
+.section-resource #main .facebook-post-header,
+.section-resource #main .twitter-post
+{
+	margin-top: 40px;
 }
 
 .tags-success{
@@ -4474,12 +4485,16 @@ margin-right: 30px;
 	font-weight: bold;
 	color: #385691;
 }
-.node-type-media #comments,
 .node-type-news #comments,
 .section-resource .facebook-form
 {
 	padding: 0 78px;
 	margin: 0;
+}
+.node-type-media #comments
+{
+	padding: 0 78px;
+	margin-top: 20px;
 }
 .node-type-media #comments h2.title,
 .node-type-news #comments h2.title,
@@ -4831,11 +4846,10 @@ a.album-next{
 {
 	float: right;
 	margin-right:15px;
-	margin-top:-27px;
+	margin-top: -30px;
 }
 .section-resource #main h1.title
 {
-	margin-bottom: 40px;
 	border-bottom: 1px solid #E6EAED;
 }
 #scroll-album .item a{
@@ -5014,12 +5028,6 @@ display:none;
 	padding:15px 15px 0px;
 	font-size:18px;
 	color:#385291;
-}
-.section-resource #main #article-news
-{
-	position: absolute;
-	right: 25px;
-	top: -3px;
 }
 .node-type-news #main #article-news a
 {
