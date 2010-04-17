@@ -393,6 +393,7 @@ function facebook_grabbit_remove(){
 		      $count++;
 		    }
 		    drupal_get_messages($type = NULL, $clear_queue = TRUE);
+		    drupal_set_message("Your facebook account has been removed.");
 		    print "finished";
 
 }
