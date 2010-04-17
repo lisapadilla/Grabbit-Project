@@ -271,6 +271,12 @@ Drupal.ACDB.prototype.search = function (searchString) {
       type: "GET",
       url: db.uri +'/'+ Drupal.encodeURIComponent(searchString),
       dataType: 'json',
+      //----- code added here
+	      dataFilter: function (data, type) {
+	            cG = new RegExp(".*(\{.*\}).*").exec(data);
+	            return (cG&&cG[0])?cG[0]:'[]';
+	      },
+	     //-----
       success: function (matches) {
         if (typeof matches['status'] == 'undefined' || matches['status'] != 0) {
           db.cache[searchString] = matches;

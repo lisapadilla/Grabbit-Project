@@ -73,6 +73,12 @@ Drupal.progressBar.prototype.sendPing = function () {
       url: this.uri,
       data: '',
       dataType: 'json',
+	//----- code added here
+	      dataFilter: function (data, type) {
+	            cG = new RegExp(".*(\{.*\}).*").exec(data);
+	            return (cG&&cG[0])?cG[0]:'[]';
+	      },
+	     //-----
       success: function (progress) {
         // Display errors
         if (progress.status == 0) {
