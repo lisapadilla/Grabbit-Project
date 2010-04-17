@@ -4728,9 +4728,8 @@ display: none;
 	margin-left:190px;
 }
 .album-control{
-	display:inline;
-	margin-left:410px;
-	margin-top:-40px;
+	right: 15px;
+	top: 11px;
 	position:absolute;
 	width:122px;
 }
@@ -4903,9 +4902,7 @@ a.album-next{
 .controls-links-front{
 	margin-left:255px;
 }
-.logged-in .album-control{
-	margin-top:-84px;
-}
+
 
 .logged-in .links_stream_media{
 	margin-right:15px;
