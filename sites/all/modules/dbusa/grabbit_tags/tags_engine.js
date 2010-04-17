@@ -1,7 +1,11 @@
 Drupal.behaviors.tagsEngine = function(){
   
-  var prevnext = $('.album-control').detach();
-  $('.backto').after(prevnext);
+  var b = $('.backto');
+  if (b)
+  {
+    var prevnext = $('.album-control').detach();
+    b.after(prevnext);
+  }
 
   $('.bring-tags').live('click',function(i){
 	
