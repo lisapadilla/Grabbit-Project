@@ -664,6 +664,8 @@ function friend_search_preprocess_views_view_fields(&$vars) {
 	  if(stristr($vars['fields']['field_profile_picture_fid']->content, '<img') === FALSE){
 		$new_content=str_replace('</a>','',$vars['fields']['field_profile_picture_fid']->content);
 	    $vars['fields']['field_profile_picture_fid']->content=$new_content.'<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" /></a>';
-	  }
+	  }else{
+		  $vars['fields']['field_profile_picture_fid']->content='<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" />';
+	}
     }
 }
