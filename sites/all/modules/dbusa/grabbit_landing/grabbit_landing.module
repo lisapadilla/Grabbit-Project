@@ -257,7 +257,7 @@ global $base_path;
 		$twitimage='<img src="http://twitpic.com/show/full/'.$matches[2].'" />';
 	}
 	
-	if($twitimage=='<img src="http://twitpic.com/show/full/" />'){
+	if($twitimage=='<img src="http://twitpic.com/show/full/">'){
 		$twitimage='';
 	}
 	
