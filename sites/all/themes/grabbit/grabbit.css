@@ -3552,15 +3552,15 @@ div.navbar
 #rss-controls span{
   display: block
 }
-.section-user #rss-controls .grabb-control-buttons span
+.section-user #rss-controls span
 {
 	display: inline;
 }
-.section-user #rss-controls .grabb-control-buttons span a
+.section-user #rss-controls span a
 {
 	color: #B9C1C7;
 }
-.section-user #rss-controls .grabb-control-buttons span .selected
+.section-user #rss-controls span .selected
 {
 	display: inline;
 	color: #666666;
