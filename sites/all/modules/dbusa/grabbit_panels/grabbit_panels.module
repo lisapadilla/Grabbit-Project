@@ -121,6 +121,7 @@ function grabbit_panels_get_favorites(){
 		$resultados = facebook_grabbit_theme_results($twitface);
             
 			$output .='<div class="panels-controllers">
+			           <div class="title-inline">'.$user->name.'\'s favorites</div>
 			           <div id="panels-pager" class="panels-pager"></div>
 			           <a href="JavaScript:void(0);" class="move-left"></a>
 			           <a href="JavaScript:void(0);" class="move-right"></a>
@@ -142,6 +143,7 @@ function grabbit_panels_get_favorites(){
 	$resultados = facebook_grabbit_theme_results($twitface);
 	
 		$output .='<div class="panels-controllers">
+		           <div class="title-inline">'.$user->name.'\'s favorites</div>
 		           <div id="panels-pager" class="panels-pager"></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
