@@ -10,7 +10,7 @@ Drupal.behaviors.deals = function()
     i.preventDefault();
     if ( $(this).hasClass('selected') )
     {
-      $(this).toggleClass('available');
+	  $(this).removeClass('selected');
       $('.deals-display .close').click();
     }
     else
