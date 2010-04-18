@@ -3907,8 +3907,9 @@ div.navbar
 }
 #removing-fb, #removing-tw
 {
-	margin-top: 10px;
-	clear: both;
+	position:absolute;
+	right:25px;
+	top:43px;
 }
 #removing-fb a, #removing-tw a
 {
