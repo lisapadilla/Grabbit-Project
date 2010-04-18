@@ -1245,6 +1245,18 @@ p#queuestatus
   float: left;
 }
 
+.page-user-me-edit-add-imap h2 a + a,
+.page-user-me-edit-add-gmail h2 a + a {
+  display: block;
+  width: 57px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
+  background: url(/sites/all/themes/grabbit/images/remove_sust.gif) 0 0 no-repeat;
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+}
 
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
