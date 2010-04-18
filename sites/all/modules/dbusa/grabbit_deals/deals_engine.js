@@ -7,6 +7,7 @@ Drupal.behaviors.deals = function()
   
   // deals box behaviors
   $('.url-deal a').live('click', function(i){
+	$('.bring-tags').removeClass('selected');
     i.preventDefault();
     if ( $(this).hasClass('selected') )
     {
@@ -37,7 +38,6 @@ Drupal.behaviors.deals = function()
     var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
     reset_buttons_container(container);
     $('.album-control').show();
-    $('.bring-tags').removeClass('selected');
     $('.url-deal a').removeClass('selected');
     $(this).parent().hide(500, function(i){
 	  $(i).parent().remove();
