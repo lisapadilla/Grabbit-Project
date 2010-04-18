@@ -4697,7 +4697,7 @@ display: none;
 	color:#3399FF;
 }
 .page-user-me-myfriends .friend-action{
-	
+	margin-right: 0 !important;
 }
 .section-friendlist .friend-message-add,.section-friendlist #friendlist-ui-relation-form {
 	color:#999999;
