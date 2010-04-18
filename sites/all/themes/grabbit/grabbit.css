@@ -1891,6 +1891,7 @@ a.panel-filters{
 .section-resource .facebook-comment-text
 {
 	float: left;
+	width: 400px !important;
 }
 #panel-0 .facebook-post .facebook-comment-text
 {
@@ -4732,7 +4733,7 @@ display: none;
 }
 .node-type-media .album-control{
 	right: 15px;
-	top: 11px;
+	top: 10px;
 	position:absolute;
 	width:122px;
 }
