@@ -53,6 +53,10 @@ function grabbit_tags_display(){
 	$nid=$_GET['nid'];
 	$type=$_GET['type'];
 	
+	$keywords = grabbit_deals_extract_keywords($nid);
+		$keys= array_keys($keywords);
+		$keys = implode(', ',$keys);
+	
 	$node=node_load($nid);
 
 	if(is_array($node->tags)){
@@ -77,6 +81,7 @@ function grabbit_tags_display(){
 	  }else{
 		$text = implode(', ',$text);
 	  }
+	  $text .=' '.$keys;
 	  if($node->type!='news'){
 		$allowed='<span class="tags-block"><input type="checkbox" id="save-tags" checked="checked" /> Save tags to item.</span>';
 	  }
