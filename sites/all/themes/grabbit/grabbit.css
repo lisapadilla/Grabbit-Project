@@ -4507,6 +4507,11 @@ div.navbar
 	font-size:12px;
 	margin-top:10px;
 }
+.page-user-me-edit-add-gmail .image-deal img,
+.page-user-me-edit-add-imap .image-deal img
+{
+height:32px;
+}
 .section-resource .frost
 {
 	margin: 0 15px;
