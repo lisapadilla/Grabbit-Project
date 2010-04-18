@@ -7,10 +7,10 @@ Drupal.behaviors.deals = function()
   
   // deals box behaviors
   $('.url-deal a').live('click', function(i){
+	$('.bring-tags').removeClass('selected');
     i.preventDefault();
     if ( $(this).hasClass('selected') )
     {
-      $(this).toggleClass('available');
       $('.deals-display .close').click();
     }
     else
@@ -22,7 +22,6 @@ Drupal.behaviors.deals = function()
       $.get(Drupal.settings.basePath+"deals/display",{nid:nid},function(data){
          if (data)
          {
-           anch.toggleClass('available');
            $('.album-control').hide();
   	       $('#tags-show-'+nid, parent).hide();
              $('#tags-show-'+nid, parent).html(data);
@@ -39,6 +38,7 @@ Drupal.behaviors.deals = function()
     var container = $(this).parents('.twitter-message-stream, .facebook-post, .node-stream-news');
     reset_buttons_container(container);
     $('.album-control').show();
+    $('.url-deal a').removeClass('selected');
     $(this).parent().hide(500, function(i){
 	  $(i).parent().remove();
 	});
