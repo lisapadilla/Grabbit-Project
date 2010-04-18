@@ -1891,7 +1891,7 @@ a.panel-filters{
 .section-resource .facebook-comment-text
 {
 	float: left;
-	width: 400px;
+	width: 400px !important;
 }
 #panel-0 .facebook-post .facebook-comment-text
 {
