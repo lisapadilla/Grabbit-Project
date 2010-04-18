@@ -180,9 +180,16 @@ function grabbit_langing_facebook_update($post,$user,$target,$profiles,$comenta,
 	    </div>
   </div><!-- /facebook-post-header -->
   
-	<div class="facebook-post-sux">
+	';
+	if($attachment){
+	  	$output .='<div class="facebook-post-sux">
+
+		  <div class="facebook-attachment">'.$attachment.'</div>
+		</div>';	
+	}
 	
-	  <div class="facebook-attachment">'.$attachment.'</div></div></div>
+	
+	$output .='</div>
 	  <div class="frost clearfix">
 	    '.$comments_data.'
 	  </div>
