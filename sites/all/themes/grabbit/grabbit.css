@@ -1451,6 +1451,10 @@ p#queuestatus
   font-size: 12px;
   line-height: 15px;
 }
+.section-resource .facebook-comment-text
+{
+	color: #555E6B;
+}
 .facebook-post .facebook-comment-link,
 .section-resource .facebook-comment-link{
   color: #0073CF;
@@ -3747,7 +3751,7 @@ div.navbar
 }
 .display-comments-buttons
 {
-	margin-top: 10px;
+	margin-top: 25px;
 }
 .facebook-attach-photo
 {
@@ -4501,7 +4505,7 @@ div.navbar
 {
 	color:#3399CC;
 	font-size:12px;
-	margin-top:20px;
+	margin-top:10px;
 }
 .section-resource .frost
 {
