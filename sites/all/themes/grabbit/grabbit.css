@@ -1245,6 +1245,18 @@ p#queuestatus
   float: left;
 }
 
+.page-user-me-edit-add-imap h2 a + a,
+.page-user-me-edit-add-gmail h2 a + a {
+  display: block;
+  width: 57px;
+  height: 15px;
+  overflow: hidden;
+  text-indent: -3000px;
+  background: url(/sites/all/themes/grabbit/images/remove_sust.gif) 0 0 no-repeat;
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
+}
 
 #block-friend_search-2{
   background: #FFFFFF url(images/updp_bot.gif) bottom no-repeat;
@@ -1450,6 +1462,10 @@ p#queuestatus
 .facebook-post .facebook-comment-timeline{
   font-size: 12px;
   line-height: 15px;
+}
+.section-resource .facebook-comment-text
+{
+	color: #555E6B;
 }
 .facebook-post .facebook-comment-link,
 .section-resource .facebook-comment-link{
@@ -3577,10 +3593,6 @@ div.navbar
 	height: 24px;
 	padding-top: 5px;
 }
-.page-user-me-myfriends-twitter-friends .friend_favorite
-{
-margin-right: 30px;
-}
 #rss-controls a{
 	color:#666666;
 	font-size:11px;
@@ -3751,7 +3763,7 @@ margin-right: 30px;
 }
 .display-comments-buttons
 {
-	margin-top: 10px;
+	margin-top: 25px;
 }
 .facebook-attach-photo
 {
@@ -3895,8 +3907,9 @@ margin-right: 30px;
 }
 #removing-fb, #removing-tw
 {
-	margin-top: 10px;
-	clear: both;
+	position:absolute;
+	right:25px;
+	top:43px;
 }
 #removing-fb a, #removing-tw a
 {
@@ -4505,7 +4518,12 @@ margin-right: 30px;
 {
 	color:#3399CC;
 	font-size:12px;
-	margin-top:20px;
+	margin-top:10px;
+}
+.page-user-me-edit-add-gmail .image-deal img,
+.page-user-me-edit-add-imap .image-deal img
+{
+height:32px;
 }
 .section-resource .frost
 {
@@ -4697,7 +4715,7 @@ display: none;
 	color:#3399FF;
 }
 .page-user-me-myfriends .friend-action{
-	
+	margin-right: 0 !important;
 }
 .section-friendlist .friend-message-add,.section-friendlist #friendlist-ui-relation-form {
 	color:#999999;
