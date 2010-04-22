@@ -13,14 +13,15 @@ function grabbit_facebook_account($account){
 	global $user;
 	
 	$fuser = facebook_grabbit_get_fid($user->uid);
-	print_r($fuser);
-	exit;
+	
 	if ($fuser){
 		$suser=$fuser->fid;
 		$session_key=$fuser->kid;
 		
 		$facebook = new FacebookDesktop($api_key, $secret);
 		$facebook->set_user($suser, $session_key);
+		print_r($facebook);
+		exit;
 		try{
 		  
 		  $user_details = $facebook->api_client->users_getInfo($suser, 'last_name, first_name, pic_square '); 
