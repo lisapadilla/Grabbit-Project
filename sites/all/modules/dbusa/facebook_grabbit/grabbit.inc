@@ -24,8 +24,7 @@ function grabbit_facebook_account($account){
 		try{
 		  
 		  $user_details = $facebook->api_client->users_getInfo($suser, 'last_name, first_name, pic_square ');
-		print_r($user_details);
-		exit; 
+		
 		  if(is_array($user_details[0])):
 		  $output='<div id="fb_story_000000000" class="facebook-post clearfix even" style="display: block;">
 			<div class="facebook-post-header">
