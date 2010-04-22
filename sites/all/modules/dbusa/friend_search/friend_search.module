@@ -667,6 +667,7 @@ function friend_search_preprocess_views_view_fields(&$vars) {
 	  }else{
 		  if($vars['fields']['field_profile_picture_fid']->content=='<img src="http://grabbit.biz/sites/default/files/imagecache/friend_thumbnail/imagefield_default_images/usr3.jpg" alt="" title=""  class="imagecache imagecache-friend_thumbnail imagecache-default imagecache-friend_thumbnail_default" />')
 		    $vars['fields']['field_profile_picture_fid']->content='<img src="'.base_path().'sites/all/themes/grabbit/images/default/default_profile.jpg" />';
-	}
+	  }
+	  if()
     }
 }

@@ -371,9 +371,9 @@ function facebook_grabbit_facebook(){
   $output .='<div id="statusdiv" style="display:'.$visibility.';">  
 	   <strong>Thank you for installing this application, <br></strong>
 	    You will be able to access your facebook account from grabbit.net<br>
-	    Now <a href="#">got to Grabbit.net</a> to start using your new fatures.
+	    Now <a href="http://www.grabbit.biz">go to Grabbit</a> to start using your new fatures.
 	<br><br>
-	    Grabbit.net Staff
+	    Grabbit Staff
 	</div>  
 	<script>
 	function after(url){
