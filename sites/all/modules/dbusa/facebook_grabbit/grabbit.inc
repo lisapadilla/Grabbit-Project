@@ -13,7 +13,8 @@ function grabbit_facebook_account($account){
 	global $user;
 	
 	$fuser = facebook_grabbit_get_fid($user->uid);
-	
+	print_r($fuser);
+	exit;
 	if ($fuser){
 		$suser=$fuser->fid;
 		$session_key=$fuser->kid;
