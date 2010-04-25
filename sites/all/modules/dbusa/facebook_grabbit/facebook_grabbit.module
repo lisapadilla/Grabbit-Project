@@ -368,22 +368,24 @@ function facebook_grabbit_facebook(){
 	 }
     
     }
+
+    $output .='<div id="statusdiv" style="display:'.$visibility.';">  
+		   <strong>Thank you for installing this application, <br></strong>
+		    You will be able to access your facebook account from grabbit.net<br>
+		    Now <a href="http://www.grabbit.biz">go to Grabbit</a> to start using your new fatures.
+		<br><br>
+		    Grabbit Staff
+		</div>  
+		<script>
+		function after(url){
+		  document.setLocation(url);
+		}
+		</script>';
   }catch(FacebookRestClientException $e){
-	print_r($e);
+	$output = '<strong>Oops! there was a problem connecting with the grabbit application.</strong>
+	           Please remove the grabbit application from your facebook account in Account/Application Setings and try again from the <a href="http://www.grabbit.biz">grabbit</a> site.';
   } 
 
-  $output .='<div id="statusdiv" style="display:'.$visibility.';">  
-	   <strong>Thank you for installing this application, <br></strong>
-	    You will be able to access your facebook account from grabbit.net<br>
-	    Now <a href="http://www.grabbit.biz">go to Grabbit</a> to start using your new fatures.
-	<br><br>
-	    Grabbit Staff
-	</div>  
-	<script>
-	function after(url){
-	  document.setLocation(url);
-	}
-	</script>';
 
   print $output;
 }
