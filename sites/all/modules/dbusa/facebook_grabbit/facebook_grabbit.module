@@ -368,7 +368,7 @@ function facebook_grabbit_facebook(){
 	 }
     
     }
-  }catch($e){
+  }catch(FacebookRestClientException $e){
 	print_r($e);
   } 
 
