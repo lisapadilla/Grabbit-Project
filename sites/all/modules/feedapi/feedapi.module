@@ -881,7 +881,7 @@ function feedapi_refresh($node, $destination_path = NULL) {
 /**
  * Insert feedapi data to the DB when it's a new for for FeedAPI
  */
-function _feedapi_insert(&$node, $teaser, $page, $OPML==FALSE) {
+function _feedapi_insert(&$node, $teaser, $page, $OPML=FALSE) {
 
   if (isset($node->feed->url) && isset($node->feed->feed_type)) {
     if (isset($node->feedapi)) {
