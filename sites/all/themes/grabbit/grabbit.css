@@ -5217,9 +5217,9 @@ div#edit-users-wrapper.form-item
 	display:none;
 }
 
-#edit-delete{
-	background-image:none !important;
-	text-indent:0px !important;
-	border:auto !important;
-	width:auto;
+#link-edit-delete{
+	color:#3399FF;
+	font-size:13px;
+	font-weight:bold;
+	line-height:15px;
 }
