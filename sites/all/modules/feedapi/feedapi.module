@@ -143,7 +143,7 @@ function feedapi_nodeapi(&$node, $op, $teaser, $page) {
         }
         break;
       case 'insert':
-        _feedapi_insert($node, $teaser, $page);
+        _feedapi_insert($node, $teaser, $page, $node->opml);
         break;
       case 'update':
         _feedapi_update($node, $teaser, $page);
@@ -811,7 +811,7 @@ function feedapi_get_natural_name($module) {
  * @param $url
  *  URI of feed.
  */
-function feedapi_create_node($param, $url) {
+function feedapi_create_node($param, $url, $OPML=FALSE) {
   if (is_object($param)) {
     $node = $param;
   }
@@ -840,6 +840,9 @@ function feedapi_create_node($param, $url) {
   node_object_prepare($node);
   global $user;
   $node->uid = $user->uid;
+  if($OPML){
+    $node->opml=TRUE;	
+  }
   node_save($node);
   return $node;
 }
@@ -878,7 +881,7 @@ function feedapi_refresh($node, $destination_path = NULL) {
 /**
  * Insert feedapi data to the DB when it's a new for for FeedAPI
  */
-function _feedapi_insert(&$node, $teaser, $page) {
+function _feedapi_insert(&$node, $teaser, $page, $OPML==FALSE) {
 
   if (isset($node->feed->url) && isset($node->feed->feed_type)) {
     if (isset($node->feedapi)) {
@@ -910,7 +913,7 @@ function _feedapi_insert(&$node, $teaser, $page) {
     // Refresh feed if the user would like to do that
     $settings = feedapi_get_settings($node->type, $node->vid);
     if (isset($settings['refresh_on_create'])) {
-      if ($settings['refresh_on_create'] == TRUE) {
+      if ($settings['refresh_on_create'] == TRUE && $OPML==FALSE) {
         $node->feed->nid = $node->nid;
         $node->feed->vid = $node->vid;
         $node->feed->settings = $settings;
