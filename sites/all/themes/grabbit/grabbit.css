@@ -5217,7 +5217,7 @@ div#edit-users-wrapper.form-item
 	display:none;
 }
 
-#link-edit-delete{
+#link-edit-delete a{
 	color:#3399FF;
 	font-size:13px;
 	font-weight:bold;
