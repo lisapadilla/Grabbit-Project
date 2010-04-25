@@ -5223,3 +5223,17 @@ div#edit-users-wrapper.form-item
 	font-weight:bold;
 	line-height:15px;
 }
+#user-confirm-delete{
+	padding:10px;
+}
+
+#user-confirm-delete .container-inline{
+	margin-top:10px;
+	width:100px;
+}
+#user-confirm-delete .container-inline a{
+	color:#3399FF;
+	font-size:13px;
+	font-weight:bold;
+	line-height:15px;
+}
