@@ -5220,5 +5220,6 @@ div#edit-users-wrapper.form-item
 #edit-delete{
 	background-image:none !important;
 	text-indent:0px !important;
-	border:none DarkSkyBlue !important;
+	border:auto !important;
+	width:auto;
 }
