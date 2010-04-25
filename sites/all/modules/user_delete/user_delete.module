@@ -148,7 +148,7 @@ function user_delete_submit($form, &$form_state) {
     case 'user_delete_block':
       // block user
       db_query("UPDATE {users} SET status = 0 WHERE uid = %d", $uid);
-      drupal_set_message(t('%name has been blocked.', array('%name' => check_plain($account->name))));
+      drupal_set_message(t('%name has been deleted.', array('%name' => check_plain($account->name))));
       break;
     case 'user_delete_block_unpublish':
       // block user
