@@ -84,7 +84,7 @@ function user_delete_form_alter(&$form, $form_state, $form_id) {
     if ($default_op) {
       switch ($default_op) {
         case 'user_delete_block':
-          $description = t('x');
+          $description = t('The account will be disabled, all submitted content will be kept.');
           break;
         case 'user_delete_block_unpublish':
           $description = t('The account will be disabled, all submitted content will be unpublished.');
