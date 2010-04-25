@@ -349,24 +349,28 @@ function facebook_grabbit_facebook(){
 
   $duid=$_GET["duid"];
 
-  if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access") || !$facebook->api_client->users_hasAppPermission("read_stream") || !$facebook->api_client->users_hasAppPermission("publish_stream")){  
-	$output .= "To start using Grabbit for reading and updating your Facebook Stream you have to grant permissions for the grabbit application:<br>";
-    $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream, publish_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status and read your stream!</strong></fb:prompt-permission>';  
-    $visibility = "none";  
-  }else{
-    $visibility = "block";
+  try{
+    if (!$facebook->api_client->users_hasAppPermission("status_update")  || !$facebook->api_client->users_hasAppPermission("offline_access") || !$facebook->api_client->users_hasAppPermission("read_stream") || !$facebook->api_client->users_hasAppPermission("publish_stream")){  
+	  $output .= "To start using Grabbit for reading and updating your Facebook Stream you have to grant permissions for the grabbit application:<br>";
+      $output .= '<fb:prompt-permission perms="status_update, offline_access, read_stream, publish_stream" next_fbjs="after(\'http://apps.facebook.com/onixmedia/?duid='.$duid.'\')"><strong>Let Grabbit.net update your status and read your stream!</strong></fb:prompt-permission>';  
+      $visibility = "none";  
+    }else{
+      $visibility = "block";
   
-	if(!$_GET["duid"]){
+	  if(!$_GET["duid"]){
 	    $output = "There was a problem accessing your Grabbit account, please go back to grabbit.net and try again";	
-	}else{
+	  }else{
 	  	$sessionkey = $_REQUEST['fb_sig_session_key'];
 
 	    $fid=$facebook->api_client->user;
 
 	    facebook_grabbit_save_fid($_GET["duid"],$fid,$sessionkey);
-	}
+	 }
     
-  }  
+    }
+  }catch($e){
+	print_r($e);
+  } 
 
   $output .='<div id="statusdiv" style="display:'.$visibility.';">  
 	   <strong>Thank you for installing this application, <br></strong>
