@@ -154,9 +154,9 @@ function grabbit_search_custom_page($term=NULL){
 	  
 	  if ( isset($_POST['onlysite'])  )
   	{
-      drupal_goto( 'search/apache_solr/'.$_POST['search'] );
+      drupal_goto( 'search/apachesolr_search/'.$_POST['search'] );
   	}elseif(isset($_POST['details']['profiles'])){
-	  drupal_goto( 'search/apache_solr/'.$_POST['search']);
+	  drupal_goto( 'search/apachesolr_search/'.$_POST['search']);
     }elseif(isset($_POST['users'])){
 	  if($result =grabbit_search_perform_users($_POST['search'])){
 	    $output = grabbit_search_custom_results_users($result,$_POST['search']);	
