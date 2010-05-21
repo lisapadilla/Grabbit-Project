@@ -570,7 +570,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
     }else{
 	  $friends='<b>Thats you!</b>';
     }
-	
+	$supername=str_replace(' ','-',$item->name);
 	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
 	  <div class="listable">
 	    ';
@@ -581,7 +581,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	}
 	$return .='</div>
 	  '.$favs.'
-	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$item->name.'">'.$item->name.'</a>
+	  <a target="_blank" class="twitter-name-link" href="'.base_path().'users/'.$supername.'">'.$item->name.'</a>
 	  <div class="twitter-body">
 	    <div class="twitter-body-contains">'.$profile->field_profile_about[0]['value'].'</div>';
 	if($items)
