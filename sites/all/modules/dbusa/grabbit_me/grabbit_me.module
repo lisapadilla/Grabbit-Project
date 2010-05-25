@@ -2040,6 +2040,6 @@ function grabbit_me_form_alter(&$form, $form_state, $form_id){
 	}
 	if($form_id=='feedapi_import_opml'){
 		print_r($form);
-		$form['submit']['#description']='Later, if you decide to delete any of the feeds in your OPML file from Grabbit, you can do so individually by going to "settings > My feeds."';
+		$form['feed_type']['#description']='The type of feed you would like to associate this import with. Later, if you decide to delete any of the feeds in your OPML file from Grabbit, you can do so individually by going to "settings > My feeds."';
 	}
 }
