@@ -286,7 +286,7 @@ function grabbit_panels_edit_panels(){
 		global $user;
 		$panels = grabbit_panels_get_all_panels($user->uid);
 		if(db_affected_rows($panels)>=4){
-		  print "We are sorry. Grabbit is still on Beta and your account can only have 4 streams. We will increase this number in the future!";	
+		  print "We are sorry. Grabbit is still in beta and your account can only have 4 streams. We will increase this number in the future. Stay tuned!";	
 		}else{
 		  $output = drupal_get_form("grabbit_panels_source_create_form",$panel);
 		  print '<div id="grabbit-panel-create-form" class="grabbit-panels-forms">'.$output."</div>";
@@ -669,7 +669,7 @@ function grabbit_panels_form_alter($form,$form_state,$form_id){
 		 	$form['feedapi']['feedapi_panel'] = array(
 		        '#type' => 'checkbox',
 		        '#title' => t('Create a panel from this RSS feed'),
-		        '#description' => t('Let grabbit create a stream for you containing the items from this RSS feed. You can delete/edit that stream latter.'),
+		        '#description' => t('Create a panel from this RSS feed Let Grabbit create a stream for you containing the items from this RSS feed. You can delete/edit this stream later.'),
 		        '#default_value' => 1
 		      );
 		    $form['#validate'][] = 'grabbit_panels_node_validate';
