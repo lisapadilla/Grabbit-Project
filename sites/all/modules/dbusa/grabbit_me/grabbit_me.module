@@ -1719,7 +1719,7 @@ function grabbit_me_you_updates(){
 	$friend = user_load(arg(2));
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
-    if($status=='TW_BOTH' || $user->uid==1){
+    if($status=='TW_BOTH' || user_access('administer users')){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Updates'); 
 	                 $('.content-truncated').truncate( 135,{
 					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
@@ -1742,7 +1742,7 @@ function grabbit_me_you_favorites(){
 	$friend = user_load(arg(2));
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
-    if($status=='TW_BOTH'){
+    if($status=='TW_BOTH' || user_access('administer users')){
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
@@ -1803,7 +1803,7 @@ function grabbit_me_you_comments(){
 	$friend = user_load(arg(2));
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
-    if($status=='TW_BOTH'){
+    if($status=='TW_BOTH' || user_access('administer users')){
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
 	  drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
 	
@@ -1823,7 +1823,7 @@ function grabbit_me_you_friends(){
 	$friend = user_load(arg(2));
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
-    if($status=='TW_BOTH'){
+    if($status=='TW_BOTH' || user_access('administer users')){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." added Friends'); 
 	                 $('.content-truncated').truncate( 135,{
 					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
@@ -1846,7 +1846,7 @@ function grabbit_me_you_rss(){
 	$friend = user_load(arg(2));
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
-    if($status=='TW_BOTH'){
+    if($status=='TW_BOTH' || user_access('administer users')){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." RSS'); 
 	                 $('.content-truncated').truncate( 135,{
 					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
@@ -1869,7 +1869,7 @@ function grabbit_me_you_mentions(){
 	$friend = user_load(arg(2));
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
-    if($status=='TW_BOTH'){
+    if($status=='TW_BOTH' || user_access('administer users')){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." mentions'); 
 	                 $('.content-truncated').truncate( 135,{
 					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
