@@ -1719,7 +1719,7 @@ function grabbit_me_you_updates(){
 	$friend = user_load(arg(2));
 	
 	$status = friendlist_api_relation_status_calculate($user->uid, $friend->uid, 1);
-    if($status=='TW_BOTH'){
+    if($status=='TW_BOTH' || $user->uid==1){
 	  drupal_add_js("$(document).ready(function(){ $('body').addClass('profile-extended-view'); $('#content-area .title').html('".$friend->name." Updates'); 
 	                 $('.content-truncated').truncate( 135,{
 					        trail: [ '...<a href=\'#\' class=\'truncate_show\'>more</a>', '<a href=\'#\' class=\'truncate_hide\'>less</a>' ]
