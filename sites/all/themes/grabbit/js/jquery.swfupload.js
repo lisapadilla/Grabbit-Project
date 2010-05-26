@@ -71,8 +71,13 @@ function file_to_tinymce(urlcomplete){
 	        { 
 				var current = $("#edit-status").val();
 				var lastPos = current.length-1;
-				alert( current.charAt(lastPos) +"  "+ current.charCodeAt(lastPos) );
-				$("#edit-status").val($("#edit-status").val()+data.url+' ');
+				var lastcode = current.charCodeAt(lastPos);
+				if(lastCode==31){
+				  $("#edit-status").val($("#edit-status").val()+data.url+' ');	
+				}else{
+					$("#edit-status").val($("#edit-status").val()+' '+data.url+' ');
+				}
+				
 				var scroll = $("#edit-status");
 				$("#edit-status").focus();
 				$("#edit-media-link").val(data.url);
