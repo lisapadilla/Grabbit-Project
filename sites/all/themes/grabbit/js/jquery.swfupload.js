@@ -71,7 +71,7 @@ function file_to_tinymce(urlcomplete){
 	        { 
 				var current = $("#edit-status").val();
 				var lastPos = current.length-1;
-				var lastcode = current.charCodeAt(lastPos);
+				var lastCode = current.charCodeAt(lastPos);
 				if(lastCode==31){
 				  $("#edit-status").val($("#edit-status").val()+data.url+' ');	
 				}else{
