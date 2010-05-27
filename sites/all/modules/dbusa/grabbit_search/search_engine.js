@@ -28,12 +28,12 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
 	
 	basic = basic+hidden;
     $('a.grabbit-results').html('Results: '+basic+' of '+count);
-    var visibles;
+    var visibles=0;
    	$('.stream-node:visible').each(function(i){
 		visibles++;
 	});
 	
-	alert(visibles);
+	alert(visibles*76);
     $('.suser-panels').height(visibles);	
   });
 };
