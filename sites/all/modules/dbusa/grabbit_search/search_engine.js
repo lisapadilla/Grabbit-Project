@@ -13,7 +13,19 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
   $('a.grabbit-results').html('Results: '+basic+' of '+count);
 
   if(count > basic){
-	$('#content-area').append('<span style="position: relative; margin-left: 280px; color: rgb(153, 153, 153); font-size: 14px; text-decoration: none;"><a href="#" style="position: relative; margin-left: 280px; color: rgb(153, 153, 153); font-size: 14px; text-decoration: none;">MORE</a></span>');
-}
-
+	$('#content-area').append('<span style="position: relative; margin-left: 280px; color: rgb(153, 153, 153); font-size: 14px; text-decoration: none;"><a href="#" id="moremore" style="position: relative; color: rgb(153, 153, 153); font-size: 14px; text-decoration: none;">more</a></span>');
+  }
+  
+  $('#moremore').click(function(i){
+	var hidden=0;
+	$('.stream-node:hidden').each(function(i){
+		hidden++;
+		if(hidden<=10){
+			$(this).show();
+		}
+	  });
+	
+	basic = basic+hidden;
+    $('a.grabbit-results').html('Results: '+basic+' of '+count);	
+  });
 };
