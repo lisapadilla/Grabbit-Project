@@ -13,7 +13,7 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
   $('a.grabbit-results').html('Results: '+basic+' of '+count);
 
   if(count > basic){
-	$('#content-area').append('<span style="position: absolute;"><a href="#">MORE</a></span>');
+	$('#content-area').append('<span style="position: relative; margin-left: 280px; color: rgb(153, 153, 153); font-size: 14px; text-decoration: none;"><a href="#" style="position: relative; margin-left: 280px; color: rgb(153, 153, 153); font-size: 14px; text-decoration: none;">MORE</a></span>');
 }
 
 };
