@@ -31,6 +31,7 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
     var height;
    	$('.stream-node:visible').each(function(i){
 		height = height + $(this).height();
+		alert($(this).height());
 	});
 	alert(height);
     $('.suser-panels').height(height);	
