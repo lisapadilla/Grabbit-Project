@@ -17,6 +17,7 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
   }
   
   $('#moremore').click(function(i){
+	i.preventDefault();
 	var hidden=0;
 	$('.stream-node:hidden').each(function(i){
 		hidden++;
@@ -30,8 +31,7 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
     var height;
    	$('.stream-node:visible').each(function(i){
 		height = height + $(this).height();
-	  });
-
+	});
     $('.suser-panels').height(height);	
   });
 };
