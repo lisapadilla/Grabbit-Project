@@ -33,7 +33,7 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
 		visibles++;
 	});
 	
-	alert(visibles*76);
-    $('.suser-panels').height(visibles*76);	
+	alert(visibles);
+    $('.suser-panels').height(visibles);	
   });
 };
