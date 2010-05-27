@@ -179,7 +179,7 @@ function grabbit_search_custom_page($term=NULL){
 function grabbit_search_no_results($term){
 //	$output = drupal_get_form('grabbit_search_custom_form');
 	
-	$output .='<div class="panels-controllers"><div id="panels-pager" class="panels-pager"><a title="Search Results" href="#">Search Results</a></div></div>
+	$output .='<div class="panels-controllers"><div id="panels-pager" class="panels-pager"><a title="Search Results" class="grabbit-results" href="#">Search Results</a></div></div>
 	<div class="messages-status-updates">'.t('Your search for <strong>'.$term.'</strong> did not match any results, please try again').'</div>';
 	
 	return $output;
@@ -274,6 +274,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 	drupal_add_css(drupal_get_path('module', 'grabbit_panels').'/jquery.alerts.css', $type = 'module');
 	drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/jquery_scroll.js', $type = 'module');
     drupal_add_js(drupal_get_path('module', 'facebook_grabbit').'/facebook_grabbit.js', $type = 'module');
+    drupal_add_js(drupal_get_path('module', 'grabbit_search').'/search_engine.js', $type = 'module');
 	
 	
 	while($node = db_fetch_object($results)){
@@ -292,7 +293,7 @@ function grabbit_search_custom_results($results,$keyword=NULL){
 	  $mensajes = '<div class="messages-status-updates">'.$mesa['status'][0].'</div>';
 	
 		$output .='<div class="panels-controllers">
-		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a><a href="#" title="results">Results: '.$total_results.'</a><a class="back-to-search" href="javaScript:history.go(-1)"> Back</a></div>
+		           <div id="panels-pager" class="panels-pager"><a class="activeSlide" title="Search Results" href="#">Search results</a><a href="#" class="grabbit-results">Results: </a><a class="back-to-search" href="javaScript:history.go(-1)"> Back</a></div>
 		           <a href="JavaScript:void(0);" class="move-left"></a>
 		           <a href="JavaScript:void(0);" class="move-right"></a>
 		           </div>'.$mensajes.'<div class="panel-grabbit suser-panels">
