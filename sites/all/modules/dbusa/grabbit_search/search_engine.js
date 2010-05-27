@@ -4,7 +4,6 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
   $('.twitter-message-stream').each(function(i){
 	count++;
 	if(count<=10){
-		continue;
 		basic++;
 	}else{
 		i.hide();
