@@ -6,7 +6,7 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
 	if(count<=10){
 		basic++;
 	}else{
-		alert(i);
+		$(this).hide();
 	}
   });
 
