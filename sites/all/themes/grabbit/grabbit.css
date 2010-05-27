@@ -5241,3 +5241,9 @@ div#edit-users-wrapper.form-item
 	font-size:12px;
 	
 }
+.page-private-results #panels-pager a {
+	cursor:default;
+}
+.page-private-results #panels-pager a.back-to-search {
+	cursor:pointer;
+}
