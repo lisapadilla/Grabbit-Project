@@ -26,6 +26,12 @@ Drupal.behaviors.grabbitSearchEngine = function (context) {
 	  });
 	
 	basic = basic+hidden;
-    $('a.grabbit-results').html('Results: '+basic+' of '+count);	
+    $('a.grabbit-results').html('Results: '+basic+' of '+count);
+    var height;
+   	$('.stream-node:visible').each(function(i){
+		height = height + $(this).height();
+	  });
+
+    $('.suser-panels').height(height);	
   });
 };
