@@ -37,5 +37,22 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
     });
   });
 
+  //Only for favs
+  $('.page-favorites-display .user-display-div').hide();
+  var basichtml= '<div class="ladronde" style="margin-top: -7px; margin-left: 355px;"><a href="#" id="only-stories" style="padding-top: 0px; font-weight: bold; color: rgb(185, 193, 199);">show stories</a><a href="#" id="only-users" style="color: rgb(185, 193, 199); padding-top: 0px;">show friends</a></div>';
+  $('.page-favorites-display .panels-pager').html(basichtml);
+  
+   $('#only-stories').click(function(i){
+	i.preventDefault();
+    $('.page-favorites-display .user-display-div').hide();
+    $('.page-favorites-display .stream-node').show('slow');	
+   });
+
+  
+   $('#only-users').click(function(i){
+	i.preventDefault();
+    $('.page-favorites-display .stream-node').hide('slow');
+    $('.page-favorites-display .user-display-div').show('slow');	
+   });
 
 };
