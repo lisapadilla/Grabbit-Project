@@ -571,7 +571,7 @@ function grabbit_me_theme_friends($nod,$item,$profile,$items){
 	  $friends='<b>Thats you!</b>';
     }
 	$supername=str_replace(' ','-',$item->name);
-	$return = '<div class="twitter-message-stream clearfix '.$nod.'" style="display: block;">
+	$return = '<div class="twitter-message-stream clearfix '.$nod.' user-display-div" style="display: block;">
 	  <div class="listable">
 	    ';
 	if($profile->field_profile_picture[0]['filepath']){
