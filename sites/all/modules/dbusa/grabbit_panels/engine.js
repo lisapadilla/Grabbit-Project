@@ -44,6 +44,8 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
   
    $('#only-stories').click(function(i){
 	i.preventDefault();
+	$('#only-users').css('font-weight','normal');
+	$(this).css('font-weight','bold');
     $('.page-favorites-display .user-display-div').hide();
     $('.page-favorites-display .stream-node, .node-stream-news').show('slow');	
    });
@@ -51,6 +53,8 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
   
    $('#only-users').click(function(i){
 	i.preventDefault();
+	$('#only-stories').css('font-weight','normal');
+	$(this).css('font-weight','bold');
     $('.page-favorites-display .stream-node').hide();
     $('.page-favorites-display .user-display-div, .node-stream-news').show('slow');	
    });
