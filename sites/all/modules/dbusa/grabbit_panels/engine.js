@@ -45,14 +45,14 @@ Drupal.behaviors.grabbitPanelsAdjust = function (context) {
    $('#only-stories').click(function(i){
 	i.preventDefault();
     $('.page-favorites-display .user-display-div').hide();
-    $('.page-favorites-display .stream-node').show('slow');	
+    $('.page-favorites-display .stream-node, .node-stream-news').show('slow');	
    });
 
   
    $('#only-users').click(function(i){
 	i.preventDefault();
-    $('.page-favorites-display .stream-node').hide('slow');
-    $('.page-favorites-display .user-display-div').show('slow');	
+    $('.page-favorites-display .stream-node').hide();
+    $('.page-favorites-display .user-display-div, .node-stream-news').show('slow');	
    });
 
 };
