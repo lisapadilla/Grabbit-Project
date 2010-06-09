@@ -408,7 +408,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	
 	$text=get_url_msg_formatted($item['status']);
 	preg_match_all("#((?:http|https)://(?:.*?)is.gd/([A-Za-z0-9]+))#is", $item['status'], $matches);
-	print_r($item);
+
 	$super_link=$matches[0][0];
 /*<a href="javaScript:void(0);" class="twit-reply" id="@'.$profile->name.'">Reply This</a>*/
 	if($item['facebook'])
@@ -424,8 +424,8 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 			  <a face_id="11" class="trash-facebook" title="delete" href="JavaScript:void(0);">TR</a>
 			  <a href="JavaScript:void(0);" class="retweet">RT</a>
 			  <a href="javaScript:void(0);" class="twit-reply" id="@'.$profile->name.'">Reply This</a>
-			  <a node="3324208" class="bring-tags iconchange" title="add/edit tags" href="javascript:void(0);"></a>
-			  <span class="url-deal iconchange"><a node="3324208" title="check deals" href="#" class="available">Deal</a></span>
+			  <a node="'.$item['time'].'" class="bring-tags iconchange" title="add/edit tags" href="javascript:void(0);"></a>
+			  <span class="url-deal iconchange"><a node="'.$item['time'].'" title="check deals" href="#">Deal</a></span>
 			  
 			</div>
 	
