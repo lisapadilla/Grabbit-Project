@@ -101,7 +101,7 @@ Drupal.behaviors.charCountDown = function(context)
       if($('#edit-status').css('height')=='55px'){
 	    //$('#edit-status-wrapper').fadeOut(400, function(){
 		  	$('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea_big.gif) no-repeat scroll 0 0',
-		                                      'height':'95px'});
+		                                      'height':'97px'});
 		      $('.panels-update-wraper .form-submit').css('top','110px');
 		      $('#counter').css('top','85px');
 		      $('#edit-status').css('height','85px');
@@ -117,7 +117,7 @@ Drupal.behaviors.charCountDown = function(context)
       if($('#edit-status').css('height')=='85px'){
 	//    $('#edit-status-wrapper').fadeOut(400, function(i){
 			$('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
-		                                      'height':'70px'});
+		                                      'height':'73px'});
 		      $('.panels-update-wraper .form-submit').css('top','88px');
 		      $('#counter').css('top','63px');
 		      $('#edit-status').css('height','55px');
