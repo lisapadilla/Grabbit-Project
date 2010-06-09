@@ -104,7 +104,7 @@ Drupal.behaviors.charCountDown = function(context)
 		                                      'height':'97px'});
 		      $('.panels-update-wraper .form-submit').css('top','110px');
 		      $('#counter').css('top','112px');
-		      $('#counter').css('left','638px');
+		      $('#counter').css('left','650px');
 		      $('#counter').css('color','#FF6600');
 		      
 		      $('#edit-status').css('height','85px');
