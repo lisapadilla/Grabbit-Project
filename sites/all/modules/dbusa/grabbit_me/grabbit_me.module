@@ -848,6 +848,7 @@ function grabbit_me_get_statuses_all($uid,$limit='10',$pag=FALSE){
 	  case 'status':
 	      $item=unserialize($element->extra);
 	      if(substr($item['status'], 0, 2) != 'D '){ //NO DIRECT MESSAGES
+		    $item['faid']=$element->faid;
 		    $output .= grabbit_me_theme_my_activity($nod,$item,$profile,$element); 
 	      }
 	  break;
@@ -1114,6 +1115,7 @@ function grabbit_me_show_activity_comments(){
 	    $nod='even display';
 	  	foreach($comm as $comment){
 		  $item=unserialize($comment->extra);
+		  $item['faid']=$comment->faid;
 	      $comments .= grabbit_me_theme_my_activity_comments($nod,$item);
 	      if($nod=='odd display'){
 		    $nod='even display';
@@ -1165,6 +1167,7 @@ function grabbit_me_show_activity_mentions(){
 		    $nod='even';
 		  	foreach($ment as $m_status){
 			  $item=unserialize($m_status->extra);
+			  $item['faid']=$m_status->faid;
 	          $profile = content_profile_load('profile', $m_status->uid);
 		      $mentions .= grabbit_me_theme_my_activity($nod,$item,$profile,$m_status);
 		      if($nod=='odd'){
