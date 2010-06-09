@@ -122,7 +122,7 @@ Drupal.behaviors.charCountDown = function(context)
 			$('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea.gif) no-repeat scroll 0 0',
 		                                      'height':'73px'});
 		      $('.panels-update-wraper .form-submit').css('top','88px');
-		      $('#counter').css('top','63px');
+		      $('#counter').css('top','59px');
 		      $('#counter').css('left','705px');
 		      $('#counter').css('color','#B3B3B3');
 		      $('#edit-status').css('height','55px');
