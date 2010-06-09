@@ -408,8 +408,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	
 	$text=get_url_msg_formatted($item['status']);
 	preg_match_all("#((?:http|https)://(?:.*?)is.gd/([A-Za-z0-9]+))#is", $item['status'], $matches);
-	print_r($matches);
-	exit;
+	
 	$super_link=$matches[0][0];
 	
 	if($item['facebook'])
