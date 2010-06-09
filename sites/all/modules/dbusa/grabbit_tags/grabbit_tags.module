@@ -53,6 +53,20 @@ function grabbit_tags_display(){
 	$nid=$_GET['nid'];
 	$type=$_GET['type'];
 	
+	if(!$nid){
+		
+		$output = '<div node="3324208" class="tags-engine">
+
+			             <a class="close-tags" href="#">Close</a><span class="all-tags">
+			             <span class="tags-legend">Add or edit tags to your settings:</span><span class="tags-instruction">(comma-separated list)</span>
+			             <textarea id="text-area-3324208"></textarea><span class="checkboxes-tags">
+			              <span class="tags-block"><input type="checkbox" checked="checked" id="save-tags"> Save tags to item.</span>
+			              <span class="tags-block"><input type="checkbox" id="add-tags"> Add tags to my profile.</span>
+			              </span>
+			              <button class="tags-submit-profile" node="3324208">Add</button></span></div>';
+		return $output;
+	}
+	
 	$keywords = grabbit_deals_extract_keywords($nid);
 		$keys= array_keys($keywords);
 		$keys = implode(', ',$keys);
@@ -72,7 +86,7 @@ function grabbit_tags_display(){
 		}
 	}
 
-    if(1==1){ //$node->nid
+    if($node->nid){
 	  if(!count($text)){
 	    if($node->type=='twitter' || $node->type=='facebook'){
 		  //$input ='<div class="no-tags">There are no tags in this item, you can add tags using the form below</div>';
