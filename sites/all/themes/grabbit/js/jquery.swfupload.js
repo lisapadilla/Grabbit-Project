@@ -103,7 +103,10 @@ Drupal.behaviors.charCountDown = function(context)
 		  	$('#edit-status-wrapper').css({'background':'transparent url('+Drupal.settings.basePath+'sites/all/themes/grabbit/images/bg_textarea_big.gif) no-repeat scroll 0 0',
 		                                      'height':'97px'});
 		      $('.panels-update-wraper .form-submit').css('top','110px');
-		      $('#counter').css('top','85px');
+		      $('#counter').css('top','112px');
+		      $('#counter').css('left','638px');
+		      $('#counter').css('color','#FF6600');
+		      
 		      $('#edit-status').css('height','85px');
 		      $('#facebook-grabbit-update-form').css('height','110px');
 		//      $('#edit-status-wrapper').fadeIn(200);
@@ -120,6 +123,8 @@ Drupal.behaviors.charCountDown = function(context)
 		                                      'height':'73px'});
 		      $('.panels-update-wraper .form-submit').css('top','88px');
 		      $('#counter').css('top','63px');
+		      $('#counter').css('left','705px');
+		      $('#counter').css('color','#B3B3B3');
 		      $('#edit-status').css('height','55px');
 		      $('#facebook-grabbit-update-form').css('height','90px');
 		  //    $('#edit-status-wrapper').fadeIn(200);
