@@ -143,6 +143,7 @@ function grabbit_me_pagination(){
 		    $nod='even';
 			foreach ($totals as $status){
 				$item=unserialize($status->extra);
+				$item['faid']=$status->faid;
 			      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile,$status);
 			      if($nod=='odd'){
 				    $nod='even';
@@ -424,8 +425,8 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 			  <a face_id="11" class="trash-facebook" title="delete" href="JavaScript:void(0);">TR</a>
 			  <a href="JavaScript:void(0);" class="retweet">RT</a>
 			  <a href="javaScript:void(0);" class="twit-reply" id="@'.$profile->name.'">Reply This</a>
-			  <a node="'.$item['time'].'" class="bring-tags iconchange" title="add/edit tags" href="javascript:void(0);"></a>
-			  <span class="url-deal iconchange"><a node="'.$item['time'].'" title="check deals" href="#">Deal</a></span>
+			  <a node="'.$item['faid'].'" class="bring-tags iconchange" title="add/edit tags" href="javascript:void(0);"></a>
+			  <span class="url-deal iconchange"><a node="'.$item['faid'].'" title="check deals" href="#">Deal</a></span>
 			  
 			</div>
 	
@@ -776,6 +777,7 @@ function grabbit_me_get_statuses($uid,$limit=10, $pag=FALSE){
   $array=array();
   while ($status = db_fetch_object($result)){
 	$data=unserialize($status->extra);
+	
 	if(substr($data['status'], 0, 2) != 'D '){ //NO DIRECT MESSAGES
       $array[]=$status;
     }
@@ -1215,6 +1217,7 @@ function grabbit_me_show_activity_rendered(){
     }else{
 	  	foreach($statuses as $status){
 		  $item=unserialize($status->extra);
+		  $item['faid']=$status->faid;
 	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile,$status);
 	      if($nod=='odd'){
 		    $nod='even';
@@ -1906,6 +1909,7 @@ function grabbit_me_you_activity_rendered($user){
     }else{
 	  	foreach($statuses as $status){
 		  $item=unserialize($status->extra);
+		  $item['faid']=$status->faid;
 	      $updates .= grabbit_me_theme_my_activity($nod,$item,$profile,$status);
 	      if($nod=='odd'){
 		    $nod='even';
