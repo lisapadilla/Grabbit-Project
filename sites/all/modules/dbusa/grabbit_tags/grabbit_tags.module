@@ -64,7 +64,7 @@ function grabbit_tags_display(){
 			              <span class="tags-block"><input type="checkbox" id="add-tags"> Add tags to my profile.</span>
 			              </span>
 			              <button class="tags-submit-profile" node="3324208">Add</button></span></div>';
-		return $output;
+		print $output;
 	}
 	
 	$keywords = grabbit_deals_extract_keywords($nid);
