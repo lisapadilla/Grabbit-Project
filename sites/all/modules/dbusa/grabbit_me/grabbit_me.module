@@ -2159,5 +2159,6 @@ function grabbit_me_rss_formating(){
 	$link = "www.grabbit.biz";
 	$description = "This is the description of the channel, lets see how it goes.";
 	$format = format_rss_channel($title, $link, $description, $output, $langcode  = NULL, $args = array());
+	$format = '<?xml version="1.0" encoding="ISO-8859-1" ?><feed xmlns="http://www.w3.org/2005/Atom">'.$format.'</feed>';
 	print $format;
 }
