@@ -2070,6 +2070,7 @@ function grabbit_me_form_alter(&$form, $form_state, $form_id){
 }
 
 function grabbit_me_rss_formating(){
+	global $base_url;
 	$uid = $_GET['uid'];
 	$limit = 10;
 	$super_array=array();
@@ -2158,7 +2159,13 @@ function grabbit_me_rss_formating(){
 	$title = "Activity channel for user THE USER in Grabbit";
 	$link = "www.grabbit.biz";
 	$description = "This is the description of the channel, lets see how it goes.";
-	$format = format_rss_channel($title, $link, $description, $output, $langcode  = NULL, $args = array());
-	$format = '<?xml version="1.0" encoding="ISO-8859-1" ?><feed xmlns="http://www.w3.org/2005/Atom">'.$format.'</feed>';
+    $namespaces = array('xmlns:dc="http://purl.org/dc/elements/1.1/"');
+    $format = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+	$format .= "<rss version=\"2.0\" xml:base=\"". $base_url ."\" ". implode(' ', $namespaces) .">\n";
+	$format .= format_rss_channel($title, $link, $description, $output, $langcode  = NULL, $args = array());
+	$format .= "</rss>\n";
+
+	drupal_set_header('Content-Type: text/xml; charset=utf-8');
 	print $format;
+	exit;
 }
