@@ -2111,7 +2111,7 @@ function grabbit_me_rss_formating(){
 	  ksort($super_array);
 	  $reverse = array_reverse($super_array);
 	  $total = array_slice($reverse,0,15);
-
+      $user = user_load($uid);
 	  $profile = content_profile_load('profile', $uid);
 
 	  foreach($total as $element){
@@ -2119,8 +2119,30 @@ function grabbit_me_rss_formating(){
 	    switch($element->type){
 		  case 'comment':
 			  $item=unserialize($element->extra);
-		      //$output .= grabbit_me_theme_my_activity_comments($nod,$item);
-		      $title = 'Comment - ';
+		      $node=node_load($item['nid'],NULL,TRUE);
+              switch($node->type){
+				case 'facebook':
+		           $link = 'http://www.google.com';		 
+				break;
+				case 'twitter':
+				   $link = 'http://www.google.com';
+				break;
+				case 'gmail':
+				   $link = 'http://www.google.com';
+				break;
+				case 'imap':
+				   $link = 'http://www.google.com';
+				break;
+				case 'media':
+				   $link = 'http://www.google.com';
+				break;
+				default:
+				   $link = 'http://www.google.com';
+				break;
+			}
+		
+		      $title = 'Comment on '.$node->type.' item by '.$profile->title.' - '.format_date($node->created);
+		      $description = 'Testing the description of the RSS feeds for the users';
 		  break;
 		  case 'status':
 		      $item=unserialize($element->extra);
@@ -2128,7 +2150,9 @@ function grabbit_me_rss_formating(){
 			    $item['faid']=$element->faid;
 			    //$output .= grabbit_me_theme_my_activity($nod,$item,$profile,$element); 
 		      }
-		      $title = 'Status update - ';
+		      $title = 'Status update by '.$profile->title. ' - '.format_date($item['time']);
+		      $description = $item['status'];
+		      $link = $base_url.'/users/'.$user->name;
 		  break;
 		  case 'rss':
 		      $item=unserialize($element->extra);
@@ -2136,29 +2160,29 @@ function grabbit_me_rss_formating(){
 		      $node->created=$item['time'];
 		      $node->action=$item['action'];
 		      //$output .= grabbit_me_theme_feeds($nod,$node);
-		      $title = 'RSS added - ';
+		      $title = 'RSS '.$node->title.' added by '.$profile->title.' - '.format_date($node->created);
+		      $link = $base_url.'/node/'.$node->nid;
 		  break;
 		  case 'feed':
 		      $node=node_load($element->nid);
 		      //$output .= grabbit_me_theme_feeds($nod,$node);
-		      $title = 'RSS added - ';
+		      $title = 'RSS '.$node->title.' added by '.$profile->title.' - '.format_date($node->created);
+		      $link = $base_url.'/node/'.$node->nid;
 		  break;
 		  case 'friend':
-		      $user=user_load($element->requestee_id);
+		      $user_1=user_load($element->requestee_id);
 		      $profile_user = content_profile_load('profile', $element->requestee_id);
 		      //$output .= grabbit_me_theme_friends($nod,$user,$profile_user,$element);
-		      $title = 'Friend added - ';
+		      $title = 'Friend '.$user_1.' added by '.$profile->name.' - '.format_date($element->last_update_time);
+		      $link = $base_url.'/users/'.$user_1->name;
 		  break;
 	    }
-	
-	    $link = 'http://www.google.com';
-	    $description = 'Testing the description of the RSS feeds for the users';
 
 	    $output .= format_rss_item($title, $link, $description, $args = array());	 
 	  }
-	$title = "Activity channel for user THE USER in Grabbit";
-	$link = "www.grabbit.biz";
-	$description = "This is the description of the channel, lets see how it goes.";
+	$title = "Activity channel for user ".$user->name." in Grabbit";
+	$link = $base_url. "/activity/rss?uid=".$uid;
+	$description = "This is the channel for the user activity in Grabbit. Subscribe and you'll get updates as soon as they happen.";
     $namespaces = array('xmlns:dc="http://purl.org/dc/elements/1.1/"');
     $format = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 	$format .= "<rss version=\"2.0\" xml:base=\"". $base_url ."\" ". implode(' ', $namespaces) .">\n";
