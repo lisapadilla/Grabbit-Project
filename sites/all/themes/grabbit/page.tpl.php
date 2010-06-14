@@ -83,6 +83,8 @@ global $user;
 
 <head>
   <title><?php print $head_title; ?></title>
+  <meta name="keywords" content="news, shopping, search, buy, Twitter, Facebook, publishing, media, enterprise, deal"/>
+  <meta name="description" content="Grabbit is a social publishing platform for publisher and media companies to bring real-time publishing, distribution and monetization of content, including real-time content."/>
   <?php print $head; ?>
   <?php print $styles; ?>
   <?php print $scripts; ?>
@@ -102,7 +104,7 @@ global $user;
         <div id="logo-title">
 
           <?php if ($logo): ?>
-            <div id="logo"><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" id="logo-image" /></a></div>
+            <div id="logo"><a href="<?php print $front_page; ?>" title="Return to Grabbit.net for real-time news and updates, RSS feeds, email and friends. No download required!" rel="home"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" id="logo-image" /></a></div>
           <?php endif; ?>
 
           <?php if ($site_name): ?>

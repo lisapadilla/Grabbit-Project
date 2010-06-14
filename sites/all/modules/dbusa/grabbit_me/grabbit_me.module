@@ -124,6 +124,11 @@ function grabbit_me_menu() {
      'access arguments' => array('access content'),
    );
 
+  $items['activity/rss'] = array(
+     'page callback' => 'grabbit_me_rss_formating',
+     'access arguments' => array('access content'),
+   );
+
   return $items;
 }
 
@@ -2062,4 +2067,97 @@ function grabbit_me_form_alter(&$form, $form_state, $form_id){
 			'#weight'=>100,
 			);
 	}
+}
+
+function grabbit_me_rss_formating(){
+	$uid = $_GET['uid'];
+	$limit = 10;
+	$super_array=array();
+
+	  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='status' ORDER BY number DESC LIMIT %s",$uid,$limit);
+
+	  while ($status = db_fetch_object($result)){
+		$super_array[$status->number]=$status;
+		$super_array[$status->number]->type='status';
+	  }
+
+	  $result = db_query("SELECT * FROM {friendlist_statuses} WHERE requester_id=%d AND status='TW_BOTH' ORDER BY last_update_time DESC LIMIT %s",$uid,$limit);
+
+	  while ($status = db_fetch_object($result)){
+		$super_array[$status->last_update_time]=$status;
+		$super_array[$status->last_update_time]->type='friend';
+	  }
+
+	  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='comment' ORDER BY number DESC LIMIT %s",$uid,$limit);
+
+	  while ($status = db_fetch_object($result)){
+		$super_array[$status->number]=$status;
+		$super_array[$status->number]->type='comment';
+	  }
+
+	  $result = db_query("SELECT * FROM {grabbit_me} WHERE uid=%d AND type='rss' ORDER BY number DESC LIMIT %s",$uid,$limit);
+
+	  while ($status = db_fetch_object($result)){
+		$super_array[$status->number]=$status;
+		$super_array[$status->number]->type='rss';
+	  }
+
+	  $result = db_query("SELECT * FROM {node} WHERE uid=%d AND type='feed' ORDER BY created DESC LIMIT %s",$uid,$limit);
+
+	  while ($status = db_fetch_object($result)){
+		$super_array[$status->created]=$status;
+	  }
+	  ksort($super_array);
+	  $reverse = array_reverse($super_array);
+	  $total = array_slice($reverse,0,15);
+
+	  $profile = content_profile_load('profile', $uid);
+
+	  foreach($total as $element){
+
+	    switch($element->type){
+		  case 'comment':
+			  $item=unserialize($element->extra);
+		      //$output .= grabbit_me_theme_my_activity_comments($nod,$item);
+		      $title = 'Comment - ';
+		  break;
+		  case 'status':
+		      $item=unserialize($element->extra);
+		      if(substr($item['status'], 0, 2) != 'D '){ //NO DIRECT MESSAGES
+			    $item['faid']=$element->faid;
+			    //$output .= grabbit_me_theme_my_activity($nod,$item,$profile,$element); 
+		      }
+		      $title = 'Status update - ';
+		  break;
+		  case 'rss':
+		      $item=unserialize($element->extra);
+		      $node=node_load($item['rss']);
+		      $node->created=$item['time'];
+		      $node->action=$item['action'];
+		      //$output .= grabbit_me_theme_feeds($nod,$node);
+		      $title = 'RSS added - ';
+		  break;
+		  case 'feed':
+		      $node=node_load($element->nid);
+		      //$output .= grabbit_me_theme_feeds($nod,$node);
+		      $title = 'RSS added - ';
+		  break;
+		  case 'friend':
+		      $user=user_load($element->requestee_id);
+		      $profile_user = content_profile_load('profile', $element->requestee_id);
+		      //$output .= grabbit_me_theme_friends($nod,$user,$profile_user,$element);
+		      $title = 'Friend added - ';
+		  break;
+	    }
+	
+	    $link = 'http://www.google.com';
+	    $description = 'Testing the description of the RSS feeds for the users';
+
+	    $output .= format_rss_item($title, $link, $description, $args = array());	 
+	  }
+	$title = "Activity channel for user THE USER in Grabbit";
+	$link = "www.grabbit.biz";
+	$description = "This is the description of the channel, lets see how it goes.";
+	$format = format_rss_channel($title, $link, $description, $items, $langcode  = NULL, $args = array());
+	return $format;
 }
