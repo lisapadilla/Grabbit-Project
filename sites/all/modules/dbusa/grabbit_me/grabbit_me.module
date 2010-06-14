@@ -2142,7 +2142,9 @@ function grabbit_me_rss_formating(){
 			}
 		
 		      $title = 'Comment on '.$node->type.' item by '.$profile->title.' - '.format_date($node->created);
-		      $description = 'Testing the description of the RSS feeds for the users';
+		      //$description = 'Testing the description of the RSS feeds for the users';
+		     $description = ' ';
+		     $link = $base_url.'/users/'.$user->name;
 		  break;
 		  case 'status':
 		      $item=unserialize($element->extra);
@@ -2162,12 +2164,14 @@ function grabbit_me_rss_formating(){
 		      //$output .= grabbit_me_theme_feeds($nod,$node);
 		      $title = 'RSS '.$node->title.' added by '.$profile->title.' - '.format_date($node->created);
 		      $link = $base_url.'/node/'.$node->nid;
+		      $description = $node->body;
 		  break;
 		  case 'feed':
 		      $node=node_load($element->nid);
 		      //$output .= grabbit_me_theme_feeds($nod,$node);
 		      $title = 'RSS '.$node->title.' added by '.$profile->title.' - '.format_date($node->created);
 		      $link = $base_url.'/node/'.$node->nid;
+		      $description = $node->body;
 		  break;
 		  case 'friend':
 		      $user_1=user_load($element->requestee_id);
@@ -2175,6 +2179,7 @@ function grabbit_me_rss_formating(){
 		      //$output .= grabbit_me_theme_friends($nod,$user,$profile_user,$element);
 		      $title = 'Friend '.$user_1.' added by '.$profile->name.' - '.format_date($element->last_update_time);
 		      $link = $base_url.'/users/'.$user_1->name;
+		      $description = ' ';
 		  break;
 	    }
 
