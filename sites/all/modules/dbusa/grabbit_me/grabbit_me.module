@@ -2158,6 +2158,6 @@ function grabbit_me_rss_formating(){
 	$title = "Activity channel for user THE USER in Grabbit";
 	$link = "www.grabbit.biz";
 	$description = "This is the description of the channel, lets see how it goes.";
-	$format = format_rss_channel($title, $link, $description, $items, $langcode  = NULL, $args = array());
+	$format = format_rss_channel($title, $link, $description, $output, $langcode  = NULL, $args = array());
 	print $format;
 }
