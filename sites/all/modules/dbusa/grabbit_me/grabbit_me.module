@@ -485,7 +485,7 @@ function grabbit_me_theme_my_media($nod,$itemx,$profilex,$comments,$node){
 	$profile=$profilex;
 	$text=get_url_msg_formatted($item['status']);
 	
-	preg_match("#((?:http|https)://(?:.*?)tr.im/([A-Za-z0-9]+))#is", $item['status'], $matches);
+	preg_match("#((?:http|https)://(?:.*?)bit.ly/([A-Za-z0-9]+))#is", $item['status'], $matches);
 	$super_link=$matches[0][0];
 	
 	if($item['facebook'])
