@@ -69,14 +69,13 @@ function file_to_tinymce(urlcomplete){
 		$.getJSON(Drupal.settings.basePath+"sites/all/modules/dbusa/facebook_grabbit/trim_proxy.php",{url:myurl}, 
 	        function(data)
 	        { 
-		alert(data);
 				var current = $("#edit-status").val();
 				var lastPos = current.length-1;
 				var lastCode = current.charCodeAt(lastPos);
 				if(lastCode==31){
-				  $("#edit-status").val($("#edit-status").val()+data.url+' ');	
+				  $("#edit-status").val($("#edit-status").val()+data.data.url+' ');	
 				}else{
-					$("#edit-status").val($("#edit-status").val()+' '+data.url+' ');
+					$("#edit-status").val($("#edit-status").val()+' '+data.data.url+' ');
 				}
 				
 				var scroll = $("#edit-status");
