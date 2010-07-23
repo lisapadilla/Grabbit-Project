@@ -2763,6 +2763,7 @@ function facebook_grabbit_checkout_textlong($text, $media=FALSE, $media_link=FAL
 		  if($node->nid){
 			$url_json=json_decode(file_get_contents('http://api.bit.ly/v3/shorten?login=grabbit&apiKey=R_3ec7e2bdc7065f1a5847789192659d72&format=json&longUrl='.$_SERVER['HTTP_HOST'] . base_path() . 'node/'.$node->nid));
 			print_r($url_json);
+			exit;
 			$url_trim=$url_json->data->url;
 			$new_text=$new_text . '... '.$url_trim;
 		  }
