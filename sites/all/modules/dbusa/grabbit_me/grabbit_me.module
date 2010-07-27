@@ -414,7 +414,7 @@ function grabbit_me_theme_my_activity($nod,$item,$profile,$node=null){
 	
 	$text=get_url_msg_formatted($item['status']);
 	preg_match_all("#((?:http|https)://(?:.*?)bit.ly/([A-Za-z0-9]+))#is", $item['status'], $matches);
-
+    preg_match_all("#((?:http|https)://(?:.*?)is.gd/([A-Za-z0-9]+))#is", $item['status'], $matches);
 	$super_link=$matches[0][0];
 /*<a href="javaScript:void(0);" class="twit-reply" id="@'.$profile->name.'">Reply This</a>*/
 	if($item['facebook'])
