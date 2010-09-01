@@ -199,7 +199,7 @@ function grabbit_upload_picture(){
 	$_FILES['files']['tmp_name']['uploadfile']=$files['uploadfile']['tmp_name'];
 	
 	$file=file_save_upload('uploadfile');
-	
+	print_r($file);
 	if($file){
 		file_set_status($file, 1);
 		$profile = content_profile_load('profile', $user->uid);
